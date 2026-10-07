@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:h="http://java.sun.com/jsf/html">
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <c:set var="bundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle_ar']}"/>
+  <af:panelHeader text="إعتماد إجراءات الوافدين لنيابة الحكم" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+        <af:panelGroupLayout id="pgl1">
+            <h:panelGroup id="pg12" styleClass="row " layout="block">
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:panelGroupLayout id="pgl81" styleClass="ml-3">
+                    <af:outputLabel showRequired="true" value="#{bindings.CaseNumber.label}" id="ol7"/>
+                    <af:inputText value="#{bindings.CaseNumber.inputValue}" simple="true" autoSubmit="true"
+                                  maximumLength="15" shortDesc="#{bindings.CaseNumber.hints.tooltip}" id="it5"
+                                  contentStyle="width: 60px;"
+                                  valueChangeListener="#{pageFlowScope.expatriateBean.seqVCL}">
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:inputText>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl58">
+                    <h:panelGroup id="pg8" styleClass="ml-3">
+                        <af:outputLabel showRequired="true" value="#{bindings.Year.label}" id="ol8"/>
+                        <af:inputText value="#{bindings.Year.inputValue}" simple="true" maximumLength="4"
+                                      contentStyle="width: 60px;" shortDesc="#{bindings.Year.hints.tooltip}" id="it4"
+                                      autoSubmit="true" validator="#{cjValidator.yearValidator}"
+                                      valueChangeListener="#{pageFlowScope.expatriateBean.yearVCL}">
+                            <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}"
+                                                    type="valueChange"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl5" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel showRequired="true" value="#{bindings.BusinessCaseTypeId.label}" id="ol9"/>
+                    <af:selectOneChoice value="#{bindings.BusinessCaseTypeId.inputValue}" autoSubmit="true"
+                                        label="#{bindings.BusinessCaseTypeId.label}"
+                                        shortDesc="#{bindings.BusinessCaseTypeId.hints.tooltip}" id="soc9" simple="true"
+                                        valueChangeListener="#{pageFlowScope.expatriateBean.businessCaseTypeListener}">
+                        <f:selectItems value="#{bindings.BusinessCaseTypeId.items}" id="si12"/>
+                        <f:validator binding="#{bindings.BusinessCaseTypeId.validator}"/>
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:selectOneChoice>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pg46" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel showRequired="true" value="نيابة كلية" id="ol46"/>
+                    <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" label="#{bindings.NeyabKolyaa.label}"
+                                        required="#{bindings.NeyabKolyaa.hints.mandatory}"
+                                        shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc28"
+                                        disabled="#{sessionScope.userInfo.entityDegree eq '39' or sessionScope.userInfo.entityDegree eq '3' }"
+                                        autoSubmit="true"
+                                        simple="true">
+                        <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si13"/>
+                        <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:selectOneChoice>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pg45" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel showRequired="true" value="نيابة جزئية " id="ol45" partialTriggers="soc29"/>
+                    <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}"
+                                        label="#{bindings.NeyabGozayaa.label}"
+                                        required="#{bindings.NeyabGozayaa.hints.mandatory}"
+                                        shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc29"
+                                        disabled="#{pageFlowScope.expatriateBean.nyabaaGozaiaDisabled and sessionScope.userInfo.errandEntUser eq '0'}"
+                                          autoSubmit="true"
+                                        simple="true">
+                        <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si11"/>
+                        <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:selectOneChoice>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pg44" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel showRequired="true" value="قسم شرطة" id="ol41"/>
+                    <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}" label="#{bindings.OrigEntity.label}"
+                                        required="#{bindings.OrigEntity.hints.mandatory}"
+                                        shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc30"
+                                        simple="true"
+                                        disabled="#{pageFlowScope.expatriateBean.origEntityDisabled or bindings.NeyabGozayaa.inputValue eq null or bindings.NeyabGozayaa.inputValue eq '0' or bindings.NeyabKolyaa.inputValue eq null or bindings.BusinessCaseTypeId.inputValue eq null}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.expatriateBean.policeVCL}"
+                                        partialTriggers="soc29">
+                        <f:selectItems value="#{bindings.OrigEntity.items}" id="si10"/>
+                        <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:selectOneChoice>
+                </af:panelGroupLayout>
+                <af:spacer width="10" height="10" id="s6"/>
+                <af:panelGroupLayout id="pgl3" styleClass="btn-holder-search col-md-1 col-sm-12"
+                                      layout="horizontal">
+                    <af:link styleClass="btn-search" icon="/resources/images/magnifier.png" id="b1"
+                            action="#{bindings.ValidateExpatriateProcSecondApproval.execute}"
+                             
+                             inlineStyle="width:84px !important;">
+                        <af:setPropertyListener from="1" to="#{pageFlowScope.disableSearch}" type="action"/>
+                    </af:link>
+                </af:panelGroupLayout>
+            </h:panelGroup>
+        </af:panelGroupLayout>
+        
+        
+        
+        <af:panelTabbed position="above" visible="#{bindings.ExpatriateProcSecondApprovalROV1.estimatedRowCount > 0}" id="pt3"
+                        partialTriggers="::b1">
+                <af:showDetailItem id="tab5" text="المتهمين" disclosed="true" partialTriggers="::b1">
+                    <af:panelGroupLayout id="pgl8" partialTriggers="::b1">
+                    <af:table value="#{bindings.ExpatriateProcSecondApprovalROV1.collectionModel}" var="row"
+                              rows="#{bindings.ExpatriateProcSecondApprovalROV1.rangeSize}"
+                              emptyText="#{bindings.ExpatriateProcSecondApprovalROV1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.ExpatriateProcSecondApprovalROV1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.ExpatriateProcSecondApprovalROV1.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.ExpatriateProcSecondApprovalROV1.rangeSize}"
+                              id="t2" partialTriggers="::b1" contentDelivery="lazy" scrollPolicy="page">
+                        <af:column headerText="رقم القضية" id="c9" width="160">
+                            <af:outputText value="#{row.BusinessCaseNumber}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.BusinessCaseNumber.tooltip}"
+                                           id="ot8" visible="false"/>
+                            <af:link text="#{row.BusinessCaseNumber}" id="l4"
+                                     destination="http://10.20.35.46/criminal_justice/BusinessCaseFindByPrimaryKeyResults.do?id=#{row.bindings.BusinessCaseId.inputValue}&amp;businessCaseId=#{row.bindings.BusinessCaseId.inputValue}&amp;crudMethod=update"
+                                     targetFrame="_blank"/>
+                        </af:column>
+                        <af:column headerText="اسم الطرف" id="c8" width="160">
+                            <af:outputText value="#{row.PartyName}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.PartyName.tooltip}"
+                                           id="ot1"/>
+                        </af:column>
+                        <af:column headerText="الرقم القومى" id="c10" width="120">
+                            <af:outputText value="#{row.IdNumber}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.IdNumber.tooltip}"
+                                           id="ot9"/>
+                        </af:column>
+                        <af:column headerText="رقم الحصر"
+                                   id="c11" width="230">
+                            <af:outputText value="#{row.InventoryNumber}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.InventoryNumber.tooltip}"
+                                           id="ot10"/>
+                        </af:column>
+                        <af:column headerText="تاريخ الجلسه" id="c12" width="80">
+                            <af:outputText value="#{row.HearingDate}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.HearingDate.tooltip}"
+                                           id="ot11"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.ExpatriateProcSecondApprovalROV1.hints.FolderId.label}"
+                                   id="c13"
+                                   visible="false">
+                            <af:outputText value="#{row.FolderId}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.FolderId.tooltip}"
+                                           id="ot12">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.ExpatriateProcSecondApprovalROV1.hints.FolderId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="درجه الحكم" id="c14" width="80" align="center">
+                            <af:outputText value="#{row.DegreeName}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.DegreeName.tooltip}"
+                                           id="ot13"/>
+                        </af:column>
+                        <af:column headerText="نوع الحضور" id="c17" width="70" align="center">
+                            <af:outputText value="#{row.AttendanceName}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.AttendanceName.tooltip}"
+                                           id="ot15"/>
+                        </af:column>
+                        <af:column headerText="الاجراء" id="c19" width="150">
+                            <af:selectOneChoice value="#{row.bindings.ActionType.inputValue}"
+                                                label="#{row.bindings.ActionType.label}"
+                                                required="#{bindings.ExpatriateProcSecondApprovalROV1.hints.ActionType.mandatory}"
+                                                shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.ActionType.tooltip}"
+                                                readOnly="true" id="soc3">
+                                <f:selectItems value="#{row.bindings.ActionType.items}" id="si3"/>
+                                <f:validator binding="#{row.bindings.ActionType.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column headerText="موقف نيابة الظبط" id="c18" width="75" align="center">
+                            <af:outputText value="#{row.FActionsActive eq 'O' ? 'تم إعتماد' : '--' or row.FActionsActive eq 'X' ? 'تم الرفض' : '--'}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.FActionsActive.tooltip}"
+                                           id="ot17"/>
+                        </af:column>
+                        <af:column headerText="موقف نيابة الحكم" width="75" align="center" id="c2">
+                            <af:outputText value="#{row.FExpatriateApproval eq 'O' ? 'تم إعتماد' : '--' or row.FExpatriateApproval eq 'X' ? 'تم الرفض' : '--'}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.FExpatriateApproval.tooltip}"
+                                           id="ot3"/>
+                        </af:column>
+                        <af:column headerText="تاريخ  إعتماد نيابة الحكم" id="c1">
+                            <af:outputText value="#{row.ExpApprovalDate}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.ExpApprovalDate.tooltip}"
+                                           id="ot2">
+                                <af:convertDateTime pattern="#{bindings.ExpatriateProcSecondApprovalROV1.hints.ExpApprovalDate.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.ExpatriateProcSecondApprovalROV1.hints.ProcedureId.label}"
+                                   id="c20"
+                                   rendered="false">
+                            <af:outputText value="#{row.ProcedureId}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.ProcedureId.tooltip}"
+                                           id="ot18">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.ExpatriateProcSecondApprovalROV1.hints.ProcedureId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="موقف الاجراء" id="c21" width="80" rendered="false">
+                            <af:outputText value="#{row.IsActive eq 'O' ? 'تم إعتماد' : '--' or row.IsActive eq 'X' ? 'تم الرفض' : '--'}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.IsActive.tooltip}"
+                                           id="ot19"/>
+                        </af:column>
+                        <af:column id="c22" width="125">
+                            <af:panelGroupLayout id="pgl6" layout="horizontal">
+                                <af:link text="إعتماد" id="l3" inlineStyle="color:Green; font-size:large;" visible="#{row.FExpatriateApproval eq 'N'}"
+                                         actionListener="#{pageFlowScope.expatriateBean.expatriateProcSecondApproval}"
+                                         partialTriggers="c18 ot19 ::t2"/>
+                                <af:link text="رفض" id="l5" inlineStyle="color:Red; font-size:large;" visible="#{row.FExpatriateApproval eq 'N'}"
+                                         actionListener="#{pageFlowScope.expatriateBean.expatriateProcSecondReject}"
+                                         partialTriggers="c18 ot19 ::t2"/>
+                                <f:facet name="separator">
+                                    <af:spacer width="20" height="10" id="s4"/>
+                                </f:facet>
+                                <af:spacer width="20" height="10" id="s5"/>
+                            </af:panelGroupLayout>
+                        </af:column>
+                        <af:column headerText="#{bindings.ExpatriateProcSecondApprovalROV1.hints.ProcedureText.label}"
+                                   id="c23" rendered="false">
+                            <af:outputText value="#{row.ProcedureText}"
+                                           shortDesc="#{bindings.ExpatriateProcSecondApprovalROV1.hints.ProcedureText.tooltip}"
+                                           id="ot20"/>
+                        </af:column>
+                        <!--<f:facet name="detailStamp">
+                            <h:panelGroup layout="block" styleClass="row notes-panel" id="pg1">
+                                <h:panelGroup id="pg2" layout="block" styleClass="col-md-12 col-sm-12">
+                                    <af:panelGroupLayout id="pgl7" layout="horizontal">
+                                        <af:outputLabel value=" قرار النيابة المتخذ :  " id="ol1"/>
+                                        <af:outputFormatted value="#{row.bindings.DescDecision.inputValue}" id="of2"/>
+                                    </af:panelGroupLayout>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </f:facet>-->
+                    </af:table>
+                </af:panelGroupLayout>
+                </af:showDetailItem>
+            </af:panelTabbed>
+        
+        
+        
+        
+    </af:panelHeader>
+</ui:composition>

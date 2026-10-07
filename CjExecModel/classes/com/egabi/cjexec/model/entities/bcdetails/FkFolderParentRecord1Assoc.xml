@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkFolderParentRecord1Assoc"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="ParentFolderRecordExcFolderData1"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.ExcFolderData1EO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ParentFolderRecordExcFolderData1"/>
+      <Attr Name="_foreignKey" Value="com.egabi.cjexec.model.entities.bcdetails.ExcFolderData1EO.PkExcFolders"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcFolderData1EO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ExcFolderData1"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.ExcFolderData1EO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcFolderData1"/>
+      <Attr Name="_foreignKey" Value="com.egabi.cjexec.model.entities.bcdetails.ExcFolderData1EO.FkFolderParentRecord"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcFolderData1EO.ParentFolderRecord"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BCFormCaseDescriptionDescROVO"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.BCFormCaseDescriptionDescROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pBC"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal"/>
+  <ViewAccessor
+    Name="BCFormCaseDescriptionDescROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.BCFormCaseDescriptionDescROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="BCFormCaseDescriptionDescROVOCriteria"
+      FullName="com.egabi.cjexec.model.roviews.bcdetails.BCFormCaseDescriptionDescROVO.BCFormCaseDescriptionDescROVOCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="pBC">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[BusinessCaseId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PartCrimTypesROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.PartCrimTypesROVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_DescriptionId"
+    ListVOName="PartCrimTypesROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DescriptionId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DescName"
+    ListVOName="BCFormCaseDescriptionDescROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DescName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DescName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DescName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT FormCaseDescriptionDesEO.ID,             
+       FormCaseDescriptionDesEO.FORM_CASE_DESCRIPTION_ID,             
+       FormCaseDescriptionDesEO.DESCRIPTION_ID ,            
+       FORM_CASE_DESCRIPTION.ID as id_two, FORM_CASE_DESCRIPTION.BUSINESS_CASE_ID             
+       ,  (select  PAR_CRIMINAL_TYPES.NAME from PAR_CRIMINAL_TYPES where PAR_CRIMINAL_TYPES.id =  FormCaseDescriptionDesEO.DESCRIPTION_ID )as DEsc_Name            
+FROM  FORM_CASE_DESCRIPTION_DES FormCaseDescriptionDesEO , FORM_CASE_DESCRIPTION              
+where FormCaseDescriptionDesEO.FORM_CASE_DESCRIPTION_ID = FORM_CASE_DESCRIPTION.id      
+and FORM_CASE_DESCRIPTION.CREATED_BY  != 'jicIntegration'    
+-- and  ROWNUM = 1  order by FORM_CASE_DESCRIPTION.ID desc]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FormCaseDescriptionId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FORM_CASE_DESCRIPTION_ID"
+    Expression="FORM_CASE_DESCRIPTION_ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DescriptionId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DESCRIPTION_ID"
+    Expression="DESCRIPTION_ID"
+    SQLType="NUMERIC"
+    LOVName="LOV_DescriptionId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdTwo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID_TWO"
+    Expression="ID_TWO"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_ID"
+    Expression="BUSINESS_CASE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DescName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESC_NAME"
+    Expression="DESC_NAME"
+    SQLType="VARCHAR"
+    LOVName="LOV_DescName">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="80"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="BCFormCaseDescriptionDescROVOCriteria"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.BCFormCaseDescriptionDescROVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="BCFormCaseDescriptionDescROVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="BCFormCaseDescriptionDescROVOCriteria_BCFormCaseDescriptionDescROVOCriteria_row_0_BusinessCaseId"
+        ViewAttribute="BusinessCaseId"
+        Operator="="
+        Conjunction="AND"
+        Value=":pBC"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

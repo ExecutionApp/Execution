@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SecUsersSessionsVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.views.security.SecUsersSessionsVOImpl"
+  RowClass="com.egabi.cjexec.model.views.security.SecUsersSessionsVORowImpl"
+  ComponentInterface="com.egabi.cjexec.model.views.security.common.SecUsersSessionsVO"
+  ClientProxyName="com.egabi.cjexec.model.views.security.client.SecUsersSessionsVOClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.views.security.SecUsersSessionsVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="BindToken"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT SecUsersSessionsEO.ID,   
+       SecUsersSessionsEO.LOGIN_DATE,   
+       SecUsersSessionsEO.USER_ID,   
+       SecUsersSessionsEO.SESSION_TOKEN,   
+       SecUsersSessionsEO.IS_ACTIVE  
+FROM  EXC_SEC_USERS_SESSIONS SecUsersSessionsEO 
+where SecUsersSessionsEO.IS_ACTIVE = 'T' 
+AND   SecUsersSessionsEO.SESSION_TOKEN = :BindToken]]></SQLQuery>
+  <EntityUsage
+    Name="SecUsersSessionsEO"
+    Entity="com.egabi.cjexec.model.entities.security.SecUsersSessionsEO"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="SecUsersSessionsEO"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="LoginDate"
+    PrecisionRule="true"
+    EntityAttrName="LoginDate"
+    EntityUsage="SecUsersSessionsEO"
+    AliasName="LOGIN_DATE"/>
+  <ViewAttribute
+    Name="UserId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="UserId"
+    EntityUsage="SecUsersSessionsEO"
+    AliasName="USER_ID"/>
+  <ViewAttribute
+    Name="SessionToken"
+    PrecisionRule="true"
+    EntityAttrName="SessionToken"
+    EntityUsage="SecUsersSessionsEO"
+    AliasName="SESSION_TOKEN"/>
+  <ViewAttribute
+    Name="IsActive"
+    PrecisionRule="true"
+    EntityAttrName="IsActive"
+    EntityUsage="SecUsersSessionsEO"
+    AliasName="IS_ACTIVE"/>
+  <ViewCriteria
+    Name="ActiveUsersSessions"
+    ViewObjectName="com.egabi.cjexec.model.views.security.SecUsersSessionsVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="SecUsersSessionsVOCriteria_row_0"
+      UpperColumns="1"
+      Conjunction="AND">
+      <ViewCriteriaItem
+        Name="IsActive"
+        ViewAttribute="IsActive"
+        Operator="="
+        Conjunction="AND"
+        Value="T"
+        Required="Optional"
+        UpperColumns="1"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="SecUsersROV"
+    ViewLink="com.egabi.cjexec.model.viewLinks.security.UserSessionSecUsersVL"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="getUserSessionByToken"
+      MethodName="getUserSessionByToken">
+      <Return
+        Name="_return_type_"
+        Type="oracle.jbo.Row"/>
+      <Parameter
+        Name="loginToken"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getUserSessionByToken2"
+      MethodName="getUserSessionByToken2">
+      <Return
+        Name="_return_type_"
+        Type="oracle.jbo.Row"/>
+      <Parameter
+        Name="loginToken"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

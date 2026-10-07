@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">AncillaryProvisions</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">565.3574</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>AncillaryProvisions&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">275.39648</property>
+      <property
+         name="page">/pages/com/egabi/Reports/AncillaryProvisions.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <MethodCall
+      id="MethodCall9">
+      <property
+         name="activityId">preEnterReportsSearch</property>
+      <property
+         name="x">316.03223</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>preEnterReportsSearch&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="y">265.74707</property>
+      <property
+         name="exceptionHandler">false</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase11"
+      from="MethodCall9"
+      to="View2">
+      <property
+         name="fromOutcome">preEnterReportsSearch</property>
+      <property
+         name="sdm:polyPoints">R50,357.03223,265.39648,524.3574,275.0459,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="MethodCall9">
+      <property
+         name="tosrcid">__2</property>
+      <property
+         name="fromOutcome">preEnterReportsSearch</property>
+      <property
+         name="fromsrcid">__1</property>
+   </ControlFlowCase>
+</SDM>

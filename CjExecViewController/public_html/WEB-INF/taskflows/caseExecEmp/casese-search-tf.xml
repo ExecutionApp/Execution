@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="casese-search-tf">
+    <default-activity>ExecuteSearchForm</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__7">
+      <name>sessionUserId</name>
+      <value>#{pageFlowScope.sessionUserId}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name>sessionUserName</name>
+      <value>#{pageFlowScope.sessionUserName}</value>
+      <required/>
+    </input-parameter-definition>
+    <managed-bean id="__14">
+      <managed-bean-name>caseSearchBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.caseexecemp.CaseSearchBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="casesSearchFrag">
+      <page>/caseExecEmp/casesSearchFrag.jsff</page>
+    </view>
+    <method-call id="ExecuteSearchForm">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="case-edit-tf">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/caseExecEmp/case-edit-tf.xml</document>
+        <id>case-edit-tf</id>
+      </task-flow-reference>
+      <input-parameter id="__11">
+        <name>HearingResId</name>
+        <value>#{requestScope.HearingResId}</value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>userName</name>
+        <value>#{pageFlowScope.sessionUserName}</value>
+      </input-parameter>
+      <input-parameter id="__10">
+        <name>userId</name>
+        <value>#{pageFlowScope.sessionUserId}</value>
+      </input-parameter>
+      <input-parameter id="__15">
+        <name>viewOnlyMode</name>
+        <value>#{requestScope.viewOnlyMode}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="ExecuteSearchResult">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome>
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>ExecuteSearchForm</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>casesSearchFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>casesSearchFrag</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>viewCase</from-outcome>
+        <to-activity-id>case-edit-tf</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>case-edit-tf</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>ExecuteSearchResult</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id>ExecuteSearchResult</from-activity-id>
+      <control-flow-case id="__13">
+        <from-outcome>Execute</from-outcome>
+        <to-activity-id>casesSearchFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

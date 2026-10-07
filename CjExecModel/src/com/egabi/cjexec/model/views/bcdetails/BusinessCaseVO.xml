@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject xmlns="http://xmlns.oracle.com/bc4j" Name="BusinessCaseVO"
+    Version="12.2.1.0.31"
+            InheritPersonalization="merge"
+            BindingStyle="OracleName" CustomQuery="false" PageIterMode="Full"
+            ComponentClass="com.egabi.cjexec.model.views.bcdetails.BusinessCaseVOImpl" FetchMode="FETCH_AS_NEEDED"
+    MaxFetchSize="1"
+    QueryHint="FIRST_ROWS"
+    SelectList="BusinessCaseEO.ID, 
+       BusinessCaseEO.CASE_NUMBER, 
+       BusinessCaseEO.CASE_TYPE, 
+       BusinessCaseEO.ENTITY_ID, 
+       BusinessCaseEO.ASSIGNED_TO, 
+       BusinessCaseEO.CASE_SCHEMA_TYPE_ID, 
+       BusinessCaseEO.ENTITY_LEDGER_ID, 
+       BusinessCaseEO.COMMENTS, 
+       BusinessCaseEO.CREATED_BY, 
+       BusinessCaseEO.CREATED_DATE, 
+       BusinessCaseEO.UPATED_BY, 
+       BusinessCaseEO.UPDATED_DATE, 
+       BusinessCaseEO.HAS_COOPED, 
+       BusinessCaseEO.APPROVED, 
+       BusinessCaseEO.CORRESPONDENCE_ID, 
+       BusinessCaseEO.INPUT_TYPE, 
+       BusinessCaseEO.BUSINESS_CASE_TYPE, 
+       BusinessCaseEO.BUSINESS_CASE_NAME, 
+       BusinessCaseEO.BUSINESS_CASE_SUMMARY, 
+       BusinessCaseEO.PROSECUTION_ID, 
+       BusinessCaseEO.COURT_ID, 
+       BusinessCaseEO.CASE_FLAG, 
+       BusinessCaseEO.PARENT_ID, 
+       BusinessCaseEO.COURT_ASSIGN, 
+       BusinessCaseEO.REJECTION_REASON, 
+       BusinessCaseEO.FELONY_ID, 
+       BusinessCaseEO.ASSIGNED_DATE, 
+       BusinessCaseEO.PETITION_TYPE, 
+       BusinessCaseEO.SOURCE, 
+       BusinessCaseEO.JOURNALIST_FLAG, 
+       BusinessCaseEO.CRIME_DATE, 
+       BusinessCaseEO.IN_TIME_DESCRIPTION, 
+       BusinessCaseEO.CRIME_DATE_TO, 
+       BusinessCaseEO.IN_TIME_FLAG"
+    FromList="BUSINESS_CASE BusinessCaseEO"
+    Where="ROWNUM = 1">
+    <DesignTime>
+        <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    </DesignTime>
+    <ViewAccessor Name="BCTypeROVO1" ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.BCTypeROVO"
+                  RowLevelBinds="true"/>
+    <ViewAccessor Name="EntityROVO1" ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityROVO"
+                  RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="InTimecrimeLKPROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.InTimecrimeLKPROVO"
+        RowLevelBinds="true"/>
+    <ListBinding Name="LOV_CaseType" ListVOName="BCTypeROVO1" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="CaseType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_InTimeFlag"
+        ListVOName="InTimecrimeLKPROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="InTimeFlag"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <EntityUsage Name="BusinessCaseEO" Entity="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseEO"/>
+    <ViewAttribute Name="Id" IsNotNull="true" PrecisionRule="true" EntityAttrName="Id" EntityUsage="BusinessCaseEO"
+                   AliasName="ID"/>
+    <ViewAttribute Name="CaseNumber" PrecisionRule="true" EntityAttrName="CaseNumber" EntityUsage="BusinessCaseEO"
+                   AliasName="CASE_NUMBER">
+        <Properties>
+            <SchemaBasedProperties>
+                <DISPLAYWIDTH Value="20"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="CaseType" PrecisionRule="true" EntityAttrName="CaseType" EntityUsage="BusinessCaseEO"
+                   AliasName="CASE_TYPE" LOVName="LOV_CaseType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="EntityId" IsNotNull="true" PrecisionRule="true" EntityAttrName="EntityId"
+                   EntityUsage="BusinessCaseEO" AliasName="ENTITY_ID"/>
+    <ViewAttribute Name="AssignedTo" PrecisionRule="true" EntityAttrName="AssignedTo" EntityUsage="BusinessCaseEO"
+                   AliasName="ASSIGNED_TO"/>
+    <ViewAttribute Name="CaseSchemaTypeId" PrecisionRule="true" EntityAttrName="CaseSchemaTypeId"
+                   EntityUsage="BusinessCaseEO" AliasName="CASE_SCHEMA_TYPE_ID"/>
+    <ViewAttribute Name="EntityLedgerId" PrecisionRule="true" EntityAttrName="EntityLedgerId"
+                   EntityUsage="BusinessCaseEO" AliasName="ENTITY_LEDGER_ID"/>
+    <ViewAttribute Name="Comments" PrecisionRule="true" EntityAttrName="Comments" EntityUsage="BusinessCaseEO"
+                   AliasName="COMMENTS"/>
+    <ViewAttribute Name="CreatedBy" IsNotNull="true" PrecisionRule="true" EntityAttrName="CreatedBy"
+                   EntityUsage="BusinessCaseEO" AliasName="CREATED_BY" IsUpdateable="false"/>
+    <ViewAttribute Name="CreatedDate" IsNotNull="true" PrecisionRule="true" EntityAttrName="CreatedDate"
+                   EntityUsage="BusinessCaseEO" AliasName="CREATED_DATE" IsUpdateable="false"/>
+    <ViewAttribute Name="UpatedBy" PrecisionRule="true" EntityAttrName="UpatedBy" EntityUsage="BusinessCaseEO"
+                   AliasName="UPATED_BY" IsUpdateable="false"/>
+    <ViewAttribute Name="UpdatedDate" PrecisionRule="true" EntityAttrName="UpdatedDate" EntityUsage="BusinessCaseEO"
+                   AliasName="UPDATED_DATE" IsUpdateable="false"/>
+    <ViewAttribute Name="HasCooped" PrecisionRule="true" EntityAttrName="HasCooped" EntityUsage="BusinessCaseEO"
+                   AliasName="HAS_COOPED"/>
+    <ViewAttribute Name="Approved" PrecisionRule="true" EntityAttrName="Approved" EntityUsage="BusinessCaseEO"
+                   AliasName="APPROVED"/>
+    <ViewAttribute Name="CorrespondenceId" PrecisionRule="true" EntityAttrName="CorrespondenceId"
+                   EntityUsage="BusinessCaseEO" AliasName="CORRESPONDENCE_ID"/>
+    <ViewAttribute Name="InputType" PrecisionRule="true" EntityAttrName="InputType" EntityUsage="BusinessCaseEO"
+                   AliasName="INPUT_TYPE"/>
+    <ViewAttribute Name="BusinessCaseType" PrecisionRule="true" EntityAttrName="BusinessCaseType"
+                   EntityUsage="BusinessCaseEO" AliasName="BUSINESS_CASE_TYPE"/>
+    <ViewAttribute Name="BusinessCaseName" PrecisionRule="true" EntityAttrName="BusinessCaseName"
+                   EntityUsage="BusinessCaseEO" AliasName="BUSINESS_CASE_NAME"/>
+    <ViewAttribute Name="BusinessCaseSummary" PrecisionRule="true" EntityAttrName="BusinessCaseSummary"
+                   EntityUsage="BusinessCaseEO" AliasName="BUSINESS_CASE_SUMMARY"/>
+    <ViewAttribute Name="ProsecutionId" PrecisionRule="true" EntityAttrName="ProsecutionId" EntityUsage="BusinessCaseEO"
+                   AliasName="PROSECUTION_ID"/>
+    <ViewAttribute Name="CourtId" PrecisionRule="true" EntityAttrName="CourtId" EntityUsage="BusinessCaseEO"
+                   AliasName="COURT_ID"/>
+    <ViewAttribute Name="CaseFlag" PrecisionRule="true" EntityAttrName="CaseFlag" EntityUsage="BusinessCaseEO"
+                   AliasName="CASE_FLAG"/>
+    <ViewAttribute Name="ParentId" PrecisionRule="true" EntityAttrName="ParentId" EntityUsage="BusinessCaseEO"
+                   AliasName="PARENT_ID"/>
+    <ViewAttribute Name="CourtAssign" PrecisionRule="true" EntityAttrName="CourtAssign" EntityUsage="BusinessCaseEO"
+                   AliasName="COURT_ASSIGN"/>
+    <ViewAttribute Name="RejectionReason" IsQueriable="false" PrecisionRule="true" EntityAttrName="RejectionReason"
+                   EntityUsage="BusinessCaseEO" AliasName="REJECTION_REASON"/>
+    <ViewAttribute Name="FelonyId" PrecisionRule="true" EntityAttrName="FelonyId" EntityUsage="BusinessCaseEO"
+                   AliasName="FELONY_ID"/>
+    <ViewAttribute Name="AssignedDate" PrecisionRule="true" EntityAttrName="AssignedDate" EntityUsage="BusinessCaseEO"
+                   AliasName="ASSIGNED_DATE"/>
+    <ViewAttribute Name="PetitionType" PrecisionRule="true" EntityAttrName="PetitionType" EntityUsage="BusinessCaseEO"
+                   AliasName="PETITION_TYPE"/>
+    <ViewAttribute Name="Source" PrecisionRule="true" EntityAttrName="Source" EntityUsage="BusinessCaseEO"
+                   AliasName="SOURCE"/>
+    <ViewAttribute Name="JournalistFlag" PrecisionRule="true" EntityAttrName="JournalistFlag"
+                   EntityUsage="BusinessCaseEO" AliasName="JOURNALIST_FLAG"/>
+    <ViewAttribute
+        Name="CrimeDate"
+        PrecisionRule="true"
+        EntityAttrName="CrimeDate"
+        EntityUsage="BusinessCaseEO"
+        AliasName="CRIME_DATE"/>
+    <ViewAttribute
+        Name="InTimeDescription"
+        PrecisionRule="true"
+        EntityAttrName="InTimeDescription"
+        EntityUsage="BusinessCaseEO"
+        AliasName="IN_TIME_DESCRIPTION"/>
+    <ViewAttribute
+        Name="CrimeDateTo"
+        PrecisionRule="true"
+        EntityAttrName="CrimeDateTo"
+        EntityUsage="BusinessCaseEO"
+        AliasName="CRIME_DATE_TO"/>
+    <ViewAttribute
+        Name="InTimeFlag"
+        PrecisionRule="true"
+        EntityAttrName="InTimeFlag"
+        EntityUsage="BusinessCaseEO"
+        AliasName="IN_TIME_FLAG"
+        DefaultValue="1"
+        LOVName="LOV_InTimeFlag">
+        <Properties>
+            <SchemaBasedProperties>
+                <DISPLAYWIDTH
+                    Value="50"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewLinkAccessor Name="FormCaseDescription"
+                      ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.FormCaseDescriptionFk1VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="ParPoliceAuthorityReport" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLinkVL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="CourtBcHearingReservation" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink1VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="FormCaseDescriptionPartiesRO"
+                      ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink17VL" Type="oracle.jbo.RowIterator"
+                      IsUpdateable="false"/>
+    <ViewLinkAccessor Name="BusinessCaseDetails" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink18VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="BusinessCaseDetails2" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink20VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="BusinessCaseLog" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink22VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="BCFormCaseDescriptionDescRO"
+                      ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink25VL" Type="oracle.jbo.RowIterator"
+                      IsUpdateable="false"/>
+    <ViewLinkAccessor Name="BCReservaionRO" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink26VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="CJFormCaseDescRO" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink27VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="SearchInventoryResultR"
+                      ViewLink="com.egabi.cjexec.model.viewLinks.suppamount.BusCaseInventoryResult"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="CriminalJusticeFilesDetails"
+        ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.BusinessCaseCriminalJusticeFilesVlink"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="CriminalJusticeFilesDetails2"
+        ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink32VL"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="ExcClaims"
+        ViewLink="com.egabi.cjexec.model.vl.ViewLink1VL"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
+    <ResourceBundle>
+        <PropertiesBundle PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewObject>

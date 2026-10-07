@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DescriptionPartyRoVO"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.DescriptionPartyRoVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pFORM_CASE_DESCRIPTION_ID"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal"/>
+  <SQLQuery><![CDATA[SELECT  
+    FORM_CASE_DESCRIPTION_PARTIES.ID, PARTY_ID, FORM_CASE_DESCRIPTION_ID  , PAR_ID,  NICKNAME , ID_NUMBER,  
+     
+   JOB_TITLE ,  
+   PARTY_FULL_NAME  
+    
+FROM  FORM_CASE_DESCRIPTION_PARTIES , PAR_PARTIES where  PAR_PARTIES.id = FORM_CASE_DESCRIPTION_PARTIES.PARTY_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARTY_ID"
+    Expression="PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FormCaseDescriptionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FORM_CASE_DESCRIPTION_ID"
+    Expression="FORM_CASE_DESCRIPTION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ParId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PAR_ID"
+    Expression="PAR_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Nickname"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NICKNAME"
+    Expression="NICKNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_NUMBER"
+    Expression="ID_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JobTitle"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JOB_TITLE"
+    Expression="JOB_TITLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyFullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_FULL_NAME"
+    Expression="PARTY_FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="DescriptionPartyRoVOCriteria"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.DescriptionPartyRoVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="DescriptionPartyRoVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DescriptionPartyRoVOCriteria_DescriptionPartyRoVOCriteria_row_0_FormCaseDescriptionId"
+        ViewAttribute="FormCaseDescriptionId"
+        Operator="="
+        Conjunction="AND"
+        Value=":pFORM_CASE_DESCRIPTION_ID"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

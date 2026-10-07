@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="UpdatePartyPageDef1"
+                Package="pages.com.egabi.party">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ParPartiesView1" RangeSize="25" DataControl="UtilsAppModuleAMDataControl" id="ParPartiesView1Iterator1"/>
+    <iterator Binds="ParPartiesLogView1" RangeSize="5" DataControl="UtilsAppModuleAMDataControl"
+              id="ParPartiesLogView1Iterator"/>
+    <searchRegion Binds="ParPartiesLogView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ParPartiesLogView1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="Fname">
+      <AttrNames>
+        <Item Value="Fname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="Sname">
+      <AttrNames>
+        <Item Value="Sname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="Tname">
+      <AttrNames>
+        <Item Value="Tname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="Fourthname">
+      <AttrNames>
+        <Item Value="Fourthname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="Nickname">
+      <AttrNames>
+        <Item Value="Nickname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="Address">
+      <AttrNames>
+        <Item Value="Address"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="Age">
+      <AttrNames>
+        <Item Value="Age"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="IdNumber">
+      <AttrNames>
+        <Item Value="IdNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="JobTitle">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator1" id="PartyFullName">
+      <AttrNames>
+        <Item Value="PartyFullName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ParPartiesLogView1Iterator" id="ParPartiesLogView1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.party.log.ParPartiesLogView" Name="ParPartiesLogView10">
+        <AttrNames>
+          <Item Value="Fname"/>
+          <Item Value="Sname"/>
+          <Item Value="Tname"/>
+          <Item Value="Fourthname"/>
+          <Item Value="Nickname"/>
+          <Item Value="Address"/>
+          <Item Value="Age"/>
+          <Item Value="DateOfBirth"/>
+          <Item Value="IdNumber"/>
+          <Item Value="JobTitle"/>
+          <Item Value="UpdatedDate"/>
+          <Item Value="UpdatedBy"/>
+          <Item Value="ParId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

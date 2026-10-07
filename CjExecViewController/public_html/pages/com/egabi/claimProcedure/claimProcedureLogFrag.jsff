@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="cjexecviewcontrollerBundle"
+           value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle_ar']}"/>
+    <af:panelHeader text="#{bundle.SEARCH}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:activeOutputText value="لا توجد نتائج تطابق محددات البحث" id="aot1" visible="false"
+                             styleClass="alert alert-warning alert-custom" partialTriggers="t1"/>
+        <af:panelGroupLayout id="pgl1" layout="default" styleClass="row">
+            <af:panelGroupLayout id="pgl10" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bundle.LOGGEDIN_ENTITY_ID}" id="ol10"/>
+                <af:selectOneChoice value="#{bindings.ProsecutionKolya.inputValue}" contentStyle="width:200px"
+                                    label="#{bindings.ProsecutionKolya.label}" simple="true"
+                                    required="#{bindings.ProsecutionKolya.hints.mandatory}"
+                                    shortDesc="#{bindings.ProsecutionKolya.hints.tooltip}" id="soc4">
+                    <f:selectItems value="#{bindings.ProsecutionKolya.items}" id="si3"/>
+                    <f:validator binding="#{bindings.ProsecutionKolya.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:spacer width="30" height="10" id="s1"/>
+            <af:panelGroupLayout id="pgl3" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bundle.FROM_DATE}" id="ol8"/>
+                <af:inputDate value="#{bindings.FromDate.inputValue}" label="#{bindings.FromDate.hints.label}"
+                              required="#{bindings.FromDate.hints.mandatory}" simple="true" columns="20"
+                              disabled="#{bindings.Today.inputValue eq true}" contentStyle="width:200px"
+                              partialTriggers="sbc2" shortDesc="#{bindings.FromDate.hints.tooltip}" id="id1"
+                              autoSubmit="true">
+                    <f:validator binding="#{bindings.FromDate.validator}"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:spacer width="30" height="10" id="s2"/>
+            <af:panelGroupLayout id="pgl2" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bundle.TO_DATE}" id="ol7"/>
+                <af:inputDate value="#{bindings.ToDate.inputValue}" label="#{bindings.ToDate.hints.label}"
+                              disabled="#{bindings.Today.inputValue eq true or bindings.FromDate.inputValue eq null}"
+                              simple="true" required="#{bindings.ToDate.hints.mandatory}" columns="20" autoSubmit="true"
+                              contentStyle="width:200px" shortDesc="#{bindings.ToDate.hints.tooltip}" id="id2"
+                              partialTriggers="sbc2 id1" minValue="#{bindings.FromDate.inputValue}">
+                    <f:validator binding="#{bindings.ToDate.validator}"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:spacer width="30" height="10" id="s3"/>
+            <af:panelGroupLayout id="pgl11" layout="vertical">
+                <af:outputLabel value="#{bundle.TODAY}" id="ol9"/>
+                <af:selectBooleanCheckbox value="#{bindings.Today.inputValue eq null ? 'N' : bindings.Today.inputValue}"
+                                          label="#{bindings.Today.label}" simple="true"
+                                          shortDesc="#{bindings.Today.hints.tooltip}" id="sbc2" autoSubmit="true"
+                                          partialTriggers="id2 id1"
+                                          valueChangeListener="#{pageFlowScope.claimProcedureBean.todayCBChanged}"/>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl5" styleClass="btn-holder">
+            <af:button text="#{bundle.SEARCH}" id="b1"
+                       action="#{pageFlowScope.claimProcedureBean.searchClaimProcedureLog}"/>
+            <af:spacer width="10" height="10" id="s4"/>
+            <af:button text="#{bundle.RESET_SEARCH}" id="b2"
+                       action="#{pageFlowScope.claimProcedureBean.resetSearchClaimProcedureLog}" immediate="true"/>
+        </af:panelGroupLayout>
+    </af:panelHeader>
+    <af:panelHeader text="#{bundle.CLAIMS_SEARCH_RESULTS}" id="ph2">
+        <f:facet name="context"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:table value="#{bindings.ExcProcedureClaimLog1.collectionModel}" var="row"
+                  rows="#{bindings.ExcProcedureClaimLog1.rangeSize}"
+                  emptyText="#{bindings.ExcProcedureClaimLog1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.ExcProcedureClaimLog1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.ExcProcedureClaimLog1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.ExcProcedureClaimLog1.rangeSize}" id="t1"
+                  columnStretching="column:c16" scrollPolicy="page" autoHeightRows="5" width="100%">
+            <af:column headerText="#{bindings.ExcProcedureClaimLog1.hints.Id.label}" id="c1" visible="false">
+                <af:outputText value="#{row.Id}" shortDesc="#{bindings.ExcProcedureClaimLog1.hints.Id.tooltip}"
+                               id="ot1">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ExcProcedureClaimLog1.hints.Id.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ExcProcedureClaimLog1.hints.ClaimId.label}" id="c2" visible="false">
+                <af:outputText value="#{row.ClaimId}"
+                               shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ClaimId.tooltip}" id="ot2">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExcProcedureClaimLog1.hints.ClaimId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.CREATION_DATE}" width="100px" id="c15">
+                <af:outputText value="#{row.CreatedDate}"
+                               shortDesc="#{bindings.ExcProcedureClaimLog1.hints.CreatedDate.tooltip}" id="ot8">
+                    <af:convertDateTime pattern="#{bindings.ExcProcedureClaimLog1.hints.CreatedDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.USER}" width="200px" id="c14">
+                <af:selectOneChoice value="#{row.bindings.CreatedBy.inputValue}" label="#{row.bindings.CreatedBy.label}"
+                                    required="#{bindings.ExcProcedureClaimLog1.hints.CreatedBy.mandatory}"
+                                    readOnly="true"
+                                    shortDesc="#{bindings.ExcProcedureClaimLog1.hints.CreatedBy.tooltip}" id="soc6">
+                    <f:selectItems value="#{row.bindings.CreatedBy.items}" id="si13"/>
+                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.LOGGEDIN_ENTITY_ID}" width="100px" id="c16">
+                <af:selectOneChoice value="#{row.bindings.LoggedInEntityId.inputValue}"
+                                    label="#{row.bindings.LoggedInEntityId.label}"
+                                    required="#{bindings.ExcProcedureClaimLog1.hints.LoggedInEntityId.mandatory}"
+                                    shortDesc="#{bindings.ExcProcedureClaimLog1.hints.LoggedInEntityId.tooltip}"
+                                    id="soc5" disabled="true">
+                    <f:selectItems value="#{row.bindings.LoggedInEntityId.items}" id="si7"/>
+                    <f:validator binding="#{row.bindings.LoggedInEntityId.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_NUMBER}" id="c3" visible="true">
+                <af:outputText value="#{row.ClaimNumber}"
+                               shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ClaimNumber.tooltip}" id="ot3"/>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_YEAR}" id="c4" visible="true">
+                <af:selectOneChoice value="#{row.bindings.ClaimYear.inputValue}" label="#{row.bindings.ClaimYear.label}"
+                                    required="#{bindings.ExcProcedureClaimLog1.hints.ClaimYear.mandatory}"
+                                    shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ClaimYear.tooltip}"
+                                    readOnly="true" id="soc1">
+                    <f:selectItems value="#{row.bindings.ClaimYear.items}" id="si1"/>
+                    <f:validator binding="#{row.bindings.ClaimYear.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_TYPE}" id="c5" visible="true" width="150px;">
+                <af:selectOneChoice value="#{row.bindings.ClaimTypeId.inputValue}"
+                                    label="#{row.bindings.ClaimTypeId.label}"
+                                    required="#{bindings.ExcProcedureClaimLog1.hints.ClaimTypeId.mandatory}"
+                                    shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ClaimTypeId.tooltip}"
+                                    readOnly="true" id="soc2">
+                    <f:selectItems value="#{row.bindings.ClaimTypeId.items}" id="si6"/>
+                    <f:validator binding="#{row.bindings.ClaimTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.IS_REPEATED}" id="c6" visible="true">
+                <af:selectOneChoice value="#{row.bindings.ClaimRepeatedFlag.inputValue}"
+                                    label="#{row.bindings.ClaimRepeatedFlag.label}"
+                                    required="#{bindings.ExcProcedureClaimLog1.hints.ClaimRepeatedFlag.mandatory}"
+                                    shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ClaimRepeatedFlag.tooltip}"
+                                    readOnly="true" id="soc3">
+                    <f:selectItems value="#{row.bindings.ClaimRepeatedFlag.items}" id="si4"/>
+                    <f:validator binding="#{row.bindings.ClaimRepeatedFlag.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_COLYA}" id="c7" rendered="false">
+                <af:selectOneChoice value="#{row.bindings.ClaimEntityColya.inputValue}"
+                                    label="#{row.bindings.ClaimEntityColya.label}"
+                                    required="#{bindings.ExcProcedureClaimLog1.hints.ClaimEntityColya.mandatory}"
+                                    shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ClaimEntityColya.tooltip}"
+                                    readOnly="true" id="soc9">
+                    <f:selectItems value="#{row.bindings.ClaimEntityColya.items}" id="si9"/>
+                    <f:validator binding="#{row.bindings.ClaimEntityColya.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_PARTIAL}" id="c8" width="100" visible="false">
+                <af:selectOneChoice value="#{row.bindings.ClaimEntityPartial.inputValue}"
+                                    label="#{row.bindings.ClaimEntityPartial.label}"
+                                    required="#{bindings.ExcProcedureClaimLog1.hints.ClaimEntityPartial.mandatory}"
+                                    shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ClaimEntityPartial.tooltip}"
+                                    readOnly="true" id="soc7">
+                    <f:selectItems value="#{row.bindings.ClaimEntityPartial.items}" id="si14"/>
+                    <f:validator binding="#{row.bindings.ClaimEntityPartial.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_POLICE}" id="c9" visible="false">
+                <af:selectOneChoice value="#{row.bindings.ClaimEntityPolice.inputValue}"
+                                    label="#{row.bindings.ClaimEntityPolice.label}"
+                                    required="#{bindings.ExcProcedureClaimLog1.hints.ClaimEntityPolice.mandatory}"
+                                    shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ClaimEntityPolice.tooltip}"
+                                    readOnly="true" id="soc11">
+                    <f:selectItems value="#{row.bindings.ClaimEntityPolice.items}" id="si2"/>
+                    <f:validator binding="#{row.bindings.ClaimEntityPolice.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bindings.ExcProcedureClaimLog1.hints.ProcedureId.label}" id="c10" visible="false">
+                <af:outputText value="#{row.ProcedureId}"
+                               shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ProcedureId.tooltip}" id="ot4">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExcProcedureClaimLog1.hints.ProcedureId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.PROCEDURE_NUMBER}" width="100px" id="c11" rendered="false">
+                <af:outputText value="#{row.ProcedureNumber}"
+                               shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ProcedureNumber.tooltip}" id="ot5"/>
+            </af:column>
+            <af:column headerText="#{bundle.PROCEDURE_TYPE}" width="100px" id="c12">
+                <af:selectOneChoice value="#{row.bindings.ProcedureTypeId.inputValue}"
+                                    label="#{row.bindings.ProcedureTypeId.label}"
+                                    required="#{bindings.ExcProcedureClaimLog1.hints.ProcedureTypeId.mandatory}"
+                                    shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ProcedureTypeId.tooltip}"
+                                    readOnly="true" id="soc12">
+                    <f:selectItems value="#{row.bindings.ProcedureTypeId.items}" id="si12"/>
+                    <f:validator binding="#{row.bindings.ProcedureTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.PROCEDURE_DATE}" width="100px" id="c13">
+                <af:outputText value="#{row.ProcedureDate}"
+                               shortDesc="#{bindings.ExcProcedureClaimLog1.hints.ProcedureDate.tooltip}" id="ot6">
+                    <af:convertDateTime pattern="#{bindings.ExcProcedureClaimLog1.hints.ProcedureDate.format}"/>
+                </af:outputText>
+            </af:column>
+        </af:table>
+    </af:panelHeader>
+</ui:composition>

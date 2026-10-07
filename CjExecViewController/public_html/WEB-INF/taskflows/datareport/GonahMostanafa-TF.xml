@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="GonahMostanafa-TF">
+    <default-activity>preEnterReportsSearch</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>printDafatertBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.reports.PrintDafatertBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__2">
+      <managed-bean-name>gonahMostanafaBean</managed-bean-name>
+      <managed-bean-class>cjexecviewcontroller.GonahMostanafaBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="preEnterReportsSearch">
+      <method>#{bindings.preEnterReportsSearch.execute}</method>
+      <outcome>
+        <fixed-outcome>preEnterReportsSearch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="GonahMostanafa">
+      <page>/pages/com/egabi/Reports/GonahMostanafa.jsff</page>
+    </view>
+    <control-flow-rule id="__6">
+      <from-activity-id>preEnterReportsSearch</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>preEnterReportsSearch</from-outcome>
+        <to-activity-id>GonahMostanafa</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

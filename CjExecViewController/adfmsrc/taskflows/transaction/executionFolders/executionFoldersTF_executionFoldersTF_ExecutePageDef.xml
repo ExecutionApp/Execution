@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="executionFoldersTF_executionFoldersTF_ExecutePageDef"
+                Package="taskflows.transaction.executionFolders" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="FolderTypeROV1" RangeSize="25" DataControl="CjExecAMDataControl" id="FolderTypeROV1Iterator"
+              Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="FolderTypeROV1Iterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

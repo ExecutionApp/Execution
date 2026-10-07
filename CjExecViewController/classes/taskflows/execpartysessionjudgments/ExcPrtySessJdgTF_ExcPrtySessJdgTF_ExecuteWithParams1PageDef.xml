@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="ExcPrtySessJdgTF_ExcPrtySessJdgTF_ExecuteWithParams1PageDef"
+                Package="taskflows.execpartysessionjudgments" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ExecPartySessionJudgmentsROV1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExecPartySessionJudgmentsROV1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="P_PARTY_ID" NDValue="#{pageFlowScope.partyId}" NDType="java.math.BigDecimal"/>
+     
+    </action>
+  </bindings>
+</pageDefinition>

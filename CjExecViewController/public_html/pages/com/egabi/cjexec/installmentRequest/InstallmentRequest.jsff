@@ -1,0 +1,742 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <af:panelGroupLayout id="pgl1">
+        <af:panelHeader text="#{bundle.INSTALLMENT_HEADER}" id="ph1">
+            <f:facet name="context"/>
+            <f:facet name="toolbar">
+                <af:toolbox id="t2">
+                    <af:toolbar id="t3">
+                        <af:button text="#{bundle.INSTALLMENT_SUBMIT}" id="b3"
+                                   action="#{pageFlowScope.installmentRequestBean.startUpload}"
+                                   actionListener="#{pageFlowScope.installmentRequestBean.procedureStatus}">
+                            <af:setPropertyListener to="#{bindings.DECISION_TYPE.attributeValue}" from="a"
+                                                    type="action"/>
+                        </af:button>
+                        <af:button text="#{bundle.BACK}" id="b4" immediate="true" action="back"
+                                   actionListener="#{bindings.Rollback.execute}"/>
+                    </af:toolbar>
+                </af:toolbox>
+            </f:facet>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <h:panelGroup layout="block" styleClass="casedata-panel" id="pgl8">
+                <af:outputText styleClass="casedata-header" value="#{bundle.CASE_DATA}" id="ot31"/>
+                <h:panelGroup layout="block" styleClass="row" id="pg2">
+                    <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg3">
+                        <af:outputLabel value="#{bindings.CaseNumber.hints.label}" id="ol1"/>
+                        <af:inputText value="#{bindings.CaseNumber.inputValue}" simple="true"
+                                      required="#{bindings.CaseNumber.hints.mandatory}"
+                                      columns="#{bindings.CaseNumber.hints.displayWidth}"
+                                      maximumLength="#{bindings.CaseNumber.hints.precision}"
+                                      shortDesc="#{bindings.CaseNumber.hints.tooltip}" id="it20">
+                            <f:validator binding="#{bindings.CaseNumber.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg4">
+                        <af:outputLabel value="#{bindings.HearingDate.hints.label}" id="ol2"/>
+                        <af:inputText value="#{bindings.HearingDate.inputValue}"
+                                      required="#{bindings.HearingDate.hints.mandatory}"
+                                      columns="#{bindings.HearingDate.hints.displayWidth}"
+                                      maximumLength="#{bindings.HearingDate.hints.precision}"
+                                      shortDesc="#{bindings.HearingDate.hints.tooltip}" id="it21">
+                            <f:validator binding="#{bindings.HearingDate.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.HearingDate.format}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg5">
+                        <af:outputLabel value="#{bindings.JudgmentType.hints.label}" id="ol3"/>
+                        <af:inputText value="#{bindings.JudgmentType.inputValue}" simple="true"
+                                      required="#{bindings.JudgmentType.hints.mandatory}"
+                                      columns="#{bindings.JudgmentType.hints.displayWidth}"
+                                      maximumLength="#{bindings.JudgmentType.hints.precision}"
+                                      shortDesc="#{bindings.JudgmentType.hints.tooltip}" id="it22">
+                            <f:validator binding="#{bindings.JudgmentType.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg1">
+                        <af:outputLabel value="#{bindings.EntityName.hints.label}" id="ol6"/>
+                        <af:inputText value="#{bindings.EntityName.inputValue}" simple="true"
+                                      required="#{bindings.EntityName.hints.mandatory}"
+                                      columns="#{bindings.EntityName.hints.displayWidth}"
+                                      maximumLength="#{bindings.EntityName.hints.precision}"
+                                      shortDesc="#{bindings.EntityName.hints.tooltip}" id="it3">
+                            <f:validator binding="#{bindings.EntityName.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+            <af:panelTabbed position="above" id="pt1">
+                <af:showDetailItem id="tab1" text="#{bundle.ISTALLMENT_REQUEST_INFO}" immediate="false">
+                    <af:panelGroupLayout id="pgl3">
+                        <af:panelGridLayout id="pgl10">
+                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr10">
+                                <af:gridCell marginStart="5px" width="20%" id="gc46">
+                                    <af:panelLabelAndMessage label="#{bindings.CapacityType.hints.label}" id="plam11"
+                                                             showRequired="true"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc47">
+                                    <af:selectOneChoice value="#{bindings.CapacityType.inputValue}"
+                                                        label="#{bindings.CapacityType.label}" required="true"
+                                                        autoSubmit="true" simple="true"
+                                                        shortDesc="#{bindings.CapacityType.hints.tooltip}" id="soc1"
+                                                        valueChangeListener="#{pageFlowScope.installmentRequestBean.fireTable}">
+                                        <f:selectItems value="#{bindings.CapacityType.items}" id="si3"/>
+                                        <f:validator binding="#{bindings.CapacityType.validator}"/>
+                                    </af:selectOneChoice>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc48"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc49">
+                                    <af:panelLabelAndMessage label="#{bindings.PrimaryLawyerId.hints.label}" id="plam12"
+                                                             showRequired="#{bindings.CapacityType.inputValue == pageFlowScope.installmentRequestBean.seven}"
+                                                             visible="#{bindings.CapacityType.inputValue == pageFlowScope.installmentRequestBean.seven}"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc50">
+                                    <af:selectOneChoice value="#{bindings.PrimaryLawyerId.inputValue}"
+                                                        label="#{bindings.PrimaryLawyerId.label}"
+                                                        shortDesc="#{bindings.PrimaryLawyerId.hints.tooltip}" id="soc2"
+                                                        autoSubmit="true" simple="true" disabled="false"
+                                                        required="#{bindings.CapacityType.inputValue == pageFlowScope.installmentRequestBean.seven}"
+                                                        visible="#{bindings.CapacityType.inputValue == pageFlowScope.installmentRequestBean.seven}">
+                                        <!--binding="#{pageFlowScope.installmentRequestBean.lawyerBind}">-->
+                                        <!--disabled="#{pageFlowScope.installmentRequestBean.firEmployee == false}"-->
+                                        <!--readOnly="#{pageFlowScope.installmentRequestBean.validLawyer}">-->
+                                        <f:selectItems value="#{bindings.PrimaryLawyerId.items}" id="si2"/>
+                                        <f:validator binding="#{bindings.PrimaryLawyerId.validator}"/>
+                                    </af:selectOneChoice>
+                                    <af:button text="#{bundle.ADD_LAWYER}" id="b6" immediate="true" action="parLawyerTF"
+                                               useWindow="true" windowModalityType="applicationModal" windowWidth="500"
+                                               windowHeight="500"
+                                               returnListener="#{pageFlowScope.installmentRequestBean.lawyerRefresh}"
+                                               disabled="#{bindings.CapacityType.inputValue ne pageFlowScope.installmentRequestBean.seven}"
+                                               partialTriggers="soc1"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                        <af:panelBox text="#{bundle.CRIMINAL}" id="pb1"
+                                     visible="#{bindings.CapacityType.inputValue eq pageFlowScope.installmentRequestBean.six}">
+                            <f:facet name="toolbar"/>
+                            <af:panelGridLayout id="pgl5">
+                                <af:gridRow marginTop="5px" height="auto" id="gr1">
+                                    <af:gridCell marginStart="5px" width="10%" id="gc1">
+                                        <af:panelLabelAndMessage label="#{bindings.PartyFullName.hints.label}"
+                                                                 id="plam1"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" id="gc2">
+                                        <af:inputText value="#{bindings.PartyFullName.inputValue}" simple="true"
+                                                      required="#{bindings.PartyFullName.hints.mandatory}"
+                                                      columns="#{bindings.PartyFullName.hints.displayWidth}"
+                                                      maximumLength="#{bindings.PartyFullName.hints.precision}"
+                                                      shortDesc="#{bindings.PartyFullName.hints.tooltip}" id="it1"
+                                                      autoSubmit="true" readOnly="true">
+                                            <f:validator binding="#{bindings.PartyFullName.validator}"/>
+                                        </af:inputText>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="2%" id="gc3"/>
+                                    <af:gridCell marginStart="5px" width="10%" id="gc4">
+                                        <af:panelLabelAndMessage label="#{bindings.IdNumber.hints.label}" id="plam2"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc5">
+                                        <af:inputText value="#{bindings.IdNumber.inputValue}" simple="true"
+                                                      required="#{bindings.IdNumber.hints.mandatory}"
+                                                      columns="#{bindings.IdNumber.hints.displayWidth}"
+                                                      maximumLength="#{bindings.IdNumber.hints.precision}"
+                                                      shortDesc="#{bindings.IdNumber.hints.tooltip}" id="it2"
+                                                      autoSubmit="true" readOnly="true">
+                                            <f:validator binding="#{bindings.IdNumber.validator}"/>
+                                        </af:inputText>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow marginTop="5px" height="auto" id="gr2">
+                                    <af:gridCell marginStart="5px" width="10%" id="gc6">
+                                        <af:panelLabelAndMessage label="#{bundle.CRIMINAL_PIC}" id="plam15"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" id="gc7">
+                                        <!--<af:region value="#{bindings.WebCamTF.regionModel}" id="r3"/>-->
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="2%" id="gc8"/>
+                                    <af:gridCell marginStart="5px" width="10%" id="gc9"/>
+                                    <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc10"/>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                        </af:panelBox>
+                        <af:panelBox text="#{bundle.LAWYER}" id="pb2"
+                                     visible="#{pageFlowScope.installmentRequestBean.lawyerInfo}">
+                            <f:facet name="toolbar"/>
+                            <af:panelGridLayout id="pgl6">
+                                <af:gridRow marginTop="5px" height="auto" id="gr7">
+                                    <af:gridCell marginStart="5px" width="10%" id="gc31">
+                                        <af:panelLabelAndMessage label="#{bindings.Name.hints.label}" id="plam7"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" id="gc32">
+                                        <af:inputText value="#{bindings.Name.inputValue}" simple="true"
+                                                      required="#{bindings.Name.hints.mandatory}"
+                                                      columns="#{bindings.Name.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Name.hints.precision}"
+                                                      shortDesc="#{bindings.Name.hints.tooltip}" id="it7"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.Name.validator}"/>
+                                        </af:inputText>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="2%" id="gc33"/>
+                                    <af:gridCell marginStart="5px" width="10%" id="gc34">
+                                        <af:panelLabelAndMessage label="#{bindings.RetainerNumber.hints.label}"
+                                                                 id="plam8"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc35">
+                                        <af:inputText value="#{bindings.RetainerNumber.inputValue}" simple="true"
+                                                      required="#{bindings.RetainerNumber.hints.mandatory}"
+                                                      columns="#{bindings.RetainerNumber.hints.displayWidth}"
+                                                      maximumLength="#{bindings.RetainerNumber.hints.precision}"
+                                                      shortDesc="#{bindings.RetainerNumber.hints.tooltip}" id="it8"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.RetainerNumber.validator}"/>
+                                        </af:inputText>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr8">
+                                    <af:gridCell marginStart="5px" width="10%" id="gc36"/>
+                                    <af:gridCell marginStart="5px" width="30%" id="gc37"/>
+                                    <af:gridCell marginStart="5px" width="2%" id="gc38"/>
+                                    <af:gridCell marginStart="5px" width="10%" id="gc39">
+                                        <af:panelLabelAndMessage label="#{bindings.ReleasedFrom.hints.label}"
+                                                                 id="plam9"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc40">
+                                        <af:inputText value="#{bindings.ReleasedFrom.inputValue}" simple="true"
+                                                      required="#{bindings.ReleasedFrom.hints.mandatory}"
+                                                      columns="#{bindings.ReleasedFrom.hints.displayWidth}"
+                                                      maximumLength="#{bindings.ReleasedFrom.hints.precision}"
+                                                      shortDesc="#{bindings.ReleasedFrom.hints.tooltip}" id="it9"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.ReleasedFrom.validator}"/>
+                                        </af:inputText>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                        </af:panelBox>
+                    </af:panelGroupLayout>
+                    <af:panelGridLayout id="pgl7">
+                        <af:gridRow marginTop="5px" height="auto" id="gr5">
+                            <af:gridCell marginStart="5px" width="30%" id="gc21">
+                                <af:panelLabelAndMessage label="#{bindings.ProcedureText.hints.label}" id="plam10"
+                                                         showRequired="true"/>
+                            </af:gridCell>
+                            <af:gridCell marginStart="5px" width="30%" id="gc22">
+                                <af:inputText value="#{bindings.ProcedureText.inputValue}" simple="true" required="true"
+                                              columns="#{bindings.ProcedureText.hints.displayWidth}"
+                                              maximumLength="#{bindings.ProcedureText.hints.precision}"
+                                              shortDesc="#{bindings.ProcedureText.hints.tooltip}" id="it10"
+                                              autoSubmit="true" readOnly="false" showRequired="true" immediate="false">
+                                    <f:validator binding="#{bindings.ProcedureText.validator}"/>
+                                </af:inputText>
+                            </af:gridCell>
+                        </af:gridRow>
+                        <af:gridRow marginTop="5px" height="auto" id="gr6">
+                            <af:gridCell marginStart="5px" width="10%" id="gc26">
+                                <af:panelLabelAndMessage label="#{bindings.ProcedureDate.hints.label}" id="plam22"
+                                                         showRequired="true"/>
+                            </af:gridCell>
+                            <af:gridCell marginStart="5px" width="30%" id="gc27">
+                                <af:inputDate value="#{bindings.ProcedureDate.inputValue}" required="true"
+                                              columns="#{bindings.ProcedureDate.hints.displayWidth}"
+                                              shortDesc="#{bindings.ProcedureDate.hints.tooltip}" id="id3"
+                                              autoSubmit="true" simple="true">
+                                    <!--disabled="#{pageFlowScope.installmentRequestBean.firEmployee==false}"-->
+                                    <f:validator binding="#{bindings.ProcedureDate.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.ProcedureDate.format}"/>
+                                </af:inputDate>
+                            </af:gridCell>
+                        </af:gridRow>
+                    </af:panelGridLayout>
+                    <af:panelSplitter id="ps1" disabled="true" splitterPosition="700">
+                        <f:facet name="first">
+                            <af:panelBox text="#{bundle.REQUIRED_ATTACHMENTS}" id="pb4" showDisclosure="false"
+                                         styleClass="AFStretchWidth">
+                                <f:facet name="toolbar"/>
+                                <af:table value="#{bindings.RequiredAttachmentROV.collectionModel}" var="row"
+                                          rows="#{bindings.RequiredAttachmentROV.rangeSize}"
+                                          emptyText="#{bindings.RequiredAttachmentROV.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0" fetchSize="#{bindings.RequiredAttachmentROV.rangeSize}"
+                                          id="t7" columnStretching="column:c4" partialTriggers="soc1">
+                                    <af:column headerText="#{bundle.ATTACHMENT_NAME}" id="c4">
+                                        <af:outputText value="#{row.Name}"
+                                                       shortDesc="#{bindings.RequiredAttachmentROV.hints.Name.tooltip}"
+                                                       id="ot1"/>
+                                    </af:column>
+                                    <af:column visible="false"
+                                               headerText="#{bindings.RequiredAttachmentROV.hints.Id.label}" id="c9">
+                                        <af:outputText value="#{row.Id}"
+                                                       shortDesc="#{bindings.RequiredAttachmentROV.hints.Id.tooltip}"
+                                                       id="ot2">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.RequiredAttachmentROV.hints.Id.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bundle.ATTACHMENT_STATUS}" id="c12">
+                                        <af:selectBooleanCheckbox value="#{pageFlowScope.installmentRequestBean.attachmentUploaded}"
+                                                                  autoSubmit="true" disabled="true" required="true"
+                                                                  label="#{row.bindings.Updatestatus.label}"
+                                                                  shortDesc="#{bindings.RequiredAttachmentROV.hints.Updatestatus.tooltip}"
+                                                                  id="sbc1"/>
+                                        <!--<af:outputText value="#{pageFlowScope.installmentRequestBean.attachmentUploaded}"/>-->
+                                    </af:column>
+                                </af:table>
+                            </af:panelBox>
+                        </f:facet>
+                        <f:facet name="second">
+                            <af:panelBox text="#{bundle.ATTACHMENTS}" showDisclosure="false" id="pb7"
+                                         styleClass="AFStretchWidth">
+                                <f:facet name="toolbar">
+                                    <af:button text="#{bundle.ADD}" id="b2" immediate="true"
+                                               action="#{pageFlowScope.installmentRequestBean.addAdditionAttach}"/>
+                                </f:facet>
+                                <af:table value="#{bindings.ExcFolderActionsAttachVO.collectionModel}" var="row"
+                                          rows="#{bindings.ExcFolderActionsAttachVO.rangeSize}"
+                                          emptyText="#{bindings.ExcFolderActionsAttachVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0" partialTriggers="t7 b1"
+                                          selectedRowKeys="#{bindings.ExcFolderActionsAttachVO.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.ExcFolderActionsAttachVO.collectionModel.makeCurrent}"
+                                          rowSelection="single"
+                                          fetchSize="#{bindings.ExcFolderActionsAttachVO.rangeSize}" id="t9"
+                                          columnStretching="last">
+                                    <af:column headerText="#{bindings.ExcFolderActionsAttachVO.hints.Id.label}" id="c5"
+                                               visible="false">
+                                        <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                      label="#{bindings.ExcFolderActionsAttachVO.hints.Id.label}"
+                                                      required="#{bindings.ExcFolderActionsAttachVO.hints.Id.mandatory}"
+                                                      columns="#{bindings.ExcFolderActionsAttachVO.hints.Id.displayWidth}"
+                                                      maximumLength="#{bindings.ExcFolderActionsAttachVO.hints.Id.precision}"
+                                                      shortDesc="#{bindings.ExcFolderActionsAttachVO.hints.Id.tooltip}"
+                                                      id="it17">
+                                            <f:validator binding="#{row.bindings.Id.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ExcFolderActionsAttachVO.hints.Id.format}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.label}"
+                                               id="c6" visible="false">
+                                        <af:inputText value="#{row.bindings.FolderActionId.inputValue}"
+                                                      label="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.label}"
+                                                      required="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.mandatory}"
+                                                      columns="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.displayWidth}"
+                                                      maximumLength="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.precision}"
+                                                      shortDesc="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.tooltip}"
+                                                      id="it18">
+                                            <f:validator binding="#{row.bindings.FolderActionId.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.format}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.label}"
+                                               id="c8" visible="false">
+                                        <af:inputText value="#{row.bindings.DocumentId.inputValue}"
+                                                      label="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.label}"
+                                                      required="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.mandatory}"
+                                                      columns="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.displayWidth}"
+                                                      maximumLength="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.precision}"
+                                                      shortDesc="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.tooltip}"
+                                                      id="it19">
+                                            <f:validator binding="#{row.bindings.DocumentId.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.format}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.ExcFolderActionsAttachVO.hints.AttachmentType.label}"
+                                               id="c7">
+                                        <af:selectOneChoice value="#{row.bindings.AttachmentType.inputValue}"
+                                                            autoSubmit="true"
+                                                            label="#{row.bindings.AttachmentType.label}" required="true"
+                                                            shortDesc="#{bindings.ExcFolderActionsAttachVO.hints.AttachmentType.tooltip}"
+                                                            id="soc4"
+                                                            disabled="#{pageFlowScope.installmentRequestBean.fileUpload}">
+                                            <f:selectItems value="#{row.bindings.AttachmentType.items}" id="si1"/>
+                                            <f:validator binding="#{row.bindings.AttachmentType.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column id="c11" headerText="#{bundle.ATTACHMENT}">
+                                        <af:inputFile label="#{bundle.ATTACHMENT_LABEL}" id="if1" maximumFiles="1"
+                                                      required="true" autoSubmit="true"
+                                                      valueChangeListener="#{pageFlowScope.installmentRequestBean.uploadFile}"
+                                                      binding="#{pageFlowScope.installmentRequestBean.fileUploaded}"
+                                                      disabled="#{pageFlowScope.installmentRequestBean.fileUpload}"/>
+                                    </af:column>
+                                    <af:column id="c10" headerText="#{bundle.ATTACHMENT}">
+                                        <af:button text="#{bundle.DELETE}" id="b1"
+                                                   actionListener="#{bindings.Delete.execute}" immediate="true"/>
+                                    </af:column>
+                                </af:table>
+                            </af:panelBox>
+                        </f:facet>
+                    </af:panelSplitter>
+                    <af:panelGroupLayout id="pgl12">
+                        <af:spacer width="10" height="10" id="s4"/>
+                        <af:panelGridLayout id="pgl13">
+                            <af:gridRow marginTop="5px" height="auto" id="gr18">
+                                <af:gridCell marginStart="5px" width="10%" id="gc316">
+                                    <af:panelLabelAndMessage label="#{bindings.Amount.hints.label}" id="plam23"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc317">
+                                    <af:inputText value="#{bindings.Amount.inputValue}"
+                                                  required="#{bindings.Amount.hints.mandatory}"
+                                                  columns="#{bindings.Amount.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Amount.hints.precision}"
+                                                  shortDesc="#{bindings.Amount.hints.tooltip}" id="it12"
+                                                  autoSubmit="true" simple="true" readOnly="true">
+                                        <f:validator binding="#{bindings.Amount.validator}"/>
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Amount.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc318"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc319">
+                                    <af:panelLabelAndMessage label="#{bindings.AdvancePayment.hints.label}"
+                                                             id="plam16"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc410">
+                                    <af:selectOneRadio value="#{bindings.AdvancePayment.inputValue}"
+                                                       label="#{bindings.AdvancePayment.label}"
+                                                       required="#{bindings.AdvancePayment.hints.mandatory}"
+                                                       shortDesc="#{bindings.AdvancePayment.hints.tooltip}" id="sor1"
+                                                       autoSubmit="true" layout="horizontal" simple="true">
+                                        <af:selectItem label="#{bundle.YES}" value="#{'y'}" id="si111"/>
+                                        <af:selectItem label="#{bundle.NO}" value="#{'n'}" id="si112"/>
+                                        <f:validator binding="#{bindings.AdvancePayment.validator}"/>
+                                    </af:selectOneRadio>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" id="gr9"
+                                        rendered="#{bindings.AdvancePayment.inputValue == 'y'}">
+                                <af:gridCell marginStart="5px" width="10%" id="gc41">
+                                    <af:panelLabelAndMessage label="#{bindings.AdvancePaymentAmount.hints.label}"
+                                                             id="plam17" showRequired="true"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc42">
+                                    <af:inputText value="#{bindings.AdvancePaymentAmount.inputValue}"
+                                                  required="#{bindings.AdvancePayment.inputValue == 'y'}"
+                                                  columns="#{bindings.AdvancePaymentAmount.hints.displayWidth}"
+                                                  maximumLength="#{bindings.AdvancePaymentAmount.hints.precision}"
+                                                  shortDesc="#{bindings.AdvancePaymentAmount.hints.tooltip}" id="it13"
+                                                  simple="true" autoSubmit="true">
+                                        <f:validator binding="#{bindings.AdvancePaymentAmount.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.AdvancePaymentAmount.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc43"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc44">
+                                    <af:panelLabelAndMessage label="#{bindings.AdvancePaymentDate.hints.label}"
+                                                             id="plam18" showRequired="true"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="35px" width="30%" marginEnd="5px" id="gc45">
+                                    <af:inputDate value="#{bindings.AdvancePaymentDate.inputValue}"
+                                                  required="#{bindings.AdvancePayment.inputValue == 'y'}"
+                                                  columns="#{bindings.AdvancePaymentDate.hints.displayWidth}"
+                                                  shortDesc="#{bindings.AdvancePaymentDate.hints.tooltip}" id="id1"
+                                                  simple="true" autoSubmit="true">
+                                        <f:validator binding="#{bindings.AdvancePaymentDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.AdvancePaymentDate.format}"/>
+                                    </af:inputDate>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" id="gr12">
+                                <af:gridCell marginStart="5px" width="10%" id="gc56">
+                                    <af:panelLabelAndMessage label="#{bindings.RestAmount.hints.label}" id="plam19"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc57">
+                                    <af:inputText value="#{bindings.AdvancePayment.inputValue == 'n' ? bindings.Amount.inputValue :  bindings.Amount.inputValue - bindings.AdvancePaymentAmount.inputValue}"
+                                                  required="#{bindings.RestAmount.hints.mandatory}"
+                                                  columns="#{bindings.RestAmount.hints.displayWidth}"
+                                                  maximumLength="#{bindings.RestAmount.hints.precision}"
+                                                  shortDesc="#{bindings.RestAmount.hints.tooltip}" id="it14"
+                                                  simple="true" readOnly="true" autoSubmit="true">
+                                        <f:validator binding="#{bindings.RestAmount.validator}"/>
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.RestAmount.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc58">
+                                    <!--<af:outputText value="#{bindings.Amount.inputValue - bindings.AdvancePaymentAmount.inputValue}"
+                                                   id="ot4"/>-->
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="10%" id="gc59">
+                                    <af:panelLabelAndMessage label="#{bindings.NumberOfInstallment.hints.label}"
+                                                             id="plam20" showRequired="true"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc60">
+                                    <af:inputText value="#{bindings.NumberOfInstallment.inputValue}" required="true"
+                                                  columns="#{bindings.NumberOfInstallment.hints.displayWidth}"
+                                                  maximumLength="#{bindings.NumberOfInstallment.hints.precision}"
+                                                  shortDesc="#{bindings.NumberOfInstallment.hints.tooltip}" id="it15"
+                                                  autoSubmit="true" simple="true" immediate="false">
+                                        <!--required="#{pageFlowScope.installmentRequestBean.SEmployee}"-->
+                                        <f:validator binding="#{bindings.NumberOfInstallment.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.NumberOfInstallment.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" id="gr13">
+                                <af:gridCell marginStart="5px" width="10%" id="gc61">
+                                    <af:panelLabelAndMessage label="#{bindings.FirstInstallmentDate.hints.label}"
+                                                             showRequired="true" id="plam21"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc62">
+                                    <af:inputDate value="#{bindings.FirstInstallmentDate.inputValue}" required="true"
+                                                  columns="#{bindings.FirstInstallmentDate.hints.displayWidth}"
+                                                  shortDesc="#{bindings.FirstInstallmentDate.hints.tooltip}" id="id2"
+                                                  simple="true" autoSubmit="true" immediate="false">
+                                        <!--required="#{pageFlowScope.installmentRequestBean.SEmployee}"-->
+                                        <f:validator binding="#{bindings.FirstInstallmentDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.FirstInstallmentDate.format}"/>
+                                    </af:inputDate>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc63"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc64"/>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc65"/>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr14">
+                                <af:gridCell marginStart="5px" width="10%" id="gc66"/>
+                                <af:gridCell marginStart="5px" width="30%" id="gc67"/>
+                                <af:gridCell marginStart="5px" width="2%" id="gc68"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc69"/>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc70"/>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                        <af:panelBox text="#{bundle.INSTALLMENT_TABLE}" id="pb6">
+                            <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl14">
+                                <af:button text="#{bundle.SHOW_TABLE}" id="b9" immediate="false"
+                                           actionListener="#{bindings.insertPlentyInstallment.execute}"
+                                           action="#{bindings.ExecuteWithParams3.execute}"/>
+                                <!--<af:button actionListener="#{bindings.ExecuteWithParams3.execute}"
+                                           text="ExecuteWithParams3" 
+                                           id="b10"/>-->
+                                <af:table value="#{bindings.PlentyInstallmentDetails.collectionModel}" var="row"
+                                          rows="#{bindings.PlentyInstallmentDetails.rangeSize}"
+                                          emptyText="#{bindings.PlentyInstallmentDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.PlentyInstallmentDetails.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.PlentyInstallmentDetails.collectionModel.makeCurrent}"
+                                          rowSelection="single"
+                                          fetchSize="#{bindings.PlentyInstallmentDetails.rangeSize}" id="t6"
+                                          partialTriggers="b9">
+                                    <af:column headerText="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.label}"
+                                               id="c1">
+                                        <af:inputText value="#{row.bindings.InstallmentNumber.inputValue}"
+                                                      label="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.label}"
+                                                      required="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.mandatory}"
+                                                      columns="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.displayWidth}"
+                                                      maximumLength="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.precision}"
+                                                      shortDesc="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.tooltip}"
+                                                      id="it16">
+                                            <f:validator binding="#{row.bindings.InstallmentNumber.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.format}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.PlentyInstallmentDetails.hints.InstallmentDate.label}"
+                                               id="c2">
+                                        <af:inputDate value="#{row.bindings.InstallmentDate.inputValue}"
+                                                      label="#{bindings.PlentyInstallmentDetails.hints.InstallmentDate.label}"
+                                                      required="#{bindings.PlentyInstallmentDetails.hints.InstallmentDate.mandatory}"
+                                                      columns="#{bindings.PlentyInstallmentDetails.hints.InstallmentDate.displayWidth}"
+                                                      shortDesc="#{bindings.PlentyInstallmentDetails.hints.InstallmentDate.tooltip}"
+                                                      id="id4">
+                                            <f:validator binding="#{row.bindings.InstallmentDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.PlentyInstallmentDetails.hints.InstallmentDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.PlentyInstallmentDetails.hints.InstallmentAmount.label}"
+                                               id="c3">
+                                        <af:outputText value="#{row.InstallmentAmount}"
+                                                       shortDesc="#{bindings.PlentyInstallmentDetails.hints.InstallmentAmount.tooltip}"
+                                                       id="ot3">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.PlentyInstallmentDetails.hints.InstallmentAmount.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                        <af:toolbox id="t1" visible="false">
+                            <af:toolbar id="t8">
+                                <af:button text="#{bundle.save}" id="b16"
+                                           actionListener="#{pageFlowScope.installmentRequestBean.procedureStatus}"
+                                           action="commit"/>
+                                <af:button text="#{bundle.BACK}" id="b15" immediate="true" action="back"
+                                           actionListener="{bindings.Rollback.execute}"/>
+                                <af:button actionListener="#{pageFlowScope.installmentRequestBean.printReports}"
+                                           text="#{bundle.PRINT}" id="b12" immediate="true" visible="false">
+                                    <af:setActionListener from="executionFolderReports"
+                                                          to="#{pageFlowScope.reportFolder}"/>
+                                    <af:setActionListener from="InstallmentFine" to="#{pageFlowScope.reportName}"/>
+                                    <af:setActionListener from="executionFolderReports"
+                                                          to="#{pageFlowScope.reportFolder}"/>
+                                </af:button>
+                            </af:toolbar>
+                        </af:toolbox>
+                    </af:panelGroupLayout>
+                </af:showDetailItem>
+                <!--<af:showDetailItem id="tab2" text="#{bundle.ATTACMENTS}" immediate="false"/>
+                <af:showDetailItem id="tab3" text="Tab Label 3" immediate="false"/>-->
+                <af:showDetailItem id="tab4" text="#{bundle.VIEW_ACTION_INFO}" immediate="true">
+                    <af:region value="#{bindings.ExcPrtySessJdgTF.regionModel}" id="r1"/>
+                </af:showDetailItem>
+                <af:showDetailItem id="tab5" text="#{bundle.CRIMINAL_INFO}" immediate="true">
+                    <h:panelGroup layout="block" id="pg8">
+                        <h:panelGroup layout="block" id="pg9">
+                            <af:outputLabel value="#{bindings.IdNumber1.hints.label}" id="ol7"/>
+                            <af:inputText value="#{bindings.IdNumber1.inputValue}" simple="true"
+                                          required="#{bindings.IdNumber1.hints.mandatory}"
+                                          columns="#{bindings.IdNumber1.hints.displayWidth}" disabled="true"
+                                          maximumLength="#{bindings.IdNumber1.hints.precision}"
+                                          shortDesc="#{bindings.IdNumber1.hints.tooltip}" id="it4">
+                                <f:validator binding="#{bindings.IdNumber1.validator}"/>
+                            </af:inputText>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" id="pg10">
+                            <af:outputLabel value="#{bindings.PartyName.hints.label}" id="ol8"/>
+                            <af:inputText value="#{bindings.PartyName.inputValue}" simple="true" disabled="true"
+                                          required="#{bindings.PartyName.hints.mandatory}"
+                                          columns="#{bindings.PartyName.hints.displayWidth}"
+                                          maximumLength="#{bindings.PartyName.hints.precision}"
+                                          shortDesc="#{bindings.PartyName.hints.tooltip}" id="it5">
+                                <f:validator binding="#{bindings.PartyName.validator}"/>
+                            </af:inputText>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" id="pg11">
+                            <af:outputLabel value="#{bindings.Age.hints.label}" id="ol9"/>
+                            <af:inputText value="#{bindings.Age.inputValue}" simple="true"
+                                          required="#{bindings.Age.hints.mandatory}"
+                                          columns="#{bindings.Age.hints.displayWidth}"
+                                          maximumLength="#{bindings.Age.hints.precision}" disabled="true"
+                                          shortDesc="#{bindings.Age.hints.tooltip}" id="it6">
+                                <f:validator binding="#{bindings.Age.validator}"/>
+                            </af:inputText>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" id="pg12">
+                            <af:outputLabel value="#{bindings.Gender.hints.label}" id="ol10"/>
+                            <af:inputText value="#{bindings.Gender.inputValue}" simple="true"
+                                          required="#{bindings.Gender.hints.mandatory}" disabled="true"
+                                          columns="#{bindings.Gender.hints.displayWidth}"
+                                          maximumLength="#{bindings.Gender.hints.precision}"
+                                          shortDesc="#{bindings.Gender.hints.tooltip}" id="it11">
+                                <f:validator binding="#{bindings.Gender.validator}"/>
+                            </af:inputText>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" id="pg13">
+                            <af:outputLabel value="#{bindings.Address.hints.label}" id="ol11"/>
+                            <af:inputText value="#{bindings.Address.inputValue}" simple="true"
+                                          required="#{bindings.Address.hints.mandatory}"
+                                          columns="#{bindings.Address.hints.displayWidth}" disabled="true"
+                                          maximumLength="#{bindings.Address.hints.precision}"
+                                          shortDesc="#{bindings.Address.hints.tooltip}" id="it25">
+                                <f:validator binding="#{bindings.Address.validator}"/>
+                            </af:inputText>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" id="pg14">
+                            <af:outputLabel value="#{bindings.JobTitle.hints.label}" id="ol12"/>
+                            <af:inputText value="#{bindings.JobTitle.inputValue}" disabled="true"
+                                          label="#{bindings.JobTitle.hints.label}"
+                                          required="#{bindings.JobTitle.hints.mandatory}"
+                                          columns="#{bindings.JobTitle.hints.displayWidth}"
+                                          maximumLength="#{bindings.JobTitle.hints.precision}"
+                                          shortDesc="#{bindings.JobTitle.hints.tooltip}" id="it26">
+                                <f:validator binding="#{bindings.JobTitle.validator}"/>
+                            </af:inputText>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </af:showDetailItem>
+            </af:panelTabbed>
+            <!--<af:panelGroupLayout id="pgl2">
+                <af:panelGroupLayout id="pgl4">
+                    <af:panelBox text="#{bundle.ISTALLMENT_REQUEST_INFO}" id="pb3">
+                        <f:facet name="toolbar"/>
+                        <af:button text="#{bundle.VIEW_CASE_INFO}" id="b7" immediate="true">
+                            <af:showPopupBehavior popupId="p2"/>
+                        </af:button>  
+                        <af:button text="#{bundle.VIEW_ACTION_INFO}" id="b7" immediate="true">
+                            <af:showPopupBehavior popupId="p2"/>
+                        </af:button>-->
+            <!-- </af:panelBox>
+                    <af:panelGroupLayout id="pgl9">
+                        <af:panelBox text="" id="pb5">
+                            <f:facet name="toolbar"/>
+                            <af:panelGridLayout id="pgl11" visible="false">
+                                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr15">
+                                    <af:gridCell marginStart="5px" width="10%" id="gc54">
+                                        <af:panelLabelAndMessage label="#{bindings.DECISION_TYPE.hints.label}"
+                                                                 id="plam14" showRequired="true"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc55">
+                                        <af:selectOneChoice value="#{bindings.DECISION_TYPE.inputValue}"
+                                                            label="#{bindings.DECISION_TYPE.label}"
+                                                            shortDesc="#{bindings.DECISION_TYPE.hints.tooltip}"
+                                                            id="soc3" autoSubmit="true" simple="true">
+                                            -->
+            <!--required="#{pageFlowScope.installmentRequestBean.chef}"-->
+            <!--
+                                            <af:selectItem label="#{bundle.INSTALLMENT_APPROVE}" value="#{'a'}"
+                                                           id="si3"/>
+                                            <af:selectItem label="#{bundle.INSTALLMENT_REJECT}" value="#{'r'}"
+                                                           id="si4"/>
+                                            <f:validator binding="#{bindings.DECISION_TYPE.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr11">
+                                    <af:gridCell marginStart="5px" width="10%" id="gc51">
+                                        <af:panelLabelAndMessage label="#{bindings.Remarks.hints.label}" id="plam13"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" id="gc52">
+                                        <af:inputText value="#{bindings.Remarks.inputValue}" simple="true"
+                                                      required="#{bindings.Remarks.hints.mandatory}"
+                                                      columns="#{bindings.Remarks.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Remarks.hints.precision}"
+                                                      shortDesc="#{bindings.Remarks.hints.tooltip}" id="it11"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.Remarks.validator}"/>
+                                        </af:inputText>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="2%" id="gc53"/>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <af:toolbox id="t5" visible="false">
+                                <af:toolbar id="t4">
+                                    <af:button text="#{bundle.INSTALLMENT_SAVE}" id="b5"
+                                               actionListener="#{pageFlowScope.installmentRequestBean.procedureStatus}"
+                                               action="commit"/>
+                                    <af:button text="#{bundle.BACK}" id="b6" immediate="true" action="back"
+                                               actionListener="#{bindings.Rollback.execute}"/>
+                                    <af:button actionListener="#{pageFlowScope.installmentRequestBean.printReports}"
+                                               text="#{bundle.PRINT}" id="b1" immediate="true">
+                                        <af:setActionListener from="executionFolderReports"
+                                                              to="#{pageFlowScope.reportFolder}"/>
+                                        <af:setActionListener from="InstallmentFine" to="#{pageFlowScope.reportName}"/>
+                                        <af:setActionListener from="executionFolderReports"
+                                                              to="#{pageFlowScope.reportFolder}"/>
+                                    </af:button>
+                                </af:toolbar>
+                            </af:toolbox>
+                        </af:panelBox>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>-->
+            <!--<af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                <af:dialog id="d1" type="ok">
+                    <af:region value="#{bindings.ExcPrtySessJdgTF.regionModel}" id="r1"/>
+                    <f:facet name="buttonBar"/>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p2">
+                <af:dialog id="d2" type="ok">
+                    <af:region value="#{bindings.ExecBcSessionsJudgmentsTF.regionModel}" id="r2"/>
+                    <f:facet name="buttonBar"/>
+                </af:dialog>
+            </af:popup>-->
+            <!--<af:popup autoCancel="disabled" id="p1" contentDelivery="immediate"
+                  childCreation="deferred" binding="#{pageFlowScope.installmentRequestBean.popUp}"/>-->
+        </af:panelHeader>
+    </af:panelGroupLayout>
+</ui:composition>

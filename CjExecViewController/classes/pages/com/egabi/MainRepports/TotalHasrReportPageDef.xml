@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="TotalHasrReportPageDef"
+                Package="pages.com.egabi.MainRepports">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.TotalHasrReportRVO1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="TotalHasrReportRVO1Iterator"/>
+    <searchRegion Binds="TotalHasrReportRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="TotalHasrReportRVO1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateFrom">
+      <AttrNames>
+        <Item Value="DateFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="TotalHasrReportRVO1Iterator" id="TotalHasrReportRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.mainreports.TotalHasrReportRVO"
+                      Name="TotalHasrReportRVO10">
+        <AttrNames>
+          <Item Value="ParentEntityName"/>
+          <Item Value="GozeyaEntityName"/>
+          <Item Value="UserName"/>
+          <Item Value="CountGonah"/>
+          <Item Value="CountGenayat"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateTo">
+      <AttrNames>
+        <Item Value="DateTo"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

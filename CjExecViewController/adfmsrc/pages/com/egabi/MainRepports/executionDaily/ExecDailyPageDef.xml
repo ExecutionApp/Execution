@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="ExecDailyPageDef"
+                Package="pages.com.egabi.MainRepports.executionDaily">
+<parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ValidatePoliceReportROVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.AgendaSearchROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="AgendaSearchROVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.ExecutionDailyROVO1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="ExecutionDailyROVO1Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="AgendaSearchROVO1Iterator" id="KolID">
+      <AttrNames>
+        <Item Value="KolID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AgendaSearchROVO1Iterator" id="GozID">
+      <AttrNames>
+        <Item Value="GozID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AgendaSearchROVO1Iterator" id="DailyDate">
+      <AttrNames>
+        <Item Value="DailyDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ExecutionDailyROVO1Iterator" id="ExecutionDailyROVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.bcdetails.ExecutionDailyROVO" Name="ExecutionDailyROVO10">
+        <AttrNames>
+          <Item Value="BusinessCaseId"/>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="DegreeName"/>
+          <Item Value="HearingDate"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="JudgmentText"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="Name"/>
+          <Item Value="ProcedureDate"/>
+          <Item Value="Crimes"/>
+          <Item Value="IdNumber"/>
+          <Item Value="CriminalType"/>
+          <Item Value="InventoryNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>
+

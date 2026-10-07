@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcCourtBcChrgDecPenPartView"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  SelectList="ExcCourtBcChrgDecPenPartEO.ID, 
+       ExcCourtBcChrgDecPenPartEO.CHARGE_DECISION_ID, 
+       ExcCourtBcChrgDecPenPartEO.PARTY_ID, 
+       (:bindHearingResId) AS HEARING_RES_ID"
+  FromList="EXC_COURT_BC_CHRG_DEC_PEN_PART ExcCourtBcChrgDecPenPartEO"
+  Where=":bindHearingResId = :bindHearingResId or :bindHearingResId is null">
+  <Variable
+    Name="bindHearingResId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="PenaltySharedPartiesROV"
+    ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.PenaltySharedPartiesROV"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="bindHearingResId">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[HearingResId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_PartyId"
+    ListVOName="PenaltySharedPartiesROV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PartyId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FullName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="ExcCourtBcChrgDecPenPartEO"
+    Entity="com.egabi.cjexec.model.entities.caseexecemp.ExcCourtBcChrgDecPenPartEO"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ExcCourtBcChrgDecPenPartEO"
+    AliasName="ID"
+    IsUpdateable="while_insert"/>
+  <ViewAttribute
+    Name="ChargeDecisionId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ChargeDecisionId"
+    EntityUsage="ExcCourtBcChrgDecPenPartEO"
+    AliasName="CHARGE_DECISION_ID"/>
+  <ViewAttribute
+    Name="PartyId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PartyId"
+    EntityUsage="ExcCourtBcChrgDecPenPartEO"
+    AliasName="PARTY_ID"
+    LOVName="LOV_PartyId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecPenPartView.PartyId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingResId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HEARING_RES_ID"
+    SQLType="VARCHAR"
+    Expression=":bindHearingResId"
+    Precision="255"
+    Passivate="true"/>
+  <ViewLinkAccessor
+    Name="ExcCourtBcChargeDecisionsView"
+    ViewLink="com.egabi.cjexec.model.views.caseexecemp.links.FkChargeDecisionIdFkLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

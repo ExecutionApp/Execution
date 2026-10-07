@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ParPoliceAuthorityLogROVO"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full"
+  FetchMode="FETCH_AS_NEEDED"
+  MaxFetchSize="1">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.ParPoliceAuthorityLogROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT  
+   ID, POLICE_NUMBER, BUSINESS_CASE_ID,  BUSINESS_CASE_TYPE,  
+   ORIGIN_ENTITY, PAR_YEAR 
+FROM  PAR_POLICE_AUTHORITY_LOG]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoliceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="POLICE_NUMBER"
+    Expression="POLICE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_ID"
+    Expression="BUSINESS_CASE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BusinessCaseType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_TYPE"
+    Expression="BUSINESS_CASE_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="OriginEntity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ORIGIN_ENTITY"
+    Expression="ORIGIN_ENTITY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ParYear"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PAR_YEAR"
+    Expression="PAR_YEAR"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

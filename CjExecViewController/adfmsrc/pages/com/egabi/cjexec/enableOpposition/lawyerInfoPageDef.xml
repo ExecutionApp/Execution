@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="lawyerInfoPageDef"
+                Package="pages.com.egabi.cjexec.enableOpposition">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="LawyerDetailsROV" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="LawyerDetailsROVIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="LawyerDetailsROVIterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="LawyerDetailsROVIterator" id="ReleasedFrom">
+      <AttrNames>
+        <Item Value="ReleasedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="LawyerDetailsROVIterator" id="RetainerNumber">
+      <AttrNames>
+        <Item Value="RetainerNumber"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DescriptionDescROVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.DescriptionDescROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pDescPartyId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"
+      CodeSourceName="DescriptionDescROVO"/>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT        
+     nvl (  FormCaseDescriptionDesPartEO.FORM_CASE_DES_ID , 0)FORM_CASE_DES_ID,        
+       FormCaseDescriptionDesPartEO.FORM_CASE_PARTY_ID ,       
+        FormCaseDescriptionDesPartEO.ID, PARTY_ID, FORM_CASE_DESCRIPTION_ID        
+FROM  FORM_CASE_DESCRIPTION_DES_PART FormCaseDescriptionDesPartEO left outer join FORM_CASE_DESCRIPTION_PARTIES       
+on FormCaseDescriptionDesPartEO.FORM_CASE_PARTY_ID =FORM_CASE_DESCRIPTION_PARTIES.ID 
+where PARTY_ID = :pDescPartyId]]></SQLQuery>
+  <ViewAttribute
+    Name="FormCaseDesId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FORM_CASE_DES_ID"
+    Expression="FORM_CASE_DES_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FormCasePartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FORM_CASE_PARTY_ID"
+    Expression="FORM_CASE_PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARTY_ID"
+    Expression="PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FormCaseDescriptionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FORM_CASE_DESCRIPTION_ID"
+    Expression="FORM_CASE_DESCRIPTION_ID"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

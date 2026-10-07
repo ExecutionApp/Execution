@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+    <view id="provisionsInclusionPage">
+        <page>/provisionsInclusion/provisionsInclusionPage.jsf</page>
+    </view>
+    <view id="caseExecEmpPage">
+        <page>/caseExecEmp/caseExecEmpPage.jsf</page>
+    </view>
+    <view id="execFoldersPage">
+        <page>/pages/com/egabi/cjexec/transaction/executionFolders/execFoldersPage.jsf</page>
+    </view>
+    <view id="MyRequests">
+        <page>/pages/com/egabi/cjexec/requests/Requests.jsf</page>
+    </view>
+    <view id="OppositionPage">
+        <page>/pages/com/egabi/oppositions/OppositionPage.jsf</page>
+    </view>
+    <view id="OpenedRequests">
+        <page>/pages/com/egabi/cjexec/requests/Requests.jsf</page>
+    </view>
+    <view id="AllRequests">
+        <page>/pages/com/egabi/cjexec/requests/Requests.jsf</page>
+    </view>
+    <view id="AuthenticationError">
+        <page>/pages/com/egabi/security/loginOutside/AuthenticationError.jsf</page>
+    </view>
+    <view id="Welcome">
+        <page>/pages/com/egabi/security/loginOutside/Welcome.jsf</page>
+    </view>
+    <view id="Logout">
+        <page>/pages/com/egabi/security/loginOutside/Logout.jsf</page>
+    </view>
+    <view id="TestCaseAttach">
+        <page>/caseExecEmp/TestCaseAttach.jsf</page>
+    </view>
+    <view id="BCDetails">
+        <page>/bcDetails/BCDetails.jsf</page>
+    </view>
+    <view id="CaseInventorySesrch">
+        <page>/pages/com/egabi/inventory/CaseInventorySesrch.jsf</page>
+    </view>
+    <view id="provisionsInclusionPage1">
+        <page>/provisionsInclusion/provisionsInclusionPage.jsf</page>
+    </view>
+    <view id="Claim">
+        <page>/pages/com/egabi/claimProcedure/Claim.jsf</page>
+    </view>
+    <view id="audit">
+        <page>/pages/com/egabi/audit/audit.jsf</page>
+    </view>
+    <view id="claimProcedure">
+        <page>/pages/com/egabi/claimProcedure/claimProcedure.jsf</page>
+    </view>
+    <view id="claimProcedureLog">
+        <page>/pages/com/egabi/claimProcedure/claimProcedureLog.jsf</page>
+    </view>
+    <view id="Inventory">
+        <page>/pages/com/egabi/inventory/Inventory.jsf</page>
+    </view>
+    <view id="searchByPartyCaseHasr">
+        <page>/pages/com/egabi/claimProcedure/searchByPartyCaseHasr.jsf</page>
+    </view>
+    <view id="auditMainPage">
+        <page>/pages/com/egabi/auditUpdate/auditMainPage.jsf</page>
+    </view>
+    <view id="displayAuditPage">
+        <page>/pages/com/egabi/auditUpdate/displayAuditPage.jsf</page>
+    </view>
+    <view id="MainReports">
+        <page>/pages/com/egabi/MainRepports/MainReports.jsf</page>
+    </view>
+    <view id="TotalProceudresReport">
+        <page>/pages/com/egabi/MainRepports/procedures/TotalProceudresReport.jsf</page>
+    </view>
+    <view id="nIdServiceLog">
+        <page>/pages/com/egabi/nIdService/nIdServiceLog.jsf</page>
+    </view>
+    <view id="HasrReport">
+        <page>/pages/com/egabi/MainRepports/hasr/HasrReport.jsf</page>
+    </view>
+    <view id="HasrDetailsReport">
+        <page>/pages/com/egabi/MainRepports/hasr/HasrDetailsReport.jsf</page>
+    </view>
+    <view id="HasrIdNumbReport">
+        <page>/pages/com/egabi/MainRepports/hasr/HasrIdNumbReport.jsf</page>
+    </view>
+    <view id="TotalMotalabatReport">
+        <page>/pages/com/egabi/MainRepports/motalabat/TotalMotalabatReport.jsf</page>
+    </view>
+    <view id="HasrNotInDB">
+        <page>/pages/com/egabi/MainRepports/hasr/HasrNotInDB.jsf</page>
+    </view>
+    <view id="HasrPage">
+        <page>/pages/com/egabi/Reports/HasrPage.jsf</page>
+    </view>
+    <view id="ProvisionsInclusionSM">
+        <page>/provisionInclusionSM/ProvisionsInclusionSM.jsf</page>
+    </view>
+    <view id="HasrGharamaReport">
+        <page>/pages/com/egabi/Reports/HasrGharamaReport.jsf</page>
+    </view>
+    <view id="MoardaReportPage">
+        <page>/pages/com/egabi/Reports/MoardaReportPage.jsf</page>
+    </view>
+    <view id="MoaradastanafiaReportPage">
+        <page>/pages/com/egabi/Reports/MoaradastanafiaReportPage.jsf</page>
+    </view>
+    <view id="EstanafReportPage">
+        <page>/pages/com/egabi/Reports/EstanafReportPage.jsf</page>
+    </view>
+    <view id="EatradAmrGenaya">
+        <page>/pages/com/egabi/Reports/EatradAmrGenaya.jsf</page>
+    </view>
+    <view id="TaanReportPage">
+        <page>/pages/com/egabi/Reports/TaanReportPage.jsf</page>
+    </view>
+    <view id="MotalbatReportPage">
+        <page>/pages/com/egabi/Reports/MotalbatReportPage.jsf</page>
+    </view>
+    <view id="AppealDigitsSM">
+        <page>/AppealDigitsSM/AppealDigitsSM.jsf</page>
+    </view>
+    <view id="AbroadRequestReport">
+        <page>/pages/com/egabi/Reports/AbroadRequestReport.jsf</page>
+    </view>
+      
+    <view id="ArrestWarrants">
+        <page>/pages/com/egabi/previewArrestWarrants/ArrestWarrants.jsf</page>
+    </view>
+    <view id="GonahMostanafa">
+        <page>/pages/com/egabi/Reports/GonahMostanafa.jsf</page>
+    </view>
+     <view id="AncillaryProvisions">
+        <page>/pages/com/egabi/Reports/AncillaryProvisions.jsf</page>
+    </view>
+    <method-call id="methodCall1">
+        <method>#{sessionScope.ExcTemplateBean.handleExceptionShowMessageInPopupDialog}</method>
+        <outcome>
+            <fixed-outcome>g</fixed-outcome>
+        </outcome>
+    </method-call>
+    <view id="Error">
+        <page>/pages/com/egabi/security/loginOutside/Error.jsf</page>
+    </view>
+    <view id="MainReport">
+        <page>/pages/com/egabi/Reports/MainReport.jsf</page>
+    </view>
+    <view id="FirstDegree">
+        <page>/pages/com/egabi/Reports/FirstDegree.jsf</page>
+    </view>
+    <view id="PaiedFees">
+        <page>/pages/com/egabi/Reports/PaiedFees.jsf</page>
+    </view>
+    <view id="EstanafGnayaatReport">
+        <page>/pages/com/egabi/Reports/EstanafGnayaatReport.jsf</page>
+    </view>
+    <view id="AgendaReservation">
+        <page>/pages/com/egabi/MainRepports/AgendaReservations/AgendaReservation.jsf</page>
+    </view>
+    <view id="ProcPaied">
+        <page>/pages/com/egabi/Reports/ProcPaied.jsf</page>
+    </view>
+    <view id="ProsecutorApproveProc">
+        <page>/pages/com/egabi/prosecutorApprove/ProsecutorApproveProc.jsf</page>
+    </view>
+    <view id="ExecutionDaily">
+        <page>/pages/com/egabi/MainRepports/executionDaily/ExecutionDaily.jsf</page>
+    </view>
+    <view id="MotalbatProcReportPage">
+        <page>/pages/com/egabi/Reports/MotalbatProcReportPage.jsf</page>
+    </view>
+    <view id="NewClaims">
+        <page>/bcClaims/NewClaims.jsf</page>
+    </view>
+    <view id="ActivateAgenda">
+        <page>/pages/com/egabi/MainRepports/ActivateAgenda/ActivateAgenda.jsf</page>
+    </view>
+    <view id="JudgmentAppealApproval">
+        <page>/pages/com/egabi/JudgmentAppealApproval/JudgmentAppealApproval.jsf</page>
+    </view>
+    <view id="ExpatriateProcedures">
+        <page>/pages/com/egabi/expatriateProcedures/ExpatriateProcedures.jsf</page>
+    </view>
+    <view id="ExpatriateProcAppealApproval">
+        <page>/pages/com/egabi/expatriateProcAppealApproval/ExpatriateProcAppealApproval.jsf</page>
+    </view>
+    <view id="ExpatriateProcSecondApproval">
+        <page>/pages/com/egabi/expatriateProcSecondApproval/ExpatriateProcSecondApproval.jsf</page>
+    </view>
+    <control-flow-rule id="__2">
+        <from-activity-id>*</from-activity-id>
+        <control-flow-case id="__3">
+            <from-outcome>addJudg</from-outcome>
+            <to-activity-id>provisionsInclusionPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__4">
+            <from-outcome>judgClass</from-outcome>
+            <to-activity-id>caseExecEmpPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__5">
+            <from-outcome>folders</from-outcome>
+            <to-activity-id>execFoldersPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__6">
+            <from-outcome>myRequests</from-outcome>
+            <to-activity-id>MyRequests</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__8">
+            <from-outcome>goOppositions</from-outcome>
+            <to-activity-id>OppositionPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__1">
+            <from-outcome>openedRequests</from-outcome>
+            <to-activity-id>OpenedRequests</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__9">
+            <from-outcome>allRequests</from-outcome>
+            <to-activity-id>AllRequests</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__12">
+            <from-outcome>Allfolders</from-outcome>
+            <to-activity-id>execFoldersPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__14">
+            <from-outcome>SimplifiedModeBC</from-outcome>
+            <to-activity-id>BCDetails</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__15">
+            <from-outcome>goActions</from-outcome>
+            <to-activity-id>CaseInventorySesrch</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__16">
+            <from-outcome>updateJudg</from-outcome>
+            <to-activity-id>provisionsInclusionPage1</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__17">
+            <from-outcome>Claim</from-outcome>
+            <to-activity-id>Claim</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__177">
+            <from-outcome>audit</from-outcome>
+            <to-activity-id>audit</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__18">
+            <from-outcome>claimProcedure</from-outcome>
+            <to-activity-id>claimProcedure</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__19">
+            <from-outcome>claimProcedureLog</from-outcome>
+            <to-activity-id>claimProcedureLog</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__20">
+            <from-outcome>goInventory</from-outcome>
+            <to-activity-id>Inventory</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__21">
+            <from-outcome>searchByPartyCaseHasr</from-outcome>
+            <to-activity-id>searchByPartyCaseHasr</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__23">
+            <from-outcome>auditUpdate</from-outcome>
+            <to-activity-id>auditMainPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__24">
+            <from-outcome>displayAuditUpdate</from-outcome>
+            <to-activity-id>displayAuditPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__25">
+            <from-outcome>goMainReports</from-outcome>
+            <to-activity-id>MainReports</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__26">
+            <from-outcome>goTotalProceduresReport</from-outcome>
+            <to-activity-id>TotalProceudresReport</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__266">
+            <from-outcome>nIdServiceLog</from-outcome>
+            <to-activity-id>nIdServiceLog</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__27">
+            <from-outcome>goHasrReport</from-outcome>
+            <to-activity-id>HasrReport</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__28">
+            <from-outcome>goHasrDetailsReport</from-outcome>
+            <to-activity-id>HasrDetailsReport</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__29">
+            <from-outcome>goHasrIdNumbReport</from-outcome>
+            <to-activity-id>HasrIdNumbReport</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__30">
+            <from-outcome>goTotalMotalabatReport</from-outcome>
+            <to-activity-id>TotalMotalabatReport</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__31">
+            <from-outcome>hasrNoInDB</from-outcome>
+            <to-activity-id>HasrNotInDB</to-activity-id>
+        </control-flow-case>
+         <control-flow-case id="__34_34">
+            <from-outcome>AncillaryProvisions</from-outcome>
+            <to-activity-id>AncillaryProvisions</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__32">
+            <from-outcome>HasrPage</from-outcome>
+            <to-activity-id>HasrPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__312">
+            <from-outcome>SimplifidModeProvisionInclusion</from-outcome>
+            <to-activity-id>ProvisionsInclusionSM</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__33">
+            <from-outcome>HasrGharamaReport</from-outcome>
+            <to-activity-id>HasrGharamaReport</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__34">
+            <from-outcome>Moarda</from-outcome>
+            <to-activity-id>MoardaReportPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__35">
+            <from-outcome>Estanaf</from-outcome>
+            <to-activity-id>EstanafReportPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__36">
+            <from-outcome>MoardaEstanafia</from-outcome>
+            <to-activity-id>MoaradastanafiaReportPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__45">
+            <from-outcome>EatradAmrGenaya</from-outcome>
+            <to-activity-id>EatradAmrGenaya</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__46">
+            <from-outcome>TaanReportPage</from-outcome>
+            <to-activity-id>TaanReportPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__47">
+            <from-outcome>MotalbatReportPage</from-outcome>
+            <to-activity-id>MotalbatReportPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__37">
+            <from-outcome>AppealDigitsSM</from-outcome>
+            <to-activity-id>AppealDigitsSM</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__38">
+            <from-outcome>AbroadRequestReport</from-outcome>
+            <to-activity-id>AbroadRequestReport</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__39">
+            <from-outcome>previewArrestWarrants</from-outcome>
+            <to-activity-id>PreviewArrestWarrants</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__40">
+            <from-outcome>PreviewArrest</from-outcome>
+            <to-activity-id>ArrestWarrants</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__41">
+            <from-outcome>GonahMostanafa</from-outcome>
+            <to-activity-id>GonahMostanafa</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__42">
+            <from-outcome>MainReport</from-outcome>
+            <to-activity-id>MainReport</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__43">
+            <from-outcome>FirstDegree</from-outcome>
+            <to-activity-id>FirstDegree</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__44">
+            <from-outcome>paiedFees</from-outcome>
+            <to-activity-id>PaiedFees</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__48">
+            <from-outcome>EstanafGnayaatReport</from-outcome>
+            <to-activity-id>EstanafGnayaatReport</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__50">
+            <from-outcome>AgendaReservation</from-outcome>
+            <to-activity-id>AgendaReservation</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__49">
+            <from-outcome>ProcPaied</from-outcome>
+            <to-activity-id>ProcPaied</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__51">
+            <from-outcome>ProsecutorApproveProc</from-outcome>
+            <to-activity-id>ProsecutorApproveProc</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__52">
+            <from-outcome>ExectionDaily</from-outcome>
+            <to-activity-id>ExecutionDaily</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__53">
+            <from-outcome>MotalbatProcReportPage</from-outcome>
+            <to-activity-id>MotalbatProcReportPage</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__55">
+            <from-outcome>NewClaims</from-outcome>
+            <to-activity-id>NewClaims</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__54">
+            <from-outcome>ActivateAgenda</from-outcome>
+            <to-activity-id>ActivateAgenda</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__56">
+            <from-outcome>goJudgmentAppealApproval</from-outcome>
+            <to-activity-id>JudgmentAppealApproval</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__57">
+            <from-outcome>goExpatriateProcedures</from-outcome>
+            <to-activity-id>ExpatriateProcedures</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__58">
+            <from-outcome>goExpatriateProcAppealApproval</from-outcome>
+            <to-activity-id>ExpatriateProcAppealApproval</to-activity-id>
+        </control-flow-case>
+        <control-flow-case id="__59">
+            <from-outcome>goExpatriateProcSecondApproval</from-outcome>
+            <to-activity-id>ExpatriateProcSecondApproval</to-activity-id>
+        </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__90">
+        <from-activity-id>Welcome</from-activity-id>
+        <control-flow-case id="__10">
+            <from-outcome>error</from-outcome>
+            <to-activity-id>AuthenticationError</to-activity-id>
+        </control-flow-case>
+    </control-flow-rule>
+    <managed-bean id="__7">
+        <managed-bean-name>now</managed-bean-name>
+        <managed-bean-class><?audit suppress oracle.ide.xml.brokenref-warning?>java.util.Data</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__80">
+        <managed-bean-name>welcomeBean</managed-bean-name>
+        <managed-bean-class>com.egabi.cjexec.view.beans.security.Welcome</managed-bean-class>
+        <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__11">
+        <managed-bean-name>ExcTemplateBean</managed-bean-name>
+        <managed-bean-class>com.egabi.cjexec.view.beans.common.ExcTemplate</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__13">
+        <managed-bean-name>parPartiesBean</managed-bean-name>
+        <managed-bean-class>com.egabi.cjexec.view.beans.parties.ParPartiesBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__22">
+        <managed-bean-name>cjValidator</managed-bean-name>
+        <managed-bean-class>com.egabi.cjexec.view.utils.CJValidator</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+</adfc-config>

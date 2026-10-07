@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="execFoldersDetailFragPageDef"
+                Package="pages.com.egabi.cjexec.transaction.executionFolders">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="FolderTypeROV1" RangeSize="25" DataControl="CjExecAMDataControl" id="FolderTypeROV1Iterator"/>
+        <iterator Binds="ResPartyCrimesROV1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ResPartyCrimesROV1Iterator"/>
+        <taskFlow id="ExecBcSessionsJudgmentsTF1"
+                  taskFlowId="/WEB-INF/taskflows/execbcsessionsjudgments/ExcBcSessJdgTF.xml#ExecBcSessionsJudgmentsTF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"
+                  parametersMap="#{bindings.BusinessCaseId}">
+            <parameters>
+                <parameter id="BusinessCaseId" value="#{bindings.BusinessCaseId.inputValue}"/>
+            </parameters>
+        </taskFlow>
+        <taskFlow id="ExcPrtySessJdgTF1"
+                  taskFlowId="/WEB-INF/taskflows/execpartysessionjudgments/ExcPrtySessJdgTF.xml#ExcPrtySessJdgTF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters>
+                <parameter id="partyId" value="#{bindings.PartyId.inputValue}"/>
+            </parameters>
+        </taskFlow>
+        <iterator Binds="ProcedureIdROV1" RangeSize="10" DataControl="CjExecAMDataControl"
+                  id="ProcedureIdROV1Iterator"/>
+        <iterator Binds="ExecPartySessionJudgmentsROV1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExecPartySessionJudgmentsROV1Iterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="SequenceNumber">
+            <AttrNames>
+                <Item Value="SequenceNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="PoliceNumber">
+            <AttrNames>
+                <Item Value="PoliceNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="HearingDate">
+            <AttrNames>
+                <Item Value="HearingDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="PartyFullName">
+            <AttrNames>
+                <Item Value="PartyFullName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="Nickname">
+            <AttrNames>
+                <Item Value="Nickname"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="IdNumber">
+            <AttrNames>
+                <Item Value="IdNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="Age">
+            <AttrNames>
+                <Item Value="Age"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="Address">
+            <AttrNames>
+                <Item Value="Address"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="Gender">
+            <AttrNames>
+                <Item Value="Gender"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="JudgementResolution">
+            <AttrNames>
+                <Item Value="JudgementResolution"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="JudgementStatus">
+            <AttrNames>
+                <Item Value="JudgementStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="Attendance">
+            <AttrNames>
+                <Item Value="Attendance"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="ResPartyCrimesROV1Iterator" id="ResPartyCrimesROV1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.executionfolders.ResPartyCrimesROV"
+                            Name="ResPartyCrimesROV10">
+                <AttrNames>
+                    <Item Value="CrimeName"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="JobTitle">
+            <AttrNames>
+                <Item Value="JobTitle"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="DegreeName">
+            <AttrNames>
+                <Item Value="DegreeName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="FolderId">
+            <AttrNames>
+                <Item Value="FolderId"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="ResPartyCrimesROV1Iterator" id="ResPartyCrimesROV11">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.executionfolders.ResPartyCrimesROV"
+                            Name="ResPartyCrimesROV110">
+                <AttrNames>
+                    <Item Value="CrimeName"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+    <attributeValues IterBinding="FolderTypeROV1Iterator" id="ResPartyId">
+      <AttrNames>
+        <Item Value="ResPartyId"/>
+      </AttrNames>
+    </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="JudgementId">
+      <AttrNames>
+        <Item Value="JudgementId"/>
+      </AttrNames>
+    </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="BusinessCaseId">
+            <AttrNames>
+                <Item Value="BusinessCaseId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="PartyId">
+            <AttrNames>
+                <Item Value="PartyId"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="validateActions" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateActions"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider"
+                      ReturnName="data.CjExecAMDataControl.methodResults.validateActions_CjExecAMDataControl_dataProvider_validateActions_result">
+            <NamedData NDName="folder_id" NDValue="#{bindings.FolderId.inputValue}" NDType="int"/>
+            <NamedData NDName="validation_type" NDValue="#{pageFlowScope.validationType}" NDType="int"/>
+            <NamedData NDName="session_id" NDValue="#{sessionScope.userInfo.userId}" NDType="int"/>
+        </methodAction>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="ExecutionProcedurId">
+            <AttrNames>
+                <Item Value="ExecutionProcedurId"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="ProcedureIdROV1Iterator" id="ExecuteWithParams"
+                InstanceName="CjExecAMDataControl.ProcedureIdROV1" DataControl="CjExecAMDataControl"
+                RequiresUpdateModel="true" Action="executeWithParams">
+            <NamedData NDName="P_folder_id" NDValue="#{bindings.FolderId.inputValue}" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="P_Action_type" NDValue="#{pageFlowScope.actionType}" NDType="java.math.BigDecimal"/>
+        </action>
+        <attributeValues IterBinding="ProcedureIdROV1Iterator" id="ProcedureId">
+            <AttrNames>
+                <Item Value="ProcedureId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ProcedureIdROV1Iterator" id="CapacityType">
+            <AttrNames>
+                <Item Value="CapacityType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="Year">
+            <AttrNames>
+                <Item Value="Year"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="ExecPartySessionJudgmentsROV1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.common.ExecPartySessionJudgmentsROV"
+                            Name="ExecPartySessionJudgmentsROV10">
+                <AttrNames>
+                    <Item Value="BusinessCaseId"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="PartyJudgementResolution"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="BcDegreeId"/>
+                    <Item Value="Name"/>
+                    <Item Value="SequenceNumber"/>
+                    <Item Value="ExecutionFlag"/>
+                    <Item Value="ExecutionStatus"/>
+                    <Item Value="AttendanceType"/>
+                    <Item Value="AttendanceName"/>
+                    <Item Value="Year"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="ExecuteWithParams1" RequiresUpdateModel="true"
+                Action="executeWithParams">
+            <NamedData NDName="P_PARTY_ID" NDValue="#{bindings.PartyId.inputValue}" NDType="java.lang.String"/>
+        </action>
+        <attributeValues IterBinding="FolderTypeROV1Iterator" id="Seq">
+            <AttrNames>
+                <Item Value="Seq"/>
+            </AttrNames>
+        </attributeValues>
+    </bindings>
+</pageDefinition>

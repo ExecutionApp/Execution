@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcCourtBcChrgDepOrdROVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="com.egabi.cjexec.model.roviews.bcdetails.ExcCourtBcChrgDepOrdROVORowImpl"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.ExcCourtBcChrgDepOrdROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT 
+    exc_court_bc_chrg_dec_dep_ord.id, 
+    exc_court_bc_chrg_dec_dep_ord.charge_decision_id, 
+    exc_court_bc_chrg_dec_dep_ord.dependent_order_type, 
+    exc_court_bc_chrg_dec_dep_ord.sequence_number, 
+    exc_court_bc_chrg_dec_dep_ord.created_date, 
+    exc_court_bc_chrg_dec_dep_ord.year, 
+    exc_court_bc_chrg_dec_dep_ord.entity_id, 
+    exc_court_bc_chrg_dec_dep_ord.criminal_type 
+FROM 
+    exc_court_bc_chrg_dec_dep_ord]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ChargeDecisionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CHARGE_DECISION_ID"
+    Expression="CHARGE_DECISION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DependentOrderType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DEPENDENT_ORDER_TYPE"
+    Expression="DEPENDENT_ORDER_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SequenceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SEQUENCE_NUMBER"
+    Expression="SEQUENCE_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATED_DATE"
+    Expression="CREATED_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="Year"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="YEAR"
+    Expression="YEAR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENTITY_ID"
+    Expression="ENTITY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CriminalType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CRIMINAL_TYPE"
+    Expression="CRIMINAL_TYPE"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

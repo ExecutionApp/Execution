@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view beforePhase="#{backingBeanScope.welcomeBean.beforePhase}" xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ar" xmlns:h="http://java.sun.com/jsf/html">
+    <af:document title="Welcome" id="d1">
+        <af:form id="f2" usesUpload="true">
+            <af:pageTemplate viewId="/main-template.jspx" id="pt1">
+                <f:facet name="center">
+                    <h:panelGroup layout="block"
+                                  styleClass="welcome-panel d-flex justify-content-center align-items-center" id="pg1">
+                        <af:outputText styleClass="welcome-massege" value="#{backingBeanScope.welcomeBean.welcomeText}"
+                                       id="ot1"/>
+                    </h:panelGroup>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

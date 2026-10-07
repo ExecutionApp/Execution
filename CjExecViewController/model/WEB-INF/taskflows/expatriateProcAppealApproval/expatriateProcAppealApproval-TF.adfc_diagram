@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View3">
+      <property
+         name="activityId">expatriateAppealApproval</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">803.0</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>expatriateAppealApproval&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">307.5459</property>
+      <property
+         name="page">/pages/com/egabi/expatriateProcAppealApproval/expatriateAppealApproval.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">expatriateAppealApprovalSearch</property>
+      <property
+         name="x">285.0</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>expatriateAppealApprovalSearch&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="y">223.58594</property>
+      <property
+         name="exceptionHandler">false</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View3">
+      <property
+         name="fromOutcome">goExpatriateAppealApprovalSearch</property>
+      <property
+         name="sdm:polyPoints">R50,326.0,223.23535,762.0,307.1953,L50</property>
+   </ControlFlowCase>
+</SDM>

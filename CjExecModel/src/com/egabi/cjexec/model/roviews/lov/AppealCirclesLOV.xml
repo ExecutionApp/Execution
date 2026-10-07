@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AppealCirclesLOV"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.lov.AppealCirclesLOV_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="entityId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="degreeIdBind"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="prevDate"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="prevDegree"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId1"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId2"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="postponedBindd"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId1"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId2"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pnum"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="RDF"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId3"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId3"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId4"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId4"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId5"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId5"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId6"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId6"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId7"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId7"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId8"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId8"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId9"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId9"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="delay"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId11"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId11"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId12"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId12"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId13"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId13"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId14"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId14"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId15"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId15"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId16"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId16"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId17"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId17"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId18"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId18"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId19"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId19"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entId10"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ruleId10"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesLOV"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bcidp"
+    Kind="where"
+    Type="oracle.jbo.domain.Number">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"
+      CodeSourceName="AppealCirclesLOV"/>
+  </Variable>
+  <SQLQuery><![CDATA[WITH rule_entities AS (         
+    SELECT to_char(:entId )   entity_id, to_char(:ruleId)    rule_id FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId1),  to_char(:ruleId1)  FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId2),  to_char(:ruleId2)  FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId3),  to_char(:ruleId3)  FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId4),  to_char(:ruleId4)  FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId5),  to_char(:ruleId5)  FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId6),  to_char(:ruleId6)  FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId7),  to_char(:ruleId7)  FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId8),  to_char(:ruleId8)  FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId9),  to_char(:ruleId9)  FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId10), to_char(:ruleId10) FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId11), to_char(:ruleId11) FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId12), to_char(:ruleId12) FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId13), to_char(:ruleId13) FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId14), to_char(:ruleId14) FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId15), to_char(:ruleId15) FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId16), to_char(:ruleId16) FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId17), to_char(:ruleId17) FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId18), to_char(:ruleId18) FROM dual         
+    UNION ALL         
+    SELECT to_char(:entId19), to_char(:ruleId19) FROM dual         
+)   
+  
+ ( SELECT COU.ID,                              
+         TO_CHAR (COU.HEARING_DATE, 'yyyy-mm-dd') || ' ' || ENTS.ENTITY_NAME                              
+            HEARING_DATE                              
+    FROM COURT_CIRCLES_DATES_HEARING COU, ENTITY ENTS                              
+WHERE (:delay = 'Y' or COU.CAPACITY > 0  )                    
+   and COU.CIRCLES_ARCHIVE = 0                  
+         AND COU.ENTITY_ID = ENTS.ID                              
+         AND COU.ENTITY_ID IN                              
+                (SELECT CIR.DESTINATION_ENTITY_ID                              
+                   FROM ENTITY_CIRCLES CIR                              
+                  WHERE     CIR.SOURCE_ENTITY_ID = :entityId                              
+                        AND CIR.JOIN_TYPE = '1')                              
+       --  AND COU.BC_DEGREE_ID =                              
+         --       CASE                              
+          --         WHEN     :degreeIdBind IS NOT NULL                              
+          --              AND (   :degreeIdBind IN (1, 14, 19)                              
+           --                  OR (    :degreeIdBind = 24                              
+               --                  AND ( :prevDegree = 1 OR :prevDegree = 14)))                              
+          --         THEN                              
+             --         DECODE ( :degreeIdBind,  1, 3,  14, 3,  24, 3,  19, 3)                              
+            --       ELSE                              
+            --          CASE                              
+                --         WHEN     :degreeIdBind IS NOT NULL                              
+                      --        AND (   :degreeIdBind IN (9, 23, 19)                              
+                         --          OR (    :degreeIdBind = 24                              
+                                  --     AND (   :prevDegree = 9                              
+                                 --           OR :prevDegree = 23)))                              
+                    --     THEN                              
+                     --       DECODE ( :degreeIdBind,                              
+                      --              24, 4,                              
+                      --              9, 4,                              
+                     --               23, 4,                              
+                    --                19, 4)                              
+                     --    WHEN     :degreeIdBind IS NOT NULL                              
+                        --      AND (   :degreeIdBind IN (2, 8)                              
+                         --          OR (    :degreeIdBind = 24                              
+                           --            AND ( :prevDegree = 2 OR :prevDegree = 8  )))                              
+                      --   THEN                              
+                          --  DECODE ( :degreeIdBind,  2, 3,  8, 3,24,3)                              
+                        -- ELSE                              
+                    --    --    NULL                              
+                    --  END                              
+               -- END                    
+               and ( :degreeIdBind = :degreeIdBind                 
+                 or  :prevDegree = :prevDegree )                 
+                 and COU.BC_DEGREE_ID = :postponedBindd                 
+                               
+         AND COU.HEARING_DATE >  NVL(TO_DATE(:prevDate, 'yyyy-mm-dd'), SYSDATE)                    
+         AND COU.HEARING_DATE  >= sysdate                  
+     and  (:delay = 'Y' or('N' = :RDF OR COU.HEARING_DATE  < sysdate      )     )                     
+                      
+                         
+                         
+)      
+  union   
+ ( SELECT COU.ID,                                
+         TO_CHAR (COU.HEARING_DATE, 'yyyy-mm-dd') || ' ' || ENTS.ENTITY_NAME                                
+                          
+  FROM  COURT_CIRCLES_DATES_HEARING COU, ENTITY ENTS                                                                              
+WHERE  COU.ENTITY_ID = ENTS.ID                                                       
+                                                                           
+AND COU.BC_DEGREE_ID = :postponedBindd                                                           
+             
+                 
+AND COU.HEARING_DATE  >= sysdate     
+and COU.id in (select COURT_BC_HEARING_RESERVATION.CIRCLE_HEARING_DATE_ID from COURT_BC_HEARING_RESERVATION where COURT_BC_HEARING_RESERVATION.BUSINESS_CASE_ID = :bcidp  ))   
+    
+     
+union                  
+                  
+(SELECT                  
+    cou.ID,                  
+      TO_CHAR (COU.HEARING_DATE, 'yyyy-mm-dd') || ' ' || ENTS.ENTITY_NAME HEARING_DATE                   
+                     
+FROM COURT_CIRCLES_DATES_HEARING cou                  
+JOIN ENTITY ents                  
+    ON ents.id = cou.entity_id                  
+JOIN rule_entities re                  
+    ON re.entity_id = cou.entity_id                  
+JOIN CASE_DISTRIBUTION_RULES cdr                  
+    ON cdr.rule_id = re.rule_id                  
+WHERE                  
+                  
+(:pnum = 7 or COU.CAPACITY > 0    )         
+AND COU.ENTITY_ID = ENTS.ID  AND COU.HEARING_DATE  >= sysdate       
+and COU.BC_DEGREE_ID = :postponedBindd                
+AND COU.CIRCLES_ARCHIVE = 0  and 'Y' = :RDF  and                  
+ ( (:pnum = 7 and SYSDATE   < COU.HEARING_DATE) or NVL(TO_DATE(:prevDate, 'yyyy-mm-dd') + 14, SYSDATE)   < COU.HEARING_DATE )  and                  
+       INSTR(                  
+            cdr.court_day,                  
+            TO_CHAR(                  
+                cou.hearing_date,                  
+                'DY',                  
+                'NLS_DATE_LANGUAGE=ENGLISH'                  
+            )                  
+        ) > 0                  
+                          
+            order by row_number() over(partition by trunc(cou.ENTITY_ID) order by cou.HEARING_DATE asc) fetch first :pnum  row with ties   )]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.lov.AppealCirclesLOV.HearingDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

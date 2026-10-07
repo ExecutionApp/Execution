@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <af:panelHeader text="#{bundle.CASE_INFO}" id="ph0">
+        <af:table value="#{bindings.ExecBcSeeeionsJudgmentsROV1.collectionModel}" var="row"
+                  rows="#{bindings.ExecBcSeeeionsJudgmentsROV1.rangeSize}"
+                  emptyText="#{bindings.ExecBcSeeeionsJudgmentsROV1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.ExecBcSeeeionsJudgmentsROV1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.ExecBcSeeeionsJudgmentsROV1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.ExecBcSeeeionsJudgmentsROV1.rangeSize}" id="t1">
+            <af:column sortProperty="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.HearingDate.name}" sortable="true"
+                       headerText="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.HearingDate.label}" id="c1">
+                <af:outputText value="#{row.HearingDate}"
+                               shortDesc="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.HearingDate.tooltip}" id="ot1">
+                    <af:convertDateTime pattern="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.HearingDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.JudgementResolution.name}"
+                       sortable="true"
+                       headerText="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.JudgementResolution.label}" id="c2"
+                       noWrap="false">
+                <af:outputText value="#{row.JudgementResolution}"
+                               shortDesc="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.JudgementResolution.tooltip}"
+                               id="ot2"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.Name.name}" sortable="true"
+                       headerText="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.Name.label}" id="c3">
+                <af:outputText value="#{row.Name}"
+                               shortDesc="#{bindings.ExecBcSeeeionsJudgmentsROV1.hints.Name.tooltip}" id="ot3"/>
+            </af:column>
+        </af:table>
+    </af:panelHeader>
+</ui:composition>

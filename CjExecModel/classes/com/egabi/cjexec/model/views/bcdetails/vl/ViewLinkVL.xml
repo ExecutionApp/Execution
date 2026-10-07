@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ViewLinkVL"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  EntityAssociation="com.egabi.cjexec.model.entities.bcdetails.assoc.AssociationAssoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.views.bcdetails.vl.ViewLinkVL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="BusinessCase"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.views.bcdetails.BusinessCaseVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="BusinessCase"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.BusinessCaseVO.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ParPoliceAuthorityReport"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.views.bcdetails.ParPoliceAuthorityReportVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="ParPoliceAuthorityReport"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.ParPoliceAuthorityReportVO.BusinessCaseId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

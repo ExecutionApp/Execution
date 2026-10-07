@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ViewLink32VL"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink32VL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="BusinessCase"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.views.bcdetails.BusinessCaseVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="BusinessCase"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.BusinessCaseVO.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="CriminalJusticeFilesDetails2"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.views.bcdetails.CriminalJusticeFilesDetails2VO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="CriminalJusticeFilesDetails2"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.CriminalJusticeFilesDetails2VO.Businesscaseid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

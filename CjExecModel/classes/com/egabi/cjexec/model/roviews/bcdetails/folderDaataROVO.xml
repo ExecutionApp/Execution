@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="folderDaataROVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.folderDaataROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT ExcFolderDataEO.ID,  
+COURT_BC_HEARING_RES_PARTIES.COURT_BC_HEARING_RES_ID , 
+       ExcFolderDataEO.RES_PARTY_ID,  
+       ExcFolderDataEO.YEAR,  
+       ExcFolderDataEO.FOLDER_TYPE,  
+       ExcFolderDataEO.POLICE_STATION_ENTITY_ID,  
+       ExcFolderDataEO.SEQUENCE_NUMBER,  
+       ExcFolderDataEO.REPEATED_FLAG,  
+       ExcFolderDataEO.BUSINESS_CASE_DETAIL_ID,  
+       ExcFolderDataEO.PARENT_FOLDER_RECORD,  
+       ExcFolderDataEO.JUDGEMENT_STATUS,  
+       ExcFolderDataEO.CREATED_BY,  
+       ExcFolderDataEO.CREATED_DATE,  
+       ExcFolderDataEO.EXECUTION_FLAG,  
+       ExcFolderDataEO.TOT_IMPRISONMENT_DAYS,  
+       ExcFolderDataEO.TOT_IMPRISONMENT_MONTHS,  
+       ExcFolderDataEO.TOT_IMPRISONMENT_YEARS,  
+       ExcFolderDataEO.IMPRISONMENT_START_DATE,  
+       ExcFolderDataEO.IMPRISONMENT_END_DATE,  
+       ExcFolderDataEO.EXECUTION_DATE,  
+       ExcFolderDataEO.ANNOUNCEMENT_DATE,  
+       ExcFolderDataEO.EXECUTION_NUMBER,  
+       ExcFolderDataEO.IMPRISONED_FLAG,  
+       ExcFolderDataEO.JUDGMENT_TEXT,  
+       ExcFolderDataEO.IMPRISONMENT_PLACE,  
+       ExcFolderDataEO.SECONDARY_PROSECUTION,  
+       ExcFolderDataEO.PRIMARY_PROSECUTION,  
+       ExcFolderDataEO.EXECUTION_PROCEDUR_ID,  
+       ExcFolderDataEO.NOTES,  
+       ExcFolderDataEO.IS_ACTIVE,  
+       ExcFolderDataEO.WITNESS_FLAG,  
+       ExcFolderDataEO.CRIMINAL_TYPE,  
+       ExcFolderDataEO.OBJECTION_TYPE 
+FROM  EXC_FOLDER_DATA ExcFolderDataEO inner join COURT_BC_HEARING_RES_PARTIES on COURT_BC_HEARING_RES_PARTIES.id = ExcFolderDataEO.RES_PARTY_ID]]></SQLQuery>
+  
+  
+  <ViewAccessor
+    Name="FolderTypeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderTypeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderTypecrimeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderTypecrimeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderAllTypes1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderAllTypes"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CrininalTypeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.CrininalTypeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderTypesESS1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderTypesESS"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ExcFolderObjectionTypeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.ExcFolderObjectionTypeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="AllEntityROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AllEntityROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EntityROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="AllEntity1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AllEntity"
+    RowLevelBinds="true"/>
+    
+    <ListBinding
+    Name="LOV_FolderType"
+    ListVOName="FolderAllTypes1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderTypeCrime"
+    ListVOName="FolderTypecrimeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderTypeCrime"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderTypeAll"
+    ListVOName="FolderTypeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderTypeAll"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CriminalType"
+    ListVOName="CrininalTypeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CriminalType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ID"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderTypeESS"
+    ListVOName="FolderTypesESS1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderTypeESS"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ObjectionType"
+    ListVOName="ExcFolderObjectionTypeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ObjectionType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ObjectionFlag"/>
+      <Item Value="ObjectionText"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="ExtendPunishFlag"/>
+      <Item Value="JudgeText"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PoliceStationEntityId"
+    ListVOName="AllEntity1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PoliceStationEntityId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="EntityName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  
+  
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CourtBcHearingResId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="COURT_BC_HEARING_RES_ID"
+    Expression="COURT_BC_HEARING_RES_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ResPartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RES_PARTY_ID"
+    Expression="RES_PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Year"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="YEAR"
+    Expression="YEAR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FolderType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FOLDER_TYPE"
+    Expression="FOLDER_TYPE"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderType"/>
+  <ViewAttribute
+    Name="PoliceStationEntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="POLICE_STATION_ENTITY_ID"
+    Expression="POLICE_STATION_ENTITY_ID"
+    SQLType="NUMERIC"
+    LOVName="LOV_PoliceStationEntityId"/>
+  <ViewAttribute
+    Name="SequenceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SEQUENCE_NUMBER"
+    Expression="SEQUENCE_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="RepeatedFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REPEATED_FLAG"
+    Expression="REPEATED_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseDetailId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_DETAIL_ID"
+    Expression="BUSINESS_CASE_DETAIL_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ParentFolderRecord"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARENT_FOLDER_RECORD"
+    Expression="PARENT_FOLDER_RECORD"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JudgementStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="JUDGEMENT_STATUS"
+    Expression="JUDGEMENT_STATUS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATED_DATE"
+    Expression="CREATED_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ExecutionFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="EXECUTION_FLAG"
+    Expression="EXECUTION_FLAG"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotImprisonmentDays"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOT_IMPRISONMENT_DAYS"
+    Expression="TOT_IMPRISONMENT_DAYS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotImprisonmentMonths"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOT_IMPRISONMENT_MONTHS"
+    Expression="TOT_IMPRISONMENT_MONTHS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotImprisonmentYears"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOT_IMPRISONMENT_YEARS"
+    Expression="TOT_IMPRISONMENT_YEARS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ImprisonmentStartDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="IMPRISONMENT_START_DATE"
+    Expression="IMPRISONMENT_START_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ImprisonmentEndDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="IMPRISONMENT_END_DATE"
+    Expression="IMPRISONMENT_END_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ExecutionDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="EXECUTION_DATE"
+    Expression="EXECUTION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="AnnouncementDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="ANNOUNCEMENT_DATE"
+    Expression="ANNOUNCEMENT_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ExecutionNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="EXECUTION_NUMBER"
+    Expression="EXECUTION_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ImprisonedFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="IMPRISONED_FLAG"
+    Expression="IMPRISONED_FLAG"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JudgmentText"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JUDGMENT_TEXT"
+    Expression="JUDGMENT_TEXT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ImprisonmentPlace"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="IMPRISONMENT_PLACE"
+    Expression="IMPRISONMENT_PLACE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SecondaryProsecution"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SECONDARY_PROSECUTION"
+    Expression="SECONDARY_PROSECUTION"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PrimaryProsecution"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PRIMARY_PROSECUTION"
+    Expression="PRIMARY_PROSECUTION"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ExecutionProcedurId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="EXECUTION_PROCEDUR_ID"
+    Expression="EXECUTION_PROCEDUR_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Notes"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NOTES"
+    Expression="NOTES"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IsActive"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="IS_ACTIVE"
+    Expression="IS_ACTIVE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WitnessFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="WITNESS_FLAG"
+    Expression="WITNESS_FLAG"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CriminalType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CRIMINAL_TYPE"
+    Expression="CRIMINAL_TYPE"
+    SQLType="NUMERIC"
+    LOVName="LOV_CriminalType"/>
+  <ViewAttribute
+    Name="ObjectionType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="OBJECTION_TYPE"
+    Expression="OBJECTION_TYPE"
+    SQLType="NUMERIC"
+    LOVName="LOV_ObjectionType"/>
+    <ViewAttribute
+    Name="FolderTypeCrime"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderTypeCrime">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderTypeAll"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FOLDER_TYPE_ALL"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderTypeAll">
+    <TransientExpression
+      Name="ExpressionScript"><![CDATA[FolderType]]></TransientExpression>
+    <RecalcCondition
+      Name="RecalcExpressionScript"><![CDATA[true]]></RecalcCondition>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderTypeESS"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderTypeESS">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+ 
+  <ViewAttribute
+    Name="ObjectionText"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="ObjectionFlag"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+   
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

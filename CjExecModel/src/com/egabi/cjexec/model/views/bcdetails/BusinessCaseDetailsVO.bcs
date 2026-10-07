@@ -1,0 +1,12 @@
+//Groovy Scripts for com.egabi.cjexec.model.views.bcdetails.BusinessCaseDetailsVO
+
+package com.egabi.cjexec.model.views.bcdetails
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="pBCID")
+def pBCID_VariableScript_Variable()
+{
+adf.context.current.sessionScope.BC_ID
+}
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ViewLink20VL"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  EntityAssociation="com.egabi.cjexec.model.entities.bcdetails.assoc.Association14Assoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink20VL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="BusinessCase"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.views.bcdetails.BusinessCaseVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="BusinessCase"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.BusinessCaseVO.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="BusinessCaseDetails2"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.views.bcdetails.BusinessCaseDetails2VO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="BusinessCaseDetails2"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.BusinessCaseDetails2VO.BusinessCaseId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

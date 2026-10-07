@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="WelcomePageDef"
+                Package="pages.com.egabi.security.loginOutside">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="SecUsersSessionsVOIterator" Binds="SecUsersSessionsVO" DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+    <iterator id="SecUsersROVIterator" Binds="SecUsersROV" DataControl="CjExecAMDataControl" RangeSize="25"/>
+    <iterator id="MenuRolesROVIterator" Binds="MenuRolesROV" DataControl="CjExecAMDataControl" RangeSize="25"/>
+    <iterator Binds="UsersTokensROV" RangeSize="10" DataControl="CjExecAMDataControl" id="UsersTokensROVIterator"/>
+    <iterator id="UserRolesRVO1Iterator" Binds="UserRolesRVO1" DataControl="CjExecAMDataControl" RangeSize="25"/>
+    <iterator id="SecUserFunctionsRVO1Iterator" Binds="SimplifiedModeAM1.SecUserFunctionsRVO1"
+              DataControl="CjExecAMDataControl"
+              RangeSize="-1"/>
+    <iterator id="SecuriedEntities1Iterator" Binds="SimplifiedModeAM1.SecuriedEntities1" DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+    <iterator id="SecuriedEntities2Iterator" Binds="SimplifiedModeAM1.SecuriedEntities2"
+              DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+    <iterator id="SecuriedEntitiesColya1Iterator" Binds="SecuriedEntitiesColya1"
+              DataControl="SimplifiedModeAMDataControl" RangeSize="25"/>
+    <iterator id="SecuriedEntitiesPartial1Iterator" Binds="SecuriedEntitiesPartial1"
+              DataControl="SimplifiedModeAMDataControl" RangeSize="25"/>
+    <iterator id="AcceptedFormatsROV1Iterator" Binds="SimplifiedModeAM1.AcceptedFormatsROV1"
+              DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+    <iterator id="CjConfigRoVOIterator" Binds="SimplifiedModeAM1.CjConfigRoVO" DataControl="CjExecAMDataControl" RangeSize="25"/>
+    <iterator id="SettlementsCodeROVO1Iterator" Binds="SimplifiedModeAM1.SettlementsCodeROVO1"
+              DataControl="CjExecAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SecUsersSessionsVOIterator" id="UserId">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="Username">
+      <AttrNames>
+        <Item Value="Username"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="EntityId">
+      <AttrNames>
+        <Item Value="EntityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="RoleId">
+      <AttrNames>
+        <Item Value="RoleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="FullName">
+      <AttrNames>
+        <Item Value="FullName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getUserSessionByToken2" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getUserSessionByToken2" IsViewObjectMethod="true" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.SecUsersSessionsVO"
+                  ReturnName="data.CjExecAMDataControl.methodResults.getUserSessionByToken2_CjExecAMDataControl_SecUsersSessionsVO_getUserSessionByToken2_result">
+      <NamedData NDName="loginToken" NDType="java.lang.String"/>
+    </methodAction>
+    <action IterBinding="UsersTokensROVIterator" id="ExecuteWithParams2"
+            InstanceName="CjExecAMDataControl.UsersTokensROV" DataControl="CjExecAMDataControl"
+            RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="BindToken" NDType="java.lang.String" NDValue="#{sessionScope.loginId}"/>
+    </action>
+    <action IterBinding="SecUsersSessionsVOIterator" id="ExecuteWithParams"
+            InstanceName="CjExecAMDataControl.SecUsersSessionsVO" DataControl="CjExecAMDataControl"
+            RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="BindToken" NDType="java.lang.String" NDValue="#{sessionScope.loginId}"/>
+    </action>
+    <attributeValues IterBinding="SecUsersROVIterator" id="EntityDegree">
+      <AttrNames>
+        <Item Value="EntityDegree"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="ParentEntityId">
+      <AttrNames>
+        <Item Value="ParentEntityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="EntityName">
+      <AttrNames>
+        <Item Value="EntityName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="EntityAppeal">
+      <AttrNames>
+        <Item Value="EntityAppeal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="NidUserId">
+      <AttrNames>
+        <Item Value="NidUserId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="NidChannelId">
+      <AttrNames>
+        <Item Value="NidChannelId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="NidTokenId">
+      <AttrNames>
+        <Item Value="NidTokenId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="NidCallPermission">
+      <AttrNames>
+        <Item Value="NidCallPermission"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="ErrandFlag">
+      <AttrNames>
+        <Item Value="ErrandFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="ExcErrandEntityId">
+      <AttrNames>
+        <Item Value="ExcErrandEntityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="ExcErrandUserFlag">
+      <AttrNames>
+        <Item Value="ExcErrandUserFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="AutomationFlag">
+      <AttrNames>
+        <Item Value="AutomationFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="ExcDisRuleFlag">
+      <AttrNames>
+        <Item Value="ExcDisRuleFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SecUsersROVIterator" id="EntityPresident">
+      <AttrNames>
+        <Item Value="EntityPresident"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

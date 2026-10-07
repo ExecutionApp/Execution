@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MotalbaProcedureReport"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.roviews.reports.MotalbaProcedureReportImpl"
+  PageIterMode="Full"
+  ComponentInterface="com.egabi.cjexec.model.roviews.reports.common.MotalbaProcedureReport"
+  ClientProxyName="com.egabi.cjexec.model.roviews.reports.client.MotalbaProcedureReportClient">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.reports.MotalbaProcedureReport_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="YEAR"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="folderCriminalType"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="Nyabaa"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="ClaimFolderType"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="DATE_FROM"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="DATE_TO"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="END_NUM"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="START_NUM"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="procType"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[select proc.id, claim.PARTY_NAME , claim.CLAIM_NUMBER ||' - '||   years.CLAIM_YEAR || ' - '|| folders.name ||' - '|| (select entity_name from entity where entity.id = claim.CLAIM_POLICE_STATION_ID ) as claim_number                 
+, claim.CLAIM_TOTAL_ORIGINAL , claim.claim_total , claim.fixed_penalty_amount, proc.PROCEDURE_AMOUNT,proc.PROCEDURE_TYPE_ID,type.NAME , proc.PROCEDURE_DATE                   
+from exc_claims claim                  
+inner join EXC_PROCEDURE_CLAIM proc on proc.claim_id = claim.id                 
+inner join EXC_CLAIM_years years on claim.claim_year = years.id                 
+inner join EXC_lkp_CLAIM_folders folders on claim.claim_folder_id = folders.id                  
+inner join EXC_LKP_CLAIM_PROCEDURE_TYPES type  on proc.PROCEDURE_TYPE_ID = type.ID                 
+                 
+WHERE                                                                       
+ ( :YEAR  =0 or years.ID = :YEAR   )                        
+and claim.criminal_type =  :folderCriminalType                       
+AND claim.CLAIM_POLICE_STATION_ID =:Nyabaa                                                      
+and (:ClaimFolderType  = 0 or claim.CLAIM_FOLDER_ID = :ClaimFolderType )                                           
+and claim.DELETED_FLAG = 'N'                                             
+AND (:DATE_FROM is null or proc.PROCEDURE_DATE BETWEEN TO_DATE(:DATE_FROM, 'dd/mm/yyyy')                                                                                     
+  AND TO_DATE(:DATE_TO , 'dd/mm/yyyy')+1    )                        
+                       
+  and ( :END_NUM is null or ( to_number(claim.CLAIM_NUMBER ) >= :START_NUM  and to_number(claim.CLAIM_NUMBER ) <= :END_NUM))                     
+   and ( :procType =0 or proc.PROCEDURE_TYPE_ID =  :procType             
+   )             
+order by  proc.PROCEDURE_DATE desc]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME"
+    Expression="PARTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClaimNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="896"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLAIM_NUMBER"
+    Expression="CLAIM_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="896"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClaimTotalOriginal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CLAIM_TOTAL_ORIGINAL"
+    Expression="CLAIM_TOTAL_ORIGINAL"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ClaimTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CLAIM_TOTAL"
+    Expression="CLAIM_TOTAL"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FixedPenaltyAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FIXED_PENALTY_AMOUNT"
+    Expression="FIXED_PENALTY_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ProcedureAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PROCEDURE_AMOUNT"
+    Expression="PROCEDURE_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ProcedureTypeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PROCEDURE_TYPE_ID"
+    Expression="PROCEDURE_TYPE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Name"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProcedureDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="PROCEDURE_DATE"
+    Expression="PROCEDURE_DATE"
+    SQLType="DATE"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="executeMotalbatView"
+      MethodName="executeMotalbatView">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="claimFolderType"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="procType"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="criminalType"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="casYear"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="nyabaaGozaya"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="dateFrom"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="dateTo"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="startNum"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="endNum"
+        Type="java.math.BigDecimal"/>
+    </Method>
+  </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

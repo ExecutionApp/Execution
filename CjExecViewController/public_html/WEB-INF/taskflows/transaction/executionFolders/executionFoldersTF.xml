@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="executionFoldersTF">
+    <default-activity>router1</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__11">
+      <name>folderID</name>
+      <value>#{pageFlowScope.folderID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__23">
+      <name>party_id</name>
+      <value>#{pageFlowScope.party_id}</value>
+      <class>java.math.BigDecimal</class>
+    </input-parameter-definition>
+    <managed-bean id="__19">
+      <managed-bean-name>ReportsBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.executionfolders.PrintReportsBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__20">
+      <managed-bean-name>ExecutionFoldersBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.executionfolders.ExecutionFoldersBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="execFoldersSearchFrag">
+      <page>/pages/com/egabi/cjexec/transaction/executionFolders/execFoldersSearchFrag.jsff</page>
+    </view>
+    <view id="execFoldersDetailFrag">
+      <page>/pages/com/egabi/cjexec/transaction/executionFolders/execFoldersDetailFrag.jsff</page>
+    </view>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="ationsTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/transaction/actions/ationsTF.xml</document>
+        <id>ationsTF</id>
+      </task-flow-reference>
+      <input-parameter id="__8">
+        <name>execFolderId</name>
+        <value>#{pageFlowScope.FolderID}</value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>buttonAction</name>
+        <value>#{pageFlowScope.action}</value>
+      </input-parameter>
+      <input-parameter id="__14">
+        <name>executionFlag</name>
+        <value>#{pageFlowScope.execution_Flag}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome>
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="router1">
+      <case id="__21">
+        <expression>#{sessionScope.screen_name == 'search'}</expression>
+        <outcome>search</outcome>
+      </case>
+      <case id="__22">
+        <expression>#{sessionScope.screen_name == 'searchall'}</expression>
+        <outcome>searchall</outcome>
+      </case>
+      <default-outcome>search</default-outcome>
+    </router>
+    <task-flow-call id="searchAllFoldersTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/transaction/executionFolders/searchAllFoldersTF.xml</document>
+        <id>searchAllFoldersTF</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <method-call id="ExecuteWithParams1">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>execFoldersSearchFrag</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>ExecuteWithParams1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>execFoldersDetailFrag</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>execFoldersSearchFrag</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__7">
+        <from-outcome>action</from-outcome>
+        <to-activity-id>ationsTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>execFoldersSearchFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>ationsTF</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>taskFlowReturn1</from-outcome>
+        <to-activity-id>Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id>Execute</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome>Execute</from-outcome>
+        <to-activity-id>execFoldersSearchFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>router1</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>searchall</from-outcome>
+        <to-activity-id>searchAllFoldersTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__13">
+        <from-outcome>search</from-outcome>
+        <to-activity-id>ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__24">
+      <from-activity-id>ExecuteWithParams1</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>execFoldersDetailFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

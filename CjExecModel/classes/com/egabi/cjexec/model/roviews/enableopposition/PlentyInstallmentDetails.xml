@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PlentyInstallmentDetails"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.enableopposition.PlentyInstallmentDetails_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="FolderRecordId"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <SQLQuery><![CDATA[SELECT FPI.INSTALLMENT_DATE, FPI.INSTALLMENT_NUMBER, FPI.INSTALLMENT_AMOUNT     
+FROM EXC_FOLDER_PROC_INSTALL FPI     
+WHERE FPI.FOLDER_RECORD_ID = :FolderRecordId]]></SQLQuery>
+  <ViewAttribute
+    Name="InstallmentDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="INSTALLMENT_DATE"
+    Expression="INSTALLMENT_DATE"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.enableopposition.PlentyInstallmentDetails.InstallmentDate"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InstallmentNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INSTALLMENT_NUMBER"
+    Expression="INSTALLMENT_NUMBER"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.enableopposition.PlentyInstallmentDetails.InstallmentNumber"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InstallmentAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INSTALLMENT_AMOUNT"
+    Expression="INSTALLMENT_AMOUNT"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.enableopposition.PlentyInstallmentDetails.InstallmentAmount"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

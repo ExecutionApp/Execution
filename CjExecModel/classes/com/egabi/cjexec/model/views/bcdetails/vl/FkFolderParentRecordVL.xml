@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkFolderParentRecordVL"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  EntityAssociation="com.egabi.cjexec.model.entities.bcdetails.assoc.FkFolderParentRecordAssoc">
+  <ViewLinkDefEnd
+    Name="ParentFolderRecordExcFolderData"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.views.bcdetails.ExcFolderDataVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="ParentFolderRecordExcFolderData"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.ExcFolderDataVO.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ExcFolderData"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.views.bcdetails.ExcFolderDataVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="ExcFolderData"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.ExcFolderDataVO.ParentFolderRecord"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

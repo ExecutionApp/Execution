@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+    <task-flow-definition id="nIdServiceTF">
+        <default-activity>router1</default-activity>
+        <data-control-scope>
+            <shared/>
+        </data-control-scope>
+        <input-parameter-definition id="__1">
+            <name>nIdParam</name>
+            <value>#{pageFlowScope.nIdParam}</value>
+            <class>com.egabi.cjexec.view.utils.NidService</class>
+            <required/>
+        </input-parameter-definition>
+        <input-parameter-definition id="__9">
+            <name>fcnParam</name>
+            <value>#{pageFlowScope.fcnParam}</value>
+            <class>com.egabi.cjexec.view.utils.NidService</class>
+        </input-parameter-definition>
+        <input-parameter-definition id="__10">
+            <name>userIdParam</name>
+            <value>#{pageFlowScope.userIdParam}</value>
+            <class>com.egabi.cjexec.view.utils.NidService</class>
+            <required/>
+        </input-parameter-definition>
+        <input-parameter-definition id="__16">
+            <name>channelIdParam</name>
+            <value>#{pageFlowScope.channelIdParam}</value>
+            <class>com.egabi.cjexec.view.utils.NidService</class>
+            <required/>
+        </input-parameter-definition>
+        <input-parameter-definition id="__17">
+            <name>tokenIdParam</name>
+            <value>#{pageFlowScope.tokenIdParam}</value>
+            <class>com.egabi.cjexec.view.utils.NidService</class>
+            <required/>
+        </input-parameter-definition>
+        <input-parameter-definition id="__18">
+            <name>callPermissionParam</name>
+            <value>#{pageFlowScope.callPermissionParam}</value>
+            <class>com.egabi.cjexec.view.utils.NidService</class>
+            <required/>
+        </input-parameter-definition>
+        <input-parameter-definition id="__19">
+            <name>userNameParam</name>
+            <value>#{pageFlowScope.userNameParam}</value>
+            <class>com.egabi.cjexec.view.utils.NidService</class>
+            <required/>
+        </input-parameter-definition>
+        <input-parameter-definition id="__20">
+            <name>passwordParam</name>
+            <value>#{pageFlowScope.passwordParam}</value>
+            <class>com.egabi.cjexec.view.utils.NidService</class>
+            <required/>
+        </input-parameter-definition>
+        <return-value-definition id="__4">
+            <name>nIdResponseParam</name>
+            <value>#{pageFlowScope.nIdResponseParam}</value>
+            <class>com.egabi.cjexec.view.utils.NidService</class>
+        </return-value-definition>
+        <managed-bean id="__2">
+            <managed-bean-name>nIdBean</managed-bean-name>
+            <managed-bean-class>com.egabi.cjexec.view.utils.NidService</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+        <managed-bean id="__6">
+            <managed-bean-name>personDataBean</managed-bean-name>
+            <managed-bean-class>com.egabi.cjexec.view.utils.PersonData</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+        <method-call id="methodCall1">
+            <method>#{pageFlowScope.nIdBean.getPersonData}</method>
+            <outcome>
+                <fixed-outcome>go</fixed-outcome>
+            </outcome>
+        </method-call>
+        <view id="nIdServiceFrag">
+            <page>/pages/com/egabi/nIdService/nIdServiceFrag.jsf</page>
+        </view>
+        <task-flow-return id="taskFlowReturn1">
+            <outcome>
+                <name>taskFlowReturn1</name>
+            </outcome>
+        </task-flow-return>
+        <router id="router1">
+            <case id="__14">
+                <expression>#{pageFlowScope.nIdParam eq 5}</expression>
+                <outcome>verify</outcome>
+            </case>
+            <case id="__15">
+                <expression>#{pageFlowScope.nIdParam ne 5}</expression>
+                <outcome>notVerify</outcome>
+            </case>
+            <default-outcome>notVerify</default-outcome>
+        </router>
+        <control-flow-rule id="__3">
+            <from-activity-id>methodCall1</from-activity-id>
+            <control-flow-case id="__5">
+                <from-outcome>go</from-outcome>
+                <to-activity-id>nIdServiceFrag</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__7">
+            <from-activity-id>nIdServiceFrag</from-activity-id>
+            <control-flow-case id="__8">
+                <from-outcome>close</from-outcome>
+                <to-activity-id>taskFlowReturn1</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__11">
+            <from-activity-id>router1</from-activity-id>
+            <control-flow-case id="__12">
+                <from-outcome>notVerify</from-outcome>
+                <to-activity-id>methodCall1</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__13">
+                <from-outcome>verify</from-outcome>
+                <to-activity-id>nIdServiceFrag</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+    </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AppealCirclesTaqseerFatra"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.roviews.lov.AppealCirclesTaqseerFatraImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.lov.AppealCirclesTaqseerFatra_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="degreeIdBind"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entityId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesTaqseerFatra"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="prevDate"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesTaqseerFatra"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="prevDegree"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="egraaDate"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealCirclesTaqseerFatra"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[/* Formatted on 25/11/2020 06:44:24 ص (QP5 v5.287) */      
+/* this query return date of estanaf or tajeel estenaf or moarda estanafia or tageel moarda estanafia or moarda estanafia be el tamkeen or tageel moarda estanafia be el tamkeen  */      
+      
+  SELECT COU.ID,      
+         TO_CHAR (COU.HEARING_DATE, 'yyyy-mm-dd') || ' ' || ENTS.ENTITY_NAME      
+            HEARING_DATE      
+    FROM COURT_CIRCLES_DATES_HEARING COU, ENTITY ENTS      
+   WHERE     COU.CAPACITY > 0      
+         AND COU.ENTITY_ID = ENTS.ID      
+         AND COU.ENTITY_ID IN      
+                (SELECT CIR.DESTINATION_ENTITY_ID      
+                   FROM ENTITY_CIRCLES CIR      
+                  WHERE     CIR.SOURCE_ENTITY_ID = :entityId      
+                        AND CIR.JOIN_TYPE = '1')      
+         AND COU.BC_DEGREE_ID =      
+                CASE      
+                   WHEN     :degreeIdBind IS NOT NULL      
+                        AND (   :degreeIdBind IN (1, 14, 19)      
+                             OR (    :degreeIdBind = 24      
+                                 AND ( :prevDegree = 1 OR :prevDegree = 14)))      
+                   THEN      
+                      DECODE ( :degreeIdBind,  1, 3,  14, 3,  24, 3,  19, 3)      
+                   ELSE      
+                      CASE      
+                         WHEN     :degreeIdBind IS NOT NULL      
+                              AND (   :degreeIdBind IN (9, 23, 19)      
+                                   OR (    :degreeIdBind = 24      
+                                       AND (   :prevDegree = 9      
+                                            OR :prevDegree = 23)))      
+                         THEN      
+                            DECODE ( :degreeIdBind,      
+                                    24, 4,      
+                                    9, 4,      
+                                    23, 4,      
+                                    19, 4)      
+                         WHEN     :degreeIdBind IS NOT NULL      
+                              AND (   :degreeIdBind IN (2, 8)      
+                                   OR (    :degreeIdBind = 24      
+                                       AND ( :prevDegree = 2 OR :prevDegree = 8  )))      
+                         THEN      
+                            DECODE ( :degreeIdBind,  2, 3,  8, 3,24,3)      
+                         ELSE      
+                            NULL      
+                      END      
+                END  
+         AND COU.HEARING_DATE < TO_DATE ( :prevDate, 'yyyy-mm-dd')
+        AND COU.HEARING_DATE > TO_DATE ( :egraaDate, 'yyyy-mm-dd')
+        -- AND COU.SOURCE IS NULL      
+ORDER BY COU.HEARING_DATE desc, COU.ENTITY_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="307"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="307"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.lov.AppealCirclesTaqseerFatra.HearingDate_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="executionReport26" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f8a811a7-1f6b-4207-ae2d-95e3962492b1">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="46"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="0ce843f3-b7ef-4906-b3e8-76ad545959aa">
+		<parameter name="pname" class="java.lang.String"/>
+		<parameter name="pnum" class="java.lang.String"/>
+		<parameter name="pyear" class="java.math.BigDecimal"/>
+		<parameter name="proc" class="java.lang.String"/>
+		<parameter name="police" class="java.lang.String"/>
+		<parameter name="seq" class="java.math.BigDecimal"/>
+		<parameter name="seqYear" class="java.math.BigDecimal"/>
+		<queryString>
+			<![CDATA[select 1 from dual]]>
+		</queryString>
+		<field name="1" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="New Dataset 2" uuid="417e8956-6369-4c64-8d70-0b171789d8a5">
+		<parameter name="degree" class="java.lang.String"/>
+		<parameter name="date" class="java.sql.Timestamp"/>
+		<parameter name="judge" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select 1 from dual]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="New Dataset 3" uuid="e0634a17-1b0a-441d-b0f9-25bcdb2a992b">
+		<parameter name="folder_id" class="java.math.BigDecimal">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select ROWNUM, t.name ,P.PROCEDURE_DATE ,S.FOLDER_RECORD_ID
+from EXC_FOLDER_ACTIONS s ,EXC_LKP_ACTION_TYPES t, EXC_FOLDER_PROCEDURES p
+where S.FOLDER_RECORD_ID=$P{folder_id}
+and S.ACTION_TYPE=t.id
+and S.PROCEDURE_ID =P.ID]]>
+		</queryString>
+		<field name="ROWNUM" class="java.math.BigDecimal"/>
+		<field name="NAME" class="java.lang.String"/>
+		<field name="PROCEDURE_DATE" class="java.sql.Timestamp"/>
+		<field name="FOLDER_RECORD_ID" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="userId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FOLDER_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT (SELECT ENTITY_NAME
+          FROM ENTITY
+         WHERE ID IN ( (SELECT ENTITY_ID
+                          FROM SEC_USERs
+                         WHERE ID =$P{userId})))
+          ENTITY_NAME,
+          (SELECT ENTITY_ID
+                          FROM SEC_USERs
+                         WHERE ID =$P{userId}) ENTITY_ID,
+    (SELECT S.SEQ FROM BUSINESS_CASE_LEDGER_SEQ S WHERE S.BUSINESS_CASE_DETAILS_ID = (SELECT BD.ID FROM BUSINESS_CASE_DETAILS BD WHERE BD.BUSINESS_CASE_ID = RES.BUSINESS_CASE_ID
+       AND BD.CASE_SCHEMA_ID = 3643)) SEQ,
+       (SELECT S.YEAR FROM BUSINESS_CASE_LEDGER_SEQ S WHERE S.BUSINESS_CASE_DETAILS_ID = (SELECT BD.ID FROM BUSINESS_CASE_DETAILS BD WHERE BD.BUSINESS_CASE_ID = RES.BUSINESS_CASE_ID
+       AND BD.CASE_SCHEMA_ID = 3643)) SEQ_YEAR,
+       FD.RESUMPTION_PROSECUTION RESUMPTION_PROSECUTION,
+       FD.PRIMARY_PROSECUTION PRIMARY_PROSECUTION,
+       FD.SECONDARY_PROSECUTION SECONDARY_PROSECUTION,
+       ar.police_number || ' ' || bc.NAME || ' ' || ar.par_year police_number,
+       ar.police_number num,
+       bc.NAME pname,
+       ar.par_year pyear,
+       fd.sequence_number sequence_number,
+       FD.YEAR YEAR,
+       FD.SEQUENCE_NUMBER || '/' || FD.YEAR seq,
+       fd.folder_type folder_type,
+       pp.party_full_name party_full_name,
+       RP.ID RES_PARTY_ID,
+       (SELECT  LISTAGG (P.NAME, ',') WITHIN GROUP (ORDER BY P.NAME)
+                  AS CRIME_NAMES
+     FROM FORM_CASE_DESCRIPTION cd, FORM_CASE_DESCRIPTION_DES s , PAR_CRIMINAL_TYPES p , FORM_CASE_DESCRIPTION_DES_PART PART , FORM_CASE_DESCRIPTION_PARTIES DP
+    WHERE     S.FORM_CASE_DESCRIPTION_ID = CD.ID
+    AND p.id = S.DESCRIPTION_ID
+    AND PART.FORM_CASE_DES_ID  = S.ID
+    AND PART.FORM_CASE_PARTY_ID = DP.ID
+    AND DP.FORM_CASE_DESCRIPTION_ID = CD.ID
+    AND DP.PARTY_ID = pp.id )
+          CRIME_NAME,
+       (SELECT ENTITY_NAME
+          FROM ENTITY e
+         WHERE e.ID = AR.ORIGIN_ENTITY)
+          police_name,
+       pp.id_number id_number,
+       PP.ADDRESS,
+       PP.EXTRA_INFORMATION notes,
+       AT.NAME attendance,
+       PP.job_title JOB_TITLE,
+       --------------------------------------
+       bcd.name DEGREE_NAME,
+       FD.JUDGMENT_TEXT JUDGEMENT_RESOLUTION,
+       HEAR.hearing_date hearing_date,
+       --------------------------
+       (SELECT U.FULL_NAME
+          FROM SEC_USERS U
+         WHERE U.ID = $P{userId})
+          LOGIN_USER,
+       FD.ID
+
+
+  FROM EXC_FOLDER_DATA fd,
+       COURT_BC_HEARING_RES_PARTIES rp,
+       COURT_BC_HEARING_RESERVATION res,
+       COURT_CIRCLES_DATES_HEARING hear,
+       PAR_POLICE_AUTHORITY_REPORT ar,
+       PAR_PARTIES pp,
+       business_case_type bc,
+       business_CASE_DEGrees bcd,
+       CJ_ATTENDEES at
+ WHERE                                  -----------join-----------------------
+      FD   .RES_PARTY_ID = RP.ID
+       AND RP.COURT_BC_HEARING_RES_ID = RES.ID
+       AND RES.CIRCLE_HEARING_DATE_ID = HEAR.ID
+       AND AR.BUSINESS_CASE_ID = RES.BUSINESS_CASE_ID
+       AND PP.ID = RP.PARTY_ID
+       AND ar.BUSINESS_CASE_TYPE = bc.ID
+       AND hear.BC_DEGREE_ID = bcd.id
+       AND RP.ATTENDANCE = at.id
+       ------------------ MANDATORY-------------------
+       AND FD.JUDGEMENT_STATUS <> 1
+       AND FD.id = $P{FOLDER_ID}]]>
+	</queryString>
+	<field name="ENTITY_NAME" class="java.lang.String"/>
+	<field name="ENTITY_ID" class="java.math.BigDecimal"/>
+	<field name="SEQ" class="java.math.BigDecimal"/>
+	<field name="SEQ_YEAR" class="java.math.BigDecimal"/>
+	<field name="RESUMPTION_PROSECUTION" class="java.math.BigDecimal"/>
+	<field name="PRIMARY_PROSECUTION" class="java.math.BigDecimal"/>
+	<field name="SECONDARY_PROSECUTION" class="java.math.BigDecimal"/>
+	<field name="POLICE_NUMBER" class="java.lang.String"/>
+	<field name="NUM" class="java.lang.String"/>
+	<field name="PNAME" class="java.lang.String"/>
+	<field name="PYEAR" class="java.math.BigDecimal"/>
+	<field name="SEQUENCE_NUMBER" class="java.math.BigDecimal"/>
+	<field name="YEAR" class="java.math.BigDecimal"/>
+	<field name="FOLDER_TYPE" class="java.math.BigDecimal"/>
+	<field name="PARTY_FULL_NAME" class="java.lang.String"/>
+	<field name="RES_PARTY_ID" class="java.math.BigDecimal"/>
+	<field name="CRIME_NAME" class="java.lang.String"/>
+	<field name="POLICE_NAME" class="java.lang.String"/>
+	<field name="ID_NUMBER" class="java.lang.String"/>
+	<field name="ADDRESS" class="java.lang.String"/>
+	<field name="NOTES" class="java.lang.String"/>
+	<field name="ATTENDANCE" class="java.lang.String"/>
+	<field name="JOB_TITLE" class="java.lang.String"/>
+	<field name="DEGREE_NAME" class="java.lang.String"/>
+	<field name="JUDGEMENT_RESOLUTION" class="java.lang.String"/>
+	<field name="HEARING_DATE" class="java.sql.Timestamp"/>
+	<field name="LOGIN_USER" class="java.lang.String"/>
+	<field name="ID" class="java.math.BigDecimal"/>
+	<background>
+		<band height="555" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="555" uuid="39646d28-444d-4361-a5c6-9e359c8f73ff"/>
+			</rectangle>
+			<line>
+				<reportElement x="391" y="48" width="1" height="484" uuid="b60cf1a4-8afe-4a75-b837-a181c2ce762d"/>
+			</line>
+		</band>
+	</background>
+	<title>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="271" y="2" width="247" height="30" uuid="4757b233-2099-4136-9daa-3d81055d1b01"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[النظام الالكترونى لتنفيذ الاحكام و المطالبة الجنائية]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="14" y="9" width="100" height="20" uuid="a122b184-b3de-4a88-a991-204a976c81fa"/>
+				<textElement>
+					<font fontName="ArialEgabi" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="46" width="802" height="1" uuid="b198580f-e7da-4b8a-9926-8f49e8d0134a"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="61" width="802" height="1" uuid="908e8cd9-2615-40cb-aaae-5db4794ec0e9"/>
+			</line>
+			<line>
+				<reportElement x="663" y="0" width="1" height="59" uuid="ed418100-65b7-4bc2-9c42-a2e4182f3b4e"/>
+			</line>
+			<line>
+				<reportElement x="664" y="20" width="139" height="1" uuid="65ac1e05-269e-4984-a9b0-0bff84b9e5e4"/>
+			</line>
+			<staticText>
+				<reportElement x="688" y="0" width="100" height="20" uuid="4d331271-ff29-4ee0-9c17-233186b58ecb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[النيابة العامة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="9" width="100" height="20" uuid="06174e6b-8ce6-4469-bd2f-151caaba1c3f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[احكام التقاضى]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="413" y="10" width="247" height="51" uuid="d545ab8e-d01a-43a9-93db-1973edf21463"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[النظام الالكترونى لتنفيذ الاحكام و المطالبة الجنائية(نموذج رقم 26 نيابة)]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="668" y="24" width="131" height="36" uuid="a1f8e3ae-39f6-43cb-ad5a-eb4ca836a234"/>
+				<textElement textAlignment="Right">
+					<font fontName="ArialEgabi" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="281">
+			<componentElement>
+				<reportElement key="table" style="table" x="508" y="3" width="255" height="50" uuid="b473dfee-c1cc-4783-8eab-1023793def54"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="edbf8fd6-3e6b-4590-9380-4882c477b875">
+						<datasetParameter name="pname">
+							<datasetParameterExpression><![CDATA[$F{PNAME}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="pnum">
+							<datasetParameterExpression><![CDATA[$F{NUM}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="pyear">
+							<datasetParameterExpression><![CDATA[$F{PYEAR}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="police">
+							<datasetParameterExpression><![CDATA[$F{POLICE_NAME}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="62405ca9-3bfa-4549-8384-c7b99caa829a">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="b9c87408-dedb-40c8-82f5-caf2476faec0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[قسم شرطة]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="30" uuid="60af7d61-0652-4b1e-b6c3-ef3f6e259b9e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{police}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="b1e22378-2378-43b6-a243-832da70af19d">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="594b3d27-a31c-4cad-a1b5-a24a93c4f713"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[النوع]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="70" height="30" uuid="e1ddffb0-8273-4ead-993c-c420f306cb12"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{pname}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="34825dee-8f3a-4559-a00c-7919a0834de8">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="52" height="30" uuid="ba8e0963-1380-48d3-895c-a936ce07e789"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[سنة القضية]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="52" height="30" uuid="1b16d546-4682-4c72-ad23-d22515545a3e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{pyear}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62" uuid="9ad7f0b9-ac5e-489e-8e02-2952044b2874">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="62" height="30" uuid="8bb443f3-4d53-4948-9255-ea62fb0b421a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[رقم القضية]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="62" height="30" uuid="81809a33-2419-46c3-9f28-24d98523b879"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{pnum}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 2" style="table 2" x="3" y="3" width="271" height="50" uuid="4f35e746-0a88-4c02-95c0-7449c5d4847c"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 2" uuid="72c48682-e616-4c40-b8e0-9242066248a6">
+						<datasetParameter name="degree">
+							<datasetParameterExpression><![CDATA[$F{DEGREE_NAME}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="date">
+							<datasetParameterExpression><![CDATA[$F{HEARING_DATE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="judge">
+							<datasetParameterExpression><![CDATA[$F{JUDGEMENT_RESOLUTION}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="75" uuid="aa182aa5-8a6b-43a8-a840-a7d42021fa59">
+						<jr:columnHeader style="table 1" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="75" height="20" uuid="178eced6-c8f3-42ac-b009-078a0afba04a"/>
+								<textElement textAlignment="Center">
+									<font fontName="ArialEgabi" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[تاريخ الجلسة]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="29" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="75" height="29" uuid="849ac393-9ece-4f67-bf41-6212346c6e95"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="229" uuid="ee6f5bcd-5579-48b3-b446-f382546b95ff">
+						<jr:columnHeader style="table 1" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="229" height="20" uuid="56c9faad-06e2-4f1a-8c5c-8f7e24b7ce1c"/>
+								<textElement textAlignment="Center">
+									<font fontName="ArialEgabi" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[نص الحكم]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="29" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="229" height="29" uuid="c416a8f2-d091-4532-b0df-c683a3b0565e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{judge}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="73" uuid="9b70347d-345b-41a2-b0e1-e5c419c254c6">
+						<jr:columnHeader style="table 1" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="20" uuid="a9dd2000-a7ed-4568-b8e1-6d3d0b822c6f"/>
+								<textElement textAlignment="Center">
+									<font fontName="ArialEgabi" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[درجة الحكم]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="29" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="73" height="29" uuid="fcb0d256-9ecf-4be5-9588-fa351c19fefe"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{degree}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="423" y="70" width="247" height="20" uuid="f1b17d6b-03f4-4266-bdf8-f5c6c45b44e8"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SEQ}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="687" y="70" width="100" height="20" uuid="cf88b2e0-bd97-492c-b907-6dd1e4365d78"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[رقم الحصر]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="95" width="392" height="1" uuid="17f3e4c8-7dcc-4265-a045-44411c149a6e"/>
+			</line>
+			<line>
+				<reportElement x="392" y="66" width="409" height="1" uuid="34fd1529-8e6f-4437-9789-4db1f37a8dd2"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="141" y="72" width="100" height="20" uuid="f628dc24-cfa5-4667-98e7-0d767fa329fa"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[إجراءات التقاضى]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="66" width="392" height="1" uuid="327db95d-da72-46b0-a44b-1bae3efd3212"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="391" y="90" width="411" height="1" uuid="cbbd2abc-6900-4c1c-a66b-5fa25f2987a8"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="423" y="97" width="247" height="20" uuid="d6c65891-3076-4746-b6ed-a3408431a67b"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARTY_FULL_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="423" y="123" width="247" height="20" uuid="d66f7254-add8-4705-bed9-36c97cf10202"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="423" y="154" width="247" height="20" uuid="813010a2-28e2-4950-85a2-36e073e8b52a"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ATTENDANCE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="687" y="97" width="100" height="20" uuid="f4607e94-57f5-4195-9613-8e1500ffe4be"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[اسم المتهم]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="687" y="123" width="100" height="20" uuid="29166e7f-b156-4e65-a323-eeffd1d661fd"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الرقم القومى]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="687" y="153" width="100" height="20" uuid="e6fe3bd0-cdb2-445c-98fa-9ee5b67cba86"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[وصف الحكم]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 3" style="table 3" positionType="Float" x="32" y="116" width="239" height="50" uuid="b3219582-d94e-4643-98d7-8de49212a923"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 3" uuid="e040687f-36e7-42a1-870a-6da92e6326ef">
+						<datasetParameter name="folder_id">
+							<datasetParameterExpression><![CDATA[$F{ID}]]></datasetParameterExpression>
+						</datasetParameter>
+					</datasetRun>
+					<jr:column width="102" uuid="a3c2f6a3-fe49-4cfc-80be-b5465bf44735">
+						<jr:columnHeader style="table 1" height="30" rowSpan="1">
+							<staticText>
+								<reportElement positionType="Float" mode="Transparent" x="0" y="0" width="101" height="30" uuid="81004212-7561-48da-b430-2d395a954ccc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[تاريخ الاجراء]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 3_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="101" height="20" uuid="8961d3f1-8afe-4398-883a-4280c5b403ca"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{PROCEDURE_DATE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="136" uuid="fb58a3c2-5bd2-4686-bd00-36cc6a68fcf2">
+						<jr:columnHeader style="table 1" height="30" rowSpan="1">
+							<staticText>
+								<reportElement positionType="Float" mode="Transparent" x="0" y="0" width="136" height="30" uuid="4d57a1cc-32c3-4059-b00d-8fbb5e2cf16f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" isBold="true"/>
+								</textElement>
+								<text><![CDATA[الإجراء]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 3_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="135" height="20" uuid="af4fd19a-949b-4acd-9f82-b1deb7357fc5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="44" uuid="fb58a568-204e-46ab-85f3-95ff7edf0ad9">
+						<jr:columnHeader style="table 1" height="30" rowSpan="1">
+							<staticText>
+								<reportElement positionType="Float" mode="Transparent" x="0" y="0" width="44" height="30" uuid="d6f0f583-31be-4ef4-b5de-605f3ad906ae"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" isBold="true"/>
+								</textElement>
+								<text><![CDATA[م]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="44" height="20" uuid="9a1a969d-ac13-49d9-a5aa-d08e0cd59ad6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ROWNUM}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<line>
+				<reportElement positionType="Float" x="392" y="116" width="407" height="1" uuid="cbe43a92-0948-4ef6-9d6f-f4a0ef1e6172"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="390" y="146" width="411" height="1" uuid="ab077a08-9d82-421f-9a25-1be463a0435a"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="423" y="224" width="247" height="20" uuid="fc538c9f-5fac-443a-b22b-00798e093c86"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="423" y="257" width="247" height="20" uuid="74f2b8b5-ef91-4310-bf28-e284af9b1acc"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOTES}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="687" y="257" width="100" height="20" uuid="b5c84aec-5552-49e3-b6d7-28270109cc01"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الملاحظات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="687" y="224" width="100" height="20" uuid="ef6a6c7f-4610-454d-8e87-48d0adadde17"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[العنوان]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="687" y="189" width="100" height="20" uuid="dbccf265-3a1e-4b1a-9ad2-8e95c30e0131"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[التهم]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="423" y="190" width="247" height="20" uuid="f40067fd-58dc-4521-94f3-82fb960458c1"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CRIME_NAME}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="390" y="180" width="409" height="1" uuid="db8b7186-8623-448d-bb02-9b1869cbd926"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="391" y="216" width="410" height="1" uuid="42b3b463-dc7b-49b0-a879-121936d640ac"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="390" y="248" width="409" height="1" uuid="7f0653b3-03fa-462f-bbb3-95ac70dabf2d"/>
+			</line>
+			<componentElement>
+				<reportElement key="table" style="table" x="418" y="3" width="71" height="50" uuid="97f1c011-720b-4a80-a030-56abf2360741"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="19cf51c4-e94c-4057-8913-48b92f6083fc">
+						<datasetParameter name="seq">
+							<datasetParameterExpression><![CDATA[$F{SEQ}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="seqYear">
+							<datasetParameterExpression><![CDATA[$F{SEQ_YEAR}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="d527cb5e-bd11-4a1d-91fb-5b592f93890a">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="20ac1925-2424-4c92-95d9-690ffb3a3317"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[جنح مستأنف]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="30" uuid="cd6da731-4b91-4f3f-8dfe-861fbd44e544"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="ArialEgabi" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{seq}+"/"+$P{seqYear}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="93">
+			<staticText>
+				<reportElement positionType="Float" x="286" y="22" width="100" height="20" uuid="011685e6-5057-4c38-98de-8897884d96d6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14"/>
+				</textElement>
+				<text><![CDATA[توقيع مدخل البيانات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="141" y="22" width="110" height="20" uuid="1204d855-1441-40a1-88d1-3778ceee6383"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14"/>
+				</textElement>
+				<text><![CDATA[اسم المستخدم]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="14" y="22" width="100" height="20" uuid="bf839f7b-7d19-4d06-b0c2-95f6da0a8081"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14"/>
+				</textElement>
+				<text><![CDATA[توقيع موظف التنفيذ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="270" y="23" width="1" height="44" uuid="7c600c46-145a-43cf-bfb4-a012353eb9e4"/>
+			</line>
+			<line>
+				<reportElement x="125" y="23" width="1" height="44" uuid="51f544fd-ff6c-4041-ac4d-b5b2e92ded21"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="141" y="1" width="100" height="20" uuid="fc6112f0-6bfe-491d-8c95-58701b961589"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[اعتماد الملف]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="22" width="392" height="1" uuid="3a30fffe-83b0-4a71-9591-831dd24cfec3"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="42" width="392" height="1" uuid="4df32109-9cba-43f4-b6d2-da377826525f"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="1" width="392" height="1" uuid="5448f5a2-6fdd-4479-8cee-b6c54830c4b5"/>
+			</line>
+			<textField>
+				<reportElement x="135" y="46" width="125" height="20" uuid="4a84ae9b-b938-435e-bd7e-d6413a4db3b8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LOGIN_USER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="607" y="70" width="181" height="18" uuid="b135b62a-ad73-48e6-9985-7835e6daf303"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$P{userId} + " / " + $F{ENTITY_ID}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="3" y="67" width="800" height="3" uuid="c8113eeb-4fd9-4bc7-93ea-d490cef92e62"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

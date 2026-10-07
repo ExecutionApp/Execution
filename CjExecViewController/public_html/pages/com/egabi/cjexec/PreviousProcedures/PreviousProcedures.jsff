@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1">
+    <af:table value="#{bindings.PreviousProceduresRVO1.collectionModel}" var="row"
+              rows="#{bindings.PreviousProceduresRVO1.rangeSize}"
+              emptyText="#{bindings.PreviousProceduresRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PreviousProceduresRVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PreviousProceduresRVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.PreviousProceduresRVO1.rangeSize}" width="100%" columnStretching="multiple"
+              filterModel="#{bindings.PreviousProceduresRVO1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.PreviousProceduresRVO1Query.processQuery}" varStatus="vs" id="t1"
+              scrollPolicy="page">
+      <af:column sortProperty="#{bindings.PreviousProceduresRVO1.hints.InventoryNumber.name}" filterable="true" width="100%"
+                 sortable="true" headerText="#{bindings.PreviousProceduresRVO1.hints.InventoryNumber.label}" id="c1">
+        <af:outputText value="#{row.InventoryNumber}"
+                       shortDesc="#{bindings.PreviousProceduresRVO1.hints.InventoryNumber.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PreviousProceduresRVO1.hints.HearingDate.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PreviousProceduresRVO1.hints.HearingDate.label}" id="c2">
+        <af:outputText value="#{row.HearingDate}"
+                       shortDesc="#{bindings.PreviousProceduresRVO1.hints.HearingDate.tooltip}" id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PreviousProceduresRVO1.hints.FolderName.name}" filterable="true" width="100%"
+                 sortable="true" headerText="#{bindings.PreviousProceduresRVO1.hints.FolderName.label}" id="c3">
+        <af:outputText value="#{row.FolderName}" shortDesc="#{bindings.PreviousProceduresRVO1.hints.FolderName.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PreviousProceduresRVO1.hints.ProcedureDate.name}" filterable="true" width="100%"
+                 sortable="true" headerText="#{bindings.PreviousProceduresRVO1.hints.ProcedureDate.label}" id="c4">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PreviousProceduresRVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ProcedureDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.PreviousProceduresRVO1.hints.ProcedureDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ProcedureDate}"
+                       shortDesc="#{bindings.PreviousProceduresRVO1.hints.ProcedureDate.tooltip}" id="ot4">
+          <af:convertDateTime pattern="yyyy-MM-dd"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PreviousProceduresRVO1.hints.ActsTypesName.name}" filterable="true" width="100%"
+                 sortable="true" headerText="#{bindings.PreviousProceduresRVO1.hints.ActsTypesName.label}" id="c5">
+        <af:outputText value="#{row.ActsTypesName}"
+                       shortDesc="#{bindings.PreviousProceduresRVO1.hints.ActsTypesName.tooltip}" id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PreviousProceduresRVO1.hints.PartyFullName.name}" filterable="true" width="100%"
+                 sortable="true" headerText="#{bindings.PreviousProceduresRVO1.hints.PartyFullName.label}" id="c6">
+        <af:outputText value="#{row.PartyFullName}"
+                       shortDesc="#{bindings.PreviousProceduresRVO1.hints.PartyFullName.tooltip}" id="ot6"/>
+      </af:column>
+    </af:table>
+  </af:panelGroupLayout>
+</ui:composition>

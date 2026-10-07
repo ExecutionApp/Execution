@@ -1,0 +1,47 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.expatriate.ExpatriateProcSecondApprovalROV
+
+package com.egabi.cjexec.model.roviews.expatriate
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="bcidp")
+def bcidp_VariableScript_Variable()
+{
+adf.context.current.sessionScope.bcidp
+}
+
+
+@VariableExpression(path="pCaseNumber")
+def pCaseNumber_VariableScript_Variable()
+{
+adf.context.current.sessionScope.ppCaseNumberR
+}
+
+
+@VariableExpression(path="pCaseOrigin")
+def pCaseOrigin_VariableScript_Variable()
+{
+adf.context.current.sessionScope.ppCaseOrigin
+}
+
+
+@VariableExpression(path="pCaseType")
+def pCaseType_VariableScript_Variable()
+{
+adf.context.current.sessionScope.ppCaseType
+}
+
+
+@VariableExpression(path="pCaseYear")
+def pCaseYear_VariableScript_Variable()
+{
+adf.context.current.sessionScope.ppCaseYear
+}
+
+
+@VariableExpression(path="pent")
+def pent_VariableScript_Variable()
+{
+adf.context.current.sessionScope.userInfo.entityId
+}
+

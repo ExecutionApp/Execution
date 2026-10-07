@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core" locale="ar">
+   <c:set var="bundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle_ar']}"/>
+   
+  <af:document id="d1">
+    <af:form id="f1">
+    <af:resource type="javascript">
+    var captureButton = document.getElementById('capture');
+
+    function snap(actionEvent)
+    {
+      var video = document.getElementById('player');
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+      //Take a picture from video stream
+      context.drawImage(player, 0, 0, canvas.width, canvas.height);
+      var source = actionEvent.getSource();
+      AdfCustomEvent.queue(source, "takePicture", 
+      {
+        picture : canvas.toDataURL("image/jpeg")
+      },
+      true);
+      closeCam();
+    }
+
+    function closeCam()
+    {
+    var videoElem = document.getElementById('player');
+      var stream = videoElem.srcObject;
+      var tracks = stream.getTracks();
+
+      tracks.forEach(function (track)
+      {
+        track.stop();
+      });
+
+      videoElem.srcObject = null;      
+    }
+
+function closepop()
+{
+   document.getElementById( document.getElementsByClassName('dialog')[0].parentElement.id).hide();     
+  
+}
+    function runOnLoad(event)
+    {
+      var video = document.getElementById('player');
+      // Get access to the camera!
+      if (navigator.mediaDevices &amp;&amp; navigator.mediaDevices.getUserMedia)
+      {
+        // Not adding `{ audio: true }` since we only want video now
+        navigator.mediaDevices.getUserMedia(
+        {
+          video : true
+        }).then(function (stream)
+        {
+          //video.src = window.URL.createObjectURL(stream);
+          video.srcObject = stream;
+          video.play();
+        });
+      }
+      context.drawImage(video, 0, 0, 400, 300);
+      var captureButton = document.getElementById("pt1:r1:0:r2:0:b4::icon");
+      captureButton.style.display = 'none';
+    }
+
+    function showCapture()
+    {
+      var captureButton = document.getElementById("pt1:r1:0:r2:0:b3::icon");
+      var openButton = document.getElementById("pt1:r1:0:r2:0:b4::icon");
+      if (captureButton.style.display === 'none')
+      {
+        captureButton.style.display = 'block';
+        openButton.style.display = 'none';
+      }
+      else 
+      {
+        captureButton.style.display = 'none';
+        openButton.style.display = 'block';
+      }
+    }
+
+    function hideCapture()
+    {
+      var captureButton = document.getElementById("pt1:r1:0:r2:0:b3::icon");
+      captureButton.style.display = 'block';
+    }
+
+  </af:resource>
+      <af:panelGroupLayout partialTriggers="b1 b2" id="pgl3">
+        <af:switcher id="s1" facetName="#{pageFlowScope.WebCamUtil.switchFaces}" defaultFacet="Face1">
+          <f:facet name="Face1">
+            <af:panelGroupLayout id="pgl1" layout="vertical">
+              <af:panelGroupLayout id="pgl2" styleClass="camera-buttons-panel" layout="horizontal">
+                <af:button id="b3" actionListener="#{pageFlowScope.WebCamUtil.Cam}"
+                           icon="/resources/img/video-camera.png">
+                  <af:clientListener method="runOnLoad" type="click"/>
+                  <af:clientListener method="showCapture" type="click"/>
+                </af:button>
+                <af:button id="b4" clientComponent="true" action="#{pageFlowScope.WebCamUtil.Shoot}"
+                           icon="/resources/img/webcamera.png">
+                  <af:clientListener method="snap" type="click"/>
+                  <af:clientListener method="showCapture" type="click"/>
+                  <af:serverListener type="takePicture" method="#{pageFlowScope.WebCamUtil.webCam}"/>
+                </af:button>
+                <af:button id="b2" clientComponent="true" action="back"
+                           icon="/resources/img/cancel.png">
+                  <!--<af:clientListener method="closeCam" type="click"/>-->
+                </af:button>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout id="pgl4">
+                <af:link id="linkPhoto1" binding="#{pageFlowScope.WebCamUtil.photo}" partialTriggers="b3 b4">
+                  <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                  <af:image id="i1" inlineStyle="height:200px; width:225px;"
+                            shortDesc="#{pageFlowScope.WebCamUtil.partyID}Image Not Found #{pageFlowScope.WebCamUtil.document_ID}"
+                            source="/loaducmimage?did=#{pageFlowScope.WebCamUtil.document_ID == null ?bindings.DocumentId.inputValue :pageFlowScope.WebCamUtil.document_ID}"/>
+                </af:link>
+                <af:link id="l1" binding="#{pageFlowScope.WebCamUtil.video}" partialTriggers="b4">
+                  <?audit suppress oracle.adf.faces.bindingWithoutRequestOrBackingBeanScope?>
+                  <video width="225" height="275" id="player" autoplay="autoplay" xmlns="http://www.w3.org/1999/xhtml">
+                    <canvas id="canvas" width="80" height="100"></canvas>
+                  </video>
+                </af:link>
+              </af:panelGroupLayout>
+              <af:button id="b1" text="Take Photo" rendered="false">
+                <af:setPropertyListener to="#{pageFlowScope.WebCamUtil.switchFaces}" from="Face2" type="action"/>
+                <af:clientListener method="runOnLoad" type="click"/>
+              </af:button>
+              <af:outputText value="partyID #{pageFlowScope.WebCamUtil.document_ID}" id="ot2" rendered="true"/>
+              <af:outputText value="folderActionID #{pageFlowScope.WebCamUtil.folderActionID}" id="ot1"
+                             rendered="false"/>
+              <af:outputText value="#{bindings.DocumentId.inputValue}" shortDesc="#{bindings.DocumentId.hints.tooltip}"
+                             id="ot3" rendered="true">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.DocumentId.format}"/>
+              </af:outputText>
+              <af:outputText value="#{pageFlowScope.WebCamUtil.document_ID == null ?bindings.DocumentId.inputValue :pageFlowScope.WebCamUtil.document_ID}"
+                             id="ot4" rendered="true" partialTriggers="b4"/>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="Face2">
+            <af:panelGroupLayout id="pgl18" layout="scroll" valign="middle">
+               
+              <button id="capture" xmlns="http://www.w3.org/1999/xhtml" type="submit" formtarget="_self">
+                Camera
+              </button>
+              <af:link id="l2" text="ffffffff"/>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:switcher>
+      </af:panelGroupLayout>
+    </af:form>
+  </af:document>
+</f:view>

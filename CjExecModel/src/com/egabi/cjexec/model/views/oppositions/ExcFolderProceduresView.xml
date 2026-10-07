@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcFolderProceduresView"
+    Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+    ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+    <DesignTime>
+        <Attr Name="_isExpertMode" Value="true"/>
+    </DesignTime>
+    <ViewAccessor
+      Name="CourtCirclesDatesHearing1"
+      ViewObjectName="com.egabi.cjexec.model.roviews.lov.CourtCirclesDatesHearing"
+      RowLevelBinds="true"/>
+    <ViewAccessor
+      Name="EntitiesLOV1"
+      ViewObjectName="com.egabi.cjexec.model.roviews.lov.EntitiesLOV"
+      RowLevelBinds="true"/>
+    <ViewAccessor
+      Name="ExcLkpCapacityTypeLOV1"
+      ViewObjectName="com.egabi.cjexec.model.roviews.lov.ExcLkpCapacityTypeLOV"
+      RowLevelBinds="true">
+        <ViewCriteriaUsage
+          Name="ExcLkpCapacityTypeLOVCriteria_Oppositions"
+          FullName="com.egabi.cjexec.model.roviews.lov.ExcLkpCapacityTypeLOV.ExcLkpCapacityTypeLOVCriteria_Oppositions"/>
+    </ViewAccessor>
+    <ViewAccessor
+      Name="PartyLawyersLOV1"
+      ViewObjectName="com.egabi.cjexec.model.roviews.lov.PrimaryPartyLawyersLOV"
+      RowLevelBinds="true">
+        <ParameterMap>
+            <PIMap Variable="resPartyId">
+                <TransientExpression
+                  Name="ExpressionScript"><![CDATA[adf.context.current.sessionScope.get('resPartyId')]]></TransientExpression>
+            </PIMap>
+        </ParameterMap>
+    </ViewAccessor>
+    <ViewAccessor
+      Name="SecondaryPartyLawyersLOV1"
+      ViewObjectName="com.egabi.cjexec.model.roviews.lov.SecondaryPartyLawyersLOV"
+      RowLevelBinds="true">
+        <ParameterMap>
+            <PIMap Variable="resPartyId">
+                <TransientExpression
+                  Name="ExpressionScript"><![CDATA[adf.context.current.sessionScope.get('resPartyId')]]></TransientExpression>
+            </PIMap>
+        </ParameterMap>
+    </ViewAccessor>
+    <ListBinding
+      Name="LOV_ProsecutionId"
+      ListVOName="EntitiesLOV1"
+      ListRangeSize="-1"
+      NullValueFlag="start"
+      NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+      MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ProsecutionId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+      Name="LOV_CapacityType"
+      ListVOName="ExcLkpCapacityTypeLOV1"
+      ListRangeSize="-1"
+      NullValueFlag="none"
+      MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="CapacityType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+      Name="LOV_HearingDate"
+      ListVOName="CourtCirclesDatesHearing1"
+      ListRangeSize="-1"
+      ComboRowCountHint="10"
+      NullValueFlag="none"
+      MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="HearingDate"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="CourtCircleDatesHearingId"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="HearingDate"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="HearingDate"/>
+        </AttrArray>
+        <DisplayCriteria
+          Hint="showAndExecute"/>
+    </ListBinding>
+    <ListBinding
+      Name="LOV_PrimaryLawyerName"
+      ListVOName="PartyLawyersLOV1"
+      ListRangeSize="-1"
+      NullValueFlag="none"
+      MRUCount="0"
+      ComboRowCountHint="10">
+        <AttrArray Name="AttrNames">
+            <Item Value="PrimaryLawyerName"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="PrimaryLawyerId"/>
+            <Item Value="PrimaryRetainerNumber"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Name"/>
+            <Item Value="Id"/>
+            <Item Value="RetainerNumber"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria
+          Hint="showAndExecute"/>
+    </ListBinding>
+    <ListBinding
+      Name="LOV_SecondaryLawyerName"
+      ListVOName="SecondaryPartyLawyersLOV1"
+      ListRangeSize="-1"
+      ComboRowCountHint="10"
+      NullValueFlag="none"
+      MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="SecondaryLawyerName"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="SecondaryLawyerId"/>
+            <Item Value="SecondaryRetainerNumber"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Name"/>
+            <Item Value="Id"/>
+            <Item Value="RetainerNumber"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria
+          Hint="showAndExecute"/>
+    </ListBinding>
+    <SQLQuery><![CDATA[SELECT EXCFOLDERPROCEDURESEO.ID,                                  
+       EXCFOLDERPROCEDURESEO.CAPACITY_TYPE,                                  
+       EXCFOLDERPROCEDURESEO.COURT_CIRCLE_DATES_HEARING_ID,                                  
+       EXCFOLDERPROCEDURESEO.RES_PARTY_ID ,                                
+       EXCFOLDERPROCEDURESEO.CREATED_BY ,                                
+       EXCFOLDERPROCEDURESEO.CREATED_DATE ,                                
+       EXCFOLDERPROCEDURESEO.PROCEDURE_DATE ,                                
+       EXCFOLDERPROCEDURESEO.PROCEDURE_SERIAL ,                                
+       EXCFOLDERPROCEDURESEO.PROCEDURE_STATUS ,                                
+       EXCFOLDERPROCEDURESEO.PROCEDURE_TEXT ,                               
+       EXCFOLDERPROCEDURESEO.PROSECUTION_ID ,                            
+       EXCFOLDERPROCEDURESEO.PRIMARY_LAWYER_ID ,                        
+       EXCFOLDERPROCEDURESEO.SECONDARY_LAWYER_ID ,      
+       PART.FNAME || ' ' || PART.SNAME || ' ' || PART.TNAME || ' ' || PART.FOURTHNAME AS FULL_NAME ,                                
+       PART.ID_NUMBER ,                                
+       PART.NICKNAME ,                             
+       TO_CHAR(DATES.HEARING_DATE , 'yyyy-mm-dd') HEARING_DATE  ,                     
+       PRIMARY_LAWER.NAME PRIMARY_LAWYER_NAME ,                     
+       SECONDARY_LAWER.NAME SECONDARY_LAWYER_NAME ,                 
+       PRIMARY_LAWER.RETAINER_NUMBER PRIMARY_RETAINER_NUMBER,                 
+       SECONDARY_LAWER.RETAINER_NUMBER SECONDARY_RETAINER_NUMBER  ,              
+       PART.AGE ,              
+       PART.ADDRESS ,              
+       PART.JOB_TITLE ,   
+       EXCFOLDERPROCEDURESEO.ADVANCE_PAYMENT_AMOUNT ,  
+       EXCFOLDERPROCEDURESEO.NUMBER_OF_INSTALLMENT  
+FROM  EXC_FOLDER_PROCEDURES EXCFOLDERPROCEDURESEO , COURT_BC_HEARING_RES_PARTIES COURT_PARTY , PAR_PARTIES PART , COURT_BC_HEARING_RESERVATION RES ,                            
+COURT_CIRCLES_DATES_HEARING DATES , PAR_LAWYERS PRIMARY_LAWER , PAR_LAWYERS SECONDARY_LAWER                            
+WHERE EXCFOLDERPROCEDURESEO.RES_PARTY_ID = COURT_PARTY.ID                                
+AND COURT_PARTY.PARTY_ID = PART.ID                            
+AND COURT_PARTY.COURT_BC_HEARING_RES_ID = RES.ID                            
+AND DATES.ID = RES.CIRCLE_HEARING_DATE_ID                     
+AND EXCFOLDERPROCEDURESEO.PRIMARY_LAWYER_ID = PRIMARY_LAWER.ID                     
+AND EXCFOLDERPROCEDURESEO.SECONDARY_LAWYER_ID = SECONDARY_LAWER.ID]]></SQLQuery>
+    <EntityUsage
+      Name="ExcFolderProceduresEO"
+      Entity="com.egabi.cjexec.model.entities.oppositions.ExcFolderProceduresEO"/>
+    <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      PrecisionRule="true"
+      EntityAttrName="Id"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="ID"
+      IsUpdateable="while_insert"/>
+    <ViewAttribute
+      Name="CapacityType"
+      IsNotNull="true"
+      PrecisionRule="true"
+      EntityAttrName="CapacityType"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="CAPACITY_TYPE"
+      LOVName="LOV_CapacityType">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.CapacityType_LABEL"/>
+                <CONTROLTYPE
+                  Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="CourtCircleDatesHearingId"
+      IsNotNull="true"
+      PrecisionRule="true"
+      EntityAttrName="CourtCircleDatesHearingId"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="COURT_CIRCLE_DATES_HEARING_ID">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.CourtCircleDatesHearingId_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="ResPartyId"
+      IsNotNull="true"
+      PrecisionRule="true"
+      EntityAttrName="ResPartyId"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="RES_PARTY_ID"/>
+    <ViewAttribute
+      Name="CreatedBy"
+      PrecisionRule="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="CREATED_BY"/>
+    <ViewAttribute
+      Name="CreatedDate"
+      PrecisionRule="true"
+      EntityAttrName="CreatedDate"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="CREATED_DATE">
+        <TransientExpression
+          Name="ExpressionScript"
+          CodeSourceName="ExcFolderProceduresViewRow"/>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="ProcedureDate"
+      PrecisionRule="true"
+      EntityAttrName="ProcedureDate"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="PROCEDURE_DATE">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.ProcedureDate_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="ProcedureSerial"
+      PrecisionRule="true"
+      EntityAttrName="ProcedureSerial"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="PROCEDURE_SERIAL"/>
+    <ViewAttribute
+      Name="ProcedureStatus"
+      PrecisionRule="true"
+      EntityAttrName="ProcedureStatus"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="PROCEDURE_STATUS"/>
+    <ViewAttribute
+      Name="ProcedureText"
+      PrecisionRule="true"
+      EntityAttrName="ProcedureText"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="PROCEDURE_TEXT">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.ProcedureText_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="ProsecutionId"
+      PrecisionRule="true"
+      EntityAttrName="ProsecutionId"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="PROSECUTION_ID"
+      LOVName="LOV_ProsecutionId">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.ProsecutionId_LABEL"/>
+                <CONTROLTYPE
+                  Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="PrimaryLawyerId"
+      PrecisionRule="true"
+      EntityAttrName="PrimaryLawyerId"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="PRIMARY_LAWYER_ID">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.PrimaryLawyerId_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="SecondaryLawyerId"
+      PrecisionRule="true"
+      EntityAttrName="SecondaryLawyerId"
+      EntityUsage="ExcFolderProceduresEO"
+      AliasName="SECONDARY_LAWYER_ID">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.SecondaryLawyerId_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="FullName"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="403"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="FULL_NAME"
+      Expression="FULL_NAME"
+      SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="403"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.FullName_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="IdNumber"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ID_NUMBER"
+      Expression="ID_NUMBER"
+      SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.IdNumber_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="Nickname"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NICKNAME"
+      Expression="NICKNAME"
+      SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.Nickname_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="HearingDate"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="java.lang.String"
+      ColumnType="DATE"
+      AliasName="HEARING_DATE"
+      Expression="HEARING_DATE"
+      SQLType="VARCHAR"
+      LOVName="LOV_HearingDate">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                  Value="input_text_lov"/>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.HearingDate_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="PrimaryLawyerName"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRIMARY_LAWYER_NAME"
+      Expression="PRIMARY_LAWYER_NAME"
+      SQLType="VARCHAR"
+      LOVName="LOV_PrimaryLawyerName">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.PrimaryLawyerName_LABEL"/>
+                <CONTROLTYPE
+                  Value="input_text_lov"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="SecondaryLawyerName"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SECONDARY_LAWYER_NAME"
+      Expression="SECONDARY_LAWYER_NAME"
+      SQLType="VARCHAR"
+      LOVName="LOV_SecondaryLawyerName">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.SecondaryLawyerName_LABEL"/>
+                <CONTROLTYPE
+                  Value="input_text_lov"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="PrimaryRetainerNumber"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRIMARY_RETAINER_NUMBER"
+      Expression="PRIMARY_RETAINER_NUMBER"
+      SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.PrimaryRetainerNumber_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="SecondaryRetainerNumber"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SECONDARY_RETAINER_NUMBER"
+      Expression="SECONDARY_RETAINER_NUMBER"
+      SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.SecondaryRetainerNumber_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="Age"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="AGE"
+      Expression="AGE"
+      SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="20"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.Age_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="Address"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="200"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ADDRESS"
+      Expression="ADDRESS"
+      SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="200"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.Address_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="JobTitle"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="JOB_TITLE"
+      Expression="JOB_TITLE"
+      SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                  ResId="com.egabi.cjexec.model.views.oppositions.ExcFolderProceduresView.JobTitle_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="AdvancePaymentAmount"
+        PrecisionRule="true"
+        EntityAttrName="AdvancePaymentAmount"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="ADVANCE_PAYMENT_AMOUNT"/>
+    <ViewAttribute
+        Name="NumberOfInstallment"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="NUMBER_OF_INSTALLMENT"
+        Expression="NUMBER_OF_INSTALLMENT"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="ActionNotes"
+        PrecisionRule="true"
+        EntityAttrName="ActionNotes"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="ACTION_NOTES"/>
+    <ViewAttribute
+        Name="DeliveryDate"
+        PrecisionRule="true"
+        EntityAttrName="DeliveryDate"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="DELIVERY_DATE"/>
+    <ViewAttribute
+        Name="EndDate"
+        PrecisionRule="true"
+        EntityAttrName="EndDate"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="END_DATE"/>
+    <ViewAttribute
+        Name="StartDate"
+        PrecisionRule="true"
+        EntityAttrName="StartDate"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="START_DATE"/>
+    <ResourceBundle>
+        <PropertiesBundle
+          PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewObject>

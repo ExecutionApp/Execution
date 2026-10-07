@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">searchByPartyFrag</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">547.35156</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>searchByPartyFrag&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">215.69531</property>
+      <property
+         name="page">/pages/com/egabi/claimProcedure/searchByPartyFrag.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <TaskFlowCall
+      id="TaskFlowCall5">
+      <property
+         name="runAsDialog">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>nIdServiceTF&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="activityId">nIdServiceTF</property>
+      <property
+         name="x">763.67773</property>
+      <property
+         name="y">375.1494</property>
+      <property
+         name="documentReference">/WEB-INF/taskflows/nIdService/nIdServiceTF.xml</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="taskFlowId">nIdServiceTF</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase24"
+      from="View2"
+      to="TaskFlowCall5">
+      <property
+         name="fromOutcome">nId</property>
+      <property
+         name="sdm:polyPoints">B50,547.35156,269.34473,722.67773,374.79883,L50</property>
+   </ControlFlowCase>
+</SDM>

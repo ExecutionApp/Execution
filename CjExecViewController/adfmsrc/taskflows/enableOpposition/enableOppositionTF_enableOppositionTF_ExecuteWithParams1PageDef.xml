@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef"
+                Package="taskflows.enableOpposition" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="UserDataROVIterator" Binds="UserDataROV" DataControl="CjExecAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action IterBinding="UserDataROVIterator" id="ExecuteWithParams" InstanceName="CjExecAMDataControl.UserDataROV"
+            DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="FolderDataId_Bind" NDValue="#{pageFlowScope.folderId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

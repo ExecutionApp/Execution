@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <af:panelHeader text="#{bundle.IMPLEMENT_PRISON}" id="ph0">
+        <?audit suppress oracle.adf.faces.invalidTypeForHeaderComponent?>
+        <f:facet name="info"/>
+        <af:panelBox text="#{bundle.IMPLEMENT_PRISON}" id="pb2">
+            <af:panelGroupLayout id="pgl2">
+                <af:panelFormLayout id="pfl1" rows="10"  fieldWidth="300">
+                    <f:facet name="footer"/>
+                    <af:inputDate id="id1" label="تاريخ تنفيذ الطلب " value="#{bindings.v_execution_date1.inputValue}"
+                                  autoSubmit="true" contentStyle="width:200px;height:30px;"/>
+                    <af:selectOneChoice id="sor1" label="حالة الحبس" value="#{bindings.imprisoned_flag1.inputValue}"
+                                        contentStyle="width:200px;height:30px;">
+                        <f:selectItem id="si1" itemValue="1" itemLabel="محبوس"/>
+                        <f:selectItem itemLabel="غير محبوس" id="si2" itemValue="0"/>
+                    </af:selectOneChoice>
+                    <!--<af:spacer height="30" width="10" id="s1"/>-->
+                    <af:inputText id="it1" label="رقم الحبس" value="#{bindings.execution_number1.inputValue}"
+                                  contentStyle="width:200px;height:30px;"/>
+                    <!--<af:spacer height="30" width="10" id="s2"/>-->
+                    <af:inputText id="it3" label="مكان الحبس" value="#{bindings.imprisoned_place1.inputValue}"
+                                  contentStyle="width:200px;height:30px;"/>
+                    <af:richTextEditor label="المواد" value="#{bindings.Subjects.inputValue}"
+                                       required="#{bindings.Subjects.hints.mandatory}" readOnly="true"
+                                       columns="#{bindings.Subjects.hints.displayWidth}"
+                                       maximumLength="#{bindings.Subjects.hints.precision}"
+                                       shortDesc="#{bindings.Subjects.hints.tooltip}" id="it6"
+                                       contentStyle="width:200px;height:30px;"/>
+                    <af:selectOneChoice value="#{bindings.JudicialEntityId1.inputValue}" 
+                                        label="جهه ارتكاب الجريمة" readOnly="true" contentStyle="width:200px;height:30px;"
+                                        required="#{bindings.JudicialEntityId1.hints.mandatory}"
+                                        shortDesc="#{bindings.JudicialEntityId1.hints.tooltip}" id="soc1">
+                        <f:selectItems value="#{bindings.JudicialEntityId1.items}" id="si3"/>
+                        <f:validator binding="#{bindings.JudicialEntityId1.validator}"/>
+                    </af:selectOneChoice>
+                    <!--<af:inputText label="جهه ارتكاب الجريمة" value="#{bindings.JudicialEntityId.inputValue}"
+                                  required="#{bindings.JudicialEntityId.hints.mandatory}" readOnly="true"
+                                  columns="#{bindings.JudicialEntityId.hints.displayWidth}"
+                                  maximumLength="#{bindings.JudicialEntityId.hints.precision}"
+                                  shortDesc="#{bindings.JudicialEntityId.hints.tooltip}" id="it4"
+                                  contentStyle="width:200px;height:30px;">
+                        <f:validator binding="#{bindings.JudicialEntityId.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.JudicialEntityId.format}"/>
+                    </af:inputText>-->
+                    <af:inputDate label="تاريخ الواقعه" value="#{bindings.IncidentDate.inputValue}" readOnly="true"
+                                  required="#{bindings.IncidentDate.hints.mandatory}"
+                                  columns="#{bindings.IncidentDate.hints.displayWidth}"
+                                  shortDesc="#{bindings.IncidentDate.hints.tooltip}" id="id2"
+                                  contentStyle="width:200px;height:30px;">
+                        <f:validator binding="#{bindings.IncidentDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.IncidentDate.format}"/>
+                    </af:inputDate>
+                    <af:inputText label="العقوبة" value="#{bindings.JudgmentText.inputValue}"
+                                  required="#{bindings.JudgmentText.hints.mandatory}" readOnly="true"
+                                  columns="#{bindings.JudgmentText.hints.displayWidth}"
+                                  maximumLength="#{bindings.JudgmentText.hints.precision}"
+                                  shortDesc="#{bindings.JudgmentText.hints.tooltip}" id="it5"
+                                  contentStyle="width:200px;height:30px;">
+                        <f:validator binding="#{bindings.JudgmentText.validator}"/>
+                    </af:inputText>
+                    <af:inputDate label="بداية مدة العقوبة" value="#{bindings.ImprisonmentStartDate.inputValue}"
+                                  readOnly="true" required="#{bindings.ImprisonmentStartDate.hints.mandatory}"
+                                  columns="#{bindings.ImprisonmentStartDate.hints.displayWidth}"
+                                  shortDesc="#{bindings.ImprisonmentStartDate.hints.tooltip}" id="id4"
+                                  contentStyle="width:200px;height:30px;">
+                        <f:validator binding="#{bindings.ImprisonmentStartDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.ImprisonmentStartDate.format}"/>
+                    </af:inputDate>
+                    <af:inputDate label="نهايه مدة العقوبة" value="#{bindings.ImprisonmentEndDate.inputValue}"
+                                  readOnly="true" required="#{bindings.ImprisonmentEndDate.hints.mandatory}"
+                                  columns="#{bindings.ImprisonmentEndDate.hints.displayWidth}"
+                                  shortDesc="#{bindings.ImprisonmentEndDate.hints.tooltip}" id="id3"
+                                  contentStyle="width:200px;height:30px;">
+                        <f:validator binding="#{bindings.ImprisonmentEndDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.ImprisonmentEndDate.format}"/>
+                    </af:inputDate>
+                </af:panelFormLayout>
+                <af:spacer height="30" width="10" id="s3"/>
+                <af:spacer height="30" width="10" id="s4"/>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl1" layout="horizontal">
+                <af:spacer height="10" width="10" id="s5"/>
+                <af:button text="#{bundle.IMPLEMENT_PRISON}" id="b1" partialTriggers="b1"
+                           action="#{pageFlowScope.ExecutionFoldersBean.executionMethod}"
+                           disabled="#{pageFlowScope.executionFlag eq '4'}"
+                           binding="#{pageFlowScope.ExecutionFoldersBean.executButton}"/>
+                <af:spacer height="10" width="10" id="s6"/>
+                <!--<af:button text="طباعة نموذج الحبس" id="b2"/>-->
+                <af:button actionListener="#{pageFlowScope.ReportsBean.printReports}" text="طباعة نموذج الحبس" id="b14"
+                       >   
+                    <af:setActionListener from="Prison" to="#{pageFlowScope.reportName}"/>
+                    <af:setActionListener from="executionFolderReports" to="#{pageFlowScope.reportFolder}"/>
+                </af:button>
+                <af:spacer height="10" width="10" id="s7"/>
+                <!--<af:button text="طباعة ملف التنفيذ" id="b3"/>-->
+                <af:button actionListener="#{pageFlowScope.ReportsBean.printReports}" text="طباعة ملف التنفيذ" id="b15"
+                        >
+                    <af:setActionListener from="Implement" to="#{pageFlowScope.reportName}"/>
+                    <af:setActionListener from="executionFolderReports" to="#{pageFlowScope.reportFolder}"/>
+                </af:button>
+            </af:panelGroupLayout>
+            <af:spacer height="30" width="10" id="s8"/>
+            <af:button text="#{bundle.BACK}" id="b4" action="back"/>
+        </af:panelBox>
+    </af:panelHeader>
+</ui:composition>

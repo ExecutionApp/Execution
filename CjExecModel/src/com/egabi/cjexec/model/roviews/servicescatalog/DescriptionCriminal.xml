@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DescriptionCriminal"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full"
+  RowClass="com.egabi.cjexec.model.roviews.servicescatalog.DescriptionCriminalRowImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.servicescatalog.DescriptionCriminal_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT DECS_DES_PART.ID DECS_DEC_PART_ID, 
+       DECS_DES_PART.FORM_CASE_PARTY_ID, 
+       CASE_DESC_DEC.ID DESC_DEC_ID, 
+       CASE_DESC_DEC.DESCRIPTION_ID, 
+       CRI_TYP.NAME 
+  FROM FORM_CASE_DESCRIPTION_DES_PART DECS_DES_PART, 
+       FORM_CASE_DESCRIPTION_DES CASE_DESC_DEC, 
+       PAR_CRIMINAL_TYPES CRI_TYP 
+ WHERE     CASE_DESC_DEC.ID = DECS_DES_PART.FORM_CASE_DES_ID 
+       AND CASE_DESC_DEC.DESCRIPTION_ID = CRI_TYP.ID]]></SQLQuery>
+  <ViewAttribute
+    Name="DecsDecPartId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DECS_DEC_PART_ID"
+    Expression="DECS_DEC_PART_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FormCasePartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FORM_CASE_PARTY_ID"
+    Expression="FORM_CASE_PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DescDecId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DESC_DEC_ID"
+    Expression="DESC_DEC_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DescriptionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DESCRIPTION_ID"
+    Expression="DESCRIPTION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Name"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="DecsDecPartId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ClaimsFoldersRO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersROImpl"
+  PageIterMode="Full"
+  ComponentInterface="com.egabi.cjexec.model.roviews.claimFolder.common.ClaimsFoldersRO"
+  ClientProxyName="com.egabi.cjexec.model.roviews.claimFolder.client.ClaimsFoldersROClient">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bindCaseNumber"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindParYear"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindOriginEntity"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindBusinessCaseType"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pflg"
+    Kind="where"
+    Type="java.lang.String"
+    DefaultValue="1"/>
+  <Variable
+    Name="puser"
+    Kind="where"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="BCDegreeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.BCDegreeROVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_BcDegreeId"
+    ListVOName="BCDegreeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BcDegreeId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[select  
+   
+  ROW_NUMBER () OVER (PARTITION BY PARTY_ID ORDER BY PARTY_ID,HEARING_DATE DESC)ORDER_RAWS , 
+ -- distinct  
+  PARTIES.PARTY_FIXED_FULL_NAME,PARTIES.ID_NUMBER , CAS.ID BUS_CASE_ID ,  PARTIES.id part_id,   CAS_TYPE.id CAS_TYPE, POLICE.id POLICE_ID,                                                
+                               
+ DECISIONS.id DECISIONS_IDS,   
+--null DECISIONS_IDS,   
+ CH_PARTIES.DECISION_ID DECISION_ID,   DATES.BC_DEGREE_ID  ,                                                          
+      PAR_POLICE.PAR_YEAR|| '/'|| CAS.CASE_NUMBER|| '/'|| CAS_TYPE.NAME   || '/' || POLICE.ENTITY_NAME AS BUSINESS_CASE_NUMBER_FULL,                                                                                
+      FOLDER.YEAR                                                                                  
+      || '/'                                                                                  
+      || FOLDER.SEQUENCE_NUMBER                                                                                  
+      || '/'                                                                                  
+      || DECODE (FOLDER.FOLDER_TYPE, 2, 'حبس', 3, 'غرامة')                                                                                  
+      || '/'                                                                                  
+      || DECODE (FOLDER.REPEATED_FLAG, 'Y', 'مكرر', 'N', 'غير مكرر')                                                                                  
+      || '/'                                                                                  
+      || POLICE.ENTITY_NAME AS SEQ_NUMBER_FULL                                                       
+      ,                                                          
+       DECISIONS.PENALTY_AMOUNT   ,                               
+       DECISIONS.Work_AMOUNT,  FOLDER.id  folder_id,  FOLDER.police_station_entity_id ,                           
+       DECISIONS.PENALTY_DUE_DATE    ,            
+      (select max (id  ) from BUSINESS_CASE_LEDGER_SEQ where business_case_id = CAS.ID and case_schema_id in ( 3645 , 3647 , 3648) ) as kolaya ,               
+      'N' as Combained                                   
+      , (select   max(FEES_AMOUNT) from  EXC_COURT_BC_DECISION_FEES FEES where  FEES.DECISION_ID  =   CH_PARTIES.DECISION_ID and FEES.FEES_TYPE_ID =2 and COURT_FEES_FLAG Is null)   COURT_FEES                                
+      , (select   max(FEES_AMOUNT) from  EXC_COURT_BC_DECISION_FEES FEES where  FEES.DECISION_ID  =   CH_PARTIES.DECISION_ID and FEES.FEES_TYPE_ID =1 and LAWYER_FEES_FLAG Is null)   LAWYER_FEES                                 
+        , (DECISIONS.PENALTY_AMOUNT - ( ( select   nvl(Sum(CLAIM_TOTAL_ORIGINAL),0) from                   
+        EXC_CLAIMS Claims where Claims.deleted_flag = 'N' and  Claims.DECISION_ID  =    DECISIONS.id) +   
+          
+        ( select nvl( sum (EXC_FOLDER_PROCEDURES.Advance_Payment_Amount ) ,0 ) from EXC_FOLDER_ACTIONS inner join EXC_FOLDER_PROCEDURES on EXC_FOLDER_ACTIONS.PROCEDURE_ID = EXC_FOLDER_PROCEDURES.id  
+where EXC_FOLDER_ACTIONS.ACTION_TYPE in  (7 ,77) and EXC_FOLDER_ACTIONS.DELETED_FLAG = 'N' and EXC_FOLDER_ACTIONS.FOLDER_RECORD_ID = FOLDER.id and EXC_FOLDER_PROCEDURES.FEES_TYPE_ID = 3)  
+          
+     )  ) CLAIM_TOTAL_VALUE                                     
+ FROM    EXC_FOLDER_DATA FOLDER left outer join EXC_FOLDER_ACTIONS folder_actions on  folder_actions.FOLDER_RECORD_ID   = FOLDER.id                                                                                          
+   ,   COURT_BC_HEARING_RES_PARTIES RES_PART,                                                                                  
+      COURT_BC_HEARING_RESERVATION RES,                                                                                  
+      PAR_PARTIES PARTIES,                                                                                  
+      BUSINESS_CASE CAS,                                                                                  
+      PAR_POLICE_AUTHORITY_REPORT PAR_POLICE,                                                                                  
+      ENTITY POLICE,                                                                                  
+      COURT_CIRCLES_DATES_HEARING DATES,                                                                                  
+      BUSINESS_CASE_DEGREES DEGREES,                                                                                  
+      BUSINESS_CASE_TYPE CAS_TYPE,                                                                                  
+      EXC_LKP_FOLDER_TYPES FOLDER_TYPE,                                                                                  
+      EXC_COURT_BC_CHARGES_PARTIES CH_PARTIES,                                                                                  
+      EXC_COURT_BC_CHARGE_DECISIONS DECISIONS                 
+    WHERE FOLDER.RES_PARTY_ID            = RES_PART.ID                           
+                                                                         
+    AND RES_PART.COURT_BC_HEARING_RES_ID = RES.ID                                                                                  
+    AND RES_PART.PARTY_ID                = PARTIES.ID                                                                                  
+    AND RES.BUSINESS_CASE_ID             = CAS.ID                                                                                  
+    AND CAS.ID                           = PAR_POLICE.BUSINESS_CASE_ID                                                                                  
+    AND PAR_POLICE.ORIGIN_ENTITY         = POLICE.ID                                                                                  
+    AND DATES.ID                         = RES.CIRCLE_HEARING_DATE_ID                                                                                  
+    AND DATES.BC_DEGREE_ID               = DEGREES.ID                                                                                  
+    AND CAS.CASE_TYPE                    = CAS_TYPE.ID                                                                                  
+    AND FOLDER_TYPE.ID                   = FOLDER.FOLDER_TYPE                                                        
+     AND CH_PARTIES.CHARGE_DECISION_ID           = DECISIONS.ID                                                                                  
+    AND CH_PARTIES.RES_PARTY_ID                 = FOLDER.RES_PARTY_ID                                                              
+   AND  (res_part.attendance    in(1,4) or                    
+   ( DATES.BC_DEGREE_ID != 1 and DATES.BC_DEGREE_ID != 3 ) or folder_actions.ACTION_TYPE = 60                     
+   or (  res_part.PREVIOUS_OBJECTION_FLAG ='Y'  ) )                           
+ and DECISIONS.Stop_Execution_Flag  ='N'    
+  and CH_PARTIES.deleted_flag  ='N'    
+  AND FOLDER.CLAIM_ISSUE_FLAG    in ( 0 , 2)                                                         
+  AND FOLDER.JUDGEMENT_STATUS    = 2                                                        
+ AND ( :pflg=:pflg or  FOLDER.EXECUTION_FLAG    = 1 or FOLDER.is_active = 'Y' )    
+ AND FOLDER.folder_type    != 35    
+   AND FOLDER.is_active    = 'Y'                      
+      AND (CAS.CASE_NUMBER = :bindCaseNumber )                                                              
+       AND (PAR_POLICE.PAR_YEAR = :bindParYear OR :bindParYear IS NULL)                                                                  
+       AND (   PAR_POLICE.ORIGIN_ENTITY = :bindOriginEntity                                                              
+            OR :bindOriginEntity IS NULL)                                                              
+       AND (   PAR_POLICE.BUSINESS_CASE_TYPE = :bindBusinessCaseType                                                              
+            OR :bindBusinessCaseType IS NULL) 
+          and (  
+      ( :puser = 39 and FOLDER.CRIMINAL_TYPE = 1  and (    :bindBusinessCaseType = 4 or  DATES.BC_DEGREE_ID = 3  or DATES.BC_DEGREE_ID =4 or DATES.BC_DEGREE_ID =8)   )   
+      or   ( :puser = 39 and FOLDER.CRIMINAL_TYPE = 2  and (DATES.BC_DEGREE_ID = 1  or DATES.BC_DEGREE_ID =7 or DATES.BC_DEGREE_ID =8)   )   
+     or (  :bindBusinessCaseType != 4 and   :puser = 3 and FOLDER.CRIMINAL_TYPE = 1  and (DATES.BC_DEGREE_ID = 1 or DATES.BC_DEGREE_ID =2)   )     
+     )]]></SQLQuery>
+  <ViewAttribute
+    Name="OrderRaws"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ORDER_RAWS"
+    Expression="ORDER_RAWS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyFixedFullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_FIXED_FULL_NAME"
+    Expression="PARTY_FIXED_FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO.PartyFixedFullName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_NUMBER"
+    Expression="ID_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO.IdNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusCaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUS_CASE_ID"
+    Expression="BUS_CASE_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PART_ID"
+    Expression="PART_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CasType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CAS_TYPE"
+    Expression="CAS_TYPE"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PoliceId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="POLICE_ID"
+    Expression="POLICE_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DecisionsIds"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="DECISIONS_IDS"
+    Expression="DECISIONS_IDS"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DecisionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DECISION_ID"
+    Expression="DECISION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BcDegreeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BC_DEGREE_ID"
+    Expression="BC_DEGREE_ID"
+    SQLType="NUMERIC"
+    LOVName="LOV_BcDegreeId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseNumberFull"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="486"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NUMBER_FULL"
+    Expression="BUSINESS_CASE_NUMBER_FULL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="486"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeqNumberFull"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="472"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEQ_NUMBER_FULL"
+    Expression="SEQ_NUMBER_FULL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="472"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PenaltyAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PENALTY_AMOUNT"
+    Expression="PENALTY_AMOUNT"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO.PenaltyAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WorkAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="WORK_AMOUNT"
+    Expression="WORK_AMOUNT"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO.WorkAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FOLDER_ID"
+    Expression="FOLDER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoliceStationEntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="POLICE_STATION_ENTITY_ID"
+    Expression="POLICE_STATION_ENTITY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PenaltyDueDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="PENALTY_DUE_DATE"
+    Expression="PENALTY_DUE_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO.PenaltyDueDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Kolaya"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="KOLAYA"
+    Expression="KOLAYA"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Combained"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="32"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="COMBAINED"
+    Expression="COMBAINED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="32"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CourtFees"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="COURT_FEES"
+    Expression="COURT_FEES"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO.CourtFees_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LawyerFees"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LAWYER_FEES"
+    Expression="LAWYER_FEES"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO.LawyerFees_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClaimTotalValue"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CLAIM_TOTAL_VALUE"
+    Expression="CLAIM_TOTAL_VALUE"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO.ClaimTotalValue_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="ClaimsFoldersROCriteria"
+    ViewObjectName="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ClaimsFoldersROCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="OrderRaws"
+        ViewAttribute="OrderRaws"
+        Operator="="
+        Conjunction="AND"
+        Value="1"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="BusCaseId"/>
+    <Item Value="PartId"/>
+    <Item Value="FolderId"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="ExcClaims"
+    ViewLink="com.egabi.cjexec.model.vl.ViewLinkVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="filterClaimsFoldersRO"
+      MethodName="filterClaimsFoldersRO">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="caseNumber"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="parYear"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="originEntity"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="businessCaseType"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

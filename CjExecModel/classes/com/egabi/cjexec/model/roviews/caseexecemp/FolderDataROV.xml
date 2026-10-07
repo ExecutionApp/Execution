@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FolderDataROV"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="bindDecesionId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT FD.ID,   FD.JUDGMENT_TEXT ,           
+       FD.SEQUENCE_NUMBER,              
+       FD.YEAR,              
+       FD.YEAR || '/' || FD.SEQUENCE_NUMBER              
+           COUNT_NUMBER,              
+       PP.FNAME || ' ' || PP.SNAME || ' ' || PP.TNAME || ' ' || PP.FOURTHNAME              
+           FULL_NAME,              
+       PP.ID_NUMBER,             
+       RP.JUDGEMENT_RESOLUTION_C,      
+       (SELECT FOLDER_NAME FROM EXC_LKP_FOLDER_TYPES WHERE ID = FD.FOLDER_TYPE )   FOLDER_NAME,    
+       FD.POLICE_STATION_ENTITY_ID    
+  FROM EXC_FOLDER_DATA FD, COURT_BC_HEARING_RES_PARTIES RP, PAR_PARTIES PP              
+ WHERE     RP.ID = FD.RES_PARTY_ID              
+       AND RP.PARTY_ID = PP.ID            
+       AND FD.JUDGEMENT_STATUS = 2         
+       AND RP.PARTY_ID IN  
+               (SELECT FCDP.PARTY_ID  
+                  FROM FORM_CASE_DESCRIPTION_DES_PART  FCDDP,  
+                       FORM_CASE_DESCRIPTION_DES       FCDD,  
+                       FORM_CASE_DESCRIPTION_PARTIES   FCDP,  
+                       FORM_CASE_DESCRIPTION           FCD  
+                 WHERE     FCDDP.FORM_CASE_DES_ID = FCDD.ID  
+                       AND FCDP.FORM_CASE_DESCRIPTION_ID = FCD.ID  
+                       AND FCDD.FORM_CASE_DESCRIPTION_ID = FCD.ID  
+                       AND FCDDP.FORM_CASE_PARTY_ID = FCDP.ID  
+                       AND FCDP.PARTY_ID = RP.PARTY_ID  
+                       AND FCDDP.JUDGMENT_CLASSIFICATION = 2)         
+       AND RP.COURT_BC_HEARING_RES_ID =          
+           (SELECT ECBSJ.COURT_BC_HEARING_RES_ID          
+              FROM EXC_COURT_BC_SESSION_JUDGMENT  ECBSJ,          
+                   EXC_COURT_BC_DECISION          ECBD          
+             WHERE     ECBSJ.ID = ECBD.SESSION_JUDGMENT_ID          
+                   AND ECBD.ID = :bindDecesionId)]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JudgmentText"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JUDGMENT_TEXT"
+    Expression="JUDGMENT_TEXT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.FolderDataROV.JudgmentText_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SequenceNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SEQUENCE_NUMBER"
+    Expression="SEQUENCE_NUMBER"
+    SQLType="NUMERIC"
+    Passivate="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="COUNT_NUMBER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Year"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="YEAR"
+    Expression="YEAR"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="YEAR"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="81"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNT_NUMBER"
+    Expression="COUNT_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="81"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="COUNT_NUMBER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="403"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FULL_NAME"
+    Expression="FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="403"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CaseConvictedPartiesROV.FullName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_NUMBER"
+    Expression="ID_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CaseConvictedPartiesROV.IdNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JudgementResolutionC"
+    IsUpdateable="false"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.ClobDomain"
+    ColumnType="CLOB"
+    AliasName="JUDGEMENT_RESOLUTION_C"
+    Expression="JUDGEMENT_RESOLUTION_C"
+    SQLType="CLOB">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="JUDJMENT_RESOLUTION"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FOLDER_NAME"
+    Expression="FOLDER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="FOLDER_NAME"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PoliceStationEntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="POLICE_STATION_ENTITY_ID"
+    Expression="POLICE_STATION_ENTITY_ID"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

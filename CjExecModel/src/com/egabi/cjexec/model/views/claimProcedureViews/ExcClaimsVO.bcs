@@ -1,0 +1,12 @@
+//Groovy Scripts for com.egabi.cjexec.model.views.claimProcedureViews.ExcClaimsVO
+
+package com.egabi.cjexec.model.views.claimProcedureViews
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="p_claim_deleted")
+def p_claim_deleted_VariableScript_Variable()
+{
+adf.context.current.sessionScope.pClaimDeleted
+}
+

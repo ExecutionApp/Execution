@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="parLawyerTF_parLawyerTF_Create1PageDef" Package="taskflows.parlawyer" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ParLawyerPartiesVO" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ParLawyerPartiesVOIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ParLawyerPartiesVOIterator" id="CreateWithParam" RequiresUpdateModel="true" Action="createRow"
+            InstanceName="CjExecAMDataControl.ParLawyerPartiesVO" DataControl="CjExecAMDataControl"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="provisionsInclusionFragPageDef"
+                Package="provisionsInclusion">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="SearchFormRVO1" RangeSize="25" DataControl="CjExecAMDataControl" id="SearchFormRVO1Iterator"/>
+        <iterator Binds="EntityCourtRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="EntityCourtRVO1Iterator"/>
+        <iterator Binds="EntityCircleRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="EntityCircleRVO1Iterator"/>
+        <iterator Binds="SearchResultsRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="SearchResultsRVO1Iterator"/>
+        <iterator Binds="ProvisionedCasesInSession1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ProvisionedCasesInSession1Iterator"/>
+        <iterator Binds="AllCasesInSessionRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="AllCasesInSessionRVO1Iterator"/>
+        <iterator id="CourtCirclesHearingDatesRVO1Iterator" Binds="CourtCirclesHearingDatesRVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator id="FormCaseDescriptionDesView1Iterator" Binds="FormCaseDescriptionDesView1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+    </executables>
+    <bindings>
+        <list IterBinding="SearchFormRVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseType" id="BusinessCaseType"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="EntityCourtRVO1Iterator" id="EntityName">
+            <AttrNames>
+                <Item Value="EntityName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="EntityCircleRVO1Iterator" id="EntityName1">
+            <AttrNames>
+                <Item Value="EntityName"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="SearchFormRVO1Iterator" StaticList="false" Uses="LOV_CourtCircleHearingDate"
+              id="CourtCircleHearingDate" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <!--<list IterBinding="SearchFormRVO1Iterator" StaticList="false" Uses="LOV_OrderBy" id="OrderBy"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>-->
+        <!--<tree IterBinding="SearchResultsRVO1Iterator" id="SearchResultsRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.provisionsInclusion.SearchResultsRVO"
+                            Name="SearchResultsRVO10">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="JudicialNumber"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="OperativeJudgment"/>
+                    <Item Value="JudgmentType"/>
+                    <Item Value="JudgmentSubType"/>
+                    <Item Value="Degree"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>-->
+        <list IterBinding="SearchFormRVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseDegree"
+              id="BusinessCaseDegree" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="SearchFormRVO1Iterator" StaticList="false" Uses="LOV_provisionInclusionCase" DTSupportsMRU="true" SelectItemValueMode="ListObject"
+              id="ClassifiedFlag"/>
+        <list IterBinding="SearchFormRVO1Iterator" StaticList="false" Uses="LOV_OriginEntity" id="OriginEntity"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <tree IterBinding="SearchResultsRVO1Iterator" id="SearchResultsRVO11">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.provisionsInclusion.SearchResultsRVO"
+                            Name="SearchResultsRVO110">
+                <AttrNames>
+                    <Item Value="ResId"/>
+                    <Item Value="EntityId"/>
+                    <Item Value="BusinessCaseNumber"/>
+                    <Item Value="BusinessCaseName"/>
+                    <Item Value="BusinessCaseDegree"/>
+                    <Item Value="ClassifiedFlag"/>
+                    <Item Value="HearingDate"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <methodAction id="copySessionFormCase" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="copySessionFormCase" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="reservationId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <attributeValues IterBinding="ProvisionedCasesInSession1Iterator" id="ProvisionedCasesCount">
+            <AttrNames>
+                <Item Value="ProvisionedCasesCount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AllCasesInSessionRVO1Iterator" id="AllCasesCount">
+            <AttrNames>
+                <Item Value="AllCasesCount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="EntityCircleRVO1Iterator" id="Id">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="SearchResultsRVO1Iterator" id="SearchResultsRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.provisionsInclusion.SearchResultsRVO"
+                            Name="SearchResultsRVO10">
+                <AttrNames>
+                    <Item Value="ResId"/>
+                    <Item Value="EntityId"/>
+                    <Item Value="BusinessCaseNumber"/>
+                    <Item Value="BusinessCaseName"/>
+                    <Item Value="BusinessCaseDegree"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="ClassifiedFlag"/>
+                    <Item Value="BusinessCaseId"/>
+                    <Item Value="CircleHearingDateId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <listOfValues IterBinding="SearchFormRVO1Iterator" StaticList="false" Uses="LOV_CourtCircleHearingDate"
+                      id="CourtCircleHearingDate1"/>
+        <attributeValues IterBinding="CourtCirclesHearingDatesRVO1Iterator" id="HearingDate">
+            <AttrNames>
+                <Item Value="HearingDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchFormRVO1Iterator" id="OriginEntityName">
+            <AttrNames>
+                <Item Value="OriginEntityName"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="getOperationNumber" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getOperationNumber" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getOperationNumber_CjExecAMDataControl_dataProvider_getOperationNumber_result"/>
+        <action id="Rollback" DataControl="CjExecAMDataControl" RequiresUpdateModel="false"
+                Action="rollbackTransaction"/>
+    </bindings>
+</pageDefinition>

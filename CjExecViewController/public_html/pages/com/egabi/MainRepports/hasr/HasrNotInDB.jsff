@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <af:panelGroupLayout id="pgl2" partialTriggers="sbc2">
+        <af:panelHeader text="#{cjexecviewcontrollerBundle.HASR_NOT_IN_DB}" id="ph1"/>
+        <af:panelGroupLayout id="pg12" styleClass="row " layout="default" partialTriggers="sbc2">
+            <af:panelGroupLayout id="pg46" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="true" value="#{cjexecviewcontrollerBundle.PROSECUTION_KOLYA}" id="ol1"/>
+                <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" label="#{bindings.NeyabKolyaa.label}"
+                                    required="#{bindings.NeyabKolyaa.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc1" simple="true"
+                                    disabled="#{(sessionScope.userInfo.entityDegree eq '39' and !sessionScope.userInfo.userPrevMap[5051]) or sessionScope.userInfo.entityDegree eq '3'}"
+                                    autoSubmit="true">
+                    <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si1"/>
+                    <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl5" styleClass="col-md-2 col-sm-12" partialTriggers="sbc2"
+                                 visible="#{pageFlowScope.mainReportBean.check or pageFlowScope.mainReportBean.userGozeya}">
+                <af:outputLabel showRequired="true" value="#{cjexecviewcontrollerBundle.PROSECUTION_PARTIAL}" id="ol2"/>
+                <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}"
+                disabled="#{pageFlowScope.mainReportBean.userGozeya}"
+                label="#{bindings.NeyabGozayaa.label}"
+                                    required="#{bindings.NeyabGozayaa.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc2" simple="true"
+                                    autoSubmit="true" partialTriggers="soc1">
+                    <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si2"/>
+                    <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl6" styleClass="col-md-2 col-sm-12"
+                                 rendered="#{pageFlowScope.mainReportBean.check or pageFlowScope.mainReportBean.userGozeya}"
+                                 partialTriggers="sbc2">
+                <af:outputLabel showRequired="true" value="#{cjexecviewcontrollerBundle.POLICE_STATIONS}" id="ol3"/>
+                <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}" label="#{bindings.OrigEntity.label}"
+                                    required="#{bindings.OrigEntity.hints.mandatory}"
+                                    shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc3" simple="true"
+                                    valueChangeListener="#{cjValidator.origEntityVCL}" autoSubmit="true"
+                                    partialTriggers="soc2">
+                    <f:selectItems value="#{bindings.OrigEntity.items}" id="si3"/>
+                    <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl7" styleClass="col-md-2 col-sm-12"
+                                 rendered="#{pageFlowScope.mainReportBean.check or pageFlowScope.mainReportBean.userGozeya}"
+                                 partialTriggers="sbc2">
+                <af:outputLabel showRequired="true" value="#{bindings.FolderTypeId.label}" id="ol5"/>
+                <!--<af:selectOneChoice value="#{pageFlowScope.mainReportBean.folderTypeId}" label="#{bindings.FolderTypeId.label}"
+                            shortDesc="#{bindings.FolderTypeId.hints.tooltip}" id="soc4" 
+                            >
+           <f:selectItems value="#{bindings.FolderTypeId.items}" id="si128"/>
+        </af:selectOneChoice>-->
+                <af:selectOneChoice value="#{bindings.FolderTypeId.inputValue}" label="#{bindings.FolderTypeId.label}"
+                                    required="#{bindings.FolderTypeId.hints.mandatory}" simple="true"
+                                    contentStyle="width:80px;" shortDesc="#{bindings.FolderTypeId.hints.tooltip}"
+                                    id="soc4">
+                    <f:selectItems value="#{bindings.FolderTypeId.items}" id="si5"/>
+                    <f:validator binding="#{bindings.FolderTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl9" styleClass="col-md-2 col-sm-12"
+                                 rendered="#{!pageFlowScope.mainReportBean.check and sessionScope.userInfo.entityDegree eq '39'}"
+                                 partialTriggers="sbc2">
+                <af:outputLabel showRequired="true" value="#{bindings.FolderTypeIdGenay.label}" id="ol6"/>
+                <!--<af:selectOneChoice value="#{bindings.FolderTypeIdGenay.inputValue}" label="#{bindings.FolderTypeIdGenay.label}"
+                            required="#{bindings.FolderTypeIdGenay.hints.mandatory}"
+                            shortDesc="#{bindings.FolderTypeIdGenay.hints.tooltip}" id="soc6" simple="true">
+          -->
+                <!--<af:selectItem label="#{cjexecviewcontrollerBundle.PRISON}" id="si6" value="2"/>
+          <af:selectItem label="#{cjexecviewcontrollerBundle.GARAMA}" id="si28" value="3"/>
+          <af:selectItem label="#{cjexecviewcontrollerBundle.PRISON_DONE}" id="si29" value="4"/>
+          <af:selectItem label="#{cjexecviewcontrollerBundle.PRISON_NOT_DONE}" id="si30" value="5"/>-->
+                <!--
+          <af:selectItem id="si6" value="#{bindings.}" />
+        </af:selectOneChoice>-->
+                <af:selectOneChoice value="#{bindings.FolderTypeIdGenay.inputValue}"
+                                    label="#{bindings.FolderTypeIdGenay.label}"
+                                    required="#{bindings.FolderTypeIdGenay.hints.mandatory}" 
+                                    simple="true" autoSubmit="true"
+                                    valueChangeListener="#{pageFlowScope.mainReportBean.folderTypeIdGenayListener}"
+                                    shortDesc="#{bindings.FolderTypeIdGenay.hints.tooltip}" id="soc7">
+                    <f:selectItems value="#{bindings.FolderTypeIdGenay.items}" id="si28"/>
+                    <f:validator binding="#{bindings.FolderTypeIdGenay.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl12" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="رقم الحصر من" id="ol8"/>
+                <af:inputText value="#{bindings.FromSequence.inputValue}"
+                              required="#{bindings.FromSequence.hints.mandatory}"
+                              columns="#{bindings.FromSequence.hints.displayWidth}"
+                              maximumLength="#{bindings.FromSequence.hints.precision}"
+                              shortDesc="#{bindings.FromSequence.hints.tooltip}" id="it2" autoSubmit="true">
+                    <f:validator binding="#{bindings.FromSequence.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.FromSequence.format}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl13" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="رقم الحصر الى" id="ol9"/>
+                <af:inputText value="#{bindings.ToSequence.inputValue}"
+                              required="#{bindings.ToSequence.hints.mandatory}"
+                              columns="#{bindings.ToSequence.hints.displayWidth}"
+                              maximumLength="#{bindings.ToSequence.hints.precision}"
+                              shortDesc="#{bindings.ToSequence.hints.tooltip}" id="it3" autoSubmit="true">
+                    <f:validator binding="#{bindings.ToSequence.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ToSequence.format}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl8" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="true" value="#{cjexecviewcontrollerBundle.YEAR}" id="ol4"/>
+                <af:inputText value="#{bindings.Year.inputValue}" simple="true" columns="4" maximumLength="4"
+                              shortDesc="#{bindings.Year.hints.tooltip}" id="it1" autoSubmit="true"
+                              valueChangeListener="#{cjValidator.yearVCL}" required="true">
+                    <f:validator binding="#{bindings.Year.validator}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl10" visible="#{pageFlowScope.mainReportBean.check eq null || !pageFlowScope.mainReportBean.check}" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="النوع" id="ol7" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.CriminalTypeFlag.inputValue}" 
+                simple="true" autoSubmit="true"  partialTriggers="si28"
+                label="#{bindings.CriminalTypeFlag.label}"
+                disabled="#{bindings.FolderTypeIdGenay.inputValue ne null and bindings.FolderTypeIdGenay.inputValue eq '3'}"
+                shortDesc="#{bindings.CriminalTypeFlag.hints.tooltip}" 
+                id="soc5" >
+                    <f:selectItem itemValue="1" itemLabel="جنح" id="si4"/>
+                    <f:selectItem itemValue="2" itemLabel="جنايات" id="si6"/>
+                    <f:selectItem itemValue="3" itemLabel="جنايات مستأنفة" id="si56"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl1" styleClass="col-md-1 col-sm-12">
+                <af:panelFormLayout id="pfl2" labelAlignment="top">
+                    <f:facet name="footer"/>
+                    <af:selectBooleanCheckbox text="#{cjexecviewcontrollerBundle.GOZEYA}" label="" id="sbc2"
+                                              autoSubmit="true" value="#{pageFlowScope.mainReportBean.check}"
+                                              rendered="#{sessionScope.userInfo.entityDegree eq '39' or sessionScope.userInfo.entityDegree eq '38' or sessionScope.userInfo.entityDegree eq '46'}"/>
+                </af:panelFormLayout>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl11"
+                                 styleClass="btn-holder-search col-md-1 col-sm-12">
+                <af:link styleClass="btn-search"
+                         icon="/resources/images/magnifier.png" id="l1"
+                         action="#{pageFlowScope.mainReportBean.searchHasrNotIn}"
+                         inlineStyle="width:84px !important;"/>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl3" styleClass="btn-holder-search col-md-1 col-sm-12">
+                            <af:button text="عرض التقرير" id="b2"
+                                       action="#{pageFlowScope.mainReportBean.printReport}"
+                                       inlineStyle="width:84px !important;"
+                                       styleClass="btn-search"/>
+</af:panelGroupLayout>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl4" rendered="#{bindings.HasrNoInDBRVO1.estimatedRowCount > '0'}">
+            <af:table value="#{bindings.HasrNoInDBRVO1.collectionModel}" var="row"
+                      rows="#{bindings.HasrNoInDBRVO1.rangeSize}"
+                      emptyText="#{bindings.HasrNoInDBRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0" selectedRowKeys="#{bindings.HasrNoInDBRVO1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.HasrNoInDBRVO1.collectionModel.makeCurrent}" rowSelection="single"
+                      fetchSize="#{bindings.HasrNoInDBRVO1.rangeSize}" width="100%" columnStretching="multiple"
+                      filterModel="#{bindings.HasrNoInDBRVO1Query.queryDescriptor}" filterVisible="true"
+                      queryListener="#{bindings.HasrNoInDBRVO1Query.processQuery}" varStatus="vs" id="t1"
+                      scrollPolicy="page">
+                <af:column sortProperty="#{bindings.HasrNoInDBRVO1.hints.SequenceNumber.name}" filterable="true"
+                           sortable="true" headerText="ارقام الحصر الساقطة" id="c1"
+                           width="100%">
+                    <af:outputText value="#{row.SequenceNumber}"
+                                   rendered="#{bindings.HasrNoInDBRVO1Iterator.estimatedRowCount > '0'}"
+                                   shortDesc="#{bindings.HasrNoInDBRVO1.hints.SequenceNumber.tooltip}" id="ot1"/>
+                </af:column>
+            </af:table>
+        </af:panelGroupLayout>
+    </af:panelGroupLayout>
+</ui:composition>

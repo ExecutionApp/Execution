@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Person" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc26958a-de3d-4603-956d-b9ee91971ec6">
+	<property name="ireport.zoom" value="1.7715610000000022"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PROCEDURE_ID" class="java.math.BigDecimal"/>
+	<parameter name="REPORT_PATH" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[/* Formatted on 11/16/2019 1:24:32 PM (QP5 v5.227.12220.39754) */
+SELECT FA.PROCEDURE_ID,
+       FP.COURT_CIRCLE_DATES_HEARING_ID,
+       RP.COURT_BC_HEARING_RES_ID,
+       FA.ID ID_FOLDER_ACTIONS,
+       FP.PROCEDURE_SERIAL,
+       FP.PROSECUTION_ID,
+       FP.PROCEDURE_TEXT,
+p.id PARTY_ID,
+       E.ID,
+(SELECT T.NAME
+          FROM COURT_ANNOUNCEMENT_TYPES T
+         WHERE RP.ATTENDANCE = T.ID)
+          JUDGEMENT,  DBMS_LOB.SUBSTR( RP.JUDGEMENT_RESOLUTION_C, 4000, 1) JUDGEMENT_RESOLUTION_C,
+       E.COURT_ID,
+       FP.PROCEDURE_DATE,
+       P.PARTY_FULL_NAME,
+       P.ID_NUMBER,
+   FP.CAPACITY_TYPE,
+       (CASE
+           WHEN FP.CAPACITY_TYPE = 6 THEN (SELECT PP.PARTY_FULL_NAME FROM PAR_PARTIES PP, COURT_BC_HEARING_RES_PARTIES RPP WHERE RPP.PARTY_ID = PP.ID AND RPP.ID = FP.RES_PARTY_ID)
+           WHEN FP.CAPACITY_TYPE = 7 THEN (SELECT L.NAME FROM PAR_LAWYERS L WHERE L.ID = FP.PRIMARY_LAWYER_ID)
+        END)
+          NAMEE,
+       DH.HEARING_DATE,
+       PR.POLICE_NUMBER,
+       PR.PAR_YEAR,
+       CT.NAME,
+       (SELECT ENTITY_NAME
+          FROM ENTITY
+         WHERE E.COURT_ID = ENTITY.ID)
+          ENTITY_NAME,
+       (SELECT ENTITY_NAME
+          FROM ENTITY
+         WHERE ID = PR.ORIGIN_ENTITY)
+          ENTITY,
+ (SELECT ENTITY_NAME
+          FROM ENTITY
+         WHERE ID = PR.ENTITY_ID)
+          ORIGIN_ENTITY,
+       (SELECT H.HEARING_DATE
+          FROM COURT_CIRCLES_DATES_HEARING H
+         WHERE FP.COURT_CIRCLE_DATES_HEARING_ID = H.ID)
+          HEARING_DATE_TWO,(SELECT H.HEARING_DATE
+          FROM COURT_CIRCLES_DATES_HEARING H
+         WHERE FP.COURT_CIRCLE_DATES_HEARING_ID = H.ID)
+          HEARING_DATE_TWO,(SELECT D.SEQUENCE_NUMBER FROM EXC_FOLDER_DATA D WHERE D.ID = FA.FOLDER_RECORD_ID) SEQUENCE_NUMBER,
+          (SELECT U.FULL_NAME FROM SEC_USERS U WHERE U.ID = FP.CREATED_BY) CREATED_BY,SYSDATE
+  FROM EXC_FOLDER_ACTIONS FA,
+       EXC_FOLDER_PROCEDURES FP,
+       ENTITY E,
+       COURT_BC_HEARING_RES_PARTIES RP,
+       PAR_PARTIES P,
+       COURT_BC_HEARING_RESERVATION HR,
+       COURT_CIRCLES_DATES_HEARING DH,
+       PAR_POLICE_AUTHORITY_REPORT PR,
+       BUSINESS_CASE_TYPE CT
+ WHERE     FA.PROCEDURE_ID = $P{PROCEDURE_ID}
+       AND FP.ID = FA.PROCEDURE_ID
+       AND E.id = FP.PROSECUTION_ID
+       AND RP.ID = FP.RES_PARTY_ID
+       AND RP.PARTY_ID = P.ID
+       AND HR.ID = RP.COURT_BC_HEARING_RES_ID
+       AND HR.CIRCLE_HEARING_DATE_ID = DH.ID
+       AND HR.BUSINESS_CASE_ID = PR.BUSINESS_CASE_ID
+       AND PR.BUSINESS_CASE_TYPE = CT.ID
+       AND FA.ACTION_TYPE = 4]]>
+	</queryString>
+	<field name="PROCEDURE_ID" class="java.math.BigDecimal"/>
+	<field name="COURT_CIRCLE_DATES_HEARING_ID" class="java.math.BigDecimal"/>
+	<field name="COURT_BC_HEARING_RES_ID" class="java.math.BigDecimal"/>
+	<field name="ID_FOLDER_ACTIONS" class="java.math.BigDecimal"/>
+	<field name="PROCEDURE_SERIAL" class="java.lang.String"/>
+	<field name="PROSECUTION_ID" class="java.math.BigDecimal"/>
+	<field name="PROCEDURE_TEXT" class="java.lang.String"/>
+	<field name="PARTY_ID" class="java.math.BigDecimal"/>
+	<field name="ID" class="java.math.BigDecimal"/>
+	<field name="JUDGEMENT" class="java.lang.String"/>
+	<field name="JUDGEMENT_RESOLUTION_C" class="java.lang.String"/>
+	<field name="COURT_ID" class="java.math.BigDecimal"/>
+	<field name="PROCEDURE_DATE" class="java.sql.Timestamp"/>
+	<field name="PARTY_FULL_NAME" class="java.lang.String"/>
+	<field name="ID_NUMBER" class="java.lang.String"/>
+	<field name="CAPACITY_TYPE" class="java.math.BigDecimal"/>
+	<field name="NAMEE" class="java.lang.String"/>
+	<field name="HEARING_DATE" class="java.sql.Timestamp"/>
+	<field name="POLICE_NUMBER" class="java.lang.String"/>
+	<field name="PAR_YEAR" class="java.math.BigDecimal"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="ENTITY_NAME" class="java.lang.String"/>
+	<field name="ENTITY" class="java.lang.String"/>
+	<field name="ORIGIN_ENTITY" class="java.lang.String"/>
+	<field name="HEARING_DATE_TWO" class="java.sql.Timestamp"/>
+	<field name="SEQUENCE_NUMBER" class="java.math.BigDecimal"/>
+	<field name="CREATED_BY" class="java.lang.String"/>
+	<field name="SYSDATE" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="93" y="24" width="360" height="20" uuid="dc1df594-04f3-4e3c-9c29-14de0ffca904"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[طلب تقسيط غرامة]]></text>
+			</staticText>
+			<image hAlign="Center">
+				<reportElement x="0" y="0" width="93" height="67" uuid="b3784889-ff26-4f58-b10f-cc16ed836644"/>
+				<imageExpression><![CDATA[$P{REPORT_PATH}+"logo-ppo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="40">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="20" isRemoveLineWhenBlank="true" uuid="75efe762-f7d4-4c2d-94de-48f2327cf827"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["السيد الأستاذ/ رئيس نيابة"+" "+($F{ORIGIN_ENTITY}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{ORIGIN_ENTITY}.toString())))]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="20" width="555" height="20" isRemoveLineWhenBlank="true" uuid="b7c3fd7d-81af-4be7-8ddf-8ff837039df1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["تحية طيبة وبعد،"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="20">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="20" isRemoveLineWhenBlank="true" uuid="a43dc46d-ddf6-4ebc-b719-653619af3c0f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["مقدمة لسيادتكم / "+($F{NAMEE}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{NAMEE}.toString())))+" "+"وصفته "+($F{CAPACITY_TYPE}==6?"المتهم":($F{CAPACITY_TYPE}==7?"المحامي عن المتهم المحكوم عليه":""))+"، "+"في القضية رقم "+($F{POLICE_NUMBER}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{POLICE_NUMBER}.toString())))+" "+"لسنة "+($F{PAR_YEAR}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{PAR_YEAR}.toString())))+" "+($F{NAME}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{NAME}.toString())))+" "+($F{ENTITY}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{ENTITY}.toString())))+" "+"والمقيدة برقم حصر "+($F{SEQUENCE_NUMBER}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{SEQUENCE_NUMBER}.toString())))+" "+"والمقضي فيها بجلسة "+($F{HEARING_DATE}==null?"":new utils.ArabicNumberFormatter().formatTimeStamp($F{HEARING_DATE},new java.lang.String("dd/MM/yyyy")).trim())+" "+"ب"+($F{JUDGEMENT}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{JUDGEMENT}.toString())))+" "+($F{JUDGEMENT_RESOLUTION_C}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{JUDGEMENT_RESOLUTION_C}.toString())))]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="20">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="20" isRemoveLineWhenBlank="true" uuid="27061955-18d6-4672-aef2-cf9e080c057c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["أرجو من سيادتكم التفضل بتمكيني لعمل تقسيط الغرامة في الحكم الموضح بعالية على "+($F{PROCEDURE_TEXT}==null?"":new java.lang.String(new utils.ArabicNumberFormatter().format($F{PROCEDURE_TEXT}.toString())))]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="20">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="20" isRemoveLineWhenBlank="true" uuid="9b07c96e-9714-4a23-b99b-c8b67fa71666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["وتفضلوا بقبول فائق الاحترام والتقدير"+"،"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="48">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="205" height="20" isRemoveLineWhenBlank="true" uuid="82a4935f-c2a0-49bc-bdde-65ba0cfd5e16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NAMEE}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement positionType="Float" x="205" y="0" width="154" height="48" uuid="994c92a4-c1ad-4f54-ae35-87163cb4270e"/>
+				<imageExpression><![CDATA["http://10.21.37.111:9015/criminal_justice/loaducmimage?partyId="+$F{PARTY_ID}+"&mode=FB"]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement x="392" y="0" width="163" height="48" uuid="5947b917-5f73-4080-8bc6-3382096a4819"/>
+				<imageExpression><![CDATA["http://10.21.37.111:9015/criminal_justice/loaducmimage?partyId="+$F{PARTY_ID}+"&mode=IMG"]]></imageExpression>
+			</image>
+		</band>
+	</lastPageFooter>
+</jasperReport>

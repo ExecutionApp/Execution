@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core" locale="ar">
+    <c:set var="bundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle_ar']}"/>
+    <af:document id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:panelGroupLayout id="pgl54" layout="horizontal" rendered="#{pageFlowScope.nIdParam eq 5}"
+                                 inlineStyle="margin:20px;">
+                <af:outputLabel value="#{bundle.ID_NUMBER}" id="ol51"/>
+                <af:inputText value="#{pageFlowScope.nIdBean.idNum}" required="true" simple="true" maximumLength="14"
+                              contentStyle="width:200px;" id="it52" validator="#{cjValidator.nationalIdValidator}"/>
+                <af:spacer width="10" height="10" id="s51"/>
+                <af:button text="#{bundle.VERIFY}" id="b5" actionListener="#{pageFlowScope.nIdBean.getPersonData}"/>
+            </af:panelGroupLayout>
+            <af:panelFormLayout id="pfl1" rows="3" maxColumns="4" partialTriggers="b5">
+                <af:panelGroupLayout id="pgl341" rendered="#{pageFlowScope.personDataBean.httpCode ne 200}"
+                                     layout="horizontal" halign="center">
+                    <af:outputText id="ot0" inlineStyle="width:150px;color:Red;font-size:larger;font-weight:bold;"
+                                   value="#{pageFlowScope.personDataBean.httpMessage}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl32" rendered="#{pageFlowScope.personDataBean.responseCode ne 0}"
+                                     halign="center" layout="horizontal">
+                    <af:outputText id="ot2" inlineStyle="width:150px;color:Red;font-size:larger;font-weight:bold;"
+                                   value="#{pageFlowScope.personDataBean.responseMessage}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl2" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.NATIONAL_ID}" id="ol1" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it1" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.nationalId}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl3" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.FIRST_NAME}" id="ol2" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it2" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.firstName}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl4" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.FULL_NAME}" id="ol3" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it3" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.fatherFullName}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl5" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.GENDER}" id="ol4" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it4" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.gender eq 1 ? 'ذكر' : 'أنثى'}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl6" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.BIRTH_DATE}" id="ol5" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it5" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.birthDate}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl7" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.MARITAL_STATUS}" id="ol6" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it6" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.maritalStatus}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl8" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.MOTHER_FIRST_NAME}" id="ol7" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it7" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.motherFirstName}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl9" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.MOTHER_SECOND_NAME}" id="ol8" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it8" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.motherSecondName}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl10" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.MOTHER_THIRD_NAME}" id="ol9" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it9" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.motherThirdName}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl11" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.FACTORY_CARD_NUMBER}" id="ol10" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it10" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.factoryCardNumber}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl12" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.CARD_EXPIRATION_DATE}" id="ol11" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it11" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.cardExpirationDate}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl13" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.ADDRESS}" id="ol12" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it12" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.address}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl164" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.POLICE_ADDRESS_CODE}" id="ol163" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it163" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.policeAddressCode}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl14" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.POLICE_ADDRESS}" id="ol13" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it13" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.policeAddress}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl165" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.GOVERNATE_CODE}" id="ol164" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it164" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.governateCode}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl15" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.GOVERNATE}" id="ol14" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it14" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.governate}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl16" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.JOB_DESCRIRTION}" id="ol15" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it15" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.jobDescription}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl17" rendered="#{pageFlowScope.personDataBean.responseCode eq 0}">
+                    <af:outputLabel value="#{bundle.STATUS}" id="ol16" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it16" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.status eq 1 ? 'على قيد الحياه' : 'ميت'}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl18"
+                                     rendered="#{pageFlowScope.personDataBean.responseCode eq 200 and pageFlowScope.personDataBean.dateOfDeath eq 2}">
+                    <af:outputLabel value="#{bundle.DATE_OF_DEATH}" id="ol17" inlineStyle="margin-right:20px;"/>
+                    <af:inputText disabled="true" id="it17" contentStyle="width:150px;"
+                                  value="#{pageFlowScope.personDataBean.dateOfDeath}"/>
+                </af:panelGroupLayout>
+            </af:panelFormLayout>
+            <af:panelGroupLayout id="pgl1" layout="horizontal" valign="middle" halign="center"
+                                 inlineStyle="margin-top:20px;">
+                <af:button text="#{bundle.SAVE}" id="b1" action="#{pageFlowScope.nIdBean.savePopUp}"
+                           partialTriggers="b5" visible="#{pageFlowScope.personDataBean.responseCode eq 0}"/>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:button text="#{bundle.CANCEL_BUTTON}" id="b2" action="#{pageFlowScope.nIdBean.cancelPopUp}"/>
+                <!--<af:button actionListener="#{bindings.insertNIdServiceCallLog.execute}" text="insertNIdServiceCallLog"
+                           disabled="#{!bindings.insertNIdServiceCallLog.enabled}" id="b3"/>-->
+                           
+            </af:panelGroupLayout>
+        </af:form>
+    </af:document>
+</f:view>

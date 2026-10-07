@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SearchFragPageDef"
+                Package="pages.com.egabi.cjexec.requests">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="RequestsSearchRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="RequestsSearchRVO1Iterator"/>
+    <iterator Binds="RequestsSearchResultRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="RequestsSearchResultRVO1Iterator"/>
+    <searchRegion Binds="RequestsSearchResultRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="RequestsSearchResultRVO1Query"/>
+  </executables>
+  <bindings>
+    <list IterBinding="RequestsSearchRVO1Iterator" StaticList="false" Uses="LOV_RequestType" id="RequestType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="RequestsSearchRVO1Iterator" id="RequestNumber">
+      <AttrNames>
+        <Item Value="RequestNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RequestsSearchRVO1Iterator" id="BCNumber">
+      <AttrNames>
+        <Item Value="BCNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RequestsSearchRVO1Iterator" id="IdNmumber">
+      <AttrNames>
+        <Item Value="IdNmumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RequestsSearchRVO1Iterator" id="FromDate">
+      <AttrNames>
+        <Item Value="FromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RequestsSearchRVO1Iterator" id="ToDate">
+      <AttrNames>
+        <Item Value="ToDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="RequestsSearchResultRVO1Iterator" id="RequestsSearchResultRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.requests.RequestsSearchResultRVO"
+                      Name="RequestsSearchResultRVO10">
+        <AttrNames>
+          <Item Value="ProcedureSerial"/>
+          <Item Value="BcNumber"/>
+          <Item Value="ActsName"/>
+          <Item Value="ProcName"/>
+          <Item Value="CapName"/>
+          <Item Value="ProcedureDate"/>
+          <Item Value="ActsTypeId"/>
+          <Item Value="ClosedFlag"/>
+          <Item Value="Id"/>
+          <Item Value="NextAssignedUser"/>
+          <Item Value="FolderRecordId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

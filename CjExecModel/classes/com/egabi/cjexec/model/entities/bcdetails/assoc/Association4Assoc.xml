@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Association4Assoc"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="CourtBcHearingResParties"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.CourtBcHearingResPartiesEO"
+    LockLevel="NONE">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="CourtBcHearingResParties"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.bcdetails.CourtBcHearingResPartiesEO.uk_CourtBcHearingResPartiesEO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.CourtBcHearingResPartiesEO.PartyId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ParParties"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.ParPartiesEO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ParParties"/>
+      <Attr Name="_foreignKey" Value="com.egabi.cjexec.model.entities.bcdetails.ParPartiesEO.fk_ParPartiesEO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ParPartiesEO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

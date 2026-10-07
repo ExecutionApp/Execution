@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AppealBCROVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.AppealBCROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pEntityId"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal"
+    DefaultValue="0"/>
+  <Variable
+    Name="pPoliceNo"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pKolyaEntity"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal"/>
+  <SQLQuery><![CDATA[select distinct bc.id , bc.entity_id ,(         
+          
+          
+          
+          
+ select PAR_POLICE.police_number ||' - '||PAR_POLICE.par_year||' - '|| CAS_TYPE.NAME ||' - '||POLICE.ENTITY_NAME  as code          
+         
+ from par_police_authority_report PAR_POLICE,ENTITY POLICE,BUSINESS_CASE_TYPE CAS_TYPE where          
+   PAR_POLICE.ORIGIN_ENTITY = POLICE.ID         
+  AND PAR_POLICE.BUSINESS_CASE_TYPE = CAS_TYPE.ID         
+  and    PAR_POLICE.business_case_id = bc.id          
+  ) code, (         
+ select PAR_POLICE.police_number              
+ from par_police_authority_report PAR_POLICE,ENTITY POLICE,BUSINESS_CASE_TYPE CAS_TYPE where          
+   PAR_POLICE.ORIGIN_ENTITY = POLICE.ID         
+  AND PAR_POLICE.BUSINESS_CASE_TYPE = CAS_TYPE.ID         
+  and    PAR_POLICE.business_case_id = bc.id          
+  ) police_number             
+           
+  from business_case bc inner join           
+court_bc_hearing_reservation res on bc.id = res.business_case_id         
+ where  res.sent_to_court='C'  order by id desc]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENTITY_ID"
+    Expression="ENTITY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Code"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="499"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CODE"
+    Expression="CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="499"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PoliceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="POLICE_NUMBER"
+    Expression="POLICE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="AppealBCROVOCriteria"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AppealBCROVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="AppealBCROVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItemCompound
+        Name="EntityId"
+        ViewAttribute="EntityId">
+        <ViewCriteria
+          Name="AppealBCROVOCriteria_AppealBCROVOCriteria_row_0_EntityId_itemHolder"
+          ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AppealBCROVO"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="AppealBCROVOCriteria_AppealBCROVOCriteria_row_0_EntityId_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="EntityId"
+              ViewAttribute="EntityId"
+              Operator="="
+              Conjunction="AND"
+              Value=":pEntityId"
+              IsBindVarValue="true"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="AppealBCROVOCriteria_AppealBCROVOCriteria_row_0_EntityId_itemHolder_row_1"
+            Conjunction="OR">
+            <ViewCriteriaItem
+              Name="AppealBCROVOCriteria_AppealBCROVOCriteria_row_0_EntityId_AppealBCROVOCriteria_AppealBCROVOCriteria_row_0_EntityId_itemHolder_AppealBCROVOCriteria_AppealBCROVOCriteria_row_0_EntityId_itemHolder_row_1_EntityId"
+              ViewAttribute="EntityId"
+              Operator="="
+              Conjunction="OR"
+              Value=":pKolyaEntity"
+              IsBindVarValue="true"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="AppealBCROVOCriteria1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AppealBCROVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="AppealBCROVOCriteria1_row_0"
+      UpperColumns="1"
+      Conjunction="AND">
+      <ViewCriteriaItem
+        Name="PoliceNumber"
+        ViewAttribute="PoliceNumber"
+        Operator="="
+        Conjunction="AND"
+        Value=":pPoliceNo"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+    <ViewCriteriaRow
+      Name="AppealBCROVOCriteria1_row_1"
+      Conjunction="AND"
+      UpperColumns="1">
+      <ViewCriteriaItemCompound
+        Name="EntityId"
+        ViewAttribute="EntityId">
+        <ViewCriteria
+          Name="AppealBCROVOCriteria1_AppealBCROVOCriteria1_row_1_EntityId_itemHolder"
+          ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AppealBCROVO"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="AppealBCROVOCriteria1_AppealBCROVOCriteria1_row_1_EntityId_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="EntityId"
+              ViewAttribute="EntityId"
+              Operator="="
+              Conjunction="AND"
+              Value=":pEntityId"
+              IsBindVarValue="true"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="AppealBCROVOCriteria1_AppealBCROVOCriteria1_row_1_EntityId_itemHolder_row_1"
+            Conjunction="OR">
+            <ViewCriteriaItem
+              Name="AppealBCROVOCriteria1_AppealBCROVOCriteria1_row_1_EntityId_AppealBCROVOCriteria1_AppealBCROVOCriteria1_row_1_EntityId_itemHolder_AppealBCROVOCriteria1_AppealBCROVOCriteria1_row_1_EntityId_itemHolder_row_1_EntityId"
+              ViewAttribute="EntityId"
+              Operator="="
+              Conjunction="OR"
+              Value=":pKolyaEntity"
+              IsBindVarValue="true"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="AppealsBCParties"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink34VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="CourtBcHearingReservation"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink36VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

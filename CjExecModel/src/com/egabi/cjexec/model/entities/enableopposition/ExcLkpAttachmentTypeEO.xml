@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcLkpAttachmentTypeEO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="EXC_LKP_ATTACHMENT_TYPE"
+  AliasName="ExcLkpAttachmentTypeEO"
+  BindingStyle="OracleName"
+  RowClass="com.egabi.cjexec.model.baseclasses.EntityEOImpl">
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_LKP_ATTACHMENT_TYPE"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="Name"
+    IsNotNull="true"
+    Precision="400"
+    ColumnName="NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_LKP_ATTACHMENT_TYPE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="ExcFolderActionsAttach"
+    Association="com.egabi.cjexec.model.entities.enableopposition.FkAttachmentTypeAssoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.enableopposition.FkAttachmentTypeAssoc.ExcFolderActionsAttach"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.enableopposition.FkAttachmentTypeAssoc.ExcLkpAttachmentType"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="PkExcLkpAttachmentType"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PK_EXC_LKP_ATTACHMENT_TYPE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcLkpAttachmentTypeEO.Id"/>
+    </AttrArray>
+  </Key>
+</Entity>

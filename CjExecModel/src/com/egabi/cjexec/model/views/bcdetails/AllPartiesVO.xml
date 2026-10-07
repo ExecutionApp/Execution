@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AllPartiesVO"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  SelectAllAttributes="false"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.views.bcdetails.AllPartiesVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="FormCaseDescriptionDesPartEO"
+    Entity="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO"/>
+  <EntityUsage
+    Name="FormCaseDescriptionPartiesEO"
+    Entity="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionPartiesEO"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.FormCaseDescriptionDesR02Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FormCaseDescriptionDesR02Assoc.FormCaseDescriptionParties"
+    SourceUsage="com.egabi.cjexec.model.views.bcdetails.AllPartiesVO.FormCaseDescriptionDesPartEO"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="LEFT OUTER JOIN">
+    <DesignTime>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionPartiesEO.Id"/>
+      </AttrArray>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCasePartyId"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <EntityUsage
+    Name="ParPartiesEO"
+    Entity="com.egabi.cjexec.model.entities.bcdetails.ParPartiesEO"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association5Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association5Assoc.ParParties"
+    SourceUsage="com.egabi.cjexec.model.views.bcdetails.AllPartiesVO.FormCaseDescriptionPartiesEO"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="LEFT OUTER JOIN">
+    <DesignTime>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="com.egabi.cjexec.model.entities.bcdetails.ParPartiesEO.Id"/>
+      </AttrArray>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionPartiesEO.PartyId"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <ViewAttribute
+    Name="Id"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="FormCaseDescriptionDesPartEO"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="FormCasePartyId"
+    PrecisionRule="true"
+    EntityAttrName="FormCasePartyId"
+    EntityUsage="FormCaseDescriptionDesPartEO"
+    AliasName="FORM_CASE_PARTY_ID"/>
+  <ViewAttribute
+    Name="FormCaseDesId"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FormCaseDesId"
+    EntityUsage="FormCaseDescriptionDesPartEO"
+    AliasName="FORM_CASE_DES_ID"/>
+  <ViewAttribute
+    Name="Id1"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="FormCaseDescriptionPartiesEO"
+    AliasName="ID1"/>
+  <ViewAttribute
+    Name="FormCaseDescriptionId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FormCaseDescriptionId"
+    EntityUsage="FormCaseDescriptionPartiesEO"
+    AliasName="FORM_CASE_DESCRIPTION_ID"/>
+  <ViewAttribute
+    Name="PartyId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PartyId"
+    EntityUsage="FormCaseDescriptionPartiesEO"
+    AliasName="PARTY_ID"/>
+  <ViewAttribute
+    Name="Id2"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ParPartiesEO"
+    AliasName="ID2"/>
+  <ViewAttribute
+    Name="IdNumber"
+    PrecisionRule="true"
+    EntityAttrName="IdNumber"
+    EntityUsage="ParPartiesEO"
+    AliasName="ID_NUMBER"/>
+  <ViewAttribute
+    Name="PartyFullName"
+    PrecisionRule="true"
+    EntityAttrName="PartyFullName"
+    EntityUsage="ParPartiesEO"
+    AliasName="PARTY_FULL_NAME"/>
+  <ViewAttribute
+    Name="Nickname"
+    PrecisionRule="true"
+    EntityAttrName="Nickname"
+    EntityUsage="ParPartiesEO"
+    AliasName="NICKNAME"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

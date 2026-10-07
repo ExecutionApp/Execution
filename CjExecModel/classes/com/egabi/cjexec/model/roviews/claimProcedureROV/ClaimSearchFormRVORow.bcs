@@ -1,0 +1,12 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.claimProcedureROV.ClaimSearchFormRVO
+
+package com.egabi.cjexec.model.roviews.claimProcedureROV
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="UserDegree")
+def UserDegree_ExpressionScript_Expression()
+{
+(adf.context.current.sessionScope.userInfo.entityDegree == '39' || adf.context.current.sessionScope.userInfo.errandFlag == 'Y') ? 'LOV_BusinessCaseTypeIdKoly' : 'LOV_BusinessCaseTypeId'
+}
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="executionFoldersTF_executionFoldersTF_ExecuteWithParamsPageDef"
+                Package="taskflows.transaction.executionFolders" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="SearchROV1" RangeSize="25" DataControl="CjExecAMDataControl" id="SearchROV1Iterator"
+              Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="SearchROV1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="sessionUser" NDValue="#{sessionScope.userInfo.userId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

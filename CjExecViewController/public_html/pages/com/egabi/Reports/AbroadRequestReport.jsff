@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+ <c:set var="bundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle_ar']}"/>
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+   <!--<af:panelHeader text="#{bundle.GENERAL_SEARCH_BUTTON}" id="ph1" contentStyle="padding-right: 15px;"
+                    inlineStyle="padding-right: 15px;">
+--><!--<af:panelGroupLayout id="pg46" styleClass="col-md-2 col-sm-12"/>--><!--
+    </af:panelHeader>-->
+    <af:panelGroupLayout id="pgl1" styleClass="col-md-2 col-sm-12">
+        <af:selectOneRadio id="sor1" layout="horizontal" autoSubmit="true"
+                           value="#{bindings.SearchTypeWafedeen.inputValue}">
+            <af:selectItem label="الصادر" value="1" id="si2"/>
+            <af:selectItem label="الوارد" value="2" id="si4"/>
+        </af:selectOneRadio>
+    </af:panelGroupLayout>
+    <h:panelGroup id="pg12" styleClass="row " layout="block">
+        <af:panelGroupLayout id="pg46" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{cjexecviewcontrollerBundle.PROSECUTION_KOLYA}" id="ol2"/>
+            <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" label="#{bindings.NeyabKolyaa.label}"
+                                required="#{bindings.NeyabKolyaa.hints.mandatory}" autoSubmit="true"
+                                disabled="#{(sessionScope.userInfo.entityDegree eq '39' and !sessionScope.userInfo.userPrevMap[5051]) or sessionScope.userInfo.entityDegree eq '3'}"
+                                shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc1" simple="true">
+                <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si1"/>
+                <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+            </af:selectOneChoice>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl8" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{cjexecviewcontrollerBundle.PROSECUTION_PARTIAL}" id="ol3"/>
+            <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}" label="#{bindings.NeyabGozayaa.label}"
+                                partialTriggers="soc1" shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc2"
+                                simple="true" autoSubmit="true" disabled="#{printDafatertBean.userGozaya}">
+                <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si3"/>
+                <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+            </af:selectOneChoice>
+        </af:panelGroupLayout>
+    </h:panelGroup>
+<h:panelGroup id="pg1" styleClass="row" layout="block">
+            <af:panelGroupLayout id="pgl3" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="من تاريخ ادخال" id="ol4"/>
+                <af:inputDate value="#{bindings.DateFrom.inputValue}" simple="true"
+                              shortDesc="#{bindings.DateFrom.hints.tooltip}" id="id2" autoSubmit="true"
+                              showRequired="false">
+                    <f:validator binding="#{bindings.DateFrom.validator}"/>
+                    <af:convertDateTime pattern="dd/MM/yyyy"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl4" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="الي تاريخ ادخال" id="ol5"/>
+                <af:inputDate value="#{bindings.DateTo.inputValue}" simple="true"
+                              shortDesc="#{bindings.DateTo.hints.tooltip}" id="id1" autoSubmit="true"
+                              showRequired="false">
+                    <f:validator binding="#{bindings.DateTo.validator}"/>
+                    <af:convertDateTime pattern="dd/MM/yyyy"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl5" styleClass="col-md-1 col-sm-12">
+                <af:spacer width="10" height="20" id="s1"/>
+                <af:button text="بحث" actionListener="#{printDafatertBean.searchAbroadScreen}" partialSubmit="true" id="b3"/>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl6" styleClass="col-md-1 col-sm-12">
+                <af:spacer width="10" height="20" id="s2"/>
+                <af:button  text="#{cjexecviewcontrollerBundle.PRINT_REPORT}" id="b2"
+                           disabled="#{bindings.ExcProceduresLogView1Iterator.estimatedRowCount eq '0'}"
+                           partialTriggers="b3 t1" action="#{printDafatertBean.printAbroadRequestsReport}"/>
+            </af:panelGroupLayout>
+        </h:panelGroup>
+            <af:table value="#{bindings.ExcProceduresLogView1.collectionModel}" var="row"
+              rows="#{bindings.ExcProceduresLogView1.rangeSize}" 
+              emptyText="#{bindings.ExcProceduresLogView1.viewable ?  bundle['NO_DATA'] : 'Access Denied.'}"
+              rowBandingInterval="1" selectedRowKeys="#{bindings.ExcProceduresLogView1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.ExcProceduresLogView1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.ExcProceduresLogView1.rangeSize}" columnStretching="column:c6"
+              filterModel="#{bindings.ExcProceduresLogView1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.ExcProceduresLogView1Query.processQuery}" varStatus="vs" id="t1"
+                      scrollPolicy="page">
+        <af:column  width="200" sortProperty="#{bindings.ExcProceduresLogView1.hints.LoggedEntityName.name}" filterable="true"
+                   sortable="true" headerText="النيابة" id="c1" minimumWidth="12">
+            <af:outputText value="#{bindings.SearchTypeWafedeen.inputValue eq '1' ? row.CaseEntityName : row.LoggedEntityName}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.LoggedEntityName.tooltip}" id="ot1"/>
+        </af:column>
+        <!--<af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.CaseEntityName.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.CaseEntityName.label}" id="c2">
+            <af:outputText value="#{row.CaseEntityName}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.CaseEntityName.tooltip}" id="ot2"/>
+        </af:column>-->
+        <af:column width="150" sortProperty="#{bindings.ExcProceduresLogView1.hints.ProcedureDate.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.ProcedureDate.label}" id="c4"
+                   minimumWidth="12">
+            <f:facet name="filter">
+                <af:inputDate value="#{bindings.ExcProceduresLogView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ProcedureDate.value}"
+                              id="id3">
+                    <af:convertDateTime pattern="#{bindings.ExcProceduresLogView1.hints.ProcedureDate.format}"/>
+                </af:inputDate>
+            </f:facet>
+            <af:outputText value="#{row.ProcedureDate}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.ProcedureDate.tooltip}" id="ot4">
+                <af:convertDateTime pattern="#{bindings.ExcProceduresLogView1.hints.ProcedureDate.format}"/>
+            </af:outputText>
+        </af:column>
+        <af:column width="200" sortProperty="#{bindings.ExcProceduresLogView1.hints.ActionTypeName.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.ActionTypeName.label}" id="c5"
+                   minimumWidth="12">
+            <af:outputText value="#{row.ActionTypeName}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.ActionTypeName.tooltip}" id="ot5"/>
+        </af:column>
+        <af:column width="150" sortProperty="#{bindings.ExcProceduresLogView1.hints.FullName.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.FullName.label}" id="c6"
+                   minimumWidth="12">
+            <af:outputText value="#{row.FullName}" shortDesc="#{bindings.ExcProceduresLogView1.hints.FullName.tooltip}"
+                           id="ot6"/>
+        </af:column>
+        <!--<af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.SequenceNumberLong.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.SequenceNumberLong.label}"
+                   id="c7">
+            <af:outputText value="#{row.SequenceNumberLong}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.SequenceNumberLong.tooltip}" id="ot7"/>
+        </af:column>-->
+        <af:column width="150" sortProperty="#{bindings.ExcProceduresLogView1.hints.CreatedDate.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.CreatedDate.label}" id="c8"
+                   minimumWidth="12">
+            <f:facet name="filter">
+                <af:inputDate value="#{bindings.ExcProceduresLogView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreatedDate.value}"
+                              id="id4">
+                    <af:convertDateTime pattern="#{bindings.ExcProceduresLogView1.hints.CreatedDate.format}"/>
+                </af:inputDate>
+            </f:facet>
+            <af:outputText value="#{row.CreatedDate}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.CreatedDate.tooltip}" id="ot8">
+                <af:convertDateTime pattern="#{bindings.ExcProceduresLogView1.hints.CreatedDate.format}"/>
+            </af:outputText>
+        </af:column>
+    </af:table>
+</ui:composition>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="OppositionPagePageDef"
+                Package="pages.com.egabi.oppositions">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="OppositionsTF1" taskFlowId="/WEB-INF/taskflows/oppositions/Oppositions-TF.xml#Oppositions-TF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="folderActionId" value="#{48}"/>
+        <parameter id="resPartyId" value="#{7523}"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

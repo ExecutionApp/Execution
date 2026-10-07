@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HasrDafater" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="261e9ab5-f547-4d50-a61c-d8b74dcc4acd">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_PATH" class="java.lang.String"/>
+	<parameter name="createdDateBind" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="gozeyaIdBind" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="createdDateToBind" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[/* Formatted on 21/08/2020 11:21:06 ص (QP5 v5.287) */
+SELECT NVL (COUNT_GONAH, 0) COUNT_GONAH,
+       NVL (COUNT_GENAYAT, 0) COUNT_GENAYAT,
+       NVL (TAB1.GOZEYA_ENTITY_NAME, TAB2.GOZEYA_ENTITY_NAME)
+          GOZEYA_ENTITY_NAME,
+       NVL (TAB2.PARENT_ENTITY_NAME, TAB1.PARENT_ENTITY_NAME)
+          PARENT_ENTITY_NAME,
+       NVL (TAB1.USER_NAME, TAB2.USER_NAME) USER_NAME
+  FROM (  SELECT COUNT (FOLD.ID) COUNT_GONAH,
+                 PAREN.ENTITY_NAME GOZEYA_ENTITY_NAME,
+                 Master.ENTITY_NAME PARENT_ENTITY_NAME,
+                 USR.USERNAME USER_NAME,
+                 PAREN.ID
+            FROM EXC_FOLDER_DATA FOLD,
+                 ENTITY GOZEYA,
+                 ENTITY PAREN,
+                 ENTITY Master,
+                 SEC_USERS USR
+           WHERE     FOLD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID
+                 AND FOLD.CREATED_BY = USR.USERNAME
+                 AND FOLD.CRIMINAL_TYPE = 1
+                 AND (   FOLD.POLICE_STATION_ENTITY_ID IN
+                            (SELECT id
+                               FROM entity
+                              WHERE PARENT_ENTITY_ID = $P{gozeyaIdBind})
+                      OR master.ID = $P{gozeyaIdBind})
+                 AND (   FOLD.CREATED_DATE BETWEEN TO_DATE ( $P{createdDateBind},
+                                                            'yyyy-MM-dd')
+                                               AND TO_DATE (
+                                                      $P{createdDateToBind},
+                                                      'yyyy-MM-dd') +1
+                      OR to_char(FOLD.CREATED_DATE, 'yyyy-MM-dd') =$P{createdDateBind})
+        GROUP BY PAREN.ID,
+                 PAREN.ENTITY_NAME,
+                 master.ENTITY_NAME,
+                 USR.USERNAME) TAB1
+       FULL OUTER JOIN
+       (  SELECT COUNT (FOLD.ID) COUNT_GENAYAT,
+                 GOZEYA.ID,
+                 GOZEYA.ENTITY_NAME GOZEYA_ENTITY_NAME,
+                 GOZEYA.ENTITY_NAME PARENT_ENTITY_NAME,
+                 USR.USERNAME USER_NAME
+            FROM EXC_FOLDER_DATA FOLD,
+                 ENTITY GOZEYA,
+                 ENTITY PAREN,
+                 SEC_USERS USR
+           WHERE     FOLD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+                 AND FOLD.CREATED_BY = USR.USERNAME
+                 AND FOLD.CRIMINAL_TYPE = 2
+                 AND (   (FOLD.POLICE_STATION_ENTITY_ID =
+                             (SELECT PARENT_ENTITY_ID
+                                FROM entity
+                               WHERE id = $P{gozeyaIdBind}))
+                      OR (FOLD.POLICE_STATION_ENTITY_ID = $P{gozeyaIdBind}))
+                 AND (   FOLD.CREATED_DATE BETWEEN TO_DATE ( $P{createdDateBind},
+                                                            'yyyy-MM-dd')
+                                               AND TO_DATE (
+                                                      $P{createdDateToBind},
+                                                      'yyyy-MM-dd')+1
+                      OR to_char(FOLD.CREATED_DATE, 'yyyy-MM-dd') =$P{createdDateBind})
+        GROUP BY GOZEYA.ID,
+                 GOZEYA.ENTITY_NAME,
+                 PAREN.ENTITY_NAME,
+                 USR.USERNAME) TAB2
+          ON TAB1.ID = TAB2.ID]]>
+	</queryString>
+	<field name="COUNT_GONAH" class="java.math.BigDecimal"/>
+	<field name="COUNT_GENAYAT" class="java.math.BigDecimal"/>
+	<field name="GOZEYA_ENTITY_NAME" class="java.lang.String"/>
+	<field name="PARENT_ENTITY_NAME" class="java.lang.String"/>
+	<field name="USER_NAME" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="128" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement mode="Opaque" x="0" y="0" width="115" height="79" uuid="c552c988-ca4b-44bb-955b-09fd6e244d2d"/>
+				<imageExpression><![CDATA[$P{REPORT_PATH} + "logo-ppo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="140" y="88" width="100" height="20" uuid="5f1d842a-2322-4a06-ab06-f2a8c704b5d0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[التاريخ من :- ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="88" width="100" height="20" uuid="cbf6b36e-e3d3-4fe5-a3c6-fd8a7635023c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createdDateBind}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="108" width="100" height="20" uuid="8d47d5d0-2075-4e28-87e7-217b37acc472"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[التاريخ إلى :- ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="108" width="100" height="20" uuid="4acbc6ee-d69a-47ef-bab8-a3a52ad0feb1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createdDateToBind}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="172" y="34" width="203" height="20" uuid="013ceef5-604a-4a89-a958-c500558189dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[معدل إدراج الحصر اليومي]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="377" y="34" width="217" height="20" uuid="bf1044fe-107b-4819-800c-5922b92fd27f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARENT_ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="377" y="59" width="217" height="20" uuid="0169cc03-3e2c-4843-bc53-95343e09a6fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GOZEYA_ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="454" y="0" width="140" height="20" uuid="7a2d866d-ebc2-44c5-ac17-66cfd71ff4a2"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[القطاع]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="314" y="0" width="140" height="20" uuid="de1cd29d-5244-46ec-a739-f3f927f07b8d"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[النيابة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="0" width="132" height="20" uuid="40fc5e61-88a3-47ec-a005-60e074957842"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[اسم المستخدم]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="91" height="20" uuid="a0bb8336-7593-4837-944f-c0c0a151cdcc"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[جنايات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="0" width="91" height="20" uuid="5837c68b-9a61-4e4b-a617-00488e187b06"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[جنح]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="454" y="0" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="dd236f39-6e78-4cbf-93fc-c2f1bfa683dc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARENT_ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="314" y="0" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="6d0023ab-1a97-405d-a5d4-f5c4f097632b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GOZEYA_ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="182" y="0" width="132" height="20" isPrintWhenDetailOverflows="true" uuid="6bfe8b18-c143-4ecb-bfa4-e2a6a4851dde"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{USER_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="91" height="20" isPrintWhenDetailOverflows="true" uuid="2a275f29-4365-468b-a7cf-4778e4d7f8c9"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COUNT_GENAYAT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="91" y="0" width="91" height="20" isPrintWhenDetailOverflows="true" uuid="c01bd3d8-7df6-4e49-b4d2-f08e17670005"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COUNT_GONAH}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

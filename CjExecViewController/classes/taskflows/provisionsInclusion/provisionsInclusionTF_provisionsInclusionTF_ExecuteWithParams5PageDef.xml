@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams5PageDef"
+                Package="taskflows.provisionsInclusion" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ExcCourtBcSessionJudgmentVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExcCourtBcSessionJudgmentVO1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="ResIdParam" NDValue="#{pageFlowScope.provisionsInclusionBean.resId}"
+                 NDType="java.math.BigDecimal"/>
+    </action>
+  </bindings>
+</pageDefinition>

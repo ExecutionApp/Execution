@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Association25Assoc"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="ExcFolderData"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.ExcFolderDataEO"
+    LockLevel="NONE">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcFolderData"/>
+      <Attr Name="_foreignKey" Value="com.egabi.cjexec.model.entities.bcdetails.ExcFolderDataEO.ExcFolderDataIdCheck"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcFolderDataEO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ExcClaims"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.claimProcedureEntities.ExcClaimsEO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcClaims"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.claimProcedureEntities.ExcClaimsEO.fk_ExcClaimsEO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.claimProcedureEntities.ExcClaimsEO.ExcFolderId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

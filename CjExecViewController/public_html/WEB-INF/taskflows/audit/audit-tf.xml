@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="audit-tf">
+    <default-activity>methodCall1</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>auditSimpleBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.audit.AuditSimple</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="methodCall1">
+      <method>#{pageFlowScope.auditSimpleBean.userRoles}</method>
+      <outcome>
+        <to-string/>
+      </outcome>
+    </method-call>
+    <view id="auditSimpleFrag">
+      <page>/pages/com/egabi/audit/auditSimpleFrag.jsff</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>methodCall1</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>go</from-outcome>
+        <to-activity-id>auditFrag</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>go</from-outcome>
+        <to-activity-id>auditSimpleFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

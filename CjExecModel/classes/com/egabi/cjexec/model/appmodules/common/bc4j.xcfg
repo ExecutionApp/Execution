@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="com.egabi.cjexec.model.appmodules.CjExecAM">
+      <AppModuleConfig jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.CjExecAM" DeployPlatform="LOCAL" name="CjExecAMLocal">
+         <AM-Pooling jbo.ampool.minavailablesize="50" jbo.ampool.maxpoolsize="100" jbo.doconnectionpooling="true" jbo.ampool.maxavailablesize="100" jbo.recyclethreshold="50" jbo.ampool.initpoolsize="100"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.CjExecAM"/>
+         <Custom ns0:JDBCDataSource="CJEXECDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.CjExecAM" DeployPlatform="LOCAL" name="CjExecAMShared">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.resetnontransactionalstate="false" jbo.ampool.minavailablesize="50" jbo.ampool.maxpoolsize="100" jbo.ampool.maxavailablesize="100" jbo.recyclethreshold="50" jbo.ampool.isuseexclusive="false" jbo.ampool.initpoolsize="100"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.CjExecAM"/>
+         <Custom ns0:JDBCDataSource="CJEXECDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="com.egabi.cjexec.model.appmodules.OppositionAM">
+      <AppModuleConfig jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.OppositionAM" DeployPlatform="LOCAL" name="OppositionAMLocal">
+         <AM-Pooling jbo.ampool.minavailablesize="2" jbo.ampool.maxpoolsize="2" jbo.doconnectionpooling="true" jbo.ampool.maxavailablesize="2" jbo.recyclethreshold="2"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.OppositionAM"/>
+         <Custom ns0:JDBCDataSource="CJEXECDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.OppositionAM" DeployPlatform="LOCAL" name="OppositionAMShared">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.resetnontransactionalstate="false" jbo.ampool.minavailablesize="2" jbo.ampool.maxpoolsize="2" jbo.ampool.maxavailablesize="2" jbo.recyclethreshold="2" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.OppositionAM"/>
+         <Custom ns0:JDBCDataSource="CJEXECDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="com.egabi.cjexec.model.appmodules.SimplifiedModeAM">
+      <AppModuleConfig jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.SimplifiedModeAM" DeployPlatform="LOCAL" name="SimplifiedModeAMLocal">
+         <AM-Pooling jbo.ampool.minavailablesize="50" jbo.ampool.maxpoolsize="100" jbo.doconnectionpooling="true" jbo.ampool.maxavailablesize="100" jbo.recyclethreshold="50" jbo.ampool.initpoolsize="100"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.SimplifiedModeAM"/>
+         <Custom ns0:JDBCDataSource="CJEXECDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.SimplifiedModeAM" DeployPlatform="LOCAL" name="SimplifiedModeAMShared">
+         <AM-Pooling jbo.ampool.minavailablesize="50" jbo.ampool.maxpoolsize="100" jbo.doconnectionpooling="true" jbo.ampool.maxavailablesize="100" jbo.recyclethreshold="50" jbo.ampool.initpoolsize="100"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.SimplifiedModeAM"/>
+         <Custom ns0:JDBCDataSource="CJEXECDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="com.egabi.cjexec.model.appmodules.UtilsAppAM"/>
+   <AppModuleConfigBag ApplicationName="com.egabi.cjexec.model.appmodules.UtilsAppModuleAM">
+      <AppModuleConfig jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.UtilsAppModuleAM" DeployPlatform="LOCAL" name="UtilsAppModuleAMLocal">
+         <AM-Pooling jbo.ampool.minavailablesize="400" jbo.ampool.maxpoolsize="1000" jbo.doconnectionpooling="true" jbo.ampool.maxavailablesize="500" jbo.recyclethreshold="500" jbo.ampool.initpoolsize="100"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.UtilsAppModuleAM"/>
+         <Custom ns0:JDBCDataSource="CJEXECDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.UtilsAppModuleAM" DeployPlatform="LOCAL" name="UtilsAppModuleAMShared">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.resetnontransactionalstate="false" jbo.ampool.minavailablesize="400" jbo.ampool.maxpoolsize="1000" jbo.ampool.maxavailablesize="500" jbo.recyclethreshold="500" jbo.ampool.isuseexclusive="false" jbo.ampool.initpoolsize="100"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.UtilsAppModuleAM"/>
+         <Custom ns0:JDBCDataSource="CJEXECDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="com.egabi.cjexec.model.appmodules.ClaimProcedureAM">
+      <AppModuleConfig name="ClaimProcedureAMLocal" jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.ClaimProcedureAM" DeployPlatform="LOCAL">
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.ClaimProcedureAM"/>
+         <Custom ns0:JDBCDataSource="java:comp/env/jdbc/PRE_PRODCJDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="ClaimProcedureAMShared" jbo.project="com.egabi.cjexec.model.CjExecModel" ApplicationName="com.egabi.cjexec.model.appmodules.ClaimProcedureAM" DeployPlatform="LOCAL">
+         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.egabi.cjexec.model.appmodules.ClaimProcedureAM"/>
+         <Custom ns0:JDBCDataSource="java:comp/env/jdbc/PRE_PRODCJDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

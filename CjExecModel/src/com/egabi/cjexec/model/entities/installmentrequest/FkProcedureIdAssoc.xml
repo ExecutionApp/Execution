@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkProcedureIdAssoc"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="ExcFolderProceduresEO1"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.installmentrequest.ExcFolderProceduresEO"
+    LockLevel="NONE">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcFolderProceduresEO1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.installmentrequest.ExcFolderProceduresEO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ExcFolderActionsEO1"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.installmentrequest.ExcFolderActionsEO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcFolderActionsEO1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.installmentrequest.ExcFolderActionsEO.ProcedureId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="searchAllFoldersTF_searchAllFoldersTF_ExecuteWithParamsPageDef"
+                Package="taskflows.transaction.executionFolders" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ExecPartySessionJudgmentsROV1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExecPartySessionJudgmentsROV1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="P_PARTY_ID" NDValue="#{pageFlowScope.party_id}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

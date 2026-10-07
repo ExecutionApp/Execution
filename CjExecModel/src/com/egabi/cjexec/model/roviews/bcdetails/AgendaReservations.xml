@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AgendaReservations"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.AgendaReservations_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="AgendaDateId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AgendaReservations"/>
+  </Variable>
+  <Variable
+    Name="postpon"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AgendaReservations"/>
+  </Variable>
+  <Variable
+    Name="judg"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AgendaReservations"/>
+  </Variable>
+  <Variable
+    Name="nojudg"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AgendaReservations"/>
+  </Variable>
+  <Variable
+    Name="fold"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AgendaReservations"/>
+  </Variable>
+  <Variable
+    Name="pDeg"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"
+      CodeSourceName="AgendaReservations"/>
+  </Variable>
+  <SQLQuery><![CDATA[select        
+       
+RESERVATION.BUSINESS_CASE_ID , RESERVATION.id  ,   RESERVATION.created_date , RES_PARTIES.bc_degree_spec_id  ,    
+PAR_POLICE.PAR_YEAR || '/' || PAR_POLICE.POLICE_NUMBER || '/' || CAS_TYPE.NAME|| '/' || POLICE.ENTITY_NAME   BUSINESS_CASE_NUMBER ,       
+RESERVATION.CIRCLE_HEARING_DATE_ID ,circle.HEARING_DATE, RES_PARTIES.party_id , parties.PARTY_FULL_NAME ,       
+RES_PARTIES.POSTPONED, RES_PARTIES.ATTENDANCE , folder_data.JUDGMENT_TEXT  ,    
+    
+DECODE (RES_PARTIES.bc_degree_spec_id ,1, 'أول درجة' , 2 , 'معارضة' , 3 ,'إستئناف' ,4 ,'معارضة إستئنافية')  Degree_Name  ,    
+    
+(select COURT_CIRCLES_DATES_HEARING.HEARING_DATE  from COURT_CIRCLES_DATES_HEARING  
+inner join COURT_BC_HEARING_RESERVATION   
+on  COURT_CIRCLES_DATES_HEARING.id = COURT_BC_HEARING_RESERVATION.circle_hearing_date_id    
+  
+ where COURT_BC_HEARING_RESERVATION.id in  
+(select max ( COURT_BC_HEARING_RES_PARTIES.COURT_BC_HEARING_RES_id ) from COURT_BC_HEARING_RES_PARTIES where    
+COURT_BC_HEARING_RES_PARTIES.party_id = RES_PARTIES.party_id   
+and ( (RES_PARTIES.ATTENDANCE is not null and  RES_PARTIES.POSTPONED = 0 and COURT_BC_HEARING_RES_PARTIES.bc_degree_spec_id = RES_PARTIES.bc_degree_spec_id+1 )    
+or (RES_PARTIES.POSTPONED = 1 and COURT_BC_HEARING_RES_PARTIES.bc_degree_spec_id = 1))    
+    
+    
+)) next_reservation_date    
+     
+     
+     
+ ,  (select EXC_FOLDER_PROCEDURES.PROCEDURE_DATE from EXC_FOLDER_PROCEDURES where id in(    
+ ( select  max (EXC_FOLDER_actions.PROCEDURE_ID ) from EXC_FOLDER_actions where EXC_FOLDER_actions.folder_record_id in (  
+ select exc_folder_data.id from exc_folder_data inner join COURT_BC_HEARING_RES_PARTIES on exc_folder_data.RES_PARTY_ID = COURT_BC_HEARING_RES_PARTIES.id    
+ where COURT_BC_HEARING_RES_PARTIES.bc_degree_spec_id = RES_PARTIES.bc_degree_spec_id-1  
+ and COURT_BC_HEARING_RES_PARTIES.ATTENDANCE is not null and  COURT_BC_HEARING_RES_PARTIES.POSTPONED = 0 and COURT_BC_HEARING_RES_PARTIES.party_id = RES_PARTIES.party_id   
+ )  
+   
+   
+   
+ and EXC_FOLDER_actions.action_type in (1,2,3,8,9,24)   
+   
+   
+ )) )last_action        
+       
+     
+       
+       
+from         
+       
+       
+COURT_BC_HEARING_RESERVATION RESERVATION inner join COURT_BC_HEARING_RES_PARTIES RES_PARTIES       
+on RESERVATION.id = RES_PARTIES.COURT_BC_HEARING_RES_id       
+inner join COURT_CIRCLES_DATES_HEARING circle on circle.id = RESERVATION.CIRCLE_HEARING_DATE_ID       
+INNER join par_parties parties on parties.id = RES_PARTIES.PARTY_ID       
+      
+inner join PAR_POLICE_AUTHORITY_REPORT PAR_POLICE on PAR_POLICE.BUSINESS_CASE_ID = RESERVATION.BUSINESS_CASE_ID      
+inner join BUSINESS_CASE_TYPE CAS_TYPE on CAS_TYPE.id = PAR_POLICE.BUSINESS_CASE_TYPE      
+inner join entity POLICE on  POLICE.id = PAR_POLICE.ORIGIN_ENTITY      
+INNER join par_parties parties on parties.id = RES_PARTIES.PARTY_ID      
+      
+inner join COURT_CIRCLES_DATES_HEARING cou on cou.id = RESERVATION.CIRCLE_HEARING_DATE_ID 
+inner join COURT_CIRCLES_DATES_HEARING cc on cou.HEARING_DATE = cc.HEARING_DATE and  COU.ENTITY_ID  =  cc.ENTITY_ID  
+     
+left outer join exc_folder_data folder_data on folder_data.RES_PARTY_ID = RES_PARTIES.id      
+       
+ where  
+   cc.id=  :AgendaDateId   
+  
+-- delay  
+  and (:postpon = 99 or RES_PARTIES.POSTPONED = :postpon )  
+     
+   -- with judge  
+  and ( :judg = 99 or ( RES_PARTIES.POSTPONED = 0 and  RES_PARTIES.ATTENDANCE is not null ))  
+    
+  -- without judge  
+    and ( :nojudg = 99 or ( RES_PARTIES.POSTPONED = 0 and  RES_PARTIES.ATTENDANCE is  null ))  
+      
+      and ( :pDeg = 99 or (RES_PARTIES.bc_degree_spec_id = :pDeg )) 
+   and (:fold = 99 or folder_data.FOLDER_TYPE = :fold)  
+ order by  RESERVATION.BUSINESS_CASE_ID    desc]]></SQLQuery>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_ID"
+    Expression="BUSINESS_CASE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Id"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATED_DATE"
+    Expression="CREATED_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="BcDegreeSpecId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BC_DEGREE_SPEC_ID"
+    Expression="BC_DEGREE_SPEC_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BusinessCaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="586"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NUMBER"
+    Expression="BUSINESS_CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="586"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CircleHearingDateId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CIRCLE_HEARING_DATE_ID"
+    Expression="CIRCLE_HEARING_DATE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HearingDate"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="PartyId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARTY_ID"
+    Expression="PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyFullName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_FULL_NAME"
+    Expression="PARTY_FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Postponed"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="POSTPONED"
+    Expression="POSTPONED"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Attendance"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ATTENDANCE"
+    Expression="ATTENDANCE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JudgmentText"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JUDGMENT_TEXT"
+    Expression="JUDGMENT_TEXT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DegreeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="32"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEGREE_NAME"
+    Expression="DEGREE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="32"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NextReservationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="NEXT_RESERVATION_DATE"
+    Expression="NEXT_RESERVATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LastAction"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="NUMBER"
+    AliasName="LAST_ACTION"
+    Expression="LAST_ACTION"
+    SQLType="DATE"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+    <Item Value="PartyId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

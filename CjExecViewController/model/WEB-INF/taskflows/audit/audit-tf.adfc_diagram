@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">methodCall1</property>
+      <property
+         name="x">247.0</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>methodCall1&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="y">70.04004</property>
+      <property
+         name="exceptionHandler">false</property>
+   </MethodCall>
+   <View
+      id="View8">
+      <property
+         name="activityId">auditSimpleFrag</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">56.6875</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>auditSimpleFrag&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">135.09766</property>
+      <property
+         name="page">/pages/com/egabi/audit/auditSimpleFrag.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase9"
+      from="MethodCall3"
+      to="View8">
+      <property
+         name="fromOutcome">go</property>
+      <property
+         name="sdm:polyPoints">L50,206.0,69.68945,97.6875,134.74707,R50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase7"
+      from="MethodCall3">
+      <property
+         name="tosrcid">__5</property>
+      <property
+         name="fromOutcome">go</property>
+      <property
+         name="fromsrcid">__2</property>
+   </ControlFlowCase>
+</SDM>

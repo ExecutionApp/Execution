@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">ProvisionInclusion</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">325.0</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>ProvisionInclusion&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">121.5459</property>
+      <property
+         name="page">/provisionInclusionSM/ProvisionInclusion.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <TaskFlowCall
+      id="TaskFlowCall3">
+      <property
+         name="runAsDialog">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>nIdServiceTF&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="activityId">nIdServiceTF</property>
+      <property
+         name="x">348.67773</property>
+      <property
+         name="y">306.1494</property>
+      <property
+         name="documentReference">/WEB-INF/taskflows/nIdService/nIdServiceTF.xml</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="taskFlowId">nIdServiceTF</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="TaskFlowCall3">
+      <property
+         name="fromOutcome">nId</property>
+      <property
+         name="sdm:polyPoints">B50,325.0,175.19531,348.67773,251.79883,T50</property>
+   </ControlFlowCase>
+</SDM>

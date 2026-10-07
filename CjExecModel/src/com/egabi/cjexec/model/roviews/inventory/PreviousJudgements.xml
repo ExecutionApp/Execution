@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PreviousJudgements"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.inventory.PreviousJudgements_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="PARTY_ID"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT (   FD.YEAR 
+        || '/' 
+        || FD.SEQUENCE_NUMBER 
+        || '/' 
+        || decode (fd.FOLDER_TYPE , 2 , 'حبس' ,3 ,'غرامة',5,'امن دوله حبس' ,6,'امن دوله غرامة',7,'براْة')  ) 
+          SEQ_N, 
+       bcd.name DEGREE_NAME, 
+       bcd.id degree_id, 
+       FD.JUDGMENT_TEXT JUDGEMENT_RESOLUTION, 
+       JUD_TYP.ID JUD_TYPE, 
+       HEAR.hearing_date hearing_date 
+  FROM EXC_FOLDER_DATA fd, 
+       COURT_BC_HEARING_RES_PARTIES rp, 
+       COURT_BC_HEARING_RESERVATION res, 
+       COURT_CIRCLES_DATES_HEARING hear, 
+       business_CASE_DEGrees bcd, 
+       EXC_COURT_BC_SESSION_JUDGMENT SESS, 
+       EXC_LKP_JUDGMENT_TYPES JUD_TYP 
+ WHERE                                  -----------join----------------------- 
+       FD.RES_PARTY_ID = RP.ID AND RP.PARTY_ID = :PARTY_ID 
+         AND RES.CIRCLE_HEARING_DATE_ID = HEAR.ID 
+         AND RP.COURT_BC_HEARING_RES_ID = RES.ID 
+         AND hear.BC_DEGREE_ID = bcd.id 
+         AND RES.ID = SESS.COURT_BC_HEARING_RES_ID 
+AND SESS.JUDGMENT_TYPE = JUD_TYP.ID 
+ORDER BY hearing_date]]></SQLQuery>
+  <ViewAttribute
+    Name="SeqN"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEQ_N"
+    Expression="SEQ_N"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="176"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DegreeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEGREE_NAME"
+    Expression="DEGREE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DegreeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DEGREE_ID"
+    Expression="DEGREE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JudgementResolution"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JUDGEMENT_RESOLUTION"
+    Expression="JUDGEMENT_RESOLUTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JudType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="JUD_TYPE"
+    Expression="JUD_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="DATE"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MotalbatDataReport"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.roviews.reports.MotalbatDataReportImpl"
+  PageIterMode="Full"
+  ComponentInterface="com.egabi.cjexec.model.roviews.reports.common.MotalbatDataReport"
+  ClientProxyName="com.egabi.cjexec.model.roviews.reports.client.MotalbatDataReportClient">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="YEAR"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="Nyabaa"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="DATE_FROM"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="DATE_TO"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="ClaimFolderType"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="folderCriminalType"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="END_NUM"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="START_NUM"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="degId"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <SQLQuery><![CDATA[SELECT C.ID, to_number(C.CLAIM_NUMBER ) as CLAIM_NUMBER,                                             
+C.PARTY_NAME,                                  
+c.ID_NUMBER ,           
+f.criminal_type ,                                
+C.CLAIM_FOLDER_ID,                                             
+Y.CLAIM_YEAR,                                             
+C.CLAIM_TOTAL_ORIGINAL,--(C.CLAIM_TOTAL_ORIGINAL - C.FIXED_PENALTY_AMOUNT )                                  
+C.CLAIM_TOTAL,  C.COMBINED_ORDER ,                             
+C.FIXED_PENALTY_AMOUNT,             
+C.cancel_amount ,             
+C.CLAIM_SEQUENCE_NUMBER,                                                      
+C.ORIGINAL_PENALTY_DUE_DATE,   r.BC_DEGREE_SPEC_ID    ,                                           
+C.CREATED_DATE ,                                             
+P.POLICE_NUMBER || '/' || P.PAR_YEAR || '/' || T.NAME || '/' || E.ENTITY_NAME   CASE_NUMBER,                                    
+(SELECT USERNAME FROM SEC_USERS WHERE ID = C.CREATED_BY) CREATED_BY                                     
+                                            
+FROM EXC_CLAIMS C, BUSINESS_CASE B, EXC_CLAIM_YEARS Y,  exc_folder_data f ,                                           
+PAR_POLICE_AUTHORITY_REPORT P, ENTITY E, BUSINESS_CASE_TYPE T   , court_bc_hearing_res_parties r                                                  
+                                            
+WHERE C.BUSINESS_CASE_ID = B.ID   
+and r.id = f.res_party_id 
+AND C.CLAIM_YEAR = Y.ID              
+AND C.exc_folder_id = f.id                                                  
+AND C.BUSINESS_CASE_ID = P.BUSINESS_CASE_ID                                                      
+AND P.ORIGIN_ENTITY = E.ID                                                      
+AND P.BUSINESS_CASE_TYPE = T.ID                                                     
+AND Y.ID = :YEAR  
+and   r.BC_DEGREE_SPEC_ID  = :degId 
+and f.criminal_type =  :folderCriminalType       
+AND c.CLAIM_POLICE_STATION_ID =:Nyabaa                                      
+and C.CLAIM_FOLDER_ID = :ClaimFolderType                                
+and C.DELETED_FLAG = 'N'                             
+AND (:DATE_FROM is null or C.CREATED_DATE BETWEEN TO_DATE(:DATE_FROM, 'dd/mm/yyyy')                                                                     
+  AND TO_DATE(:DATE_TO , 'dd/mm/yyyy')+1    )        
+       
+  and ( :END_NUM is null or ( to_number(C.CLAIM_NUMBER ) >= :START_NUM  and to_number(C.CLAIM_NUMBER ) <= :END_NUM))     
+order by C.CLAIM_NUMBER asc]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ClaimNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CLAIM_NUMBER"
+    Expression="CLAIM_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME"
+    Expression="PARTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport.PartyName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_NUMBER"
+    Expression="ID_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CriminalType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CRIMINAL_TYPE"
+    Expression="CRIMINAL_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ClaimFolderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLAIM_FOLDER_ID"
+    Expression="CLAIM_FOLDER_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClaimYear"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLAIM_YEAR"
+    Expression="CLAIM_YEAR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport.ClaimYear_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClaimTotalOriginal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CLAIM_TOTAL_ORIGINAL"
+    Expression="CLAIM_TOTAL_ORIGINAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport.ClaimTotalOriginal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClaimTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CLAIM_TOTAL"
+    Expression="CLAIM_TOTAL"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CombinedOrder"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="COMBINED_ORDER"
+    Expression="COMBINED_ORDER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FixedPenaltyAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FIXED_PENALTY_AMOUNT"
+    Expression="FIXED_PENALTY_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CancelAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CANCEL_AMOUNT"
+    Expression="CANCEL_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ClaimSequenceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLAIM_SEQUENCE_NUMBER"
+    Expression="CLAIM_SEQUENCE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport.ClaimSequenceNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OriginalPenaltyDueDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORIGINAL_PENALTY_DUE_DATE"
+    Expression="ORIGINAL_PENALTY_DUE_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport.OriginalPenaltyDueDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BcDegreeSpecId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BC_DEGREE_SPEC_ID"
+    Expression="BC_DEGREE_SPEC_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATED_DATE"
+    Expression="CREATED_DATE"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMAT
+          ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport.CreatedDate_FMT_FORMAT"/>
+        <FMT_FORMATTER
+          ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport.CreatedDate_FMT_FORMATTER"/>
+        <CONTROLTYPE
+          Value="date"/>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport.CreatedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="586"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_NUMBER"
+    Expression="CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="586"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATED_BY"
+    SQLType="VARCHAR"
+    Expression="CREATED_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.MotalbatDataReport.CreatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="executeMotalbatView"
+      MethodName="executeMotalbatView">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="claimFolderType"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="criminalType"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="casYear"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="nyabaaGozaya"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="dateFrom"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="dateTo"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="startNum"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="endNum"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="degId"
+        Type="java.math.BigDecimal"/>
+    </Method>
+  </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

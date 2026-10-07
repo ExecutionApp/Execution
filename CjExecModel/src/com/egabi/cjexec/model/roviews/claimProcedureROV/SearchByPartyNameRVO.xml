@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SearchByPartyNameRVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full"
+  FetchSize="5">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyNameRVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pSearchType"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="SearchByPartyNameRVO"/>
+  </Variable>
+  <Variable
+    Name="pK"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="SearchByPartyNameRVO"/>
+  </Variable>
+  <SQLQuery><![CDATA[select distinct ( par_parties.id ) as id ,          
+             
+par_parties.PARTY_FIXED_FULL_NAME ,  par_parties.par_id ,par_parties.ADDRESS,par_parties.id_number ,par_parties.CREATED_BY_BUSINESS_CASE_ID            
+     
+    ,  POLICE.PARENT_ENTITY_ID  as goza, ENTITY_Parent.PARENT_ENTITY_ID as kol  
+,     
+     
+PAR_POLICE.PAR_YEAR || '/' || PAR_POLICE.POLICE_NUMBER || '/' || CAS_TYPE.NAME|| '/' || POLICE.ENTITY_NAME AS BUSINESS_CASE_NUMBER                                        
+     
+     
+from COURT_BC_HEARING_RES_PARTIES  resPart inner join par_parties              
+on resPart.PARTY_ID   = par_parties .id             
+inner join exc_folder_data fold on              
+fold.res_party_id = resPart.id       
+inner join PAR_POLICE_AUTHORITY_REPORT PAR_POLICE on par_parties.par_id = PAR_POLICE.ID   ,BUSINESS_CASE_TYPE CAS_TYPE ,  ENTITY POLICE    , ENTITY ENTITY_Parent         
+       
+where resPart.ATTENDANCE is not null        
+     and ENTITY_Parent.id =   POLICE.PARENT_ENTITY_ID      
+AND PAR_POLICE.ORIGIN_ENTITY = POLICE.ID  AND PAR_POLICE.BUSINESS_CASE_TYPE = CAS_TYPE.ID      
+     and (  0=  :pK or (POLICE.PARENT_ENTITY_ID  =  :pK or  ENTITY_Parent.PARENT_ENTITY_ID = :pK))  
+     
+  and  1 = :pSearchType]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyFixedFullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_FIXED_FULL_NAME"
+    Expression="PARTY_FIXED_FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PAR_ID"
+    Expression="PAR_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Address"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ADDRESS"
+    Expression="ADDRESS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_NUMBER"
+    Expression="ID_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedByBusinessCaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CREATED_BY_BUSINESS_CASE_ID"
+    Expression="CREATED_BY_BUSINESS_CASE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Goza"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="GOZA"
+    Expression="GOZA"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Kol"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="KOL"
+    Expression="KOL"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BusinessCaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="586"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NUMBER"
+    Expression="BUSINESS_CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="586"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <!--<Variable
+    Name="p_party_full_name"
+    Kind="where"
+    Type="java.lang.String"/>-->
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

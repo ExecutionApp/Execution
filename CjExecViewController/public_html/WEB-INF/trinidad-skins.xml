@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+    <skin>
+        <id>CustomSkin.desktop</id>
+        <family>CustomSkin</family>
+        <extends>alta-v1.desktop</extends>
+        <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+        <style-sheet-name>resources/css/main-skin.css</style-sheet-name>
+        <!--create css file and specify the folder path-->
+    </skin>
+</skins>

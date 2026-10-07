@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="auditFragPageDef"
+                Package="pages.com.egabi.audit">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="SearchInventoryRVO1Iterator"/>
+        <iterator Binds="SimplifiedModeAM1.SearchInventoryResultRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="SearchInventoryResultRVO1Iterator"/>
+        <iterator Binds="SimplifiedModeAM1.SearchInventoryCaseResultRVO1" DataControl="CjExecAMDataControl"
+                  RangeSize="25" id="SearchInventoryCaseResultRVO1Iterator"/>
+        <iterator id="SearchClaimInventoryCaseResultRVO1Iterator"
+                  Binds="SimplifiedModeAM1.SearchClaimInventoryCaseResultRVO1" DataControl="CjExecAMDataControl"
+                  RangeSize="25"/>
+        <iterator id="SearchClaimInventoryResultRVO1Iterator" Binds="SimplifiedModeAM1.SearchClaimInventoryResultRVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <searchRegion Binds="SearchClaimInventoryResultRVO1Iterator" Criteria=""
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      id="SearchInventoryResultRVO1Query"/>
+        <searchRegion Binds="SearchClaimInventoryResultRVO1Iterator" Criteria=""
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      id="SearchInventoryCaseResultRVO1Query"/>
+        <searchRegion Binds="SearchClaimInventoryResultRVO1Iterator" Criteria=""
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      id="SearchInventoryResultRVO1Query1"/>
+        <searchRegion Binds="SearchClaimInventoryCaseResultRVO1Iterator" Criteria=""
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      id="SearchClaimInventoryResultRVO1Query1"/>
+        <iterator id="AuditBusinessCaseVO1Iterator" Binds="SimplifiedModeAM1.AuditBusinessCaseVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator id="AuditBusinessCaseDetailsVO1Iterator" Binds="SimplifiedModeAM1.AuditBusinessCaseDetailsVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator id="AuditBusinessCaseLedgerSeqVO1Iterator" Binds="SimplifiedModeAM1.AuditBusinessCaseLedgerSeqVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator id="AuditParPoliceAuthorityReportVO1Iterator"
+                  Binds="SimplifiedModeAM1.AuditParPoliceAuthorityReportVO1" DataControl="CjExecAMDataControl"
+                  RangeSize="25"/>
+        <iterator Binds="SimplifiedModeAM1.CaseAuditROV1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="CaseAuditROV1Iterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="SequenceNumber">
+            <AttrNames>
+                <Item Value="SequenceNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="Year">
+            <AttrNames>
+                <Item Value="Year"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_FolderTypeId" id="FolderTypeId"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="SearchInventoryRVO1Iterator" id="RepeatedFlag" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="RepeatedFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </list>
+        <attributeValues IterBinding="SearchInventoryResultRVO1Iterator" id="PartyId">
+            <AttrNames>
+                <Item Value="PartyId"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_SearchType" id="SearchType"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <tree IterBinding="SearchClaimInventoryResultRVO1Iterator" id="SearchInventoryResultRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.inventory.SearchClaimInventoryResultRVO"
+                            Name="SearchInventoryResultRVO10">
+                <AttrNames>
+                    <Item Value="PartyName"/>
+                    <Item Value="BusinessCaseNumber"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="SequenceNumber"/>
+                    <Item Value="Year"/>
+                    <Item Value="DegreeName"/>
+                    <Item Value="CasTypeName"/>
+                    <Item Value="IdNumber"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="CaseNumber">
+            <AttrNames>
+                <Item Value="CaseNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseTypeId"
+              id="BusinessCaseTypeId" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <tree IterBinding="SearchClaimInventoryCaseResultRVO1Iterator" id="SearchInventoryCaseResultRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.inventory.SearchClaimInventoryCaseResultRVO"
+                            Name="SearchInventoryCaseResultRVO10">
+                <AttrNames>
+                    <Item Value="PartyName"/>
+                    <Item Value="BusinessCaseNumber"/>
+                    <Item Value="EntityName"/>
+                    <Item Value="Year"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="SequenceNumber"/>
+                    <Item Value="DegreeName"/>
+                    <Item Value="CasTypeName"/>
+                    <Item Value="IdNumber"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <listOfValues IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_ProsecutionKolya"
+                      id="ProsecutionKolya"/>
+        <listOfValues IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_ProsecutionPartial"
+                      id="ProsecutionPartial"/>
+        <listOfValues IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_PoliceStationEntity"
+                      id="PoliceStationEntity"/>
+        <attributeValues IterBinding="ExcClaimsVO1Iterator" id="PartyName">
+            <AttrNames>
+                <Item Value="PartyName"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues Uses="LOV_ProsecutionKolya" StaticList="false" IterBinding="SearchInventoryRVO1Iterator"
+                      id="ProsecutionKolya1"/>
+        <listOfValues Uses="LOV_ProsecutionPartial" StaticList="false" IterBinding="SearchInventoryRVO1Iterator"
+                      id="ProsecutionPartial1"/>
+        <listOfValues Uses="LOV_PoliceStationEntity" StaticList="false" IterBinding="SearchInventoryRVO1Iterator"
+                      id="PoliceStationEntity1"/>
+        <listOfValues IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_ProsecutionPartialName"
+                      id="ProsecutionPartialName"/>
+        <listOfValues IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_PoliceStationEntityName"
+                      id="PoliceStationEntityName"/>
+        <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="EntitKoleyaaName">
+            <AttrNames>
+                <Item Value="EntitKoleyaaName"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_ProsecutionKolya"
+              id="ProsecutionKolya2" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_ProsecutionPartial"
+              id="ProsecutionPartial2" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_PoliceStationEntity"
+              id="PoliceStationEntity2" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <action id="Commit" DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+        <action id="Rollback" DataControl="CjExecAMDataControl" RequiresUpdateModel="false"
+                Action="rollbackTransaction"/>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="BC_CASE_NUMBER">
+            <AttrNames>
+                <Item Value="BC_CASE_NUMBER"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="BC_CASE_TYPE">
+            <AttrNames>
+                <Item Value="BC_CASE_TYPE"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="BC_ENTITY_ID">
+            <AttrNames>
+                <Item Value="BC_ENTITY_ID"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="PPAR_POLICE_NUMBER">
+            <AttrNames>
+                <Item Value="PPAR_POLICE_NUMBER"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="PPAR_ENTITY_ID">
+            <AttrNames>
+                <Item Value="PPAR_ENTITY_ID"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="PPAR_BUSINESS_CASE_TYPE">
+            <AttrNames>
+                <Item Value="PPAR_BUSINESS_CASE_TYPE"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="PPAR_ORIGIN_ENTITY">
+            <AttrNames>
+                <Item Value="PPAR_ORIGIN_ENTITY"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="PPAR_PAR_YEAR">
+            <AttrNames>
+                <Item Value="PPAR_PAR_YEAR"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="BCLS_SEQ">
+            <AttrNames>
+                <Item Value="BCLS_SEQ"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="BCLS_YEAR">
+            <AttrNames>
+                <Item Value="BCLS_YEAR"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="BCD_ENTITY_ID">
+            <AttrNames>
+                <Item Value="BCD_ENTITY_ID"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseAuditROV1Iterator" id="BCLS_LEDGER_ID">
+            <AttrNames>
+                <Item Value="BCLS_LEDGER_ID"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="insertAuditRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="insertAuditRow"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+            <NamedData NDName="type" NDType="java.lang.String"/>
+            <NamedData NDName="editedAttribute" NDType="java.lang.String"/>
+            <NamedData NDName="oldValue" NDType="java.lang.String"/>
+            <NamedData NDName="newValue" NDType="java.lang.String"/>
+            <NamedData NDName="businessCaseId" NDType="java.lang.String"/>
+        </methodAction>
+        <attributeValues IterBinding="AuditBusinessCaseVO1Iterator" id="CaseNumber1">
+            <AttrNames>
+                <Item Value="CaseNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditBusinessCaseVO1Iterator" id="BusinessCaseType">
+            <AttrNames>
+                <Item Value="BusinessCaseType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditBusinessCaseVO1Iterator" id="EntityId">
+            <AttrNames>
+                <Item Value="EntityId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditParPoliceAuthorityReportVO1Iterator" id="PoliceNumber">
+            <AttrNames>
+                <Item Value="PoliceNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditParPoliceAuthorityReportVO1Iterator" id="EntityId1">
+            <AttrNames>
+                <Item Value="EntityId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditParPoliceAuthorityReportVO1Iterator" id="BusinessCaseType1">
+            <AttrNames>
+                <Item Value="BusinessCaseType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditParPoliceAuthorityReportVO1Iterator" id="OriginEntity">
+            <AttrNames>
+                <Item Value="OriginEntity"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditParPoliceAuthorityReportVO1Iterator" id="ParYear">
+            <AttrNames>
+                <Item Value="ParYear"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditBusinessCaseLedgerSeqVO1Iterator" id="Seq">
+            <AttrNames>
+                <Item Value="Seq"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditBusinessCaseLedgerSeqVO1Iterator" id="Year1">
+            <AttrNames>
+                <Item Value="Year"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditBusinessCaseLedgerSeqVO1Iterator" id="LedgerId">
+            <AttrNames>
+                <Item Value="LedgerId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AuditBusinessCaseDetailsVO1Iterator" id="EntityId2">
+            <AttrNames>
+                <Item Value="EntityId"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="CaseAuditROV1Iterator" StaticList="false" Uses="LOV_PPAR_BUSINESS_CASE_TYPE"
+              id="PPAR_BUSINESS_CASE_TYPE1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="CaseAuditROV1Iterator" StaticList="false" Uses="LOV_PPAR_ENTITY_ID" id="PPAR_ENTITY_ID1"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="CaseAuditROV1Iterator" StaticList="false" Uses="LOV_PPAR_ORIGIN_ENTITY"
+              id="PPAR_ORIGIN_ENTITY1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="CaseAuditROV1Iterator" StaticList="false" Uses="LOV_BCLS_LEDGER_ID" id="BCLS_LEDGER_ID1"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="CaseAuditROV1Iterator" StaticList="false" Uses="LOV_BCD_ENTITY_ID" id="BCD_ENTITY_ID1"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="AuditParPoliceAuthorityReportVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseType"
+              id="BusinessCaseType2" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="AuditParPoliceAuthorityReportVO1Iterator" StaticList="false" Uses="LOV_EntityId"
+              id="EntityId3" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="AuditParPoliceAuthorityReportVO1Iterator" StaticList="false" Uses="LOV_OriginEntity"
+              id="OriginEntity1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="AuditBusinessCaseLedgerSeqVO1Iterator" StaticList="false" Uses="LOV_LedgerId"
+              id="LedgerId1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="AuditBusinessCaseDetailsVO1Iterator" StaticList="false" Uses="LOV_EntityId" id="EntityId4"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    </bindings>
+</pageDefinition>

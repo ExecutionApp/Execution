@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <af:panelHeader text="#{bundle.CASE_SEARCH_PANEL}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <!--Form-->
+        <h:panelGroup layout="block" styleClass="row" id="pg2">
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg3">
+                <af:outputLabel showRequired="#{bindings.EntityName.hints.mandatory}" value="#{bundle.COURT}" id="ol1"/>
+                <af:inputText value="#{bindings.EntityName.inputValue}" label="#{bundle.COURT}" simple="true"
+                              disabled="true" required="#{bindings.EntityName.hints.mandatory}"
+                              maximumLength="#{bindings.EntityName.hints.precision}"
+                              shortDesc="#{bindings.EntityName.hints.tooltip}" id="it1">
+                    <f:validator binding="#{bindings.EntityName.validator}"/>
+                </af:inputText>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg4">
+                <af:outputLabel showRequired="#{bindings.EntityName1.hints.mandatory}" value="#{bundle.CIRCLE}"
+                                id="ol2"/>
+                <af:inputText simple="true" value="#{bindings.EntityName1.inputValue}" label="#{bundle.CIRCLE}"
+                              disabled="true" required="#{bindings.EntityName1.hints.mandatory}"
+                              maximumLength="#{bindings.EntityName1.hints.precision}"
+                              shortDesc="#{bindings.EntityName1.hints.tooltip}" id="it2">
+                    <f:validator binding="#{bindings.EntityName1.validator}"/>
+                </af:inputText>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg8">
+                <af:outputLabel showRequired="true" value="#{bundle.BUSINESS_CASE_DEGREE}" id="ol5"/>
+                <af:selectOneChoice simple="true" value="#{bindings.BusinessCaseDegree.inputValue}"
+                                    label="#{bundle.BUSINESS_CASE_DEGREE}" required="true"
+                                    shortDesc="#{bindings.BusinessCaseDegree.hints.tooltip}" id="soc6" autoSubmit="true"
+                                    showRequired="true">
+                    <f:selectItems value="#{bindings.BusinessCaseDegree.items}" id="si6"/>
+                    <f:validator binding="#{bindings.BusinessCaseDegree.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg9">
+                <af:outputLabel showRequired="#{bindings.CourtCircleHearingDate1.hints.mandatory}"
+                                value="#{bundle.HEARING_DATE}" id="ol6"/>
+                <af:inputListOfValues simple="true" id="courtCircleHearingDate1Id"
+                                      popupTitle="Search and Select: #{bindings.CourtCircleHearingDate1.hints.label}"
+                                      value="#{bindings.CourtCircleHearingDate1.inputValue}"
+                                      label="#{bundle.HEARING_DATE}"
+                                      model="#{bindings.CourtCircleHearingDate1.listOfValuesModel}"
+                                      required="#{bindings.CourtCircleHearingDate1.hints.mandatory}"
+                                      shortDesc="#{bindings.CourtCircleHearingDate1.hints.tooltip}"
+                                      partialTriggers="soc6" autoSubmit="true"
+                                      valueChangeListener="#{pageFlowScope.provisionsInclusionBean.hearingDateVCL}">
+                    <f:validator binding="#{bindings.CourtCircleHearingDate1.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.CourtCircleHearingDate1.format}"/>
+                    <af:autoSuggestBehavior suggestItems="#{bindings.CourtCircleHearingDate1.suggestItems}"/>
+                </af:inputListOfValues>
+            </h:panelGroup>
+            <!-- <h:panelGroup layout="block" styleClass="col-md-3" id="pg10">
+                <af:outputLabel value="#{bundle.HEARING}" id="ol7"/>
+                <af:selectOneChoice  simple="true" value="#{bindings.CourtCircleHearingDate.inputValue}" label="#{bundle.HEARING}"
+                                    required="false" autoSubmit="true"
+                                    shortDesc="#{bindings.CourtCircleHearingDate.hints.tooltip}" id="soc2"
+                                    showRequired="false"
+                                    valueChangeListener="#{pageFlowScope.provisionsInclusionBean.hearingDateVCL}"
+                                    rendered="false">
+                    <f:selectItems value="#{bindings.CourtCircleHearingDate.items}" id="si2"/>
+                    <f:validator binding="#{bindings.CourtCircleHearingDate.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>-->
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg11">
+                <af:outputLabel showRequired="#{bindings.ClassifiedFlag.hints.mandatory}" value="#{bundle.PROVISIONED}"
+                                id="ol8"/>
+                <af:selectOneChoice simple="true" value="#{bindings.ClassifiedFlag.inputValue}"
+                                    label="#{bundle.PROVISIONED}" required="#{bindings.ClassifiedFlag.hints.mandatory}"
+                                    shortDesc="#{bindings.ClassifiedFlag.hints.tooltip}" id="soc7" autoSubmit="true">
+                    <f:selectItems value="#{bindings.ClassifiedFlag.items}" id="si7"/>
+                    <f:validator binding="#{bindings.ClassifiedFlag.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg13">
+                <af:outputLabel value="#{bundle.CASE_ID}" id="ol9"/>
+                <af:inputText simple="true" label="#{bundle.CASE_ID}" id="it3"
+                              value="#{pageFlowScope.provisionsInclusionBean.policeNumber}"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg10">
+                <af:outputLabel value="#{bundle.CASE_YEAR}" id="ol7"/>
+                <af:inputText simple="true" id="it6" value="#{pageFlowScope.provisionsInclusionBean.caseYear}"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg6">
+                <af:outputLabel showRequired="true" value="#{bundle.SCHEDULE}" id="ol4"/>
+                <af:selectOneChoice simple="true" value="#{bindings.BusinessCaseType.inputValue}"
+                                    label="#{bundle.SCHEDULE}" required="true"
+                                    shortDesc="#{bindings.BusinessCaseType.hints.tooltip}" id="soc1"
+                                    showRequired="true">
+                    <f:selectItems value="#{bindings.BusinessCaseType.items}" id="si1"/>
+                    <f:validator binding="#{bindings.BusinessCaseType.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg5">
+                <af:outputLabel showRequired="#{bindings.OriginEntity.hints.mandatory}" value="#{bundle.ORIGIN_ENTITY}"
+                                id="ol3"/>
+                <af:selectOneChoice simple="true" value="#{bindings.OriginEntity.inputValue}"
+                                    label="#{bundle.ORIGIN_ENTITY}" required="#{bindings.OriginEntity.hints.mandatory}"
+                                    shortDesc="#{bindings.OriginEntity.hints.tooltip}" id="soc8">
+                    <f:selectItems value="#{bindings.OriginEntity.items}" id="si8"/>
+                    <f:validator binding="#{bindings.OriginEntity.validator}"/>
+                </af:selectOneChoice>
+                <af:outputText value="#{bindings.OriginEntityName.inputValue}" rendered="false"
+                               shortDesc="#{bindings.OriginEntityName.hints.tooltip}" id="ot8"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg14">
+                <af:outputLabel value="#{bundle.NATIONAL_ID}" id="ol10"/>
+                <af:inputText simple="true" label="#{bundle.NATIONAL_ID}" id="it4"
+                              value="#{pageFlowScope.provisionsInclusionBean.nationalId}"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="col-md-4 col-sm-12" id="pg15">
+                <af:outputLabel value="#{bundle.NAME_QUADRANT}" id="ol11"/>
+                <af:inputText simple="true" label="#{bundle.NAME_QUADRANT}" id="it5"
+                              value="#{pageFlowScope.provisionsInclusionBean.quadrantName}"/>
+            </h:panelGroup>
+        </h:panelGroup>
+        <!--End Form-->
+        <!--<af:panelFormLayout id="pfl1" maxColumns="1" rows="1212123">
+           
+            -->
+        <!--<af:selectOneChoice value="#{bindings.OrderBy.inputValue}" label="#{bundle.ORDER_BY}"
+                                required="#{bindings.OrderBy.hints.mandatory}"
+                                shortDesc="#{bindings.OrderBy.hints.tooltip}" id="soc3"
+                                contentStyle="width:200px;height:30px;margin-top:10px;">
+                <f:selectItems value="#{bindings.OrderBy.items}" id="si3"/>
+                <f:validator binding="#{bindings.OrderBy.validator}"/>
+            </af:selectOneChoice>-->
+        <!--
+        </af:panelFormLayout>-->
+    </af:panelHeader>
+    <!--Action Button holder-->
+    <h:panelGroup layout="block" styleClass="btn-holder" id="pg1">
+        <af:button styleClass="btn-primary btn-md ripple search-btn" text="#{bundle.SEARCH}" id="b1"
+                   action="#{pageFlowScope.provisionsInclusionBean.search}"/>
+        <!--Alert Panel Cases-->
+        <af:panelGroupLayout id="pgl2" styleClass="alert alert-warning" layout="vertical">
+            <af:outputFormatted value="#{bundle.PROVISIONED_CASES_IN_SESSION}" id="of1"
+                                inlineStyle="font-size:large; font-weight:bold;padding:2px;margin-left:2px;">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.ProvisionedCasesCount.format}"/>
+            </af:outputFormatted>
+            <af:outputFormatted value="#{bindings.CourtCircleHearingDate1.inputValue}" id="of2"
+                                inlineStyle="font-size:large; font-weight:bold;padding:2px;margin:2px;color:red;">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.ProvisionedCasesCount.format}"/>
+            </af:outputFormatted>
+            <af:outputFormatted value="#{bundle.IS}" id="of3"
+                                inlineStyle="font-size:large; font-weight:bold;padding:2px;margin:2px;">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.ProvisionedCasesCount.format}"/>
+            </af:outputFormatted>
+            <af:outputFormatted value="#{bindings.ProvisionedCasesCount.inputValue}" id="of4"
+                                inlineStyle="font-size:large; font-weight:bold;padding:2px;margin:2px;color:red;">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.ProvisionedCasesCount.format}"/>
+            </af:outputFormatted>
+            <af:outputFormatted value="#{bundle.FROM_ORIGIN}" id="of5"
+                                inlineStyle="font-size:large; font-weight:bold;padding:2px;margin:2px;">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.ProvisionedCasesCount.format}"/>
+            </af:outputFormatted>
+            <af:outputFormatted value="#{bindings.AllCasesCount.inputValue}" id="of6"
+                                inlineStyle="font-size:large; font-weight:bold;padding:2px;margin:2px;color:red;">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.AllCasesCount.format}"/>
+            </af:outputFormatted>
+        </af:panelGroupLayout>
+        <!--End Alert Panel Cases-->
+    </h:panelGroup>
+    <!--End Action Button holder-->
+    <!--Search Results-->
+    <af:panelHeader text="#{bundle.SEARCH_RESULTS}" id="ph2">
+        <f:facet name="context"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:table value="#{bindings.SearchResultsRVO1.collectionModel}" var="row"
+                  rows="#{bindings.SearchResultsRVO1.rangeSize}"
+                  emptyText="#{bindings.SearchResultsRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.SearchResultsRVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.SearchResultsRVO1.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="10" id="t1" scrollPolicy="page" columnStretching="multiple">
+            <af:column sortProperty="#{bindings.SearchResultsRVO1.hints.ResId.name}" sortable="true"
+                       headerText="#{bundle.RESERVATION_ID}" id="c1" width="100%">
+                <af:outputText value="#{row.ResId}" shortDesc="#{bindings.SearchResultsRVO1.hints.ResId.tooltip}"
+                               id="ot1">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchResultsRVO1.hints.ResId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchResultsRVO1.hints.EntityId.name}" sortable="true" rendered="false"
+                       headerText="#{bindings.SearchResultsRVO1.hints.EntityId.label}" id="c2" width="100%">
+                <af:outputText value="#{row.EntityId}" shortDesc="#{bindings.SearchResultsRVO1.hints.EntityId.tooltip}"
+                               id="ot2">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SearchResultsRVO1.hints.EntityId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchResultsRVO1.hints.BusinessCaseNumber.name}" sortable="true"
+                       width="100%" headerText="#{bundle.BUSINESS_CASE_NUMBER}" id="c3">
+                <af:outputText value="#{row.BusinessCaseNumber} / #{bindings.OriginEntityName.inputValue}"
+                               shortDesc="#{bindings.SearchResultsRVO1.hints.BusinessCaseNumber.tooltip}" id="ot3"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchResultsRVO1.hints.BusinessCaseName.name}" sortable="true"
+                       rendered="false" width="100%" headerText="#{bundle.BUSINESS_CASE_NAME}" id="c4">
+                <af:outputText value="#{row.BusinessCaseName}"
+                               shortDesc="#{bindings.SearchResultsRVO1.hints.BusinessCaseName.tooltip}" id="ot4"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchResultsRVO1.hints.BusinessCaseDegree.name}" sortable="true"
+                       width="100%" headerText="#{bundle.BUSINESS_CASE_DEGREE}" id="c5">
+                <af:outputText value="#{row.BusinessCaseDegree}"
+                               shortDesc="#{bindings.SearchResultsRVO1.hints.BusinessCaseDegree.tooltip}" id="ot5"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchResultsRVO1.hints.HearingDate.name}" sortable="true" width="100%"
+                       headerText="#{bundle.HEARING_DATE}" id="c6">
+                <af:outputText value="#{row.HearingDate}"
+                               shortDesc="#{bindings.SearchResultsRVO1.hints.HearingDate.tooltip}" id="ot6">
+                    <af:convertDateTime pattern="#{bindings.SearchResultsRVO1.hints.HearingDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchResultsRVO1.hints.ClassifiedFlag.name}" sortable="true"
+                       headerText="#{bindings.SearchResultsRVO1.hints.ClassifiedFlag.label}" id="c7" rendered="false"
+                       width="100%">
+                <af:outputText value="#{row.ClassifiedFlag}"
+                               shortDesc="#{bindings.SearchResultsRVO1.hints.ClassifiedFlag.tooltip}" id="ot7">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SearchResultsRVO1.hints.ClassifiedFlag.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column id="c8" width="120" visible="#{sessionScope.screen_name eq 'addJudg'}">
+                <af:button text="#{bundle.NEW_PROVISIONS}" disabled="#{row.bindings.ClassifiedFlag.inputValue eq null}"
+                           action="#{pageFlowScope.provisionsInclusionBean.newProvisions}" id="b2">
+                    <af:setPropertyListener from="#{row.bindings.ResId.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.resId}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.CircleHearingDateId.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.hearingDateId}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseId.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseId}" type="action"/>
+                    <af:setPropertyListener from="#{bindings.BusinessCaseDegree.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.degreeId}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseNumber.inputValue} / #{bindings.OriginEntityName.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseNumber}"
+                                            type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseName.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseName}"
+                                            type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.HearingDate.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.hearingDate}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseDegree.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseDegree}"
+                                            type="action"/>
+                </af:button>
+            </af:column>
+            <af:column id="c9" width="120" visible="#{sessionScope.screen_name eq 'updateJudg'}">
+                <af:button text="#{bundle.EDIT_PROVISIONS}" disabled="#{row.bindings.ClassifiedFlag.inputValue eq 0}"
+                           action="#{pageFlowScope.provisionsInclusionBean.editProvisions}" id="b4">
+                    <af:setPropertyListener from="#{row.bindings.ResId.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.resId}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.CircleHearingDateId.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.hearingDateId}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseId.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseId}" type="action"/>
+                    <af:setPropertyListener from="#{bindings.BusinessCaseDegree.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.degreeId}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseNumber.inputValue} / #{bindings.OriginEntityName.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseNumber}"
+                                            type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseName.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseName}"
+                                            type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.HearingDate.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.hearingDate}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseDegree.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseDegree}"
+                                            type="action"/>
+                </af:button>
+            </af:column>
+            <af:column id="c10" width="120" visible="#{sessionScope.screen_name eq 'updateJudg'}">
+                <af:button text="#{bundle.VIEW_PROVISIONS}" disabled="#{row.bindings.ClassifiedFlag.inputValue eq 0}"
+                           action="#{pageFlowScope.provisionsInclusionBean.viewProvisions}" id="b5">
+                    <af:setPropertyListener from="#{row.bindings.ResId.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.resId}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.CircleHearingDateId.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.hearingDateId}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseId.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseId}" type="action"/>
+                    <af:setPropertyListener from="#{bindings.BusinessCaseDegree.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.degreeId}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseNumber.inputValue} / #{bindings.OriginEntityName.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseNumber}"
+                                            type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseName.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseName}"
+                                            type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.HearingDate.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.hearingDate}" type="action"/>
+                    <af:setPropertyListener from="#{row.bindings.BusinessCaseDegree.inputValue}"
+                                            to="#{pageFlowScope.provisionsInclusionBean.businessCaseDegree}"
+                                            type="action"/>
+                </af:button>
+            </af:column>
+        </af:table>
+    </af:panelHeader>
+    <!--Search Results-->
+    <!--disabled="#{row.bindings.ProvisionedFlag.inputValue != 0}"-->
+    <!--oracle-jdev-comment:preferred-managed-bean-name:provisionsInclusionBean-->
+</ui:composition>

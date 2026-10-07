@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+  
+  <af:panelHeader text="#{bundle.JUDG_CLASS}" id="ph1">
+   <af:outputText value="#{bundle.CASE_SEARCH_PANEL}" id="ot25"/>
+    <f:facet name="context"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <h:panelGroup layout="block" styleClass="row" id="pg2">
+      <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg3">
+        <!--<af:inputText value="#{bindings.DirName.inputValue}" label="#{bindings.DirName.hints.label}" disabled="true"
+                        required="#{bindings.DirName.hints.mandatory}" columns="#{bindings.DirName.hints.displayWidth}"
+                        maximumLength="#{bindings.DirName.hints.precision}"
+                        shortDesc="#{bindings.DirName.hints.tooltip}" id="it2">
+            <f:validator binding="#{bindings.DirName.validator}"/>-->
+        <af:outputLabel showRequired="#{bindings.CourtName.hints.mandatory}" value="#{bindings.CourtName.hints.label}" id="ol1"/>
+        <af:inputText simple="true" value="#{bindings.CourtName.inputValue}" label="#{bindings.CourtName.hints.label}"
+                      required="#{bindings.CourtName.hints.mandatory}"
+                      maximumLength="#{bindings.CourtName.hints.precision}" disabled="true"
+                      shortDesc="#{bindings.CourtName.hints.tooltip}" id="it1">
+          <f:validator binding="#{bindings.CourtName.validator}"/>
+        </af:inputText>
+      </h:panelGroup>
+      <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg4">
+        <af:outputLabel showRequired="#{bindings.DirId.hints.mandatory}" value="#{bindings.DirId.label}" id="ol2"/>
+        <af:selectOneChoice simple="true"  value="#{bindings.DirId.inputValue}" label="#{bindings.DirId.label}"
+                            required="#{bindings.DirId.hints.mandatory}" shortDesc="#{bindings.DirId.hints.tooltip}"
+                            id="soc2">
+          <f:selectItems value="#{bindings.DirId.items}" id="si2"/>
+          <f:validator binding="#{bindings.DirId.validator}"/>
+        </af:selectOneChoice>
+      </h:panelGroup>
+      <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg5">
+        <af:outputLabel showRequired="true" value="#{bundle.BUSINESS_CASE_DEGREE}" id="ol3"/>
+        <af:selectOneChoice simple="true" value="#{bindings.BusinessCaseDegree.inputValue}" label="#{bundle.BUSINESS_CASE_DEGREE}"
+                            required="true" shortDesc="#{bindings.BusinessCaseDegree.hints.tooltip}" id="socCaseDegree"
+                            autoSubmit="true" valueChangeListener="#{pageFlowScope.caseSearchBean.degreeVCL}"
+                            showRequired="true">
+          <f:selectItems value="#{bindings.BusinessCaseDegree.items}" id="si6"/>
+          <f:validator binding="#{bindings.BusinessCaseDegree.validator}"/>
+        </af:selectOneChoice>
+      </h:panelGroup>
+      <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg7">
+        <af:outputLabel showRequired="#{bindings.PoliceNumber.hints.mandatory}" value="#{bindings.PoliceNumber.hints.label}" id="ol4"/>
+        <af:inputText simple="true" value="#{bindings.PoliceNumber.inputValue}" label="#{bindings.PoliceNumber.hints.label}"
+                      required="#{bindings.PoliceNumber.hints.mandatory}"
+                      maximumLength="#{bindings.PoliceNumber.hints.precision}"
+                      shortDesc="#{bindings.PoliceNumber.hints.tooltip}" id="it3">
+          <f:validator binding="#{bindings.PoliceNumber.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PoliceNumber.format}"/>
+        </af:inputText>
+      </h:panelGroup>
+      <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg8">
+        <af:outputLabel  showRequired="#{bindings.CaseType.hints.mandatory}" value="#{bindings.CaseType.label}" id="ol5"/>
+        <af:selectOneChoice simple="true" value="#{bindings.CaseType.inputValue}" label="#{bindings.CaseType.label}"
+                            required="#{bindings.CaseType.hints.mandatory}"
+                            shortDesc="#{bindings.CaseType.hints.tooltip}" id="soc1">
+          <f:selectItems value="#{bindings.CaseType.items}" id="si1"/>
+          <f:validator binding="#{bindings.CaseType.validator}"/>
+        </af:selectOneChoice>
+      </h:panelGroup>
+        <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg11">
+        <af:outputLabel showRequired="#{bindings.OriginEntity.hints.mandatory}" value="#{bundle.ORIGIN_ENTITY}" id="ol9"/>
+        <af:selectOneChoice simple="true" value="#{bindings.OriginEntity.inputValue}" label="#{bundle.ORIGIN_ENTITY}"
+                            required="#{bindings.OriginEntity.hints.mandatory}"
+                            shortDesc="#{bindings.OriginEntity.hints.tooltip}" id="soc8">
+          <f:selectItems value="#{bindings.OriginEntity.items}" id="si8"/>
+          <f:validator binding="#{bindings.OriginEntity.validator}"/>
+        </af:selectOneChoice>
+      </h:panelGroup>
+  
+      
+      <h:panelGroup layout="block" styleClass="col-md-4 col-sm-12" id="pg6">
+        <af:outputLabel showRequired="#{bindings.PartyFullName.hints.mandatory}" value="#{bindings.PartyFullName.hints.label}" id="ol6"/>
+        <af:inputText simple="true" value="#{bindings.PartyFullName.inputValue}" label="#{bindings.PartyFullName.hints.label}"
+                      required="#{bindings.PartyFullName.hints.mandatory}"
+                      maximumLength="#{bindings.PartyFullName.hints.precision}"
+                      shortDesc="#{bindings.PartyFullName.hints.tooltip}" id="it4">
+          <f:validator binding="#{bindings.PartyFullName.validator}"/>
+        </af:inputText>
+      </h:panelGroup>
+      <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg9">
+        <!--<af:selectOneChoice value="#{bindings.HearingDate.inputValue}" label="#{bindings.HearingDate.label}"
+                              required="#{bindings.HearingDate.hints.mandatory}"
+                              shortDesc="#{bindings.HearingDate.hints.tooltip}" id="soc2">
+            <f:selectItems value="#{bindings.HearingDate.items}" id="si2"/>
+            <f:validator binding="#{bindings.HearingDate.validator}"/>
+          </af:selectOneChoice>-->
+        <af:outputLabel showRequired="#{bindings.CourtCircleHearingDate.hints.mandatory}" value="#{bundle.HEARING_DATE}" id="ol7"/>
+        <af:inputListOfValues id="courtCircleHearingDate" value="#{bindings.courtCircleHearingDate.inputValue}"
+                             simple="true" label="#{bundle.HEARING_DATE}"
+                              model="#{bindings.CourtCircleHearingDate.listOfValuesModel}"
+                              required="#{bindings.CourtCircleHearingDate.hints.mandatory}"
+                              shortDesc="#{bindings.CourtCircleHearingDate.hints.tooltip}"
+                              partialTriggers="socCaseDegree"
+                              valueChangeListener="#{pageFlowScope.caseSearchBean.hearingDateVCL}">
+          <f:validator binding="#{bindings.CourtCircleHearingDate.validator}"/>
+          
+          <af:autoSuggestBehavior suggestedItems="#{bindings.HearingDate2.suggestedItems}"/>
+        </af:inputListOfValues>
+      </h:panelGroup>
+      <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg10">
+        <af:outputLabel showRequired="#{bindings.PartyIdNumber.hints.mandatory}" value="#{bindings.PartyIdNumber.hints.label}" id="ol8"/>
+        <af:inputText simple="true" value="#{bindings.PartyIdNumber.inputValue}" label="#{bindings.PartyIdNumber.hints.label}"
+                      required="#{bindings.PartyIdNumber.hints.mandatory}"
+                      maximumLength="#{bindings.PartyIdNumber.hints.precision}"
+                      shortDesc="#{bindings.PartyIdNumber.hints.tooltip}" id="it5">
+          <f:validator binding="#{bindings.PartyIdNumber.validator}"/>
+        </af:inputText>
+      </h:panelGroup>
+    
+    </h:panelGroup>
+  </af:panelHeader>
+  <h:panelGroup layout="block" styleClass="btn-holder" id="pg1">
+    <!--<af:toolbar id="t2"> 
+    </af:toolbar>-->
+      <af:button styleClass="btn-primary btn-md ripple search-btn" text="#{bundle.SEARCH}" id="b1"
+                 actionListener="#{bindings.ExecuteCaseResult.execute}"/>
+    <af:panelGroupLayout styleClass="alert alert-warning" layout="vertical" id="pgl4">
+    <af:outputFormatted inlineStyle="font-size: larger;" value="#{bundle.NUMBER_OF_CASES_COUNTED}" id="of1"/>
+    <af:outputFormatted inlineStyle="font-size:large; font-weight:bold;padding:2px;margin:2px;color:red;"
+                        value="#{(empty bindings.Done.inputValue) ? 0 : bindings.Done.inputValue}" id="of4"/>
+    <af:outputFormatted inlineStyle="font-size: larger;" value="#{bundle.CASES_FROM}" id="of2"/>
+    <af:outputFormatted inlineStyle="font-size:large; font-weight:bold;padding:2px;margin:2px;color:red;"
+                        value="#{(empty bindings.CountAll.inputValue) ? 0 : bindings.CountAll.inputValue}" id="of3"/>
+  </af:panelGroupLayout>
+  
+  </h:panelGroup>
+
+  
+  
+  
+    <af:panelHeader text="#{bundle.SEARCH_RESULTS}" id="ph2">
+        <f:facet name="context"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:table value="#{bindings.CasesSearchReasultROV.collectionModel}" var="row"
+                  rows="#{bindings.CasesSearchReasultROV.rangeSize}"
+                  emptyText="#{bindings.CasesSearchReasultROV.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.CasesSearchReasultROV.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.CasesSearchReasultROV.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.CasesSearchReasultROV.rangeSize}" id="t1"
+                  columnStretching="multiple" partialTriggers="::b1" scrollPolicy="page">
+          <af:column sortable="true" sortProperty="#{bindings.CasesSearchReasultROV.hints.HearingResId.name}"
+                     headerText="#{bundle.RESERVATION_ID}" id="c20" width="100%">
+            <af:outputText value="#{row.HearingResId}"
+                           shortDesc="#{bindings.CasesSearchReasultROV.hints.HearingResId.tooltip}" id="ot20">
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.CasesSearchReasultROV.hints.HearingResId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortable="true" sortProperty="#{bindings.CasesSearchReasultROV.hints.CaseNumber.name}"
+                     headerText="#{bindings.CasesSearchReasultROV.hints.CaseNumber.label}" id="c1" width="100%">
+            <af:outputText shortDesc="#{bindings.CasesSearchReasultROV.hints.CaseNumber.tooltip}" id="ot1"
+                           value="#{row.CaseNumber}"/>
+          </af:column>
+          <af:column headerText="#{bindings.CasesSearchReasultROV.hints.BusinessCaseName.label}" id="c2" width="100%"
+                     rendered="false">
+            <af:outputText value="#{row.BusinessCaseName}"
+                           shortDesc="#{bindings.CasesSearchReasultROV.hints.BusinessCaseName.tooltip}" id="ot2"/>
+          </af:column>
+          <af:column headerText="#{bindings.CasesSearchReasultROV.hints.HearingDate.label}" id="c3" width="100%">
+            <af:outputText value="#{row.HearingDate}"
+                           shortDesc="#{bindings.CasesSearchReasultROV.hints.HearingDate.tooltip}" id="ot3">
+              <af:convertDateTime pattern="#{bindings.CasesSearchReasultROV.hints.HearingDate.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="#{bindings.CasesSearchReasultROV.hints.CaseDegree.label}" id="c4" width="100%">
+            <af:outputText value="#{row.CaseDegree}"
+                           shortDesc="#{bindings.CasesSearchReasultROV.hints.CaseDegree.tooltip}" id="ot4"/>
+          </af:column>
+          <af:column id="c5" width="100%" rendered="false">
+            <af:button text="view" id="b2" action="viewCase">
+              <af:setActionListener to="#{requestScope.HearingResId}" from="#{row.HearingResId}"/>
+            </af:button>
+          </af:column>
+      <af:column headerText="#{bundle.RESTRICTION_BTN}" id="c6" width="100%">
+        <af:link text="#{row.ClassifiedFlag}" id="l1" rendered="false"/>
+        <af:button shortDesc="" id="otEdit" immediate="true" text="#{bundle.RESTRICTION_BTN}" action="viewCase"
+                   disabled="#{row.ClassifiedFlag eq '1'}">
+          <af:setActionListener to="#{requestScope.HearingResId}" from="#{row.HearingResId}"/>
+          <af:setActionListener to="#{requestScope.viewOnlyMode}" from="false"/>
+        </af:button>
+      </af:column>
+      <af:column headerText="#{bundle.VIEW_CASE_DETAILS}" id="c10" width="100%">
+        <af:button shortDesc="" id="otView" immediate="true" text="#{bundle.VIEW_CASE_DETAILS}" action="viewCase"
+                   disabled="#{row.ClassifiedFlag eq '0'}">
+          <af:setActionListener to="#{requestScope.HearingResId}" from="#{row.HearingResId}"/>
+          <af:setActionListener to="#{requestScope.viewOnlyMode}" from="true"/>
+        </af:button>
+      </af:column>
+    </af:table>
+      </af:panelHeader>
+   
+  
+ 
+</ui:composition>

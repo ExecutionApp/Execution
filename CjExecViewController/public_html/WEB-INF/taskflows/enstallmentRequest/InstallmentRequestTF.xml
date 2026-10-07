@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="InstallmentRequestTF">
+    <default-activity>CaseInfo</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__10">
+      <name>folderId</name>
+      <value>#{pageFlowScope.folderId}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__4">
+      <name>stepNumber</name>
+      <value>#{pageFlowScope.stepNumber}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name>decisionType</name>
+      <value>#{pageFlowScope.decisionType}</value>
+    </input-parameter-definition>
+     <input-parameter-definition id="__31">
+      <name>reportName</name>
+      <value>#{pageFlowScope.reportName}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__32">
+      <name>reportFolder</name>
+      <value>#{pageFlowScope.reportFolder}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__33">
+      <name>Document_ID</name>
+      <value>#{sessionScope.DOCUMENTID}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__38">
+      <name>BusinessCaseId</name>
+      <value>#{pageFlowScope.BusinessCaseId}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__39">
+      <name>ParID</name>
+      <value>#{pageFlowScope.ParID}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__40">
+      <name>PartyID</name>
+      <value>#{pageFlowScope.PartyID}</value>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>installmentRequestBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.cjexec.installmentrequest.InstallmentRequestBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="InstallmentRequest">
+      <page>/pages/com/egabi/cjexec/installmentRequest/InstallmentRequest.jsff</page>
+    </view>
+    <method-call id="CaseInfo">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="UserData">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Commit">
+      <method>#{bindings.Commit.execute}</method>
+      <outcome>
+        <fixed-outcome>Commit</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="Rollback">
+      <method>#{bindings.Rollback.execute}</method>
+      <outcome>
+        <fixed-outcome>Rollback</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="getStepsNumber">
+      <method>#{pageFlowScope.installmentRequestBean.getStepsNumber}</method>
+      <outcome>
+      <to-string/>
+      </outcome>
+    </method-call>
+    <method-call id="CreateWithParameters">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="CreateWithParameters1">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="CreateWithParameters2">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams1">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ParParties">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="parLawyerTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/parlawyer/parLawyerTF.xml</document>
+        <id>parLawyerTF</id>
+      </task-flow-reference>
+      <input-parameter id="__34">
+        <name>parId</name>
+        <value>#{pageFlowScope.ParID}</value>
+        <pass-by-value/>
+      </input-parameter>
+      <input-parameter id="__35">
+        <name>partyId</name>
+        <value>#{pageFlowScope.PartyID}</value>
+        <pass-by-value/>
+      </input-parameter>
+      <input-parameter id="__36">
+        <name>createdBy</name>
+        <value>#{sessionScope.userInfo.userId}</value>
+        <pass-by-value/>
+      </input-parameter>
+      <input-parameter id="__37">
+        <name>businessCaseId</name>
+        <value>#{pageFlowScope.BusinessCaseId}</value>
+        <pass-by-value/>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>CaseInfo</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>UserData</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__19">
+      <from-activity-id>Commit</from-activity-id>
+      <control-flow-case id="__20">
+        <from-outcome>Commit</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>InstallmentRequest</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>insert</from-outcome>
+        <to-activity-id>Commit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>getStepsNumber</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>CreateWithParameters</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__25">
+        <from-outcome>insert</from-outcome>
+        <to-activity-id>ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>CreateWithParameters</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>CreateWithParams</from-outcome>
+        <to-activity-id>CreateWithParameters1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id>CreateWithParameters1</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome>CreateWithParams</from-outcome>
+        <to-activity-id>CreateWithParameters2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__26">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__27">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>CreateWithParameters2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>UserData</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>ExecuteWithParams1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>ExecuteWithParams1</from-activity-id>
+      <control-flow-case id="__28">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>ParParties</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__42">
+      <from-activity-id>InstallmentRequest</from-activity-id>
+      <control-flow-case id="__43">
+        <from-outcome>parLawyerTF</from-outcome>
+        <to-activity-id>parLawyerTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__63">
+      <from-activity-id>ParParties</from-activity-id>
+      <control-flow-case id="__64">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>getStepsNumber</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__29">
+      <from-activity-id>CreateWithParameters2</from-activity-id>
+      <control-flow-case id="__30">
+        <from-outcome>CreateWithParams</from-outcome>
+        <to-activity-id>InstallmentRequest</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

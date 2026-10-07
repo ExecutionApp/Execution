@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="UpdatePartyPageDef"
+                Package="pages.com.egabi.party">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ParPartiesView1" RangeSize="25" DataControl="CjExecAMDataControl" id="ParPartiesView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ParPartiesView1Iterator" id="Fname">
+      <AttrNames>
+        <Item Value="Fname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator" id="Sname">
+      <AttrNames>
+        <Item Value="Sname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator" id="Tname">
+      <AttrNames>
+        <Item Value="Tname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator" id="Fourthname">
+      <AttrNames>
+        <Item Value="Fourthname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator" id="Age">
+      <AttrNames>
+        <Item Value="Age"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator" id="IdNumber">
+      <AttrNames>
+        <Item Value="IdNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator" id="Nickname">
+      <AttrNames>
+        <Item Value="Nickname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator" id="JobTitle">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParPartiesView1Iterator" id="Address">
+      <AttrNames>
+        <Item Value="Address"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

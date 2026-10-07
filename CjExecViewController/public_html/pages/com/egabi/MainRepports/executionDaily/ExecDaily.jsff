@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+  <af:panelHeader text="يومية التنفيذ" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelGroupLayout id="pgl1" layout="vertical">
+      <h:panelGroup id="pg7" layout="block" styleClass="row search-case-panel">
+        <h:panelGroup id="pg98" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel showRequired="true" value="النيابة الكلية" id="ol70"/>
+          <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" required="true"
+                              shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc28" simple="true"
+                              disabled="#{sessionScope.userInfo.entityDegree eq '39' or sessionScope.userInfo.entityDegree eq '3' }"
+                              autoSubmit="true" showRequired="true">
+            <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si28"/>
+            <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg97" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel showRequired="false" value="النيابة الجزئية" id="ol54"/>
+          <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}" required="false"
+                              shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc17" partialTriggers="soc28"
+                              simple="true"
+                              disabled="#{(sessionScope.userInfo.entityDegree eq '3'  or pageFlowScope.disabledValidate)and sessionScope.userInfo.errandEntUser eq '0'}"
+                              autoSubmit="true" showRequired="false" valueChangeListener="#{Agenda.gozVCL}">
+            <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si17"/>
+            <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <!-- Search toggle -->
+        <h:panelGroup id="pg2" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel showRequired="false" value="قسم الشرطة" id="ol2"/>
+          <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}" label=" "
+                              required="#{bindings.OrigEntity.hints.mandatory}"
+                              shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc1" partialTriggers="soc17"
+                              autoSubmit="true">
+            <f:selectItems value="#{bindings.OrigEntity.items}" id="si1"/>
+            <f:validator binding="#{bindings.OrigEntity.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <!-- end Search toggle -->
+        <h:panelGroup id="pg1" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel showRequired="true" value="التاريخ" id="ol1"/>
+          <af:inputDate value="#{bindings.DailyDate.inputValue}" required="#{bindings.DailyDate.hints.mandatory}"
+                        columns="#{bindings.DailyDate.hints.displayWidth}"
+                        shortDesc="#{bindings.DailyDate.hints.tooltip}" id="id1">
+            <f:validator binding="#{bindings.DailyDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.DailyDate.format}"/>
+          </af:inputDate>
+        </h:panelGroup>
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:spacer width="10" height="10" id="s3"/>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:spacer width="10" height="10" id="s4"/>
+        <af:spacer width="10" height="10" id="s5"/>
+        <h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:button text="بحث" id="b1" actionListener="#{Agenda.DailySearch}"/>
+          <af:button text="تصدير إلى إكسل" id="b2">
+            <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="Daily.xls" charset="UTF-8"
+                                               title="Daily Execution" filterName="Agenda.csv" rowLimit="-1"/>
+          </af:button>
+        </h:panelGroup>
+        <af:table value="#{bindings.ExecutionDailyROVO1.collectionModel}" var="row"
+                  rows="#{bindings.ExecutionDailyROVO1.rangeSize}"
+                  emptyText="#{bindings.ExecutionDailyROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.ExecutionDailyROVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.ExecutionDailyROVO1.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.ExecutionDailyROVO1.rangeSize}" id="t1" scrollPolicy="page"
+                  contentDelivery="lazy">
+          <af:column headerText="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseId.label}" id="c1" rendered="false">
+            <af:inputText value="#{row.bindings.BusinessCaseId.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseId.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseId.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseId.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseId.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseId.tooltip}" id="it1"
+                          readOnly="true">
+              <f:validator binding="#{row.bindings.BusinessCaseId.validator}"/>
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseId.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="رقم الحصر" id="c2" width="200">
+            <af:inputText value="#{row.bindings.InventoryNumber.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.InventoryNumber.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.InventoryNumber.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.InventoryNumber.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.InventoryNumber.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.InventoryNumber.tooltip}" id="it2">
+              <f:validator binding="#{row.bindings.InventoryNumber.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="رقم القضائى" id="c3" width="200">
+            <af:inputText value="#{row.bindings.BusinessCaseNumber.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseNumber.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseNumber.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseNumber.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseNumber.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.BusinessCaseNumber.tooltip}" id="it3">
+              <f:validator binding="#{row.bindings.BusinessCaseNumber.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="درجة" id="c4">
+            <af:inputText value="#{row.bindings.DegreeName.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.DegreeName.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.DegreeName.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.DegreeName.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.DegreeName.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.DegreeName.tooltip}" id="it4" readOnly="true">
+              <f:validator binding="#{row.bindings.DegreeName.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{row.bindings.CriminalType.inputValue eq '1' ? 'جنح' :'جنايات'}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.DegreeName.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.DegreeName.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.DegreeName.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.DegreeName.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.DegreeName.tooltip}" id="it10"
+                          readOnly="true">
+              <f:validator binding="#{row.bindings.DegreeName.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="تارخ الجلسة" id="c5">
+            <af:inputDate value="#{row.bindings.HearingDate.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.HearingDate.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.HearingDate.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.HearingDate.displayWidth}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.HearingDate.tooltip}" id="id2">
+              <f:validator binding="#{row.bindings.HearingDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.ExecutionDailyROVO1.hints.HearingDate.format}"/>
+            </af:inputDate>
+          </af:column>
+          <af:column headerText="المتهم" id="c6" width="200">
+            <af:inputText value="#{row.bindings.PartyFullName.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.PartyFullName.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.PartyFullName.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.PartyFullName.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.PartyFullName.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.PartyFullName.tooltip}" id="it5">
+              <f:validator binding="#{row.bindings.PartyFullName.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{row.bindings.IdNumber.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.IdNumber.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.IdNumber.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.IdNumber.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.IdNumber.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.IdNumber.tooltip}" id="it8">
+              <f:validator binding="#{row.bindings.IdNumber.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="الحكم" id="c7" width="200">
+            <af:inputText value="#{row.bindings.JudgmentText.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.JudgmentText.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.JudgmentText.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.JudgmentText.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.JudgmentText.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.JudgmentText.tooltip}" id="it6">
+              <f:validator binding="#{row.bindings.JudgmentText.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="الاجراء" id="c9">
+            <af:inputText value="#{row.bindings.Name.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.Name.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.Name.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.Name.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.Name.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.Name.tooltip}" id="it7">
+              <f:validator binding="#{row.bindings.Name.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="تارخ الاجراء" id="c10" rendered="false">
+            <af:inputDate value="#{row.bindings.ProcedureDate.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.ProcedureDate.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.ProcedureDate.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.ProcedureDate.displayWidth}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.ProcedureDate.tooltip}" id="id4">
+              <f:validator binding="#{row.bindings.ProcedureDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.ExecutionDailyROVO1.hints.ProcedureDate.format}"/>
+            </af:inputDate>
+          </af:column>
+          <af:column headerText="التهم" id="c8" width="200">
+            <af:inputText value="#{row.bindings.Crimes.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.Crimes.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.Crimes.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.Crimes.displayWidth}"
+                          maximumLength="#{bindings.ExecutionDailyROVO1.hints.Crimes.precision}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.Crimes.tooltip}" id="it9">
+              <f:validator binding="#{row.bindings.Crimes.validator}"/>
+            </af:inputText>
+            <af:inputDate value="#{row.bindings.CreatedDate.inputValue}"
+                          label="#{bindings.ExecutionDailyROVO1.hints.CreatedDate.label}"
+                          required="#{bindings.ExecutionDailyROVO1.hints.CreatedDate.mandatory}"
+                          columns="#{bindings.ExecutionDailyROVO1.hints.CreatedDate.displayWidth}"
+                          shortDesc="#{bindings.ExecutionDailyROVO1.hints.CreatedDate.tooltip}" id="id3"
+                          rendered="false">
+              <f:validator binding="#{row.bindings.CreatedDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.ExecutionDailyROVO1.hints.CreatedDate.format}"/>
+            </af:inputDate>
+          </af:column>
+        </af:table>
+      </h:panelGroup>
+    </af:panelGroupLayout>
+  </af:panelHeader>
+</ui:composition>

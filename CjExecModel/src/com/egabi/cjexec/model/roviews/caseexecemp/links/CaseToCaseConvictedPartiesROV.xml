@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CaseToCaseConvictedPartiesROV"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <ViewLinkDefEnd
+    Name="CaseEditMasterROV"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.roviews.caseexecemp.CaseEditMasterROV">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="CaseEditMasterROV"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.roviews.caseexecemp.CaseEditMasterROV.HearingResId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="CaseConvictedPartiesROV"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.roviews.caseexecemp.CaseConvictedPartiesROV">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="CaseConvictedPartiesROV"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.roviews.caseexecemp.CaseConvictedPartiesROV.CourtBcHearingResId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

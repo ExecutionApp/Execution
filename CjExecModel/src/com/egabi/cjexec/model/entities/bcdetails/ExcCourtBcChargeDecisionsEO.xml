@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcCourtBcChargeDecisionsEO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="EXC_COURT_BC_CHARGE_DECISIONS"
+  AliasName="ExcCourtBcChargeDecisionsEO"
+  BindingStyle="OracleName"
+  RowClass="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEOImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="CreatedBy"
+    Precision="100"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <TransientExpression
+      Name="ExpressionScript"><![CDATA[adf.context.current.sessionScope.userInfo.userName]]></TransientExpression>
+    <RecalcCondition
+      Name="RecalcExpressionScript"><![CDATA[true]]></RecalcCondition>
+  </Attribute>
+  <Attribute
+    Name="CreatedDate"
+    ColumnName="CREATED_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    IsUpdateable="while_insert"
+    HistoryColumn="DateHistory"/>
+  <Attribute
+    Name="UpdateBy"
+    Precision="100"
+    ColumnName="UPDATE_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    HistoryColumn="UserHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UpdatedDate"
+    ColumnName="UPDATED_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    HistoryColumn="DateHistory"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="StopExecutionFlag"
+    Precision="2"
+    ColumnName="STOP_EXECUTION_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.StopExecutionFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0627_U064A_U0642_U0627_U0641__U0627_U0644_U062A_U0646_U0641_U064A_U0630"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ActionTypeId"
+    ColumnName="ACTION_TYPE_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="DisplayAttribute"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ActionTypeId.DisplayAttribute_VALUE"/>
+        <Property
+          Name="LookUp"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ActionTypeId.LookUp_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ActionTypeId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="DecisionDate"
+    IsNotNull="true"
+    ColumnName="DECISION_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    IsUpdateable="while_insert"
+    HistoryColumn="DateHistory"/>
+  <Attribute
+    Name="ExecutionDate"
+    ColumnName="EXECUTION_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"/>
+  <Attribute
+    Name="ChargeAnnouncmentDate"
+    ColumnName="CHARGE_ANNOUNCMENT_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ChargeAnnouncmentDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CivilCompensationAmount"
+    ColumnName="CIVIL_COMPENSATION_AMOUNT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"/>
+  <Attribute
+    Name="ImprisonmentDays"
+    ColumnName="IMPRISONMENT_DAYS"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="0">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="AuditUpdate"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ImprisonmentDays.AuditUpdate_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ImprisonmentDays_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <validation:CompareValidationBean
+      Name="ImprisonmentDaysRule0"
+      ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ImprisonmentDays_Rule_0"
+      OnAttribute="ImprisonmentDays"
+      OperandType="LITERAL"
+      Inverse="false"
+      CompareType="LESSTHANEQUALTO"
+      CompareValue="30"/>
+  </Attribute>
+  <Attribute
+    Name="ImprisonmentMonths"
+    ColumnName="IMPRISONMENT_MONTHS"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="0">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="AuditUpdate"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ImprisonmentMonths.AuditUpdate_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ImprisonmentMonths_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <validation:CompareValidationBean
+      Name="ImprisonmentMonthsRule0"
+      ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ImprisonmentMonths_Rule_0"
+      OnAttribute="ImprisonmentMonths"
+      OperandType="LITERAL"
+      Inverse="false"
+      CompareType="LESSTHAN"
+      CompareValue="12"/>
+  </Attribute>
+  <Attribute
+    Name="ImprisonmentYears"
+    ColumnName="IMPRISONMENT_YEARS"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="0">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="AuditUpdate"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ImprisonmentYears.AuditUpdate_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ImprisonmentYears_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="GuranteeAmount"
+    ColumnName="GURANTEE_AMOUNT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.GuranteeAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PenaltyAmount"
+    ColumnName="PENALTY_AMOUNT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="0">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="AuditUpdate"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltyAmount.AuditUpdate_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltyAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="WorkAmount"
+    ColumnName="WORK_AMOUNT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="0">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="WorkAmountPercent"
+    ColumnName="WORK_AMOUNT_PERCENT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountPercent_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="WorkAmountMultiplier"
+    ColumnName="WORK_AMOUNT_MULTIPLIER"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountMultiplier_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PenaltySharedFlag"
+    Precision="2"
+    ColumnName="PENALTY_SHARED_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltySharedFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltySharedFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="DependentOrderFlag"
+    Precision="1"
+    ColumnName="DEPENDENT_ORDER_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.DependentOrderFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.DependentOrderFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="GuaranteeFlag"
+    Precision="1"
+    ColumnName="GUARANTEE_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.GuaranteeFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.GuaranteeFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="DecisionId"
+    IsNotNull="true"
+    ColumnName="DECISION_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"/>
+  <Attribute
+    Name="PenaltyAmountFixedFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="PENALTY_AMOUNT_FIXED_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltyAmountFixedFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltyAmountFixedFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="WorkAmountFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="WORK_AMOUNT_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="WorkAmountMultiplierFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="WORK_AMOUNT_MULTIPLIER_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountMultiplierFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountMultiplierFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="WorkAmountPercentFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="WORK_AMOUNT_PERCENT_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountPercentFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountPercentFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ExecutionFlag"
+    Precision="1"
+    ColumnName="EXECUTION_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ExecutionFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ExecutionFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PenaltyFlag"
+    ColumnName="PENALTY_FLAG"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="0">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltyFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltyFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="UnDefineedPenalty"
+    ColumnName="UN_DEFINEED_PENALTY"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.UnDefineedPenalty_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Comments"
+    Precision="500"
+    ColumnName="COMMENTS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UndefinedPenaltyFlag"
+    ColumnName="UNDEFINED_PENALTY_FLAG"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.UndefinedPenaltyFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.UndefinedPenaltyFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="DeleteFlag"
+    Precision="80"
+    ColumnName="DELETE_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    DefaultValue="N"
+    IsPersistent="false"
+    IsQueriable="false"/>
+  <Attribute
+    Name="PenaltyDueDate"
+    ColumnName="PENALTY_DUE_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltyDueDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PenaltyAmountComFlag"
+    Precision="1"
+    ColumnName="PENALTY_AMOUNT_COM_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltyAmountComFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.PenaltyAmountComFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="UndefineedPenaltyComFlag"
+    Precision="1"
+    ColumnName="UNDEFINEED_PENALTY_COM_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.UndefineedPenaltyComFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.UndefineedPenaltyComFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="WorkAmountComFlag"
+    Precision="1"
+    ColumnName="WORK_AMOUNT_COM_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountComFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.WorkAmountComFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ForeverFlag"
+    Precision="1"
+    ColumnName="FOREVER_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ForeverFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ForeverFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="HardLabourFlag"
+    Precision="1"
+    ColumnName="HARD_LABOUR_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="CheckBox"
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.HardLabourFlag.CheckBox_VALUE"/>
+      </CustomProperties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.HardLabourFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="TransFolderId"
+    ColumnName="TRANS_FOLDER_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    IsPersistent="false"
+    IsQueriable="false"/>
+  <Attribute
+    Name="MeasureEndDate"
+    ColumnName="MEASURE_END_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"/>
+  <Attribute
+    Name="MeasureType"
+    ColumnName="MEASURE_TYPE"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"/>
+  <Attribute
+    Name="StopExecutionPrisonFlag"
+    Precision="1"
+    ColumnName="STOP_EXECUTION_PRISON_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PenaltyEndDate"
+    ColumnName="PENALTY_END_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"/>
+  <Attribute
+    Name="ClaimChargeDecisionId"
+    ColumnName="CLAIM_CHARGE_DECISION_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"/>
+  <Attribute
+    Name="ClaimCourtFeesId"
+    ColumnName="CLAIM_COURT_FEES_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"/>
+  <Attribute
+    Name="ClaimLawyerFeesId"
+    ColumnName="CLAIM_LAWYER_FEES_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGE_DECISIONS"/>
+  <AccessorAttribute
+    Name="ExcCourtBcChargesParties"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.FkChargeDecisionId2Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FkChargeDecisionId2Assoc.ExcCourtBcChargesParties"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FkChargeDecisionId2Assoc.ExcCourtBcChargeDecisions"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="ExcCourtBcDecision"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association12Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association12Assoc.ExcCourtBcDecision"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association12Assoc.ExcCourtBcChargeDecisions"
+    Type="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcDecisionEOImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="ExcCourtBcChargesParties1"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association9Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association9Assoc.ExcCourtBcChargesParties1"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association9Assoc.ExcCourtBcChargeDecisions1"
+    Type="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEOImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="ExcCourtBcChrgDecDepOrd"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.FkChargeDecisionIdAssoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FkChargeDecisionIdAssoc.ExcCourtBcChrgDecDepOrd"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FkChargeDecisionIdAssoc.ExcCourtBcChargeDecisions"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ExcCourtBcChargesParties11"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink9VL"
+    ViewLinkEnd="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink9VL.ExcCourtBcChargesParties11"
+    ViewLinkOtherEnd="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink9VL.ExcCourtBcChargeDecisions2"
+    Type="oracle.jbo.server.ViewRowImpl"
+    IsUpdateable="false"/>
+  <Key
+    Name="ChkDependentOrderFlag">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value="DEPENDENT_ORDER_FLAG IN ('N','Y')"/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="CHK_DEPENDENT_ORDER_FLAG"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ChkGuranteeFlag">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value="GUARANTEE_FLAG IN ('N','Y')"/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="CHK_GURANTEE_FLAG"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ChkPenaltySharedFlag">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value="PENALTY_SHARED_FLAG IN ('N','Y')"/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="CHK_PENALTY_SHARED_FLAG"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ChkStopExecutionFlag">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value="STOP_EXECUTION_FLAG IN ('N','Y')"/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="CHK_STOP_EXECUTION_FLAG"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ExcCourtBcChargeDecisiC08">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value="PENALTY_AMOUNT_FIXED_FLAG IN ('N','Y')"/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_CHARGE_DECISI_C08"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ExcCourtBcChargeDecisiC10">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value="WORK_AMOUNT_FLAG IN ('Y','N')"/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_CHARGE_DECISI_C10"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ExcCourtBcChargeDecisiC12">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value="WORK_AMOUNT_MULTIPLIER_FLAG IN ('Y','N')"/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_CHARGE_DECISI_C12"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ExcCourtBcChargeDecisiC13">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value="WORK_AMOUNT_PERCENT_FLAG IN ('Y','N')"/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_CHARGE_DECISI_C13"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ExcCourtBcChrgDeciPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_CHRG_DECI_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="EXC_COURT_BC_DECISION_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.DecisionId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="UK_EXC_COURT_BC_CHARGES_PARTIE"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO2">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="UK_EXC_COURT_BC_CHARGES_PARTIE"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO3">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="UK_EXC_COURT_BC_CHARGES_PARTIE"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO4">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="UK_EXC_COURT_BC_CHARGES_PARTIE"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO5">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="UK_EXC_COURT_BC_CHARGES_PARTIE"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO6">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="UK_EXC_COURT_BC_CHARGES_PARTIE"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO7">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="UK_EXC_COURT_BC_CHARGES_PARTIE"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO8">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="UK_EXC_COURT_BC_CHARGES_PARTIE"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargeDecisionsEO9">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="EXC_COURT_BC_CHARGES_PARTIES_C"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGE_DECISIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+  <Properties>
+    <CustomProperties>
+      <Property
+        Name="AuditUpdate"
+        ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.AuditUpdate_VALUE"/>
+      <Property
+        Name="TransFolderId"
+        ResId="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.TransFolderId_VALUE"/>
+    </CustomProperties>
+  </Properties>
+</Entity>

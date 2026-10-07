@@ -1,0 +1,7 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyResultRVO
+
+package com.egabi.cjexec.model.roviews.claimProcedureROV
+
+import oracle.jbo.script.annotation.VariableExpression;
+ 
+

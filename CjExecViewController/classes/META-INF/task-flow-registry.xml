@@ -1,0 +1,154 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
+   <task-flow-descriptor path="META-INF/adfc-config.xml" id="" type="" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/JudgmentAppealApproval/JudgmentAppealApproval-TF.xml" id="JudgmentAppealApproval-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/MainReports/ExecDaily.xml" id="ExecDaily" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/MainReports/MainReports.xml" id="MainReports" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/MainReports/hasr/HasrDetailsReport-TF.xml" id="HasrDetailsReport-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/MainReports/hasr/HasrIdNumbReport-TF.xml" id="HasrIdNumbReport-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/MainReports/hasr/HasrNotInDB_TF.xml" id="HasrNotInDB_TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/MainReports/hasr/TotalHasrReport-TF.xml" id="TotalHasrReport-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="reportHasrParam"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/MainReports/motalabat/MotalbatProc-TF.xml" id="MotalbatProc-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/MainReports/motalabat/TotalMotalabatReport-TF.xml" id="TotalMotalabatReport-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/MainReports/procedures/TotalProceduresReport-TF.xml" id="TotalProceduresReport-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/ParParties/Par_Parties-TF.xml" id="Par_Parties-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="partyId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/ParParties/Search_Par_Parties-TF.xml" id="Search_Par_Parties-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/activateAgenda/activate_agenda.xml" id="activate_agenda" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/agenda/agenda_reservation_TFF.xml" id="agenda_reservation_TFF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/appeal_Digits/appeal_Digits_TFF.xml" id="appeal_Digits_TFF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/audit/audit-tf.xml" id="audit-tf" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/auditUpdate/auditMainTaskFlow.xml" id="auditMainTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/auditUpdate/displayAuditTaskFlow.xml" id="displayAuditTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/bcDetails/bc_details_TFF.xml" id="bc_details_TFF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/bcDetails/newClaims_TFF.xml" id="newClaims_TFF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/caseExecEmp/case-attachments-tf.xml" id="case-attachments-tf" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="businessCaseId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/caseExecEmp/case-edit-tf.xml" id="case-edit-tf" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="viewOnlyMode"/>
+      <input-parameter name="HearingResId"/>
+      <input-parameter name="userName"/>
+      <input-parameter name="userId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/caseExecEmp/casese-search-tf.xml" id="casese-search-tf" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="sessionUserName"/>
+      <input-parameter name="sessionUserId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/claimProcedure/ClaimTF.xml" id="ClaimTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/claimProcedure/claimProcedureLogTF.xml" id="claimProcedureLogTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/claimProcedure/claimProcedureTF.xml" id="claimProcedureTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/claimProcedure/searchByPartyTF.xml" id="searchByPartyTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/AbroadRequestReportTF.xml" id="AbroadRequestReportTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/AncillaryProvisions-TF.xml" id="AncillaryProvisions-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/FeesReport-TF.xml" id="FeesReport-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/FirstDegreeTF.xml" id="FirstDegreeTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/GonahMostanafa-TF.xml" id="GonahMostanafa-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/HasrGharamaReport-TF.xml" id="HasrGharamaReport-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/MainReportTF.xml" id="MainReportTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/Motalbat-TF.xml" id="Motalbat-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/ProcPaied-TF.xml" id="ProcPaied-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/datareport/Procedures-TF.xml" id="Procedures-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml" id="enableOppositionTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="Document_ID"/>
+      <input-parameter name="reportName"/>
+      <input-parameter name="decisionType"/>
+      <input-parameter name="stepNumber"/>
+      <input-parameter name="reportFolder"/>
+      <input-parameter name="folderId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/enableOpposition/lawyerInfoTF.xml" id="lawyerInfoTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="resPartyId"/>
+      <input-parameter name="primaryLawyerId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml" id="InstallmentRequestTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="Document_ID"/>
+      <input-parameter name="reportName"/>
+      <input-parameter name="PartyID"/>
+      <input-parameter name="BusinessCaseId"/>
+      <input-parameter name="ParID"/>
+      <input-parameter name="decisionType"/>
+      <input-parameter name="stepNumber"/>
+      <input-parameter name="reportFolder"/>
+      <input-parameter name="folderId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/enstallmentRequest/plentyInstallments/plentyInstallmentTF.xml" id="plentyInstallmentTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="CreationProcedureId"/>
+      <input-parameter name="FeesAmount"/>
+      <input-parameter name="FolderRecord"/>
+      <input-parameter name="FirstInstallmentDate"/>
+      <input-parameter name="MonthNumber"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/execbcsessionsjudgments/ExcBcSessJdgTF.xml" id="ExecBcSessionsJudgmentsTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="BusinessCaseId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/execpartysessionjudgments/ExcPrtySessJdgTF.xml" id="ExcPrtySessJdgTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="partyId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/expatriateProcAppealApproval/expatriateProcAppealApproval-TF.xml" id="expatriateProcAppealApproval-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/expatriateProcSecondApproval/expatriateProcSecondApproval-TF.xml" id="expatriateProcSecondApproval-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/expatriateProcedures/expatriate-TF.xml" id="expatriate-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/inventory/CaseInventorySearch-TF.xml" id="CaseInventorySearch-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/inventory/Inventory-TF.xml" id="Inventory-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="police"/>
+      <input-parameter name="yearBind"/>
+      <input-parameter name="degreeIdBind"/>
+      <input-parameter name="hearingDateBind"/>
+      <input-parameter name="caseNumberBind"/>
+      <input-parameter name="caseTypeBind"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/inventory/InventoryCase-TF.xml" id="InventoryCase-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/lookup/task-flow-definition.xml" id="task-flow-definition" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/nIdService/nIdServiceLogTF.xml" id="nIdServiceLogTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="inputParameter1"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/nIdService/nIdServiceTF.xml" id="nIdServiceTF" type="task-flow-definition" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="nIdParam"/>
+      <input-parameter name="tokenIdParam"/>
+      <input-parameter name="fcnParam"/>
+      <input-parameter name="userNameParam"/>
+      <input-parameter name="passwordParam"/>
+      <input-parameter name="channelIdParam"/>
+      <input-parameter name="userIdParam"/>
+      <input-parameter name="callPermissionParam"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/oppositions/Oppositions-TF.xml" id="Oppositions-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/parlawyer/parLawyerTF.xml" id="parLawyerTF" type="task-flow-definition" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="parId"/>
+      <input-parameter name="partyId"/>
+      <input-parameter name="businessCaseId"/>
+      <input-parameter name="createdBy"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/previewArrestWarrants/arrestWarrantsPreview_TFF.xml" id="arrestWarrantsPreview_TFF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/procedures/PreviousProcedures-TF.xml" id="PreviousProcedures-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="businessCaseId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/prosecutorApproveProc/ProsecutorApproveProc-TF.xml" id="ProsecutorApproveProc-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml" id="provisionsInclusionTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/provisionsInclusionSM/provision_inclusion_TFF.xml" id="provision_inclusion_TFF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/requests/Requests-TF.xml" id="Requests-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/taskflows/suppamount/suppAmountTF.xml" id="suppAmountTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="folderID"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/supprepayment/suppRepaymentTF.xml" id="suppRepaymentTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="folderID"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/transaction/actions/ationsTF.xml" id="ationsTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="executionFlag"/>
+      <input-parameter name="buttonAction"/>
+      <input-parameter name="execFolderId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/transaction/executionFolders/executionFoldersTF.xml" id="executionFoldersTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="folderID"/>
+      <input-parameter name="party_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/transaction/executionFolders/searchAllFoldersTF.xml" id="searchAllFoldersTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="party_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflows/webcam/WebCamTF.xml" id="WebCamTF" type="task-flow-definition" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="Party_ID"/>
+   </task-flow-descriptor>
+</task-flow-registry>

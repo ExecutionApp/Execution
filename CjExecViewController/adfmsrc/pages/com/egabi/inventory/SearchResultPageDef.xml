@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SearchResultPageDef"
+                Package="pages.com.egabi.inventory">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryResultRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryResultRVO1Iterator"/>
+    <searchRegion Binds="SearchInventoryResultRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SearchInventoryResultRVO1Query"/>
+    <iterator Binds="SimplifiedModeAM1.ActionsRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ActionsRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.PartyProceduresRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="PartyProceduresRVO1Iterator"/>
+    <searchRegion Binds="PartyProceduresRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PartyProceduresRVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchInventoryResultRVO1Iterator" id="SearchInventoryResultRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.inventory.SearchInventoryResultRVO"
+                      Name="SearchInventoryResultRVO10">
+        <AttrNames>
+          <Item Value="CaseNumber"/>
+          <Item Value="DegreeName"/>
+          <Item Value="Year"/>
+          <Item Value="CasTypeName"/>
+          <Item Value="PartyName"/>
+          <Item Value="EntityName"/>
+          <Item Value="IdNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="ActionsRVO1Iterator" StaticList="false" Uses="LOV_ActionTypeId" id="ActionTypeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ActionsRVO1Iterator" id="ActionDate">
+      <AttrNames>
+        <Item Value="ActionDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ActionsRVO1Iterator" StaticList="false" Uses="LOV_CapacityTypeId" id="CapacityTypeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="ActionsRVO1Iterator" StaticList="false" Uses="LOV_HearingDate" id="HearingDate"/>
+    <button IterBinding="ActionsRVO1Iterator" id="AccusedRequired" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="AccusedRequired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="2"/>
+        <Item Value="3"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="ActionsRVO1Iterator" id="ProcedureText">
+      <AttrNames>
+        <Item Value="ProcedureText"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ActionsRVO1Iterator" id="DateFrom">
+      <AttrNames>
+        <Item Value="DateFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ActionsRVO1Iterator" id="DateTo">
+      <AttrNames>
+        <Item Value="DateTo"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="PartyProceduresRVO1Iterator" id="PartyProceduresRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.inventory.PartyProceduresRVO" Name="PartyProceduresRVO10">
+        <AttrNames>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="HearingDate"/>
+          <Item Value="SequenceNumber"/>
+          <Item Value="CaseYear"/>
+          <Item Value="DegreeName"/>
+          <Item Value="CasTypeName"/>
+          <Item Value="FolderName"/>
+          <Item Value="AdvancePaymentAmount"/>
+          <Item Value="AdvancePaymentDate"/>
+          <Item Value="ImprisonmentStartDate"/>
+          <Item Value="ImprisonmentEndDate"/>
+          <Item Value="Name"/>
+          <Item Value="ProcedureDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

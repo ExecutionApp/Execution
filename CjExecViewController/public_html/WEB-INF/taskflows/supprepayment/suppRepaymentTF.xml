@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="suppRepaymentTF">
+    <default-activity>FolderIDExecuteWithParams</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>folderID</name>
+      <value>#{pageFlowScope.folderID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__7">
+      <managed-bean-name>SuppRepayBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.supprepay.SuppRepayBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <method-call id="FolderIDExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="SuppRepaymentFrag">
+      <page>/pages/com/egabi/cjexec/suppRepayment/SuppRepaymentFrag.jsff</page>
+    </view>
+    <task-flow-return id="commit">
+      <outcome>
+        <name>commit</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="excuteInstallment">
+      <method>#{backingBeanScope.SuppRepayBean.excuteInstallment}</method>
+      <outcome>
+        <fixed-outcome>main</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>FolderIDExecuteWithParams</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>excuteInstallment</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>SuppRepaymentFrag</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>save</from-outcome>
+        <to-activity-id>commit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>excuteInstallment</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>main</from-outcome>
+        <to-activity-id>SuppRepaymentFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

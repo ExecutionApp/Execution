@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="searchByPartyFragPageDef"
+                Package="pages.com.egabi.claimProcedure">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator id="SearchByPartyFormRVO1Iterator" Binds="SearchByPartyFormRVO1"
+                  DataControl="SimplifiedModeAMDataControl" RangeSize="25"/>
+        <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="ValidatePoliceReportROVO1Iterator"/>
+        <iterator Binds="SearchByPartyResultRVO1" RangeSize="10" DataControl="SimplifiedModeAMDataControl"
+                  id="SearchByPartyResultRVO1Iterator"/>
+        <iterator Binds="PartyProceduresRVO3" RangeSize="10" DataControl="SimplifiedModeAMDataControl"
+                  id="PartyProceduresRVO3Iterator"/>
+        <iterator id="PartyAddressesRVO1Iterator" Binds="PartyAddressesRVO1" DataControl="SimplifiedModeAMDataControl"
+                  RangeSize="25"/>
+        <iterator id="PartyFoldersRVO1Iterator" Binds="PartyFoldersRVO1" DataControl="SimplifiedModeAMDataControl"
+                  RangeSize="25"/>
+        <iterator id="PartyClaimsRVO1Iterator" Binds="PartyClaimsRVO1" DataControl="SimplifiedModeAMDataControl"
+                  RangeSize="25"/>
+        <iterator id="PartyCrimesRVO1Iterator" Binds="PartyCrimesRVO1" DataControl="SimplifiedModeAMDataControl"
+                  RangeSize="25"/>
+        <iterator Binds="SearchByPartyNameRVO1" RangeSize="10" DataControl="SimplifiedModeAMDataControl"
+                  id="SearchByPartyNameRVO1Iterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="SearchByPartyFormRVO1Iterator" id="PartyName">
+            <AttrNames>
+                <Item Value="PartyName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchByPartyFormRVO1Iterator" id="IdNumber">
+            <AttrNames>
+                <Item Value="IdNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchByPartyFormRVO1Iterator" id="CaseNumber">
+            <AttrNames>
+                <Item Value="CaseNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchByPartyFormRVO1Iterator" id="SequenceNumber">
+            <AttrNames>
+                <Item Value="SequenceNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchByPartyFormRVO1Iterator" id="Year">
+            <AttrNames>
+                <Item Value="Year"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="SearchByPartyFormRVO1Iterator" StaticList="false" Uses="LOV_SearchType" id="SearchType"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="SearchByPartyFormRVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseTypeId"
+              id="BusinessCaseTypeId" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="SearchByPartyFormRVO1Iterator" StaticList="false" Uses="LOV_FolderTypeId" id="FolderTypeId"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="SearchByPartyFormRVO1Iterator" id="RepeatedFlag" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="RepeatedFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </list>
+       <!-- <list IterBinding="SearchByPartyFormRVO1Iterator" id="IsRequired" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="IsRequired"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="1"/>
+                <Item Value="2"/>
+            </ValueList>
+        </list>-->
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa"
+              id="NeyabGozayaa" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <tree id="searchByPartyResultRVO1" IterBinding="SearchByPartyResultRVO1Iterator">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyResultRVO"
+                            Name="searchByPartyResultRVO10">
+                <AttrNames>
+                    <Item Value="OrderRaws"/>
+                    <Item Value="Attendance"/>
+                    <Item Value="AttendanceName"/>
+                    <Item Value="BusinessCaseId"/>
+                    <Item Value="BusinessCaseNumber"/>
+                    <Item Value="CaseNumber"/>
+                    <Item Value="CaseYear"/>
+                    <Item Value="CasTypeId"/>
+                    <Item Value="CasTypeName"/>
+                    <Item Value="DegreeId"/>
+                    <Item Value="DegreeName"/>
+                    <Item Value="EntityName"/>
+                    <Item Value="ExecutionFlag"/>
+                    <Item Value="FolderId"/>
+                    <Item Value="FolderName"/>
+                    <Item Value="FolderType"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="IdNumber"/>
+                    <Item Value="InventoryNumber"/>
+                    <Item Value="JudgmentText"/>
+                    <Item Value="Nickname"/>
+                    <Item Value="Notes"/>
+                    <Item Value="ParentEntityId"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="PartyName"/>
+                    <Item Value="PoliceId"/>
+                    <Item Value="PoliceStationEntityId"/>
+                    <Item Value="RepeatedFlag"/>
+                    <Item Value="ResPartyId"/>
+                    <Item Value="SequenceNumber"/>
+                    <Item Value="SessionId"/>
+                    <Item Value="Year"/>
+                    <Item Value="CheckParty" Binds="CheckParty"/>
+                    <Item Value="ExecutionFlagName"/>
+                    <Item Value="CriminalType"/>
+                    <Item Value="Crimes"/>
+                    <Item Value="PartyClaimFlag"/>
+                    <Item Value="PartyIdXx"/>
+                    <Item Value="Remaining"/>
+                    <Item Value="Total"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree id="PartyProceduresRVO3" IterBinding="PartyProceduresRVO3Iterator">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.PartyProceduresRVO"
+                            Name="PartyProceduresRVO30">
+                <AttrNames>
+                    <Item Value="InventoryNumber"/>
+                    <Item Value="ActionType"/>
+                    <Item Value="ActsTypesName"/>
+                    <Item Value="AdvancePaymentAmount"/>
+                    <Item Value="AdvancePaymentDate"/>
+                    <Item Value="FolderId"/>
+                    <Item Value="FolderName"/>
+                    <Item Value="FolderType"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="Id"/>
+                    <Item Value="ImprisonmentEndDate"/>
+                    <Item Value="ImprisonmentStartDate"/>
+                    <Item Value="MappingFileTypes"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="PoliceStationEntityId"/>
+                    <Item Value="ProcedureDate"/>
+                    <Item Value="ProcedureType"/>
+                    <Item Value="RepeatedFlag"/>
+                    <Item Value="ResPartyId"/>
+                    <Item Value="SequenceNumber"/>
+                    <Item Value="Year"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <button IterBinding="SearchByPartyResultRVO1Iterator" id="CheckParty" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="CheckParty"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="1"/>
+                <Item Value="0"/>
+            </ValueList>
+        </button>
+        <methodAction id="updateParParties" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateParParties" IsViewObjectMethod="false" DataControl="SimplifiedModeAMDataControl"
+                      InstanceName="data.SimplifiedModeAMDataControl.dataProvider">
+            <NamedData NDName="firstName" NDType="java.lang.String"/>
+            <NamedData NDName="secondName" NDType="java.lang.String"/>
+            <NamedData NDName="thirdName" NDType="java.lang.String"/>
+            <NamedData NDName="fourthName" NDType="java.lang.String"/>
+            <NamedData NDName="address" NDType="java.lang.String"/>
+            <NamedData NDName="placeOfBirth" NDType="java.lang.String"/>
+            <NamedData NDName="dateOfBirth" NDType="java.lang.String"/>
+            <NamedData NDName="idNumber" NDType="java.lang.String"/>
+            <NamedData NDName="updatedBy" NDType="java.lang.String"/>
+            <NamedData NDName="jobTitle" NDType="java.lang.String"/>
+            <NamedData NDName="fullName" NDType="java.lang.String"/>
+            <NamedData NDName="partyIds" NDType="java.lang.String"/>
+            <NamedData NDName="updateType" NDType="java.lang.String"/>
+        </methodAction>
+        <button IterBinding="SearchByPartyFormRVO1Iterator" id="EsteanafFlag" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="EsteanafFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <methodAction id="getGozeyFromKoly" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getGozeyFromKoly" IsViewObjectMethod="false" DataControl="SimplifiedModeAMDataControl"
+                      InstanceName="data.SimplifiedModeAMDataControl.dataProvider"
+                      ReturnName="data.SimplifiedModeAMDataControl.methodResults.getGozeyFromKoly_SimplifiedModeAMDataControl_dataProvider_getGozeyFromKoly_result">
+            <NamedData NDName="caseNumber" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="caseYear" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="businessCaseId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="entityKolya" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <list IterBinding="SearchByPartyFormRVO1Iterator" StaticList="false" Uses="LOV_IsRequired" id="IsRequired"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="SearchByPartyResultRVO1Iterator" id="CriminalType">
+            <AttrNames>
+                <Item Value="CriminalType"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="PartyAddressesRVO1Iterator" id="PartyAddressesRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.PartyAddressesRVO"
+                            Name="PartyAddressesRVO10">
+                <AttrNames>
+                    <Item Value="ParPartyId"/>
+                    <Item Value="Address"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="PartyFoldersRVO1Iterator" id="PartyFoldersRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.PartyFoldersRVO"
+                            Name="PartyFoldersRVO10">
+                <AttrNames>
+                    <Item Value="FolderId"/>
+                    <Item Value="JudgmentText"/>
+                    <Item Value="SequenceNumber"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="PartyClaimsRVO1Iterator" id="PartyClaimsRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.PartyClaimsRVO"
+                            Name="PartyClaimsRVO10">
+                <AttrNames>
+                    <Item Value="PartyId"/>
+                    <Item Value="Id"/>
+                    <Item Value="Remaining"/>
+                    <Item Value="Total"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="PartyClaimsRVO1Iterator" id="PartyClaimsRVO11">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.PartyClaimsRVO"
+                            Name="PartyClaimsRVO110">
+                <AttrNames>
+                    <Item Value="PartyId"/>
+                    <Item Value="Remaining"/>
+                    <Item Value="Total"/>
+                    <Item Value="Id"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="SearchByPartyFormRVO1Iterator" id="ClaimFlag">
+            <AttrNames>
+                <Item Value="ClaimFlag"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchByPartyFormRVO1Iterator" id="PaidFlag">
+            <AttrNames>
+                <Item Value="PaidFlag"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="getPartyNameFixedSearch" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getPartyNameFixedSearch" IsViewObjectMethod="false"
+                      DataControl="SimplifiedModeAMDataControl"
+                      InstanceName="data.SimplifiedModeAMDataControl.dataProvider"
+                      ReturnName="data.SimplifiedModeAMDataControl.methodResults.getPartyNameFixedSearch_SimplifiedModeAMDataControl_dataProvider_getPartyNameFixedSearch_result">
+            <NamedData NDName="partyName" NDType="java.lang.String"/>
+        </methodAction>
+        <tree IterBinding="PartyCrimesRVO1Iterator" id="PartyCrimesRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.PartyCrimesRVO"
+                            Name="PartyCrimesRVO10">
+                <AttrNames>
+                    <Item Value="PartyId"/>
+                    <Item Value="Name"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="SearchByPartyNameRVO1Iterator" id="SearchByPartyNameRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyNameRVO"
+                            Name="SearchByPartyNameRVO10">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="PartyFixedFullName"/>
+                    <Item Value="IdNumber"/>
+                    <Item Value="Address"/>
+                    <Item Value="BusinessCaseNumber"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="SearchByPartyNameRVO1Iterator" id="SearchByPartyNameRVO11">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyNameRVO"
+                            Name="SearchByPartyNameRVO110">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="PartyFixedFullName"/>
+                     
+                    <Item Value="CreatedByBusinessCaseId"/>
+                  
+                    <Item Value="IdNumber"/>
+                   
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+    </bindings>
+</pageDefinition>

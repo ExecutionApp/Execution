@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="PreviewArrestWarrantsPageDef1"
+                Package="pages.com.egabi.previewArrestWarrants">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ValidatePoliceReportROVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.PreviewArrestWarrantsROVO1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="PreviewArrestWarrantsROVO1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="PoliceNo">
+      <AttrNames>
+        <Item Value="PoliceNo"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseType"
+          id="BusinessCaseType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="ParYear">
+      <AttrNames>
+        <Item Value="ParYear"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseDegree"
+          id="BusinessCaseDegree" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_BcDegreeGonaha"
+          id="BcDegreeGonaha" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_BcDegreeGnayaat"
+          id="BcDegreeGnayaat" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="HearingDate">
+      <AttrNames>
+        <Item Value="HearingDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_Hearing" id="Hearing"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="CheckFlag">
+      <AttrNames>
+        <Item Value="CheckFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="Judgement">
+      <AttrNames>
+        <Item Value="Judgement"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="FromDateTrans">
+      <AttrNames>
+        <Item Value="FromDateTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="ToDateTrans">
+      <AttrNames>
+        <Item Value="ToDateTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_UserIdTrans" id="UserIdTrans"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="SearchType">
+      <AttrNames>
+        <Item Value="SearchType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="PenaltyAmountCom">
+      <AttrNames>
+        <Item Value="PenaltyAmountCom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="UndefineedPenaltyCom">
+      <AttrNames>
+        <Item Value="UndefineedPenaltyCom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="WorkAmountCom">
+      <AttrNames>
+        <Item Value="WorkAmountCom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="CityId">
+      <AttrNames>
+        <Item Value="CityId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_FirstDegree" id="FirstDegree"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="PreviewArrestWarrantsROVO1Iterator" id="PreviewArrestWarrantsROVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.bcdetails.PreviewArrestWarrantsROVO"
+                      Name="PreviewArrestWarrantsROVO10">
+        <AttrNames>
+          <Item Value="SequenceNumber"/>
+          <Item Value="Year"/>
+          <Item Value="FolderType"/>
+          <Item Value="PoliceStationEntityId"/>
+          <Item Value="RepeatedFlag"/>
+          <Item Value="CriminalType"/>
+          <Item Value="JudgmentText"/>
+          <Item Value="FolderId"/>
+          <Item Value="ResPartId"/>
+          <Item Value="MatchingStatus"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="DateOfBirth"/>
+          <Item Value="BirthGovId"/>
+          <Item Value="PolicestationId"/>
+          <Item Value="Address"/>
+          <Item Value="Gender"/>
+          <Item Value="PassportNo"/>
+          <Item Value="CaseNumber"/>
+          <Item Value="CaseYear"/>
+          <Item Value="CaseType"/>
+          <Item Value="OriginEntityId"/>
+          <Item Value="SecondaryProsecutionId"/>
+          <Item Value="PrimaryProsecution"/>
+          <Item Value="SentenceTypeId"/>
+          <Item Value="SentenceTermDay"/>
+          <Item Value="SentenceTermMonth"/>
+          <Item Value="SentenceTermYear"/>
+          <Item Value="PenaltyValue"/>
+          <Item Value="ArrestDate"/>
+          <Item Value="ArrestHoure"/>
+          <Item Value="ArrestAddress"/>
+          <Item Value="IdNo"/>
+          <Item Value="BailValue"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="Did"/>
+          <Item Value="DocName"/>
+          <Item Value="FileName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

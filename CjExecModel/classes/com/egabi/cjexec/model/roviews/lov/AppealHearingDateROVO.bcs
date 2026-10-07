@@ -1,0 +1,19 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.lov.AppealHearingDateROVO
+
+package com.egabi.cjexec.model.roviews.lov
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="entityId")
+def entityId_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('policeId')
+}
+
+
+@VariableExpression(path="prevDate")
+def prevDate_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('hearingDateId')
+}
+

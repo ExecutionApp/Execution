@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="EntityNeyabaROVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.EntityNeyabaROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pParentEntity"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="sessionUser"
+    Kind="where"
+    Type="oracle.jbo.domain.Number">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="EntityNeyabaROVO"/>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT            
+    e.ID ID,            
+    e.ENTITY_NAME ENTITY_NAME,            
+    e.ENTITY_TYPE_ID ENTITY_TYPE_ID,            
+    e.PARENT_ENTITY_ID PARENT_ENTITY_ID   ,    
+    (SELECT             
+    ee.ENTITY_NAME from ENTITY ee where ee.id = e.PARENT_ENTITY_ID) as Parent_Name  
+    ,   
+    e.ENTITY_DEGREE         
+FROM            
+    ENTITY  e     
+    where  e.entity_type_id=1    
+    and     
+     id in     
+(SELECT ENTITY_ID FROM SEC_USERs WHERE ID=     
+:sessionUser) 
+order by ENTITY_NAME asc]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_NAME"
+    Expression="ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityTypeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENTITY_TYPE_ID"
+    Expression="ENTITY_TYPE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ParentEntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARENT_ENTITY_ID"
+    Expression="PARENT_ENTITY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ParentName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENT_NAME"
+    Expression="PARENT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityDegree"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_DEGREE"
+    Expression="ENTITY_DEGREE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="EntityNeyabaROVOCriteria"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityNeyabaROVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EntityNeyabaROVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="EntityDegree"
+        ViewAttribute="EntityDegree"
+        Operator="="
+        Conjunction="OR"
+        Value="3"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="EntityNeyabaROVOCriteria1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityNeyabaROVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EntityNeyabaROVOCriteria1_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="EntityNeyabaROVOCriteria1_EntityNeyabaROVOCriteria1_row_0_EntityDegree"
+        ViewAttribute="EntityDegree"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value="39"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="EntityNeyabaROVOCriteria2"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityNeyabaROVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EntityNeyabaROVOCriteria2_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ParentEntityId"
+        ViewAttribute="ParentEntityId"
+        Operator="="
+        Conjunction="AND"
+        Value=":pParentEntity"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

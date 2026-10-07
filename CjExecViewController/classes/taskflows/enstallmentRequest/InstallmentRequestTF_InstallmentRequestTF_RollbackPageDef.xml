@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="InstallmentRequestTF_InstallmentRequestTF_RollbackPageDef" Package="taskflows.enstallmentRequest">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="Rollback" DataControl="CjExecAMDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

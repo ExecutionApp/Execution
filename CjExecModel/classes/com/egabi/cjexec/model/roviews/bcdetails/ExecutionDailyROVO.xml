@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExecutionDailyROVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.ExecutionDailyROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pdate"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="ExecutionDailyROVO"/>
+  </Variable>
+  <Variable
+    Name="pEnt"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="ExecutionDailyROVO"/>
+  </Variable>
+  <SQLQuery><![CDATA[select                  
+      distinct           
+RESERVATION.BUSINESS_CASE_ID , EXC_FOLDER_PROCEDURES.id  ,   EXC_FOLDER_PROCEDURES.created_date , RES_PARTIES.bc_degree_spec_id  ,              
+PAR_POLICE.PAR_YEAR || '/' || PAR_POLICE.POLICE_NUMBER || '/' || CAS_TYPE.NAME|| '/' || POLICE.ENTITY_NAME   BUSINESS_CASE_NUMBER ,                 
+RESERVATION.CIRCLE_HEARING_DATE_ID ,circle.HEARING_DATE, RES_PARTIES.party_id , parties.PARTY_FULL_NAME ,                 
+RES_PARTIES.POSTPONED, RES_PARTIES.ATTENDANCE , folder_data.JUDGMENT_TEXT  ,              
+              
+DECODE (RES_PARTIES.bc_degree_spec_id ,1, 'أول درجة' , 2 , 'معارضة' , 3 ,'إستئناف' ,4 ,'معارضة إستئنافية' , 7 ,'إستئناف جنايات' ,8 ,'الطعن بالنقض')  Degree_Name  ,              
+              
+ EXC_FOLDER_PROCEDURES.PROCEDURE_DATE  ,EXC_FOLDER_actions.action_type , EXC_LKP_ACTION_TYPES.name           
+               
+ ,   decode(folder_data.sequence_number, NULL, '',(folder_data.year                      
+                                             || '/'                      
+                                             || folder_data.sequence_number                      
+                                             || '/'                      
+                                             || decode(folder_data.folder_type, 2, 'حبس', 3, 'غرامة',                      
+                                                       5, 'أمن دولة حبس', 6, 'أمن دولة غرامة')                      
+                                             || '/'                      
+                                             || ents.entity_name))  inventory_number ,  
+                                               
+  (  SELECT LISTAGG (  
+                            (SELECT name  
+                               FROM par_criminal_types  
+                              WHERE par_criminal_types.id =  
+                                       form_case_description_des.description_id),  
+                            ' , ')  
+                         WITHIN GROUP (ORDER BY  
+                                          form_case_description_des.description_id)  
+                            AS aa  
+                    FROM form_case_description_des  
+                   WHERE form_case_description_id IN (SELECT MAX (id)  
+                                                        FROM form_case_description  
+                                                       WHERE business_case_id =  
+                                                                RESERVATION.business_case_id)  
+                GROUP BY form_case_description_des.form_case_description_id)  
+                  crimes  
+                                                         
+           ,parties.id_number   
+         ,folder_data.CRIMINAL_TYPE    
+          
+                 
+from                   
+                 
+                 
+COURT_BC_HEARING_RESERVATION RESERVATION inner join COURT_BC_HEARING_RES_PARTIES RES_PARTIES                 
+on RESERVATION.id = RES_PARTIES.COURT_BC_HEARING_RES_id                 
+inner join COURT_CIRCLES_DATES_HEARING circle on circle.id = RESERVATION.CIRCLE_HEARING_DATE_ID                 
+INNER join par_parties parties on parties.id = RES_PARTIES.PARTY_ID                 
+                
+inner join PAR_POLICE_AUTHORITY_REPORT PAR_POLICE on PAR_POLICE.BUSINESS_CASE_ID = RESERVATION.BUSINESS_CASE_ID                
+inner join BUSINESS_CASE_TYPE CAS_TYPE on CAS_TYPE.id = PAR_POLICE.BUSINESS_CASE_TYPE                
+inner join entity POLICE on  POLICE.id = PAR_POLICE.ORIGIN_ENTITY                
+INNER join par_parties parties on parties.id = RES_PARTIES.PARTY_ID                
+                
+inner join COURT_CIRCLES_DATES_HEARING cou on cou.id = RESERVATION.CIRCLE_HEARING_DATE_ID           
+inner join COURT_CIRCLES_DATES_HEARING cc on cou.HEARING_DATE = cc.HEARING_DATE and  COU.ENTITY_ID  =  cc.ENTITY_ID            
+               
+inner join exc_folder_data folder_data on folder_data.RES_PARTY_ID = RES_PARTIES.id                
+inner JOIN EXC_FOLDER_actions on EXC_FOLDER_actions.folder_record_id =folder_data.id           
+inner join EXC_FOLDER_PROCEDURES on EXC_FOLDER_PROCEDURES.id = EXC_FOLDER_actions.PROCEDURE_ID           
+inner join EXC_LKP_ACTION_TYPES on  EXC_LKP_ACTION_TYPES.id = EXC_FOLDER_actions.action_type           
+inner join entity ents on ents.id = folder_data.police_station_entity_id                
+              
+              
+    where     EXC_FOLDER_PROCEDURES.PROCEDURE_DATE = to_date (:pdate,'yyyy-mm-dd')           
+    and folder_data.police_station_entity_id = :pEnt           
+    and EXC_FOLDER_actions.deleted_flag = 'N'      
+    and folder_data.folder_type != 35       
+            
+ order by  RESERVATION.BUSINESS_CASE_ID    desc]]></SQLQuery>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_ID"
+    Expression="BUSINESS_CASE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATED_DATE"
+    Expression="CREATED_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="BcDegreeSpecId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BC_DEGREE_SPEC_ID"
+    Expression="BC_DEGREE_SPEC_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BusinessCaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="586"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NUMBER"
+    Expression="BUSINESS_CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="586"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CircleHearingDateId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CIRCLE_HEARING_DATE_ID"
+    Expression="CIRCLE_HEARING_DATE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="PartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARTY_ID"
+    Expression="PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyFullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_FULL_NAME"
+    Expression="PARTY_FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Postponed"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="POSTPONED"
+    Expression="POSTPONED"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Attendance"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ATTENDANCE"
+    Expression="ATTENDANCE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JudgmentText"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JUDGMENT_TEXT"
+    Expression="JUDGMENT_TEXT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DegreeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="32"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEGREE_NAME"
+    Expression="DEGREE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="32"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProcedureDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="PROCEDURE_DATE"
+    Expression="PROCEDURE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ActionType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ACTION_TYPE"
+    Expression="ACTION_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Name"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InventoryNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="408"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INVENTORY_NUMBER"
+    Expression="INVENTORY_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="408"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Crimes"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CRIMES"
+    Expression="CRIMES"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_NUMBER"
+    Expression="ID_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CriminalType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CRIMINAL_TYPE"
+    Expression="CRIMINAL_TYPE"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CasesSearchReasultROV"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="bindCaseType"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindCircleId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindHearingDateId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindPoliceNumber"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindIdNumber"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindPartyName"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindDegree"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindOriginEntityId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT CBHR.ID       
+             HEARING_RES_ID,       
+            POLICE_NUMBER       
+         || '  '       
+         || (SELECT NAME       
+               FROM BUSINESS_CASE_TYPE       
+              WHERE ID = BC.BUSINESS_CASE_TYPE)       
+         || '  '       
+         || PAR_YEAR       
+             AS CASE_NUMBER,       
+         BC.BUSINESS_CASE_NAME,       
+         HEARING_DATE,       
+         (SELECT NAME       
+            FROM BUSINESS_CASE_DEGREES       
+           WHERE ID = CCDH.BC_DEGREE_ID)       
+             CASE_DEGREE,     
+             CCDH.BC_DEGREE_ID,    
+         POLICE_NUMBER,       
+         BC.BUSINESS_CASE_TYPE,       
+         PAR_YEAR,       
+         CCDH.ID       
+             HEARING_DATE_ID,       
+         COUNTS.COUNT_ALL,       
+         COUNTS.CREATED,       
+         COUNTS.DONE   ,   
+         CSJ.CLASSIFIED_FLAG     
+    FROM PAR_POLICE_AUTHORITY_REPORT  AR,       
+         BUSINESS_CASE                BC,       
+         COURT_CIRCLES_DATES_HEARING  CCDH,       
+         COURT_BC_HEARING_RESERVATION CBHR,       
+         EXC_COURT_BC_SESSION_JUDGMENT CSJ,       
+         (SELECT COUNT (EXBD.CLASSIFIED_FLAG)                    CREATED,       
+                 COUNT (DECODE (EXBD.CLASSIFIED_FLAG, 0, NULL, 1)) DONE,       
+                 COUNT (CCDH.ID)                                 COUNT_ALL       
+            FROM PAR_POLICE_AUTHORITY_REPORT  AR,       
+                 BUSINESS_CASE                BC,       
+                 COURT_CIRCLES_DATES_HEARING  CCDH,       
+                 COURT_BC_HEARING_RESERVATION CBHR,       
+                 EXC_COURT_BC_SESSION_JUDGMENT CSJ,       
+                 EXC_COURT_BC_DECISION        EXBD       
+           WHERE     AR.BUSINESS_CASE_ID = BC.ID       
+                 AND CBHR.BUSINESS_CASE_ID = AR.BUSINESS_CASE_ID       
+                 AND CBHR.CIRCLE_HEARING_DATE_ID = CCDH.ID       
+                 AND CSJ.COURT_BC_HEARING_RES_ID = CBHR.ID       
+                 AND EXBD.SESSION_JUDGMENT_ID(+) = CSJ.ID       
+                 AND CCDH.ENTITY_ID = :bindCircleId       
+                 AND CASE_TYPE = :bindCaseType       
+                 AND CCDH.ID = nvl(:bindHearingDateId,CCDH.ID)      
+                 AND AR.ORIGIN_ENTITY = NVL(:bindOriginEntityId,AR.ORIGIN_ENTITY)    
+                 AND CCDH.BC_DEGREE_ID = :bindDegree       
+                 AND CSJ.CLASSIFIED_FLAG = 0       
+                 AND CSJ.JUDGMENT_TYPE = 1) COUNTS       
+   WHERE     AR.BUSINESS_CASE_ID = BC.ID       
+         AND CBHR.BUSINESS_CASE_ID = AR.BUSINESS_CASE_ID       
+         AND CBHR.CIRCLE_HEARING_DATE_ID = CCDH.ID       
+         AND CSJ.COURT_BC_HEARING_RES_ID = CBHR.ID       
+         AND CCDH.ENTITY_ID = :bindCircleId       
+         AND CASE_TYPE = :bindCaseType       
+         AND CCDH.ID = NVL(:bindHearingDateId,CCDH.ID)    
+         AND CCDH.BC_DEGREE_ID = :bindDegree       
+         AND AR.ORIGIN_ENTITY = NVL(:bindOriginEntityId,AR.ORIGIN_ENTITY)    
+         AND (AR.POLICE_NUMBER = :bindPoliceNumber OR :bindPoliceNumber IS NULL)       
+         AND AR.ID IN       
+                 (SELECT PP.PAR_ID       
+                    FROM PAR_PARTIES PP       
+                   WHERE     (   PP.ID_NUMBER = :bindIdNumber       
+                              OR :bindIdNumber IS NULL)       
+                         AND (   UPPER (       
+                                        PP.FNAME       
+                                     || ' '       
+                                     || PP.SNAME       
+                                     || ' '       
+                                     || PP.TNAME       
+                                     || ' '       
+                                     || PP.FOURTHNAME) LIKE       
+                                     UPPER ('%' || :bindPartyName || '%')       
+                              OR :bindPartyName IS NULL)       
+                         AND PP.PAR_ID = AR.ID)       
+        -- AND CSJ.CLASSIFIED_FLAG = 0       
+         AND CSJ.JUDGMENT_TYPE = 1       
+ORDER BY 1 DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="HearingResId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HEARING_RES_ID"
+    SQLType="NUMERIC"
+    Expression="HEARING_RES_ID"/>
+  <ViewAttribute
+    Name="CaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_NUMBER"
+    Expression="CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="282"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CasesSearchReasultROV.CaseNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NAME"
+    Expression="BUSINESS_CASE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CasesSearchReasultROV.BusinessCaseName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CasesSearchReasultROV.HearingDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseDegree"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_DEGREE"
+    Expression="CASE_DEGREE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CasesSearchReasultROV.CaseDegree_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BcDegreeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BC_DEGREE_ID"
+    Expression="BC_DEGREE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoliceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="POLICE_NUMBER"
+    Expression="POLICE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_TYPE"
+    Expression="BUSINESS_CASE_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ParYear"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PAR_YEAR"
+    Expression="PAR_YEAR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HearingDateId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HEARING_DATE_ID"
+    Expression="HEARING_DATE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CountAll"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="COUNT_ALL"
+    Expression="COUNT_ALL"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Created"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CREATED"
+    Expression="CREATED"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Done"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DONE"
+    Expression="DONE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ClassifiedFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CLASSIFIED_FLAG"
+    Expression="CLASSIFIED_FLAG"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="HearingResId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

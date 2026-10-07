@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="plentyInstallmentTF">
+    <default-activity>insertPlentyInstallment</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>FirstInstallmentDate</name>
+      <value>#{pageFlowScope.FirstInstallmentDate}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__2">
+      <name>MonthNumber</name>
+      <value>#{pageFlowScope.MonthNumber}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__3">
+      <name>CreationProcedureId</name>
+      <value>#{pageFlowScope.CreationProcedureId}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__4">
+      <name>FolderRecord</name>
+      <value>#{pageFlowScope.FolderRecord}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__5">
+      <name>FeesAmount</name>
+      <value>#{pageFlowScope.FeesAmount}</value>
+      <required/>
+    </input-parameter-definition>
+    <view id="PlentyInstallmentFrag">
+      <page>/pages/com/egabi/cjexec/installmentRequest/plentyInstallment/PlentyInstallmentFrag.jsff</page>
+    </view>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="insertPlentyInstallment">
+      <method>#{bindings.insertPlentyInstallment.execute}</method>
+      <outcome>
+        <fixed-outcome>insertPlentyInstallment</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__9">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>PlentyInstallmentFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>insertPlentyInstallment</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>insertPlentyInstallment</from-outcome>
+        <to-activity-id>ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

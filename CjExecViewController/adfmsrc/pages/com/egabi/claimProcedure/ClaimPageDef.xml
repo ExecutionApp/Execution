@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="ClaimPageDef"
+                Package="pages.com.egabi.claimProcedure">
+    <parameters/>
+    <executables>
+        <iterator Binds="SimplifiedModeAM1.ExcClaimsVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="ExcClaimsVO1Iterator"/>
+        <iterator Binds="SimplifiedModeAM1.ClaimInputFormRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="ClaimInputFormRVO1Iterator"/>
+        <iterator Binds="SimplifiedModeAM1.ExcClaimsVO2" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="ExcClaimsVO2Iterator"/>
+        <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="ValidatePoliceReportROVO1Iterator"/>
+        <iterator id="ClaimSearchFormRVO1Iterator" Binds="SimplifiedModeAM1.ClaimSearchFormRVO" DataControl="CjExecAMDataControl"
+                  RangeSize="25"/>
+        <iterator Binds="SimplifiedModeAM1.SearchClaimResultRVO1" RangeSize="-1" DataControl="CjExecAMDataControl"
+                  id="SearchClaimResultRVO1Iterator"/>
+        <iterator id="ExcFolderDataViewVO1Iterator" Binds="SimplifiedModeAM1.ExcFolderDataViewVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator Binds="SimplifiedModeAM1.ClaimsFoldersRO" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ClaimsFoldersROIterator"/>
+        <iterator Binds="SimplifiedModeAM1.ExcClaimsVO1" RangeSize="10" DataControl="CjExecAMDataControl"
+                  id="ExcClaimsVO1Iterator1"/>
+        <iterator id="ExcCourtBcChargeDecisionsVO4Iterator" Binds="SimplifiedModeAM1.ExcCourtBcChargeDecisionsVO4"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator Binds="SimplifiedModeAM1.ClaimInputFormRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ClaimInputFormRVO1Iterator1"/>
+        <iterator Binds="SimplifiedModeAM1.ExcClaimsVO3" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcClaimsVO3Iterator"/>
+        <iterator id="ExcSettlementPenaltyVO1Iterator" Binds="SimplifiedModeAM1.ExcSettlementPenaltyVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="ExcClaimsVO2Iterator" id="ExcClaimsVO2">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.claimProcedureViews.ExcClaimsVO" Name="ExcClaimsVO20">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="ClaimNumber"/>
+                    <Item Value="FixedPenaltyAmount"/>
+                    <Item Value="FixedPenaltyFees"/>
+                    <Item Value="ClaimTotal"/>
+                    <Item Value="DailyPenaltyFlag"/>
+                    <Item Value="DailyPenaltyAmount"/>
+                    <Item Value="ClaimRemarks"/>
+                    <Item Value="ActiveFlag"/>
+                    <Item Value="ClaimColyaId"/>
+                    <Item Value="ClaimDecisionDate"/>
+                    <Item Value="ClaimFolderId"/>
+                    <Item Value="ClaimPartialId"/>
+                    <Item Value="ClaimPoliceStationId"/>
+                    <Item Value="ClaimResPartyId"/>
+                    <Item Value="ClaimSequenceNumber"/>
+                    <Item Value="ClaimTypeId"/>
+                    <Item Value="ClaimYear"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreatedDate"/>
+                    <Item Value="DailyPenaltyRemaining"/>
+                    <Item Value="DecisionId"/>
+                    <Item Value="DeletedBy"/>
+                    <Item Value="DeletedDate"/>
+                    <Item Value="IdNumber"/>
+                    <Item Value="OriginalPenaltyDueDate"/>
+                    <Item Value="PartyName"/>
+                    <Item Value="PenaltyDueDate"/>
+                    <Item Value="RepeatedClaimFlag"/>
+                    <Item Value="UpdatedBy"/>
+                    <Item Value="UpdatedDate"/>
+                    <Item Value="ClaimYearName"/>
+                    <Item Value="BusinessCaseId"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="BusinessCaseNumber"/>
+                    <Item Value="ClaimTotalOriginal"/>
+                    <Item Value="DailyPenaltyFees"/>
+                    <Item Value="ParPoliceId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="SearchClaimResultRVO1Iterator" id="SearchClaimResultRVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimProcedureROV.SearchClaimResultRVO"
+                            Name="SearchClaimResultRVO10">
+                <AttrNames>
+                    <Item Value="BusinessCaseId"/>
+                    <Item Value="BusinessCaseNumber"/>
+                    <Item Value="BusinessCaseNumberFull"/>
+                    <Item Value="CaseNumber"/>
+                    <Item Value="CaseYear"/>
+                    <Item Value="CasTypeId"/>
+                    <Item Value="CasTypeName"/>
+                    <Item Value="DailyPerParty"/>
+                    <Item Value="DegreeId"/>
+                    <Item Value="DegreeName"/>
+                    <Item Value="EntityName"/>
+                    <Item Value="FolderId"/>
+                    <Item Value="FolderName"/>
+                    <Item Value="FolderType"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="Id"/>
+                    <Item Value="IdNumber"/>
+                    <Item Value="KolyaEntityId"/>
+                    <Item Value="Nickname"/>
+                    <Item Value="ParentEntityId"/>
+                    <Item Value="PartialName"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="PartyName"/>
+                    <Item Value="PenaltyDueDate"/>
+                    <Item Value="PenaltyPerParty"/>
+                    <Item Value="PoliceId"/>
+                    <Item Value="PoliceName"/>
+                    <Item Value="PoliceStationEntityId"/>
+                    <Item Value="RepeatedFlag"/>
+                    <Item Value="ResPartyId"/>
+                    <Item Value="SeqNumberFull"/>
+                    <Item Value="SequenceNumber"/>
+                    <Item Value="FolderYear"/>
+                    <Item Value="PenaltyAmountComFlag"/>
+                    <Item Value="WorkAmountComFlag"/>
+                    <Item Value="DailyFixedFlag"/>
+                    <Item Value="DecisionId"/>
+                    <Item Value="SeqNumber"/>
+                    <Item Value="DailyPerPartyFees"/>
+                    <Item Value="PenaltyPerPartyFees"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="ClaimSearchFormRVO1Iterator" id="SequenceNumber">
+            <AttrNames>
+                <Item Value="SequenceNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimSearchFormRVO1Iterator" id="Year">
+            <AttrNames>
+                <Item Value="Year"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimSearchFormRVO1Iterator" id="CaseNumber">
+            <AttrNames>
+                <Item Value="CaseNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchClaimResultRVO1Iterator" id="PartyId">
+            <AttrNames>
+                <Item Value="PartyId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcClaimsVO1Iterator" id="PartyName">
+            <AttrNames>
+                <Item Value="PartyName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="ClaimNumber">
+            <AttrNames>
+                <Item Value="ClaimNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="FixedPenaltyAmount">
+            <AttrNames>
+                <Item Value="FixedPenaltyAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="FixedPenaltyFees">
+            <AttrNames>
+                <Item Value="FixedPenaltyFees"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="ClaimTotal">
+            <AttrNames>
+                <Item Value="ClaimTotal"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="DailyPenaltyAmount">
+            <AttrNames>
+                <Item Value="DailyPenaltyAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="DailyPenaltyFees">
+            <AttrNames>
+                <Item Value="DailyPenaltyFees"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="DailyPenaltyDate">
+            <AttrNames>
+                <Item Value="DailyPenaltyDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="ClaimRemarks">
+            <AttrNames>
+                <Item Value="ClaimRemarks"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="ClaimYear1">
+            <AttrNames>
+                <Item Value="ClaimYear"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="PenaltyDueDate">
+            <AttrNames>
+                <Item Value="PenaltyDueDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="ClaimAmountToText">
+            <AttrNames>
+                <Item Value="ClaimAmountToText"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ClaimSearchFormRVO1Iterator" StaticList="false" Uses="LOV_FolderTypeId" id="FolderTypeId"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ClaimSearchFormRVO1Iterator" id="RepeatedFlag" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="RepeatedFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </list>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa"
+              id="NeyabGozayaa" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ClaimSearchFormRVO1Iterator" StaticList="false" Uses="LOV_SearchType" id="SearchType"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ClaimSearchFormRVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseTypeId"
+              id="BusinessCaseTypeId" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ClaimInputFormRVO1Iterator" StaticList="false" Uses="LOV_ClaimYear" id="ClaimYear"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <button IterBinding="ClaimInputFormRVO1Iterator" id="DailyPenaltyFlag" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="DailyPenaltyFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ClaimInputFormRVO1Iterator" id="RepeatedClaimFlag" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="RepeatedClaimFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <action id="Commit" DataControl="CjExecAMDataControl" RequiresUpdateModel="true"
+                Action="commitTransaction"/>
+        <methodAction id="numberToText" RequiresUpdateModel="true" Action="invokeMethod" MethodName="numberToText"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.numberToText_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_numberToText_result">
+            <NamedData NDName="amount" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="OriginalPenaltyDueDate">
+            <AttrNames>
+                <Item Value="OriginalPenaltyDueDate"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="insertClaimRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="insertClaimRow"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+            <NamedData NDName="claimNumber" NDType="java.lang.String"/>
+            <NamedData NDName="claimYear" NDType="java.lang.String"/>
+            <NamedData NDName="repeatedClaimFlag" NDType="java.lang.String"/>
+            <NamedData NDName="fixedPenaltyAmount" NDType="java.lang.Double"/>
+            <NamedData NDName="fixedPenaltyFees" NDType="java.lang.Double"/>
+            <NamedData NDName="claimTotal" NDType="java.lang.Double"/>
+            <NamedData NDName="dailyPenaltyFlag" NDType="java.lang.String"/>
+            <NamedData NDName="dailyPenaltyAmount" NDType="java.lang.Double"/>
+            <NamedData NDName="dailyPenaltyFees" NDType="java.lang.Double"/>
+            <NamedData NDName="dailyPenaltyDate" NDType="java.lang.String"/>
+            <NamedData NDName="penaltyDueDate" NDType="java.lang.String"/>
+            <NamedData NDName="claimRemarks" NDType="java.lang.String"/>
+            <NamedData NDName="idNumber" NDType="java.lang.String"/>
+            <NamedData NDName="partyId" NDType="java.lang.String"/>
+            <NamedData NDName="partyName" NDType="java.lang.String"/>
+            <NamedData NDName="folderId" NDType="java.lang.String"/>
+            <NamedData NDName="kolyaEntityId" NDType="java.lang.String"/>
+            <NamedData NDName="parialEntityId" NDType="java.lang.String"/>
+            <NamedData NDName="policeEntityId" NDType="java.lang.String"/>
+            <NamedData NDName="sequenceNumber" NDType="java.lang.String"/>
+            <NamedData NDName="resPartyId" NDType="java.lang.String"/>
+            <NamedData NDName="businessCaseId" NDType="java.lang.String"/>
+            <NamedData NDName="caseTypeId" NDType="java.lang.String"/>
+            <NamedData NDName="parPoliceId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <button IterBinding="ClaimSearchFormRVO1Iterator" id="EsteanafFlag" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="EsteanafFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <methodAction id="getGozeyFromKoly" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getGozeyFromKoly" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getGozeyFromKoly_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getGozeyFromKoly_result">
+            <NamedData NDName="caseNumber" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="caseYear" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="businessCaseId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="entityKolya" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="getDailyPerParty" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getDailyPerParty" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getDailyPerParty_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getDailyPerParty_result">
+            <NamedData NDName="resPartyId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="getPenaltyPerParty" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getPenaltyPerParty" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getPenaltyPerParty_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getPenaltyPerParty_result">
+            <NamedData NDName="resPartyId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <action id="Commit1" DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+        <methodAction id="getDailyPerPartyWithFlag" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getDailyPerPartyWithFlag" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getDailyPerPartyWithFlag_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getDailyPerPartyWithFlag_result">
+            <NamedData NDName="resParty" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="flag" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="getPenaltyPerPartyWithFlag" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getPenaltyPerPartyWithFlag" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getPenaltyPerPartyWithFlag_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getPenaltyPerPartyWithFlag_result">
+            <NamedData NDName="resParty" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="flag" NDValue="1" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <attributeValues IterBinding="ClaimInputFormRVO1Iterator" id="ClaimTypeId">
+            <AttrNames>
+                <Item Value="ClaimTypeId"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="getClaimType" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getClaimType"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getClaimType_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getClaimType_result">
+            <NamedData NDName="businessCaseId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <tree IterBinding="ClaimsFoldersROIterator" id="ClaimsFoldersRO">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimFolder.ClaimsFoldersRO"
+                            Name="ClaimsFoldersRO0">
+                <AttrNames>
+                    <Item Value="PartyFixedFullName"/>
+                    <Item Value="IdNumber"/>
+                    <Item Value="DecisionsIds"/>
+                    <Item Value="BusinessCaseNumberFull"/>
+                    <Item Value="SeqNumberFull"/>
+                    <Item Value="PenaltyAmount"/>
+                    <Item Value="WorkAmount"/>
+                    <Item Value="CourtFees"/>
+                    <Item Value="LawyerFees"/>
+                    <Item Value="ClaimTotalValue"/>
+                    <Item Value="FolderId"/>
+                    <Item Value="BcDegreeId"/>
+                    <Item Value="PoliceStationEntityId"/>
+                    <Item Value="Combained"/>
+                    <Item Value="PenaltyDueDate"/>
+                    <Item Value="Kolaya"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <methodAction id="filterClaimsFoldersRO" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="filterClaimsFoldersRO" IsViewObjectMethod="true"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.ClaimsFoldersRO">
+            <NamedData NDName="caseNumber" NDValue="#{bindings.CaseNumber.inputValue}" NDType="java.lang.String"/>
+            <NamedData NDName="parYear" NDValue="#{bindings.Year.inputValue}" NDType="java.lang.String"/>
+            <NamedData NDName="originEntity" NDValue="#{bindings.OrigEntity.inputValue}" NDType="java.lang.String"/>
+            <NamedData NDName="businessCaseType" NDValue="#{bindings.BusinessCaseTypeId.inputValue}"
+                       NDType="java.lang.String"/>
+        </methodAction>
+        <action IterBinding="ExcClaimsVO1Iterator1" id="CreateInsertClaim"
+                InstanceName="SimplifiedModeAMDataControl.ExcClaimsVO1" DataControl="SimplifiedModeAMDataControl"
+                RequiresUpdateModel="true" Action="createInsertRow"/>
+        <methodAction id="getSequenceValue" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getSequenceValue" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getSequenceValue_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getSequenceValue_result">
+            <NamedData NDName="SequenceName" NDValue="#{'EXC_CLAIM_SEQ'}" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction id="getChargeDecisionRow" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getChargeDecisionRow" IsViewObjectMethod="true"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.ExcCourtBcChargeDecisionsVO4">
+            <NamedData NDName="bindId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <list IterBinding="ClaimInputFormRVO1Iterator" StaticList="false" Uses="LOV_ClaimFolderType"
+              id="ClaimFolderType" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <button IterBinding="ClaimInputFormRVO1Iterator" id="AddAllFees" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="AddAllFees"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ClaimInputFormRVO1Iterator1" id="WorkPenaltyFlag" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="WorkPenaltyFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <methodAction id="getPreviousPaidAmount" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getPreviousPaidAmount" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getPreviousPaidAmount_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getPreviousPaidAmount_result">
+            <NamedData NDName="party_id" NDType="java.lang.String"/>
+            <NamedData NDName="folderType" NDType="java.lang.String"/>
+        </methodAction>
+        <action id="Rollback" DataControl="CjExecAMDataControl" RequiresUpdateModel="false"
+                Action="rollbackTransaction"/>
+        <tree IterBinding="ExcClaimsVO3Iterator" id="ExcClaimsVO3">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.claimProcedureViews.ExcClaimsVO" Name="ExcClaimsVO30">
+                <AttrNames>
+                    <Item Value="ClaimNumber"/>
+                    <Item Value="ClaimYear"/>
+                    <Item Value="ClaimFolderId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <button IterBinding="ClaimsFoldersROIterator" id="Combained" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="Combained"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="ExcClaimsVO3Iterator" id="CombinedOrder">
+            <AttrNames>
+                <Item Value="CombinedOrder"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcClaimsVO1Iterator1" id="CombinedOrder1">
+            <AttrNames>
+                <Item Value="CombinedOrder"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="getCalimNumber" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getCalimNumber"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getCalimNumber_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getCalimNumber_result">
+            <NamedData NDName="claimId" NDType="java.lang.String"/>
+        </methodAction>
+        <list IterBinding="ClaimInputFormRVO1Iterator" StaticList="false" Uses="LOV_RepeatedClaimFlag"
+              id="RepeatedClaimFlag1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ClaimInputFormRVO1Iterator" StaticList="false" Uses="LOV_ClaimFolderTypeEcon"
+              id="ClaimFolderTypeEcon" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    </bindings>
+</pageDefinition>
+

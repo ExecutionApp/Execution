@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="newClaims_TFF">
+    <default-activity>Hasr_Claim</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>HasrClaim</managed-bean-name>
+      <managed-bean-class>cjexecviewcontroller.HasrClaim</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__2">
+      <managed-bean-name>TestBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.bcDetails.TestBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="Hasr_Claim">
+      <page>/bcClaims/Hasr_Claim.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

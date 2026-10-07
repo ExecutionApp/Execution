@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="claimProcedureLogTF">
+    <default-activity>emptyClaimProcedureLog</default-activity>
+    <transaction>
+      <new-transaction/>
+    </transaction>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>claimProcedureBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.claimprocedure.ClaimProcedure</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="claimProcedureLogFrag">
+      <page>/pages/com/egabi/claimProcedure/claimProcedureLogFrag.jsff</page>
+    </view>
+    <method-call id="emptyClaimProcedureLog">
+      <method>#{bindings.emptyClaimProcedureLog.execute}</method>
+      <outcome>
+        <fixed-outcome>emptyClaimProcedureLog</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>emptyClaimProcedureLog</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>emptyClaimProcedureLog</from-outcome>
+        <to-activity-id>claimProcedureLogFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

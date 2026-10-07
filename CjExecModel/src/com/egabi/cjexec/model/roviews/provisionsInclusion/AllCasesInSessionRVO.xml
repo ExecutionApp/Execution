@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AllCasesInSessionRVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.provisionsInclusion.AllCasesInSessionRVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="entityId"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <Variable
+    Name="degreeId"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <Variable
+    Name="hearingDateId"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <SQLQuery><![CDATA[SELECT COUNT (*)   
+         FROM COURT_BC_HEARING_RESERVATION  r, COURT_CIRCLES_DATES_HEARING d   
+         WHERE    
+         r.CIRCLE_HEARING_DATE_ID = d.ID   
+         AND   
+         r.id not in (select s.COURT_BC_HEARING_RES_ID from  EXC_COURT_BC_SESSION_JUDGMENT s)   
+         AND   
+         d.id = :hearingDateId  
+         AND   
+         d.entity_id = :entityId  
+         AND   
+         d.bc_degree_id = :degreeId]]></SQLQuery>
+  <ViewAttribute
+    Name="AllCasesCount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SELECTOBJECTS0"
+    Expression="SELECTOBJECTS0"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

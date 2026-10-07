@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="TotalHasrReport-TF">
+    <default-activity>resetReports</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__11">
+      <name>reportHasrParam</name>
+      <value>#{sessionScope.reportHasr}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>mainReportsBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.mainrepotrs.MainReportsBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="resetReports">
+      <method>#{bindings.resetReports.execute}</method>
+      <outcome>
+        <fixed-outcome>resetReports</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="TotalHasrReport">
+      <page>/pages/com/egabi/MainRepports/hasr/TotalHasrReport.jsff</page>
+    </view>
+    <control-flow-rule id="__12">
+      <from-activity-id>resetReports</from-activity-id>
+      <control-flow-case id="__13">
+        <from-outcome>resetReports</from-outcome>
+        <to-activity-id>TotalHasrReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcFolderActionsAttachViewVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  SelectAllAttributes="false"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <EntityUsage
+    Name="ExcFolderActionsAttachEO"
+    Entity="com.egabi.cjexec.model.entities.inventory.ExcFolderActionsAttachEO"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ExcFolderActionsAttachEO"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="FolderActionId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FolderActionId"
+    EntityUsage="ExcFolderActionsAttachEO"
+    AliasName="FOLDER_ACTION_ID"/>
+  <ViewAttribute
+    Name="AttachmentType"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="AttachmentType"
+    EntityUsage="ExcFolderActionsAttachEO"
+    AliasName="ATTACHMENT_TYPE"/>
+  <ViewAttribute
+    Name="DocumentId"
+    PrecisionRule="true"
+    EntityAttrName="DocumentId"
+    EntityUsage="ExcFolderActionsAttachEO"
+    AliasName="DOCUMENT_ID"/>
+</ViewObject>

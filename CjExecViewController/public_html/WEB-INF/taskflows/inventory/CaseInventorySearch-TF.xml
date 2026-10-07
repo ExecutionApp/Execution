@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="CaseInventorySearch-TF">
+    <default-activity>presEnterInventorySearch</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>inventoryBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.inventory.InventoryBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__22">
+      <managed-bean-name>BCDetails</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.bcDetails.BCDetails</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="home">
+      <page>/pages/com/egabi/inventory/home.jsff</page>
+    </view>
+    <method-call id="methodCall1">
+      <method>#{pageFlowScope.inventoryBean.userRoles}</method>
+      <outcome>
+        <fixed-outcome>go</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="nIdServiceTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/nIdService/nIdServiceTF.xml</document>
+        <id>nIdServiceTF</id>
+      </task-flow-reference>
+      <input-parameter id="__8">
+        <name>nIdParam</name>
+        <value>#{pageFlowScope.nIdParam}</value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>fcnParam</name>
+        <value>#{pageFlowScope.fcnParam}</value>
+      </input-parameter>
+      <input-parameter id="__15">
+        <name>userIdParam</name>
+        <value>#{pageFlowScope.userIdParam}</value>
+      </input-parameter>
+      <input-parameter id="__16">
+        <name>channelIdParam</name>
+        <value>#{pageFlowScope.channelIdParam}</value>
+      </input-parameter>
+      <input-parameter id="__17">
+        <name>tokenIdParam</name>
+        <value>#{pageFlowScope.tokenIdParam}</value>
+      </input-parameter>
+      <input-parameter id="__18">
+        <name>callPermissionParam</name>
+        <value>#{pageFlowScope.callPermissionParam}</value>
+      </input-parameter>
+      <input-parameter id="__19">
+        <name>userNameParam</name>
+        <value>#{pageFlowScope.userNameParam}</value>
+      </input-parameter>
+      <input-parameter id="__20">
+        <name>passwordParam</name>
+        <value>#{pageFlowScope.passwordParam}</value>
+      </input-parameter>
+      <return-value id="__21">
+        <name>nIdResponseParam</name>
+        <value>#{pageFlowScope.nIdResponseParam}</value>
+      </return-value>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <task-flow-call id="WebCamTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/webcam/WebCamTF.xml</document>
+        <id>WebCamTF</id>
+      </task-flow-reference>
+      <return-value id="__13">
+        <name>PicName</name>
+        <value>#{pageFlowScope.DName}</value>
+      </return-value>
+      <return-value id="__14">
+        <name>PicId</name>
+        <value>#{pageFlowScope.DID}</value>
+      </return-value>
+      <run-as-dialog>
+        <display-type>
+         <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <method-call id="presEnterInventorySearch">
+      <method>#{bindings.presEnterInventorySearch.execute}</method>
+      <outcome>
+        <fixed-outcome>presEnterInventorySearch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>methodCall1</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>go</from-outcome>
+        <to-activity-id>home</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>methodCall1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>home</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>nid</from-outcome>
+        <to-activity-id>nIdServiceTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome>webCam</from-outcome>
+        <to-activity-id>WebCamTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>presEnterInventorySearch</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>presEnterInventorySearch</from-outcome>
+        <to-activity-id>home</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

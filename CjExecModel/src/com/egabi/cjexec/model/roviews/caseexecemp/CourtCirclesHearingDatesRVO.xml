@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CourtCirclesHearingDatesRVO"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.caseexecemp.CourtCirclesHearingDatesRVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="sessionUser"
+    Kind="where"
+    Type="oracle.jbo.domain.Number">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="CourtCirclesHearingDatesRVO"/>
+  </Variable>
+  <ViewAccessor
+    Name="CourtCirclesHearingDatesRVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.CourtCirclesHearingDatesRVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_HearingDate"
+    ListVOName="CourtCirclesHearingDatesRVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="HearingDate"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="HearingDate"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="HearingDate"/>
+      <Item Value="EntityName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[select h.id,to_char(h.hearing_date, 'dd/mm/yyyy') as hearing_date,           
+h.bc_degree_id,ENT.ENTITY_NAME          
+from court_circles_dates_hearing h,ENTITY ent          
+where H.ENTITY_ID = ENT.ID   
+and entity_id in (   
+select id   
+from entity   
+where entity_type_id=5   
+and parent_entity_id in  
+(  
+select court_id from entity where id in   
+(  
+SELECT ENTITY_ID FROM SEC_USERs WHERE ID= :sessionUser  
+)  
+)  
+)]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="VARCHAR"
+    LOVName="LOV_HearingDate">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BcDegreeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BC_DEGREE_ID"
+    Expression="BC_DEGREE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_NAME"
+    Expression="ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

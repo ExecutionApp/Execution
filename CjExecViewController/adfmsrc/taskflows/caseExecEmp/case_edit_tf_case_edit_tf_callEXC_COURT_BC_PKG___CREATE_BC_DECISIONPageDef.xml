@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="case_edit_tf_case_edit_tf_callEXC_COURT_BC_PKG___CREATE_BC_DECISIONPageDef"
+                Package="taskflows.caseExecEmp" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="CaseEditMasterROV" RangeSize="10" DataControl="CjExecAMDataControl"
+              id="CaseEditMasterROVIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="CaseEditMasterROVIterator" id="SessionJudgmentId">
+      <AttrNames>
+        <Item Value="SessionJudgmentId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="callEXC_COURT_BC_PKG___CREATE_BC_DECISION" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callEXC_COURT_BC_PKG___CREATE_BC_DECISION" IsViewObjectMethod="false"
+                  DataControl="CjExecAMDataControl" InstanceName="data.CjExecAMDataControl.dataProvider">
+      <NamedData NDName="sessionJudId" NDValue="#{bindings.SessionJudgmentId.inputValue}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="username" NDValue="#{pageFlowScope.userId}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

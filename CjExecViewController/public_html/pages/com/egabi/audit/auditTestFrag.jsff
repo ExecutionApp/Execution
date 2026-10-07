@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:panelGroupLayout id="pgl1">
+    <af:outputText value="outputText1" id="ot1" inlineStyle="font-size:xx-large;"/>
+    <af:button text="button 1" id="b1" action="#{pageFlowScope.auditBean.b1_action}"/>
+  </af:panelGroupLayout>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:auditBean-->
+</ui:composition>

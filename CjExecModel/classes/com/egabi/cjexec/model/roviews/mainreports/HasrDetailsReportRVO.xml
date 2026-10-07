@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="HasrDetailsReportRVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.mainreports.HasrDetailsReportRVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="createdDateBind"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="createdDateToBind"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="gozeyaIdBind"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="year"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[/* Formatted on 7/4/2021 3:22:53 PM (QP5 v5.287) */  
+SELECT NVL (Gonah.GOZEYA_ENTITY_NAME, Genayat.GOZEYA_ENTITY_NAME)  
+          GOZEYA_ENTITY_NAME,  
+       NVL (Genayat.PARENT_ENTITY_NAME, Gonah.PARENT_ENTITY_NAME)  
+          PARENT_ENTITY_NAME,  
+       GONAH_PRISON,  
+       GONAH_PENALTY,  
+       GENAYAT_DONE,  
+       GENAYAT_NOT_DONE,  
+       PREV_GONAH,  
+       CURR_GONAH,  
+       PREV_GENAYAT,  
+       CURR_GENAYAT,  
+       TOTAL_GONAH,  
+       TOTAL_GENAYAT,  
+       AMN_DOAWLA  
+  FROM (  SELECT COUNT (FD.ID) TOTAL_GONAH,  
+                 PAREN.id,  
+                 PAREN.ENTITY_NAME GOZEYA_ENTITY_NAME,  
+                 master.ENTITY_NAME PARENT_ENTITY_NAME  
+            FROM EXC_FOLDER_DATA FD,  
+                 ENTITY master,  
+                 ENTITY GOZEYA,  
+                 ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID  
+                 AND FD.CRIMINAL_TYPE = 1  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   FD.POLICE_STATION_ENTITY_ID IN  
+                            (SELECT id  
+                               FROM entity  
+                              WHERE PARENT_ENTITY_ID = :gozeyaIdBind)  
+                      OR master.ID = :gozeyaIdBind)  
+        GROUP BY PAREN.ID, PAREN.ENTITY_NAME, Master.ENTITY_NAME) Gonah  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (FD.ID) TOTAL_GENAYAT,  
+                 GOZEYA.ID,  
+                 GOZEYA.ENTITY_NAME GOZEYA_ENTITY_NAME,  
+                 GOZEYA.ENTITY_NAME PARENT_ENTITY_NAME  
+            FROM EXC_FOLDER_DATA FD, ENTITY GOZEYA, ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND FD.CRIMINAL_TYPE = 2  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   (FD.POLICE_STATION_ENTITY_ID =  
+                             (SELECT PARENT_ENTITY_ID  
+                                FROM entity  
+                               WHERE id = :gozeyaIdBind))  
+                      OR (FD.POLICE_STATION_ENTITY_ID = :gozeyaIdBind))  
+        GROUP BY GOZEYA.ID, GOZEYA.ENTITY_NAME, PAREN.ENTITY_NAME) Genayat  
+          ON Genayat.id = Gonah.id  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (FD.ID) GONAH_PRISON, PAREN.id  
+            FROM EXC_FOLDER_DATA FD,  
+                 ENTITY master,  
+                 ENTITY GOZEYA,  
+                 ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   FD.POLICE_STATION_ENTITY_ID IN  
+                            (SELECT id  
+                               FROM entity  
+                              WHERE PARENT_ENTITY_ID = :gozeyaIdBind)  
+                      OR master.ID = :gozeyaIdBind)  
+                 AND FD.CRIMINAL_TYPE = 1  
+                 AND FD.FOLDER_TYPE = 2  
+                 AND (   FD.CREATED_DATE BETWEEN TO_DATE ( :createdDateBind,  
+                                                          'dd/mm/yyyy')  
+                                             AND   TO_DATE (  
+                                                      :createdDateToBind,  
+                                                      'dd/mm/yyyy')  
+                                                 + 1  
+                      OR TO_CHAR (FD.CREATED_DATE, 'dd/mm/yyyy') =  
+                            :createdDateBind)  
+        GROUP BY PAREN.ID) tab1  
+          ON tab1.id = gonah.id  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (fd.ID) GONAH_PENALTY, PAREN.ID  
+            FROM EXC_FOLDER_DATA FD,  
+                 ENTITY master,  
+                 ENTITY GOZEYA,  
+                 ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   FD.POLICE_STATION_ENTITY_ID IN  
+                            (SELECT id  
+                               FROM entity  
+                              WHERE PARENT_ENTITY_ID = :gozeyaIdBind)  
+                      OR master.id = :gozeyaIdBind)  
+                 AND FD.CRIMINAL_TYPE = 1  
+                 AND FD.FOLDER_TYPE = 3  
+                 AND (   FD.CREATED_DATE BETWEEN TO_DATE ( :createdDateBind,  
+                                                          'dd/mm/yyyy')  
+                                             AND   TO_DATE (  
+                                                      :createdDateToBind,  
+                                                      'dd/mm/yyyy')  
+                                                 + 1  
+                      OR TO_CHAR (FD.CREATED_DATE, 'dd/mm/yyyy') =  
+                            :createdDateBind)  
+        GROUP BY PAREN.ID) tab2  
+          ON Gonah.ID = TAB2.ID  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (FD.ID) GENAYAT_DONE, GOZEYA.ID  
+            FROM EXC_FOLDER_DATA FD, ENTITY GOZEYA, ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   (FD.POLICE_STATION_ENTITY_ID =  
+                             (SELECT PARENT_ENTITY_ID  
+                                FROM entity  
+                               WHERE id = :gozeyaIdBind))  
+                      OR (FD.POLICE_STATION_ENTITY_ID = :gozeyaIdBind))  
+                 AND FD.CRIMINAL_TYPE = 2  
+                 AND FD.FOLDER_TYPE = 1  
+                 AND (   FD.CREATED_DATE BETWEEN TO_DATE ( :createdDateBind,  
+                                                          'dd/mm/yyyy')  
+                                             AND   TO_DATE (  
+                                                      :createdDateToBind,  
+                                                      'dd/mm/yyyy')  
+                                                 + 1  
+                      OR TO_CHAR (FD.CREATED_DATE, 'dd/mm/yyyy') =  
+                            :createdDateBind)  
+        GROUP BY GOZEYA.ID) TAB3  
+          ON GENAYAT.ID = TAB3.ID  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (FD.ID) GENAYAT_NOT_DONE, GOZEYA.ID  
+            FROM EXC_FOLDER_DATA FD, ENTITY GOZEYA, ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND FD.CRIMINAL_TYPE = 2  
+                 AND FD.FOLDER_TYPE = 2  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   (FD.POLICE_STATION_ENTITY_ID =  
+                             (SELECT PARENT_ENTITY_ID  
+                                FROM entity  
+                               WHERE id = :gozeyaIdBind))  
+                      OR (FD.POLICE_STATION_ENTITY_ID = :gozeyaIdBind))  
+                 AND (   FD.CREATED_DATE BETWEEN TO_DATE ( :createdDateBind,  
+                                                          'dd/mm/yyyy')  
+                                             AND   TO_DATE (  
+                                                      :createdDateToBind,  
+                                                      'dd/mm/yyyy')  
+                                                 + 1  
+                      OR TO_CHAR (FD.CREATED_DATE, 'dd/mm/yyyy') =  
+                            :createdDateBind)  
+        GROUP BY GOZEYA.ID, GOZEYA.ENTITY_NAME, PAREN.ENTITY_NAME) tab4  
+          ON TAB4.ID = GENAYAT.ID  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (fd.ID) PREV_GONAH, PAREN.ID  
+            FROM EXC_FOLDER_DATA FD,  
+                 ENTITY master,  
+                 ENTITY GOZEYA,  
+                 ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   fd.POLICE_STATION_ENTITY_ID IN  
+                            (SELECT id  
+                               FROM entity  
+                              WHERE PARENT_ENTITY_ID = :gozeyaIdBind)  
+                      OR Master.id = :gozeyaIdBind)  
+                 AND FD.CRIMINAL_TYPE = 1  
+                 AND FD.CREATED_DATE BETWEEN ADD_MONTHS (  
+                                                TRUNC (  
+                                                   TO_DATE ( :createdDateBind,  
+                                                            'dd/mm/yyyy')),  
+                                                -12)  
+                                         AND ADD_MONTHS (  
+                                                TRUNC (  
+                                                   TO_DATE (  
+                                                      :createdDateToBind,  
+                                                      'dd/mm/yyyy')),  
+                                                -12)  
+        GROUP BY PAREN.ID, PAREN.ENTITY_NAME, Master.ENTITY_NAME) tab5  
+          ON gonah.ID = TAB5.ID  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (fd.ID) CURR_GONAH, PAREN.ID  
+            FROM EXC_FOLDER_DATA FD,  
+                 ENTITY master,  
+                 ENTITY GOZEYA,  
+                 ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   fd.POLICE_STATION_ENTITY_ID IN  
+                            (SELECT id  
+                               FROM entity  
+                              WHERE PARENT_ENTITY_ID = :gozeyaIdBind)  
+                      OR Master.id = :gozeyaIdBind)  
+                 AND FD.CRIMINAL_TYPE = 1  
+                 AND FD.CREATED_DATE BETWEEN TO_DATE ( :createdDateBind,  
+                                                      'dd/mm/yyyy')  
+                                         AND TO_DATE ( :createdDateToBind,  
+                                                      'dd/mm/yyyy')  
+        GROUP BY PAREN.ID, PAREN.ENTITY_NAME, Master.ENTITY_NAME) tab7  
+          ON gonah.ID = TAB7.ID  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (FD.ID) PREV_GENAYAT, GOZEYA.ID  
+            FROM EXC_FOLDER_DATA FD, ENTITY GOZEYA, ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND FD.CRIMINAL_TYPE = 2  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   (FD.POLICE_STATION_ENTITY_ID =  
+                             (SELECT PARENT_ENTITY_ID  
+                                FROM entity  
+                               WHERE id = :gozeyaIdBind))  
+                      OR (FD.POLICE_STATION_ENTITY_ID = :gozeyaIdBind))  
+                 AND FD.CREATED_DATE BETWEEN ADD_MONTHS (  
+                                                TRUNC (  
+                                                   TO_DATE ( :createdDateBind,  
+                                                            'dd/mm/yyyy')),  
+                                                -12)  
+                                         AND ADD_MONTHS (  
+                                                TRUNC (  
+                                                   TO_DATE (  
+                                                      :createdDateToBind,  
+                                                      'dd/mm/yyyy')),  
+                                                -12)  
+        GROUP BY GOZEYA.ID) TAB6  
+          ON GENAYAT.ID = TAB6.ID  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (FD.ID) CURR_GENAYAT, GOZEYA.ID  
+            FROM EXC_FOLDER_DATA FD, ENTITY GOZEYA, ENTITY PAREN  
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND FD.CRIMINAL_TYPE = 2  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   (FD.POLICE_STATION_ENTITY_ID =  
+                             (SELECT PARENT_ENTITY_ID  
+                                FROM entity  
+                               WHERE id = :gozeyaIdBind))  
+                      OR (FD.POLICE_STATION_ENTITY_ID = :gozeyaIdBind))  
+                 AND FD.CREATED_DATE BETWEEN TO_DATE ( :createdDateBind,  
+                                                      'dd/mm/yyyy')  
+                                         AND TO_DATE ( :createdDateToBind,  
+                                                      'dd/mm/yyyy')  
+        GROUP BY GOZEYA.ID) TAB8  
+          ON GENAYAT.ID = TAB8.ID  
+       FULL OUTER JOIN  
+       (  SELECT COUNT (FD.ID) AMN_DOAWLA, PAREN.ID  
+            FROM EXC_FOLDER_DATA FD,  
+                 COURT_BC_HEARING_RES_PARTIES RES,  
+                 COURT_BC_HEARING_RESERVATION HR,  
+                 ENTITY master,  
+                 ENTITY GOZEYA,  
+                 ENTITY PAREN,  
+                 BUSINESS_CASE BC  
+           WHERE     RES.ID = FD.RES_PARTY_ID  
+                 AND FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID  
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID  
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID  
+                 AND FD.CRIMINAL_TYPE = 1  
+                 AND (FD.YEAR = :year OR :year IS NULL)  
+                 AND (   FD.POLICE_STATION_ENTITY_ID IN  
+                            (SELECT id  
+                               FROM entity  
+                              WHERE PARENT_ENTITY_ID = :gozeyaIdBind)  
+                      OR master.ID = :gozeyaIdBind)  
+                 AND RES.COURT_BC_HEARING_RES_ID = HR.ID  
+                 AND HR.BUSINESS_CASE_ID = BC.ID  
+                 AND BC.CASE_TYPE = 10  
+        GROUP BY PAREN.ID) TAB9  
+          ON Gonah.ID = TAB9.ID]]></SQLQuery>
+  <ViewAttribute
+    Name="GozeyaEntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GOZEYA_ENTITY_NAME"
+    Expression="GOZEYA_ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.ProsecutionPartial_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParentEntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENT_ENTITY_NAME"
+    Expression="PARENT_ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0642_U0637_U0627_U0639__U0627_U0644_U0646_U064A_U0627_U0628_U0629__U0627_U0644_U0643_U0644_U064A_U0629"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GonahPrison"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="GONAH_PRISON"
+    Expression="GONAH_PRISON"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U062C_U0646_U062D____U062D_U0628_U0633__U0627_U0644_U0639_U0627_U0645"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GonahPenalty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="GONAH_PENALTY"
+    Expression="GONAH_PENALTY"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U062C_U0646_U062D____U063A_U0631_U0627_U0645_U0627_U062A__U0627_U0644_U0639_U0627_U0645"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GenayatDone"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="GENAYAT_DONE"
+    Expression="GENAYAT_DONE"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U062C_U0646_U0627_U064A_U0627_U062A__U0645_U0646_U0641_U0630__U0627_U0644_U0639_U0627_U0645"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GenayatNotDone"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="GENAYAT_NOT_DONE"
+    Expression="GENAYAT_NOT_DONE"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U062C_U0646_U064A_U0627_U064A_U0627_U062A__U063A_U064A_U0631__U0645_U0646_U0641_U0630"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PrevGonah"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PREV_GONAH"
+    Expression="PREV_GONAH"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0625_U062C_U0645_U0627_U0644_U064A__U062C_U0646_U062D__U0633_U0627_U0628_U0642"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CurrGonah"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CURR_GONAH"
+    Expression="CURR_GONAH"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0625_U062C_U0645_U0627_U0644_U064A__U062C_U0646_U062D__U062D_U0627_U0644_U064A"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PrevGenayat"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PREV_GENAYAT"
+    Expression="PREV_GENAYAT"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0625_U062C_U0645_U0627_U0644_U064A__U062C_U0646_U0627_U064A_U0627_U062A__U0633_U0627_U0628_U0642"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CurrGenayat"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CURR_GENAYAT"
+    Expression="CURR_GENAYAT"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0625_U062C_U0645_U0627_U0644_U064A__U062C_U0646_U0627_U064A_U0627_U062A__U062D_U0627_U0644_U064A"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalGonah"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_GONAH"
+    Expression="TOTAL_GONAH"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0625_U062C_U0645_U0627_U0644_U064A__U0627_U0644_U062C_U0646_U062D"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalGenayat"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_GENAYAT"
+    Expression="TOTAL_GENAYAT"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0625_U062C_U0645_U0627_U0644_U064A__U0627_U0644_U062C_U0646_U0627_U064A_U0627_U062A"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AmnDoawla"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="AMN_DOAWLA"
+    Expression="AMN_DOAWLA"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.mainreports.HasrDetailsReportRVO.AmnDoawla_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

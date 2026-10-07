@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="expatriateProcAppealApproval-TF">
+    <default-activity>expatriateAppealApprovalSearch</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>expatriateBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.expatriateProcedures.ExpatriateBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="expatriateAppealApproval">
+      <page>/pages/com/egabi/expatriateProcAppealApproval/expatriateAppealApproval.jsff</page>
+    </view>
+    <method-call id="expatriateAppealApprovalSearch">
+      <method>#{pageFlowScope.expatriateBean.expatriateAppealApprovalSearch}</method>
+      <outcome>
+        <fixed-outcome>goExpatriateAppealApprovalSearch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>expatriateAppealApprovalSearch</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>goExpatriateAppealApprovalSearch</from-outcome>
+        <to-activity-id>expatriateAppealApproval</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

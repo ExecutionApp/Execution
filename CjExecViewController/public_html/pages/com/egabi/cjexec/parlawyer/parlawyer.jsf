@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="#{bundle.ADD_LAWYER}" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+        <af:panelGroupLayout id="pgl1">
+        <af:panelHeader id="ph1">
+            <f:facet name="context"/>
+            <f:facet name="toolbar">
+                <af:button text="#{bundle.ADD_LAWYER}" id="b1" actionListener="#{bindings.addLawyer.execute}" partialSubmit="false" 
+                                action="#{pageFlowScope.parLawyerBean.setAction}"/>
+                <af:button text="#{bundle.BACK}" id="b5" partialSubmit="false"
+                            action="back" immediate="true"/>
+            </f:facet>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelGridLayout id="pgl2">
+                <af:gridRow marginTop="5px" height="auto" id="gr1">
+                    <af:gridCell marginStart="5px" width="10%" id="gc1">
+                        <af:panelLabelAndMessage label="اسم المحامي" id="plam1"/>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="30%" id="gc2">
+                        <af:inputText value="#{bindings.lawyerName.inputValue}" simple="true" autoSubmit="true"
+                                      required="true" id="it1"></af:inputText>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="5%" id="gc3"/>
+                    <af:gridCell marginStart="5px" width="10%" id="gc4">
+                        <af:panelLabelAndMessage label="رقم التوكيل" id="plam2"/>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc5">
+                        <af:inputText value="#{bindings.retainerNumber.inputValue}" simple="true" autoSubmit="true"
+                                      id="it2"></af:inputText>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow marginTop="5px" height="auto" id="gr2">
+                    <af:gridCell marginStart="5px" width="10%" id="gc6">
+                        <af:panelLabelAndMessage label="الرقم القومي " id="plam3"/>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="30%" id="gc7">
+                        <af:inputText value="#{bindings.nationalID.inputValue}" autoSubmit="true" id="it3"></af:inputText>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="5%" id="gc8"/>
+                    <af:gridCell marginStart="5px" width="10%" id="gc9">
+                        <af:panelLabelAndMessage label="مكتب شهر عقاري " id="plam4"/>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc10">
+                        <af:inputText value="#{bindings.releasedFrom.inputValue}" simple="true" autoSubmit="true"
+                                      id="it4"></af:inputText>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+                    <af:gridCell marginStart="5px" width="10%" id="gc11"/>
+                    <af:gridCell marginStart="5px" width="30%" id="gc12"/>
+                    <af:gridCell marginStart="5px" width="5%" id="gc13"/>
+                    <af:gridCell marginStart="5px" width="10%" id="gc14"/>
+                    <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc15"/>
+                </af:gridRow>
+            </af:panelGridLayout>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+        
+        </af:form>
+    </af:document>
+</f:view>

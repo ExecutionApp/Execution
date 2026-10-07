@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="ParLawyerFragPageDef"
+                Package="pages.com.egabi.cjexec.parlawyer">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Name="lawyerName" Type="java.lang.String"/>
+      <variable Name="retainerNumber" Type="java.math.BigDecimal"/>
+      <variable Name="nationalID" Type="java.math.BigDecimal"/>
+      <variable Name="releasedFrom" Type="java.math.BigDecimal"/>
+    </variableIterator>
+    <iterator Binds="ParLawyersVO" RangeSize="25" DataControl="CjExecAMDataControl" id="ParLawyersVOIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ParLawyersVOIterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParLawyersVOIterator" id="RetainerNumber">
+      <AttrNames>
+        <Item Value="RetainerNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParLawyersVOIterator" id="Nid">
+      <AttrNames>
+        <Item Value="Nid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ParLawyersVOIterator" id="ReleasedFrom">
+      <AttrNames>
+        <Item Value="ReleasedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="addLawyer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addLawyer"
+                  IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider"
+                  ReturnName="data.CjExecAMDataControl.methodResults.addLawyer_CjExecAMDataControl_dataProvider_addLawyer_result">
+      <NamedData NDName="p_PAR_ID" NDValue="#{pageFlowScope.parId}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="p_PARTY_ID" NDValue="#{pageFlowScope.partyId}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="p_CREATED_BY" NDValue="#{pageFlowScope.createdBy}" NDType="java.lang.String"/>
+      <NamedData NDName="p_BUSINESS_CASE_ID" NDValue="#{pageFlowScope.businessCaseId}" NDType="java.lang.String"/>
+      <NamedData NDName="p_LAWYER_NAME" NDValue="#{bindings.lawyerName}" NDType="java.lang.String"/>
+      <NamedData NDName="p_RETAINER_NUMBER" NDValue="#{bindings.retainerNumber}" NDType="java.lang.String"/>
+      <NamedData NDName="p_RELEASED_FROM" NDValue="#{bindings.releasedFrom}" NDType="java.lang.String"/>
+      <NamedData NDName="p_NID" NDValue="#{bindings.nationalID}" NDType="java.math.BigDecimal"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="lawyerName">
+      <AttrNames>
+        <Item Value="lawyerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="retainerNumber">
+      <AttrNames>
+        <Item Value="retainerNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="nationalID">
+      <AttrNames>
+        <Item Value="nationalID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="releasedFrom">
+      <AttrNames>
+        <Item Value="releasedFrom"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

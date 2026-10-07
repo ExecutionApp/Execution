@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="enableOppositionTF_enableOppositionTF_CreateWithParameters2PageDef"
+                Package="taskflows.enableOpposition" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ExcFolderProcedureStepsVO" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExcFolderProcedureStepsVOIterator"/>
+    <iterator id="ExcFolderProceduresVOIterator" Binds="ExcFolderProceduresVO" DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ExcFolderProcedureStepsVOIterator" id="CreateWithParams" RequiresUpdateModel="true"
+            Action="createWithParams">
+            <NamedData NDName="ProcedureId" NDType="Integer" NDValue="#{bindings.Id.inputValue}"/>
+    </action>
+    <attributeValues IterBinding="ExcFolderProceduresVOIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

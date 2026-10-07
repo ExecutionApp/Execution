@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="EntityNameROV"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.executionfolders.EntityNameROV_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="sessionUser"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="EntityNameROV"/>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT (SELECT ENTITY_NAME   
+          FROM ENTITY  
+         WHERE ID IN (SELECT court_id  
+                        FROM entity  
+                       WHERE id IN (SELECT ENTITY_ID  
+                                      FROM SEC_USERs  
+                                     WHERE ID =:sessionUser)))  
+         court_NAME,  
+       (SELECT ENTITY_NAME  
+          FROM ENTITY  
+         WHERE     ID IN ( (SELECT ENTITY_ID  
+                              FROM SEC_USERs  
+                             WHERE ID = :sessionUser))  
+               
+               )  
+          ENTITY_NAME  
+          ,  
+          ( select court_id  
+                        FROM entity  
+                       WHERE id IN (SELECT ENTITY_ID  
+                                      FROM SEC_USERs  
+                                     WHERE ID = :sessionUser))court_id  
+  FROM DUAL]]></SQLQuery>
+  <ViewAttribute
+    Name="CourtName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COURT_NAME"
+    Expression="COURT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="COURT_NAME"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_NAME"
+    Expression="ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="PROSECUTION_NAME"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CourtId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="COURT_ID"
+    Expression="COURT_ID"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

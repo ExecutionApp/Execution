@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="displayAuditTaskFlow">
+    <default-activity>displayAuditFrag</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__5">
+      <managed-bean-name>displayAuditDetails</managed-bean-name>
+      <managed-bean-class>cjexecviewcontroller.DisplayAuditDetails</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <view id="displayAuditFrag">
+      <page>/pages/com/egabi/auditUpdate/displayAuditFrag.jsff</page>
+    </view>
+    <view id="displayAuditDetailsFrag">
+      <page>/pages/com/egabi/auditUpdate/displayAuditDetailsFrag.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>displayAuditFrag</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>detail</from-outcome>
+        <to-activity-id>displayAuditDetailsFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>displayAuditDetailsFrag</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>displayAuditFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

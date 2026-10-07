@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <af:panelGroupLayout id="pgl3">
+        <af:panelHeader text="#{bundle.ACCUSED_DATA}" id="ph2">
+            <h:panelGroup id="pg10" styleClass="row" layout="block">
+                <h:panelGroup id="pg1" layout="block" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel value="#{bindings.Fname.label}" id="ol1"/>
+                    <af:inputText value="#{bindings.Fname.inputValue}"
+                                  required="#{bindings.Fname.hints.mandatory}" 
+                                  maximumLength="#{bindings.Fname.hints.precision}"
+                                  shortDesc="#{bindings.Fname.hints.tooltip}" id="it1" autoSubmit="true" simple="true"/>
+                </h:panelGroup>
+                <h:panelGroup id="pg2" layout="block" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel value="#{bindings.Sname.label}" id="ol2"/>
+                    <af:inputText value="#{bindings.Sname.inputValue}"
+                                  required="#{bindings.Sname.hints.mandatory}"
+                                  maximumLength="#{bindings.Sname.hints.precision}"
+                                  shortDesc="#{bindings.Sname.hints.tooltip}" id="it2" autoSubmit="true" simple="true"/>
+                </h:panelGroup>
+                <h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel value="#{bindings.Tname.label}" id="ol3"/>
+                    <af:inputText value="#{bindings.Tname.inputValue}"
+                                  required="#{bindings.Tname.hints.mandatory}" 
+                                  maximumLength="#{bindings.Tname.hints.precision}"
+                                  shortDesc="#{bindings.Tname.hints.tooltip}" id="it3" autoSubmit="true" simple="true"/>
+                </h:panelGroup>
+                <h:panelGroup id="pg4" layout="block" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel value="#{bindings.Fourthname.label}" id="ol4"/>
+                    <af:inputText value="#{bindings.Fourthname.inputValue}" simple="true"
+                                  required="#{bindings.Fourthname.hints.mandatory}"
+                                  maximumLength="#{bindings.Fourthname.hints.precision}"
+                                  shortDesc="#{bindings.Fourthname.hints.tooltip}" id="it4" autoSubmit="true"/>
+                </h:panelGroup>
+                <h:panelGroup id="pg5" layout="block" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel value="#{bundle.FULL_NAME}" id="ol10"/>
+                    <af:inputText value="#{bindings.PartyFullName.inputValue}" id="it5" disabled="true"
+                                  partialTriggers="it1 it2 it3 it4" simple="true"/>
+                </h:panelGroup>
+                <h:panelGroup id="pg6" layout="block" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel value="#{bindings.Nickname.label}" id="ol7"/>
+                    <af:inputText value="#{bindings.Nickname.inputValue}"
+                                  required="#{bindings.Nickname.hints.mandatory}"
+                                  maximumLength="#{bindings.Nickname.hints.precision}"
+                                  shortDesc="#{bindings.Nickname.hints.tooltip}" id="it8" simple="true"/>
+                </h:panelGroup>
+                <h:panelGroup id="pg7" layout="block" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel value="#{bindings.IdNumber.label}" id="ol6"/>
+                    <af:inputText value="#{bindings.IdNumber.inputValue}"
+                                  required="#{bindings.IdNumber.hints.mandatory}" maximumLength="14"
+                                  shortDesc="#{bindings.IdNumber.hints.tooltip}" id="it7" simple="true"/>
+                </h:panelGroup>
+                <h:panelGroup id="pg8" layout="block" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel value="#{bindings.Age.label}" id="ol5"/>
+                    <af:inputText value="#{bindings.Age.inputValue}"
+                                  required="#{bindings.Age.hints.mandatory}"  maximumLength="2"
+                                  shortDesc="#{bindings.Age.hints.tooltip}" id="it6" simple="true"/>
+                </h:panelGroup>
+                <h:panelGroup id="pg9" layout="block" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel value="#{bindings.JobTitle.label}" id="ol8"/>
+                    <af:inputText value="#{bindings.JobTitle.inputValue}"
+                                  required="#{bindings.JobTitle.hints.mandatory}" 
+                                  maximumLength="#{bindings.JobTitle.hints.precision}"
+                                  shortDesc="#{bindings.JobTitle.hints.tooltip}" id="it9" simple="true"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <af:spacer width="10" height="10" id="s1"/>
+            <h:panelGroup id="pg11" layout="block" styleClass="row">
+                <h:panelGroup id="pg12" styleClass="col-md-12 col-sm-12" layout="block">
+                    <af:outputLabel value="#{bindings.Address.label}" id="ol9"/>
+                    <af:inputText value="#{bindings.Address.inputValue}"
+                                  required="#{bindings.Address.hints.mandatory}" 
+                                  maximumLength="#{bindings.Address.hints.precision}"
+                                  shortDesc="#{bindings.Address.hints.tooltip}" id="it10" rows="5" simple="true"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <af:panelGroupLayout id="pgl2" styleClass="btn-holder">
+                <af:button text="#{bundle.save}" id="b1" action="#{pageFlowScope.partiesBean.saveParty}"/>
+                <af:spacer width="10" height="10" id="s3"/>
+                <!--<af:button text="#{bundle.CANCEL_BUTTON}" id="b2"/>-->
+            </af:panelGroupLayout>
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:panelHeader text="#{cjexecviewcontrollerBundle.UPDATE_HISTORY}" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:table value="#{bindings.ParPartiesLogView1.collectionModel}" var="row"
+                          rows="#{bindings.ParPartiesLogView1.rangeSize}"
+                          emptyText="#{bindings.ParPartiesLogView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0" columnStretching="column:c6"
+                          selectedRowKeys="#{bindings.ParPartiesLogView1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.ParPartiesLogView1.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.ParPartiesLogView1.rangeSize}"
+                          filterModel="#{bindings.ParPartiesLogView1Query.queryDescriptor}" filterVisible="true"
+                          queryListener="#{bindings.ParPartiesLogView1Query.processQuery}" varStatus="vs" id="t1"
+                          scrollPolicy="page">
+                    <af:column sortProperty="#{bindings.ParPartiesLogView1.hints.Fname.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.ParPartiesLogView1.hints.Fname.label}" id="c1">
+                        <af:outputText value="#{row.Fname} #{row.Sname} #{row.Tname} #{row.Fourthname}"
+                                       shortDesc="#{bindings.ParPartiesLogView1.hints.Fname.tooltip}" id="ot1"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ParPartiesLogView1.hints.Nickname.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.ParPartiesLogView1.hints.Nickname.label}" id="c5">
+                        <af:outputText value="#{row.Nickname}"
+                                       shortDesc="#{bindings.ParPartiesLogView1.hints.Nickname.tooltip}" id="ot5"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ParPartiesLogView1.hints.Address.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.ParPartiesLogView1.hints.Address.label}" id="c6">
+                        <af:outputText value="#{row.Address}"
+                                       shortDesc="#{bindings.ParPartiesLogView1.hints.Address.tooltip}" id="ot6"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ParPartiesLogView1.hints.Age.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.ParPartiesLogView1.hints.Age.label}" id="c7">
+                        <af:outputText value="#{row.Age}" shortDesc="#{bindings.ParPartiesLogView1.hints.Age.tooltip}"
+                                       id="ot7"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ParPartiesLogView1.hints.DateOfBirth.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.ParPartiesLogView1.hints.DateOfBirth.label}"
+                               id="c8">
+                        <f:facet name="filter">
+                            <af:inputDate value="#{bindings.ParPartiesLogView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DateOfBirth.value}"
+                                          id="id1">
+                                <af:convertDateTime pattern="#{bindings.ParPartiesLogView1.hints.DateOfBirth.format}"/>
+                            </af:inputDate>
+                        </f:facet>
+                        <af:outputText value="#{row.DateOfBirth}"
+                                       shortDesc="#{bindings.ParPartiesLogView1.hints.DateOfBirth.tooltip}" id="ot8">
+                            <af:convertDateTime pattern="#{bindings.ParPartiesLogView1.hints.DateOfBirth.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ParPartiesLogView1.hints.IdNumber.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.ParPartiesLogView1.hints.IdNumber.label}" id="c9">
+                        <af:outputText value="#{row.IdNumber}"
+                                       shortDesc="#{bindings.ParPartiesLogView1.hints.IdNumber.tooltip}" id="ot9"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ParPartiesLogView1.hints.JobTitle.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.ParPartiesLogView1.hints.JobTitle.label}"
+                               id="c10">
+                        <af:outputText value="#{row.JobTitle}"
+                                       shortDesc="#{bindings.ParPartiesLogView1.hints.JobTitle.tooltip}" id="ot10"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ParPartiesLogView1.hints.UpdatedDate.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.ParPartiesLogView1.hints.UpdatedDate.label}"
+                               id="c11">
+                        <f:facet name="filter">
+                            <af:inputDate value="#{bindings.ParPartiesLogView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.UpdatedDate.value}"
+                                          id="id2">
+                                <af:convertDateTime pattern="#{bindings.ParPartiesLogView1.hints.UpdatedDate.format}"/>
+                            </af:inputDate>
+                        </f:facet>
+                        <af:outputText value="#{row.UpdatedDate}"
+                                       shortDesc="#{bindings.ParPartiesLogView1.hints.UpdatedDate.tooltip}" id="ot11"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ParPartiesLogView1.hints.UpdatedBy.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.ParPartiesLogView1.hints.UpdatedBy.label}"
+                               id="c12">
+                        <af:outputText value="#{row.UpdatedBy}"
+                                       shortDesc="#{bindings.ParPartiesLogView1.hints.UpdatedBy.tooltip}" id="ot12"/>
+                    </af:column>
+                </af:table>
+            </af:panelHeader>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+            
+</ui:composition>

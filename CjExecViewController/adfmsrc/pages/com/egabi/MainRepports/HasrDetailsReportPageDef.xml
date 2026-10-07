@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="HasrDetailsReportPageDef"
+                Package="pages.com.egabi.MainRepports">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.HasrDetailsReportRVO1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="HasrDetailsReportRVO1Iterator"/>
+    <searchRegion Binds="HasrDetailsReportRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="HasrDetailsReportRVO1Query"/>
+    <iterator Binds="PeriodS1" RangeSize="25"
+              DataControl="SimplifiedModeAMDataControl"
+              id="PeriodS1Iterator"/>
+    <iterator Binds="SearchInventoryRVO1" RangeSize="25"
+              DataControl="SimplifiedModeAMDataControl"
+              id="SearchInventoryRVO1Iterator1"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateFrom">
+      <AttrNames>
+        <Item Value="DateFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="HasrDetailsReportRVO1Iterator" id="HasrDetailsReportRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.mainreports.HasrDetailsReportRVO"
+                      Name="HasrDetailsReportRVO10">
+        <AttrNames>
+          <Item Value="ParentEntityName"/>
+          <Item Value="GozeyaEntityName"/>
+          <Item Value="GonahPrison"/>
+          <Item Value="GonahPenalty"/>
+          <Item Value="AmnDoawla"/>
+          <Item Value="GenayatDone"/>
+          <Item Value="GenayatNotDone"/>
+          <Item Value="PrevGonah"/>
+          <Item Value="CurrGonah"/>
+          <Item Value="PrevGenayat"/>
+          <Item Value="CurrGenayat"/>
+          <Item Value="TotalGonah"/>
+          <Item Value="TotalGenayat"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateTo">
+      <AttrNames>
+        <Item Value="DateTo"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="Year">
+      <AttrNames>
+        <Item Value="Year"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PeriodS1Iterator"
+          Uses="LOV_SearchType" id="SearchType" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject" StaticList="true"/>
+    <list IterBinding="SearchInventoryRVO1Iterator1" StaticList="false"
+          Uses="LOV_Period" id="Period" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

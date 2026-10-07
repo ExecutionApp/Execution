@@ -1,0 +1,1656 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject xmlns="http://xmlns.oracle.com/bc4j" Name="SearchInventoryRVO" Version="12.2.1.0.31"
+            InheritPersonalization="merge" BindingStyle="OracleName" CustomQuery="true" PageIterMode="Full"
+            ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+    <DesignTime>
+        <Attr Name="_isExpertMode" Value="true"/>
+    </DesignTime>
+    <Properties>
+        <SchemaBasedProperties>
+            <LABEL ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO_LABEL"/>
+        </SchemaBasedProperties>
+    </Properties>
+    <Variable Name="prosecutionKolyaBind" Kind="where" Type="java.lang.String">
+        <TransientExpression Name="VariableScript" CodeSourceName="SearchInventoryRVO"/>
+    </Variable>
+    <Variable Name="pKolyaa" Kind="where" Type="java.lang.String">
+        <TransientExpression Name="VariableScript">adf.context.current.sessionScope.userInfo.parentEntityId</TransientExpression>
+    </Variable>
+    <Variable Name="pgozyaa" Kind="where" Type="java.lang.String">
+        <TransientExpression Name="VariableScript">adf.context.current.sessionScope.userInfo.entityId</TransientExpression>
+    </Variable>
+    <Variable Name="pBCType" Kind="where" Type="java.math.BigDecimal">
+        <TransientExpression Name="VariableScript" CodeSourceName="SearchInventoryRVO"/>
+    </Variable>
+    <ViewAccessor Name="AllEntityROVO1" ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AllEntityROVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="AllEntityROVOCriteriaKolya"
+                           FullName="com.egabi.cjexec.model.roviews.bcdetails.AllEntityROVO.AllEntityROVOCriteriaKolya"/>
+    </ViewAccessor>
+    <ViewAccessor Name="AllEntityROVO2" ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AllEntityROVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="AllEntityROVOCriteria"
+                           FullName="com.egabi.cjexec.model.roviews.bcdetails.AllEntityROVO.AllEntityROVOCriteria"/>
+        <ParameterMap>
+            <PIMap Variable="pParent">
+                <TransientExpression trustMode="untrusted" Name="ExpressionScript">NeyabKolyaa</TransientExpression>
+            </PIMap>
+        </ParameterMap>
+    </ViewAccessor>
+    <ViewAccessor Name="EntityLOV1" ViewObjectName="com.egabi.cjexec.model.roviews.lov.EntityLOV" RowLevelBinds="true">
+        <ViewCriteriaUsage Name="EntityLOVCriteria_Prosecutions"
+                           FullName="com.egabi.cjexec.model.roviews.lov.EntityLOV.EntityLOVCriteria_Prosecutions"/>
+    </ViewAccessor>
+    <ViewAccessor Name="EntityLOV2" ViewObjectName="com.egabi.cjexec.model.roviews.lov.EntityLOV" RowLevelBinds="true">
+        <ViewCriteriaUsage Name="EntityLOVCriteria_PoliceFromPartial"
+                           FullName="com.egabi.cjexec.model.roviews.lov.EntityLOV.EntityLOVCriteria_PoliceFromPartial"/>
+    </ViewAccessor>
+    <ViewAccessor Name="ExcLkpFolderTypesLOV1" ViewObjectName="com.egabi.cjexec.model.roviews.lov.ExcLkpFolderTypesLOV"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="oExcLkpFolderTypesLOVCriteria1_Gonah"
+                           FullName="com.egabi.cjexec.model.roviews.lov.ExcLkpFolderTypesLOV.oExcLkpFolderTypesLOVCriteria1_Gonah"/>
+    </ViewAccessor>
+    <ViewAccessor Name="BusinessCaseTypeROV1"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV" RowLevelBinds="true">
+        <ViewCriteriaUsage Name="BusinessCaseTypeROVCriteria_SM1"
+                           FullName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV.BusinessCaseTypeROVCriteria_SM1"/>
+    </ViewAccessor>
+    <ViewAccessor Name="PoliceAuthorityRVO1"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.PoliceAuthorityRVO"
+                  RowLevelBinds="true"/>
+    <ViewAccessor Name="BusinessCaseDegreesROV1"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseDegreesROV"
+                  RowLevelBinds="true"/>
+    <ViewAccessor Name="CaseInventoryStaticLOV1"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.lov.CaseInventoryStaticLOV" RowLevelBinds="true"/>
+    <ViewAccessor Name="EntityLOV3" ViewObjectName="com.egabi.cjexec.model.roviews.lov.EntityLOV" RowLevelBinds="true">
+        <ViewCriteriaUsage Name="EntityLOVCriteria_Kolya"
+                           FullName="com.egabi.cjexec.model.roviews.lov.EntityLOV.EntityLOVCriteria_Kolya"/>
+    </ViewAccessor>
+    <ViewAccessor Name="EntityLOV4" ViewObjectName="com.egabi.cjexec.model.roviews.lov.EntityLOV" RowLevelBinds="true">
+        <ViewCriteriaUsage Name="EntityLOVCriteria_FromParent"
+                           FullName="com.egabi.cjexec.model.roviews.lov.EntityLOV.EntityLOVCriteria_FromParent"/>
+    </ViewAccessor>
+    <ViewAccessor Name="EntityLOV5" ViewObjectName="com.egabi.cjexec.model.roviews.lov.EntityLOV" RowLevelBinds="true">
+        <ViewCriteriaUsage Name="EntityLOVCriteria_Partial"
+                           FullName="com.egabi.cjexec.model.roviews.lov.EntityLOV.EntityLOVCriteria_Partial"/>
+        <ParameterMap>
+            <PIMap Variable="parentEntityIdBind">
+                <TransientExpression Name="ExpressionScript">ProsecutionKolyaId</TransientExpression>
+            </PIMap>
+        </ParameterMap>
+    </ViewAccessor>
+    <ViewAccessor Name="EntityROVO1" ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityROVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="EntityROVOCriteria"
+                           FullName="com.egabi.cjexec.model.roviews.bcdetails.EntityROVO.EntityROVOCriteria"/>
+        <ParameterMap>
+            <PIMap Variable="pParentEntity">
+                <TransientExpression Name="ExpressionScript">NeyabGozayaa</TransientExpression>
+            </PIMap>
+        </ParameterMap>
+    </ViewAccessor>
+    <ViewAccessor Name="EntityLOV6" ViewObjectName="com.egabi.cjexec.model.roviews.lov.EntityLOV" RowLevelBinds="true">
+        <ViewCriteriaUsage Name="EntityLOVCriteria_Partial_Police"
+                           FullName="com.egabi.cjexec.model.roviews.lov.EntityLOV.EntityLOVCriteria_Partial_Police"/>
+        <ParameterMap>
+            <PIMap Variable="PoliceUnderPartial">
+                <TransientExpression Name="ExpressionScript">ProsecutionPartialId</TransientExpression>
+            </PIMap>
+        </ParameterMap>
+    </ViewAccessor>
+    <ViewAccessor Name="BusinessCaseTypeROV2"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV" RowLevelBinds="true">
+        <ViewCriteriaUsage Name="BusinessCaseTypeROVKoly"
+                           FullName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV.BusinessCaseTypeROVKoly"/>
+    </ViewAccessor>
+    <ViewAccessor Name="ExcLkpFolderTypesLOV2" ViewObjectName="com.egabi.cjexec.model.roviews.lov.ExcLkpFolderTypesLOV"
+                  RowLevelBinds="true"/>
+    <ViewAccessor Name="ExcLkpFolderTypesLOV3" ViewObjectName="com.egabi.cjexec.model.roviews.lov.ExcLkpFolderTypesLOV"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="GenayatWithoutGharama"
+                           FullName="com.egabi.cjexec.model.roviews.lov.ExcLkpFolderTypesLOV.GenayatWithoutGharama"/>
+    </ViewAccessor>
+    <ViewAccessor Name="ClaimYearsRVO1" ViewObjectName="com.egabi.cjexec.model.roviews.claimProcedureROV.ClaimYearsRVO"
+                  RowLevelBinds="true"/>
+    <ViewAccessor Name="PeriodSVO1" ViewObjectName="com.egabi.cjexec.model.roviews.lov.PeriodSVO" RowLevelBinds="true"/>
+    <ViewAccessor Name="ExcLkpFolderTypesROVO1"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.ExcLkpFolderTypesROVO" RowLevelBinds="true"/>
+    <ViewAccessor Name="ExcLkpDependentOrdersTypesROV1"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.ExcLkpDependentOrdersTypesROV"
+                  RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="EntityMamoreya1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.reports.EntityMamoreya"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="ExcLkpFolderTypesLOV4"
+        ViewObjectName="com.egabi.cjexec.model.roviews.lov.ExcLkpFolderTypesLOV"
+        RowLevelBinds="true">
+        <ViewCriteriaUsage
+            Name="FirstDegree"
+            FullName="com.egabi.cjexec.model.roviews.lov.ExcLkpFolderTypesLOV.FirstDegree"/>
+    </ViewAccessor>
+    <ViewAccessor
+        Name="ClaimFolderTypeLKP1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.claimFolder.ClaimFolderTypeLKP"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="FeesFolderTypeROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FeesFolderTypeROVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="CrininalTypeROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.CrininalTypeROVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="AttendanceROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AttendanceROVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="AppealTypeROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AppealTypeROVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="ClaimFoldersROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.ClaimFoldersROVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="ProcClaimLKP1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.ProcClaimLKP"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="ClaimLKTypeROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.claimProcedureROV.ClaimLKTypeROVO"
+        RowLevelBinds="true"/>
+    <ListBinding Name="LOV_NeyabKolyaa" ListVOName="AllEntityROVO1" ListRangeSize="-1" NullValueFlag="start"
+                 MRUCount="0"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
+        <AttrArray Name="AttrNames">
+            <Item Value="NeyabKolyaa"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="ProsecutionKolya1"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_NeyabGozayaa" ListVOName="AllEntityROVO2" ListRangeSize="-1" NullValueFlag="start"
+                 MRUCount="0"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
+        <AttrArray Name="AttrNames">
+            <Item Value="NeyabGozayaa"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="ProsecutionPartialName"/>
+            <Item Value="ErrandFlag"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+            <Item Value="EntityName"/>
+            <Item Value="ExcErrandFlag"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_ProsecutionEntityId" ListVOName="EntityLOV1" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ProsecutionEntityId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_FolderTypeId" ListVOName="ExcLkpFolderTypesLOV1" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FolderTypeId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="FolderName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_BusinessCaseTypeId" ListVOName="BusinessCaseTypeROV1" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="BusinessCaseTypeId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_PoliceStationId" ListVOName="PoliceAuthorityRVO1" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="PoliceStationId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_DegreeId" ListVOName="BusinessCaseDegreesROV1" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="DegreeId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_SearchType" ListVOName="CaseInventoryStaticLOV1" ListRangeSize="-1" NullValueFlag="none"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="SearchType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="TypeId"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_ProsecutionKolya" ListVOName="EntityLOV3" ListRangeSize="-1" NullValueFlag="start"
+                 MRUCount="0" NullValueId="SELECT_ALL">
+        <AttrArray Name="AttrNames">
+            <Item Value="ProsecutionKolya"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="ProsecutionKolyaId"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="EntityName"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_PoliceStationEntity" ListVOName="EntityLOV2" ListRangeSize="-1" NullValueFlag="none"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="PoliceStationEntity"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="PoliceStationEntityId"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="EntityName"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_ProsecutionPartial" ListVOName="EntityLOV4" ListRangeSize="-1" NullValueFlag="none"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ProsecutionPartial"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="ProsecutionPartialId"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="EntityName"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_OrigEntity" ListVOName="EntityROVO1" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="OrigEntity"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_ProsecutionPartialName" ListVOName="EntityLOV5" ListRangeSize="-1" NullValueFlag="none"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ProsecutionPartialName"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="ProsecutionPartialId"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="EntityName"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_PoliceStationEntityName" ListVOName="EntityLOV6" ListRangeSize="-1" NullValueFlag="none"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="PoliceStationEntityName"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="PoliceStationEntityId"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="EntityName"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_BusinessCaseTypeId1" ListVOName="BusinessCaseTypeROV2" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="BusinessCaseTypeId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_FolderTypeGenay" ListVOName="ExcLkpFolderTypesLOV2" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FolderTypeIdGenay"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="FolderName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_GenayWithoutGharama" ListVOName="ExcLkpFolderTypesLOV3" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="GenayWithoutGharama"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="FolderName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_CalimYear" ListVOName="ClaimYearsRVO1" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="CalimYear"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="ClaimYear"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_Period" ListVOName="PeriodSVO1" ListRangeSize="-1" NullValueFlag="start" MRUCount="0"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
+        <AttrArray Name="AttrNames">
+            <Item Value="Period"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_FolderTypesId" ListVOName="ExcLkpFolderTypesROVO1" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FolderTypesId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="FolderName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_DependentOrderType" ListVOName="ExcLkpDependentOrdersTypesROV1" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="DependentOrderType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_NeyabaMamoreya"
+        ListVOName="EntityMamoreya1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="NeyabaMamoreya"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_FirstDegree"
+        ListVOName="ExcLkpFolderTypesLOV4"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FirstDegree"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="FolderName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_ClaimFolderType"
+        ListVOName="ClaimLKTypeROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ClaimFolderType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_FeesFolderType"
+        ListVOName="FeesFolderTypeROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FeesFolderType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_CriminalType"
+        ListVOName="CrininalTypeROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="CriminalType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="ID"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_Attendance"
+        ListVOName="AttendanceROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="Attendance"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_AppealType"
+        ListVOName="AppealTypeROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="AppealType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_ClaimFolderId"
+        ListVOName="ClaimFoldersROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ClaimFolderId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_ProcClaimType"
+        ListVOName="ProcClaimLKP1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ProcClaimType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_NeyabKolyaa1"
+        ListVOName="EntityLOV3"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="NeyabKolyaa"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="ProsecutionKolya1"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="EntityName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <SQLQuery><![CDATA[SELECT NULL AS SEQUENCE_NUMBER , :pBCType AS BUSINESS_CASE_TYPE_ID , :prosecutionKolyaBind AS
+              Prosecution_Kolya , nvl(:pKolyaa ,6 ) as Neyab_Kolyaa , :pgozyaa as Neyab_Gozayaa FROM DUAL]]></SQLQuery>
+    <ViewAttribute
+        Name="SequenceNumber"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="oracle.jbo.domain.Number"
+        ColumnType="VARCHAR2"
+        AliasName="SEQUENCE_NUMBER"
+        Expression="SEQUENCE_NUMBER"
+        SQLType="NUMERIC">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.SequenceNumber_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="BusinessCaseTypeId"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="BUSINESS_CASE_TYPE_ID"
+        SQLType="NUMERIC"
+        LOVName="LOV_BusinessCaseTypeId"
+        Expression="BUSINESS_CASE_TYPE_ID"
+        LOVFinder="BusinessCaseSwitcher">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.BusinessCaseTypeId_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ProsecutionKolya"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="PROSECUTION_KOLYA"
+        Expression="PROSECUTION_KOLYA"
+        SQLType="VARCHAR"
+        LOVName="LOV_ProsecutionKolya">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.ProsecutionKolya_LABEL"/>
+                <CONTROLTYPE
+                    Value="default"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="NeyabKolyaa"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="Neyab_Kolyaa"
+        SQLType="NUMERIC"
+        LOVName="LOV_NeyabKolyaa"
+        Expression="Neyab_Kolyaa">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="NeyabGozayaa"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="Neyab_Gozayaa"
+        SQLType="NUMERIC"
+        LOVName="LOV_NeyabGozayaa"
+        Expression="Neyab_Gozayaa">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="default"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="SearchProcedureDate"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="10"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="SEARCH_PROCEDURE_DATE"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="10"/>
+        </DesignTime>
+        <TransientExpression
+            Name="ExpressionScript">adf.currentDate</TransientExpression>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="PoliceStationEntityId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.PoliceStationEntityId_LABEL"/>
+                <DISPLAYWIDTH
+                    Value="50"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="Year"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR">
+        <TransientExpression
+            Name="ExpressionScript">adf.context.current.sessionScope.pYear</TransientExpression>
+        <RecalcCondition
+            Name="RecalcExpressionScript">true</RecalcCondition>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.Year_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FolderTypeId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.math.BigDecimal"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_FolderTypeId">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.FolderTypeId_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ProsecutionEntityId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.math.BigDecimal"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_ProsecutionEntityId">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.ProsecutionEntityId_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="RepeatedFlag"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.RepeatedFlag_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="CaseNumber"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR">
+        <TransientExpression
+            Name="ExpressionScript">adf.context.current.sessionScope.pSequence</TransientExpression>
+        <RecalcCondition
+            Name="RecalcExpressionScript">true</RecalcCondition>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.audit.CaseAuditROV.BC_CASE_NUMBER_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="DegreeId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_DegreeId">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.DegreeId_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="PoliceStationId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Number"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_PoliceStationId">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.PoliceStationId_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="HearingDate"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Date"
+        ColumnType="DATE"
+        AliasName="VIEW_ATTR"
+        SQLType="DATE">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.HearingDate_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="SearchType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Integer"
+        ColumnType="INTEGER"
+        AliasName="VIEW_ATTR"
+        SQLType="INTEGER"
+        LOVName="LOV_SearchType">
+        <TransientExpression
+            Name="ExpressionScript">adf.context.current.sessionScope.pType</TransientExpression>
+        <RecalcCondition
+            Name="RecalcExpressionScript">true</RecalcCondition>
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="radio"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="parentEntityId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="ProsecutionKolyaId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="ProsecutionKolya1"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"
+        LOVName="LOV_ProsecutionKolya"
+        IsSelected="false"
+        Precision="255">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.ProsecutionKolya_LABEL"/>
+                <DISPLAYWIDTH
+                    Value="40"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ProsecutionPartialId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="ProsecutionPartial"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"
+        LOVName="LOV_ProsecutionPartial">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.ProsecutionPartial_LABEL"/>
+                <DISPLAYWIDTH
+                    Value="40"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="PoliceStationEntity"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"
+        LOVName="LOV_PoliceStationEntity">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.PoliceStationEntity_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="EntitKoleyaaName"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="EntityPartialName"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="ProsecutionPartialName"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"
+        LOVName="LOV_ProsecutionPartialName">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.ProsecutionPartialName_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="PoliceStationEntityName"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"
+        LOVName="LOV_PoliceStationEntityName">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.PoliceStationEntityName_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="DateFrom"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Date"
+        ColumnType="DATE"
+        AliasName="VIEW_ATTR"
+        SQLType="DATE">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.DateFrom_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="DateTo"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Date"
+        ColumnType="DATE"
+        AliasName="VIEW_ATTR"
+        SQLType="DATE">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.DateTo_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="OrigEntity"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_OrigEntity">
+        <TransientExpression
+            Name="ExpressionScript">adf.context.current.sessionScope.pPolice</TransientExpression>
+        <RecalcCondition
+            Name="RecalcExpressionScript">true</RecalcCondition>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.OrigEntity_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="EstanafGozayaFlag"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.EstanafGozayaFlag_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="BusinessCaseSwitcher"
+        IsUpdateable="false"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.String"
+        ColumnType="$none$"
+        SQLType="VARCHAR">
+        <TransientExpression
+            Name="VariableScript">(adf.context.current.sessionScope.userInfo.entityDegree == '39' ||
+                                                   adf.context.current.sessionScope.userInfo.errandFlag == 'Y')?
+                                                   'LOV_BusinessCaseTypeId1' : 'LOV_BusinessCaseTypeId'</TransientExpression>
+        <RecalcCondition
+            trustMode="untrusted"
+            Name="RecalcExpressionScript">true</RecalcCondition>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FolderTypeIdGenay"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_FolderTypeGenay">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.FolderTypeIdGenay_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="CriminalTypeFlag"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.String"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.CriminalTypeFlag_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="GenayWithoutGharama"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_GenayWithoutGharama">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.GenayWithoutGharama_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="SearchTypeWafedeen"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="CalimYear"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.math.BigDecimal"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_CalimYear">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.CalimYear_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="Period"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_Period">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ErrandFlag"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR">
+        <TransientExpression
+            Name="ExpressionScript">adf.context.current.sessionScope.userInfo.errandFlag</TransientExpression>
+        <RecalcCondition
+            Name="RecalcExpressionScript">true</RecalcCondition>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FromSequence"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Integer"
+        ColumnType="INTEGER"
+        AliasName="VIEW_ATTR"
+        SQLType="INTEGER">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.FromSequence_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ToSequence"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Integer"
+        ColumnType="INTEGER"
+        AliasName="VIEW_ATTR"
+        SQLType="INTEGER">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.ToSequence_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FolderTypesId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_FolderTypesId">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.FolderTypesId_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+                <DISPLAYWIDTH
+                    Value="40"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="DependentOrderType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_DependentOrderType">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.DependentOrderType_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="Seq"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR">
+        <Properties>
+            <SchemaBasedProperties>
+                <DISPLAYWIDTH
+                    Value="20"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="NeyabaMamoreya"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_NeyabaMamoreya">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FirstDegree"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_FirstDegree">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="MamoreyaFlag"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.MamoreyaFlag_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ClaimFolderType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_ClaimFolderType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FeesFolderType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_FeesFolderType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+                <DISPLAYWIDTH
+                    Value="30"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="CriminalType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_CriminalType"
+        DefaultValue="1">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="Attendance"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_Attendance">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="AppealType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_AppealType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="StartNum"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="EndNum"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="TypeToggle"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        DefaultValue="1"/>
+    <ViewAttribute
+        Name="ClaimFolderId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_ClaimFolderId">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="Status"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.String"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="ProcClaimType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.math.BigDecimal"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_ProcClaimType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ResourceBundle>
+        <PropertiesBundle PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewObject>

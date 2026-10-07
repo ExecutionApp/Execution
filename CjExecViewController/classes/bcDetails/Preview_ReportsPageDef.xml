@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.1.10" id="Preview_ReportsPageDef"
+                Package="bcDetails">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="ValidatePoliceReportROVO1Iterator" Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1"
+              DataControl="CjExecAMDataControl" RangeSize="25"/>
+    <iterator Binds="SimplifiedModeAM1.ExcFolderDataVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ExcFolderDataVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.CourtBcHearingResPartiesVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="CourtBcHearingResPartiesVO1Iterator"/>
+    <iterator id="cjConfig1Iterator" Binds="SimplifiedModeAM1.cjConfig1" DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="PoliceNo">
+      <AttrNames>
+        <Item Value="PoliceNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="BusinessCaseType">
+      <AttrNames>
+        <Item Value="BusinessCaseType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="ParYear">
+      <AttrNames>
+        <Item Value="ParYear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="OrigEntity">
+      <AttrNames>
+        <Item Value="OrigEntity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="BusinessCaseDegree">
+      <AttrNames>
+        <Item Value="BusinessCaseDegree"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="NeyabKolyaa">
+      <AttrNames>
+        <Item Value="NeyabKolyaa"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="NeyabGozayaa">
+      <AttrNames>
+        <Item Value="NeyabGozayaa"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" DataControl="CjExecAMDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <tree IterBinding="ExcFolderDataVO1Iterator" id="ExcFolderDataVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.bcdetails.ExcFolderDataVO" Name="ExcFolderDataVO10">
+        <AttrNames>
+          <Item Value="FolderType"/>
+          <Item Value="PoliceStationEntityId"/>
+          <Item Value="Year"/>
+          <Item Value="SequenceNumber"/>
+          <Item Value="RepeatedFlag"/>
+          <Item Value="CriminalType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="CourtBcHearingResPartiesVO1Iterator" id="CourtBcHearingResPartiesVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.bcdetails.CourtBcHearingResPartiesVO"
+                      Name="CourtBcHearingResPartiesVO10">
+        <AttrNames>
+          <Item Value="FullName"/>
+          <Item Value="ActionTypeId"/>
+          <Item Value="Amount"/>
+          <Item Value="Announced"/>
+          <Item Value="Attachment1"/>
+          <Item Value="Attachment2"/>
+          <Item Value="Attend"/>
+          <Item Value="Attendance"/>
+          <Item Value="BcDegreeSpecId"/>
+          <Item Value="BusinessCaseDegree"/>
+          <Item Value="BusinessCaseDetailsId"/>
+          <Item Value="Cancelled"/>
+          <Item Value="CauseOfResumption"/>
+          <Item Value="CircleHearingDateId"/>
+          <Item Value="CommitteeType"/>
+          <Item Value="CourtBcHearingResId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="CreatedEntityId"/>
+          <Item Value="CreatedUserId"/>
+          <Item Value="DailyPayments"/>
+          <Item Value="DecisionText"/>
+          <Item Value="Degree"/>
+          <Item Value="DegreeDate"/>
+          <Item Value="Description"/>
+          <Item Value="ExecutionCancellation"/>
+          <Item Value="ExecutionCancellationCause"/>
+          <Item Value="ExecutionNumber"/>
+          <Item Value="ExecutionNumberSchedule"/>
+          <Item Value="ExecutionStartDate"/>
+          <Item Value="ExecutionType"/>
+          <Item Value="Fees"/>
+          <Item Value="Guarantee"/>
+          <Item Value="GuaranteeDate"/>
+          <Item Value="GuaranteeNumber"/>
+          <Item Value="GuranteeAmount"/>
+          <Item Value="Id"/>
+          <Item Value="Id1"/>
+          <Item Value="Id2"/>
+          <Item Value="IdNumber"/>
+          <Item Value="InPrisonDays"/>
+          <Item Value="InPrisonMonths"/>
+          <Item Value="InPrisonYears"/>
+          <Item Value="JudgementClassDetail"/>
+          <Item Value="JudgementResolution"/>
+          <Item Value="JudgementResolutionC"/>
+          <Item Value="JudgementType"/>
+          <Item Value="JudgmentActionType"/>
+          <Item Value="JudgmentClassification"/>
+          <Item Value="LawyerFees"/>
+          <Item Value="Nickname"/>
+          <Item Value="OrderName"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="PartyId"/>
+          <Item Value="PartyOrder"/>
+          <Item Value="PaymentsNumber"/>
+          <Item Value="Postponed"/>
+          <Item Value="ScheduleYear"/>
+          <Item Value="Stamp"/>
+          <Item Value="Status"/>
+          <Item Value="TransFolderId"/>
+          <Item Value="UnspecializedFlag"/>
+          <Item Value="UpdateBy"/>
+          <Item Value="UpdatedDate"/>
+          <Item Value="X"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="ExcFolderDataTest1"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.bcdetails.ExcFolderDataVO"
+                      Name="CourtBcHearingResPartiesVO11" TargetIterator="${bindings.ExcFolderDataVO1Iterator}">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="AnnouncementDate"/>
+          <Item Value="BusinessCaseDetailId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="CriminalType"/>
+          <Item Value="ExecutionDate"/>
+          <Item Value="ExecutionFlag"/>
+          <Item Value="ExecutionNumber"/>
+          <Item Value="ExecutionProcedurId"/>
+          <Item Value="FolderType"/>
+          <Item Value="FolderTypeAll"/>
+          <Item Value="FolderTypeCrime"/>
+          <Item Value="FolderTypeESS"/>
+          <Item Value="ImprisonedFlag"/>
+          <Item Value="ImprisonmentEndDate"/>
+          <Item Value="ImprisonmentPlace"/>
+          <Item Value="ImprisonmentStartDate"/>
+          <Item Value="IsActive"/>
+          <Item Value="JudgementStatus"/>
+          <Item Value="JudgmentText"/>
+          <Item Value="Notes"/>
+          <Item Value="ObjectionFlag"/>
+          <Item Value="ObjectionText"/>
+          <Item Value="ObjectionType"/>
+          <Item Value="ParentFolderRecord"/>
+          <Item Value="PartyName"/>
+          <Item Value="PoliceStationEntityId"/>
+          <Item Value="PrimaryProsecution"/>
+          <Item Value="RepeatedFlag"/>
+          <Item Value="ResPartyId"/>
+          <Item Value="SecondaryProsecution"/>
+          <Item Value="SequenceNumber"/>
+          <Item Value="TotImprisonmentDays"/>
+          <Item Value="TotImprisonmentMonths"/>
+          <Item Value="TotImprisonmentYears"/>
+          <Item Value="WitnessFlag"/>
+          <Item Value="Year"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="ExcFolderDataVO1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="cjConfig1Iterator" id="ValuesUrl">
+      <AttrNames>
+        <Item Value="ValuesUrl"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

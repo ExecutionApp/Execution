@@ -1,0 +1,1128 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcFolderDataVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  SelectAllAttributes="false"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <ViewAccessor
+    Name="FolderTypeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderTypeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderTypecrimeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderTypecrimeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderAllTypes1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderAllTypes"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CrininalTypeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.CrininalTypeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderTypesESS1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderTypesESS"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ExcFolderObjectionTypeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.ExcFolderObjectionTypeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="AllEntityROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AllEntityROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EntityROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="AllEntity1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AllEntity"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ExcFolderObjectionGonahaaROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.ExcFolderObjectionGonahaaROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ExcFolderObjectionGnayaatROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.ExcFolderObjectionGnayaatROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderTypeChildROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderTypeChildROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderAttendanceROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderAttendanceROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderDataTypesInfractionROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderDataTypesInfractionROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ExcLkpFolderTypesChildLOV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.lov.ExcLkpFolderTypesChildLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="RepeatedROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.RepeatedROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FolderTypeEconomyROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderTypeEconomyROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="folderTypeEmpROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.folderTypeEmpROVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_FolderType"
+    ListVOName="FolderAllTypes1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderTypeCrime"
+    ListVOName="FolderTypecrimeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderTypeCrime"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderTypeAll"
+    ListVOName="FolderTypeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderTypeAll"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CriminalType"
+    ListVOName="CrininalTypeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CriminalType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ID"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderTypeESS"
+    ListVOName="FolderTypesESS1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderTypeESS"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ObjectionType"
+    ListVOName="ExcFolderObjectionTypeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ObjectionType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ObjectionFlag"/>
+      <Item Value="ObjectionText"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="ExtendPunishFlag"/>
+      <Item Value="JudgeText"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PoliceStationEntityId"
+    ListVOName="AllEntity1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PoliceStationEntityId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="EntityName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ObjectionGonahaa"
+    ListVOName="ExcFolderObjectionGonahaaROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ObjectionGonahaa"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ObjectionType"/>
+      <Item Value="ObjectionFlag"/>
+      <Item Value="ObjectionText"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+      <Item Value="ExtendPunishFlag"/>
+      <Item Value="JudgeText"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ObjectionGnayaat"
+    ListVOName="ExcFolderObjectionGnayaatROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ObjectionGnayaat"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ObjectionType"/>
+      <Item Value="ObjectionFlag"/>
+      <Item Value="ObjectionText"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+      <Item Value="ExtendPunishFlag"/>
+      <Item Value="JudgeText"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderChild"
+    ListVOName="FolderTypeChildROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderChild"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderAttend"
+    ListVOName="FolderAttendanceROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderAttend"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderTypeInfraction"
+    ListVOName="FolderDataTypesInfractionROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderTypeInfraction"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderChildNew"
+    ListVOName="ExcLkpFolderTypesChildLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderChildNew"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RepeatedFlag"
+    ListVOName="RepeatedROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RepeatedFlag"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Label"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderTypeEconomy"
+    ListVOName="FolderTypeEconomyROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderTypeEconomy"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderTypeEmp"
+    ListVOName="folderTypeEmpROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderTypeEmp"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="ExcFolderDataEO"
+    Entity="com.egabi.cjexec.model.entities.bcdetails.ExcFolderDataEO"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="ResPartyId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ResPartyId"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="RES_PARTY_ID"/>
+  <ViewAttribute
+    Name="Year"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Year"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="YEAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="edit"/>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.Year_LABEL"/>
+        <DISPLAYWIDTH
+          Value="4"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderType"
+    IsUnique="true"
+    PrecisionRule="true"
+    EntityAttrName="FolderType"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="FOLDER_TYPE"
+    LOVName="LOV_FolderType">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="folder_type"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PoliceStationEntityId"
+    IsUnique="true"
+    
+    PrecisionRule="true"
+    EntityAttrName="PoliceStationEntityId"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="POLICE_STATION_ENTITY_ID"
+    LOVName="LOV_PoliceStationEntityId">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.PoliceStationEntityId_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SequenceNumber"
+    IsUnique="true"
+    
+    PrecisionRule="true"
+    EntityAttrName="SequenceNumber"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="SEQUENCE_NUMBER">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.SequenceNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RepeatedFlag"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RepeatedFlag"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="REPEATED_FLAG"
+    DefaultValue="N"
+    LOVName="LOV_RepeatedFlag">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO.RepeatedFlag_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseDetailId"
+    PrecisionRule="true"
+    EntityAttrName="BusinessCaseDetailId"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="BUSINESS_CASE_DETAIL_ID"/>
+  <ViewAttribute
+    Name="ParentFolderRecord"
+    PrecisionRule="true"
+    EntityAttrName="ParentFolderRecord"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="PARENT_FOLDER_RECORD"/>
+  <ViewAttribute
+    Name="JudgementStatus"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="JudgementStatus"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="JUDGEMENT_STATUS"
+    DefaultValue="2"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="CREATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="CREATED_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="ExecutionFlag"
+    PrecisionRule="true"
+    EntityAttrName="ExecutionFlag"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="EXECUTION_FLAG"/>
+  <ViewAttribute
+    Name="TotImprisonmentDays"
+    PrecisionRule="true"
+    EntityAttrName="TotImprisonmentDays"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="TOT_IMPRISONMENT_DAYS"/>
+  <ViewAttribute
+    Name="TotImprisonmentMonths"
+    PrecisionRule="true"
+    EntityAttrName="TotImprisonmentMonths"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="TOT_IMPRISONMENT_MONTHS"/>
+  <ViewAttribute
+    Name="TotImprisonmentYears"
+    PrecisionRule="true"
+    EntityAttrName="TotImprisonmentYears"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="TOT_IMPRISONMENT_YEARS"/>
+  <ViewAttribute
+    Name="ImprisonmentStartDate"
+    PrecisionRule="true"
+    EntityAttrName="ImprisonmentStartDate"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="IMPRISONMENT_START_DATE"/>
+  <ViewAttribute
+    Name="ImprisonmentEndDate"
+    PrecisionRule="true"
+    EntityAttrName="ImprisonmentEndDate"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="IMPRISONMENT_END_DATE"/>
+  <ViewAttribute
+    Name="ExecutionDate"
+    PrecisionRule="true"
+    EntityAttrName="ExecutionDate"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="EXECUTION_DATE"/>
+  <ViewAttribute
+    Name="AnnouncementDate"
+    PrecisionRule="true"
+    EntityAttrName="AnnouncementDate"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="ANNOUNCEMENT_DATE"/>
+  <ViewAttribute
+    Name="ExecutionNumber"
+    PrecisionRule="true"
+    EntityAttrName="ExecutionNumber"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="EXECUTION_NUMBER"/>
+  <ViewAttribute
+    Name="ImprisonedFlag"
+    PrecisionRule="true"
+    EntityAttrName="ImprisonedFlag"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="IMPRISONED_FLAG"/>
+  <ViewAttribute
+    Name="JudgmentText"
+    PrecisionRule="true"
+    EntityAttrName="JudgmentText"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="JUDGMENT_TEXT"/>
+  <ViewAttribute
+    Name="ImprisonmentPlace"
+    PrecisionRule="true"
+    EntityAttrName="ImprisonmentPlace"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="IMPRISONMENT_PLACE"/>
+  <ViewAttribute
+    Name="SecondaryProsecution"
+    PrecisionRule="true"
+    EntityAttrName="SecondaryProsecution"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="SECONDARY_PROSECUTION"/>
+  <ViewAttribute
+    Name="PrimaryProsecution"
+    PrecisionRule="true"
+    EntityAttrName="PrimaryProsecution"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="PRIMARY_PROSECUTION"/>
+  <ViewAttribute
+    Name="ExecutionProcedurId"
+    PrecisionRule="true"
+    EntityAttrName="ExecutionProcedurId"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="EXECUTION_PROCEDUR_ID"/>
+  <ViewAttribute
+    Name="FolderTypeCrime"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderTypeCrime">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderTypeAll"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FOLDER_TYPE_ALL"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderTypeAll">
+    <TransientExpression
+      Name="ExpressionScript"><![CDATA[FolderType]]></TransientExpression>
+    <RecalcCondition
+      Name="RecalcExpressionScript"><![CDATA[true]]></RecalcCondition>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Notes"
+    PrecisionRule="true"
+    EntityAttrName="Notes"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="NOTES"/>
+  <ViewAttribute
+    Name="IsActive"
+    PrecisionRule="true"
+    EntityAttrName="IsActive"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="IS_ACTIVE"/>
+  <ViewAttribute
+    Name="WitnessFlag"
+    PrecisionRule="true"
+    EntityAttrName="WitnessFlag"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="WITNESS_FLAG"/>
+  <ViewAttribute
+    Name="CriminalType"
+    PrecisionRule="true"
+    EntityAttrName="CriminalType"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="CRIMINAL_TYPE"
+    LOVName="LOV_CriminalType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderTypeESS"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderTypeESS">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ObjectionType"
+    PrecisionRule="true"
+    EntityAttrName="ObjectionType"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="OBJECTION_TYPE"
+    LOVName="LOV_ObjectionType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ObjectionText"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="ObjectionFlag"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyName"
+    PrecisionRule="true"
+    EntityAttrName="PartyName"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="PARTY_NAME"
+    IsQueriable="false"
+    IsPersistent="false"/>
+  <ViewAttribute
+    Name="ObjectionGonahaa"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_ObjectionGonahaa">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ObjectionGnayaat"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_ObjectionGnayaat">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderChild"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderChild">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="sequenceFold"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="sequenceFold"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="SEQUENCE_FOLD"
+    IsPersistent="false"/>
+  <ViewAttribute
+    Name="UpdatedBy"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="UpdatedBy"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="UPDATED_BY"/>
+  <ViewAttribute
+    Name="UpdatedDate"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="UpdatedDate"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="UPDATED_DATE"/>
+  <ViewAttribute
+    Name="ExecutionMoiFlag"
+    PrecisionRule="true"
+    EntityAttrName="ExecutionMoiFlag"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="EXECUTION_MOI_FLAG"/>
+  <ViewAttribute
+    Name="FolderAttend"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    DefaultValue="1"
+    LOVName="LOV_FolderAttend">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GuiltlessnessFlag"
+    PrecisionRule="true"
+    EntityAttrName="GuiltlessnessFlag"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="GUILTLESSNESS_FLAG"/>
+  <ViewAttribute
+    Name="degreeId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    Expression="select  nvl (BC_DEGREE_SPEC_ID , 0) from COURT_BC_HEARING_RES_PARTIES where id = ExcFolderDataEO.RES_PARTY_ID"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="PartyFullName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    Expression="SELECT        PARTY_FULL_NAME  FROM  PAR_PARTIES  where id = (select  nvl (PARTY_ID , 0) from COURT_BC_HEARING_RES_PARTIES where id = ExcFolderDataEO.RES_PARTY_ID)"/>
+  <ViewAttribute
+    Name="FolderTypeInfraction"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderTypeInfraction">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderChildNew"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderChildNew">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderTypeEconomy"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderTypeEconomy">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderTypeEmp"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderTypeEmp"
+    DefaultValue="101">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Tmp"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="Tmp"
+    EntityUsage="ExcFolderDataEO"
+    AliasName="TMP"/>
+  <ViewLinkAccessor
+    Name="ExcFolderData"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.FkFolderParentRecordVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="CourtBcHearingResParties"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink3VL"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ExcFolderActions"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink38VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ExcCourtBcChrgDecDepOrd"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ExcFolderDataCourtDepOrdVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ExcClaims"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink45VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <!--<ViewLinkAccessor
+    Name="ExcCourtBcChrgDecDepOrdUp"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ExcFolderDataBcDepOrdVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>-->
+  <DeclarativeWhereClause
+    Name="DeclarativeWhereClause">
+    <ViewCriteria
+      Name="ExcFolderDataVOWhereCriteria"
+      ViewObjectName="com.egabi.cjexec.model.views.bcdetails.ExcFolderDataVO"
+      Conjunction="AND"
+      Mode="3">
+      <ViewCriteriaRow
+        Name="ExcFolderDataVOWhereCriteria_row_0"
+        UpperColumns="1">
+        <ViewCriteriaItem
+          Name="FolderType"
+          ViewAttribute="FolderType"
+          Operator="&lt;>"
+          Conjunction="AND"
+          Value="35"
+          Required="Optional"/>
+      </ViewCriteriaRow>
+    </ViewCriteria>
+  </DeclarativeWhereClause>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+  <SortCriteria>
+    <Sort
+      Attribute="Id"
+      Ascending="false"/>
+    <Sort
+      Attribute="ResPartyId"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Id"
+      Ascending="false"/>
+    <Sort
+      Attribute="ResPartyId"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Id"
+      Ascending="false"/>
+    <Sort
+      Attribute="ResPartyId"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Id"
+      Ascending="false"/>
+    <Sort
+      Attribute="ResPartyId"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Id"
+      Ascending="false"/>
+    <Sort
+      Attribute="ResPartyId"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Id"
+      Ascending="false"/>
+    <Sort
+      Attribute="ResPartyId"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Id"
+      Ascending="false"/>
+    <Sort
+      Attribute="ResPartyId"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Id"
+      Ascending="false"/>
+    <Sort
+      Attribute="ResPartyId"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Id"
+      Ascending="false"/>
+    <Sort
+      Attribute="ResPartyId"
+      Ascending="false"/>
+  </SortCriteria>
+</ViewObject>

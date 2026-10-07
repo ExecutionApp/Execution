@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1">
+    <af:panelBox text="PanelBox1" id="pb1">
+      <f:facet name="toolbar"/>
+      <af:table value="#{bindings.PlentyInstallmentDetails.collectionModel}" var="row"
+                rows="#{bindings.PlentyInstallmentDetails.rangeSize}"
+                emptyText="#{bindings.PlentyInstallmentDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0"
+                selectedRowKeys="#{bindings.PlentyInstallmentDetails.collectionModel.selectedRow}"
+                selectionListener="#{bindings.PlentyInstallmentDetails.collectionModel.makeCurrent}"
+                rowSelection="single" fetchSize="#{bindings.PlentyInstallmentDetails.rangeSize}" id="t1">
+        <af:column headerText="#{bindings.PlentyInstallmentDetails.hints.InstallmentDate.label}" id="c1">
+          <af:outputText value="#{row.InstallmentDate}"
+                         shortDesc="#{bindings.PlentyInstallmentDetails.hints.InstallmentDate.tooltip}" id="ot1">
+            <af:convertDateTime pattern="#{bindings.PlentyInstallmentDetails.hints.InstallmentDate.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.label}" id="c2">
+          <af:outputText value="#{row.InstallmentNumber}"
+                         shortDesc="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.tooltip}" id="ot2">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.PlentyInstallmentDetails.hints.InstallmentNumber.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{bindings.PlentyInstallmentDetails.hints.InstallmentAmount.label}" id="c3">
+          <af:outputText value="#{row.InstallmentAmount}"
+                         shortDesc="#{bindings.PlentyInstallmentDetails.hints.InstallmentAmount.tooltip}" id="ot3">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.PlentyInstallmentDetails.hints.InstallmentAmount.format}"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+    </af:panelBox>
+  </af:panelGroupLayout>
+</ui:composition>

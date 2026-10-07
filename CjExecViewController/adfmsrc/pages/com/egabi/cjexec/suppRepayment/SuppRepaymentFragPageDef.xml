@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="SuppRepaymentFragPageDef"
+                Package="pages.com.egabi.cjexec.suppRepayment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="RepayExcCourtBcPartyDebt" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="RepayExcCourtBcPartyDebtIterator"/>
+    <iterator Binds="RepayExcFolderProcInstall" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="RepayExcFolderProcInstallIterator"/>
+    <iterator id="ExcFolderProceduresIterator" Binds="ExcFolderProcedures" DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+    <iterator Binds="ExcFolderData" RangeSize="10" DataControl="CjExecAMDataControl" id="ExcFolderDataIterator"/>
+    <iterator id="ExcFolderActionsIterator" Binds="ExcFolderActions" DataControl="CjExecAMDataControl" RangeSize="25"/>
+    <iterator id="ExcCourtBcPartyDebtIterator" Binds="ExcCourtBcPartyDebt" DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="RepayExcCourtBcPartyDebtIterator" id="RepayExcCourtBcPartyDebt">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.suppamount.RepayExcCourtBcPartyDebtVO"
+                      Name="RepayExcCourtBcPartyDebt0">
+        <AttrNames>
+          <Item Value="FeesTypeId"/>
+          <Item Value="Amount"/>
+          <Item Value="GroupNumber"/>
+          <Item Value="ReceiptNumber"/>
+          <Item Value="SettlementAuthId"/>
+          <Item Value="SettlementDate"/>
+          <Item Value="PayerName"/>
+          <Item Value="SettlementProcId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="RepayExcFolderProcInstallIterator" id="RepayExcFolderProcInstall">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.suppamount.RepayExcFolderProcInstallVO"
+                      Name="RepayExcFolderProcInstall0">
+        <AttrNames>
+          <Item Value="InstallmentNumber"/>
+          <Item Value="InstallmentAmount"/>
+          <Item Value="InstallmentDate"/>
+          <Item Value="GroupNumber"/>
+          <Item Value="ReceiptNumber"/>
+          <Item Value="SettlementAuthId"/>
+          <Item Value="SettlementDate"/>
+          <Item Value="SettlementProcId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="RepayExcFolderProcInstallIterator" id="rowConts">
+      <AttrNames>
+        <Item Value="rowConts"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderDataIterator" id="ResPartyId">
+      <AttrNames>
+        <Item Value="ResPartyId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="ExcFolderDataIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="ExcFolderDataIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="P_FOLDER_ID" NDValue="#{bindings.Id.inputValue}" NDType="java.math.BigDecimal"/>
+    </action>
+    <attributeValues IterBinding="ExcFolderDataIterator" id="ExecutionFlag">
+      <AttrNames>
+        <Item Value="ExecutionFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="RepayExcFolderProcInstallIterator" id="Execute" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <methodAction id="updateRepayInfo" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateRepayInfo"
+                  IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider">
+      <NamedData NDName="resPartId" NDValue="#{bindings.ResPartyId.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="feesType" NDType="java.lang.String"/>
+      <NamedData NDName="settlProcID" NDType="java.lang.String"/>
+      <NamedData NDName="groupID" NDType="java.lang.String"/>
+      <NamedData NDName="settlDate" NDType="java.lang.String"/>
+      <NamedData NDName="paidAmount" NDType="java.lang.String"/>
+      <NamedData NDName="settAuthID" NDType="java.lang.String"/>
+      <NamedData NDName="recipNum" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="createFProcedureAndAction" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createFProcedureAndAction" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider"
+                  ReturnName="data.CjExecAMDataControl.methodResults.createFProcedureAndAction_CjExecAMDataControl_dataProvider_createFProcedureAndAction_result">
+      <NamedData NDName="resPartyId" NDValue="#{bindings.ResPartyId.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="createdBy" NDValue="3169" NDType="java.lang.String"/>
+      <NamedData NDName="actionType" NDValue="7" NDType="java.lang.String"/>
+      <NamedData NDName="folderID" NDValue="#{bindings.Id.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="procStatus" NDValue="12" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

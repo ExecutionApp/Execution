@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="ExcBcSessJdgTF_ExecBcSessionsJudgmentsTF_ExecuteWithParamsPageDef"
+                Package="taskflows.execbcsessionsjudgments" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ExecBcSeeeionsJudgmentsROV1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExecBcSeeeionsJudgmentsROV1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ExecBcSeeeionsJudgmentsROV1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="P_business_case_id" NDValue="#{pageFlowScope.BusinessCaseId}" NDType="java.math.BigDecimal"/>
+    </action>
+  </bindings>
+</pageDefinition>

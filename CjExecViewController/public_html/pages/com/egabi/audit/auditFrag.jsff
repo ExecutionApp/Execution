@@ -1,0 +1,833 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <af:panelHeader text="#{bundle.GENERAL_SEARCH_BUTTON}" id="ph1">
+        <af:panelGroupLayout id="pgl1">
+            <af:selectOneRadio value="#{bindings.SearchType.inputValue}" label="#{bindings.SearchType.label}"
+                               required="#{bindings.SearchType.hints.mandatory}"
+                               shortDesc="#{bindings.SearchType.hints.tooltip}" id="sor1" simple="true"
+                               layout="horizontal" autoSubmit="true" immediate="true"
+                               valueChangeListener="#{pageFlowScope.auditBean.resetSearhResults}">
+                <f:selectItems value="#{bindings.SearchType.items}" id="si9"/>
+                <f:validator binding="#{bindings.SearchType.validator}"/>
+            </af:selectOneRadio>
+            <af:panelGroupLayout id="pgl5" partialTriggers="sor1"
+                                 visible="#{bindings.SearchType.attributeValue eq '2'}">
+                <h:panelGroup id="pg6" layout="block" styleClass="row">
+                    <h:panelGroup id="pg1" layout="block" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.SequenceNumber.label}" id="ol1"/>
+                        <af:inputText value="#{bindings.SequenceNumber.inputValue}"
+                                      maximumLength="#{bindings.SequenceNumber.hints.precision}"
+                                      shortDesc="#{bindings.SequenceNumber.hints.tooltip}" id="it1" simple="true">
+                            <f:validator binding="#{bindings.SequenceNumber.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.SequenceNumber.format}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg2" layout="block" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.Year.label}" id="ol2"/>
+                        <af:inputText value="#{bindings.Year.inputValue}" simple="true"
+                                      maximumLength="#{bindings.Year.hints.precision}"
+                                      shortDesc="#{bindings.Year.hints.tooltip}" id="it2">
+                            <af:convertNumber messageDetailConvertNumber="#{bundle.ONLY_NUMBERS_ALLOWED}" type="number"
+                                              messageDetailConvertPattern="#{bundle.ONLY_NUMBERS_ALLOWED}"
+                                              pattern="#0000" hintPattern="2020"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.FolderTypeId.label}" id="ol3"/>
+                        <af:selectOneChoice value="#{bindings.FolderTypeId.inputValue}"
+                                            label="#{bindings.FolderTypeId.label}"
+                                            required="#{bindings.FolderTypeId.hints.mandatory}"
+                                            shortDesc="#{bindings.FolderTypeId.hints.tooltip}" id="soc1" simple="true">
+                            <f:selectItems value="#{bindings.FolderTypeId.items}" id="si1"/>
+                            <f:validator binding="#{bindings.FolderTypeId.validator}"/>
+                        </af:selectOneChoice>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg4" layout="block" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.RepeatedFlag.label}" id="ol4"/>
+                        <af:selectOneRadio value="#{bindings.RepeatedFlag.inputValue}"
+                                           label="#{bindings.RepeatedFlag.label}"
+                                           shortDesc="#{bindings.RepeatedFlag.hints.tooltip}" id="sor3"
+                                           layout="horizontal" simple="true">
+                            <af:selectItem label="#{bundle.YES_LABEL}" id="si2" value="Y"/>
+                            <af:selectItem label="#{bundle.NO_LABEL}" id="si4" value="N"/>
+                        </af:selectOneRadio>
+                    </h:panelGroup>
+                    <af:panelGroupLayout id="pgfl40"
+                                         visible="#{pageFlowScope.showAllEntities ne '3298' or pageFlowScope.insertAllEntities ne '3300'}"
+                                         styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.ProsecutionKolya1.label}" id="ol1f010"/>
+                        <af:inputText label="" value="#{pageFlowScope.entitKoleyaaName}" disabled="true" id="itf20"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pglf39"
+                                         visible="#{pageFlowScope.showAllEntities eq '3298' or pageFlowScope.insertAllEntities eq '3300'}"
+                                         styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.ProsecutionKolya1.label}" id="olf10"/>
+                        <af:inputListOfValues id="prosecutionKolyaId2" popupTitle="#{bundle.PROSECUTION_KOLYA}"
+                                              value="#{bindings.ProsecutionKolya1.inputValue}" simple="true"
+                                              label="#{bindings.ProsecutionKolya1.hints.label}"
+                                              model="#{bindings.ProsecutionKolya1.listOfValuesModel}"
+                                              required="#{bindings.ProsecutionKolya1.hints.mandatory}" columns="20"
+                                              autoSubmit="true" shortDesc="#{bindings.ProsecutionKolya1.hints.tooltip}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionKolya1.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgdl42"
+                                         visible="#{pageFlowScope.showAllEntities eq '3298' or pageFlowScope.insertAllEntities eq '3300'}"
+                                         styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.ProsecutionPartial1.label}" id="old42"/>
+                        <af:inputListOfValues id="prosecutionPartialNameId2"
+                                              popupTitle="Search and Select: #{bindings.ProsecutionPartialName.hints.label}"
+                                              value="#{bindings.ProsecutionPartialName.inputValue}"
+                                              label="#{bindings.ProsecutionPartialName.hints.label}"
+                                              model="#{bindings.ProsecutionPartialName.listOfValuesModel}"
+                                              required="#{bindings.ProsecutionPartialName.hints.mandatory}" columns="20"
+                                              disabled="#{bindings.ProsecutionKolya1.inputValue eq null}"
+                                              shortDesc="#{bindings.ProsecutionPartialName.hints.tooltip}"
+                                              autoSubmit="true" partialTriggers="prosecutionKolyaId2" simple="true">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionPartialName.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgdl43" styleClass="col-md-2 col-sm-12"
+                                         visible="#{sessionScope.userInfo.entityDegree eq '3' and (pageFlowScope.showAllEntities ne '3298' or pageFlowScope.insertAllEntities ne '3300')}">
+                        <af:outputLabel value="#{bindings.ProsecutionPartial1.label}" id="dol43"/>
+                        <af:inputText label="" value="#{pageFlowScope.entitPartialName}" disabled="true" id="dit21"
+                                      columns="15"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgvl44" styleClass="col-md-2 col-sm-12"
+                                         visible="#{pageFlowScope.entitPartialName eq null}">
+                        <af:outputLabel showRequired="true" value="#{bindings.PoliceStationEntity1.label}" id="ol23"/>
+                        <af:inputListOfValues id="policeStationEntityId3" popupTitle="#{bundle.POLICE_STATIONS}"
+                                              value="#{bindings.PoliceStationEntity1.inputValue}"
+                                              disabled="#{bindings.ProsecutionPartial1.inputValue eq null}"
+                                              label="#{bindings.PoliceStationEntity1.hints.label}"
+                                              model="#{bindings.PoliceStationEntity1.listOfValuesModel}"
+                                              required="#{bindings.PoliceStationEntity1.hints.mandatory}" columns="20"
+                                              autoSubmit="true"
+                                              shortDesc="#{bindings.PoliceStationEntity1.hints.tooltip}" simple="true"
+                                              partialTriggers="prosecutionPartialNameId2"
+                                              binding="#{pageFlowScope.auditBean.policeStationEntityLOV2}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.PoliceStationEntity1.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="ptgl45" visible="#{pageFlowScope.entitPartialName ne null}"
+                                         styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.PoliceStationEntity1.label}" id="olt44"/>
+                        <af:inputListOfValues id="policeStationEntityNameId" popupTitle="#{bundle.POLICE_STATIONS}"
+                                              value="#{bindings.PoliceStationEntityName.inputValue}"
+                                              label="#{bindings.PoliceStationEntityName.hints.label}"
+                                              model="#{bindings.PoliceStationEntityName.listOfValuesModel}"
+                                              required="#{bindings.PoliceStationEntityName.hints.mandatory}"
+                                              columns="20" shortDesc="#{bindings.PoliceStationEntityName.hints.tooltip}"
+                                              autoSubmit="true" simple="true"
+                                              partialTriggers="prosecutionPartialNameId2">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.PoliceStationEntityName.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </af:panelGroupLayout>
+                    <h:panelGroup id="pg16" styleClass="col-md-2 col-sm-12" rendered="false">
+                        <af:outputLabel value="#{bindings.ProsecutionKolya.label}" id="ol29"/>
+                        <af:inputListOfValues id="ilov1" popupTitle="#{bundle.PROSECUTION_KOLYA}"
+                                              value="#{bindings.ProsecutionKolya.inputValue}"
+                                              label="#{bindings.ProsecutionKolya.hints.label}"
+                                              model="#{bindings.ProsecutionKolya.listOfValuesModel}"
+                                              required="#{bindings.ProsecutionKolya.hints.mandatory}" columns="20"
+                                              shortDesc="#{bindings.ProsecutionKolya.hints.tooltip}" simple="true"
+                                              autoSubmit="true"
+                                              binding="#{pageFlowScope.auditBean.prosecutionKolyaLOV}"
+                                              valueChangeListener="#{pageFlowScope.auditBean.clearOnChangeProsecutionKolya}"
+                                              launchPopupListener="#{pageFlowScope.auditBean.clearOnLaunchingProsecutionKolya}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionKolya.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg17" styleClass="col-md-2 col-sm-12" rendered="false">
+                        <af:outputLabel value="#{bindings.ProsecutionPartial.label}" id="ol30"/>
+                        <af:inputListOfValues id="ilov2" popupTitle="#{bundle.PROSECUTION_PARTIAL}"
+                                              value="#{bindings.ProsecutionPartial.inputValue}"
+                                              label="#{bindings.ProsecutionPartial.hints.label}"
+                                              model="#{bindings.ProsecutionPartial.listOfValuesModel}"
+                                              required="#{bindings.ProsecutionPartial.hints.mandatory}" columns="20"
+                                              shortDesc="#{bindings.ProsecutionPartial.hints.tooltip}" simple="true"
+                                              autoSubmit="true" partialTriggers="ilov1"
+                                              valueChangeListener="#{pageFlowScope.auditBean.clearOnChangeProsecutionPartial}"
+                                              launchPopupListener="#{pageFlowScope.auditBean.clearOnLaunchingProsecutionPartial}"
+                                              binding="#{pageFlowScope.auditBean.prosecutionPartialLOV}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionPartial.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg18" styleClass="col-md-2 col-sm-12" rendered="false">
+                        <af:outputLabel value="#{bindings.PoliceStationEntity.label}" id="ol31"/>
+                        <af:inputListOfValues id="ilov3" popupTitle="#{bundle.POLICE_STATIONS}"
+                                              value="#{bindings.PoliceStationEntity.inputValue}"
+                                              label="#{bindings.PoliceStationEntity.hints.label}"
+                                              model="#{bindings.PoliceStationEntity.listOfValuesModel}"
+                                              required="#{bindings.PoliceStationEntity.hints.mandatory}" columns="20"
+                                              shortDesc="#{bindings.PoliceStationEntity.hints.tooltip}" simple="true"
+                                              partialTriggers="ilov2"
+                                              binding="#{pageFlowScope.auditBean.policeStationEntityLOV}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.PoliceStationEntity.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl6" visible="#{bindings.SearchType.attributeValue eq '1'}"
+                                 partialTriggers="sor1">
+                <h:panelGroup id="pg12" styleClass="row" layout="block">
+                    <h:panelGroup id="pg7" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel showRequired="true" value="#{bindings.CaseNumber.label}" id="ol7"/>
+                        <af:inputText value="#{bindings.CaseNumber.inputValue}" simple="true"
+                                      maximumLength="#{bindings.CaseNumber.hints.precision}"
+                                      shortDesc="#{bindings.CaseNumber.hints.tooltip}" id="it5">
+                            <f:validator binding="#{bindings.CaseNumber.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg8" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel showRequired="true" value="#{bindings.Year.label}" id="ol8"/>
+                        <af:inputText value="#{bindings.Year.inputValue}" simple="true" maximumLength="4"
+                                      shortDesc="#{bindings.Year.hints.tooltip}" id="it4" autoSubmit="true">
+                            <af:convertNumber messageDetailConvertNumber="#{bundle.ONLY_NUMBERS_ALLOWED}" type="number"
+                                              messageDetailConvertPattern="#{bundle.ONLY_NUMBERS_ALLOWED}"
+                                              pattern="#0000" hintPattern="2020"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg9" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel showRequired="true" value="#{bindings.BusinessCaseTypeId.label}" id="ol9"/>
+                        <af:selectOneChoice value="#{bindings.BusinessCaseTypeId.inputValue}"
+                                            label="#{bindings.BusinessCaseTypeId.label}"
+                                            shortDesc="#{bindings.BusinessCaseTypeId.hints.tooltip}" id="soc9"
+                                            simple="true">
+                            <f:selectItems value="#{bindings.BusinessCaseTypeId.items}" id="si12"/>
+                            <f:validator binding="#{bindings.BusinessCaseTypeId.validator}"/>
+                        </af:selectOneChoice>
+                    </h:panelGroup>
+                    <af:panelGroupLayout id="pgl40"
+                                         visible="#{pageFlowScope.showAllEntities ne '3298' or pageFlowScope.insertAllEntities ne '3300'}"
+                                         styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.ProsecutionKolya1.label}" id="ol1010"/>
+                        <af:inputText label="" value="#{pageFlowScope.entitKoleyaaName}" disabled="true" id="it21"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl39"
+                                         visible="#{pageFlowScope.showAllEntities eq '3298' or pageFlowScope.insertAllEntities eq '3300'}"
+                                         styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.ProsecutionKolya1.label}" id="ol24"/>
+                        <af:inputListOfValues id="ilov4" popupTitle="#{bundle.PROSECUTION_KOLYA}"
+                                              value="#{bindings.ProsecutionKolya1.inputValue}" simple="true"
+                                              label="#{bindings.ProsecutionKolya1.hints.label}"
+                                              model="#{bindings.ProsecutionKolya1.listOfValuesModel}"
+                                              required="#{bindings.ProsecutionKolya1.hints.mandatory}" columns="20"
+                                              autoSubmit="true" shortDesc="#{bindings.ProsecutionKolya1.hints.tooltip}"
+                                              valueChangeListener="#{pageFlowScope.auditBean.clearOnChangeProsecutionKolya}"
+                                              launchPopupListener="#{pageFlowScope.auditBean.clearOnLaunchingProsecutionKolya}"
+                                              binding="#{pageFlowScope.auditBean.prosecutionKolyaLOV2}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionKolya1.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl42"
+                                         visible="#{pageFlowScope.showAllEntities eq '3298' or pageFlowScope.insertAllEntities eq '3300'}"
+                                         styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.ProsecutionPartial1.label}" id="ol42"/>
+                        <af:inputListOfValues id="prosecutionPartialNameId"
+                                              popupTitle="Search and Select: #{bindings.ProsecutionPartialName.hints.label}"
+                                              value="#{bindings.ProsecutionPartialName.inputValue}"
+                                              label="#{bindings.ProsecutionPartialName.hints.label}"
+                                              model="#{bindings.ProsecutionPartialName.listOfValuesModel}"
+                                              required="#{bindings.ProsecutionPartialName.hints.mandatory}" columns="20"
+                                              disabled="#{bindings.ProsecutionKolya1.inputValue eq null}"
+                                              shortDesc="#{bindings.ProsecutionPartialName.hints.tooltip}"
+                                              autoSubmit="true" partialTriggers="prosecutionKolyaId" simple="true">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionPartialName.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl41"
+                                         visible="#{sessionScope.userInfo.entityDegree eq '39' and (pageFlowScope.showAllEntities ne '3298' or pageFlowScope.insertAllEntities ne '3300')}"
+                                         styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.ProsecutionPartial1.label}" id="ol25"/>
+                        <af:inputListOfValues id="ilov5" popupTitle="#{bundle.PROSECUTION_PARTIAL}"
+                                              value="#{bindings.ProsecutionPartial1.inputValue}"
+                                              label="#{bindings.ProsecutionPartial1.hints.label}"
+                                              model="#{bindings.ProsecutionPartial1.listOfValuesModel}"
+                                              required="#{bindings.ProsecutionPartial1.hints.mandatory}" columns="20"
+                                              shortDesc="#{bindings.ProsecutionPartial1.hints.tooltip}" simple="true"
+                                              partialTriggers="prosecutionKolyaId" autoSubmit="true"
+                                              valueChangeListener="#{pageFlowScope.auditBean.clearOnChangeProsecutionPartial}"
+                                              launchPopupListener="#{pageFlowScope.auditBean.clearOnLaunchingProsecutionPartial}"
+                                              binding="#{pageFlowScope.auditBean.prosecutionPartialLOV2}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionPartial1.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl43" styleClass="col-md-2 col-sm-12"
+                                         visible="#{sessionScope.userInfo.entityDegree eq '3' and (pageFlowScope.showAllEntities ne '3298' or pageFlowScope.insertAllEntities ne '3300')}">
+                        <af:outputLabel value="#{bindings.ProsecutionPartial1.label}" id="ol43"/>
+                        <af:inputText label="" value="#{pageFlowScope.entitPartialName}" disabled="true" id="it22"
+                                      columns="15"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl44" styleClass="col-md-2 col-sm-12"
+                                         visible="#{pageFlowScope.entitPartialName eq null}">
+                        <af:outputLabel showRequired="true" value="#{bindings.PoliceStationEntity1.label}" id="xol12"/>
+                        <af:inputListOfValues id="ilov6" popupTitle="#{bundle.POLICE_STATIONS}"
+                                              value="#{bindings.PoliceStationEntity1.inputValue}"
+                                              label="#{bindings.PoliceStationEntity1.hints.label}"
+                                              model="#{bindings.PoliceStationEntity1.listOfValuesModel}"
+                                              required="#{bindings.PoliceStationEntity1.hints.mandatory}" columns="20"
+                                              autoSubmit="true"
+                                              shortDesc="#{bindings.PoliceStationEntity1.hints.tooltip}" simple="true"
+                                              partialTriggers="prosecutionPartialId"
+                                              binding="#{pageFlowScope.auditBean.policeStationEntityLOV21}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.PoliceStationEntity1.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl45" visible="#{pageFlowScope.entitPartialName ne null}"
+                                         styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel value="#{bindings.PoliceStationEntity1.label}" id="ol44"/>
+                        <af:inputListOfValues id="policeStationEntityNameId2" popupTitle="#{bundle.POLICE_STATIONS}"
+                                              value="#{bindings.PoliceStationEntityName.inputValue}"
+                                              label="#{bindings.PoliceStationEntityName.hints.label}"
+                                              model="#{bindings.PoliceStationEntityName.listOfValuesModel}"
+                                              required="#{bindings.PoliceStationEntityName.hints.mandatory}"
+                                              columns="20" partialTriggers="prosecutionPartialNameId"
+                                              shortDesc="#{bindings.PoliceStationEntityName.hints.tooltip}"
+                                              autoSubmit="true" simple="true">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.PoliceStationEntityName.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </af:panelGroupLayout>
+                    <h:panelGroup id="pg15" styleClass="col-md-2 col-sm-12" rendered="false">
+                        <af:outputLabel value="#{bindings.ProsecutionKolya.label}" id="ol10"/>
+                        <af:inputListOfValues id="prosecutionKolyaId" popupTitle="#{bundle.PROSECUTION_KOLYA}"
+                                              value="#{bindings.ProsecutionKolya.inputValue}" simple="true"
+                                              label="#{bindings.ProsecutionKolya.hints.label}"
+                                              model="#{bindings.ProsecutionKolya.listOfValuesModel}"
+                                              required="#{bindings.ProsecutionKolya.hints.mandatory}" columns="20"
+                                              autoSubmit="true" shortDesc="#{bindings.ProsecutionKolya.hints.tooltip}"
+                                              valueChangeListener="#{pageFlowScope.auditBean.clearOnChangeProsecutionKolya}"
+                                              launchPopupListener="#{pageFlowScope.auditBean.clearOnLaunchingProsecutionKolya}"
+                                              binding="#{pageFlowScope.auditBean.prosecutionKolyaLOV12}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionKolya.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg10" styleClass="col-md-2 col-sm-12" rendered="false">
+                        <af:outputLabel value="#{bindings.ProsecutionPartial.label}" id="ol28"/>
+                        <af:inputListOfValues id="prosecutionPartialId" popupTitle="#{bundle.PROSECUTION_PARTIAL}"
+                                              value="#{bindings.ProsecutionPartial.inputValue}"
+                                              label="#{bindings.ProsecutionPartial.hints.label}"
+                                              model="#{bindings.ProsecutionPartial.listOfValuesModel}"
+                                              disabled="#{bindings.ProsecutionKolya.inputValue eq null}"
+                                              required="#{bindings.ProsecutionPartial.hints.mandatory}" columns="20"
+                                              shortDesc="#{bindings.ProsecutionPartial.hints.tooltip}" simple="true"
+                                              partialTriggers="prosecutionKolyaId" autoSubmit="true"
+                                              valueChangeListener="#{pageFlowScope.auditBean.clearOnChangeProsecutionPartial}"
+                                              launchPopupListener="#{pageFlowScope.auditBean.clearOnLaunchingProsecutionPartial}"
+                                              binding="#{pageFlowScope.auditBean.prosecutionPartialLOV}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionPartial.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg11" styleClass="col-md-2 col-sm-12" rendered="false">
+                        <af:outputLabel showRequired="true" value="#{bindings.PoliceStationEntity.label}" id="ol12"/>
+                        <af:inputListOfValues id="policeStationEntityId" popupTitle="#{bundle.POLICE_STATIONS}"
+                                              value="#{bindings.PoliceStationEntity.inputValue}"
+                                              disabled="#{bindings.ProsecutionPartial.inputValue eq null}"
+                                              label="#{bindings.PoliceStationEntity.hints.label}"
+                                              model="#{bindings.PoliceStationEntity.listOfValuesModel}"
+                                              required="#{bindings.PoliceStationEntity.hints.mandatory}" columns="20"
+                                              shortDesc="#{bindings.PoliceStationEntity.hints.tooltip}" simple="true"
+                                              partialTriggers="prosecutionPartialId" autoSubmit="true"
+                                              binding="#{pageFlowScope.auditBean.policeStationEntityLOV}">
+                            <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionPartial.suggestItems}"/>
+                        </af:inputListOfValues>
+                    </h:panelGroup>
+                    <!--<h:panelGroup id="pg10" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel showRequired="true" value="#{bindings.RepeatedFlag.label}" id="ol10"/>
+            <af:selectOneRadio value="#{bindings.RepeatedFlag.inputValue}" label="#{bindings.RepeatedFlag.label}"
+                               shortDesc="#{bindings.RepeatedFlag.hints.tooltip}" id="sor2" layout="horizontal"
+                               simple="true">
+              <af:selectItem value="Y" label="#{bundle.YES_LABEL}" id="si6"/>
+              <af:selectItem value="N" label="#{bundle.NO_LABEL}" id="si7"/>
+            </af:selectOneRadio>
+          </h:panelGroup>-->
+                </h:panelGroup>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl3" styleClass="btn-holder">
+                <af:button text="#{bundle.CHECK}" id="b1" action="#{pageFlowScope.auditBean.doSearchInventory}"
+                           disabled="#{bindings.SearchType.attributeValue eq null}" partialTriggers="sor1"/>
+            </af:panelGroupLayout>
+            <af:spacer width="10" height="10" id="s1"/>
+            <af:panelGroupLayout id="pfl1" binding="#{pageFlowScope.auditBean.casePanel}" visible="false">
+                <h:panelGroup id="pg21">
+                    <af:outputLabel value="#{bindings.PPAR_POLICE_NUMBER.hints.label}" id="ol13"/>
+                    <af:inputText value="#{bindings.PPAR_POLICE_NUMBER.inputValue}"
+                                  label="#{bindings.PPAR_POLICE_NUMBER.hints.label}"
+                                  required="#{bindings.PPAR_POLICE_NUMBER.hints.mandatory}"
+                                  maximumLength="#{bindings.PPAR_POLICE_NUMBER.hints.precision}"
+                                  shortDesc="#{bindings.PPAR_POLICE_NUMBER.hints.tooltip}" id="it10" columns="50"
+                                  simple="true">
+                        <f:validator binding="#{bindings.PPAR_POLICE_NUMBER.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.PoliceNumber.hints.label}" id="ol32"/>
+                    <af:inputText value="#{bindings.PoliceNumber.inputValue}"
+                                  label="#{bindings.PoliceNumber.hints.label}"
+                                  required="#{bindings.PoliceNumber.hints.mandatory}"
+                                  maximumLength="#{bindings.PoliceNumber.hints.precision}"
+                                  shortDesc="#{bindings.PoliceNumber.hints.tooltip}" id="it24" disabled="true"
+                                  simple="true">
+                        <f:validator binding="#{bindings.PoliceNumber.validator}"/>
+                    </af:inputText>
+                </h:panelGroup>
+                <h:panelGroup id="pg25">
+                    <af:outputLabel value="#{bindings.PPAR_PAR_YEAR.hints.label}" id="ol17"/>
+                    <af:inputText value="#{bindings.PPAR_PAR_YEAR.inputValue}"
+                                  label="#{bindings.PPAR_PAR_YEAR.hints.label}"
+                                  required="#{bindings.PPAR_PAR_YEAR.hints.mandatory}"
+                                  maximumLength="#{bindings.PPAR_PAR_YEAR.hints.precision}"
+                                  shortDesc="#{bindings.PPAR_PAR_YEAR.hints.tooltip}" id="it14" columns="50"
+                                  simple="true">
+                        <f:validator binding="#{bindings.PPAR_PAR_YEAR.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.ParYear.hints.label}" id="ol36"/>
+                    <af:inputText value="#{bindings.ParYear.inputValue}" label="#{bindings.ParYear.hints.label}"
+                                  required="#{bindings.ParYear.hints.mandatory}"
+                                  maximumLength="#{bindings.ParYear.hints.precision}"
+                                  shortDesc="#{bindings.ParYear.hints.tooltip}" id="it28" disabled="true" simple="true">
+                        <f:validator binding="#{bindings.ParYear.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.ParYear.format}"/>
+                    </af:inputText>
+                </h:panelGroup>
+                <h:panelGroup id="pg23">
+                    <af:outputLabel value="#{bindings.PPAR_BUSINESS_CASE_TYPE.hints.label}" id="ol15"/>
+                    <af:selectOneChoice value="#{bindings.PPAR_BUSINESS_CASE_TYPE1.inputValue}"
+                                        label="#{bindings.PPAR_BUSINESS_CASE_TYPE1.label}"
+                                        required="#{bindings.PPAR_BUSINESS_CASE_TYPE1.hints.mandatory}"
+                                        shortDesc="#{bindings.PPAR_BUSINESS_CASE_TYPE1.hints.tooltip}" id="soc2"
+                                        simple="true">
+                        <f:selectItems value="#{bindings.PPAR_BUSINESS_CASE_TYPE1.items}" id="si3"/>
+                        <f:validator binding="#{bindings.PPAR_BUSINESS_CASE_TYPE1.validator}"/>
+                    </af:selectOneChoice>
+                    <af:inputText value="#{bindings.PPAR_BUSINESS_CASE_TYPE.inputValue}"
+                                  label="#{bindings.PPAR_BUSINESS_CASE_TYPE.hints.label}"
+                                  required="#{bindings.PPAR_BUSINESS_CASE_TYPE.hints.mandatory}"
+                                  maximumLength="#{bindings.PPAR_BUSINESS_CASE_TYPE.hints.precision}"
+                                  shortDesc="#{bindings.PPAR_BUSINESS_CASE_TYPE.hints.tooltip}" id="it12" columns="50"
+                                  simple="true" rendered="false">
+                        <f:validator binding="#{bindings.PPAR_BUSINESS_CASE_TYPE.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.BusinessCaseType1.hints.label}" id="ol34"/>
+                    <af:selectOneChoice value="#{bindings.BusinessCaseType2.inputValue}"
+                                        label="#{bindings.BusinessCaseType2.label}"
+                                        required="#{bindings.BusinessCaseType2.hints.mandatory}"
+                                        shortDesc="#{bindings.BusinessCaseType2.hints.tooltip}" id="soc7">
+                        <f:selectItems value="#{bindings.BusinessCaseType2.items}" id="si10"/>
+                        <f:validator binding="#{bindings.BusinessCaseType2.validator}"/>
+                    </af:selectOneChoice>
+                </h:panelGroup>
+                <h:panelGroup id="pg22">
+                    <af:outputLabel value="#{bindings.PPAR_ENTITY_ID.hints.label}" id="ol14"/>
+                    <af:selectOneChoice value="#{bindings.PPAR_ENTITY_ID1.inputValue}"
+                                        label="#{bindings.PPAR_ENTITY_ID1.label}"
+                                        required="#{bindings.PPAR_ENTITY_ID1.hints.mandatory}"
+                                        shortDesc="#{bindings.PPAR_ENTITY_ID1.hints.tooltip}" id="soc3" simple="true">
+                        <f:selectItems value="#{bindings.PPAR_ENTITY_ID1.items}" id="si5"/>
+                        <f:validator binding="#{bindings.PPAR_ENTITY_ID1.validator}"/>
+                    </af:selectOneChoice>
+                    <af:inputText value="#{bindings.PPAR_ENTITY_ID.inputValue}"
+                                  label="#{bindings.PPAR_ENTITY_ID.hints.label}"
+                                  required="#{bindings.PPAR_ENTITY_ID.hints.mandatory}"
+                                  maximumLength="#{bindings.PPAR_ENTITY_ID.hints.precision}"
+                                  shortDesc="#{bindings.PPAR_ENTITY_ID.hints.tooltip}" id="it11" columns="50"
+                                  simple="true" rendered="false">
+                        <f:validator binding="#{bindings.PPAR_ENTITY_ID.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.EntityId1.hints.label}" id="ol33"/>
+                    <af:selectOneChoice value="#{bindings.EntityId3.inputValue}" label="#{bindings.EntityId3.label}"
+                                        required="#{bindings.EntityId3.hints.mandatory}"
+                                        shortDesc="#{bindings.EntityId3.hints.tooltip}" id="soc8">
+                        <f:selectItems value="#{bindings.EntityId3.items}" id="si11"/>
+                        <f:validator binding="#{bindings.EntityId3.validator}"/>
+                    </af:selectOneChoice>
+                </h:panelGroup>
+                <h:panelGroup id="pg24">
+                    <af:outputLabel value="#{bindings.PPAR_ORIGIN_ENTITY.hints.label}" id="ol16"/>
+                    <af:selectOneChoice value="#{bindings.PPAR_ORIGIN_ENTITY1.inputValue}"
+                                        label="#{bindings.PPAR_ORIGIN_ENTITY1.label}"
+                                        required="#{bindings.PPAR_ORIGIN_ENTITY1.hints.mandatory}"
+                                        shortDesc="#{bindings.PPAR_ORIGIN_ENTITY1.hints.tooltip}" id="soc4"
+                                        simple="true">
+                        <f:selectItems value="#{bindings.PPAR_ORIGIN_ENTITY1.items}" id="si6"/>
+                        <f:validator binding="#{bindings.PPAR_ORIGIN_ENTITY1.validator}"/>
+                    </af:selectOneChoice>
+                    <af:inputText value="#{bindings.PPAR_ORIGIN_ENTITY.inputValue}"
+                                  label="#{bindings.PPAR_ORIGIN_ENTITY.hints.label}"
+                                  required="#{bindings.PPAR_ORIGIN_ENTITY.hints.mandatory}"
+                                  maximumLength="#{bindings.PPAR_ORIGIN_ENTITY.hints.precision}"
+                                  shortDesc="#{bindings.PPAR_ORIGIN_ENTITY.hints.tooltip}" id="it13" columns="50"
+                                  simple="true" rendered="false">
+                        <f:validator binding="#{bindings.PPAR_ORIGIN_ENTITY.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.OriginEntity.hints.label}" id="ol35"/>
+                    <af:selectOneChoice value="#{bindings.OriginEntity1.inputValue}"
+                                        label="#{bindings.OriginEntity1.label}"
+                                        required="#{bindings.OriginEntity1.hints.mandatory}"
+                                        shortDesc="#{bindings.OriginEntity1.hints.tooltip}" id="soc10">
+                        <f:selectItems value="#{bindings.OriginEntity1.items}" id="si13"/>
+                        <f:validator binding="#{bindings.OriginEntity1.validator}"/>
+                    </af:selectOneChoice>
+                </h:panelGroup>
+                <h:panelGroup id="pg14" rendered="false">
+                    <af:outputLabel value="#{bindings.BC_CASE_NUMBER.hints.label}" id="ol5"/>
+                    <af:inputText value="#{bindings.BC_CASE_NUMBER.inputValue}"
+                                  label="#{bindings.BC_CASE_NUMBER.hints.label}"
+                                  required="#{bindings.BC_CASE_NUMBER.hints.mandatory}"
+                                  maximumLength="#{bindings.BC_CASE_NUMBER.hints.precision}"
+                                  shortDesc="#{bindings.BC_CASE_NUMBER.hints.tooltip}" id="it3" columns="50"
+                                  simple="true">
+                        <f:validator binding="#{bindings.BC_CASE_NUMBER.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.CaseNumber1.hints.label}" id="ol22"/>
+                    <af:inputText value="#{bindings.CaseNumber1.inputValue}" label="#{bindings.CaseNumber1.hints.label}"
+                                  required="#{bindings.CaseNumber1.hints.mandatory}"
+                                  maximumLength="#{bindings.CaseNumber1.hints.precision}"
+                                  shortDesc="#{bindings.CaseNumber1.hints.tooltip}" id="it19" simple="true"
+                                  disabled="true">
+                        <f:validator binding="#{bindings.CaseNumber1.validator}"/>
+                    </af:inputText>
+                </h:panelGroup>
+                <h:panelGroup id="pg19" rendered="false">
+                    <af:outputLabel value="#{bindings.BC_CASE_TYPE.hints.label}" id="ol6"/>
+                    <af:inputText value="#{bindings.BC_CASE_TYPE.inputValue}"
+                                  label="#{bindings.BC_CASE_TYPE.hints.label}"
+                                  required="#{bindings.BC_CASE_TYPE.hints.mandatory}"
+                                  maximumLength="#{bindings.BC_CASE_TYPE.hints.precision}"
+                                  shortDesc="#{bindings.BC_CASE_TYPE.hints.tooltip}" id="it6" columns="50"
+                                  simple="true">
+                        <f:validator binding="#{bindings.BC_CASE_TYPE.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.BusinessCaseType.hints.label}" id="ol26"/>
+                    <af:inputText value="#{bindings.BusinessCaseType.inputValue}"
+                                  label="#{bindings.BusinessCaseType.hints.label}"
+                                  required="#{bindings.BusinessCaseType.hints.mandatory}"
+                                  maximumLength="#{bindings.BusinessCaseType.hints.precision}"
+                                  shortDesc="#{bindings.BusinessCaseType.hints.tooltip}" id="it20" disabled="true"
+                                  simple="true">
+                        <f:validator binding="#{bindings.BusinessCaseType.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.BusinessCaseType.format}"/>
+                    </af:inputText>
+                </h:panelGroup>
+                <h:panelGroup id="pg20" rendered="false">
+                    <af:outputLabel value="#{bindings.BC_ENTITY_ID.hints.label}" id="ol11"/>
+                    <af:inputText value="#{bindings.BC_ENTITY_ID.inputValue}"
+                                  label="#{bindings.BC_ENTITY_ID.hints.label}"
+                                  required="#{bindings.BC_ENTITY_ID.hints.mandatory}"
+                                  maximumLength="#{bindings.BC_ENTITY_ID.hints.precision}"
+                                  shortDesc="#{bindings.BC_ENTITY_ID.hints.tooltip}" id="it7" columns="50"
+                                  simple="true">
+                        <f:validator binding="#{bindings.BC_ENTITY_ID.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.EntityId.hints.label}" id="ol27"/>
+                    <af:inputText value="#{bindings.EntityId.inputValue}" label="#{bindings.EntityId.hints.label}"
+                                  required="#{bindings.EntityId.hints.mandatory}"
+                                  maximumLength="#{bindings.EntityId.hints.precision}"
+                                  shortDesc="#{bindings.EntityId.hints.tooltip}" id="it23" disabled="true"
+                                  simple="true">
+                        <f:validator binding="#{bindings.EntityId.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.EntityId.format}"/>
+                    </af:inputText>
+                </h:panelGroup>
+                <h:panelGroup id="pg27">
+                    <af:outputLabel value="#{bindings.BCLS_SEQ.hints.label}" id="ol18"/>
+                    <af:inputText value="#{bindings.BCLS_SEQ.inputValue}" label="#{bindings.BCLS_SEQ.hints.label}"
+                                  required="#{bindings.BCLS_SEQ.hints.mandatory}"
+                                  maximumLength="#{bindings.BCLS_SEQ.hints.precision}"
+                                  shortDesc="#{bindings.BCLS_SEQ.hints.tooltip}" id="it15" columns="50" simple="true">
+                        <f:validator binding="#{bindings.BCLS_SEQ.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.Seq.hints.label}" id="ol37"/>
+                    <af:inputText value="#{bindings.Seq.inputValue}" label="#{bindings.Seq.hints.label}"
+                                  required="#{bindings.Seq.hints.mandatory}"
+                                  maximumLength="#{bindings.Seq.hints.precision}"
+                                  shortDesc="#{bindings.Seq.hints.tooltip}" id="it29" simple="true" disabled="true">
+                        <f:validator binding="#{bindings.Seq.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Seq.format}"/>
+                    </af:inputText>
+                </h:panelGroup>
+                <h:panelGroup id="pg28">
+                    <af:outputLabel value="#{bindings.BCLS_YEAR.hints.label}" id="ol19"/>
+                    <af:inputText value="#{bindings.BCLS_YEAR.inputValue}" label="#{bindings.BCLS_YEAR.hints.label}"
+                                  required="#{bindings.BCLS_YEAR.hints.mandatory}"
+                                  maximumLength="#{bindings.BCLS_YEAR.hints.precision}"
+                                  shortDesc="#{bindings.BCLS_YEAR.hints.tooltip}" id="it16" columns="50" simple="true">
+                        <f:validator binding="#{bindings.BCLS_YEAR.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.Year1.hints.label}" id="ol38"/>
+                    <af:inputText value="#{bindings.Year1.inputValue}" label="#{bindings.Year1.hints.label}"
+                                  required="#{bindings.Year1.hints.mandatory}"
+                                  maximumLength="#{bindings.Year1.hints.precision}"
+                                  shortDesc="#{bindings.Year1.hints.tooltip}" id="it30" disabled="true" simple="true">
+                        <f:validator binding="#{bindings.Year1.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Year1.format}"/>
+                    </af:inputText>
+                </h:panelGroup>
+                <h:panelGroup id="pg29">
+                    <af:outputLabel value="#{bindings.BCLS_LEDGER_ID.hints.label}" id="ol21"/>
+                    <af:selectOneChoice value="#{bindings.BCLS_LEDGER_ID1.inputValue}"
+                                        label="#{bindings.BCLS_LEDGER_ID1.label}"
+                                        required="#{bindings.BCLS_LEDGER_ID1.hints.mandatory}"
+                                        shortDesc="#{bindings.BCLS_LEDGER_ID1.hints.tooltip}" id="soc5" simple="true">
+                        <f:selectItems value="#{bindings.BCLS_LEDGER_ID1.items}" id="si7"/>
+                        <f:validator binding="#{bindings.BCLS_LEDGER_ID1.validator}"/>
+                    </af:selectOneChoice>
+                    <af:inputText value="#{bindings.BCLS_LEDGER_ID.inputValue}"
+                                  label="#{bindings.BCLS_LEDGER_ID.hints.label}"
+                                  required="#{bindings.BCLS_LEDGER_ID.hints.mandatory}"
+                                  maximumLength="#{bindings.BCLS_LEDGER_ID.hints.precision}"
+                                  shortDesc="#{bindings.BCLS_LEDGER_ID.hints.tooltip}" id="it18" columns="50"
+                                  simple="true" rendered="false">
+                        <f:validator binding="#{bindings.BCLS_LEDGER_ID.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.LedgerId.hints.label}" id="ol39"/>
+                    <af:selectOneChoice value="#{bindings.LedgerId1.inputValue}" label="#{bindings.LedgerId1.label}"
+                                        required="#{bindings.LedgerId1.hints.mandatory}"
+                                        shortDesc="#{bindings.LedgerId1.hints.tooltip}" id="soc11">
+                        <f:selectItems value="#{bindings.LedgerId1.items}" id="si14"/>
+                        <f:validator binding="#{bindings.LedgerId1.validator}"/>
+                    </af:selectOneChoice>
+                </h:panelGroup>
+                <h:panelGroup id="pg30">
+                    <af:outputLabel value="#{bindings.BCD_ENTITY_ID.hints.label}" id="ol20"/>
+                    <af:selectOneChoice value="#{bindings.BCD_ENTITY_ID1.inputValue}"
+                                        label="#{bindings.BCD_ENTITY_ID1.label}"
+                                        required="#{bindings.BCD_ENTITY_ID1.hints.mandatory}"
+                                        shortDesc="#{bindings.BCD_ENTITY_ID1.hints.tooltip}" id="soc6" simple="true">
+                        <f:selectItems value="#{bindings.BCD_ENTITY_ID1.items}" id="si8"/>
+                        <f:validator binding="#{bindings.BCD_ENTITY_ID1.validator}"/>
+                    </af:selectOneChoice>
+                    <af:inputText value="#{bindings.BCD_ENTITY_ID.inputValue}"
+                                  label="#{bindings.BCD_ENTITY_ID.hints.label}"
+                                  required="#{bindings.BCD_ENTITY_ID.hints.mandatory}"
+                                  maximumLength="#{bindings.BCD_ENTITY_ID.hints.precision}"
+                                  shortDesc="#{bindings.BCD_ENTITY_ID.hints.tooltip}" id="it17" columns="50"
+                                  simple="true" rendered="false">
+                        <f:validator binding="#{bindings.BCD_ENTITY_ID.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="#{bindings.EntityId2.hints.label}" id="ol40"/>
+                    <af:selectOneChoice value="#{bindings.EntityId4.inputValue}" label="#{bindings.EntityId4.label}"
+                                        required="#{bindings.EntityId4.hints.mandatory}"
+                                        shortDesc="#{bindings.EntityId4.hints.tooltip}" id="soc12">
+                        <f:selectItems value="#{bindings.EntityId4.items}" id="si15"/>
+                        <f:validator binding="#{bindings.EntityId4.validator}"/>
+                    </af:selectOneChoice>
+                </h:panelGroup>
+                <af:spacer width="10" height="10" id="s3"/>
+                <af:button text="edit" id="b3" action="#{pageFlowScope.auditBean.editBtn}"/>
+                <af:spacer width="10" height="10" id="s4"/>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl4"
+                                 partialTriggers="sor1" binding="#{pageFlowScope.auditBean.searchPanel2}"
+                                 visible="false">
+                <af:table value="#{bindings.SearchInventoryResultRVO1.collectionModel}" var="row"
+                          rows="#{bindings.SearchInventoryResultRVO1.rangeSize}"
+                          emptyText="#{bindings.SearchInventoryResultRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0" width="100%" columnStretching="column:c2"
+                          selectedRowKeys="#{bindings.SearchInventoryResultRVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.SearchInventoryResultRVO1.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.SearchInventoryResultRVO1.rangeSize}"
+                          filterModel="#{bindings.SearchInventoryResultRVO1Query1.queryDescriptor}" filterVisible="true"
+                          queryListener="#{bindings.SearchInventoryResultRVO1Query.processQuery}" varStatus="vs" id="t1"
+                          scrollPolicy="page" rowDisclosureListener="#{pageFlowScope.auditBean.rowDsclsrLstnClaim}">
+                    <f:facet name="detailStamp">
+                        <af:panelGroupLayout id="pgl9">
+                            <af:panelTabbed position="above" id="pt1" styleClass="inner-tabs-table">
+                                <af:showDetailItem id="tab1" text="#{bundle.ACTION_TYPE1}" disclosed="true"
+                                                   binding="#{pageFlowScope.auditBean.showDetailItem}">
+                                    <af:panelGroupLayout id="pgl7">
+                                        <h:panelGroup id="pg5" styleClass="col-md-2 col-sm-12" layout="block"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s2"/>
+                                    <af:panelGroupLayout id="pgl10" styleClass="btn-holder">
+                                        <af:button text="#{bundle.save}" id="b8"
+                                                   action="#{pageFlowScope.auditBean.insertClaim}"
+                                                   binding="#{pageFlowScope.auditBean.saveButton2}"/>
+                                    </af:panelGroupLayout>
+                                </af:showDetailItem>
+                                <af:showDetailItem id="tab2" text="#{bundle.PREV_ACTIONS1}"
+                                                   disclosureListener="#{pageFlowScope.auditBean.prevDescLstnr}"
+                                                   disclosed="true"/>
+                            </af:panelTabbed>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.PartyName.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryResultRVO1.hints.PartyName.label}" id="c2">
+                        <af:outputText value="#{row.bindings.PartyName.inputValue} وشهرته #{row.bindings.Nickname.inputValue ne null ? 'row.bindings.Nickname.inputValue' : ''}"
+                                       shortDesc="#{bindings.SearchInventoryResultRVO1.hints.PartyName.tooltip}"
+                                       id="it8"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.BusinessCaseNumber.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryResultRVO1.hints.BusinessCaseNumber.label}"
+                               id="c1">
+                        <af:outputText value="#{row.BusinessCaseNumber}"
+                                       shortDesc="#{bindings.SearchInventoryResultRVO1.hints.BusinessCaseNumber.tooltip}"
+                                       id="ot1"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.HearingDate.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryResultRVO1.hints.HearingDate.label}" id="c3">
+                        <af:outputText value="#{row.HearingDate}"
+                                       shortDesc="#{bindings.SearchInventoryResultRVO1.hints.HearingDate.tooltip}"
+                                       id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.SequenceNumber.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryResultRVO1.hints.SequenceNumber.label}" id="c4">
+                        <af:outputText value="#{row.SequenceNumber}"
+                                       shortDesc="#{bindings.SearchInventoryResultRVO1.hints.SequenceNumber.tooltip}"
+                                       id="ot4">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.SearchInventoryResultRVO1.hints.SequenceNumber.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.Year.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.SearchInventoryResultRVO1.hints.Year.label}"
+                               id="c5">
+                        <af:outputText value="#{row.Year}"
+                                       shortDesc="#{bindings.SearchInventoryResultRVO1.hints.Year.tooltip}" id="ot5">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.SearchInventoryResultRVO1.hints.Year.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.DegreeName.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryResultRVO1.hints.DegreeName.label}" id="c6">
+                        <af:outputText value="#{row.DegreeName}"
+                                       shortDesc="#{bindings.SearchInventoryResultRVO1.hints.DegreeName.tooltip}"
+                                       id="ot6"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.CasTypeName.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryResultRVO1.hints.CasTypeName.label}" id="c7">
+                        <af:outputText value="#{row.CasTypeName}"
+                                       shortDesc="#{bindings.SearchInventoryResultRVO1.hints.CasTypeName.tooltip}"
+                                       id="ot7"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.IdNumber.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryResultRVO1.hints.IdNumber.label}" id="c15">
+                        <af:outputText value="#{row.IdNumber}"
+                                       shortDesc="#{bindings.SearchInventoryResultRVO1.hints.IdNumber.tooltip}"
+                                       id="ot2"/>
+                    </af:column>
+                    <af:column id="c41" rendered="false"/>
+                </af:table>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl8"
+                                 partialTriggers="sor1" binding="#{pageFlowScope.auditBean.searchPanel1}"
+                                 visible="false">
+                <af:table value="#{bindings.SearchInventoryCaseResultRVO1.collectionModel}" var="row"
+                          rows="#{bindings.SearchInventoryCaseResultRVO1.rangeSize}"
+                          emptyText="#{bindings.SearchInventoryCaseResultRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.SearchInventoryCaseResultRVO1.collectionModel.selectedRow}"
+                          rowSelection="single" fetchSize="#{bindings.SearchInventoryCaseResultRVO1.rangeSize}"
+                          filterModel="#{bindings.SearchClaimInventoryResultRVO1Query1.queryDescriptor}"
+                          filterVisible="true"
+                          queryListener="#{bindings.SearchInventoryCaseResultRVO1Query.processQuery}" varStatus="vs"
+                          id="t2" partialTriggers="::b1" scrollPolicy="page" columnStretching="column:c14" width="100%"
+                          rowDisclosureListener="#{pageFlowScope.auditBean.rowDsclsrLstnClaimCase}"
+                          selectionListener="#{bindings.SearchInventoryCaseResultRVO1.collectionModel.makeCurrent}">
+                    <f:facet name="detailStamp">
+                        <af:panelGroupLayout id="pgl2">
+                            <af:panelTabbed position="above" id="pt2" styleClass="inner-tabs-table">
+                                <af:showDetailItem id="sdi1" text="#{bundle.ACTION_TYPE1}"
+                                                   binding="#{pageFlowScope.auditBean.showDetailItemCase}"
+                                                   disclosed="true">
+                                    <af:button text="#{bundle.save}" id="b2"
+                                               action="#{pageFlowScope.auditBean.insertClaim}"
+                                               binding="#{pageFlowScope.auditBean.saveButton1}"/>
+                                    <h:panelGroup id="pg26" styleClass="col-md-2 col-sm-12" layout="block"/>
+                                    <h:panelGroup id="pg13"/>
+                                </af:showDetailItem>
+                                <af:showDetailItem id="sdi2" text="#{bundle.PREV_ACTIONS1}"
+                                                   disclosureListener="#{pageFlowScope.auditBean.prevDescLstnrCase}"
+                                                   disclosed="true"/>
+                            </af:panelTabbed>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <af:column sortProperty="#{bindings.SearchInventoryCaseResultRVO1.hints.PartyName.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryCaseResultRVO1.hints.PartyName.label}" id="c14">
+                        <af:outputText value="#{row.bindings.PartyName.inputValue} وشهرته #{row.bindings.Nickname.inputValue}"
+                                       shortDesc="#{bindings.SearchInventoryCaseResultRVO1.hints.PartyName.tooltip}"
+                                       id="it9"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryCaseResultRVO1.hints.BusinessCaseNumber.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryCaseResultRVO1.hints.BusinessCaseNumber.label}"
+                               id="c8" width="100%">
+                        <af:outputText value="#{row.BusinessCaseNumber}"
+                                       shortDesc="#{bindings.SearchInventoryCaseResultRVO1.hints.BusinessCaseNumber.tooltip}"
+                                       id="ot8"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryCaseResultRVO1.hints.EntityName.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryCaseResultRVO1.hints.EntityName.label}" id="c9"
+                               width="100%">
+                        <af:outputText value="#{row.EntityName}"
+                                       shortDesc="#{bindings.SearchInventoryCaseResultRVO1.hints.EntityName.tooltip}"
+                                       id="ot9"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryCaseResultRVO1.hints.Year.name}"
+                               filterable="true" headerText="#{bindings.SearchInventoryCaseResultRVO1.hints.Year.label}"
+                               id="c23">
+                        <af:outputText value="#{row.Year}"
+                                       shortDesc="#{bindings.SearchInventoryCaseResultRVO1.hints.Year.tooltip}"
+                                       id="ot17">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.SearchInventoryCaseResultRVO1.hints.Year.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryCaseResultRVO1.hints.HearingDate.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryCaseResultRVO1.hints.HearingDate.label}" id="c10"
+                               width="100%">
+                        <af:outputText value="#{row.HearingDate}"
+                                       shortDesc="#{bindings.SearchInventoryCaseResultRVO1.hints.HearingDate.tooltip}"
+                                       id="ot10"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryCaseResultRVO1.hints.SequenceNumber.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryCaseResultRVO1.hints.SequenceNumber.label}"
+                               id="c11" width="100%">
+                        <af:outputText value="#{row.SequenceNumber}"
+                                       shortDesc="#{bindings.SearchInventoryCaseResultRVO1.hints.SequenceNumber.tooltip}"
+                                       id="ot11">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.SearchInventoryCaseResultRVO1.hints.SequenceNumber.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryCaseResultRVO1.hints.DegreeName.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryCaseResultRVO1.hints.DegreeName.label}" id="c12"
+                               width="100%">
+                        <af:outputText value="#{row.DegreeName}"
+                                       shortDesc="#{bindings.SearchInventoryCaseResultRVO1.hints.DegreeName.tooltip}"
+                                       id="ot12"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryCaseResultRVO1.hints.CasTypeName.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryCaseResultRVO1.hints.CasTypeName.label}" id="c13"
+                               width="100%">
+                        <af:outputText value="#{row.CasTypeName}"
+                                       shortDesc="#{bindings.SearchInventoryCaseResultRVO1.hints.CasTypeName.tooltip}"
+                                       id="ot13"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SearchInventoryCaseResultRVO1.hints.IdNumber.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.SearchInventoryCaseResultRVO1.hints.IdNumber.label}" id="c40">
+                        <af:outputText value="#{row.IdNumber}"
+                                       shortDesc="#{bindings.SearchInventoryCaseResultRVO1.hints.IdNumber.tooltip}"
+                                       id="ot14"/>
+                    </af:column>
+                    <af:column id="c42" rendered="false" filterable="true"/>
+                </af:table>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+    </af:panelHeader>
+</ui:composition>

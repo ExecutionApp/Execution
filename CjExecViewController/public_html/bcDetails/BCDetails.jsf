@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view  xmlns:f="http://java.sun.com/jsf/core"  xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ar">
+    <af:document title="#{bundle.CASE_SEARCH_PANEL}" id="d1">
+   <af:form id="f1" usesUpload="true">
+    <af:pageTemplate viewId="/main-template.jspx" id="pt1">
+                <f:facet name="center">
+               
+                    <?audit suppress oracle.adf.faces.onlyOneFormAllowedPerPage?>
+                    <af:region value="#{bindings.bc_details_TFF1.regionModel}" id="r1"/>
+              
+            </f:facet>
+                <f:facet name="start"/>
+                                <f:facet name="end"/>
+            </af:pageTemplate>
+              </af:form>
+              
+              
+              
+              <!--<af:clientListener type="load" method="onPageLoad"/>
+            <af:resource type="javascript">
+                function onPageLoad(){
+                        var button = AdfPage.PAGE.findComponentByAbsoluteId("pt1:r1:0:l8");
+                        var rad = AdfPage.PAGE.findComponentByAbsoluteId("pt1:r1:0:b277");
+                         var orig = document.getElementById("pt1:r1:0:it57::content");
+                     
+                         if(orig.value!='')
+                        AdfActionEvent.queue(button,true);
+                       
+                         if(orig.value!='')
+                         AdfActionEvent.queue(rad,true);
+                            
+                }
+            </af:resource>--> 
+              
+    </af:document>
+</f:view>

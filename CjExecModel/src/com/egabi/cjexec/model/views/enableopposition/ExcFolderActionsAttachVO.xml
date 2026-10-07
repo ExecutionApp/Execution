@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcFolderActionsAttachVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  SelectAllAttributes="false">
+  <ViewAccessor
+    Name="ExcLkpAttachmentTypeVO"
+    ViewObjectName="com.egabi.cjexec.model.views.enableopposition.ExcLkpAttachmentTypeVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_AttachmentType"
+    ListVOName="ExcLkpAttachmentTypeVO"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AttachmentType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="ExcFolderActionsAttachEO"
+    Entity="com.egabi.cjexec.model.entities.enableopposition.ExcFolderActionsAttachEO"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ExcFolderActionsAttachEO"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="FolderActionId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FolderActionId"
+    EntityUsage="ExcFolderActionsAttachEO"
+    AliasName="FOLDER_ACTION_ID"/>
+  <ViewAttribute
+    Name="AttachmentType"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="AttachmentType"
+    EntityUsage="ExcFolderActionsAttachEO"
+    AliasName="ATTACHMENT_TYPE"
+    LOVName="LOV_AttachmentType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.enableopposition.ExcFolderActionsAttachVO.AttachmentType"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocumentId"
+    PrecisionRule="true"
+    EntityAttrName="DocumentId"
+    EntityUsage="ExcFolderActionsAttachEO"
+    AliasName="DOCUMENT_ID"/>
+  <ViewLinkAccessor
+    Name="ExcFolderActionsVO"
+    ViewLink="com.egabi.cjexec.model.views.installmentrequest.FkCourtObjectionIdLink"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ExcFolderActionsVO1"
+    ViewLink="com.egabi.cjexec.model.views.enableopposition.FkCourtObjectionIdLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

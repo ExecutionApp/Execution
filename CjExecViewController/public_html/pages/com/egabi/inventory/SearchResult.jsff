@@ -1,0 +1,416 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+  <af:panelGroupLayout id="pgl1">
+    <af:panelGroupLayout id="pgl8">
+              <af:toolbar id="t2"/>
+      <h:panelGroup id="pg10" layout="block" styleClass="row">
+        <h:panelGroup id="pg1" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.ActionTypeId.label}" id="ol7"/>
+          <af:selectOneChoice value="#{bindings.ActionTypeId.inputValue}" label="#{bindings.ActionTypeId.label}"
+                              required="#{bindings.ActionTypeId.hints.mandatory}" autoSubmit="true"
+                              shortDesc="#{bindings.ActionTypeId.hints.tooltip}" id="soc4" simple="true"
+                              valueChangeListener="#{pageFlowScope.inventoryBean.actionTypeChangeListener}">
+            <f:selectItems value="#{bindings.ActionTypeId.items}" id="si4"/>
+            <f:validator binding="#{bindings.ActionTypeId.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg2" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.ActionDate.label}" id="ol8"/>
+          <af:inputDate value="#{bindings.ActionDate.inputValue}" required="#{bindings.ActionDate.hints.mandatory}"
+                        autoSubmit="true" shortDesc="#{bindings.ActionDate.hints.tooltip}" id="id4" simple="true">
+            <f:validator binding="#{bindings.ActionDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.ActionDate.format}"/>
+          </af:inputDate>
+        </h:panelGroup>
+        <h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.CapacityTypeId.label}" id="ol9"/>
+          <af:selectOneChoice value="#{bindings.CapacityTypeId.inputValue}" label="#{bindings.CapacityTypeId.label}"
+                              required="#{bindings.CapacityTypeId.hints.mandatory}"
+                              shortDesc="#{bindings.CapacityTypeId.hints.tooltip}" id="soc5" simple="true">
+            <f:selectItems value="#{bindings.CapacityTypeId.items}" id="si5"/>
+            <f:validator binding="#{bindings.CapacityTypeId.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg4" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.HearingDate.label}" id="ol10" partialTriggers="soc4"
+                          visible="#{bindings.ActionTypeId.inputValue eq '2' or bindings.ActionTypeId.inputValue eq '1'}"/>
+          <af:inputListOfValues id="hearingDateId" popupTitle="Search and Select: #{bindings.HearingDate.hints.label}"
+                                value="#{bindings.HearingDate.inputValue}" label="#{bindings.HearingDate.hints.label}"
+                                model="#{bindings.HearingDate.listOfValuesModel}"
+                                required="#{bindings.HearingDate.hints.mandatory}"
+                                shortDesc="#{bindings.HearingDate.hints.tooltip}" simple="true"
+                                visible="#{bindings.ActionTypeId.inputValue eq '2' or bindings.ActionTypeId.inputValue eq '1'}"
+                                partialTriggers="soc4">
+            <af:autoSuggestBehavior suggestItems="#{bindings.HearingDate.suggestItems}"/>
+          </af:inputListOfValues>
+        </h:panelGroup>
+        <h:panelGroup id="pg5" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.DateFrom.label}" id="ol6"/>
+          <af:inputDate value="#{bindings.DateFrom.inputValue}" required="#{bindings.DateFrom.hints.mandatory}"
+                        label="#{bindings.DateFrom.label}" visible="#{bindings.ActionTypeId.inputValue eq '5'}"
+                        shortDesc="#{bindings.DateFrom.hints.tooltip}" id="id2" partialTriggers="soc4" simple="true">
+            <f:validator binding="#{bindings.DateFrom.validator}"/>
+            <af:convertDateTime pattern="#{bindings.DateFrom.format}"/>
+          </af:inputDate>
+        </h:panelGroup>
+        <h:panelGroup id="pg6" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.DateTo.label}" id="ol13"/>
+          <af:inputDate value="#{bindings.DateTo.inputValue}" required="#{bindings.DateTo.hints.mandatory}"
+                        label="#{bindings.DateTo.label}" visible="#{bindings.ActionTypeId.inputValue eq '5'}"
+                        shortDesc="#{bindings.DateTo.hints.tooltip}" id="id3" partialTriggers="soc4" simple="true">
+            <f:validator binding="#{bindings.DateTo.validator}"/>
+            <af:convertDateTime pattern="#{bindings.DateTo.format}"/>
+          </af:inputDate>
+        </h:panelGroup>
+        <h:panelGroup id="pg7" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.ProcedureText.hints.label}" id="ol11"/>
+          <af:inputText value="#{bindings.ProcedureText.inputValue}" simple="true"
+                        required="#{bindings.ProcedureText.hints.mandatory}"
+                        maximumLength="#{bindings.ProcedureText.hints.precision}"
+                        shortDesc="#{bindings.ProcedureText.hints.tooltip}" id="it3">
+            <f:validator binding="#{bindings.ProcedureText.validator}"/>
+          </af:inputText>
+        </h:panelGroup>
+        <h:panelGroup id="pg8" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="في حالة الاختيار يصبح المتهم غير مطلوب" id="ol12" partialTriggers="soc4"/>
+          <af:selectBooleanCheckbox value="#{bindings.AccusedRequired.inputValue}"
+                                    label="#{bindings.AccusedRequired.label}" partialTriggers="soc4"
+                                    shortDesc="#{bindings.AccusedRequired.hints.tooltip}" id="sbc1" simple="true"/>
+        </h:panelGroup>
+      </h:panelGroup>
+      <af:panelGridLayout id="pgl5" rendered="false">
+                <af:gridRow marginTop="5px" height="auto" id="gr5">
+                  <af:gridCell marginStart="5px" width="auto" id="gc17"/>
+                  <af:gridCell marginStart="5px" width="auto" id="gc18"/>
+                  <af:gridCell marginStart="5px" width="auto" id="gc19"/>
+                  <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc20"/>
+                </af:gridRow>
+                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr6">
+                  <af:gridCell marginStart="5px" width="auto" id="gc21"/>
+                  <af:gridCell marginStart="5px" width="auto" id="gc22"/>
+                  <af:gridCell marginStart="5px" width="auto" id="gc23"/>
+                  <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc24"/>
+                </af:gridRow>
+              </af:panelGridLayout>
+              <af:panelGridLayout id="pgl7" rendered="false">
+                <af:gridRow id="gr3">
+                  <af:gridCell id="gc25"/>
+                  <af:gridCell id="gc26"/>
+                  <af:gridCell id="gc27"/>
+                  <af:gridCell id="gc28"/>
+                </af:gridRow>
+                <af:gridRow id="gr4">
+                  <af:gridCell id="gc13"/>
+                  <af:gridCell id="gc14"/>
+                  <af:gridCell id="gc15"/>
+                  <af:gridCell id="gc16"/>
+                </af:gridRow>
+              </af:panelGridLayout>
+              <af:panelGridLayout id="pgl6" rendered="false">
+                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr8">
+                  <af:gridCell marginStart="5px" width="auto" id="gc33"/>
+                  <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc34"/>
+                </af:gridRow>
+              </af:panelGridLayout>
+            </af:panelGroupLayout>
+    <af:table value="#{bindings.PartyProceduresRVO1.collectionModel}" var="row"
+              rows="#{bindings.PartyProceduresRVO1.rangeSize}"
+              emptyText="#{bindings.PartyProceduresRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.PartyProceduresRVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.PartyProceduresRVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.PartyProceduresRVO1.rangeSize}"
+              filterModel="#{bindings.PartyProceduresRVO1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.PartyProceduresRVO1Query.processQuery}" varStatus="vs" id="t4"
+              columnStretching="multiple">
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.BusinessCaseNumber.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PartyProceduresRVO1.hints.BusinessCaseNumber.label}" id="c9"
+                 width="100%">
+        <af:outputText value="#{row.BusinessCaseNumber}"
+                       shortDesc="#{bindings.PartyProceduresRVO1.hints.BusinessCaseNumber.tooltip}" id="ot8"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.HearingDate.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PartyProceduresRVO1.hints.HearingDate.label}" id="c10" width="100%">
+        <af:outputText value="#{row.HearingDate}" shortDesc="#{bindings.PartyProceduresRVO1.hints.HearingDate.tooltip}"
+                       id="ot9"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.SequenceNumber.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PartyProceduresRVO1.hints.SequenceNumber.label}" id="c11"
+                 width="100%">
+        <af:outputText value="#{row.SequenceNumber}"
+                       shortDesc="#{bindings.PartyProceduresRVO1.hints.SequenceNumber.tooltip}" id="ot10">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PartyProceduresRVO1.hints.SequenceNumber.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.CaseYear.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PartyProceduresRVO1.hints.CaseYear.label}" id="c12" width="100%">
+        <af:outputText value="#{row.CaseYear}" shortDesc="#{bindings.PartyProceduresRVO1.hints.CaseYear.tooltip}"
+                       id="ot11">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.PartyProceduresRVO1.hints.CaseYear.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.DegreeName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PartyProceduresRVO1.hints.DegreeName.label}" id="c13" width="100%">
+        <af:outputText value="#{row.DegreeName}" shortDesc="#{bindings.PartyProceduresRVO1.hints.DegreeName.tooltip}"
+                       id="ot12"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.CasTypeName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PartyProceduresRVO1.hints.CasTypeName.label}" id="c14" width="100%">
+        <af:outputText value="#{row.CasTypeName}" shortDesc="#{bindings.PartyProceduresRVO1.hints.CasTypeName.tooltip}"
+                       id="ot13"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.FolderName.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PartyProceduresRVO1.hints.FolderName.label}" id="c15" width="100%">
+        <af:outputText value="#{row.FolderName}" shortDesc="#{bindings.PartyProceduresRVO1.hints.FolderName.tooltip}"
+                       id="ot14"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.AdvancePaymentAmount.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PartyProceduresRVO1.hints.AdvancePaymentAmount.label}" id="c16"
+                 width="100%">
+        <af:outputText value="#{row.AdvancePaymentAmount}"
+                       shortDesc="#{bindings.PartyProceduresRVO1.hints.AdvancePaymentAmount.tooltip}" id="ot15">
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.PartyProceduresRVO1.hints.AdvancePaymentAmount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.AdvancePaymentDate.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PartyProceduresRVO1.hints.AdvancePaymentDate.label}" id="c17"
+                 width="100%">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PartyProceduresRVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.AdvancePaymentDate.value}"
+                        id="id7">
+            <af:convertDateTime pattern="#{bindings.PartyProceduresRVO1.hints.AdvancePaymentDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.AdvancePaymentDate}"
+                       shortDesc="#{bindings.PartyProceduresRVO1.hints.AdvancePaymentDate.tooltip}" id="ot16">
+          <af:convertDateTime pattern="#{bindings.PartyProceduresRVO1.hints.AdvancePaymentDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.ImprisonmentStartDate.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PartyProceduresRVO1.hints.ImprisonmentStartDate.label}"
+                 id="c18" width="100%">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PartyProceduresRVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ImprisonmentStartDate.value}"
+                        id="id8">
+            <af:convertDateTime pattern="#{bindings.PartyProceduresRVO1.hints.ImprisonmentStartDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ImprisonmentStartDate}"
+                       shortDesc="#{bindings.PartyProceduresRVO1.hints.ImprisonmentStartDate.tooltip}" id="ot17">
+          <af:convertDateTime pattern="#{bindings.PartyProceduresRVO1.hints.ImprisonmentStartDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.ImprisonmentEndDate.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PartyProceduresRVO1.hints.ImprisonmentEndDate.label}" id="c19"
+                 width="100%">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PartyProceduresRVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ImprisonmentEndDate.value}"
+                        id="id9">
+            <af:convertDateTime pattern="#{bindings.PartyProceduresRVO1.hints.ImprisonmentEndDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ImprisonmentEndDate}"
+                       shortDesc="#{bindings.PartyProceduresRVO1.hints.ImprisonmentEndDate.tooltip}" id="ot18">
+          <af:convertDateTime pattern="#{bindings.PartyProceduresRVO1.hints.ImprisonmentEndDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.Name.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.PartyProceduresRVO1.hints.Name.label}" id="c20" width="100%">
+        <af:outputText value="#{row.Name}" shortDesc="#{bindings.PartyProceduresRVO1.hints.Name.tooltip}" id="ot19"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.PartyProceduresRVO1.hints.ProcedureDate.name}" filterable="true"
+                 sortable="true" headerText="#{bindings.PartyProceduresRVO1.hints.ProcedureDate.label}" id="c21"
+                 width="100%">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.PartyProceduresRVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ProcedureDate.value}"
+                        id="id10">
+            <af:convertDateTime pattern="#{bindings.PartyProceduresRVO1.hints.ProcedureDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.ProcedureDate}"
+                       shortDesc="#{bindings.PartyProceduresRVO1.hints.ProcedureDate.tooltip}" id="ot20">
+          <af:convertDateTime pattern="#{bindings.PartyProceduresRVO1.hints.ProcedureDate.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+    <af:panelGroupLayout id="pgl2">
+      <af:table value="#{bindings.SearchInventoryResultRVO1.collectionModel}" var="row" rendered="false"
+                rows="#{bindings.SearchInventoryResultRVO1.rangeSize}" 
+                emptyText="#{bindings.SearchInventoryResultRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" columnStretching="multiple"
+                selectedRowKeys="#{bindings.SearchInventoryResultRVO1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.SearchInventoryResultRVO1.collectionModel.makeCurrent}"
+                rowSelection="single" fetchSize="#{bindings.SearchInventoryResultRVO1.rangeSize}"
+                filterModel="#{bindings.SearchInventoryResultRVO1Query.queryDescriptor}" filterVisible="true"
+                queryListener="#{bindings.SearchInventoryResultRVO1Query.processQuery}" varStatus="vs" id="t1">
+        <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.CaseNumber.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchInventoryResultRVO1.hints.CaseNumber.label}" id="c1"
+                   width="100%">
+          <af:outputText value="#{row.CaseNumber}"
+                         shortDesc="#{bindings.SearchInventoryResultRVO1.hints.CaseNumber.tooltip}" id="ot1"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.DegreeName.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchInventoryResultRVO1.hints.DegreeName.label}" id="c2"
+                   width="100%">
+          <af:outputText value="#{row.DegreeName}"
+                         shortDesc="#{bindings.SearchInventoryResultRVO1.hints.DegreeName.tooltip}" id="ot2"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.Year.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchInventoryResultRVO1.hints.Year.label}" id="c3"
+                   width="100%">
+          <af:outputText value="#{row.Year}" shortDesc="#{bindings.SearchInventoryResultRVO1.hints.Year.tooltip}"
+                         id="ot3">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchInventoryResultRVO1.hints.Year.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.CasTypeName.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchInventoryResultRVO1.hints.CasTypeName.label}" id="c4"
+                   width="100%">
+          <af:outputText value="#{row.CasTypeName}"
+                         shortDesc="#{bindings.SearchInventoryResultRVO1.hints.CasTypeName.tooltip}" id="ot4"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.PartyName.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchInventoryResultRVO1.hints.PartyName.label}" id="c5"
+                   width="100%">
+          <af:outputText value="#{row.PartyName}"
+                         shortDesc="#{bindings.SearchInventoryResultRVO1.hints.PartyName.tooltip}" id="ot5"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.IdNumber.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchInventoryResultRVO1.hints.IdNumber.label}" id="c7"
+                   width="100%">
+          <af:outputText value="#{row.IdNumber}"
+                         shortDesc="#{bindings.SearchInventoryResultRVO1.hints.IdNumber.tooltip}" id="ot7"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchInventoryResultRVO1.hints.EntityName.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchInventoryResultRVO1.hints.EntityName.label}" id="c6"
+                   width="100%">
+          <af:outputText value="#{row.EntityName}"
+                         shortDesc="#{bindings.SearchInventoryResultRVO1.hints.EntityName.tooltip}" id="ot6"/>
+        </af:column>
+        <af:column id="c8" width="100%">
+          <af:panelGroupLayout id="pgl3">
+            <af:toolbar id="t3">
+              <af:button text="#{bundle.save}" id="b3" action="#{pageFlowScope.inventoryBean.saveOpposition}"/>
+            </af:toolbar>
+            <h:panelGroup id="pg18" layout="block" styleClass="row">
+              <h:panelGroup id="pg11" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.ActionTypeId.label}" id="ol1"/>
+                <af:selectOneChoice value="#{bindings.ActionTypeId.inputValue}" label="#{bindings.ActionTypeId.label}"
+                                    required="#{bindings.ActionTypeId.hints.mandatory}" autoSubmit="true"
+                                    shortDesc="#{bindings.ActionTypeId.hints.tooltip}" id="soc1" simple="true"
+                                    valueChangeListener="#{pageFlowScope.inventoryBean.actionTypeChangeListener}">
+                  <f:selectItems value="#{bindings.ActionTypeId.items}" id="si1"/>
+                  <f:validator binding="#{bindings.ActionTypeId.validator}"/>
+                </af:selectOneChoice>
+              </h:panelGroup>
+              <h:panelGroup id="pg12" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.ActionDate.label}" id="ol2"/>
+                <af:inputDate value="#{bindings.ActionDate.inputValue}"
+                              required="#{bindings.ActionDate.hints.mandatory}"
+                              shortDesc="#{bindings.ActionDate.hints.tooltip}" id="id1" simple="true">
+                  <f:validator binding="#{bindings.ActionDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.ActionDate.format}"/>
+                </af:inputDate>
+              </h:panelGroup>
+              <h:panelGroup id="pg13" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.CapacityTypeId.label}" id="ol3"/>
+                <af:selectOneChoice value="#{bindings.CapacityTypeId.inputValue}"
+                                    label="#{bindings.CapacityTypeId.label}"
+                                    required="#{bindings.CapacityTypeId.hints.mandatory}"
+                                    shortDesc="#{bindings.CapacityTypeId.hints.tooltip}" id="soc2" simple="true">
+                  <f:selectItems value="#{bindings.CapacityTypeId.items}" id="si2"/>
+                  <f:validator binding="#{bindings.CapacityTypeId.validator}"/>
+                </af:selectOneChoice>
+              </h:panelGroup>
+              <h:panelGroup id="pg14" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.HearingDate.label}" id="ol4" partialTriggers="soc1"
+                                visible="#{bindings.ActionTypeId.inputValue eq '2' or bindings.ActionTypeId.inputValue eq '1'}"/>
+                <af:inputListOfValues id="ilov1" popupTitle="Search and Select: #{bindings.HearingDate.hints.label}"
+                                      value="#{bindings.HearingDate.inputValue}"
+                                      label="#{bindings.HearingDate.hints.label}"
+                                      model="#{bindings.HearingDate.listOfValuesModel}"
+                                      required="#{bindings.HearingDate.hints.mandatory}"
+                                      shortDesc="#{bindings.HearingDate.hints.tooltip}" simple="true"
+                                      visible="#{bindings.ActionTypeId.inputValue eq '2' or bindings.ActionTypeId.inputValue eq '1'}"
+                                      partialTriggers="soc1">
+                  <af:autoSuggestBehavior suggestItems="#{bindings.HearingDate.suggestItems}"/>
+                </af:inputListOfValues>
+              </h:panelGroup>
+              <h:panelGroup id="pg15" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.DateFrom.label}" id="ol14"/>
+                <af:inputDate value="#{bindings.DateFrom.inputValue}" required="#{bindings.DateFrom.hints.mandatory}"
+                              label="#{bindings.DateFrom.label}" visible="#{bindings.ActionTypeId.inputValue eq '5'}"
+                              shortDesc="#{bindings.DateFrom.hints.tooltip}" id="id5" partialTriggers="soc1">
+                  <f:validator binding="#{bindings.DateFrom.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.DateFrom.format}"/>
+                </af:inputDate>
+              </h:panelGroup>
+              <h:panelGroup id="pg16" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.DateTo.label}" id="ol15"/>
+                <af:inputDate value="#{bindings.DateTo.inputValue}" required="#{bindings.DateTo.hints.mandatory}"
+                              label="#{bindings.DateTo.label}" visible="#{bindings.ActionTypeId.inputValue eq '5'}"
+                              shortDesc="#{bindings.DateTo.hints.tooltip}" id="id6" partialTriggers="soc1">
+                  <f:validator binding="#{bindings.DateTo.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.DateTo.format}"/>
+                </af:inputDate>
+              </h:panelGroup>
+              <h:panelGroup id="pg17" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.ProcedureText.hints.label}" id="ol5"/>
+                <af:inputText value="#{bindings.ProcedureText.inputValue}" simple="true"
+                              required="#{bindings.ProcedureText.hints.mandatory}"
+                              maximumLength="#{bindings.ProcedureText.hints.precision}"
+                              shortDesc="#{bindings.ProcedureText.hints.tooltip}" id="it1">
+                  <f:validator binding="#{bindings.ProcedureText.validator}"/>
+                </af:inputText>
+              </h:panelGroup>
+            </h:panelGroup>
+            <af:panelGridLayout id="pgl4" rendered="false">
+              <af:gridRow marginTop="5px" height="auto" id="gr1">
+                <af:gridCell marginStart="5px" width="auto" id="gc1"/>
+                <af:gridCell marginStart="5px" width="auto" id="gc2"/>
+                <af:gridCell marginStart="5px" width="auto" id="gc3"/>
+                <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc4"/>
+              </af:gridRow>
+              <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+                <af:gridCell marginStart="5px" width="auto" id="gc5"/>
+                <af:gridCell marginStart="5px" width="auto" id="gc6"/>
+                <af:gridCell marginStart="5px" width="auto" id="gc7"/>
+                <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc8"/>
+              </af:gridRow>
+            </af:panelGridLayout>
+            <af:panelGridLayout id="pgl9" rendered="false">
+              <af:gridRow id="gr7">
+                <af:gridCell id="gc9"/>
+                <af:gridCell id="gc10"/>
+                <af:gridCell id="gc11"/>
+                <af:gridCell id="gc12"/>
+              </af:gridRow>
+              <af:gridRow id="gr9">
+                <af:gridCell id="gc29"/>
+                <af:gridCell id="gc30"/>
+                <af:gridCell id="gc31"/>
+                <af:gridCell id="gc32"/>
+              </af:gridRow>
+            </af:panelGridLayout>
+            <af:panelGroupLayout id="pgl10">
+              <af:selectBooleanCheckbox value="#{bindings.AccusedRequired.inputValue}"
+                                        label="#{bindings.AccusedRequired.label}"
+                                        shortDesc="#{bindings.AccusedRequired.hints.tooltip}" id="sbc2"
+                                        partialTriggers="soc1"
+                                        visible="#{bindings.ActionTypeId.inputValue eq '10' or bindings.ActionTypeId.inputValue eq '2' 
+                                                or bindings.ActionTypeId.inputValue eq '5' or bindings.ActionTypeId.inputValue eq '11' 
+                                                or bindings.ActionTypeId.inputValue eq '1' or bindings.ActionTypeId.inputValue eq '13'}"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:column>
+      </af:table>
+    </af:panelGroupLayout>
+    <h:panelGroup id="pg9" styleClass="btn-holder" layout="block">
+      <af:button text="#{bundle.save}" id="b2" action="#{pageFlowScope.inventoryBean.saveOpposition}"/>
+      <af:button text="#{bundle.BACK}" id="b1" action="back"/>
+    </h:panelGroup>
+  </af:panelGroupLayout>
+</ui:composition>

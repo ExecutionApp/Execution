@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcFolderProceduresEO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="EXC_FOLDER_PROCEDURES"
+  AliasName="ExcFolderProceduresEO"
+  BindingStyle="OracleName"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation"
+  RowClass="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES"
+    PrimaryKey="true"
+    ChangeIndicator="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CapacityType"
+    ColumnName="CAPACITY_TYPE"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES">
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CourtCircleDatesHearingId"
+    ColumnName="COURT_CIRCLE_DATES_HEARING_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ResPartyId"
+    IsNotNull="true"
+    ColumnName="RES_PARTY_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ProcedureText"
+    Precision="4000"
+    ColumnName="PROCEDURE_TEXT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_FOLDER_PROCEDURES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    ColumnName="CREATED_BY"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES"/>
+  <Attribute
+    Name="CreatedDate"
+    ColumnName="CREATED_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_FOLDER_PROCEDURES">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="ExpressionScript"><![CDATA[adf.currentDate]]></TransientExpression>
+  </Attribute>
+  <Attribute
+    Name="ProcedureStatus"
+    ColumnName="PROCEDURE_STATUS"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="ProcedureSerial"
+    Precision="200"
+    ColumnName="PROCEDURE_SERIAL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_FOLDER_PROCEDURES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ProcedureDate"
+    ColumnName="PROCEDURE_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_FOLDER_PROCEDURES">
+    <validation:CompareValidationBean
+      Name="ProcedureDateRule0"
+      OnAttribute="ProcedureDate"
+      OperandType="EXPR"
+      Inverse="false"
+      CompareType="LESSTHANEQUALTO"
+      ResId="com.egabi.cjexec.model.entities.enableopposition.excfolderprocedureseo.ProcedureDateValidation">
+      <validation:TransientExpression
+        trustMode="untrusted"
+        Name="ValidationRuleScript"
+        CodeSourceName="ExcFolderProceduresEORow"/>
+    </validation:CompareValidationBean>
+  </Attribute>
+  <Attribute
+    Name="AdvancePaymentFlag"
+    ColumnName="ADVANCE_PAYMENT_FLAG"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES"/>
+  <Attribute
+    Name="AdvancePaymentAmount"
+    ColumnName="ADVANCE_PAYMENT_AMOUNT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES"/>
+  <Attribute
+    Name="AdvancePaymentDate"
+    ColumnName="ADVANCE_PAYMENT_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_FOLDER_PROCEDURES"/>
+  <Attribute
+    Name="NumberOfInstallment"
+    ColumnName="NUMBER_OF_INSTALLMENT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES">
+    <validation:CompareValidationBean
+      Name="NumberOfInstallmentRule0"
+      OnAttribute="NumberOfInstallment"
+      OperandType="LITERAL"
+      Inverse="false"
+      CompareType="LESSTHANEQUALTO"
+      CompareValue="9"
+      ResId="com.egabi.cjexec.model.entities.enableopposition.excfolderprocedureseo.NumberOfInstallmentValidation"/>
+  </Attribute>
+  <Attribute
+    Name="FirstInstallmentDate"
+    ColumnName="FIRST_INSTALLMENT_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_FOLDER_PROCEDURES">
+    <validation:CompareValidationBean
+      Name="FirstInstallmentDateRule0"
+      OnAttribute="FirstInstallmentDate"
+      OperandType="EXPR"
+      Inverse="false"
+      CompareType="GREATERTHANEQUALTO"
+      ResId="com.egabi.cjexec.model.entities.enableopposition.excfolderprocedureseo.InstallmentDateValidation">
+      <validation:TransientExpression
+        trustMode="untrusted"
+        Name="ValidationRuleScript"
+        CodeSourceName="ExcFolderProceduresEORow"/>
+    </validation:CompareValidationBean>
+  </Attribute>
+  <Attribute
+    Name="ProsecutionId"
+    ColumnName="PROSECUTION_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES"/>
+  <Attribute
+    Name="PrimaryLawyerId"
+    ColumnName="PRIMARY_LAWYER_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES"/>
+  <Attribute
+    Name="SecondaryLawyerId"
+    ColumnName="SECONDARY_LAWYER_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES"/>
+  <Attribute
+    Name="ProcProsecutionId"
+    ColumnName="PROC_PROSECUTION_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_PROCEDURES"/>
+  <Attribute
+    Name="DECISION_TYPE"
+    Precision="80"
+    ColumnName="DECISION_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="AdvancePayment"
+    Precision="80"
+    ColumnName="ADVANCE_PAYMENT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false"
+    DefaultValue="n"/>
+  <AccessorAttribute
+    Name="ExcFolderActionsEO"
+    Association="com.egabi.cjexec.model.entities.enableopposition.FkProcedureIdAssoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.enableopposition.FkProcedureIdAssoc.ExcFolderActionsEO"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.enableopposition.FkProcedureIdAssoc.ExcFolderProceduresEO"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="ExcFolderProcedureStepsEO"
+    Association="com.egabi.cjexec.model.entities.enableopposition.FkProcedureIdFkAssoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.enableopposition.FkProcedureIdFkAssoc.ExcFolderProcedureStepsEO"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.enableopposition.FkProcedureIdFkAssoc.ExcFolderProceduresEO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="PkExcCourtObjection"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PK_EXC_COURT_OBJECTION"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkCapacityType">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_LKP_CAPACITY_TYPE"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_CAPACITY_TYPE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO.CapacityType"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkCourtCircleDatesHearId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COURT_CIRCLES_DATES_HEARIN_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_COURT_CIRCLE_DATES_HEAR_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO.CourtCircleDatesHearingId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkCreatedBy">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="SEC_USERS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_CREATED_BY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO.CreatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkPrimaryLawyerId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PAR_LAWYERS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_PRIMARY_LAWYER_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO.PrimaryLawyerId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkProcedureStatus">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_LKP_PROCEDURE_STATUS"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_PROCEDURE_STATUS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO.ProcedureStatus"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkProsecutionId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="ENTITY_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_PROSECUTION_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO.ProsecutionId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkResPartyIdFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COURT_BC_HEARING_RES_PARTI_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_RES_PARTY_ID_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO.ResPartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkSecondaryLawyerId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PAR_LAWYERS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_SECONDARY_LAWYER_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO.SecondaryLawyerId"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</Entity>

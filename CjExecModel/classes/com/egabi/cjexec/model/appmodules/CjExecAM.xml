@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule xmlns="http://xmlns.oracle.com/bc4j" Name="CjExecAM"
+    Version="12.2.1.0.31" InheritPersonalization="merge"
+           ClearCacheOnRollback="true" ComponentClass="com.egabi.cjexec.model.appmodules.CjExecAMImpl"
+           ComponentInterface="com.egabi.cjexec.model.appmodules.common.CjExecAM">
+    <DesignTime>
+        <Attr Name="_isCodegen" Value="true"/>
+    </DesignTime>
+    <ViewUsage Name="ParLawyerPartiesVO" ViewObjectName="com.egabi.cjexec.model.views.parlawyer.ParLawyerPartiesVO"/>
+    <ViewUsage Name="FormCaseDescriptionDesView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesView"/>
+    <ViewUsage Name="FormCaseDescriptionPartiesView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionPartiesView">
+        <ViewCriteriaUsage Name="FormCaseDescriptionPartiesViewCriteria"
+                           FullName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionPartiesView.FormCaseDescriptionPartiesViewCriteria"/>
+    </ViewUsage>
+    <ViewUsage Name="FormCaseDescriptionDesPartView2"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesPartView"/>
+    <ViewUsage Name="FormCaseDescriptionDesPartView3"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesPartView"/>
+    <ViewUsage Name="ExcLkpJudgmentClassView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcLkpJudgmentClassView"/>
+    <ViewUsage Name="ExcLkpJudgClassDetailView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcLkpJudgClassDetailView"/>
+    <ViewUsage Name="ExcLkpJudgmentTypesView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcLkpJudgmentTypesView"/>
+    <ViewUsage Name="ExcLkpJudgmentSubTypesView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcLkpJudgmentSubTypesView"/>
+    <ViewUsage Name="ExcCourtBcSessionJudgmentVO2"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcCourtBcSessionJudgmentVO"/>
+    <ViewUsage Name="ExcCourtBcSessionAttachView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcCourtBcSessionAttachView"/>
+    <ViewUsage Name="ExcLkpSessionAttachRVO1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.ExcLkpSessionAttachRVO"/>
+    <ViewUsage Name="ExcCourtBcSessionAttachView2"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcCourtBcSessionAttachView"/>
+    <ViewUsage Name="ParPartiesView1" ViewObjectName="com.egabi.cjexec.model.views.party.ParPartiesView"/>
+    <ViewUsage Name="ExcFolderProcedures"
+               ViewObjectName="com.egabi.cjexec.model.views.suppamount.ExcFolderProceduresVO"/>
+    <ViewUsage Name="ExcFolderProcInstall"
+               ViewObjectName="com.egabi.cjexec.model.views.suppamount.ExcFolderProcInstallVO"/>
+    <ViewUsage Name="ExcFolderActions" ViewObjectName="com.egabi.cjexec.model.views.suppamount.ExcFolderActionsVO"/>
+    <ViewUsage Name="ExcCourtBcPartyDebt"
+               ViewObjectName="com.egabi.cjexec.model.views.suppamount.ExcCourtBcPartyDebtVO"/>
+    <ViewUsage Name="SecUsersSessionsVO" ViewObjectName="com.egabi.cjexec.model.views.security.SecUsersSessionsVO"/>
+    <ViewUsage Name="SecUsersROV" ViewObjectName="com.egabi.cjexec.model.roviews.security.SecUsersROV"/>
+    <ViewUsage Name="SecUsersROV1" ViewObjectName="com.egabi.cjexec.model.roviews.security.SecUsersROV"/>
+    <ViewUsage Name="MenuRolesROV" ViewObjectName="com.egabi.cjexec.model.roviews.security.MenuRolesROV"/>
+    <ViewUsage Name="ExcLkpSessionAttachView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcLkpSessionAttachView"/>
+    <ViewUsage Name="WebCamAttatchROV1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.attatchUCMWebCam.WebCamAttatchROV"/>
+    <ViewUsage Name="ExcCourtDownloadAttachVO"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcSessionAttachVO"/>
+    <ViewUsage Name="RepayExcCourtBcPartyDebt"
+               ViewObjectName="com.egabi.cjexec.model.views.suppamount.RepayExcCourtBcPartyDebtVO"/>
+    <ViewUsage Name="RepayExcFolderProcInstall"
+               ViewObjectName="com.egabi.cjexec.model.views.suppamount.RepayExcFolderProcInstallVO"/>
+    <ViewUsage Name="UserDataROV" ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.UserDataROV"/>
+    <ViewUsage Name="CaseInfoROV" ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.CaseInfoROV"/>
+    <ViewUsage Name="CriminalLawyersROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.CriminalLawyersROV"/>
+    <ViewUsage Name="InsCapacityTypeROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.InsCapacityTypeROV"/>
+    <ViewUsage Name="ExcFolderActionsVO1"
+               ViewObjectName="com.egabi.cjexec.model.views.installmentrequest.ExcFolderActionsVO"/>
+    <ViewUsage Name="StepsValidationROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.StepsValidationROV"/>
+    <ViewUsage Name="ActionTypeView1" ViewObjectName="com.egabi.cjexec.model.views.ActionTypeView"/>
+    <ViewUsage Name="CasesSearchReasultROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.CasesSearchReasultROV"/>
+    <ViewUsage Name="CasesSearchFormROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.CasesSearchFormROV"/>
+    <ViewUsage Name="EntityCircleRVO1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.EntityCircleRVO"/>
+    <ViewUsage Name="EntityCourtRVO1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.EntityCourtRVO"/>
+    <ViewUsage Name="SearchFormRVO1" ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.SearchFormRVO"/>
+    <ViewUsage Name="SearchResultsRVO1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.SearchResultsRVO"/>
+    <ViewUsage Name="ExcCourtBcSessionJudgmentVO1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcCourtBcSessionJudgmentVO">
+        <ViewCriteriaUsage Name="ExcCourtBcSessionJudgmentVOCriteria"
+                           FullName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcCourtBcSessionJudgmentVO.ExcCourtBcSessionJudgmentVOCriteria"/>
+    </ViewUsage>
+    <ViewUsage Name="CourtBcHearingResPartiesVO1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.CourtBcHearingResPartiesVO">
+        <ViewCriteriaUsage Name="CourtBcHearingResPartiesVOCriteria"
+                           FullName="com.egabi.cjexec.model.views.provisionsInclusionViews.CourtBcHearingResPartiesVO.CourtBcHearingResPartiesVOCriteria"/>
+    </ViewUsage>
+    <ViewUsage Name="FormCaseDescriptionDesPartView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesPartView"/>
+    <ViewUsage Name="CaseEditMasterROV" ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.CaseEditMasterROV"/>
+    <ViewUsage Name="CaseConvictedPartiesROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.CaseConvictedPartiesROV"/>
+    <ViewUsage Name="CasePartiesConvictionsROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.CasePartiesConvictionsROV"/>
+    <ViewUsage Name="ExcCourtBcDecisionEOView"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcDecisionEOView"/>
+    <ViewUsage Name="ExcCourtBcChargeDecisionsView"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChargeDecisionsView"/>
+    <ViewUsage Name="ExcCourtBcCharePartiesDecisionsView"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChargeDecisionsView"/>
+    <ViewUsage Name="ExcCourtBcChrgDecDepOrdView"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecDepOrdView"/>
+    <ViewUsage Name="PartiesExcCourtBcChrgDecDepOrdView"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecDepOrdView"/>
+    <ViewUsage Name="PartiesExcCourtBcChrgDecPenPartView"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecPenPartView"/>
+    <ViewUsage Name="ExcCourtBcChrgDecPenPartView"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecPenPartView"/>
+    <ViewUsage Name="FolderDataROV" ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.FolderDataROV"/>
+    <ViewUsage Name="FolderTypeROV1" ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.FolderTypeROV"/>
+    <ViewUsage Name="LkpFolderTypes1" ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.LkpFolderTypes"/>
+    <ViewUsage Name="HearingDateROV1" ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.HearingDateROV"/>
+    <ViewUsage Name="CirculeNameROV1" ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.CirculeNameROV"/>
+    <ViewUsage Name="EntityNameROV1" ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.EntityNameROV"/>
+    <ViewUsage Name="SearchROV1" ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.SearchROV"/>
+    <ViewUsage Name="ResPartyCrimesROV1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.ResPartyCrimesROV"/>
+    <ViewUsage Name="ValidateChargeDecisionsErrROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.ValidateChargeDecisionsErrROV"/>
+    <ViewUsage Name="PartyDebtROV" ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.PartyDebtROV"/>
+    <ViewUsage Name="RequestsSearchRVO1" ViewObjectName="com.egabi.cjexec.model.roviews.requests.RequestsSearchRVO"/>
+    <ViewUsage Name="RequestsSearchResultRVO1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.requests.RequestsSearchResultRVO"/>
+    <ViewUsage Name="ExcCourtBcDecisionFeesView"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcDecisionFeesView"/>
+    <ViewUsage Name="ProvisionedCasesInSession1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.ProvisionedCasesInSessionRVO"/>
+    <ViewUsage Name="AllCasesInSessionRVO1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.AllCasesInSessionRVO"/>
+    <ViewUsage Name="ExecBcSeeeionsJudgmentsROV1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.common.ExecBcSessionsJudgmentsROV"/>
+    <ViewUsage Name="ExecPartySessionJudgmentsROV1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.common.ExecPartySessionJudgmentsROV"/>
+    <ViewUsage Name="CourtCirclesHearingDatesRVO1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.CourtCirclesHearingDatesRVO"/>
+    <ViewUsage Name="ExcFolderData" ViewObjectName="com.egabi.cjexec.model.views.suppamount.ExcFolderDataVO">
+        <ViewCriteriaUsage Name="ExcFolderDataVOCriteria"
+                           FullName="com.egabi.cjexec.model.views.suppamount.ExcFolderDataVO.ExcFolderDataVOCriteria"/>
+    </ViewUsage>
+    <ViewUsage Name="FormCaseDescriptionView1"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionView"/>
+    <!--<ViewUsage
+        Name="WebCamAttatchROV1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.attatchUCMWebCam.WebCamAttatchROV"/>-->
+    <ViewUsage Name="BusinesscasetypeROV1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.BusinesscasetypeROV"/>
+    <ViewUsage Name="BusinessCaseDegreesROV1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.BusinessCaseDegreesROV"/>
+    <ViewUsage Name="executionROV1" ViewObjectName="com.egabi.cjexec.model.roviews.execution.executionROV"/>
+    <ViewUsage Name="FolderTypeSearchROV1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.FolderTypeSearchROV"/>
+    <ViewUsage Name="SecondryProsecutionROV1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.SecondryProsecutionROV"/>
+    <ViewUsage Name="PrimaryProsecutionROV1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.PrimaryProsecutionROV"/>
+    <ViewUsage Name="PlentyInstallmentDetails"
+               ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.PlentyInstallmentDetails"/>
+    <ViewUsage Name="ExcFolderProceduresVO"
+               ViewObjectName="com.egabi.cjexec.model.views.enableopposition.ExcFolderProceduresVO">
+        <ViewCriteriaUsage Name="ExcFolderProceduresVOCriteria"
+                           FullName="com.egabi.cjexec.model.views.enableopposition.ExcFolderProceduresVO.ExcFolderProceduresVOCriteria"/>
+    </ViewUsage>
+    <ViewUsage Name="ExcFolderProcedureStepsVO"
+               ViewObjectName="com.egabi.cjexec.model.views.enableopposition.ExcFolderProcedureStepsVO"/>
+    <ViewUsage Name="ExcFolderActionsVO"
+               ViewObjectName="com.egabi.cjexec.model.views.enableopposition.ExcFolderActionsVO"/>
+    <ViewUsage Name="ExcFolderActionsAttachVO"
+               ViewObjectName="com.egabi.cjexec.model.views.enableopposition.ExcFolderActionsAttachVO"/>
+    <ViewUsage Name="CapacityTypeROV" ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.CapacityTypeROV"/>
+    <ViewUsage Name="RequiredAttachmentROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.RequiredAttachmentROV"/>
+    <ViewUsage Name="ParPartiesLogView1" ViewObjectName="com.egabi.cjexec.model.views.party.log.ParPartiesLogView"/>
+    <ViewUsage Name="InstallmentAmountROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.InstallmentAmountROV"/>
+    <ViewUsage Name="CrimPlaceROV1" ViewObjectName="com.egabi.cjexec.model.roviews.execution.CrimPlaceROV"/>
+    <ViewUsage Name="ParPartiesLogSearchResultRVO1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.ParParties.ParPartiesLogSearchResultRVO"/>
+    <ViewUsage Name="SearchParPartiesLogRVO1"
+               ViewObjectName="com.egabi.cjexec.model.roviews.ParParties.SearchParPartiesLogRVO"/>
+    <ViewUsage Name="UsersTokensROV" ViewObjectName="com.egabi.cjexec.model.roviews.security.UsersTokensROV"/>
+    <ViewUsage Name="ExcCourtBcChargeDecisionsView1"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChargeDecisionsView"/>
+    <ViewUsage Name="CasePartiesConvictionsROV2"
+               ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.CasePartiesConvictionsROV"/>
+    <ViewUsage Name="ExcCourtBcChrgDecPenPartView1"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecPenPartView"/>
+    <ViewUsage Name="ExcCourtBcChrgDecDepOrdView1"
+               ViewObjectName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecDepOrdView"/>
+    <ViewUsage Name="ProcedureIdROV1" ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.ProcedureIdROV"/>
+    <ViewUsage Name="LawyerDetailsROV"
+               ViewObjectName="com.egabi.cjexec.model.roviews.enableopposition.LawyerDetailsROV"/>
+    <ViewUsage Name="ExcLkpAttachmentTypeVO"
+               ViewObjectName="com.egabi.cjexec.model.views.enableopposition.ExcLkpAttachmentTypeVO"/>
+    <ViewUsage Name="CourtCirclesHearingDatesRVO2"
+               ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.CourtCirclesHearingDatesRVO"/>
+    <ViewUsage Name="ParLawyersVO" ViewObjectName="com.egabi.cjexec.model.views.parlawyer.ParLawyersVO"/>
+    <ViewUsage Name="ViewObj1" ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.ResumptionROV"/>
+    <ViewUsage
+        Name="UserRolesRVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.security.UserRolesRVO"/>
+    <ViewUsage Name="CourtBcHearingResPartiesVO2"
+               ViewObjectName="com.egabi.cjexec.model.views.provisionsInclusionViews.CourtBcHearingResPartiesVO"/>
+    <ViewLinkUsage Name="FkSessionJudgmentId2Link2"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks.FkSessionJudgmentId2Link"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcSessionJudgmentVO1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcSessionAttachView2"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FkJudgementClassIdLink1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks.FkJudgementClassIdLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcLkpJudgmentClassView1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcLkpJudgClassDetailView1"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FkSessionJudgmentId2Link1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks.FkSessionJudgmentId2Link"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcSessionJudgmentVO2"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcSessionAttachView1"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FkFormCaseDesIdLink1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks.FkFormCaseDesIdLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.FormCaseDescriptionDesView1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.FormCaseDescriptionDesPartView3"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FormCaseDescriptionDesR02Link1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks.FormCaseDescriptionDesR02Link"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.FormCaseDescriptionPartiesView1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.FormCaseDescriptionDesPartView2"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FormCaseDescriptionParFk2Link1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks.FormCaseDescriptionParFk2Link"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.FormCaseDescriptionView1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.FormCaseDescriptionPartiesView1"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FormCaseDescriptionDesFk2Link1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks.FormCaseDescriptionDesFk2Link"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.FormCaseDescriptionView1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.FormCaseDescriptionDesView1"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="CaseEditMasterToExcCourtBCDecesionVL"
+                   ViewLinkObjectName="com.egabi.cjexec.model.roviews.caseexecemp.links.CaseEditMasterToExcCourtBCDecesionVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.CaseEditMasterROV"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcDecisionEOView"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="CourtBcDecesionToCourtBcChargeDecesionsROV"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.caseexecemp.links.CourtBcDecesionToCourtBcChargeDecesionsROV"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcDecisionEOView"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcChargeDecisionsView"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="CasePartiesConvictionsToCourtBcChargeDecesionsVL"
+                   ViewLinkObjectName="com.egabi.cjexec.model.roviews.caseexecemp.links.CasePartiesConvictionsToCourtBcChargeDecesionsVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.CasePartiesConvictionsROV"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcCharePartiesDecisionsView"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FkChargeDecisionIdLink"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.caseexecemp.links.FkChargeDecisionIdLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcChargeDecisionsView"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcChrgDecDepOrdView"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="PartiesFkChargeDecisionIdFkLink"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.caseexecemp.links.FkChargeDecisionIdFkLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcCharePartiesDecisionsView"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.PartiesExcCourtBcChrgDecPenPartView"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="CaseToCaseConvictedPartiesROV"
+                   ViewLinkObjectName="com.egabi.cjexec.model.roviews.caseexecemp.links.CaseToCaseConvictedPartiesROV"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.CaseEditMasterROV"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.CaseConvictedPartiesROV"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FolderCrimeVL1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.roviews.executionfolders.FolderCrimeVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.FolderTypeROV1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ResPartyCrimesROV1" Reversed="false"/>
+    <ViewLinkUsage Name="CourtBCDecisionTOValidateChargeDecesionsVL"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.caseexecemp.links.CourtBCDecisionTOValidateChargeDecesionsVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcDecisionEOView"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ValidateChargeDecisionsErrROV"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="ExcCourtBcDecisionFeesFkLink"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.caseexecemp.links.ExcCourtBcDecisionFeesFkLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcDecisionEOView"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcDecisionFeesView"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FDataDeptVL1" ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.suppamount.FDataDeptVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderData"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcPartyDebt" Reversed="false"/>
+    <ViewLinkUsage Name="FDataFActionVL1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.suppamount.FDataFActionVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderData"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderActions" Reversed="false"/>
+    <ViewLinkUsage Name="FDataFInstallVL1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.suppamount.FDataFInstallVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderData"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderProcInstall" Reversed="false"/>
+    <ViewLinkUsage Name="FDataRepaymentDeptVL1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.suppamount.FDataRepaymentDeptVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderData"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.RepayExcCourtBcPartyDebt"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FDataFRepayInstallVL1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.suppamount.FDataFRepayInstallVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderData"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.RepayExcFolderProcInstall"
+                   Reversed="false"/>
+    <!--<ViewLinkUsage
+        Name="FkProcedureIdLink"
+        ViewLinkObjectName="com.egabi.cjexec.model.views.enableopposition.FkProcedureIdLink"
+        SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderProceduresVO"
+        DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderActionsVO"
+        Reversed="false"/>-->
+    <ViewLinkUsage Name="CaseConvictedPartiesToCaseConvictionsVL"
+                   ViewLinkObjectName="com.egabi.cjexec.model.roviews.caseexecemp.links.CaseConvictedPartiesToCaseConvictionsVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.CaseConvictedPartiesROV"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.CasePartiesConvictionsROV"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FkProcedureIdFkLink"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.enableopposition.FkProcedureIdFkLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderProceduresVO"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderProcedureStepsVO"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FkJudgmentMainTypeLink1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks.FkJudgmentMainTypeLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcLkpJudgmentTypesView1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcLkpJudgmentSubTypesView1"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="UserSessionSecUsersVL1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.viewLinks.security.UserSessionSecUsersVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.SecUsersSessionsVO"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.SecUsersROV" Reversed="false"/>
+    <ViewLinkUsage Name="CasePartiesConvictionsToCourtBcChargeDecesionsVL1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.roviews.caseexecemp.links.CasePartiesConvictionsToCourtBcChargeDecesionsVL"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.CasePartiesConvictionsROV2"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcChargeDecisionsView1"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FkProcedureIdLink"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.enableopposition.FkProcedureIdLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderProceduresVO"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderActionsVO" Reversed="false"/>
+    <ViewLinkUsage Name="FkChargeDecisionIdLink1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.caseexecemp.links.FkChargeDecisionIdLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcChargeDecisionsView1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcChrgDecDepOrdView1"
+                   Reversed="false"/>
+    <ViewLinkUsage Name="FkChargeDecisionIdFkLink1"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.caseexecemp.links.FkChargeDecisionIdFkLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcChargeDecisionsView1"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcCourtBcChrgDecPenPartView1"
+                   Reversed="false"/>
+    <AppModuleUsage
+        Name="SimplifiedModeAM1"
+        FullName="com.egabi.cjexec.model.appmodules.SimplifiedModeAM"
+        SharedScope="0"/>
+    <ViewLinkUsage Name="FkCourtObjectionIdLink"
+                   ViewLinkObjectName="com.egabi.cjexec.model.views.enableopposition.FkCourtObjectionIdLink"
+                   SrcViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderActionsVO"
+                   DstViewUsageName="com.egabi.cjexec.model.appmodules.CjExecAM.ExcFolderActionsAttachVO"
+                   Reversed="false"/>
+    <AppModuleUsage Name="OppositionAM1" FullName="com.egabi.cjexec.model.appmodules.OppositionAM" SharedScope="0"/>
+    <ClientInterface Name="__clientInterface">
+        <Method Name="updateRepayInfo" MethodName="updateRepayInfo">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="resPartId" Type="java.lang.String"/>
+            <Parameter Name="feesType" Type="java.lang.String"/>
+            <Parameter Name="settlProcID" Type="java.lang.String"/>
+            <Parameter Name="groupID" Type="java.lang.String"/>
+            <Parameter Name="settlDate" Type="java.lang.String"/>
+            <Parameter Name="paidAmount" Type="java.lang.String"/>
+            <Parameter Name="settAuthID" Type="java.lang.String"/>
+            <Parameter Name="recipNum" Type="java.lang.String"/>
+        </Method>
+        <Method Name="insertExcFolderActionsAttachs" MethodName="insertExcFolderActionsAttachs">
+            <Return Name="_return_type_" Type="int"/>
+            <Parameter Name="folderActionId" Type="long"/>
+            <Parameter Name="documentId" Type="java.lang.String"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CREATE_BC_DECISION" MethodName="callEXC_COURT_BC_PKG___CREATE_BC_DECISION">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="sessionJudId" Type="java.math.BigDecimal"/>
+            <Parameter Name="username" Type="java.lang.String"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CREATE_CHARGE_EACH_CONVICTION"
+                MethodName="callEXC_COURT_BC_PKG___CREATE_CHARGE_EACH_CONVICTION">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sessionJudId" Type="java.math.BigDecimal"/>
+            <Parameter Name="username" Type="java.lang.String"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ALL"
+                MethodName="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ALL">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sessionJudId" Type="java.math.BigDecimal"/>
+            <Parameter Name="username" Type="java.lang.String"/>
+        </Method>
+        <Method Name="copySessionFormCase" MethodName="copySessionFormCase">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="reservationId" Type="java.math.BigDecimal"/>
+            <Parameter Name="userId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="callCREATE_COUNTING_FOLDER" MethodName="callCREATE_COUNTING_FOLDER">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="filterCourtBCHearingResParties" MethodName="filterCourtBCHearingResParties">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="resId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___VALIDATE_CHARGE_DECISIONS"
+                MethodName="callEXC_COURT_BC_PKG___VALIDATE_CHARGE_DECISIONS">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="getFormCasePartyIdPK" MethodName="getFormCasePartyIdPK">
+            <Return Name="_return_type_" Type="java.math.BigDecimal"/>
+            <Parameter Name="formCaseDescriptionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="partyId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="validateActions" MethodName="validateActions">
+            <Return Name="_return_type_" Type="int"/>
+            <Parameter Name="folder_id" Type="int"/>
+            <Parameter Name="validation_type" Type="int"/>
+            <Parameter Name="session_id" Type="int"/>
+        </Method>
+        <Method Name="executePrison" MethodName="executePrison">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="folder_id" Type="int"/>
+            <Parameter Name="execution_date" Type="java.sql.Date"/>
+            <Parameter Name="session_id" Type="int"/>
+            <Parameter Name="execution_number" Type="int"/>
+            <Parameter Name="imprisoned_flag" Type="int"/>
+            <Parameter Name="imprisoned_place" Type="java.lang.String"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CREATE_BC_DECISION" MethodName="callEXC_COURT_BC_PKG___CREATE_BC_DECISION">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="sessionJudId" Type="java.math.BigDecimal"/>
+            <Parameter Name="username" Type="java.lang.String"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CREATE_CHARGE_EACH_CONVICTION"
+                MethodName="callEXC_COURT_BC_PKG___CREATE_CHARGE_EACH_CONVICTION">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sessionJudId" Type="java.math.BigDecimal"/>
+            <Parameter Name="username" Type="java.lang.String"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ALL"
+                MethodName="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ALL">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sessionJudId" Type="java.math.BigDecimal"/>
+            <Parameter Name="username" Type="java.lang.String"/>
+        </Method>
+        <Method Name="copySessionFormCase" MethodName="copySessionFormCase">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="reservationId" Type="java.math.BigDecimal"/>
+            <Parameter Name="userId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="callCREATE_COUNTING_FOLDER" MethodName="callCREATE_COUNTING_FOLDER">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="filterCourtBCHearingResParties" MethodName="filterCourtBCHearingResParties">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="resId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___VALIDATE_CHARGE_DECISIONS"
+                MethodName="callEXC_COURT_BC_PKG___VALIDATE_CHARGE_DECISIONS">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="executePrison" MethodName="executePrison">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="folder_id" Type="int"/>
+            <Parameter Name="execution_date" Type="java.sql.Date"/>
+            <Parameter Name="session_id" Type="int"/>
+            <Parameter Name="execution_number" Type="int"/>
+            <Parameter Name="imprisoned_flag" Type="int"/>
+            <Parameter Name="imprisoned_place" Type="java.lang.String"/>
+        </Method>
+        <Method Name="validateActions" MethodName="validateActions">
+            <Return Name="_return_type_" Type="int"/>
+            <Parameter Name="folder_id" Type="int"/>
+            <Parameter Name="validation_type" Type="int"/>
+            <Parameter Name="session_id" Type="int"/>
+        </Method>
+        <Method Name="getFormCasePartyIdPK" MethodName="getFormCasePartyIdPK">
+            <Return Name="_return_type_" Type="java.math.BigDecimal"/>
+            <Parameter Name="formCaseDescriptionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="partyId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="updateRepayInfo" MethodName="updateRepayInfo">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="resPartId" Type="java.lang.String"/>
+            <Parameter Name="feesType" Type="java.lang.String"/>
+            <Parameter Name="settlProcID" Type="java.lang.String"/>
+            <Parameter Name="groupID" Type="java.lang.String"/>
+            <Parameter Name="settlDate" Type="java.lang.String"/>
+            <Parameter Name="paidAmount" Type="java.lang.String"/>
+            <Parameter Name="settAuthID" Type="java.lang.String"/>
+            <Parameter Name="recipNum" Type="java.lang.String"/>
+        </Method>
+        <Method Name="insertExcFolderActionsAttachs" MethodName="insertExcFolderActionsAttachs">
+            <Return Name="_return_type_" Type="int"/>
+            <Parameter Name="folderActionId" Type="long"/>
+            <Parameter Name="documentId" Type="java.lang.String"/>
+        </Method>
+        <Method Name="createFProcedureAndAction" MethodName="createFProcedureAndAction">
+            <Return Name="_return_type_" Type="java.math.BigDecimal"/>
+            <Parameter Name="resPartyId" Type="java.lang.String"/>
+            <Parameter Name="createdBy" Type="java.lang.String"/>
+            <Parameter Name="actionType" Type="java.lang.String"/>
+            <Parameter Name="folderID" Type="java.lang.String"/>
+            <Parameter Name="procStatus" Type="java.lang.String"/>
+        </Method>
+        <Method Name="stepsNumber" MethodName="stepsNumber">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="p_FOLDER_RECORD_ID" Type="int"/>
+            <Parameter Name="p_ACTION_TYPE" Type="int"/>
+            <Parameter Name="p_STEP_NUMBER" Type="int"/>
+        </Method>
+        <Method Name="excFolderDataInsertion" MethodName="excFolderDataInsertion">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="reservationId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CHANGE_SEQUENCE_NUMBER"
+                MethodName="callEXC_COURT_BC_PKG___CHANGE_SEQUENCE_NUMBER">
+            <Return Name="_return_type_" Type="java.lang.String"/>
+            <Parameter Name="folderId" Type="java.math.BigDecimal"/>
+            <Parameter Name="newSequenceNumber" Type="java.math.BigDecimal"/>
+            <Parameter Name="year" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ONE"
+                MethodName="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ONE">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sessionJudId" Type="java.math.BigDecimal"/>
+            <Parameter Name="username" Type="java.lang.String"/>
+            <Parameter Name="PartyId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CREATE_CHARG_FOR_ONE"
+                MethodName="callEXC_COURT_BC_PKG___CREATE_CHARG_FOR_ONE">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="decesionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sessionJudId" Type="java.math.BigDecimal"/>
+            <Parameter Name="username" Type="java.lang.String"/>
+            <Parameter Name="PartyId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="updateParPartiesLog" MethodName="updateParPartiesLog">
+            <Return Name="_return_type_" Type="int"/>
+            <Parameter Name="parPartyId" Type="long"/>
+        </Method>
+        <Method Name="callEXC_COURT_BC_PKG___CHANGE_SEQUENCE_NUMBER"
+                MethodName="callEXC_COURT_BC_PKG___CHANGE_SEQUENCE_NUMBER">
+            <Return Name="_return_type_" Type="java.lang.String"/>
+            <Parameter Name="folderId" Type="java.math.BigDecimal"/>
+            <Parameter Name="newSequenceNumber" Type="java.math.BigDecimal"/>
+            <Parameter Name="year" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="addLawyer" MethodName="addLawyer">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="p_PAR_ID" Type="java.math.BigDecimal"/>
+            <Parameter Name="p_PARTY_ID" Type="java.math.BigDecimal"/>
+            <Parameter Name="p_CREATED_BY" Type="java.lang.String"/>
+            <Parameter Name="p_BUSINESS_CASE_ID" Type="java.lang.String"/>
+            <Parameter Name="p_LAWYER_NAME" Type="java.lang.String"/>
+            <Parameter Name="p_RETAINER_NUMBER" Type="java.lang.String"/>
+            <Parameter Name="p_RELEASED_FROM" Type="java.lang.String"/>
+            <Parameter Name="p_NID" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="executeSessionAttachLKP" MethodName="executeSessionAttachLKP">
+            <Return Name="_return_type_" Type="void"/>
+        </Method>
+        <Method Name="getOperationNumber" MethodName="getOperationNumber">
+            <Return Name="_return_type_" Type="oracle.jbo.domain.Number"/>
+        </Method>
+        <Method Name="deleteDesHistory" MethodName="deleteDesHistory">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="operationNumber" Type="java.math.BigDecimal"/>
+            <Parameter Name="userId" Type="java.math.BigDecimal"/>
+            <Parameter Name="deletedId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="deleteDesPartHistory" MethodName="deleteDesPartHistory">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="operationNumber" Type="java.math.BigDecimal"/>
+            <Parameter Name="userId" Type="java.math.BigDecimal"/>
+            <Parameter Name="deletedId" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="updateResHistory" MethodName="updateResHistory">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="operationNumber" Type="java.math.BigDecimal"/>
+            <Parameter Name="resIdPk" Type="java.math.BigDecimal"/>
+            <Parameter Name="userId" Type="java.math.BigDecimal"/>
+            <Parameter Name="resJudType" Type="java.math.BigDecimal"/>
+            <Parameter Name="resAttendance" Type="java.math.BigDecimal"/>
+            <Parameter Name="resJudgClass" Type="java.math.BigDecimal"/>
+            <Parameter Name="resJudgClassDetail" Type="java.math.BigDecimal"/>
+            <Parameter Name="resJudgResolution" Type="java.sql.Clob"/>
+        </Method>
+        <Method Name="isDesPartChargesFound" MethodName="isDesPartChargesFound">
+            <Return Name="_return_type_" Type="boolean"/>
+            <Parameter Name="desPartIdPk" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="removeInstallments" MethodName="removeInstallments">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="p_FOLDER_RECORD_ID" Type="java.math.BigDecimal"/>
+            <Parameter Name="p_CREATED_BY" Type="java.lang.String"/>
+        </Method>
+        <Method Name="requestHistory" MethodName="requestHistory">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="p_PROCEDURE_ID" Type="java.math.BigDecimal"/>
+            <Parameter Name="p_CREATED_BY" Type="java.lang.String"/>
+            <Parameter Name="p_PARTY_NAME" Type="java.lang.String"/>
+            <Parameter Name="p_PARID" Type="java.lang.String"/>
+            <Parameter Name="p_ACTION_TYPE" Type="java.lang.String"/>
+            <Parameter Name="p_BUSINESS_CASE_ID" Type="java.lang.String"/>
+        </Method>
+        <Method Name="insertPlentyInstallment" MethodName="insertPlentyInstallment">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="p_FIRST_INSTALLMENT_DATE" Type="java.sql.Date"/>
+            <Parameter Name="p_MONTH_NUMBER" Type="java.math.BigDecimal"/>
+            <Parameter Name="p_FOLDER_RECORD" Type="java.math.BigDecimal"/>
+            <Parameter Name="p_FEES_AMOUNT" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="alterPlentyInstallments" MethodName="alterPlentyInstallments">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="p_PROCEDURE_ID" Type="java.math.BigDecimal"/>
+            <Parameter Name="p_FOLDER_RECORD" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="updateDesPartHistory" MethodName="updateDesPartHistory">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="operationNumber" Type="java.math.BigDecimal"/>
+            <Parameter Name="desPartIdPk" Type="java.math.BigDecimal"/>
+            <Parameter Name="userId" Type="java.math.BigDecimal"/>
+            <Parameter Name="desPartJudgClass" Type="java.math.BigDecimal"/>
+            <Parameter Name="desPartJudgClassDetail" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="updateSessionHistory" MethodName="updateSessionHistory">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="operationNumber" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesResId" Type="java.math.BigDecimal"/>
+            <Parameter Name="userId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesJudType" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesJudSubType" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesFirstSessionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesSecondSessionId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesCircleId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesJudTypeToggleId" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesAttendance" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesJudgClass" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesJudgClassDetail" Type="java.math.BigDecimal"/>
+            <Parameter Name="sesResolution" Type="java.sql.Clob"/>
+        </Method>
+        <Method
+            Name="insertDesHistory"
+            MethodName="insertDesHistory">
+            <Return
+                Name="_return_type_"
+                Type="void"/>
+            <Parameter
+                Name="operationNumber"
+                Type="java.math.BigDecimal"/>
+            <Parameter
+                Name="userId"
+                Type="java.math.BigDecimal"/>
+            <Parameter
+                Name="desIdPk"
+                Type="java.math.BigDecimal"/>
+            <Parameter
+                Name="formCaseDescId"
+                Type="java.math.BigDecimal"/>
+            <Parameter
+                Name="desId"
+                Type="java.math.BigDecimal"/>
+        </Method>
+        
+        <Method
+            Name="updateSessionFlag"
+            MethodName="updateSessionFlag">
+            <Return
+                Name="_return_type_"
+                Type="void"/>
+            <Parameter
+                Name="Id"
+                Type="java.lang.Number"/>
+        </Method>
+        
+<Method Name="insertDesPartHistory" MethodName="insertDesPartHistory">
+            <Return Name="_return_type_" Type="void"/>
+            <Parameter Name="operationNumber" Type="java.math.BigDecimal"/>
+            <Parameter Name="userId" Type="java.math.BigDecimal"/>
+            <Parameter Name="desPartIdPk" Type="java.math.BigDecimal"/>
+            <Parameter Name="formCaseDesId" Type="java.math.BigDecimal"/>
+            <Parameter Name="formCasePartyId" Type="java.math.BigDecimal"/>
+            <Parameter Name="desPartJudClass" Type="java.math.BigDecimal"/>
+            <Parameter Name="desPartJudClassDetail" Type="java.math.BigDecimal"/>
+        </Method>
+        <Method Name="executeSessionAttachLKPNew" MethodName="executeSessionAttachLKPNew">
+            <Return Name="_return_type_" Type="void"/>
+        </Method>
+    </ClientInterface>
+</AppModule>

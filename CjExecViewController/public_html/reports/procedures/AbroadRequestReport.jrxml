@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HasrDafater" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="261e9ab5-f547-4d50-a61c-d8b74dcc4acd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_PATH" class="java.lang.String"/>
+	<parameter name="Query" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mode" class="java.lang.String"/>
+	<parameter name="dateFrom" class="java.util.Date"/>
+	<parameter name="dateTo" class="java.util.Date"/>
+	<parameter name="KOLYA_ID" class="java.lang.String"/>
+	<parameter name="gozeyaId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT EXCPROCEDURESLOGEO.ID,
+       EXCPROCEDURESLOGEO.PROCEDURE_ID,
+       EXCPROCEDURESLOGEO.ACTION_TYPE_ID,
+       EXCPROCEDURESLOGEO.CREATED_BY,
+       TRUNC(EXCPROCEDURESLOGEO.CREATED_DATE) AS CREATED_DATE ,
+       EXCPROCEDURESLOGEO.ENTITY_ID,
+       EXCPROCEDURESLOGEO.BUSINESS_CASE_ID,
+       EXCPROCEDURESLOGEO.LOGGED_IN_ENTITY_ID,
+       EXCPROCEDURESLOGEO.SEQUENCE_NUMBER,
+       EXCPROCEDURESLOGEO.EXC_CLAIM_ID,
+       EXCPROCEDURESLOGEO.MODE_TYPE ,
+       EXCPROCEDURESLOGEO.DOCUMENT_ID ,
+       EXCPROCEDURESLOGEO.FOLDER_TYPE_ID ,
+       DECODE(EXCPROCEDURESLOGEO.FOLDER_TYPE_ID , '2' , 'حبس' , '3' , 'غرامة' , '5' , ' حبس غير منفذ ', '6' , 'حبس منفذ ') FOLDER_TYPE_NAME ,
+       EXCPROCEDURESLOGEO.REPEATED_FLAG ,
+       EXCPROCEDURESLOGEO.SEQUENCE_YEAR ,
+       EXCPROCEDURESLOGEO.DOCUMENT_ID2 ,
+       EXCPROCEDURESLOGEO.APPEAL_REQUEST ,
+       EXCPROCEDURESLOGEO.CRIMINAL_REQUEST ,
+       EXCPROCEDURESLOGEO.OPPOSITION_REQUEST ,
+       TRUNC(EXCPROCEDURESLOGEO.PROCEDURE_DATE) AS PROCEDURE_DATE ,
+       LOGGED_ENTITY.ENTITY_NAME AS LOGGED_ENTITY_NAME ,
+       CASE_ENTITY.ENTITY_NAME AS CASE_ENTITY_NAME ,
+       ACTION_TYPES.NAME AS ACTION_TYPE_NAME ,
+       CASE_TYPE.NAME AS CASE_TYPE_NAME ,
+       BUS_CASE.CASE_NUMBER ,
+       CASE_TYPE.ID AS CASE_TYPE_ID  ,
+       REPO.PAR_YEAR AS CASE_YEAR ,
+       SEC.FULL_NAME ,
+       EXCPROCEDURESLOGEO.SEQUENCE_YEAR || '/' || EXCPROCEDURESLOGEO.SEQUENCE_NUMBER || '/' || CASE_POLICE_ENTITY.ENTITY_NAME || '/' || CASE_TYPE.NAME || ' ' || DECODE(EXCPROCEDURESLOGEO.REPEATED_FLAG , 'N' , ' ' , 'Y' , 'مكرر') SEQUENCE_NUMBER_LONG
+
+FROM  EXC_PROCEDURES_LOG EXCPROCEDURESLOGEO , ENTITY LOGGED_ENTITY , ENTITY CASE_ENTITY , ENTITY CASE_POLICE_ENTITY ,EXC_LKP_ACTION_TYPES ACTION_TYPES ,
+BUSINESS_CASE BUS_CASE , BUSINESS_CASE_TYPE CASE_TYPE , PAR_POLICE_AUTHORITY_REPORT REPO , SEC_USERS SEC
+WHERE EXCPROCEDURESLOGEO.LOGGED_IN_ENTITY_ID = LOGGED_ENTITY.ID
+AND EXCPROCEDURESLOGEO.ENTITY_ID = CASE_ENTITY.ID
+AND REPO.ORIGIN_ENTITY =   CASE_POLICE_ENTITY.ID
+AND EXCPROCEDURESLOGEO.ACTION_TYPE_ID = ACTION_TYPES.ID
+AND EXCPROCEDURESLOGEO.BUSINESS_CASE_ID = BUS_CASE.ID
+AND BUS_CASE.BUSINESS_CASE_TYPE = CASE_TYPE.ID
+AND REPO.BUSINESS_CASE_ID = BUS_CASE.ID
+AND EXCPROCEDURESLOGEO.CREATED_BY = SEC.ID
+
+AND (TRUNC(EXCPROCEDURESLOGEO.CREATED_DATE) >= TRUNC($P{dateFrom}) OR $P{dateFrom} IS NULL)
+AND (TRUNC(EXCPROCEDURESLOGEO.CREATED_DATE) <= TRUNC($P{dateTo}) OR $P{dateTo} IS NULL)
+AND ((EXCPROCEDURESLOGEO.LOGGED_IN_ENTITY_ID = $P{KOLYA_ID} OR EXCPROCEDURESLOGEO.LOGGED_IN_ENTITY_ID IN (SELECT ID FROM ENTITY WHERE PARENT_ENTITY_ID = $P{KOLYA_ID})) OR $P{KOLYA_ID} IS NULL)
+AND (EXCPROCEDURESLOGEO.LOGGED_IN_ENTITY_ID = $P{gozeyaId} OR $P{gozeyaId} IS NULL)
+AND ((EXCPROCEDURESLOGEO.ENTITY_ID = $P{KOLYA_ID} OR EXCPROCEDURESLOGEO.ENTITY_ID IN (SELECT ID FROM ENTITY WHERE PARENT_ENTITY_ID = $P{KOLYA_ID})) OR $P{KOLYA_ID} IS NULL)
+AND (EXCPROCEDURESLOGEO.ENTITY_ID = $P{gozeyaId} OR $P{gozeyaId} IS NULL)
+
+ORDER BY EXCPROCEDURESLOGEO.ID DESC]]>
+	</queryString>
+	<field name="ID" class="java.math.BigDecimal"/>
+	<field name="PROCEDURE_ID" class="java.math.BigDecimal"/>
+	<field name="ACTION_TYPE_ID" class="java.math.BigDecimal"/>
+	<field name="CREATED_BY" class="java.math.BigDecimal"/>
+	<field name="CREATED_DATE" class="java.sql.Timestamp"/>
+	<field name="ENTITY_ID" class="java.math.BigDecimal"/>
+	<field name="BUSINESS_CASE_ID" class="java.math.BigDecimal"/>
+	<field name="LOGGED_IN_ENTITY_ID" class="java.math.BigDecimal"/>
+	<field name="SEQUENCE_NUMBER" class="java.lang.String"/>
+	<field name="EXC_CLAIM_ID" class="java.math.BigDecimal"/>
+	<field name="MODE_TYPE" class="java.math.BigDecimal"/>
+	<field name="DOCUMENT_ID" class="java.lang.String"/>
+	<field name="FOLDER_TYPE_ID" class="java.math.BigDecimal"/>
+	<field name="FOLDER_TYPE_NAME" class="java.lang.String"/>
+	<field name="REPEATED_FLAG" class="java.lang.String"/>
+	<field name="SEQUENCE_YEAR" class="java.math.BigDecimal"/>
+	<field name="DOCUMENT_ID2" class="java.lang.String"/>
+	<field name="APPEAL_REQUEST" class="java.lang.String"/>
+	<field name="CRIMINAL_REQUEST" class="java.lang.String"/>
+	<field name="OPPOSITION_REQUEST" class="java.lang.String"/>
+	<field name="PROCEDURE_DATE" class="java.sql.Timestamp"/>
+	<field name="LOGGED_ENTITY_NAME" class="java.lang.String"/>
+	<field name="CASE_ENTITY_NAME" class="java.lang.String"/>
+	<field name="ACTION_TYPE_NAME" class="java.lang.String"/>
+	<field name="CASE_TYPE_NAME" class="java.lang.String"/>
+	<field name="CASE_NUMBER" class="java.lang.String"/>
+	<field name="CASE_TYPE_ID" class="java.math.BigDecimal"/>
+	<field name="CASE_YEAR" class="java.math.BigDecimal"/>
+	<field name="FULL_NAME" class="java.lang.String"/>
+	<field name="SEQUENCE_NUMBER_LONG" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement mode="Opaque" x="0" y="0" width="115" height="79" uuid="c552c988-ca4b-44bb-955b-09fd6e244d2d"/>
+				<imageExpression><![CDATA[$P{REPORT_PATH} + "logo-ppo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="299" y="34" width="200" height="20" uuid="81da89e3-e96f-4cc0-ae5c-65d662b65272"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[دفتر حصر أحكام على الوافدين]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="645" y="0" width="180" height="20" uuid="7a2d866d-ebc2-44c5-ac17-66cfd71ff4a2"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[النيابة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="0" width="146" height="20" uuid="de1cd29d-5244-46ec-a739-f3f927f07b8d"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[تاريخ الإجراء]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="0" width="178" height="20" uuid="40fc5e61-88a3-47ec-a005-60e074957842"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الإجراء]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="0" width="146" height="20" uuid="a0bb8336-7593-4837-944f-c0c0a151cdcc"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[موظف الإدخال]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="0" width="85" height="20" uuid="f21bb1ad-1314-4d47-8d24-763cb22d7791"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[تاريخ الإدخال]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="645" y="0" width="180" height="20" isPrintWhenDetailOverflows="true" uuid="dd236f39-6e78-4cbf-93fc-c2f1bfa683dc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mode} == '1' ? $F{CASE_ENTITY_NAME} : $F{LOGGED_ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="499" y="0" width="146" height="20" isPrintWhenDetailOverflows="true" uuid="6d0023ab-1a97-405d-a5d4-f5c4f097632b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROCEDURE_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="321" y="0" width="178" height="20" isPrintWhenDetailOverflows="true" uuid="6bfe8b18-c143-4ecb-bfa4-e2a6a4851dde"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACTION_TYPE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="175" y="0" width="146" height="20" isPrintWhenDetailOverflows="true" uuid="2a275f29-4365-468b-a7cf-4778e4d7f8c9"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FULL_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="90" y="0" width="85" height="20" isPrintWhenDetailOverflows="true" uuid="778d409b-4488-4c7f-8318-03d3dee8ce26"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CREATED_DATE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

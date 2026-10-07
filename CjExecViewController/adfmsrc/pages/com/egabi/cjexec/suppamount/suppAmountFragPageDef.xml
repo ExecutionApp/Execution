@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="suppAmountFragPageDef"
+                Package="pages.com.egabi.cjexec.suppamount">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ExcCourtBcPartyDebt" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExcCourtBcPartyDebtIterator"/>
+    <iterator id="ExcFolderProceduresIterator" Binds="ExcFolderProcedures" DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+    <iterator id="ExcFolderActionsIterator" Binds="ExcFolderActions" DataControl="CjExecAMDataControl" RangeSize="25"/>
+    <iterator Binds="ExcFolderData" RangeSize="10" DataControl="CjExecAMDataControl" id="ExcFolderDataIterator"/>
+    <iterator Binds="ExcFolderProcInstall" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExcFolderProcInstallIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ExcCourtBcPartyDebtIterator" id="ExcCourtBcPartyDebt">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.suppamount.ExcCourtBcPartyDebtVO"
+                      Name="ExcCourtBcPartyDebt0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="FeesTypeId"/>
+          <Item Value="Amount"/>
+          <Item Value="isPaid"/>
+          <Item Value="SettlementDate"/>
+          <Item Value="SettReqProcId"/>
+          <Item Value="isSelected"/>
+          <Item Value="SettlementProcId"/>
+          <Item Value="PaidAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="ExcCourtBcPartyDebtIterator" id="isSelected" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="isSelected"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <action id="Commit" DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="ExcFolderDataIterator" id="ResPartyId">
+      <AttrNames>
+        <Item Value="ResPartyId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ExcFolderProcInstallIterator" id="ExcFolderProcInstall">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.suppamount.ExcFolderProcInstallVO"
+                      Name="ExcFolderProcInstall0">
+        <AttrNames>
+          <Item Value="InstallmentNumber"/>
+          <Item Value="InstallmentDate"/>
+          <Item Value="InstallmentAmount"/>
+          <Item Value="SettlementDate"/>
+          <Item Value="SettReqProcId"/>
+          <Item Value="installSelected"/>
+          <Item Value="SettlementProcId"/>
+          <Item Value="isPaid"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="ExcFolderProcInstallIterator" id="rowConts">
+      <AttrNames>
+        <Item Value="rowConts"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderDataIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="ExcFolderDataIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="P_FOLDER_ID" NDValue="#{bindings.Id.inputValue}" NDType="java.math.BigDecimal"/>
+    </action>
+    <button IterBinding="ExcCourtBcPartyDebtIterator" id="isPaid" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="isPaid"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="t"/>
+        <Item Value="f"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ExcFolderProcInstallIterator" id="isPaid1" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="isPaid"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="t"/>
+        <Item Value="f"/>
+      </ValueList>
+    </button>
+    <action IterBinding="ExcFolderProcInstallIterator" id="Execute" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <methodAction id="createFProcedureAndAction" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createFProcedureAndAction" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider"
+                  ReturnName="data.CjExecAMDataControl.methodResults.createFProcedureAndAction_CjExecAMDataControl_dataProvider_createFProcedureAndAction_result">
+      <NamedData NDName="resPartyId" NDValue="#{bindings.ResPartyId.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="createdBy" NDValue="3169" NDType="java.lang.String"/>
+      <NamedData NDName="actionType" NDValue="6" NDType="java.lang.String"/>
+      <NamedData NDName="folderID" NDValue="#{bindings.Id.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="procStatus" NDValue="11" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

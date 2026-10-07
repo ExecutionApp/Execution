@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="InventoryCase-TF">
+    <default-activity>methodCall1</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>inventoryBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.inventory.InventoryBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchByCase">
+      <page>/pages/com/egabi/inventory/SearchByCase.jsff</page>
+    </view>
+    <method-call id="methodCall1">
+      <method>#{pageFlowScope.inventoryBean.userRoles}</method>
+      <outcome>
+        <fixed-outcome>go</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>methodCall1</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>go</from-outcome>
+        <to-activity-id>SearchByCase</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

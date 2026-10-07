@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ar">
+    <af:document title="إعتماد  إجراءات الطعن على الاحكام" id="d1">
+        <af:form id="f1" usesUpload="true">
+            <af:pageTemplate viewId="/main-template.jspx" id="pt1">
+                <f:facet name="center">
+                    <af:region value="#{bindings.JudgmentAppealApprovalTF1.regionModel}" id="r2"/>
+                </f:facet>
+                <f:facet name="start"/>
+                <f:facet name="end"/>
+            </af:pageTemplate>  
+        </af:form>
+    </af:document>
+</f:view>

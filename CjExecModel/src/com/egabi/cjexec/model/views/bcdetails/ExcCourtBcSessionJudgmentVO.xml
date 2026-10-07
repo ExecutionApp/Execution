@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcCourtBcSessionJudgmentVO"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  SelectAllAttributes="false"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <ViewAccessor
+    Name="PenaltyTypeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.PenaltyTypeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ExcLKPJudeSubtypeeRPVP1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.ExcLKPJudeSubtypeeRPVP"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="HearindDatesFirstDegreeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.HearindDatesFirstDegreeROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="JudgmentSubTypesRVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.JudgmentSubTypesRVO"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="judgmentMainTypeParam">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA['4']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_JudgmentType"
+    ListVOName="PenaltyTypeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="JudgmentType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_JudgmentSubType"
+    ListVOName="ExcLKPJudeSubtypeeRPVP1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="JudgmentSubType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FirstSessionId"
+    ListVOName="HearindDatesFirstDegreeROVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FirstSessionId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="HearingDate"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SecondSessionId"
+    ListVOName="HearindDatesFirstDegreeROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="SecondSessionId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="HearingDate"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FirstSession"
+    ListVOName="HearindDatesFirstDegreeROVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FirstSession"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="FirstSessionId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="HearingDate"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="HearingDate"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SecondSession"
+    ListVOName="HearindDatesFirstDegreeROVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SecondSession"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="SecondSessionId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="HearingDate"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="HearingDate"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_JudgmentTypeId"
+    ListVOName="JudgmentSubTypesRVO1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="JudgmentTypeId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="ExcCourtBcSessionJudgmentEO"
+    Entity="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcSessionJudgmentEO"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="CourtBcHearingResId"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CourtBcHearingResId"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="COURT_BC_HEARING_RES_ID"/>
+  <ViewAttribute
+    Name="JudgmentType"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="JudgmentType"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="JUDGMENT_TYPE"
+    LOVName="LOV_JudgmentType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JudgmentSubType"
+    PrecisionRule="true"
+    EntityAttrName="JudgmentSubType"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="JUDGMENT_SUB_TYPE"
+    LOVName="LOV_JudgmentSubType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FirstSessionId"
+    PrecisionRule="true"
+    EntityAttrName="FirstSessionId"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="FIRST_SESSION_ID"
+    LOVName="LOV_FirstSessionId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SecondSessionId"
+    PrecisionRule="true"
+    EntityAttrName="SecondSessionId"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="SECOND_SESSION_ID"
+    LOVName="LOV_SecondSessionId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CircleId"
+    PrecisionRule="true"
+    EntityAttrName="CircleId"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="CIRCLE_ID"/>
+  <ViewAttribute
+    Name="ClassifiedFlag"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ClassifiedFlag"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="CLASSIFIED_FLAG"/>
+  <ViewAttribute
+    Name="JudgementResolution"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="JudgementResolution"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="JUDGEMENT_RESOLUTION"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="CREATED_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="JudgementTypeToggle"
+    PrecisionRule="true"
+    EntityAttrName="JudgementTypeToggle"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="JUDGEMENT_TYPE_TOGGLE"/>
+  <ViewAttribute
+    Name="JudgmentClassification"
+    PrecisionRule="true"
+    EntityAttrName="JudgmentClassification"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="JUDGMENT_CLASSIFICATION"/>
+  <ViewAttribute
+    Name="JudgementClassDetail"
+    PrecisionRule="true"
+    EntityAttrName="JudgementClassDetail"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="JUDGEMENT_CLASS_DETAIL"/>
+  <ViewAttribute
+    Name="Attendance"
+    PrecisionRule="true"
+    EntityAttrName="Attendance"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="ATTENDANCE"/>
+  <ViewAttribute
+    Name="FirstSession"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_FirstSession">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SecondSession"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_SecondSession">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JudgmentTypeId"
+    PrecisionRule="true"
+    EntityAttrName="JudgmentTypeId"
+    EntityUsage="ExcCourtBcSessionJudgmentEO"
+    AliasName="JUDGMENT_TYPE_ID"
+    LOVName="LOV_JudgmentTypeId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="ExcCourtBcDecision"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ExcCourtBcDecisionFk2VL"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ExcCourtBcSessionAttach"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink16VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="CourtBcHearingReservation"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.FkCourtBcHearingResIdSeVL"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+</ViewObject>

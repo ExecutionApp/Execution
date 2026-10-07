@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="displayAuditFragPageDef"
+                Package="pages.com.egabi.auditUpdate">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ValidatePoliceReportROVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.AuditSimpleMasterRo" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="AuditSimpleMasterRoIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="PoliceNo">
+      <AttrNames>
+        <Item Value="PoliceNo"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseType"
+          id="BusinessCaseType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="ParYear">
+      <AttrNames>
+        <Item Value="ParYear"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_UserIdTrans" id="UserIdTrans"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="ToDateTrans">
+      <AttrNames>
+        <Item Value="ToDateTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator" id="FromDateTrans">
+      <AttrNames>
+        <Item Value="FromDateTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="filterAuditSimple" RequiresUpdateModel="true" Action="invokeMethod" MethodName="filterAuditSimple"
+                  IsViewObjectMethod="true" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.AuditSimpleMasterRo">
+      <NamedData NDName="startDate" NDValue="#{bindings.FromDateTrans.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="endDate" NDValue="#{bindings.ToDateTrans.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="userID" NDValue="#{bindings.UserIdTrans.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="caseNumber" NDValue="#{bindings.PoliceNo.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="parYear" NDValue="#{bindings.ParYear.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="entityId" NDValue="#{bindings.NeyabGozayaa.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="originEntity" NDValue="#{bindings.OrigEntity.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="businessCaseType" NDValue="#{bindings.BusinessCaseType.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="AuditSimpleMasterRoIterator" id="AuditSimpleMasterRo1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleMasterRo"
+                      Name="AuditSimpleMasterRo10">
+        <AttrNames>
+          <Item Value="CaseNumber"/>
+          <Item Value="ParYear"/>
+          <Item Value="Name"/>
+          <Item Value="EntityName"/>
+          <Item Value="BusinessCaseId"/>
+          <Item Value="EntityName1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

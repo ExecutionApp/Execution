@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="CaseInventorySearch_TF_CaseInventorySearch_TF_ExecuteWithParamsPageDef"
+                Package="taskflows.inventory" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="SimplifiedModeAM1.SecUserFunctionsRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SecUserFunctionsRVO1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="SecUserFunctionsRVO1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="uderIdBind" NDValue="#{sessionScope.userInfo.userId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

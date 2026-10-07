@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject xmlns="http://xmlns.oracle.com/bc4j" Name="ExcFolderProceduresViewVO"
+    Version="12.2.1.0.31"
+            InheritPersonalization="merge" BindingStyle="OracleName" CustomQuery="false"
+            ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl" PageIterMode="Full"
+            RowClass="com.egabi.cjexec.model.views.inventory.ExcFolderProceduresViewVORowImpl"
+            FromList="EXC_FOLDER_PROCEDURES ExcFolderProceduresEO" Where="rownum =1"
+    SelectList="ExcFolderProceduresEO.ID, 
+       ExcFolderProceduresEO.CAPACITY_TYPE, 
+       ExcFolderProceduresEO.COURT_CIRCLE_DATES_HEARING_ID, 
+       ExcFolderProceduresEO.RES_PARTY_ID, 
+       ExcFolderProceduresEO.PROCEDURE_TEXT, 
+       ExcFolderProceduresEO.CREATED_BY, 
+       ExcFolderProceduresEO.CREATED_DATE, 
+       ExcFolderProceduresEO.PROCEDURE_STATUS, 
+       ExcFolderProceduresEO.PROCEDURE_SERIAL, 
+       ExcFolderProceduresEO.PROCEDURE_DATE, 
+       ExcFolderProceduresEO.ADVANCE_PAYMENT_FLAG, 
+       ExcFolderProceduresEO.ADVANCE_PAYMENT_AMOUNT, 
+       ExcFolderProceduresEO.ADVANCE_PAYMENT_DATE, 
+       ExcFolderProceduresEO.NUMBER_OF_INSTALLMENT, 
+       ExcFolderProceduresEO.FIRST_INSTALLMENT_DATE, 
+       ExcFolderProceduresEO.PROSECUTION_ID, 
+       ExcFolderProceduresEO.PRIMARY_LAWYER_ID, 
+       ExcFolderProceduresEO.SECONDARY_LAWYER_ID, 
+       ExcFolderProceduresEO.PROC_PROSECUTION_ID, 
+       ExcFolderProceduresEO.RESUMPTION_FLAG, 
+       ExcFolderProceduresEO.RELATED_ID, 
+       ExcFolderProceduresEO.NUMBER_PAID, 
+       ExcFolderProceduresEO.FEES_TYPE_ID, 
+       ExcFolderProceduresEO.ACTION_NOTES, 
+       ExcFolderProceduresEO.CANCELLATION_DATE, 
+       ExcFolderProceduresEO.CANCELLED_BY, 
+       ExcFolderProceduresEO.DELIVERY_DATE, 
+       ExcFolderProceduresEO.END_DATE, 
+       ExcFolderProceduresEO.GUARDIAN_NAME, 
+       ExcFolderProceduresEO.GUARDIAN_NATIONAL_ID, 
+       ExcFolderProceduresEO.KINSHIP, 
+       ExcFolderProceduresEO.REASON_DATE, 
+       ExcFolderProceduresEO.SEND_TO_COURT_DATE, 
+       ExcFolderProceduresEO.START_DATE, 
+       ExcFolderProceduresEO.VETO_JUDGE_REASON, 
+       ExcFolderProceduresEO.VETO_JUDGE_STATUS, 
+       ExcFolderProceduresEO.VETO_RESERVATION_DATE, 
+       ExcFolderProceduresEO.APPEAL_PLACE, 
+       ExcFolderProceduresEO.PRISON_ID, 
+       ExcFolderProceduresEO.FIXED_FINE, 
+       ExcFolderProceduresEO.DAILY_FINE, 
+       ExcFolderProceduresEO.GUARANTEE, 
+       ExcFolderProceduresEO.EXPENSES, 
+       ExcFolderProceduresEO.LAWYER_FEES, 
+       ExcFolderProceduresEO.PRISON_NAME_DESC, 
+       ExcFolderProceduresEO.CLAIM_FOLDER_ID, 
+       ExcFolderProceduresEO.PHONE_NUM">
+    <DesignTime>
+        <Attr Name="_codeGenFlag2" Value="Access"/>
+        <Attr Name="_isCodegen" Value="true"/>
+    </DesignTime>
+    <EntityUsage Name="ExcFolderProceduresEO" Entity="com.egabi.cjexec.model.entities.inventory.ExcFolderProceduresEO"/>
+    <ViewAttribute Name="Id" PrecisionRule="true" EntityAttrName="Id" EntityUsage="ExcFolderProceduresEO"
+                   AliasName="ID"/>
+    <ViewAttribute Name="CapacityType" PrecisionRule="true" EntityAttrName="CapacityType"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="CAPACITY_TYPE"/>
+    <ViewAttribute Name="CourtCircleDatesHearingId" PrecisionRule="true" EntityAttrName="CourtCircleDatesHearingId"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="COURT_CIRCLE_DATES_HEARING_ID"/>
+    <ViewAttribute Name="ResPartyId" PrecisionRule="true" EntityAttrName="ResPartyId"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="RES_PARTY_ID"/>
+    <ViewAttribute Name="ProcedureText" PrecisionRule="true" EntityAttrName="ProcedureText"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="PROCEDURE_TEXT"/>
+    <ViewAttribute Name="CreatedBy" PrecisionRule="true" EntityAttrName="CreatedBy" EntityUsage="ExcFolderProceduresEO"
+                   AliasName="CREATED_BY"/>
+    <ViewAttribute Name="CreatedDate" PrecisionRule="true" EntityAttrName="CreatedDate"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="CREATED_DATE" IsUpdateable="false"/>
+    <ViewAttribute Name="ProcedureStatus" PrecisionRule="true" EntityAttrName="ProcedureStatus"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="PROCEDURE_STATUS"/>
+    <ViewAttribute Name="ProcedureSerial" PrecisionRule="true" EntityAttrName="ProcedureSerial"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="PROCEDURE_SERIAL"/>
+    <ViewAttribute Name="ProcedureDate" PrecisionRule="true" EntityAttrName="ProcedureDate"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="PROCEDURE_DATE"/>
+    <ViewAttribute Name="AdvancePaymentFlag" PrecisionRule="true" EntityAttrName="AdvancePaymentFlag"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="ADVANCE_PAYMENT_FLAG"/>
+    <ViewAttribute Name="AdvancePaymentAmount" PrecisionRule="true" EntityAttrName="AdvancePaymentAmount"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="ADVANCE_PAYMENT_AMOUNT"/>
+    <ViewAttribute Name="AdvancePaymentDate" PrecisionRule="true" EntityAttrName="AdvancePaymentDate"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="ADVANCE_PAYMENT_DATE"/>
+    <ViewAttribute Name="NumberOfInstallment" PrecisionRule="true" EntityAttrName="NumberOfInstallment"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="NUMBER_OF_INSTALLMENT"/>
+    <ViewAttribute Name="FirstInstallmentDate" PrecisionRule="true" EntityAttrName="FirstInstallmentDate"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="FIRST_INSTALLMENT_DATE"/>
+    <ViewAttribute Name="ProsecutionId" PrecisionRule="true" EntityAttrName="ProsecutionId"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="PROSECUTION_ID"/>
+    <ViewAttribute Name="PrimaryLawyerId" PrecisionRule="true" EntityAttrName="PrimaryLawyerId"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="PRIMARY_LAWYER_ID"/>
+    <ViewAttribute Name="SecondaryLawyerId" PrecisionRule="true" EntityAttrName="SecondaryLawyerId"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="SECONDARY_LAWYER_ID"/>
+    <ViewAttribute Name="ProcProsecutionId" PrecisionRule="true" EntityAttrName="ProcProsecutionId"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="PROC_PROSECUTION_ID"/>
+    <ViewAttribute Name="ResumptionFlag" PrecisionRule="true" EntityAttrName="ResumptionFlag"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="RESUMPTION_FLAG"/>
+    <ViewAttribute Name="RelatedId" PrecisionRule="true" EntityAttrName="RelatedId" EntityUsage="ExcFolderProceduresEO"
+                   AliasName="RELATED_ID"/>
+    <ViewAttribute Name="NumberPaid" PrecisionRule="true" EntityAttrName="NumberPaid"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="NUMBER_PAID"/>
+    <ViewAttribute Name="FeesTypeId" PrecisionRule="true" EntityAttrName="FeesTypeId"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="FEES_TYPE_ID"/>
+    <ViewAttribute Name="ActionNotes" PrecisionRule="true" EntityAttrName="ActionNotes"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="ACTION_NOTES"/>
+    
+  <ViewAttribute
+    Name="CancellationDate"
+    PrecisionRule="true"
+    EntityAttrName="CancellationDate"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="CANCELLATION_DATE"/>
+  <ViewAttribute
+    Name="CancelledBy"
+    PrecisionRule="true"
+    EntityAttrName="CancelledBy"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="CANCELLED_BY"/>
+  <ViewAttribute
+    Name="DeliveryDate"
+    PrecisionRule="true"
+    EntityAttrName="DeliveryDate"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="DELIVERY_DATE"/>
+  <ViewAttribute
+    Name="EndDate"
+    PrecisionRule="true"
+    EntityAttrName="EndDate"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="END_DATE"/>
+  <ViewAttribute
+    Name="GuardianName"
+    PrecisionRule="true"
+    EntityAttrName="GuardianName"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="GUARDIAN_NAME"/>
+  <ViewAttribute
+    Name="GuardianNationalId"
+    PrecisionRule="true"
+    EntityAttrName="GuardianNationalId"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="GUARDIAN_NATIONAL_ID"/>
+    
+    <!--<ViewAttribute
+    Name="EndDate"
+    PrecisionRule="true"
+    EntityAttrName="EndDate"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="END_DATE"/>-->
+  <!--<ViewAttribute
+    Name="DeliveryDate"
+    PrecisionRule="true"
+    EntityAttrName="DeliveryDate"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="DELIVERY_DATE"/>-->
+     <ViewAttribute Name="Kinship" PrecisionRule="true" EntityAttrName="Kinship" EntityUsage="ExcFolderProceduresEO"
+                   AliasName="KINSHIP"/>
+    <ViewAttribute Name="ReasonDate" PrecisionRule="true" EntityAttrName="ReasonDate"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="REASON_DATE"/>
+    <ViewAttribute Name="SendToCourtDate" PrecisionRule="true" EntityAttrName="SendToCourtDate"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="SEND_TO_COURT_DATE"/>
+  <ViewAttribute
+    Name="StartDate"
+    PrecisionRule="true"
+    EntityAttrName="StartDate"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="START_DATE"/>
+  <!--<ViewAttribute
+    Name="GuardianName"
+    PrecisionRule="true"
+    EntityAttrName="GuardianName"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="GUARDIAN_NAME"/>-->
+  <!--<ViewAttribute
+    Name="GuardianNationalId"
+    PrecisionRule="true"
+    EntityAttrName="GuardianNationalId"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="GUARDIAN_NATIONAL_ID"/>-->
+  <!--<ViewAttribute
+    Name="Kinship"
+    PrecisionRule="true"
+    EntityAttrName="Kinship"
+    EntityUsage="ExcFolderProceduresEO"
+    AliasName="KINSHIP"/>-->
+   
+    <!--<ViewAttribute Name="StartDate" PrecisionRule="true" EntityAttrName="StartDate" EntityUsage="ExcFolderProceduresEO"
+                   AliasName="START_DATE"/>-->
+    <ViewAttribute Name="VetoJudgeReason" PrecisionRule="true" EntityAttrName="VetoJudgeReason"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="VETO_JUDGE_REASON"/>
+    <ViewAttribute Name="VetoJudgeStatus" PrecisionRule="true" EntityAttrName="VetoJudgeStatus"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="VETO_JUDGE_STATUS"/>
+    <ViewAttribute Name="VetoReservationDate" PrecisionRule="true" EntityAttrName="VetoReservationDate"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="VETO_RESERVATION_DATE"/>
+    <ViewAttribute Name="AppealPlace" PrecisionRule="true" EntityAttrName="AppealPlace"
+                   EntityUsage="ExcFolderProceduresEO" AliasName="APPEAL_PLACE"/>
+    <ViewAttribute Name="PrisonId" PrecisionRule="true" EntityAttrName="PrisonId" EntityUsage="ExcFolderProceduresEO"
+                   AliasName="PRISON_ID"/>
+    <ViewAttribute
+        Name="FixedFine"
+        PrecisionRule="true"
+        EntityAttrName="FixedFine"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="FIXED_FINE"/>
+    <ViewAttribute
+        Name="DailyFine"
+        PrecisionRule="true"
+        EntityAttrName="DailyFine"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="DAILY_FINE"/>
+    <ViewAttribute
+        Name="Guarantee"
+        PrecisionRule="true"
+        EntityAttrName="Guarantee"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="GUARANTEE"/>
+    <ViewAttribute
+        Name="Expenses"
+        PrecisionRule="true"
+        EntityAttrName="Expenses"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="EXPENSES"/>
+    <ViewAttribute
+        Name="LawyerFees"
+        PrecisionRule="true"
+        EntityAttrName="LawyerFees"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="LAWYER_FEES"/>
+    <ViewAttribute
+        Name="PrisonNameDesc"
+        PrecisionRule="true"
+        EntityAttrName="PrisonNameDesc"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="PRISON_NAME_DESC"/>
+    <ViewAttribute
+        Name="ClaimFolderId"
+        PrecisionRule="true"
+        EntityAttrName="ClaimFolderId"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="CLAIM_FOLDER_ID"/>
+    <ViewAttribute
+        Name="PhoneNum"
+        PrecisionRule="true"
+        EntityAttrName="PhoneNum"
+        EntityUsage="ExcFolderProceduresEO"
+        AliasName="PHONE_NUM"/>
+</ViewObject>

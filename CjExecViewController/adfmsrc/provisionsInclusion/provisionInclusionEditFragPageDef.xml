@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="provisionInclusionEditFragPageDef" Package="provisionsInclusion">
+    <parameters/>
+    <executables>
+        <!--<invokeAction id="executeDes" Binds="Execute" Refresh="prepareModelIfNeeded"/>-->
+        <variableIterator id="variables"/>
+        <iterator Binds="ExcCourtBcSessionJudgmentVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcCourtBcSessionJudgmentVO1Iterator"/>
+        <iterator Binds="CourtBcHearingResPartiesVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="CourtBcHearingResPartiesVO1Iterator"/>
+        <iterator Binds="FormCaseDescriptionDesView1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="FormCaseDescriptionDesView1Iterator"/>
+        <iterator Binds="FormCaseDescriptionDesPartView3" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="FormCaseDescriptionDesPartView3Iterator"/>
+        <iterator Binds="FormCaseDescriptionView1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="FormCaseDescriptionView1Iterator"/>
+        <iterator Binds="FormCaseDescriptionPartiesView1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="FormCaseDescriptionPartiesView1Iterator"/>
+        <iterator Binds="FormCaseDescriptionDesPartView1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="FormCaseDescriptionDesPartView1Iterator"/>
+        <iterator Binds="FormCaseDescriptionDesPartView2" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="FormCaseDescriptionDesPartView2Iterator"/>
+        <iterator Binds="ExcCourtBcSessionAttachView2" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcCourtBcSessionAttachView2Iterator"/>
+        <taskFlow id="ExcPrtySessJdgTF1"
+                  taskFlowId="/WEB-INF/taskflows/execpartysessionjudgments/ExcPrtySessJdgTF.xml#ExcPrtySessJdgTF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters>
+                <parameter id="partyId" value="#{pageFlowScope.provisionsInclusionBean.partyIdTF}"/>
+            </parameters>
+        </taskFlow>
+        <iterator Binds="ExcLkpSessionAttachView1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcLkpSessionAttachView1Iterator"/>
+        <taskFlow id="Par_PartiesTF1" taskFlowId="/WEB-INF/taskflows/ParParties/Par_Parties-TF.xml#Par_Parties-TF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding" Refresh="ifNeeded">
+            <parameters>
+                <parameter id="partyId" value="#{pageFlowScope.provisionsInclusionBean.partyIdTFEdit}"/>
+            </parameters>
+        </taskFlow>
+        <iterator id="CourtBcHearingResPartiesVO2Iterator" Binds="CourtBcHearingResPartiesVO2"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator id="ParPartiesView1Iterator" Binds="ParPartiesView1" DataControl="CjExecAMDataControl"
+                  RangeSize="25"/>
+        <iterator id="ExecPartySessionJudgmentsROV1Iterator" Binds="ExecPartySessionJudgmentsROV1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator id="SearchFormRVO1Iterator" Binds="SearchFormRVO1" DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator id="SearchResultsRVO1Iterator" Binds="SearchResultsRVO1" DataControl="CjExecAMDataControl"
+                  RangeSize="25"/>
+    </executables>
+    <bindings>
+        <list IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" StaticList="false" Uses="LOV_CircleId" id="CircleId"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" id="ClassifiedFlag">
+            <AttrNames>
+                <Item Value="ClassifiedFlag"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" id="CourtBcHearingResId">
+            <AttrNames>
+                <Item Value="CourtBcHearingResId"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" StaticList="false" Uses="LOV_FirstSessionId"
+              id="FirstSessionId" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" id="Id">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" id="JudgementResolution">
+            <AttrNames>
+                <Item Value="JudgementResolution"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" StaticList="false" Uses="LOV_JudgmentSubType"
+              id="JudgmentSubType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" StaticList="false" Uses="LOV_JudgmentType"
+              id="JudgmentType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" StaticList="false" Uses="LOV_SecondSessionId"
+              id="SecondSessionId" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <tree IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" id="ExcCourtBcSessionJudgmentVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcCourtBcSessionJudgmentVO"
+                            Name="ExcCourtBcSessionJudgmentVO10">
+                <AttrNames>
+                    <Item Value="CircleId"/>
+                    <Item Value="ClassifiedFlag"/>
+                    <Item Value="CourtBcHearingResId"/>
+                    <Item Value="FirstSessionId"/>
+                    <Item Value="Id"/>
+                    <Item Value="JudgementResolution"/>
+                    <Item Value="JudgmentSubType"/>
+                    <Item Value="JudgmentType"/>
+                    <Item Value="SecondSessionId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="CourtBcHearingResPartiesVO1Iterator" id="CourtBcHearingResPartiesVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.CourtBcHearingResPartiesVO"
+                            Name="CourtBcHearingResPartiesVO10" DiscrName="Id">
+                <AttrNames>
+                    <Item Value="ActionTypeId"/>
+                    <Item Value="Amount"/>
+                    <Item Value="Announced"/>
+                    <Item Value="Attachment1"/>
+                    <Item Value="Attachment2"/>
+                    <Item Value="Attendance"/>
+                    <Item Value="BcDegreeSpecId"/>
+                    <Item Value="BusinessCaseDetailsId"/>
+                    <Item Value="Cancelled"/>
+                    <Item Value="CauseOfResumption"/>
+                    <Item Value="CommitteeType"/>
+                    <Item Value="CourtBcHearingResId"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreatedDate"/>
+                    <Item Value="CreatedEntityId"/>
+                    <Item Value="CreatedUserId"/>
+                    <Item Value="DailyPayments"/>
+                    <Item Value="DecisionText"/>
+                    <Item Value="Degree"/>
+                    <Item Value="DegreeDate"/>
+                    <Item Value="Description"/>
+                    <Item Value="ExecutionCancellation"/>
+                    <Item Value="ExecutionCancellationCause"/>
+                    <Item Value="ExecutionNumber"/>
+                    <Item Value="ExecutionNumberSchedule"/>
+                    <Item Value="ExecutionStartDate"/>
+                    <Item Value="ExecutionType"/>
+                    <Item Value="Fees"/>
+                    <Item Value="Guarantee"/>
+                    <Item Value="GuaranteeDate"/>
+                    <Item Value="GuaranteeNumber"/>
+                    <Item Value="GuranteeAmount"/>
+                    <Item Value="Id"/>
+                    <Item Value="InPrisonDays"/>
+                    <Item Value="InPrisonMonths"/>
+                    <Item Value="InPrisonYears"/>
+                    <Item Value="JudgementResolution"/>
+                    <Item Value="JudgmentActionType"/>
+                    <Item Value="JudgmentClassification"/>
+                    <Item Value="LawyerFees"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="PartyOrder"/>
+                    <Item Value="PaymentsNumber"/>
+                    <Item Value="ScheduleYear"/>
+                    <Item Value="Stamp"/>
+                    <Item Value="Status"/>
+                    <Item Value="UpdateBy"/>
+                    <Item Value="UpdatedDate"/>
+                    <Item Value="X"/>
+                    <Item Value="PartFullName"/>
+                    <Item Value="PartNickName"/>
+                    <Item Value="JudgementResolutionC"/>
+                    <Item Value="JudgementType"/>
+                    <Item Value="JudgementClassDetail"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="FormCaseDescriptionDesPartView1Iterator" id="FormCaseDescriptionDesPartView1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesPartView"
+                            Name="FormCaseDescriptionDesPartView10">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreatedDate"/>
+                    <Item Value="UpdateBy"/>
+                    <Item Value="UpdateDate"/>
+                    <Item Value="FormCaseDesId"/>
+                    <Item Value="FormCasePartyId"/>
+                    <Item Value="FormCaseDes"/>
+                    <Item Value="FormCaseParty"/>
+                    <Item Value="JudgementClassDetail"/>
+                    <Item Value="JudgmentClassification"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="FormCaseDescriptionDesPartView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="FormCaseDescriptionDesPartView1Iterator" id="Delete" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="CjExecAMDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="CjExecAMDataControl"/>
+        <tree IterBinding="FormCaseDescriptionDesView1Iterator" id="FormCaseDescriptionDesView1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesView"
+                            Name="FormCaseDescriptionDesView10">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="FormCaseDescriptionId"/>
+                    <Item Value="DescriptionId"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreatedDate"/>
+                    <Item Value="UpdatedBy"/>
+                    <Item Value="UpdatedDate"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="FormCaseDescriptionDesView1Iterator" id="CreateInsert1" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="FormCaseDescriptionDesView1Iterator" id="Delete1" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <tree IterBinding="FormCaseDescriptionDesPartView3Iterator" id="FormCaseDescriptionDesPartView3">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesPartView"
+                            Name="FormCaseDescriptionDesPartView30">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreatedDate"/>
+                    <Item Value="UpdateBy"/>
+                    <Item Value="UpdateDate"/>
+                    <Item Value="FormCaseDesId"/>
+                    <Item Value="FormCasePartyId"/>
+                    <Item Value="FormCaseDes"/>
+                    <Item Value="FormCaseParty"/>
+                    <Item Value="JudgementClassDetail"/>
+                    <Item Value="JudgmentClassification"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="FormCaseDescriptionView1Iterator" id="FormCaseDescriptionView1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionView"
+                            Name="FormCaseDescriptionView10">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="BusinessCaseId"/>
+                    <Item Value="Description"/>
+                    <Item Value="DescriptionDes"/>
+                    <Item Value="EntityId"/>
+                    <Item Value="BusinessCaseDetailsId"/>
+                    <Item Value="CourtCircleDateId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="FormCaseDescriptionDesView1Iterator" id="FormCaseDescriptionDesView11">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesView"
+                            Name="FormCaseDescriptionDesView110">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="FormCaseDescriptionId"/>
+                    <Item Value="DescriptionId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="FormCaseDescriptionPartiesView1Iterator" id="FormCaseDescriptionPartiesView1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionPartiesView"
+                            Name="FormCaseDescriptionPartiesView10">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="FormCaseDescriptionId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="FormCaseDescriptionDesPartView3Iterator" id="FormCaseDescriptionDesPartView31">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesPartView"
+                            Name="FormCaseDescriptionDesPartView310">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="FormCaseDesId"/>
+                    <Item Value="FormCasePartyId"/>
+                    <Item Value="FormCaseDes"/>
+                    <Item Value="FormCaseParty"/>
+                    <Item Value="JudgementClassDetail"/>
+                    <Item Value="JudgmentClassification"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="FormCaseDescriptionDesPartView2Iterator" id="FormCaseDescriptionDesPartView2">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesPartView"
+                            Name="FormCaseDescriptionDesPartView20">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="FormCaseDesId"/>
+                    <Item Value="FormCasePartyId"/>
+                    <Item Value="FormCaseDes"/>
+                    <Item Value="FormCaseParty"/>
+                    <Item Value="JudgementClassDetail"/>
+                    <Item Value="JudgmentClassification"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="FormCaseDescriptionDesPartView1Iterator" id="CreateWithParams" RequiresUpdateModel="true"
+                Action="createWithParams">
+            <NamedData NDName="FormCasePartyId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="FormCaseDesId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="FormCaseDes" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="JudgmentClassification" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="JudgementClassDetail" NDType="java.math.BigDecimal"/>
+        </action>
+        <action IterBinding="FormCaseDescriptionDesPartView1Iterator" id="Delete2" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <methodAction id="getFormCasePartyIdPK" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getFormCasePartyIdPK" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getFormCasePartyIdPK_CjExecAMDataControl_dataProvider_getFormCasePartyIdPK_result">
+            <NamedData NDName="formCaseDescriptionId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="partyId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <tree IterBinding="ExcCourtBcSessionAttachView2Iterator" id="ExcCourtBcSessionAttachView2">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcCourtBcSessionAttachView"
+                            Name="ExcCourtBcSessionAttachView20">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="SessionJudgmentId"/>
+                    <Item Value="AttachmentType"/>
+                    <Item Value="DocumentId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="ExcCourtBcSessionAttachView2Iterator" id="CreateInsert2" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="ExcCourtBcSessionAttachView2Iterator" id="Delete3" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <tree IterBinding="ExcLkpSessionAttachView1Iterator" id="ExcLkpSessionAttachView1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.ExcLkpSessionAttachView"
+                            Name="ExcLkpSessionAttachView10">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="AttachmentType"/>
+                    <Item Value="UploadStatus" Binds="UploadStatus"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <button IterBinding="ExcLkpSessionAttachView1Iterator" id="UploadStatus" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="UploadStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="1"/>
+                <Item Value="0"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="CourtBcHearingResPartiesVO2Iterator" id="JudgementType">
+            <AttrNames>
+                <Item Value="JudgementType"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="FormCaseDescriptionDesPartView1Iterator" id="FormCaseDescriptionDesPartView11">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.provisionsInclusionViews.FormCaseDescriptionDesPartView"
+                            Name="FormCaseDescriptionDesPartView110">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreatedDate"/>
+                    <Item Value="UpdateBy"/>
+                    <Item Value="UpdateDate"/>
+                    <Item Value="FormCaseDesId"/>
+                    <Item Value="FormCasePartyId"/>
+                    <Item Value="JudgementClassDetail"/>
+                    <Item Value="JudgmentClassification"/>
+                    <Item Value="FormCaseDes"/>
+                    <Item Value="FormCaseParty"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <list IterBinding="CourtBcHearingResPartiesVO2Iterator" StaticList="false" Uses="LOV_Attendance" id="Attendance"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="CourtBcHearingResPartiesVO2Iterator" StaticList="false" Uses="LOV_JudgmentClassification"
+              id="JudgmentClassification" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="CourtBcHearingResPartiesVO2Iterator" StaticList="false" Uses="LOV_JudgementClassDetail"
+              id="JudgementClassDetail" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" id="DegreeId">
+            <AttrNames>
+                <Item Value="DegreeId"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="excFolderDataInsertion" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="excFolderDataInsertion" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="reservationId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <attributeValues IterBinding="CourtBcHearingResPartiesVO2Iterator" id="JudgementResolutionC">
+            <AttrNames>
+                <Item Value="JudgementResolutionC"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CourtBcHearingResPartiesVO2Iterator" id="PartyId">
+            <AttrNames>
+                <Item Value="PartyId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CourtBcHearingResPartiesVO2Iterator" id="PartFullName">
+            <AttrNames>
+                <Item Value="PartFullName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CourtBcHearingResPartiesVO2Iterator" id="PartNickName">
+            <AttrNames>
+                <Item Value="PartNickName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="Id1">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="Fname">
+            <AttrNames>
+                <Item Value="Fname"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="Sname">
+            <AttrNames>
+                <Item Value="Sname"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="Tname">
+            <AttrNames>
+                <Item Value="Tname"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="Fourthname">
+            <AttrNames>
+                <Item Value="Fourthname"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="Nickname">
+            <AttrNames>
+                <Item Value="Nickname"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="Address">
+            <AttrNames>
+                <Item Value="Address"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="Age">
+            <AttrNames>
+                <Item Value="Age"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="IdNumber">
+            <AttrNames>
+                <Item Value="IdNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="JobTitle">
+            <AttrNames>
+                <Item Value="JobTitle"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="ExecPartySessionJudgmentsROV1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.common.ExecPartySessionJudgmentsROV"
+                            Name="ExecPartySessionJudgmentsROV10">
+                <AttrNames>
+                    <Item Value="BusinessCaseId"/>
+                    <Item Value="AttendanceName"/>
+                    <Item Value="AttendanceType"/>
+                    <Item Value="BcDegreeId"/>
+                    <Item Value="ExecutionFlag"/>
+                    <Item Value="ExecutionStatus"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="Name"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="PartyJudgementResolution"/>
+                    <Item Value="SequenceNumber"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="ParPartiesView1Iterator" id="ExecuteWithParams"
+                InstanceName="CjExecAMDataControl.ParPartiesView1" DataControl="CjExecAMDataControl"
+                RequiresUpdateModel="true" Action="executeWithParams">
+            <NamedData NDName="partyId" NDType="java.lang.String"/>
+        </action>
+        <action IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="ExecuteWithParams1"
+                InstanceName="CjExecAMDataControl.ExecPartySessionJudgmentsROV1" DataControl="CjExecAMDataControl"
+                RequiresUpdateModel="true" Action="executeWithParams">
+            <NamedData NDName="P_PARTY_ID" NDType="java.lang.String"/>
+        </action>
+        <action IterBinding="FormCaseDescriptionDesView1Iterator" id="Execute"
+                InstanceName="CjExecAMDataControl.FormCaseDescriptionDesView1" DataControl="CjExecAMDataControl"
+                RequiresUpdateModel="true" Action="iteratorExecute"/>
+        <list IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" StaticList="false" Uses="LOV_JudgmentClassification"
+              id="JudgmentClassification1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" StaticList="false" Uses="LOV_JudgementClassDetail"
+              id="JudgementClassDetail1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" id="JudgementTypeToggle">
+            <AttrNames>
+                <Item Value="JudgementTypeToggle"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" StaticList="false" Uses="LOV_Attendance"
+              id="Attendance1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <methodAction id="updateParPartiesLog" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateParPartiesLog" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider"
+                      ReturnName="data.CjExecAMDataControl.methodResults.updateParPartiesLog_CjExecAMDataControl_dataProvider_updateParPartiesLog_result">
+            <NamedData NDName="parPartyId" NDType="long"/>
+        </methodAction>
+        <attributeValues IterBinding="ParPartiesView1Iterator" id="PartyFullName">
+            <AttrNames>
+                <Item Value="PartyFullName"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="deleteDesHistory" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="deleteDesHistory" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="operationNumber" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="deletedId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="deleteDesPartHistory" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="deleteDesPartHistory" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="operationNumber" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="deletedId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="updateResHistory" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateResHistory" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="operationNumber" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="resIdPk" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="resJudType" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="resAttendance" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="resJudgClass" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="resJudgClassDetail" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="resJudgResolution" NDType="java.sql.Clob"/>
+        </methodAction>
+        <methodAction id="isDesPartChargesFound" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="isDesPartChargesFound" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider"
+                      ReturnName="data.CjExecAMDataControl.methodResults.isDesPartChargesFound_CjExecAMDataControl_dataProvider_isDesPartChargesFound_result">
+            <NamedData NDName="desPartIdPk" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="updateDesPartHistory" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateDesPartHistory" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="operationNumber" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="desPartIdPk" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="desPartJudgClass" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="desPartJudgClassDetail" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="updateSessionHistory" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateSessionHistory" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="operationNumber" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesResId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesJudType" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesJudSubType" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesFirstSessionId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesSecondSessionId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesCircleId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesJudTypeToggleId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesAttendance" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesJudgClass" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesJudgClassDetail" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sesResolution" NDType="java.sql.Clob"/>
+        </methodAction>
+        <methodAction id="insertDesHistory" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="insertDesHistory" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="operationNumber" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="desIdPk" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="formCaseDescId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="desId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="insertDesPartHistory" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="insertDesPartHistory" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="operationNumber" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="desPartIdPk" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="formCaseDesId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="formCasePartyId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="desPartJudClass" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="desPartJudClassDetail" NDType="java.math.BigDecimal"/>
+        </methodAction>
+    </bindings>
+</pageDefinition>

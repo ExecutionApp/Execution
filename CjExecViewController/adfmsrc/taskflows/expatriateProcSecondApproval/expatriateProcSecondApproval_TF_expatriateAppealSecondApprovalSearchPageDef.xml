@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="expatriateProcSecondApproval_TF_expatriateAppealSecondApprovalSearchPageDef"
+                Package="taskflows.expatriateProcSecondApproval" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="ExpatriateProcSecondApprovalROV1Iterator" Binds="SimplifiedModeAM1.ExpatriateProcSecondApprovalROV1"
+              DataControl="CjExecAMDataControl" RangeSize="25"/>
+    <iterator id="expatriateProcAppealApprovalROV1Iterator" Binds="SimplifiedModeAM1.expatriateProcAppealApprovalROV1"
+              DataControl="CjExecAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

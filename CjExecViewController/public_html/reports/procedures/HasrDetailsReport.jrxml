@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HasrDafater" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="261e9ab5-f547-4d50-a61c-d8b74dcc4acd">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_PATH" class="java.lang.String"/>
+	<parameter name="createdDateBind" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="gozeyaIdBind" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="createdDateToBind" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select NVL (Gonah.GOZEYA_ENTITY_NAME, Genayat.GOZEYA_ENTITY_NAME)
+          GOZEYA_ENTITY_NAME,
+       NVL (Genayat.PARENT_ENTITY_NAME, Gonah.PARENT_ENTITY_NAME)
+          PARENT_ENTITY_NAME,GONAH_PRISON,GONAH_PENALTY,GENAYAT_DONE,GENAYAT_NOT_DONE,PREV_GONAH,PREV_GENAYAT,TOTAL_GONAH,TOTAL_GENAYAT,AMN_DOAWLA
+from
+(SELECT COUNT(FD.ID) TOTAL_GONAH, PAREN.id , PAREN.ENTITY_NAME GOZEYA_ENTITY_NAME , master.ENTITY_NAME PARENT_ENTITY_NAME
+FROM EXC_FOLDER_DATA FD , ENTITY master , ENTITY GOZEYA , ENTITY PAREN
+WHERE  FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID
+                AND FD.CRIMINAL_TYPE = 1
+                 AND ( FD.POLICE_STATION_ENTITY_ID IN
+                            (SELECT id
+                               FROM entity
+                              WHERE PARENT_ENTITY_ID = $P{gozeyaIdBind})
+                      OR master.ID = $P{gozeyaIdBind})
+                      GROUP BY PAREN.ID, PAREN.ENTITY_NAME , Master.ENTITY_NAME)   Gonah
+
+                      FULL OUTER JOIN
+
+                        (SELECT COUNT(FD.ID) TOTAL_GENAYAT ,GOZEYA.ID,
+                                         GOZEYA.ENTITY_NAME GOZEYA_ENTITY_NAME,
+                                         GOZEYA.ENTITY_NAME PARENT_ENTITY_NAME
+
+                                    FROM EXC_FOLDER_DATA FD,
+                                         ENTITY GOZEYA,
+                                         ENTITY PAREN
+                                   WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                                         AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+                        AND FD.CRIMINAL_TYPE = 2
+                                         AND (   (FD.POLICE_STATION_ENTITY_ID =
+                                                     (SELECT PARENT_ENTITY_ID
+                                                        FROM entity
+                                                       WHERE id = $P{gozeyaIdBind}))
+                                              OR (FD.POLICE_STATION_ENTITY_ID = $P{gozeyaIdBind}))
+                                             GROUP BY GOZEYA.ID,
+                                         GOZEYA.ENTITY_NAME,
+                                         PAREN.ENTITY_NAME
+                                         ) Genayat
+
+              on   Genayat.id = Gonah.id
+              FULL OUTER JOIN
+
+(SELECT COUNT(FD.ID) GONAH_PRISON , PAREN.id
+FROM EXC_FOLDER_DATA FD , ENTITY master , ENTITY GOZEYA , ENTITY PAREN
+WHERE  FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID
+                 AND (   FD.POLICE_STATION_ENTITY_ID IN
+                            (SELECT id
+                               FROM entity
+                              WHERE PARENT_ENTITY_ID = $P{gozeyaIdBind})
+                      OR master.ID = $P{gozeyaIdBind})
+
+  AND FD.CRIMINAL_TYPE = 1
+AND FD.FOLDER_TYPE = 2
+AND  (  FD.CREATED_DATE BETWEEN TO_DATE($P{createdDateBind} , 'yyyy-MM-dd')
+                                                                       AND TO_DATE($P{createdDateToBind} , 'yyyy-MM-dd') +1
+                      OR to_char(FD.CREATED_DATE, 'yyyy-MM-dd') =$P{createdDateBind})
+GROUP BY PAREN.ID) tab1
+           on tab1.id=gonah.id
+FULL OUTER JOIN
+
+(SELECT COUNT(fd.ID) GONAH_PENALTY ,PAREN.ID
+FROM EXC_FOLDER_DATA FD , ENTITY master , ENTITY GOZEYA , ENTITY PAREN
+WHERE FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID
+                 AND (   FD.POLICE_STATION_ENTITY_ID IN
+                            (SELECT id
+                               FROM entity
+                              WHERE PARENT_ENTITY_ID = $P{gozeyaIdBind})
+                      OR master.id = $P{gozeyaIdBind})
+
+     AND FD.CRIMINAL_TYPE = 1
+AND FD.FOLDER_TYPE = 3
+AND (  FD.CREATED_DATE BETWEEN TO_DATE($P{createdDateBind} , 'yyyy-MM-dd')
+                                                                       AND TO_DATE($P{createdDateToBind} , 'yyyy-MM-dd')+1
+                      OR to_char(FD.CREATED_DATE, 'yyyy-MM-dd') =$P{createdDateBind})
+
+GROUP BY PAREN.ID) tab2
+
+ON Gonah.ID = TAB2.ID
+FULL OUTER JOIN
+
+(SELECT COUNT(FD.ID) GENAYAT_DONE ,GOZEYA.ID
+            FROM EXC_FOLDER_DATA FD,
+                 ENTITY GOZEYA,
+                 ENTITY PAREN
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+                 AND (   (FD.POLICE_STATION_ENTITY_ID =
+                             (SELECT PARENT_ENTITY_ID
+                                FROM entity
+                               WHERE id = $P{gozeyaIdBind}))
+                      OR (FD.POLICE_STATION_ENTITY_ID = $P{gozeyaIdBind}))
+                       AND FD.CRIMINAL_TYPE = 2
+       AND FD.FOLDER_TYPE = 1
+                 AND  (  FD.CREATED_DATE BETWEEN TO_DATE($P{createdDateBind} , 'yyyy-MM-dd')
+                                                                      AND TO_DATE($P{createdDateToBind} , 'yyyy-MM-dd')+1
+                     OR to_char(FD.CREATED_DATE, 'yyyy-MM-dd') =$P{createdDateBind})
+        GROUP BY GOZEYA.ID
+
+                 ) TAB3
+
+ON GENAYAT.ID = TAB3.ID
+
+
+FULL OUTER JOIN
+
+(SELECT COUNT(FD.ID) GENAYAT_NOT_DONE ,GOZEYA.ID
+
+
+            FROM EXC_FOLDER_DATA FD,
+                 ENTITY GOZEYA,
+                 ENTITY PAREN
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+ AND FD.CRIMINAL_TYPE = 2
+       AND FD.FOLDER_TYPE =2
+
+                 AND (   (FD.POLICE_STATION_ENTITY_ID =
+                             (SELECT PARENT_ENTITY_ID
+                                FROM entity
+                               WHERE id = $P{gozeyaIdBind}))
+                      OR (FD.POLICE_STATION_ENTITY_ID = $P{gozeyaIdBind}))
+
+
+                 AND (  FD.CREATED_DATE BETWEEN TO_DATE($P{createdDateBind} , 'yyyy-MM-dd')
+                                                                       AND TO_DATE($P{createdDateToBind} , 'yyyy-MM-dd')+1
+                      OR to_char(FD.CREATED_DATE, 'yyyy-MM-dd') =$P{createdDateBind})
+        GROUP BY GOZEYA.ID,
+                 GOZEYA.ENTITY_NAME,
+                 PAREN.ENTITY_NAME
+                 )    tab4
+
+   ON TAB4.ID = GENAYAT.ID
+   FULL OUTER JOIN
+
+   (SELECT COUNT(fd.ID) PREV_GONAH ,PAREN.ID
+FROM EXC_FOLDER_DATA FD , ENTITY master , ENTITY GOZEYA , ENTITY PAREN
+WHERE FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID
+                 AND ( fd.POLICE_STATION_ENTITY_ID IN
+                            (SELECT id
+                               FROM entity
+                              WHERE PARENT_ENTITY_ID = $P{gozeyaIdBind})
+                      OR Master.id = $P{gozeyaIdBind})
+
+     AND FD.CRIMINAL_TYPE = 1
+AND  FD.CREATED_DATE  < TO_DATE($P{createdDateBind} , 'yyyy-MM-dd')
+
+ GROUP BY PAREN.ID, PAREN.ENTITY_NAME , Master.ENTITY_NAME) tab5
+
+ON gonah.ID = TAB5.ID
+FULL OUTER JOIN
+
+(SELECT COUNT(FD.ID) PREV_GENAYAT ,GOZEYA.ID
+
+            FROM EXC_FOLDER_DATA FD,
+                 ENTITY GOZEYA,
+                 ENTITY PAREN
+           WHERE     FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+AND FD.CRIMINAL_TYPE = 2
+                 AND (   (FD.POLICE_STATION_ENTITY_ID =
+                             (SELECT PARENT_ENTITY_ID
+                                FROM entity
+                               WHERE id = $P{gozeyaIdBind}))
+                      OR (FD.POLICE_STATION_ENTITY_ID = $P{gozeyaIdBind}))
+AND FD.CREATED_DATE  < TO_DATE($P{createdDateBind} , 'yyyy-MM-dd')
+
+GROUP BY GOZEYA.ID) TAB6
+
+ON GENAYAT.ID = TAB6.ID
+
+FULL OUTER JOIN
+
+(SELECT COUNT(FD.ID) AMN_DOAWLA , PAREN.ID
+    FROM EXC_FOLDER_DATA FD , COURT_BC_HEARING_RES_PARTIES RES , COURT_BC_HEARING_RESERVATION HR , ENTITY master , ENTITY GOZEYA ,
+    ENTITY PAREN , BUSINESS_CASE BC
+    WHERE RES.ID = FD.RES_PARTY_ID
+    AND  FD.POLICE_STATION_ENTITY_ID = GOZEYA.ID
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID
+                AND FD.CRIMINAL_TYPE = 1
+                 AND ( FD.POLICE_STATION_ENTITY_ID IN
+                            (SELECT id
+                               FROM entity
+                              WHERE PARENT_ENTITY_ID = $P{gozeyaIdBind})
+                      OR master.ID = $P{gozeyaIdBind})
+    AND RES.COURT_BC_HEARING_RES_ID = HR.ID
+    AND HR.BUSINESS_CASE_ID = BC.ID
+    AND BC.CASE_TYPE = 10
+    GROUP BY PAREN.ID) TAB9
+ON Gonah.ID = TAB9.ID]]>
+	</queryString>
+	<field name="GOZEYA_ENTITY_NAME" class="java.lang.String"/>
+	<field name="PARENT_ENTITY_NAME" class="java.lang.String"/>
+	<field name="GONAH_PRISON" class="java.math.BigDecimal"/>
+	<field name="GONAH_PENALTY" class="java.math.BigDecimal"/>
+	<field name="GENAYAT_DONE" class="java.math.BigDecimal"/>
+	<field name="GENAYAT_NOT_DONE" class="java.math.BigDecimal"/>
+	<field name="PREV_GONAH" class="java.math.BigDecimal"/>
+	<field name="PREV_GENAYAT" class="java.math.BigDecimal"/>
+	<field name="TOTAL_GONAH" class="java.math.BigDecimal"/>
+	<field name="TOTAL_GENAYAT" class="java.math.BigDecimal"/>
+	<field name="AMN_DOAWLA" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="128" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement mode="Opaque" x="0" y="0" width="115" height="79" uuid="c552c988-ca4b-44bb-955b-09fd6e244d2d"/>
+				<imageExpression><![CDATA[$P{REPORT_PATH} + "logo-ppo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="140" y="88" width="100" height="20" uuid="5f1d842a-2322-4a06-ab06-f2a8c704b5d0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[التاريخ من :- ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="88" width="100" height="20" uuid="cbf6b36e-e3d3-4fe5-a3c6-fd8a7635023c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createdDateBind}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="108" width="100" height="20" uuid="8d47d5d0-2075-4e28-87e7-217b37acc472"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[التاريخ إلى :- ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="108" width="100" height="20" uuid="4acbc6ee-d69a-47ef-bab8-a3a52ad0feb1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createdDateToBind}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="311" y="34" width="203" height="20" uuid="013ceef5-604a-4a89-a958-c500558189dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[إجمالي حصر لكل نيابة بقترة زمنية]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="623" y="34" width="217" height="20" uuid="bf1044fe-107b-4819-800c-5922b92fd27f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARENT_ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="623" y="59" width="217" height="20" uuid="0169cc03-3e2c-4843-bc53-95343e09a6fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GOZEYA_ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="757" y="0" width="85" height="36" uuid="7a2d866d-ebc2-44c5-ac17-66cfd71ff4a2"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[النيابة الكلية]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="670" y="0" width="87" height="36" uuid="de1cd29d-5244-46ec-a739-f3f927f07b8d"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[النيابة الجزئية]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="0" width="70" height="36" uuid="40fc5e61-88a3-47ec-a005-60e074957842"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[جنح - حبس العام]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="0" width="75" height="36" uuid="a0bb8336-7593-4837-944f-c0c0a151cdcc"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[جنح أمن دولة طوارئ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="524" y="0" width="76" height="36" uuid="5837c68b-9a61-4e4b-a617-00488e187b06"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[جنح - غرامات العام]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="54" height="36" uuid="98ad4cc0-06ec-43b5-b055-707f30308af7"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[جنايات منفذ العام]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="312" y="0" width="83" height="36" uuid="91b99791-1bae-4052-831c-0ba37bbf8bc5"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[جنيايات غير منفذ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="0" width="82" height="36" uuid="e04418ed-d9ac-4932-b25f-75860b2329a8"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[إجمالي جنح سابق]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="0" width="76" height="36" uuid="04b7fc9f-579e-4ecd-a8c9-58206e2f9546"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[إجمالي جنايات سابق]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="0" width="78" height="36" uuid="548a3ce8-8b01-48a0-9d5e-2c8351396edb"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[إجمالي الجنح]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="76" height="36" uuid="fa764be3-1dd6-4774-a27f-5b8f939fd8d1"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[إجمالي الجنايات]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="757" y="0" width="85" height="20" isPrintWhenDetailOverflows="true" uuid="dd236f39-6e78-4cbf-93fc-c2f1bfa683dc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARENT_ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="670" y="0" width="87" height="20" isPrintWhenDetailOverflows="true" uuid="6d0023ab-1a97-405d-a5d4-f5c4f097632b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GOZEYA_ENTITY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="600" y="0" width="70" height="20" isPrintWhenDetailOverflows="true" uuid="6bfe8b18-c143-4ecb-bfa4-e2a6a4851dde"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GONAH_PRISON}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="449" y="0" width="75" height="20" isPrintWhenDetailOverflows="true" uuid="2a275f29-4365-468b-a7cf-4778e4d7f8c9"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AMN_DOAWLA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="524" y="0" width="76" height="20" isPrintWhenDetailOverflows="true" uuid="c01bd3d8-7df6-4e49-b4d2-f08e17670005"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GONAH_PENALTY}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="395" y="0" width="54" height="20" isPrintWhenDetailOverflows="true" uuid="ed7cd08c-30d1-4531-b34a-733820f199dd"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GENAYAT_DONE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="312" y="0" width="83" height="20" isPrintWhenDetailOverflows="true" uuid="591ec47d-e7d4-48b0-8ae4-6057be6544ac"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GENAYAT_NOT_DONE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="230" y="0" width="82" height="20" isPrintWhenDetailOverflows="true" uuid="cfeccc00-851b-4b01-9565-1c8f456867fb"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREV_GONAH}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="154" y="0" width="76" height="20" isPrintWhenDetailOverflows="true" uuid="23613efe-f944-437b-bc2b-524c86bbd112"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREV_GENAYAT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="76" y="0" width="78" height="20" isPrintWhenDetailOverflows="true" uuid="35b16b3c-8e25-4e83-8fff-799e58aef4a6"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL_GONAH}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="76" height="20" isPrintWhenDetailOverflows="true" uuid="64ccf544-c468-4379-8940-444c0c18c944"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialEgabi" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL_GENAYAT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

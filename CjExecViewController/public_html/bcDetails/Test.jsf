@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Test.jsf" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:button actionListener="#{bindings.CreateInsert.execute}" text="CreateInsert"
+                       disabled="#{!bindings.CreateInsert.enabled}" id="b1"/>
+            <af:table value="#{bindings.FormCaseDescriptionDESCVO1.collectionModel}" var="row"
+                      rows="#{bindings.FormCaseDescriptionDESCVO1.rangeSize}"
+                      emptyText="#{bindings.FormCaseDescriptionDESCVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0" fetchSize="#{bindings.FormCaseDescriptionDESCVO1.rangeSize}" id="t1"
+                      partialTriggers="::b1">
+                <af:column headerText="#{bindings.FormCaseDescriptionDESCVO1.hints.Id.label}" id="c1">
+                    <af:inputText value="#{row.bindings.Id.inputValue}"
+                                  label="#{bindings.FormCaseDescriptionDESCVO1.hints.Id.label}"
+                                  required="#{bindings.FormCaseDescriptionDESCVO1.hints.Id.mandatory}"
+                                  columns="#{bindings.FormCaseDescriptionDESCVO1.hints.Id.displayWidth}"
+                                  maximumLength="#{bindings.FormCaseDescriptionDESCVO1.hints.Id.precision}"
+                                  shortDesc="#{bindings.FormCaseDescriptionDESCVO1.hints.Id.tooltip}" id="it1">
+                        <f:validator binding="#{row.bindings.Id.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.FormCaseDescriptionDESCVO1.hints.Id.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.FormCaseDescriptionDESCVO1.hints.FormCaseDescriptionId.label}"
+                           id="c2">
+                    <af:inputText value="#{row.bindings.FormCaseDescriptionId.inputValue}"
+                                  label="#{bindings.FormCaseDescriptionDESCVO1.hints.FormCaseDescriptionId.label}"
+                                  required="#{bindings.FormCaseDescriptionDESCVO1.hints.FormCaseDescriptionId.mandatory}"
+                                  columns="#{bindings.FormCaseDescriptionDESCVO1.hints.FormCaseDescriptionId.displayWidth}"
+                                  maximumLength="#{bindings.FormCaseDescriptionDESCVO1.hints.FormCaseDescriptionId.precision}"
+                                  shortDesc="#{bindings.FormCaseDescriptionDESCVO1.hints.FormCaseDescriptionId.tooltip}"
+                                  id="it2">
+                        <f:validator binding="#{row.bindings.FormCaseDescriptionId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.FormCaseDescriptionDESCVO1.hints.FormCaseDescriptionId.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.FormCaseDescriptionDESCVO1.hints.DescriptionId.label}" id="c3">
+                    <af:selectOneChoice value="#{row.bindings.DescriptionId.inputValue}"
+                                        label="#{row.bindings.DescriptionId.label}"
+                                        required="#{bindings.FormCaseDescriptionDESCVO1.hints.DescriptionId.mandatory}"
+                                        shortDesc="#{bindings.FormCaseDescriptionDESCVO1.hints.DescriptionId.tooltip}"
+                                        id="soc1">
+                        <f:selectItems value="#{row.bindings.DescriptionId.items}" id="si1"/>
+                        <f:validator binding="#{row.bindings.DescriptionId.validator}"/>
+                    </af:selectOneChoice>
+                </af:column>
+                <af:column headerText="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedBy.label}" id="c4">
+                    <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                  label="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedBy.label}"
+                                  required="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedBy.mandatory}"
+                                  columns="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedBy.displayWidth}"
+                                  maximumLength="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedBy.precision}"
+                                  shortDesc="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedBy.tooltip}" id="it3">
+                        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedDate.label}" id="c5">
+                    <af:inputDate value="#{row.bindings.CreatedDate.inputValue}"
+                                  label="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedDate.label}"
+                                  required="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedDate.mandatory}"
+                                  columns="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedDate.displayWidth}"
+                                  shortDesc="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedDate.tooltip}" id="id1">
+                        <f:validator binding="#{row.bindings.CreatedDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.FormCaseDescriptionDESCVO1.hints.CreatedDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+                <af:column headerText="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedBy.label}" id="c6">
+                    <af:inputText value="#{row.bindings.UpdatedBy.inputValue}"
+                                  label="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedBy.label}"
+                                  required="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedBy.mandatory}"
+                                  columns="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedBy.displayWidth}"
+                                  maximumLength="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedBy.precision}"
+                                  shortDesc="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedBy.tooltip}" id="it4">
+                        <f:validator binding="#{row.bindings.UpdatedBy.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedDate.label}" id="c7">
+                    <af:inputDate value="#{row.bindings.UpdatedDate.inputValue}"
+                                  label="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedDate.label}"
+                                  required="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedDate.mandatory}"
+                                  columns="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedDate.displayWidth}"
+                                  shortDesc="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedDate.tooltip}" id="id2">
+                        <f:validator binding="#{row.bindings.UpdatedDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.FormCaseDescriptionDESCVO1.hints.UpdatedDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+            </af:table>
+        </af:form>
+    </af:document>
+</f:view>

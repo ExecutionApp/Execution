@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">preEnterReportsSearch</property>
+      <property
+         name="x">182.03223</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>preEnterReportsSearch&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="y">165.29297</property>
+      <property
+         name="exceptionHandler">false</property>
+   </MethodCall>
+   <View
+      id="View6">
+      <property
+         name="activityId">MainReportScreen</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">470.0</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>MainReportScreen&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">121.84473</property>
+      <property
+         name="page">/pages/com/egabi/Reports/MainReportScreen.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase8"
+      from="MethodCall3"
+      to="View6">
+      <property
+         name="fromOutcome">preEnterReportsSearch</property>
+      <property
+         name="sdm:polyPoints">R50,223.03223,164.94238,429.0,121.49414,L50</property>
+   </ControlFlowCase>
+</SDM>

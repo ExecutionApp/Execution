@@ -1,0 +1,1014 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <af:selectOneRadio value="#{bindings.SearchType.inputValue}" label="#{bindings.SearchType.label}"
+                       required="#{bindings.SearchType.hints.mandatory}" immediate="true"
+                       shortDesc="#{bindings.SearchType.hints.tooltip}" id="sor1" simple="true" layout="horizontal"
+                       autoSubmit="true"
+                       valueChangeListener="#{pageFlowScope.claimProcedureBean.resetSearhPartyHasrCaseVCL}"
+                       contentStyle="font-size:large;">
+        <f:selectItems value="#{bindings.SearchType.items eq null ? '1' : bindings.SearchType.items}" id="si9"/>
+        <f:validator binding="#{bindings.SearchType.validator}"/>
+    </af:selectOneRadio>
+    <af:panelHeader id="ph1" partialTriggers="sor1" rendered="#{bindings.SearchType.inputValue ne null}">
+        <af:activeOutputText value="لا توجد نتائج تطابق محددات البحث" id="aot1" visible="false"
+                             styleClass="alert alert-warning alert-custom" partialTriggers="t1"/>
+        <af:panelGroupLayout id="pgl1" layout="default" styleClass="row">
+            <af:panelGroupLayout id="pgl2" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 1}">
+                <af:outputLabel value="#{bundle.PART_FULL_NAME}" id="ol1f010"/>
+                <af:inputText value="#{bindings.PartyName.inputValue}" label="#{bindings.PartyName.hints.label}"
+                              contentStyle="width:200px;" maximumLength="#{bindings.PartyName.hints.precision}"
+                              simple="true" shortDesc="#{bindings.PartyName.hints.tooltip}" id="it1">
+                    <f:validator binding="#{bindings.PartyName.validator}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl4" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 1}">
+                <af:outputLabel value="#{bundle.ID_NUMBER}" id="ol1"/>
+                <af:inputText value="#{bindings.IdNumber.inputValue}" label="#{bindings.IdNumber.hints.label}"
+                              required="false" simple="true" autoSubmit="true" maximumLength="14"
+                              contentStyle="width:200px;" shortDesc="#{bindings.IdNumber.hints.tooltip}" id="it2"
+                              validator="#{cjValidator.nationalIdValidator}">
+                    <f:validator binding="#{bindings.IdNumber.validator}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl78" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 2}">
+                <af:outputLabel showRequired="true" value="#{bundle.sequence_number}" id="olv1"/>
+                <af:inputText value="#{bindings.SequenceNumber.inputValue}" simple="true" columns="15" autoSubmit="true"
+                              maximumLength="#{bindings.SequenceNumber.hints.precision}" required="true"
+                              shortDesc="#{bindings.SequenceNumber.hints.tooltip}" id="it3">
+                    <f:validator binding="#{bindings.SequenceNumber.validator}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl81" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 3}">
+                <af:outputLabel showRequired="true" value="#{bundle.BUSINESS_CASE_NUMBER}" id="ol7"/>
+                <af:inputText value="#{bindings.CaseNumber.inputValue}" simple="true" autoSubmit="true"
+                              maximumLength="#{bindings.CaseNumber.hints.precision}" required="true"
+                              shortDesc="#{bindings.CaseNumber.hints.tooltip}" id="it5">
+                    <f:validator binding="#{bindings.CaseNumber.validator}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl58" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 2}">
+                <af:outputLabel showRequired="true" value="#{bindings.Year.label}" id="ol8"/>
+                <af:inputText value="#{bindings.Year.inputValue}" simple="true" maximumLength="4" required="true"
+                              shortDesc="#{bindings.Year.hints.tooltip}" id="it4" autoSubmit="true"
+                              validator="#{cjValidator.yearValidator}"></af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl7" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 3}">
+                <af:outputLabel showRequired="true" value="#{bindings.Year.label}" id="ol5"/>
+                <af:inputText value="#{bindings.Year.inputValue}" simple="true" maximumLength="4" required="true"
+                              shortDesc="#{bindings.Year.hints.tooltip}" id="it6" autoSubmit="true"
+                              validator="#{cjValidator.yearValidator}"></af:inputText>
+            </af:panelGroupLayout>
+            <!-- <af:panelGroupLayout id="pgl5" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 2}">
+                <af:outputLabel showRequired="true" value="#{bundle.CLAIM_TYPE}" id="ol9"/>
+                <af:selectOneChoice value="#{bindings.BusinessCaseTypeId.inputValue}"
+                                    label="#{bindings.BusinessCaseTypeId.label}" required="true"
+                                    shortDesc="#{bindings.BusinessCaseTypeId.hints.tooltip}" id="soc9" simple="true">
+                    <f:selectItems value="#{bindings.BusinessCaseTypeId.items}" id="si12"/>
+                    <f:validator binding="#{bindings.BusinessCaseTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>-->
+            <af:panelGroupLayout id="pgl8" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 3}">
+                <af:outputLabel showRequired="true" value="نوع الجدول " id="ol6"/>
+                <af:selectOneChoice value="#{bindings.BusinessCaseTypeId.inputValue}"
+                                    label="#{bindings.BusinessCaseTypeId.label}" required="true"
+                                    valueChangeListener="#{pageFlowScope.claimProcedureBean.businessCaseTypeVCL}"
+                                    autoSubmit="true" shortDesc="#{bindings.BusinessCaseTypeId.hints.tooltip}" id="soc2"
+                                    simple="true">
+                    <f:selectItems value="#{bindings.BusinessCaseTypeId.items}" id="si6"/>
+                    <f:validator binding="#{bindings.BusinessCaseTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl75" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 2}">
+                <af:outputLabel value="#{bundle.FOLDER_TYPE}" id="ol2" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.FolderTypeId.inputValue}" label="#{bindings.FolderTypeId.label}"
+                                    required="true" autoSubmit="true" shortDesc="#{bindings.FolderTypeId.hints.tooltip}"
+                                    id="soc1" simple="true">
+                    <f:selectItems value="#{bindings.FolderTypeId.items}" id="si1"/>
+                    <f:validator binding="#{bindings.FolderTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg98" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="النيابة الكلية" id="ol70"/>
+                <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}"
+                                    required="#{bindings.NeyabKolyaa.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc28" simple="true"
+                                    disabled="#{(sessionScope.userInfo.entityDegree eq '39' and !sessionScope.userInfo.userPrevMap[5051]) or sessionScope.userInfo.entityDegree eq '3'}"
+                                    autoSubmit="true" immediate="true">
+                    <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si28"/>
+                    <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg97" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="النيابة الجزئية" id="ol54"/>
+                <!--or (bindings.SearchType.inputValue eq 2 and bindings.EsteanafFlag.inputValue eq 'Y') sbc1-->
+                <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}"
+                                    required="#{bindings.NeyabGozayaa.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc17"
+                                    partialTriggers="soc2 soc28 sbc1" simple="true"
+                                    disabled="#{(bindings.SearchType.inputValue eq 2 and !bindings.EsteanafFlag.inputValue eq 'Y') or sessionScope.userInfo.entityDegree eq '3'}"
+                                    autoSubmit="true" immediate="true">
+                    <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si17"/>
+                    <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg43" styleClass="col-md-2 col-sm-12">
+                <!--disabled="#{bindings.SearchType.inputValue eq 2 and bindings.EsteanafFlag.inputValue eq 'Y'}" sbc1-->
+                <af:outputLabel value="#{bindings.OrigEntity.label}" id="ol43"/>
+                <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}" label="#{bindings.OrigEntity.label}"
+                                    autoSubmit="true" shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc10"
+                                    disabled="#{bindings.SearchType.inputValue eq 2 and !bindings.EsteanafFlag.inputValue eq 'Y'}"
+                                    simple="true" partialTriggers="soc2 soc17 sbc1" immediate="true">
+                    <f:selectItems value="#{bindings.OrigEntity.items}" id="si10"/>
+                    <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl3" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 1}">
+                <af:outputLabel value="#{bundle.IS_REQUIRED}" id="ol3"/>
+                <!--<af:selectOneRadio value="#{bindings.IsRequired.inputValue}" label="#{bindings.RepeatedFlag.label}"
+                                   shortDesc="#{bindings.IsRequired.hints.tooltip}" id="sor2" layout="horizontal"
+                                   simple="true">
+                    <af:selectItem label="#{bundle.YES_LABEL}" id="si3" value="1"/>
+                    <af:selectItem label="#{bundle.NO_LABEL}" id="si5" value="2"/>
+                </af:selectOneRadio>-->
+                <af:selectOneChoice value="#{bindings.IsRequired.inputValue}" label="#{bindings.IsRequired.label}"
+                                    required="#{bindings.IsRequired.hints.mandatory}" simple="true"
+                                    shortDesc="#{bindings.IsRequired.hints.tooltip}" id="soc3">
+                    <f:selectItems value="#{bindings.IsRequired.items}" id="si7"/>
+                    <f:validator binding="#{bindings.IsRequired.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl5" styleClass="col-md-2 col-sm-12" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq 1}">
+                <af:outputLabel value="#{bundle.HAS_CLAIM}" id="ol9"/>
+                <af:selectOneRadio value="#{bindings.ClaimFlag.inputValue}" label="#{bindings.ClaimFlag.label}"
+                                   shortDesc="#{bindings.ClaimFlag.hints.tooltip}" id="sor2" layout="horizontal"
+                                   simple="true" autoSubmit="true">
+                    <af:selectItem label="#{bundle.YES_LABEL}" id="si3" value="1"/>
+                    <af:selectItem label="#{bundle.NO_LABEL}" id="si5" value="2"/>
+                </af:selectOneRadio>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl10" styleClass="col-md-2 col-sm-12" partialTriggers="sor1 sor2"
+                                 rendered="#{bindings.SearchType.inputValue eq 1 and bindings.ClaimFlag.inputValue eq 1}">
+                <af:outputLabel value="#{bundle.IS_PAID}" id="ol10"/>
+                <af:selectOneRadio value="#{bindings.PaidFlag.inputValue}" label="#{bindings.PaidFlag.label}"
+                                   shortDesc="#{bindings.PaidFlag.hints.tooltip}" id="sor4" layout="horizontal"
+                                   simple="true">
+                    <af:selectItem label="#{bundle.YES_LABEL}" id="si8" value="1"/>
+                    <af:selectItem label="#{bundle.NO_LABEL}" id="si11" value="2"/>
+                </af:selectOneRadio>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl77" partialTriggers="sor1" rendered="#{bindings.SearchType.inputValue eq '2'}"
+                                 styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.RepeatedFlag.label}" id="ol4" showRequired="true"/>
+                <af:selectOneRadio value="#{bindings.RepeatedFlag.inputValue}" label="#{bindings.RepeatedFlag.label}"
+                                   shortDesc="#{bindings.RepeatedFlag.hints.tooltip}" id="sor3" layout="horizontal"
+                                   simple="true" autoSubmit="true" required="true">
+                    <af:selectItem label="#{bundle.YES_LABEL}" id="si2" value="Y"/>
+                    <af:selectItem label="#{bundle.NO_LABEL}" id="si4" value="N"/>
+                </af:selectOneRadio>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl9" partialTriggers="sor1"
+                                 rendered="#{bindings.SearchType.inputValue eq '2' and (sessionScope.userInfo.entityDegree eq '39'  or sessionScope.userInfo.errandFlag eq 'Y')}"
+                                 styleClass="col-md-2 col-sm-12 checkbox-estenaf">
+                <!--<af:outputLabel value="#{bundle.ESTEANAF_FLAG}" id="ol10"/>-->
+                <af:selectBooleanCheckbox value="#{bindings.EsteanafFlag.inputValue}" text="#{bundle.ESTEANAF_FLAG}"
+                                          autoSubmit="true"
+                                          valueChangeListener="#{pageFlowScope.claimProcedureBean.esteanafFlagVCL}"
+                                          shortDesc="#{bindings.EsteanafFlag.hints.tooltip}" id="sbc1" simple="true"/>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+    </af:panelHeader>
+    <af:panelGroupLayout id="pgl6" styleClass="btn-holder" partialTriggers="b1 soc28">
+        <af:button text="#{bundle.SEARCH}" id="b1" disabled="#{bindings.SearchType.inputValue eq null}"
+                   action="#{pageFlowScope.claimProcedureBean.searchPartyHasrCase}" partialTriggers="sor1">
+            <af:setPropertyListener from="1" to="#{pageFlowScope.disableSearch}" type="action"/>
+        </af:button>
+        <af:button text="#{bundle.RESET_SEARCH}" id="b2" disabled="#{bindings.SearchType.inputValue eq null}"
+                   partialTriggers="sor1" action="#{pageFlowScope.claimProcedureBean.resetSearhPartyHasrCase}"
+                   immediate="true"/>
+        <af:button text="#{bundle.EDIT_PARTY}" id="b3" action="nId" useWindow="true" windowHeight="500"
+                   windowWidth="900" returnListener="#{pageFlowScope.claimProcedureBean.getNIDValues}"
+                   actionListener="#{pageFlowScope.claimProcedureBean.getParId}" disabled="true"
+                   rendered="#{bindings.SearchType.inputValue ne null and bindings.SearchType.inputValue eq 1}"
+                   partialTriggers="sor1" binding="#{pageFlowScope.claimProcedureBean.editPartyBind}">
+            <af:setPropertyListener to="#{pageFlowScope.nIdParam}" from="#{5}" type="action"/>
+            <af:setPropertyListener to="#{pageFlowScope.fcnParam}" from="#{null}" type="action"/>
+            <af:setPropertyListener to="#{pageFlowScope.userIdParam}" from="#{sessionScope.userInfo.nidUserId}"
+                                    type="action"/>
+            <af:setPropertyListener to="#{pageFlowScope.channelIdParam}" from="#{sessionScope.userInfo.nidChannelId}"
+                                    type="action"/>
+            <af:setPropertyListener to="#{pageFlowScope.tokenIdParam}" from="#{sessionScope.userInfo.nidTokenId}"
+                                    type="action"/>
+            <af:setPropertyListener to="#{pageFlowScope.callPermissionParam}"
+                                    from="#{sessionScope.userInfo.nidCallPermission}" type="action"/>
+            <af:setPropertyListener to="#{pageFlowScope.userNameParam}" from="#{sessionScope.userInfo.nidUserName}"
+                                    type="action"/>
+            <af:setPropertyListener to="#{pageFlowScope.passwordParam}" from="#{sessionScope.userInfo.nidPassword}"
+                                    type="action"/>
+            <af:setPropertyListener to="#{sessionScope.clickedButton}" from="#{null}" type="action"/>
+            <af:target events="@all" render="@all" execute="@this"/>
+        </af:button>
+    </af:panelGroupLayout>
+    <af:panelHeader text="#{bundle.CLAIMS_SEARCH_RESULTS}" id="ph2"
+                    rendered="#{bindings.SearchType.inputValue ne null and bindings.SearchType.inputValue eq 1}"
+                    partialTriggers="sor1">
+        <!--<af:table value="#{bindings.SearchByPartyNameRVO11.collectionModel}" var="row"
+                  rows="#{bindings.SearchByPartyNameRVO11.rangeSize}"
+                  emptyText="#{bindings.SearchByPartyNameRVO11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.SearchByPartyNameRVO11.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.SearchByPartyNameRVO11.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.SearchByPartyNameRVO11.rangeSize}" id="t9">
+            <af:column headerText="#{bindings.SearchByPartyNameRVO11.hints.Id.label}" id="c94">
+                <af:outputText value="#{row.Id}" shortDesc="#{bindings.SearchByPartyNameRVO11.hints.Id.tooltip}"
+                               id="ot91">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SearchByPartyNameRVO11.hints.Id.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.SearchByPartyNameRVO11.hints.PartyFixedFullName.label}" id="c96">
+                <af:outputText value="#{row.PartyFixedFullName}"
+                               shortDesc="#{bindings.SearchByPartyNameRVO11.hints.PartyFixedFullName.tooltip}"
+                               id="ot93"/>
+            </af:column>
+            <af:column headerText="#{bindings.SearchByPartyNameRVO11.hints.CaseNumber.label}" id="c99">
+                <af:outputText value="#{row.CaseNumber}"
+                               shortDesc="#{bindings.SearchByPartyNameRVO11.hints.CaseNumber.tooltip}" id="ot95"/>
+            </af:column>
+            <af:column headerText="#{bindings.SearchByPartyNameRVO11.hints.CreatedByBusinessCaseId.label}" id="c100">
+                <af:outputText value="#{row.CreatedByBusinessCaseId}"
+                               shortDesc="#{bindings.SearchByPartyNameRVO11.hints.CreatedByBusinessCaseId.tooltip}"
+                               id="ot96">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SearchByPartyNameRVO11.hints.CreatedByBusinessCaseId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.SearchByPartyNameRVO11.hints.Attendance.label}" id="c101">
+                <af:outputText value="#{row.Attendance}"
+                               shortDesc="#{bindings.SearchByPartyNameRVO11.hints.Attendance.tooltip}" id="ot97">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SearchByPartyNameRVO11.hints.Attendance.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.SearchByPartyNameRVO11.hints.IdNumber.label}" id="c102">
+                <af:outputText value="#{row.IdNumber}"
+                               shortDesc="#{bindings.SearchByPartyNameRVO11.hints.IdNumber.tooltip}" id="ot98"/>
+            </af:column>
+            <af:column headerText="#{bindings.SearchByPartyNameRVO11.hints.PoliceStationEntityId.label}" id="c103">
+                <af:outputText value="#{row.PoliceStationEntityId}"
+                               shortDesc="#{bindings.SearchByPartyNameRVO11.hints.PoliceStationEntityId.tooltip}"
+                               id="ot99">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SearchByPartyNameRVO11.hints.PoliceStationEntityId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.SearchByPartyNameRVO11.hints.ExecutionFlag.label}" id="c104">
+                <af:outputText value="#{row.ExecutionFlag}"
+                               shortDesc="#{bindings.SearchByPartyNameRVO11.hints.ExecutionFlag.tooltip}" id="ot100">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SearchByPartyNameRVO11.hints.ExecutionFlag.format}"/>
+                </af:outputText>
+            </af:column>
+        </af:table>-->
+        <af:table value="#{bindings.SearchByPartyNameRVO1.collectionModel}" var="row"
+                  rows="#{bindings.SearchByPartyNameRVO1.rangeSize}"
+                  emptyText="#{bindings.SearchByPartyNameRVO1.viewable ? bundle.NO_DATA : 'Access Denied.'}"
+                   autoHeightRows="5" scrollPolicy="page"
+                    rowBandingInterval="0" columnStretching="column:c95" width="100%"
+                selectedRowKeys="#{bindings.SearchByPartyNameRVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.SearchByPartyNameRVO1.collectionModel.makeCurrent}" varStatus="vs"
+                  rowSelection="single" fetchSize="#{bindings.SearchByPartyNameRVO1.rangeSize}" id="t8">
+                     <af:column id="c1" headerText="#" width="20" align="center" minimumWidth="c94">
+                <af:outputText value="#{vs.index+1}" id="ot1_1"/>
+            </af:column>
+            <af:column headerText="#{bindings.SearchByPartyNameRVO1.hints.Id.label}" id="c94_2" visible="false">
+                <af:outputText value="#{row.Id}" id="ot91_2">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchByPartyNameRVO1.hints.Id.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.PART_FULL_NAME}" align="right" id="c95">
+                <af:outputText value="#{row.PartyFixedFullName}"
+                               shortDesc="#{bindings.SearchByPartyNameRVO1.hints.PartyFixedFullName.tooltip}"
+                               id="ot92"/>
+            </af:column>
+            <!--<af:column headerText="#{bindings.SearchByPartyNameRVO1.hints.CreatedByBusinessCaseId.label}"  id="c96">
+                <af:outputText value="#{row.CreatedByBusinessCaseId}"
+                               shortDesc="#{bindings.SearchByPartyNameRVO1.hints.CreatedByBusinessCaseId.tooltip}"
+                               id="ot93">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SearchByPartyNameRVO1.hints.CreatedByBusinessCaseId.format}"/>
+                </af:outputText>
+            </af:column>-->
+            <af:column headerText="#{bundle.ID_NUMBER}" align="right" id="c98" width="200">                
+                <af:outputText  value="#{row.IdNumber}" id="aot2"/>
+            </af:column>
+            <af:column headerText="العنوان" align="right" id="c94" width="400">
+                <af:outputText value="#{row.Address}" id="ot91"/>
+            </af:column>
+            <af:column headerText="رقم القضية" align="right" id="c96" width="200">
+                <af:outputText value="#{row.BusinessCaseNumber}" id="ot93"/>
+            </af:column>
+            <af:column headerText="test" align="center" id="c98_1" visible="false" width="200">                
+                <af:outputText  value="#{row.PoliceStationEntityId}" id="aot2_1"/>
+            </af:column>
+            <af:column id="c55_1" align="center" width="150">
+                <af:button text="عرض التفاصيل" id="b11_1" action="#{pageFlowScope.claimProcedureBean.openPartyDetails}"/>
+            </af:column>
+        </af:table>
+        <af:popup childCreation="deferred" autoCancel="disabled" id="p4" contentDelivery="lazyUncached">
+        <!-- dialogListener="#{pageFlowScope.caseEditBean.changeEditconvictedDialogListener}"-->
+            <af:dialog id="d4" type="none" >
+                 <af:table value="#{bindings.searchByPartyResultRVO1.collectionModel}" var="row"
+                  rows="#{bindings.searchByPartyResultRVO1.rangeSize}"
+                  emptyText="#{bindings.searchByPartyResultRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" columnStretching="column:c5" width="100%"
+                  selectedRowKeys="#{bindings.searchByPartyResultRVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.searchByPartyResultRVO1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.searchByPartyResultRVO1.rangeSize}" id="t1"
+                  autoHeightRows="5" scrollPolicy="page"
+                  rowDisclosureListener="#{pageFlowScope.claimProcedureBean.rowDisclosureListenerResultsTableParty}">
+            <f:facet name="detailStamp">
+                <af:panelTabbed position="above" id="pt1">
+                    <af:showDetailItem id="tab1" text="العناوين" disclosed="true">
+                        <af:table value="#{bindings.PartyAddressesRVO1.collectionModel}" var="row"
+                                  rows="#{bindings.PartyAddressesRVO1.rangeSize}"
+                                  emptyText="#{bindings.PartyAddressesRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0" width="40%"
+                                  selectedRowKeys="#{bindings.PartyAddressesRVO1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.PartyAddressesRVO1.collectionModel.makeCurrent}"
+                                  rowSelection="single" fetchSize="#{bindings.PartyAddressesRVO1.rangeSize}" id="t4">
+                            <af:column headerText="#{bindings.PartyAddressesRVO1.hints.ParPartyId.label}" id="c67"
+                                       rendered="false">
+                                <af:outputText value="#{row.ParPartyId}"
+                                               shortDesc="#{bindings.PartyAddressesRVO1.hints.ParPartyId.tooltip}"
+                                               id="ot30">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.PartyAddressesRVO1.hints.ParPartyId.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bundle.ADDRESS}" id="c82" width="490px;">
+                                <af:outputText value="#{row.Address}"
+                                               shortDesc="#{bindings.PartyAddressesRVO1.hints.Address.tooltip}"
+                                               id="ot54"/>
+                            </af:column>
+                        </af:table>
+                    </af:showDetailItem>
+                    <af:showDetailItem id="tab2" text="الأحكام">
+                        <af:table value="#{bindings.PartyFoldersRVO1.collectionModel}" var="row"
+                                  rows="#{bindings.PartyFoldersRVO1.rangeSize}"
+                                  emptyText="#{bindings.PartyFoldersRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0" width="50%"
+                                  selectedRowKeys="#{bindings.PartyFoldersRVO1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.PartyFoldersRVO1.collectionModel.makeCurrent}"
+                                  rowSelection="single" fetchSize="#{bindings.PartyFoldersRVO1.rangeSize}" id="t5">
+                            <af:column headerText="#{bindings.PartyFoldersRVO1.hints.FolderId.label}" id="c83"
+                                       rendered="false">
+                                <af:outputText value="#{row.FolderId}"
+                                               shortDesc="#{bindings.PartyFoldersRVO1.hints.FolderId.tooltip}"
+                                               id="ot55">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.PartyFoldersRVO1.hints.FolderId.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bundle.sequence_number}" id="c91" width="250px;">
+                                <af:outputText value="#{row.SequenceNumber}"
+                                               shortDesc="#{bindings.PartyFoldersRVO1.hints.SequenceNumber.tooltip}"
+                                               id="ot88">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.PartyFoldersRVO1.hints.SequenceNumber.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bundle.JUDGMENTS}" id="c84" width="360px;">
+                                <af:outputText value="#{row.JudgmentText}"
+                                               shortDesc="#{bindings.PartyFoldersRVO1.hints.JudgmentText.tooltip}"
+                                               id="ot66"/>
+                            </af:column>
+                        </af:table>
+                    </af:showDetailItem>
+                    <af:showDetailItem id="tab3" text="المطالبات">
+                        <af:table value="#{bindings.PartyClaimsRVO11.collectionModel}" var="row"
+                                  rows="#{bindings.PartyClaimsRVO11.rangeSize}"
+                                  emptyText="#{bindings.PartyClaimsRVO11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0" width="41.5%"
+                                  selectedRowKeys="#{bindings.PartyClaimsRVO11.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.PartyClaimsRVO11.collectionModel.makeCurrent}"
+                                  rowSelection="single" fetchSize="#{bindings.PartyClaimsRVO11.rangeSize}" id="t6">
+                            <af:column headerText="#{bindings.PartyClaimsRVO11.hints.PartyId.label}" id="c87"
+                                       rendered="false">
+                                <af:outputText value="#{row.PartyId}"
+                                               shortDesc="#{bindings.PartyClaimsRVO11.hints.PartyId.tooltip}"
+                                               id="ot84"/>
+                            </af:column>
+                            <af:column headerText="#{bundle.CLAIM_TOTAL_AMOUNT}" width="250px;" id="c89">
+                                <af:outputText value="#{row.Total}"
+                                               shortDesc="#{bindings.PartyClaimsRVO11.hints.Total.tooltip}" id="ot86">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.PartyClaimsRVO11.hints.Total.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bundle.PROCEDURE_REMAINING}" width="250px;" id="c88">
+                                <af:outputText value="#{row.Remaining}"
+                                               shortDesc="#{bindings.PartyClaimsRVO11.hints.Remaining.tooltip}"
+                                               id="ot85">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.PartyClaimsRVO11.hints.Remaining.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.PartyClaimsRVO11.hints.Id.label}" id="c90"
+                                       rendered="false">
+                                <af:outputText value="#{row.Id}"
+                                               shortDesc="#{bindings.PartyClaimsRVO11.hints.Id.tooltip}" id="ot87">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.PartyClaimsRVO11.hints.Id.format}"/>
+                                </af:outputText>
+                            </af:column>
+                        </af:table>
+                    </af:showDetailItem>
+                    <af:showDetailItem id="sdi1" text="التهم">
+                    <af:table value="#{bindings.PartyCrimesRVO1.collectionModel}" var="row"
+                                  rows="#{bindings.PartyCrimesRVO1.rangeSize}"
+                                  emptyText="#{bindings.PartyCrimesRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0" width="40%"
+                                  selectedRowKeys="#{bindings.PartyCrimesRVO1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.PartyCrimesRVO1.collectionModel.makeCurrent}"
+                                  rowSelection="single" fetchSize="#{bindings.PartyCrimesRVO1.rangeSize}" id="t7">
+                            <af:column headerText="#{bindings.PartyCrimesRVO1.hints.ParPartyId.label}" id="c92"
+                                       rendered="false">
+                                <af:outputText value="#{row.PartyId}"
+                                               shortDesc="#{bindings.PartyCrimesRVO1.hints.PartyId.tooltip}"
+                                               id="ot89">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.PartyCrimesRVO1.hints.PartyId.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bundle.CRIMES}" id="c93" width="490px;">
+                                <af:outputText value="#{row.Name}"
+                                               shortDesc="#{bindings.PartyCrimesRVO1.hints.Name.tooltip}"
+                                               id="ot90"/>
+                            </af:column>
+                        </af:table>
+                    </af:showDetailItem>
+                </af:panelTabbed>
+            </f:facet>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.OrderRaws.label}" id="c1" rendered="false">
+                <af:outputText value="#{row.OrderRaws}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.OrderRaws.tooltip}" id="ot1">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.OrderRaws.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.PART_FULL_NAME}" id="c3" width="250">
+                <af:outputText value="#{row.PartyName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.PartyName.tooltip}" id="ot3"/>
+            </af:column>
+            <af:column headerText="#{bundle.ID_NUMBER}" id="c4" width="150">
+                <af:outputText value="#{row.IdNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.IdNumber.tooltip}" id="ot4"/>
+            </af:column>
+            <af:column headerText="#{bundle.sequence_number}" id="c2" width="250">
+                <af:outputText value="#{row.InventoryNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.InventoryNumber.tooltip}" id="ot2"/>
+            </af:column>
+            <af:column headerText="#{bundle.BUSINESS_CASE_NUMBER}" id="c5" width="250">
+                <af:outputText value="#{row.BusinessCaseNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.BusinessCaseNumber.tooltip}"
+                               id="ot5"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.EntityName.label}" id="c6" rendered="false">
+                <af:outputText value="#{row.EntityName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.EntityName.tooltip}" id="ot6"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.HearingDate.label}" id="c7"
+                       rendered="#{bindings.SearchType.inputValue eq 3}">
+                <af:outputText value="#{row.HearingDate}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.HearingDate.tooltip}" id="ot7"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.SequenceNumber.label}" id="c8"
+                       rendered="false">
+                <af:outputText value="#{row.SequenceNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.SequenceNumber.tooltip}" id="ot8">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.SequenceNumber.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.FolderName.label}" id="c9" rendered="false">
+                <af:outputText value="#{row.FolderName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.FolderName.tooltip}" id="ot9"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.PoliceStationEntityId.label}"
+                       rendered="false" id="c10">
+                <af:outputText value="#{row.PoliceStationEntityId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.PoliceStationEntityId.tooltip}"
+                               id="ot10">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.PoliceStationEntityId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.Year.label}" id="c11" rendered="false">
+                <af:outputText value="#{row.Year}" shortDesc="#{bindings.searchByPartyResultRVO1.hints.Year.tooltip}"
+                               id="ot11">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.Year.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.FolderType.label}" id="c12"
+                       rendered="false">
+                <af:outputText value="#{row.FolderType}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.FolderType.tooltip}" id="ot12">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.FolderType.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.RepeatedFlag.label}" id="c13"
+                       rendered="false">
+                <af:outputText value="#{row.RepeatedFlag}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.RepeatedFlag.tooltip}" id="ot13"/>
+            </af:column>
+            <af:column headerText="#{bundle.CRIMES}" id="c85" width="200px;" visible="false">
+                <af:outputText value="#{row.Crimes}"
+                               inlineStyle="white-space: pre-wrap; word-wrap:break-word; display:inline-block;"
+                               noWrap="true" styleClass="AFStretchWidth"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.Crimes.tooltip}" id="ot82"/>
+            </af:column>
+            <af:column headerText="#{bundle.IS_REQUIRED}" id="c35" rendered="#{bindings.SearchType.inputValue eq 1}"
+                       width="50">
+                <af:outputText value="#{row.ExecutionFlagName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.ExecutionFlagName.tooltip}"
+                               id="ot36">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.ExecutionFlagName.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.FolderId.label}" id="c14" rendered="false">
+                <af:outputText value="#{row.FolderId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.FolderId.tooltip}" id="ot14">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.FolderId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.PartyId.label}" id="c15" rendered="false">
+                <af:outputText value="#{row.PartyId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.PartyId.tooltip}" id="ot15">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.PartyId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.ResPartyId.label}" id="c16"
+                       rendered="false">
+                <af:outputText value="#{row.ResPartyId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.ResPartyId.tooltip}" id="ot16">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.ResPartyId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.CaseNumber.label}" id="c17"
+                       rendered="false">
+                <af:outputText value="#{row.CaseNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.CaseNumber.tooltip}" id="ot17"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.CaseYear.label}" id="c18" rendered="false">
+                <af:outputText value="#{row.CaseYear}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.CaseYear.tooltip}" id="ot18">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.CaseYear.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="درجه الحكم" id="c19">
+                <af:outputText value="#{row.DegreeName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.DegreeName.tooltip}" id="ot19"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.DegreeId.label}" id="c20" rendered="false">
+                <af:outputText value="#{row.DegreeId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.DegreeId.tooltip}" id="ot20">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.DegreeId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.PoliceId.label}" id="c21" rendered="false">
+                <af:outputText value="#{row.PoliceId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.PoliceId.tooltip}" id="ot21">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.PoliceId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.CasTypeId.label}" id="c22" rendered="false">
+                <af:outputText value="#{row.CasTypeId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.CasTypeId.tooltip}" id="ot22">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.CasTypeId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.CasTypeName.label}" id="c23"
+                       rendered="false">
+                <af:outputText value="#{row.CasTypeName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.CasTypeName.tooltip}" id="ot23"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.ParentEntityId.label}" id="c24"
+                       rendered="false">
+                <af:outputText value="#{row.ParentEntityId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.ParentEntityId.tooltip}" id="ot24">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.ParentEntityId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.BusinessCaseId.label}" id="c25"
+                       rendered="false">
+                <af:outputText value="#{row.BusinessCaseId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.BusinessCaseId.tooltip}" id="ot25">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.BusinessCaseId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.Nickname.label}" id="c26" rendered="false">
+                <af:outputText value="#{row.Nickname}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.Nickname.tooltip}" id="ot26"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.Attendance.label}" id="c27"
+                       rendered="false">
+                <af:outputText value="#{row.Attendance}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.Attendance.tooltip}" id="ot27">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.Attendance.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.SessionId.label}" id="c28" rendered="false">
+                <af:outputText value="#{row.SessionId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.SessionId.tooltip}" id="ot28">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.SessionId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.AttendanceName.label}" id="c29"
+                       rendered="false">
+                <af:outputText value="#{row.AttendanceName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.AttendanceName.tooltip}" id="ot29"/>
+            </af:column>
+            <af:column id="c30" width="50">
+                <af:selectBooleanCheckbox value="#{row.bindings.CheckParty.inputValue}"
+                                          label="#{row.bindings.CheckParty.label}" rendered="#{row.IdNumber eq null}"
+                                          autoSubmit="true"
+                                          shortDesc="#{bindings.searchByPartyResultRVO1.hints.CheckParty.tooltip}"
+                                          id="sbc2"
+                                          valueChangeListener="#{pageFlowScope.claimProcedureBean.checkChanged}"/>
+            </af:column>
+            <af:column id="c55">
+                <af:button text="عرض النموذج" id="b11" action="#{pageFlowScope.claimProcedureBean.PrintReportAction}"/>
+            </af:column>
+        </af:table>
+            </af:dialog>
+        </af:popup>
+       
+    </af:panelHeader>
+    <af:panelHeader text="#{bundle.CLAIMS_SEARCH_RESULTS}" id="ph3"
+                    rendered="#{bindings.SearchType.inputValue ne null  and bindings.SearchType.inputValue ne 1}"
+                    partialTriggers="sor1">
+        <af:table value="#{bindings.searchByPartyResultRVO1.collectionModel}" var="row"
+                  rows="#{bindings.searchByPartyResultRVO1.rangeSize}"
+                  emptyText="#{bindings.searchByPartyResultRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" columnStretching="column:c33" width="100%"
+                  selectedRowKeys="#{bindings.searchByPartyResultRVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.searchByPartyResultRVO1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.searchByPartyResultRVO1.rangeSize}" id="t3"
+                  rowDisclosureListener="#{pageFlowScope.claimProcedureBean.rowDisclosureListenerResultsTable}"
+                  autoHeightRows="5" scrollPolicy="page">
+            <f:facet name="detailStamp">
+                <af:table value="#{bindings.PartyProceduresRVO3.collectionModel}" var="row"
+                          rows="#{bindings.PartyProceduresRVO3.rangeSize}"
+                          emptyText="#{bindings.PartyProceduresRVO3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0" width="50%" styleClass="table-inside-table"
+                          selectedRowKeys="#{bindings.PartyProceduresRVO3.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.PartyProceduresRVO3.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.PartyProceduresRVO3.rangeSize}" id="t2"
+                          columnStretching="last" scrollPolicy="page" autoHeightRows="5">
+                    <af:column headerText="#{bundle.sequence_number}" id="c37" rendered="false">
+                        <af:outputText value="#{row.InventoryNumber}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.InventoryNumber.tooltip}"
+                                       id="ot37"/>
+                    </af:column>
+                    <af:column headerText="#{bundle.hearing_date}" id="c38" rendered="false">
+                        <af:outputText value="#{row.HearingDate}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.HearingDate.tooltip}" id="ot38"/>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.SequenceNumber.label}" id="c39"
+                               rendered="false">
+                        <af:outputText value="#{row.SequenceNumber}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.SequenceNumber.tooltip}"
+                                       id="ot39">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.PartyProceduresRVO3.hints.SequenceNumber.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.PoliceStationEntityId.label}" id="c40"
+                               rendered="false">
+                        <af:outputText value="#{row.PoliceStationEntityId}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.PoliceStationEntityId.tooltip}"
+                                       id="ot40">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.PartyProceduresRVO3.hints.PoliceStationEntityId.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.Year.label}" id="c41" rendered="false">
+                        <af:outputText value="#{row.Year}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.Year.tooltip}" id="ot41">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.PartyProceduresRVO3.hints.Year.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.FolderType.label}" id="c42"
+                               rendered="false">
+                        <af:outputText value="#{row.FolderType}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.FolderType.tooltip}" id="ot42">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.PartyProceduresRVO3.hints.FolderType.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.RepeatedFlag.label}" id="c43"
+                               rendered="false">
+                        <af:outputText value="#{row.RepeatedFlag}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.RepeatedFlag.tooltip}"
+                                       id="ot43"/>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.FolderId.label}" id="c44"
+                               rendered="false">
+                        <af:outputText value="#{row.FolderId}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.FolderId.tooltip}" id="ot44">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.PartyProceduresRVO3.hints.FolderId.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.ResPartyId.label}" id="c45"
+                               rendered="false">
+                        <af:outputText value="#{row.ResPartyId}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.ResPartyId.tooltip}" id="ot45">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.PartyProceduresRVO3.hints.ResPartyId.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.FolderName.label}" id="c46"
+                               rendered="false">
+                        <af:outputText value="#{row.FolderName}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.FolderName.tooltip}" id="ot46"/>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.AdvancePaymentDate.label}" id="c48"
+                               rendered="false">
+                        <af:outputText value="#{row.AdvancePaymentDate}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.AdvancePaymentDate.tooltip}"
+                                       id="ot48">
+                            <af:convertDateTime pattern="#{bindings.PartyProceduresRVO3.hints.AdvancePaymentDate.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.ImprisonmentStartDate.label}" id="c49"
+                               rendered="false">
+                        <af:outputText value="#{row.ImprisonmentStartDate}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.ImprisonmentStartDate.tooltip}"
+                                       id="ot49">
+                            <af:convertDateTime pattern="#{bindings.PartyProceduresRVO3.hints.ImprisonmentStartDate.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.ImprisonmentEndDate.label}" id="c50"
+                               rendered="false">
+                        <af:outputText value="#{row.ImprisonmentEndDate}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.ImprisonmentEndDate.tooltip}"
+                                       id="ot50">
+                            <af:convertDateTime pattern="#{bindings.PartyProceduresRVO3.hints.ImprisonmentEndDate.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bundle.PROCEDURE_TYPE}" id="c53" rendered="true" width="250">
+                        <af:outputText value="#{row.ActsTypesName}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.ActsTypesName.tooltip}"
+                                       id="ot53"/>
+                    </af:column>
+                    <af:column headerText="#{bundle.PROCEDURE_DATE}" id="c51" width="250">
+                        <af:outputText value="#{row.ProcedureDate}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.ProcedureDate.tooltip}"
+                                       id="ot51">
+                            <af:convertDateTime pattern="#{bindings.PartyProceduresRVO3.hints.ProcedureDate.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bundle.PROCEDURE_AMOUNT}" id="c47" width="100">
+                        <af:outputText value="#{row.AdvancePaymentAmount}"
+                                       shortDesc="#{bindings.PartyProceduresRVO3.hints.AdvancePaymentAmount.tooltip}"
+                                       id="ot47">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.PartyProceduresRVO3.hints.AdvancePaymentAmount.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.PartyProceduresRVO3.hints.Id.label}" id="c52" rendered="false">
+                        <af:outputText value="#{row.Id}" shortDesc="#{bindings.PartyProceduresRVO3.hints.Id.tooltip}"
+                                       id="ot52">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.PartyProceduresRVO3.hints.Id.format}"/>
+                        </af:outputText>
+                    </af:column>
+                </af:table>
+            </f:facet>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.OrderRaws.label}" id="c81" rendered="false">
+                <af:outputText value="#{row.OrderRaws}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.OrderRaws.tooltip}" id="ot81">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.OrderRaws.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.PART_FULL_NAME}" id="c31" width="350">
+                <af:outputText value="#{row.PartyName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.PartyName.tooltip}" id="ot31"/>
+            </af:column>
+            <af:column headerText="#{bundle.ID_NUMBER}" id="c34" width="200">
+                <af:outputText value="#{row.IdNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.IdNumber.tooltip}" id="ot32"/>
+            </af:column>
+            <af:column headerText="#{bundle.sequence_number}" id="c32" width="250">
+                <af:outputText value="#{row.InventoryNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.InventoryNumber.tooltip}" id="ot57"/>
+            </af:column>
+            <af:column headerText="#{bundle.BUSINESS_CASE_NUMBER}" id="c33" width="250">
+                <af:outputText value="#{row.BusinessCaseNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.BusinessCaseNumber.tooltip}"
+                               id="ot56"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.EntityName.label}" id="c56"
+                       rendered="false">
+                <af:outputText value="#{row.EntityName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.EntityName.tooltip}" id="ot34"/>
+            </af:column>
+            <af:column headerText="#{bundle.hearing_date}" id="c58" rendered="false">
+                <af:outputText value="#{row.HearingDate}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.HearingDate.tooltip}" id="ot35"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.SequenceNumber.label}" id="c36"
+                       rendered="false">
+                <af:outputText value="#{row.SequenceNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.SequenceNumber.tooltip}" id="ot33">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.SequenceNumber.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.FolderName.label}" id="c57"
+                       rendered="false">
+                <af:outputText value="#{row.FolderName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.FolderName.tooltip}" id="ot80"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.PoliceStationEntityId.label}"
+                       rendered="false" id="c80">
+                <af:outputText value="#{row.PoliceStationEntityId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.PoliceStationEntityId.tooltip}"
+                               id="ot61">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.PoliceStationEntityId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.Year.label}" id="c59" rendered="false">
+                <af:outputText value="#{row.Year}" shortDesc="#{bindings.searchByPartyResultRVO1.hints.Year.tooltip}"
+                               id="ot59">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.Year.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.FolderType.label}" id="c60"
+                       rendered="false">
+                <af:outputText value="#{row.FolderType}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.FolderType.tooltip}" id="ot60">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.FolderType.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.RepeatedFlag.label}" id="c62"
+                       rendered="false">
+                <af:outputText value="#{row.RepeatedFlag}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.RepeatedFlag.tooltip}" id="ot62"/>
+            </af:column>
+            <af:column headerText="#{bundle.CRIMES}" id="c86" width="200px;" visible="false">
+                <af:outputText value="#{row.Crimes}"
+                               inlineStyle="white-space: pre-wrap; word-wrap:break-word; display:inline-block;"
+                               noWrap="true" styleClass="AFStretchWidth"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.Crimes.tooltip}" id="ot83"/>
+            </af:column>
+            <af:column headerText="#{bundle.IS_REQUIRED}" id="c61" rendered="#{bindings.SearchType.inputValue eq 1}">
+                <af:outputText value="#{row.ExecutionFlag eq 1 ? 'مطلوب' : 'غير مطلوب'}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.ExecutionFlag.tooltip}" id="ot58">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.ExecutionFlag.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.FolderId.label}" id="c63" rendered="false">
+                <af:outputText value="#{row.FolderId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.FolderId.tooltip}" id="ot78">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.FolderId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.PartyId.label}" id="c79" rendered="false">
+                <af:outputText value="#{row.PartyId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.PartyId.tooltip}" id="ot79">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.PartyId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.ResPartyId.label}" id="c78"
+                       rendered="false">
+                <af:outputText value="#{row.ResPartyId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.ResPartyId.tooltip}" id="ot64">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.ResPartyId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.CaseNumber.label}" id="c66"
+                       rendered="false">
+                <af:outputText value="#{row.CaseNumber}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.CaseNumber.tooltip}" id="ot65"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.CaseYear.label}" id="c65" rendered="false">
+                <af:outputText value="#{row.CaseYear}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.CaseYear.tooltip}" id="ot63">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.CaseYear.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.BUSINESS_CASE_DEGREE}" id="c64" rendered="false">
+                <af:outputText value="#{row.DegreeName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.DegreeName.tooltip}" id="ot75"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.DegreeId.label}" id="c77" rendered="false">
+                <af:outputText value="#{row.DegreeId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.DegreeId.tooltip}" id="ot77">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.DegreeId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.PoliceId.label}" id="c76" rendered="false">
+                <af:outputText value="#{row.PoliceId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.PoliceId.tooltip}" id="ot76">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.PoliceId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.CasTypeId.label}" id="c73" rendered="false">
+                <af:outputText value="#{row.CasTypeId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.CasTypeId.tooltip}" id="ot72">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.CasTypeId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.CasTypeName.label}" id="c74"
+                       rendered="false">
+                <af:outputText value="#{row.CasTypeName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.CasTypeName.tooltip}" id="ot71"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.ParentEntityId.label}" id="c71"
+                       rendered="false">
+                <af:outputText value="#{row.ParentEntityId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.ParentEntityId.tooltip}" id="ot70">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.ParentEntityId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.BusinessCaseId.label}" id="c70"
+                       rendered="false">
+                <af:outputText value="#{row.BusinessCaseId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.BusinessCaseId.tooltip}" id="ot73">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.BusinessCaseId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.Nickname.label}" id="c75" rendered="false">
+                <af:outputText value="#{row.Nickname}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.Nickname.tooltip}" id="ot74"/>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.Attendance.label}" id="c72"
+                       rendered="false">
+                <af:outputText value="#{row.Attendance}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.Attendance.tooltip}" id="ot68">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.Attendance.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.SessionId.label}" id="c69" rendered="false">
+                <af:outputText value="#{row.SessionId}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.SessionId.tooltip}" id="ot69">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.searchByPartyResultRVO1.hints.SessionId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.searchByPartyResultRVO1.hints.AttendanceName.label}" id="c68"
+                       rendered="false">
+                <af:outputText value="#{row.AttendanceName}"
+                               shortDesc="#{bindings.searchByPartyResultRVO1.hints.AttendanceName.tooltip}" id="ot67"/>
+            </af:column>
+            <af:column id="c54">
+                <af:button text="عرض النموذج" id="b10" action="#{pageFlowScope.claimProcedureBean.PrintReportAction}"/>
+            </af:column>
+        </af:table>
+    </af:panelHeader>
+</ui:composition>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ar">
+    <af:document title="Logout.jsf" id="d1">
+        <af:form id="f1">
+        <af:panelGridLayout id="pgl2" dimensionsFrom="parent">
+                        <af:gridRow marginTop="5px" height="100%" marginBottom="5px" id="gr3">
+                            <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc3" halign="center"
+                                         valign="middle">
+                                <af:outputText value="#{bundle.SUCCESS_LOGOUT}" id="ot1"
+                                               inlineStyle="color:#FFF;font-size:48px;"/>
+                            </af:gridCell>
+                        </af:gridRow>
+                    </af:panelGridLayout>
+        </af:form>
+    </af:document>
+</f:view>

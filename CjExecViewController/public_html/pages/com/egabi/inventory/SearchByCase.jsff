@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+  <af:panelHeader text="#{bundle.SEARCH}" id="ph1">
+
+    <af:panelGroupLayout id="pgl1">
+      <!--<af:selectOneRadio id="sor1" layout="horizontal" autoSubmit="true" value="#{bindings.SearchType.inputValue}">
+        <af:selectItem label="#{bundle.CASE_SEARCH_PANEL}" value="1" id="si2"/>
+        <af:selectItem label="#{bundle.SEARCH_BY_SEQUENCE}" value="2" id="si4"/>
+      </af:selectOneRadio>-->
+      <af:panelGroupLayout id="pgl2">
+        <h:panelGroup id="pg7" layout="block" styleClass="row">
+          <!--<h:panelGroup id="pg1" layout="block" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{bindings.CaseNumber.label}" id="ol1"/>
+            <af:inputText value="#{bindings.CaseNumber.inputValue}" simple="true"
+                          required="#{bindings.CaseNumber.hints.mandatory}" autoSubmit="true"
+                          maximumLength="#{bindings.CaseNumber.hints.precision}"
+                          shortDesc="#{bindings.CaseNumber.hints.tooltip}" id="it1" columns="20">
+              <f:validator binding="#{bindings.CaseNumber.validator}"/>
+            </af:inputText>
+          </h:panelGroup>-->
+          <!--<h:panelGroup id="pg2" layout="block" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{bindings.Year.label}" id="ol2"/>
+            <af:inputText value="#{bindings.Year.inputValue}" simple="true" required="#{bindings.Year.hints.mandatory}"
+                          maximumLength="#{bindings.Year.hints.precision}" autoSubmit="true"
+                          shortDesc="#{bindings.Year.hints.tooltip}" id="it2" columns="20">
+              <f:validator binding="#{bindings.Year.validator}"/>
+            </af:inputText>
+          </h:panelGroup>-->
+          <!--<h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{bindings.BusinessCaseTypeId.label}" id="ol3"/>
+            <af:selectOneChoice value="#{bindings.BusinessCaseTypeId.inputValue}" autoSubmit="true"
+                                required="#{bindings.BusinessCaseTypeId.hints.mandatory}"
+                                shortDesc="#{bindings.BusinessCaseTypeId.hints.tooltip}" id="soc1">
+              <f:selectItems value="#{bindings.BusinessCaseTypeId.items}" id="si1"/>
+              <f:validator binding="#{bindings.BusinessCaseTypeId.validator}"/>
+            </af:selectOneChoice>
+          </h:panelGroup>-->
+          <!--<h:panelGroup id="pg5" layout="block" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{bindings.DegreeId.label}" id="ol5"/>
+            <af:selectOneChoice value="#{bindings.DegreeId.inputValue}" autoSubmit="true"
+                                required="#{bindings.DegreeId.hints.mandatory}"
+                                shortDesc="#{bindings.DegreeId.hints.tooltip}" id="soc3">
+              <f:selectItems value="#{bindings.DegreeId.items}" id="si3"/>
+              <f:validator binding="#{bindings.DegreeId.validator}"/>
+            </af:selectOneChoice>
+          </h:panelGroup>-->
+          <!--<af:panelGroupLayout id="pgl5" 
+                        visible="#{pageFlowScope.entitKoleyaaName ne null and (pageFlowScope.showAllEntities ne '3298' or pageFlowScope.insertAllEntities ne '3300')}">
+            <af:outputLabel value="#{bindings.ProsecutionKolya1.label}" id="ol1f010"/>
+            <af:inputText label="" value="#{pageFlowScope.entitKoleyaaName}" disabled="true" id="itf20"/>
+          </af:panelGroupLayout>-->
+          <af:panelGroupLayout id="pgl6" styleClass="col-md-2 col-sm-12">
+              <af:outputLabel value="#{bindings.ProsecutionKolya2.label}" id="ol6"/>
+              <!--<af:inputListOfValues id="prosecutionKolyaId"
+                                    popupTitle="#{bundle.GENERAL_SEARCH_BUTTON}"
+                                    value="#{bindings.ProsecutionKolya.inputValue}"
+                                    label="#{bindings.ProsecutionKolya.hints.label}"
+                                    model="#{bindings.ProsecutionKolya.listOfValuesModel}"
+                                    required="#{bindings.ProsecutionKolya.hints.mandatory}" columns="20"
+                                    shortDesc="#{bindings.ProsecutionKolya.hints.tooltip}" simple="true">
+                <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionKolya.suggestItems}"/>
+              </af:inputListOfValues>-->
+            <af:selectOneChoice value="#{bindings.ProsecutionKolya2.inputValue}"
+                                label="#{bindings.ProsecutionKolya2.label}"
+                                simple="true" autoSubmit="true"
+                                required="#{bindings.ProsecutionKolya2.hints.mandatory}"
+                                shortDesc="#{bindings.ProsecutionKolya2.hints.tooltip}" id="soc1">
+              <f:selectItems value="#{bindings.ProsecutionKolya2.items}" id="si1"/>
+              <f:validator binding="#{bindings.ProsecutionKolya2.validator}"/>
+              <af:setPropertyListener from="#{bindings.ProsecutionKolya2.inputValue}" to="#{pageFlowScope.ProsecutionKolya2}" type="valueChange"/>
+            </af:selectOneChoice>
+          </af:panelGroupLayout>
+          <!--<af:panelGroupLayout id="pgl7" styleClass="col-md-2 col-sm-12">
+              <af:outputLabel value="#{bindings.ProsecutionPartialName1.label}" id="ol7"/>
+            <af:selectOneChoice value="#{bindings.ProsecutionPartialName1.inputValue}"
+                                label="#{bindings.ProsecutionPartialName1.label}" simple="true"
+                                partialTriggers="soc1" autoSubmit="true"
+                                required="#{bindings.ProsecutionPartialName1.hints.mandatory}"
+                                shortDesc="#{bindings.ProsecutionPartialName1.hints.tooltip}" id="soc2">
+              <f:selectItems value="#{bindings.ProsecutionPartialName1.items}" id="si2"/>
+              <f:validator binding="#{bindings.ProsecutionPartialName1.validator}"/>
+              <af:setPropertyListener from="#{bindings.ProsecutionPartialName1.inputValue}" to="#{pageFlowScope.ProsecutionPartialName1}" type="valueChange"/>
+            </af:selectOneChoice>
+          </af:panelGroupLayout>-->
+          <!--<af:panelGroupLayout id="pgl41" visible="#{pageFlowScope.entitKoleyaaName ne null}" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{bindings.ProsecutionPartial1.label}" id="ol28"/>
+            <af:inputListOfValues id="prosecutionPartialId" popupTitle="#{bundle.PROSECUTION_PARTIAL}"
+                                  value="#{bindings.ProsecutionPartial1.inputValue}"
+                                  label="#{bindings.ProsecutionPartial1.hints.label}"
+                                  model="#{bindings.ProsecutionPartial1.listOfValuesModel}"
+                                  required="#{bindings.ProsecutionPartial1.hints.mandatory}" columns="20"
+                                  shortDesc="#{bindings.ProsecutionPartial1.hints.tooltip}" simple="true"
+                                  partialTriggers="prosecutionKolyaId" autoSubmit="true"
+                                  valueChangeListener="#{pageFlowScope.inventoryBean.clearOnChangeProsecutionPartial}"
+                                  launchPopupListener="#{pageFlowScope.inventoryBean.clearOnLaunchingProsecutionPartial}"
+                                  binding="#{pageFlowScope.inventoryBean.prosecutionPartialLOV2}">
+              <af:autoSuggestBehavior suggestItems="#{bindings.ProsecutionPartial1.suggestItems}"/>
+            </af:inputListOfValues>
+          </af:panelGroupLayout>-->
+          <!--<af:panelGroupLayout id="pgdl43" styleClass="col-md-2 col-sm-12" 
+                                visible="#{pageFlowScope.entitPartialName ne null}">
+            <af:outputLabel value="#{bindings.ProsecutionPartial.label}" id="dol43"/>
+            <af:inputText label="" value="#{pageFlowScope.entitPartialName}" disabled="true" id="dit21" columns="15"/>
+          </af:panelGroupLayout>-->
+          <!--<af:panelGroupLayout id="pgl8" visible="#{pageFlowScope.entitPartialName eq null}" styleClass="col-md-2 col-sm-12">
+              <af:outputLabel value="#{bindings.PoliceStationEntityId.label}" id="ol4"/>
+              <af:inputListOfValues id="policeStationEntityId"
+                                    popupTitle="#{bundle.GENERAL_SEARCH_BUTTON}"
+                                    value="#{bindings.PoliceStationEntity.inputValue}"
+                                    label="#{bindings.PoliceStationEntity.hints.label}"
+                                    model="#{bindings.PoliceStationEntity.listOfValuesModel}"
+                                    required="#{bindings.PoliceStationEntity.hints.mandatory}" columns="20"
+                                    shortDesc="#{bindings.PoliceStationEntity.hints.tooltip}" simple="true">
+                <af:autoSuggestBehavior suggestItems="#{bindings.PoliceStationEntity.suggestItems}"/>
+              </af:inputListOfValues>
+          </af:panelGroupLayout>-->
+          <!--<af:panelGroupLayout id="pgl9" visible="#{pageFlowScope.entitPartialName ne null}" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{bindings.PoliceStationEntityName.label}" id="ol1"/>
+            <af:inputListOfValues id="policeStationEntityNameId"
+                                  popupTitle="#{bundle.GENERAL_SEARCH_BUTTON}"
+                                  value="#{bindings.PoliceStationEntityName.inputValue}" simple="true"
+                                  label="#{bindings.PoliceStationEntityName.hints.label}"
+                                  model="#{bindings.PoliceStationEntityName.listOfValuesModel}"
+                                  required="#{bindings.PoliceStationEntityName.hints.mandatory}"
+                                  columns="20"
+                                  shortDesc="#{bindings.PoliceStationEntityName.hints.tooltip}">
+              <af:autoSuggestBehavior suggestItems="#{bindings.PoliceStationEntityName.suggestItems}"/>
+            </af:inputListOfValues>
+          </af:panelGroupLayout>-->
+        </h:panelGroup>
+        <h:panelGroup id="pg1" layout="block" styleClass="row">
+         
+          <af:panelGroupLayout id="pgl10" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{bindings.DateFrom.label}" id="ol2"/>
+            <af:inputDate value="#{bindings.DateFrom.inputValue}" required="#{bindings.DateFrom.hints.mandatory}" disabled="#{pageFlowScope.inventoryBean.toDay eq 'true'}"
+                          shortDesc="#{bindings.DateFrom.hints.tooltip}" id="id2" simple="true" partialTriggers="sbc1">
+              <f:validator binding="#{bindings.DateFrom.validator}"/>
+              <af:convertDateTime pattern="#{bindings.DateFrom.format}"/>
+            </af:inputDate>
+          </af:panelGroupLayout>
+          <af:panelGroupLayout id="pgl11" styleClass="col-md-2 col-sm-12">
+            <af:outputLabel value="#{bindings.DateTo.label}" id="ol3"/>
+            <af:inputDate value="#{bindings.DateTo.inputValue}" required="#{bindings.DateTo.hints.mandatory}"
+                          disabled="#{pageFlowScope.inventoryBean.toDay eq 'true'}"
+                          shortDesc="#{bindings.DateTo.hints.tooltip}" id="id3" simple="true" partialTriggers="sbc1">
+              <f:validator binding="#{bindings.DateTo.validator}"/>
+              <af:convertDateTime pattern="#{bindings.DateTo.format}"/>
+            </af:inputDate>
+          </af:panelGroupLayout>
+           <af:panelGroupLayout id="pgl12" styleClass="col-md-2 col-sm-12">
+            <!--<af:outputLabel value="#{bundle.TODAY}" id="ol5"/>-->
+            <af:selectBooleanCheckbox  text="#{bundle.TODAY}" id="sbc1" value="#{pageFlowScope.inventoryBean.toDay}"
+                                      autoSubmit="true" simple="true" styleClass="checkbox-estenaf"/>
+          </af:panelGroupLayout>
+        </h:panelGroup>
+      </af:panelGroupLayout>
+      <af:panelGroupLayout id="pgl3" styleClass="btn-holder">
+        <af:button text="#{bundle.GENERAL_SEARCH_BUTTON}" id="b1" action="#{pageFlowScope.inventoryBean.doSearch}"/>
+      </af:panelGroupLayout>
+      
+      <af:panelGroupLayout id="pgl4" visible="true"
+                           partialTriggers="b1">
+        <af:table value="#{bindings.ExcProceduresLogView1.collectionModel}" var="row"
+                  rows="#{bindings.ExcProceduresLogView1.rangeSize}"
+                  emptyText="#{bindings.ExcProceduresLogView1.viewable ? bundle.NO_DATA : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.ExcProceduresLogView1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.ExcProceduresLogView1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.ExcProceduresLogView1.rangeSize}"
+                  width="100%" columnStretching="column:c3"
+                  filterModel="#{bindings.ExcProceduresLogView1Query.queryDescriptor}" filterVisible="true"
+                  queryListener="#{bindings.ExcProceduresLogView1Query.processQuery}" varStatus="vs" id="t1"
+                  scrollPolicy="page" partialTriggers="::b1">
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.ProcedureDate.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.ProcedureDate.label}" id="c5">
+            <af:outputText value="#{row.ProcedureDate}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.ProcedureDate.tooltip}" id="ot5">
+              <af:convertDateTime pattern="yyyy-MM-dd"/>
+            </af:outputText>
+            <f:facet name="filter">
+              <af:inputDate value="#{bindings.ExcProceduresLogView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ProcedureDate.value}"
+                            id="id1">
+                <af:convertDateTime pattern="yyyy-MM-dd"/>
+              </af:inputDate>
+            </f:facet>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.LoggedEntityName.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.LoggedEntityName.label}"
+                     id="c6">
+            <af:outputText value="#{row.LoggedEntityName}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.LoggedEntityName.tooltip}" id="ot6"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.FullName.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.FullName.label}" id="c1">
+            <af:outputText value="#{row.FullName}" shortDesc="#{bindings.ExcProceduresLogView1.hints.FullName.tooltip}"
+                           id="ot1"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.CreatedDate.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.CreatedDate.label}" id="c4">
+            <f:facet name="filter">
+              <af:inputDate value="#{bindings.ExcProceduresLogView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreatedDate.value}"
+                            id="id4">
+                <af:convertDateTime pattern="yyyy-MM-dd"/>
+              </af:inputDate>
+              <!--<af:inputDate value="#{vs.filterCriteria.CreatedDate}"
+                            id="id4">
+                --><!--<af:convertDateTime pattern="dd/MM/yyyy"/>--><!--
+              </af:inputDate>-->
+            </f:facet>
+            <af:outputText value="#{row.bindings.CreatedDate.inputValue}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.CreatedDate.tooltip}" id="ot2">
+              <af:convertDateTime pattern="yyyy-MM-dd"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.ActionTypeName.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.ActionTypeName.label}" id="c8">
+            <af:outputText value="#{row.ActionTypeName}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.ActionTypeName.tooltip}" id="ot8"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.SequenceNumberLong.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.SequenceNumberLong.label}"
+                     id="c3">
+            <af:outputText value="#{row.SequenceNumberLong}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.SequenceNumberLong.tooltip}" id="ot3"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.CaseEntityName.name}" filterable="true"
+                     visible="false" sortable="true"
+                     headerText="#{bindings.ExcProceduresLogView1.hints.CaseEntityName.label}" id="c7">
+            <af:outputText value="#{row.CaseEntityName}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.CaseEntityName.tooltip}" id="ot7"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.CaseTypeName.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.CaseTypeName.label}" id="c9">
+            <af:outputText value="#{row.CaseTypeName}"
+                           shortDesc="#{bindings.ExcProceduresLogView1.hints.CaseTypeName.tooltip}" id="ot9"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.AppealRequest.name}" filterable="false"
+                     sortable="false" headerText="التقارير" id="c11">
+            <af:panelGroupLayout id="pgl5">
+              <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l1x" rendered="#{row.AppealRequest ne null}">
+                <af:fileDownloadActionListener filename="تقرير طلب الإستئناف"
+                                               method="#{pageFlowScope.inventoryBean.downloadAppealRequest}"/>
+              </af:link>
+              <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l3" rendered="#{row.CriminalRequest ne null}">
+                <af:fileDownloadActionListener filename="تقرير طلب الأعتراض على الأمر الجنائي"
+                                               method="#{pageFlowScope.inventoryBean.downloadCriminalRequest}"/>
+              </af:link>
+              <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l4" rendered="#{row.OppositionRequest ne null}">
+                <af:fileDownloadActionListener filename="#{row.FileName}"
+                                               method="#{pageFlowScope.inventoryBean.downloadOppositionRequest}"/>
+              </af:link>
+            </af:panelGroupLayout>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.CriminalRequest.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.CriminalRequest.label}" rendered="false"
+                     id="c12">
+            <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l12x" disabled="#{row.CriminalRequest eq null}">
+                <af:fileDownloadActionListener filename="تقرير طلب الأعتراض على الأمر الجنائي"
+                                             method="#{pageFlowScope.inventoryBean.downloadCriminalRequest}">                
+               </af:fileDownloadActionListener>
+              </af:link>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.OppositionRequest.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.OppositionRequest.label}" rendered="false"
+                     id="c13">
+            <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l13x" disabled="#{row.OppositionRequest eq null}">
+                <af:fileDownloadActionListener filename="تقرير طلب المعارضة"
+                                             method="#{pageFlowScope.inventoryBean.downloadOppositionRequest}">                
+                </af:fileDownloadActionListener>
+              </af:link>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.DocumentId.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.DocumentId.label}" id="c2"
+                     rendered="false">
+            <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l1" disabled="#{row.DocumentId eq null}">
+              <af:fileDownloadActionListener filename="نموذج المعارضة"
+                                             method="#{pageFlowScope.inventoryBean.downloadReport}"/>
+            </af:link>
+          </af:column>
+          <af:column sortProperty="#{bindings.ExcProceduresLogView1.hints.DocumentId2.name}" filterable="true"
+                     sortable="true" headerText="#{bindings.ExcProceduresLogView1.hints.DocumentId2.label}" id="c10"
+                     rendered="false">
+            <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l2" disabled="#{row.DocumentId2 eq null}">
+              <af:fileDownloadActionListener filename="نموذج 26"
+                                             method="#{pageFlowScope.inventoryBean.downloadReport26}"/>
+            </af:link>
+          </af:column>
+        </af:table>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+  </af:panelHeader>
+</ui:composition>

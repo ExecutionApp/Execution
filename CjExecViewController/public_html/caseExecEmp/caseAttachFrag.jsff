@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <af:panelGroupLayout styleClass="AFStretchWidth" id="pgl1">
+        <af:table value="#{bindings.CriminalJusticeFilesDetailsVO2.collectionModel}" var="row"
+                  rows="#{bindings.CriminalJusticeFilesDetailsVO2.rangeSize}"
+                  emptyText="#{bindings.CriminalJusticeFilesDetailsVO2.viewable ? bundle['NO_DATA'] : 'Access Denied.'}"
+                  rowBandingInterval="0" width="100%" columnStretching="multiple"
+                  styleClass="table-inside-table AFStretchWidth "
+                  selectedRowKeys="#{bindings.CriminalJusticeFilesDetailsVO2.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.CriminalJusticeFilesDetailsVO2.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.CriminalJusticeFilesDetailsVO2.rangeSize}"
+                  filterModel="#{bindings.CriminalJusticeFilesDetailsVO2Query.queryDescriptor}" filterVisible="true"
+                  queryListener="#{bindings.CriminalJusticeFilesDetailsVO2Query.processQuery}" varStatus="vs" id="t1">
+            <af:column sortProperty="#{bindings.CriminalJusticeFilesDetailsVO2.hints.TypeName.name}" filterable="true"
+                       headerText="#{bindings.CriminalJusticeFilesDetailsVO2.hints.TypeName.label}" id="c6" width="100%">
+                <af:outputText value="#{row.TypeName}"
+                               shortDesc="#{bindings.CriminalJusticeFilesDetailsVO2.hints.TypeName.tooltip}" id="ot5"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.CriminalJusticeFilesDetailsVO2.hints.Filename.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.CriminalJusticeFilesDetailsVO2.hints.Filename.label}"
+                       id="c1" width="100%" rendered="false">
+                <af:outputText value="#{row.Filename}"
+                               shortDesc="#{bindings.CriminalJusticeFilesDetailsVO2.hints.Filename.tooltip}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.CriminalJusticeFilesDetailsVO2.hints.CreatedBy.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.CriminalJusticeFilesDetailsVO2.hints.CreatedBy.label}"
+                       id="c2" width="100%" rendered="false">
+                <af:outputText value="#{row.CreatedBy}"
+                               shortDesc="#{bindings.CriminalJusticeFilesDetailsVO2.hints.CreatedBy.tooltip}" id="ot2"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.CriminalJusticeFilesDetailsVO2.hints.CreatedDate.name}"
+                       filterable="true" sortable="true" width="100%"
+                       headerText="#{bindings.CriminalJusticeFilesDetailsVO2.hints.CreatedDate.label}" id="c3"
+                       rendered="false">
+                <f:facet name="filter">
+                    <af:inputDate value="#{bindings.CriminalJusticeFilesDetailsVO2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreatedDate.value}"
+                                  id="id1">
+                        <af:convertDateTime pattern="#{bindings.CriminalJusticeFilesDetailsVO2.hints.CreatedDate.format}"/>
+                    </af:inputDate>
+                </f:facet>
+                <af:outputText value="#{row.CreatedDate}"
+                               shortDesc="#{bindings.CriminalJusticeFilesDetailsVO2.hints.CreatedDate.tooltip}"
+                               id="ot3">
+                    <af:convertDateTime pattern="#{bindings.CriminalJusticeFilesDetailsVO2.hints.CreatedDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.CriminalJusticeFilesDetailsVO2.hints.PartyFullName.name}"
+                       filterable="true" width="100%"
+                       headerText="#{bindings.CriminalJusticeFilesDetailsVO2.hints.PartyFullName.label}" id="c5"
+                       rendered="false">
+                <af:outputText value="#{row.PartyFullName}"
+                               shortDesc="#{bindings.CriminalJusticeFilesDetailsVO2.hints.PartyFullName.tooltip}"
+                               id="ot4"/>
+            </af:column>
+            <af:column id="c4" filterable="true" width="100%">
+                <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l2" disabled="#{row.Did eq null}">
+                    <af:fileDownloadActionListener filename="#{row.Filename}"
+                                                   method="#{pageFlowScope.caseAttachBean.download}"/>
+                </af:link>
+            </af:column>
+        </af:table>
+    </af:panelGroupLayout>
+</ui:composition>

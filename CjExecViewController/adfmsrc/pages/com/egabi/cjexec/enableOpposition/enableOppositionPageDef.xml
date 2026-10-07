@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="enableOppositionPageDef"
+                Package="pages.com.egabi.cjexec.enableOpposition">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <!--<iterator Binds="ExcFolderProceduresVO" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExcFolderProceduresVOIterator"/>-->
+        <iterator Binds="UserDataROV" RangeSize="25" DataControl="CjExecAMDataControl" id="UserDataROVIterator"/>
+        <iterator Binds="CaseInfoROV" RangeSize="25" DataControl="CjExecAMDataControl" id="CaseInfoROVIterator"/>
+        <iterator Binds="CriminalLawyersROV" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="CriminalLawyersROVIterator"/>
+        <!--<iterator Binds="ExcFolderProcedureStepsVO" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExcFolderProcedureStepsVOIterator"/>
+    <iterator id="StepsValidationROVIterator" Binds="StepsValidationROV" DataControl="CjExecAMDataControl"
+              RangeSize="25"/>-->
+        <taskFlow id="ExcPrtySessJdgTF"
+                  taskFlowId="/WEB-INF/taskflows/execpartysessionjudgments/ExcPrtySessJdgTF.xml#ExcPrtySessJdgTF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters>
+                <parameter id="partyId" value="#{bindings.PartyId.inputValue}"/>
+            </parameters>
+        </taskFlow>
+        <taskFlow id="ExecBcSessionsJudgmentsTF"
+                  taskFlowId="/WEB-INF/taskflows/execbcsessionsjudgments/ExcBcSessJdgTF.xml#ExecBcSessionsJudgmentsTF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters>
+                <parameter id="BusinessCaseId" value="#{bindings.BusinessCaseId.inputValue}"/>
+            </parameters>
+        </taskFlow>
+        <iterator Binds="ExcFolderActionsVO" RangeSize="10" DataControl="CjExecAMDataControl"
+                  id="ExcFolderActionsVOIterator"/>
+        <iterator id="ExcFolderProceduresVOIterator" Binds="ExcFolderProceduresVO" DataControl="CjExecAMDataControl"
+                  RangeSize="25"/>
+        <iterator id="ExcFolderProcedureStepsVOIterator" Binds="ExcFolderProcedureStepsVO"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator id="ExcFolderActionsAttachVOIterator" Binds="ExcFolderActionsAttachVO"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator Binds="RequiredAttachmentROV" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="RequiredAttachmentROVIterator"/>
+        <taskFlow id="WebCamTF" taskFlowId="/WEB-INF/taskflows/webcam/WebCamTF.xml#WebCamTF" activation="deferred"
+                  xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters>
+                <parameter id="Party_ID" value="#{bindings.PartyId.inputValue}"/>
+            </parameters>
+        </taskFlow>
+        <searchRegion Binds="ExcFolderActionsAttachVOIterator" Criteria=""
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      id="ExcFolderActionsAttachVOQuery"/>
+        <taskFlow id="Par_PartiesTF" taskFlowId="/WEB-INF/taskflows/ParParties/Par_Parties-TF.xml#Par_Parties-TF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters>
+                <parameter id="partyId" value="#{bindings.PartyId.inputValue}"/>
+            </parameters>
+        </taskFlow>
+        <taskFlow id="lawyerInfoTF" taskFlowId="/WEB-INF/taskflows/enableOpposition/lawyerInfoTF.xml#lawyerInfoTF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters>
+                <parameter id="resPartyId" value="#{bindings.ResPartyId.inputValue}"/>
+                <parameter id="primaryLawyerId" value="#{bindings.Lawyer_ID.inputValue}"/>
+            </parameters>
+        </taskFlow>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="UserDataROVIterator" id="PartyFullName">
+            <AttrNames>
+                <Item Value="PartyFullName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="UserDataROVIterator" id="IdNumber">
+            <AttrNames>
+                <Item Value="IdNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ExcFolderProceduresVOIterator" StaticList="true" id="CapacityType" DTSupportsMRU="true"
+              SelectItemValueMode="ListObject">
+            <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent"/>
+            <AttrNames>
+                <Item Value="CapacityType"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="4"/>
+                <Item Value="5"/>
+            </ValueList>
+        </list>
+        <attributeValues IterBinding="CaseInfoROVIterator" id="PoliceNumber">
+            <AttrNames>
+                <Item Value="PoliceNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseInfoROVIterator" id="ParYear">
+            <AttrNames>
+                <Item Value="ParYear"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseInfoROVIterator" id="BusinessCaseName">
+            <AttrNames>
+                <Item Value="BusinessCaseName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseInfoROVIterator" id="EntityName">
+            <AttrNames>
+                <Item Value="EntityName"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ExcFolderProceduresVOIterator" StaticList="false" Uses="LOV_PrimaryLawyerId" id="Lawyer_ID"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="CriminalLawyersROVIterator" id="Name">
+            <AttrNames>
+                <Item Value="Name"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CriminalLawyersROVIterator" id="RetainerNumber">
+            <AttrNames>
+                <Item Value="RetainerNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CriminalLawyersROVIterator" id="ReleasedFrom">
+            <AttrNames>
+                <Item Value="ReleasedFrom"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Commit" DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+        <action id="Rollback" DataControl="CjExecAMDataControl" RequiresUpdateModel="false"
+                Action="rollbackTransaction"/>
+        <list IterBinding="ExcFolderProceduresVOIterator" id="DECISION_TYPE" DTSupportsMRU="true"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="DECISION_TYPE"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="a"/>
+                <Item Value="r"/>
+            </ValueList>
+        </list>
+        <!--<attributeValues IterBinding="ExcFolderProceduresVOIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>-->
+        <attributeValues IterBinding="CaseInfoROVIterator" id="PartyId">
+            <AttrNames>
+                <Item Value="PartyId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseInfoROVIterator" id="BusinessCaseId">
+            <AttrNames>
+                <Item Value="BusinessCaseId"/>
+            </AttrNames>
+        </attributeValues>
+        <!--<attributeValues IterBinding="ExcFolderProceduresVOIterator" id="ProcedureStatus">
+      <AttrNames>
+        <Item Value="ProcedureStatus"/>
+      </AttrNames>
+    </attributeValues>-->
+        <action IterBinding="StepsValidationROVIterator" id="ExecuteWithParams"
+                InstanceName="CjExecAMDataControl.StepsValidationROV" DataControl="CjExecAMDataControl"
+                RequiresUpdateModel="true" Action="executeWithParams">
+            <NamedData NDName="ProcedureIDBind" NDValue="#{bindings.AttachId.inputValue}" NDType="java.lang.Integer"/>
+        </action>
+        <attributeValues IterBinding="CaseInfoROVIterator" id="CaseResPartyId">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <!--<attributeValues IterBinding="ExcFolderProceduresVOIterator" id="Remarks">
+      <AttrNames>
+        <Item Value="Remarks"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderProcedureStepsVOIterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderActionsVOIterator" id="ClosedFlag">
+      <AttrNames>
+        <Item Value="ClosedFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderProcedureStepsVOIterator" id="DecisionType">
+      <AttrNames>
+        <Item Value="DecisionType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderProcedureStepsVOIterator" id="StepId">
+      <AttrNames>
+        <Item Value="StepId"/>
+      </AttrNames>
+    </attributeValues>-->
+        <attributeValues IterBinding="ExcFolderProcedureStepsVOIterator" id="StepId">
+            <AttrNames>
+                <Item Value="StepId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcFolderProcedureStepsVOIterator" id="DecisionType">
+            <AttrNames>
+                <Item Value="DecisionType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcFolderProcedureStepsVOIterator" id="CreatedBy">
+            <AttrNames>
+                <Item Value="CreatedBy"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcFolderProceduresVOIterator" id="ProcedureStatus">
+            <AttrNames>
+                <Item Value="ProcedureStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcFolderActionsVOIterator" id="ClosedFlag">
+            <AttrNames>
+                <Item Value="ClosedFlag"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcFolderProcedureStepsVOIterator" id="Remarks">
+            <AttrNames>
+                <Item Value="Remarks"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseInfoROVIterator" id="EntityId">
+            <AttrNames>
+                <Item Value="EntityId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="RequiredAttachmentROVIterator" id="AttachmentsName">
+            <AttrNames>
+                <Item Value="Name"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="RequiredAttachmentROVIterator" id="ExecuteWithParams1"
+                InstanceName="CjExecAMDataControl.RequiredAttachmentROV" DataControl="CjExecAMDataControl"
+                RequiresUpdateModel="true" Action="executeWithParams">
+            <NamedData NDName="BActionType" NDValue="3" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="BCapacityType" NDValue="#{bindings.CapacityType.inputValue}"
+                       NDType="oracle.jbo.domain.Number"/>
+        </action>
+        <tree IterBinding="RequiredAttachmentROVIterator" id="RequiredAttachmentROV">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.enableopposition.RequiredAttachmentROV"
+                            Name="RequiredAttachmentROV0">
+                <AttrNames>
+                    <Item Value="Name"/>
+                    <Item Value="Id"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="RequiredAttachmentROVIterator" id="AttachId">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcFolderProceduresVOIterator" id="Id">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcFolderProceduresVOIterator" id="ProcedureDate">
+            <AttrNames>
+                <Item Value="ProcedureDate"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="ExcFolderActionsAttachVOIterator" id="ExcFolderActionsAttachVO">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.enableopposition.ExcFolderActionsAttachVO"
+                            Name="ExcFolderActionsAttachVO0">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="FolderActionId"/>
+                    <Item Value="AttachmentType"/>
+                    <Item Value="DocumentId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="ExcFolderProceduresVOIterator" id="ResPartyId">
+            <AttrNames>
+                <Item Value="ResPartyId"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="ExcFolderActionsAttachVOIterator" id="CreateInsert"
+                InstanceName="CjExecAMDataControl.ExcFolderActionsAttachVO" DataControl="CjExecAMDataControl"
+                RequiresUpdateModel="true" Action="createInsertRow"/>
+        <attributeValues IterBinding="ExcFolderActionsVOIterator" id="folderId">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="ExcFolderActionsAttachVOIterator" id="CreateWithParams"
+                InstanceName="CjExecAMDataControl.ExcFolderActionsAttachVO" DataControl="CjExecAMDataControl"
+                RequiresUpdateModel="true" Action="createWithParams">
+            <NamedData NDName="AttachmentType" NDValue='"9"' NDType="java.lang.String"/>
+        </action>
+    </bindings>
+</pageDefinition>

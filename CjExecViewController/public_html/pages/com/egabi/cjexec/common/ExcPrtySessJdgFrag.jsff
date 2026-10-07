@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+  
+    <h:panelGroup layout="block" styleClass="party-history-tab d-flex flex-column w-100" id="pg1">
+                <af:outputLabel styleClass="party-history-label text-right"
+                                value="#{bindings.PartyJudgementResolution.hints.label}" id="ol1"/>
+                <af:outputText styleClass="party-history-value text-right"
+                               value="#{bindings.PartyJudgementResolution.inputValue}" id="ot6"/>
+            </h:panelGroup>
+    <af:separator id="s1"/>
+    <h:panelGroup layout="block" styleClass="d-flex justify-content-between" id="pg6">
+          
+            <h:panelGroup layout="block" styleClass="party-history-tab d-flex flex-column" id="pg2">
+                <af:outputLabel styleClass="party-history-label text-right" value="#{bindings.HearingDate.hints.label}"
+                                id="ol2"/>
+                <af:outputText styleClass="party-history-value text-right" value="#{bindings.HearingDate.inputValue}"
+                               id="ot7"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="party-history-tab d-flex flex-column" id="pg3">
+                <af:outputLabel styleClass="party-history-label text-right"
+                                value="#{bindings.AttendanceName.hints.label}" id="ol3"/>
+                <af:outputText styleClass="party-history-value text-right"
+                               value="#{bindings.AttendanceName.inputValue}" id="ot8"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="party-history-tab d-flex flex-column" id="pg4">
+                <af:outputLabel styleClass="party-history-label text-right" value="#{bindings.Name.hints.label}"
+                                id="ol4"/>
+                <af:outputText styleClass="party-history-value text-right" value="#{bindings.Name.inputValue}"
+                               id="ot9"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="party-history-tab d-flex flex-column" id="pg5">
+                <af:outputLabel styleClass="party-history-label text-right"
+                                value="#{bindings.SequenceNumber.hints.label}" id="ol5"/>
+                <af:outputText styleClass="party-history-value text-right"
+                               value="#{bindings.SequenceNumber.inputValue}" id="ot10"/>
+            </h:panelGroup>
+        </h:panelGroup>
+    <af:panelHeader rendered="false" text="#{bundle.ACTION_INFO}" id="ph0">
+      
+        <!--commented and converted to data component -->
+        <af:table rendered="false" value="#{bindings.ExecPartySessionJudgmentsROV1.collectionModel}" var="row"
+                  rows="#{bindings.ExecPartySessionJudgmentsROV1.rangeSize}"
+                  emptyText="#{bindings.ExecPartySessionJudgmentsROV1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.ExecPartySessionJudgmentsROV1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.ExecPartySessionJudgmentsROV1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.ExecPartySessionJudgmentsROV1.rangeSize}" id="t1"
+                  contentDelivery="immediate">
+            <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.HearingDate.name}" sortable="true"
+                       headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.HearingDate.label}" id="c1">
+                <af:outputText value="#{row.HearingDate}"
+                               shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.HearingDate.tooltip}" id="ot1">
+                    <af:convertDateTime pattern="#{bindings.ExecPartySessionJudgmentsROV1.hints.HearingDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.AttendanceName.name}"
+                       sortable="true" headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.AttendanceName.label}"
+                       id="c2">
+                <af:outputText value="#{row.AttendanceName}"
+                               shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.AttendanceName.tooltip}"
+                               id="ot2"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.PartyJudgementResolution.name}"
+                       sortable="true"
+                       headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.PartyJudgementResolution.label}"
+                       id="c3">
+                <af:outputText value="#{row.PartyJudgementResolution}"
+                               shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.PartyJudgementResolution.tooltip}"
+                               id="ot3"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.SequenceNumber.name}"
+                       sortable="true" headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.SequenceNumber.label}"
+                       id="c4">
+                <af:outputText value="#{row.SequenceNumber}"
+                               shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.SequenceNumber.tooltip}"
+                               id="ot4">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExecPartySessionJudgmentsROV1.hints.SequenceNumber.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.Name.name}" sortable="true"
+                       headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.Name.label}" id="c5">
+                <af:outputText value="#{row.Name}"
+                               shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.Name.tooltip}" id="ot5"/>
+            </af:column>
+        </af:table>
+    </af:panelHeader>
+</ui:composition>

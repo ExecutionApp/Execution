@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1">
+      <property
+         name="linkStyle">Orthogonal</property>
+   </OverallProperties>
+   <MethodCall
+      id="MethodCall2">
+      <property
+         name="activityId">resetReports</property>
+      <property
+         name="x">502.34766</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>resetReports&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="y">239.44824</property>
+      <property
+         name="exceptionHandler">false</property>
+   </MethodCall>
+   <View
+      id="View3">
+      <property
+         name="activityId">HasrIdNumbReport</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">246.68555</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>HasrIdNumbReport&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">162.79883</property>
+      <property
+         name="page">/pages/com/egabi/MainRepports/hasr/HasrIdNumbReport.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall2"
+      to="View3">
+      <property
+         name="fromOutcome">resetReports</property>
+      <property
+         name="sdm:polyPoints">L50,374.5166,239.09766,374.5166,162.44824,R50</property>
+   </ControlFlowCase>
+</SDM>

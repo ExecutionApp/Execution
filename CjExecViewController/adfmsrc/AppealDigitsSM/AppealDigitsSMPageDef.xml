@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="AppealDigitsSMPageDef"
+                Package="AppealDigitsSM">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="appeal_Digits_TFF1"
+              taskFlowId="/WEB-INF/taskflows/appeal_Digits/appeal_Digits_TFF.xml#appeal_Digits_TFF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

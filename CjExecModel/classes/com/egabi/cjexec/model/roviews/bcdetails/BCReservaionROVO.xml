@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BCReservaionROVO"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full"
+  FetchMode="FETCH_AS_NEEDED"
+  MaxFetchSize="1">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.BCReservaionROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT COURT_BC_HEARING_RESERVATION.ID, 
+       COURT_BC_HEARING_RESERVATION.BUSINESS_CASE_ID, 
+       COURT_BC_HEARING_RESERVATION.CIRCLE_HEARING_DATE_ID, 
+       EXC_COURT_BC_SESSION_JUDGMENT.ID AS IdSession, 
+       EXC_COURT_BC_SESSION_JUDGMENT.COURT_BC_HEARING_RES_ID , 
+       EXC_COURT_BC_DECISION.ID as IdDecision,  EXC_COURT_BC_DECISION.SESSION_JUDGMENT_ID  
+        
+  FROM COURT_BC_HEARING_RESERVATION 
+       LEFT OUTER JOIN EXC_COURT_BC_SESSION_JUDGMENT 
+          ON COURT_BC_HEARING_RESERVATION.ID = 
+                EXC_COURT_BC_SESSION_JUDGMENT.COURT_BC_HEARING_RES_ID 
+                left outer join EXC_COURT_BC_DECISION 
+                on  EXC_COURT_BC_SESSION_JUDGMENT.ID = EXC_COURT_BC_DECISION.SESSION_JUDGMENT_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_ID"
+    Expression="BUSINESS_CASE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CircleHearingDateId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CIRCLE_HEARING_DATE_ID"
+    Expression="CIRCLE_HEARING_DATE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Idsession"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="IDSESSION"
+    Expression="IDSESSION"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CourtBcHearingResId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="COURT_BC_HEARING_RES_ID"
+    Expression="COURT_BC_HEARING_RES_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Iddecision"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="IDDECISION"
+    Expression="IDDECISION"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SessionJudgmentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SESSION_JUDGMENT_ID"
+    Expression="SESSION_JUDGMENT_ID"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

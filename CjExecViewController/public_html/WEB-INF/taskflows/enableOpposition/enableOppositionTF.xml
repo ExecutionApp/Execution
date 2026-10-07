@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="enableOppositionTF">
+    <default-activity>CaseInfo</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__5">
+      <name>folderId</name>
+      <value>#{pageFlowScope.folderId}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__4">
+      <name>stepNumber</name>
+      <value>#{pageFlowScope.stepNumber}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name>decisionType</name>
+      <value>#{pageFlowScope.decisionType}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__31">
+      <name>reportName</name>
+      <value>#{pageFlowScope.reportName}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__32">
+      <name>reportFolder</name>
+      <value>#{pageFlowScope.reportFolder}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__33">
+      <name>Document_ID</name>
+      <value>#{sessionScope.DOCUMENTID}</value>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>enableOppositionBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.cjexec.enableopposition.EnableOppositionBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="enableOpposition">
+      <page>/pages/com/egabi/cjexec/enableOpposition/enableOpposition.jsff</page>
+    </view>
+    <method-call id="CaseInfo">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="UserData">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="Commit">
+      <method>#{bindings.Commit.execute}</method>
+      <outcome>
+        <fixed-outcome>Commit</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Rollback">
+      <method>#{bindings.Rollback.execute}</method>
+      <outcome>
+        <fixed-outcome>Rollback</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="getStepsNumber">
+      <method>#{pageFlowScope.enableOppositionBean.getStepsNumber}</method>
+      <outcome>
+      <to-string/>
+      </outcome>
+    </method-call>
+    <method-call id="CreateWithParameters">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="CreateWithParameters1">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="CreateWithParameters2">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams1">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__10">
+      <from-activity-id>CaseInfo</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>UserData</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>enableOpposition</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>Rollback</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__41">
+        <from-outcome>insert</from-outcome>
+        <to-activity-id>Commit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id>Rollback</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome>Rollback</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__26">
+      <from-activity-id>getStepsNumber</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>CreateWithParameters</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome>insert</from-outcome>
+        <to-activity-id>ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>CreateWithParameters</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>CreateWithParams</from-outcome>
+        <to-activity-id>CreateWithParameters1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id>CreateWithParameters1</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome>CreateWithParams</from-outcome>
+        <to-activity-id>CreateWithParameters2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__19">
+      <from-activity-id>CreateWithParameters2</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome>CreateWithParams</from-outcome>
+        <to-activity-id>enableOpposition</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__27">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>CreateWithParameters2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2">
+      <from-activity-id>UserData</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>ExecuteWithParams1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__34">
+      <from-activity-id>ExecuteWithParams1</from-activity-id>
+      <control-flow-case id="__35">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>getStepsNumber</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>Commit</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>Commit</from-outcome>
+        <to-activity-id>startUpload</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__40">
+        <from-outcome>Commit</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__20">
+      <from-activity-id>startUpload</from-activity-id>
+      <control-flow-case id="__21">
+        <from-outcome>commit</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

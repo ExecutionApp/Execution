@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Association8Assoc"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="FormCaseDescriptionDesPart1"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO"
+    LockLevel="NONE"
+    DeleteContainee="true">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="FormCaseDescriptionDesPart1"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.PkFormCaseDescrDesPart"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ExcCourtBcChargesParties1"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcCourtBcChargesParties1"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.fk_ExcCourtBcChargesPartiesEO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.PartyCrimeId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SearchParPartiesFragPageDef"
+                Package="pages.com.egabi.party">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ParPartiesLogSearchResultRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ParPartiesLogSearchResultRVO1Iterator"/>
+    <searchRegion Binds="ParPartiesLogSearchResultRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ParPartiesLogSearchResultRVO1Query"/>
+    <iterator Binds="SearchParPartiesLogRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="SearchParPartiesLogRVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ParPartiesLogSearchResultRVO1Iterator" id="ParPartiesLogSearchResultRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.ParParties.ParPartiesLogSearchResultRVO"
+                      Name="ParPartiesLogSearchResultRVO10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="FullName"/>
+          <Item Value="IdNumber"/>
+          <Item Value="Address"/>
+          <Item Value="Age"/>
+          <Item Value="JobTitle"/>
+          <Item Value="TransactionType"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="CreatedUser"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchParPartiesLogRVO1Iterator" id="FullName">
+      <AttrNames>
+        <Item Value="FullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchParPartiesLogRVO1Iterator" id="IdNumber">
+      <AttrNames>
+        <Item Value="IdNumber"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkAttachmentTypeAssoc"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="ExcLkpAttachmentType"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.enableopposition.ExcLkpAttachmentTypeEO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcLkpAttachmentType"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.enableopposition.ExcLkpAttachmentTypeEO.PkExcLkpAttachmentType"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcLkpAttachmentTypeEO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ExcFolderActionsAttach"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.enableopposition.ExcFolderActionsAttachEO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcFolderActionsAttach"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderActionsAttachEO.FkAttachmentType"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.enableopposition.ExcFolderActionsAttachEO.AttachmentType"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

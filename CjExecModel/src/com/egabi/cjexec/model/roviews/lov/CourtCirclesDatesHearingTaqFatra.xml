@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CourtCirclesDatesHearingTaqFatra"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.roviews.lov.CourtCirclesDatesHearingTaqFatraImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.lov.CourtCirclesDatesHearingTaqFatra_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="degreeIdBind"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="egraaDate"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="CourtCirclesDatesHearingTaqFatra"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="entityId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="CourtCirclesDatesHearingTaqFatra"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="firstDegree"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="postponedBind"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="CourtCirclesDatesHearingTaqFatra"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="prevDate"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="CourtCirclesDatesHearingTaqFatra"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT COU.ID , TO_CHAR(COU.HEARING_DATE , 'yyyy-mm-dd')  || ' '  || ENTS.ENTITY_NAME  HEARING_DATE                                        
+FROM  COURT_CIRCLES_DATES_HEARING COU, ENTITY ENTS                                         
+WHERE COU.CAPACITY > 0  
+AND COU.CIRCLES_ARCHIVE = 0
+AND COU.ENTITY_ID = ENTS.ID                  
+AND COU.ENTITY_ID IN (                                         
+SELECT ENT.ID FROM ENTITY ENT WHERE ENT.PARENT_ENTITY_ID =(SELECT EN.COURT_ID FROM ENTITY EN WHERE EN.ID = (:entityId)))                                         
+AND (COU.BC_DEGREE_ID = DECODE(:degreeIdBind , 1 , 3 , 8 , 5 , 9 , 4 , 23 , 6 , 2 , 2 , 20 , 7 , 14 , 1,24,2,19, case when (:degreeIdBind = 19 and :firstDegree is null) then  2 else 1 end)                          
+OR COU.BC_DEGREE_ID = DECODE(:postponedBind, 8, 2 , :postponedBind))  
+AND COU.HEARING_DATE > TO_DATE ( :egraaDate, 'yyyy-mm-dd')  
+AND COU.HEARING_DATE < decode(:prevDate ,null, sysdate,TO_DATE ( :prevDate, 'yyyy-mm-dd') )              
+--AND COU.SOURCE is null   
+ORDER BY COU.HEARING_DATE desc, COU.ENTITY_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="307"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="307"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.lov.CourtCirclesDatesHearingTaqFatra.HearingDate_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

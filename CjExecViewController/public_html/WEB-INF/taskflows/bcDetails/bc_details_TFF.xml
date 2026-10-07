@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="bc_details_TFF">
+    <default-activity>AddBCDetails</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>BCDetails</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.bcDetails.BCDetails</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__4">
+      <managed-bean-name>TestBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.bcDetails.TestBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__2">
+      <managed-bean-name>HasrSession</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.bcDetails.SimplifiedHasr</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__21">
+      <managed-bean-name>ExcTemplateBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.common.ExcTemplate</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <exception-handler>methodCall1</exception-handler>
+    <view id="AddBCDetails">
+      <page>/bcDetails/AddBCDetails.jsff</page>
+    </view>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-call id="nIdServiceTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/nIdService/nIdServiceTF.xml</document>
+        <id>nIdServiceTF</id>
+      </task-flow-reference>
+      <input-parameter id="__9">
+        <name>nIdParam</name>
+        <value>#{pageFlowScope.nIdParam}</value>
+      </input-parameter>
+      <input-parameter id="__11">
+        <name>fcnParam</name>
+        <value>#{pageFlowScope.fcnParam}</value>
+      </input-parameter>
+      <input-parameter id="__5">
+        <name>userIdParam</name>
+        <value>#{pageFlowScope.userIdParam}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>channelIdParam</name>
+        <value>#{pageFlowScope.channelIdParam}</value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>tokenIdParam</name>
+        <value>#{pageFlowScope.tokenIdParam}</value>
+      </input-parameter>
+      <input-parameter id="__16">
+        <name>callPermissionParam</name>
+        <value>#{pageFlowScope.callPermissionParam}</value>
+      </input-parameter>
+      <input-parameter id="__17">
+        <name>userNameParam</name>
+        <value>#{pageFlowScope.userNameParam}</value>
+      </input-parameter>
+      <input-parameter id="__18">
+        <name>passwordParam</name>
+        <value>#{pageFlowScope.passwordParam}</value>
+      </input-parameter>
+      <return-value id="__10">
+        <name>nIdResponseParam</name>
+        <value>#{pageFlowScope.nIdResponseParam}</value>
+      </return-value>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <view id="Preview_Reports">
+      <page>/bcDetails/Preview_Reports.jsff</page>
+    </view>
+    <method-call id="methodCall1">
+      <method>#{pageFlowScope.BCDetails.handleExceptionShowMessageInPopupDialog}</method>
+      <outcome>
+        <to-string/>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__7">
+      <from-activity-id>AddBCDetails</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>nId</from-outcome>
+        <to-activity-id>nIdServiceTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__3">
+        <from-outcome>PreviewReports</from-outcome>
+        <to-activity-id>Preview_Reports</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__15">
+        <from-outcome>finish</from-outcome>
+        <to-activity-id>AddBCDetails</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

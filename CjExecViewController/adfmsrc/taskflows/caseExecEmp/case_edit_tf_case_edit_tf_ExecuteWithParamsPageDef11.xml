@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef11" Package="taskflows.caseExecEmp"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="PartiesExcCourtBcChrgDecPenPartView" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="PartiesExcCourtBcChrgDecPenPartViewIterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="PartiesExcCourtBcChrgDecPenPartViewIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="bindHearingResId" NDValue="#{pageFlowScope.HearingResId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

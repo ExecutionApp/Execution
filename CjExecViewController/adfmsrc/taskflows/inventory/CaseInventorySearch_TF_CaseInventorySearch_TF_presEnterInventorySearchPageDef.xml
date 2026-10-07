@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="CaseInventorySearch_TF_CaseInventorySearch_TF_presEnterInventorySearchPageDef"
+                Package="taskflows.inventory" SkipValidation="true">
+  <parameters/>
+  
+  
+  
+  <executables/>
+  <bindings>
+    <methodAction id="presEnterInventorySearch" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="presEnterInventorySearch" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="HasrNotInDBPageDef1"
+                Package="pages.com.egabi.MainRepports.hasr">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.HasrNoInDBRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="HasrNoInDBRVO1Iterator"/>
+    <searchRegion Binds="HasrNoInDBRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="HasrNoInDBRVO1Query"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryRVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="HasrNoInDBRVO1Iterator" id="HasrNoInDBRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.mainreports.HasrNoInDBRVO" Name="HasrNoInDBRVO10">
+        <AttrNames>
+          <Item Value="SequenceNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_FolderTypeGenay"
+          id="FolderTypeIdGenay" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_FolderTypeId" id="FolderTypeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="Year">
+      <AttrNames>
+        <Item Value="Year"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SearchInventoryRVO1Iterator" id="CriminalTypeFlag" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject" StaticList="true">
+      <AttrNames>
+        <Item Value="CriminalTypeFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="2"/>
+        <Item Value="3"/>
+      </ValueList>
+    </list>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="FromSequence">
+      <AttrNames>
+        <Item Value="FromSequence"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="ToSequence">
+      <AttrNames>
+        <Item Value="ToSequence"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

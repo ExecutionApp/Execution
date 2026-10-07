@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CourtCirclesDatesHearing"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.lov.CourtCirclesDatesHearing_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="entityId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="CourtCirclesDatesHearing"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT CO.ID , TO_CHAR(CO.HEARING_DATE , 'yyyy-mm-dd') || ' دائرة ' || CO.ENTITY_ID HEARING_DATE                       
+FROM COURT_CIRCLES_DATES_HEARING CO , ENTITY ENT                            
+WHERE CAPACITY > 0                            
+AND CO.ENTITY_ID IN (SELECT en.ID FROM ENTITY en where en.entity_type_id = 5 and en.parent_entity_id in (SELECT COURT_ID FROM ENTITY ENTS WHERE ENTS.ID = :entityId))                                 
+AND CO.ENTITY_ID = ENT.ID                   
+--AND HEARING_DATE > SYSDATE       -- must be un-commented when deploy to life  
+AND CO.BC_DEGREE_ID = 2        
+ORDER BY HEARING_DATE , ENTITY_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="DATE"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.lov.CourtCirclesDatesHearing.HearingDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

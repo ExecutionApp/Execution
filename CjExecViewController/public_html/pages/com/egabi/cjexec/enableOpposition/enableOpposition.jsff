@@ -1,0 +1,415 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <af:panelGroupLayout id="pgl1">
+        <af:panelHeader text="#{bundle.ENABLE_OPPOSITION_HEADER}" id="ph1">
+            <f:facet name="context"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelGroupLayout id="pfl1">
+                <af:panelGroupLayout id="pgl3">
+                    <af:panelGridLayout id="pgl10">
+                        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr10">
+                            <af:gridCell marginStart="5px" width="20%" id="gc46">
+                                <af:panelLabelAndMessage label="#{bindings.CapacityType.hints.label}" id="plam11"
+                                                         showRequired="true"/>
+                            </af:gridCell>
+                            <af:gridCell marginStart="5px" width="30%" id="gc47">
+                                <af:selectOneChoice value="#{bindings.CapacityType.inputValue}"
+                                                    label="#{bindings.CapacityType.label}" partialTriggers="::t1"
+                                                    shortDesc="#{bindings.CapacityType.hints.tooltip}" id="soc1"
+                                                    simple="true" autoSubmit="true" immediate="false" visible="true"
+                                                    showRequired="true" required="true"
+                                                    valueChangeListener="#{pageFlowScope.enableOppositionBean.fireTable}">
+                                    <!--required="#{pageFlowScope.enableOppositionBean.employeeFeilds}"
+                                                    disabled="#{pageFlowScope.enableOppositionBean.chefFeilds}"-->
+                                    <af:selectItem label="#{bundle.CRIMINAL}"
+                                                   value="#{pageFlowScope.enableOppositionBean.four}" id="si5"/>
+                                    <af:selectItem label="#{bundle.LAWYER}"
+                                                   value="#{pageFlowScope.enableOppositionBean.five}" id="si6"/>
+                                    <f:validator binding="#{bindings.CapacityType.validator}"/>
+                                </af:selectOneChoice>
+                            </af:gridCell>
+                            <af:gridCell marginStart="5px" width="2%" id="gc48">
+                                <!--<af:outputText value="#{bindings.PartyId.inputValue}" id="ot2"/>-->
+                            </af:gridCell>
+                            <af:gridCell marginStart="5px" width="10%" id="gc49">
+                                <af:panelLabelAndMessage label="#{bindings.Lawyer_ID.hints.label}" id="plam12"
+                                                         showRequired="#{bindings.CapacityType.inputValue==5}"/>
+                            </af:gridCell>
+                            <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc50">
+                                <af:selectOneChoice value="#{bindings.Lawyer_ID.inputValue}"
+                                                    label="#{bindings.Lawyer_ID.label}"
+                                                    visible="#{bindings.CapacityType.inputValue==5}"
+                                                    shortDesc="#{bindings.Lawyer_ID.hints.tooltip}" id="soc2"
+                                                    autoSubmit="true" simple="true"
+                                                    required="#{bindings.CapacityType.inputValue==5}"
+                                                    binding="#{pageFlowScope.enableOppositionBean.lawyerBind}">
+                                    <!--    disabled="#{pageFlowScope.enableOppositionBean.chefFeilds}"-->
+                                    <f:selectItems value="#{bindings.Lawyer_ID.items}" id="si2"/>
+                                    <f:validator binding="#{bindings.Lawyer_ID.validator}"/>
+                                </af:selectOneChoice>
+                            </af:gridCell>
+                        </af:gridRow>
+                    </af:panelGridLayout>
+                    <af:panelBox text="#{bundle.CRIMINAL}" id="pb1" visible="#{bindings.CapacityType.inputValue == 4}">
+                        <f:facet name="toolbar"/>
+                        <af:panelGridLayout id="pgl2">
+                            <af:gridRow marginTop="5px" height="auto" id="gr1">
+                                <af:gridCell marginStart="5px" width="10%" id="gc1">
+                                    <af:panelLabelAndMessage label="#{bindings.PartyFullName.hints.label}" id="plam1"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc2">
+                                    <af:inputText value="#{bindings.PartyFullName.inputValue}" simple="true"
+                                                  required="#{bindings.PartyFullName.hints.mandatory}"
+                                                  columns="#{bindings.PartyFullName.hints.displayWidth}"
+                                                  maximumLength="#{bindings.PartyFullName.hints.precision}"
+                                                  shortDesc="#{bindings.PartyFullName.hints.tooltip}" id="it1"
+                                                  autoSubmit="true" readOnly="true">
+                                        <f:validator binding="#{bindings.PartyFullName.validator}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc3"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc4">
+                                    <af:panelLabelAndMessage label="#{bindings.IdNumber.hints.label}" id="plam2"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc5">
+                                    <af:inputText value="#{bindings.IdNumber.inputValue}" simple="true"
+                                                  required="#{bindings.IdNumber.hints.mandatory}"
+                                                  columns="#{bindings.IdNumber.hints.displayWidth}"
+                                                  maximumLength="#{bindings.IdNumber.hints.precision}"
+                                                  shortDesc="#{bindings.IdNumber.hints.tooltip}" id="it2"
+                                                  autoSubmit="true" readOnly="true">
+                                        <f:validator binding="#{bindings.IdNumber.validator}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" id="gr2">
+                                <af:gridCell marginStart="5px" width="10%" id="gc6">
+                                    <af:panelLabelAndMessage label="#{bundle.CRIMINAL_PIC}" id="plam15"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc7">
+                                    <af:region value="#{bindings.WebCamTF.regionModel}" id="r3"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc8"></af:gridCell>
+                                <af:gridCell marginStart="5px" width="10%" id="gc9"/>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc10"/>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                    </af:panelBox>
+                    <af:panelBox text="#{bundle.LAWYER}" id="pb2"
+                                 visible="#{pageFlowScope.enableOppositionBean.lawyerInfo}">
+                        <f:facet name="toolbar"/>
+                        <af:region value="#{bindings.lawyerInfoTF.regionModel}" id="r5"/>
+                    </af:panelBox>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl4">
+                    <af:panelBox text="#{bundle.OPPOSITION_REQUEST_INFO}" id="pb3">
+                        <f:facet name="toolbar"/>
+                        <af:panelGridLayout id="pgl5">
+                            <af:gridRow marginTop="5px" height="auto" id="gr3">
+                                <af:gridCell marginStart="5px" width="10%" id="gc11">
+                                    <af:panelLabelAndMessage label="#{bindings.PoliceNumber.hints.label}" id="plam3"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc12">
+                                    <af:inputText value="#{bindings.PoliceNumber.inputValue}" simple="true"
+                                                  required="#{bindings.PoliceNumber.hints.mandatory}"
+                                                  columns="#{bindings.PoliceNumber.hints.displayWidth}"
+                                                  maximumLength="#{bindings.PoliceNumber.hints.precision}"
+                                                  shortDesc="#{bindings.PoliceNumber.hints.tooltip}" id="it3"
+                                                  autoSubmit="true" readOnly="true">
+                                        <f:validator binding="#{bindings.PoliceNumber.validator}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc13"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc14">
+                                    <af:panelLabelAndMessage label="#{bindings.ParYear.hints.label}" id="plam4"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc15">
+                                    <af:inputText value="#{bindings.ParYear.inputValue}"
+                                                  required="#{bindings.ParYear.hints.mandatory}"
+                                                  columns="#{bindings.ParYear.hints.displayWidth}"
+                                                  maximumLength="#{bindings.ParYear.hints.precision}"
+                                                  shortDesc="#{bindings.ParYear.hints.tooltip}" id="it4" simple="true"
+                                                  autoSubmit="true" readOnly="true">
+                                        <f:validator binding="#{bindings.ParYear.validator}"/>
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.ParYear.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" id="gr4">
+                                <af:gridCell marginStart="5px" width="10%" id="gc16">
+                                    <af:panelLabelAndMessage label="#{bindings.BusinessCaseName.hints.label}"
+                                                             id="plam5"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc17">
+                                    <af:inputText value="#{bindings.BusinessCaseName.inputValue}"
+                                                  required="#{bindings.BusinessCaseName.hints.mandatory}"
+                                                  columns="#{bindings.BusinessCaseName.hints.displayWidth}"
+                                                  maximumLength="#{bindings.BusinessCaseName.hints.precision}"
+                                                  shortDesc="#{bindings.BusinessCaseName.hints.tooltip}" id="it5"
+                                                  simple="true" autoSubmit="true" readOnly="true">
+                                        <f:validator binding="#{bindings.BusinessCaseName.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.BusinessCaseName.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc18"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc19">
+                                    <af:panelLabelAndMessage label="#{bindings.EntityName.hints.label}" id="plam6"/>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc20">
+                                    <af:inputText value="#{bindings.EntityName.inputValue}"
+                                                  required="#{bindings.EntityName.hints.mandatory}"
+                                                  columns="#{bindings.EntityName.hints.displayWidth}"
+                                                  maximumLength="#{bindings.EntityName.hints.precision}"
+                                                  shortDesc="#{bindings.EntityName.hints.tooltip}" id="it6"
+                                                  simple="true" autoSubmit="true" readOnly="true">
+                                        <f:validator binding="#{bindings.EntityName.validator}"/>
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.EntityName.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" id="gr5">
+                                <af:gridCell marginStart="5px" width="10%" id="gc21">
+                                    <af:panelLabelAndMessage label="#{bindings.ProcedureDate.hints.label}" id="plam14"
+                                                             visible="true"/>
+                                    <!--showRequired="#{pageFlowScope.enableOppositionBean.employeeFeilds}"-->
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc22">
+                                    <af:inputDate value="#{bindings.ProcedureDate.inputValue}"
+                                                  columns="#{bindings.ProcedureDate.hints.displayWidth}"
+                                                  shortDesc="#{bindings.ProcedureDate.hints.tooltip}" id="id1"
+                                                  visible="true" autoSubmit="true" simple="true" required="true">
+                                        <!--readOnly="#{pageFlowScope.enableOppositionBean.chefFeilds}"
+                                                    required="#{pageFlowScope.enableOppositionBean.employeeFeilds}"
+                                                  disabled="#{pageFlowScope.enableOppositionBean.chefFeilds}"-->
+                                        <f:validator binding="#{bindings.ProcedureDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.ProcedureDate.format}"/>
+                                    </af:inputDate>
+                                </af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc23"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc24"/>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc25"/>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                        <!--<af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr6">
+                                <af:gridCell marginStart="5px" width="10%" id="gc26"></af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" id="gc27"></af:gridCell>
+                                <af:gridCell marginStart="5px" width="2%" id="gc28"/>
+                                <af:gridCell marginStart="5px" width="10%" id="gc29"></af:gridCell>
+                                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc30"></af:gridCell>
+                            </af:gridRow>-->
+                        <af:spacer width="10" height="20" id="s4"/>
+                        <af:button text="#{bundle.VIEW_ACTION_INFO}" id="b8" immediate="true">
+                            <af:showPopupBehavior popupId="p1"/>
+                        </af:button>
+                        <af:spacer width="10" height="10" id="s3"/>
+                    </af:panelBox>
+                    <af:panelBox id="pb4">
+                        <af:spacer width="10" height="40" id="s2"/>
+                        <f:facet name="toolbar"/>
+                        <af:button text="#{bundle.EDIT_CRIMINAL_INFO}" id="b7" immediate="true">
+                            <af:showPopupBehavior popupId="p3"/>
+                        </af:button>
+                        <af:panelGroupLayout id="pgl7" visible="true">
+                            <af:panelGroupLayout id="pgl11" layout="vertical">
+                                <af:table value="#{bindings.RequiredAttachmentROV.collectionModel}" var="row"
+                                          rows="#{bindings.RequiredAttachmentROV.rangeSize}"
+                                          emptyText="#{bindings.RequiredAttachmentROV.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0" partialTriggers="::soc1"
+                                          selectedRowKeys="#{bindings.RequiredAttachmentROV.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.RequiredAttachmentROV.collectionModel.makeCurrent}"
+                                          rowSelection="single" fetchSize="#{bindings.RequiredAttachmentROV.rangeSize}"
+                                          id="t1" columnStretching="column:c1"
+                                          rendered="#{bindings.CapacityType.inputValue != null}">
+                                    <af:column headerText="#{bundle.ATTACHMENT_NAME}" id="c1">
+                                        <af:outputText value="#{row.Name}"
+                                                       shortDesc="#{bindings.RequiredAttachmentROV.hints.Name.tooltip}"
+                                                       id="ot1"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.RequiredAttachmentROV.hints.Id.label}" id="c8"
+                                            visible="false">
+                                        <af:outputText value="#{row.Id}"
+                                                       shortDesc="#{bindings.RequiredAttachmentROV.hints.Id.tooltip}"
+                                                       id="ot3"/>
+                                    </af:column>
+                                    <af:column id="c3">
+                                        <af:button text="#{bundle.ADD_ATTACHMENT}" id="b5" 
+                                           action="#{pageFlowScope.enableOppositionBean.getAttachment}"/>
+                                    </af:column>
+                                </af:table>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:button text="#{bundle.ADD_ATTACHMENT}" id="b2"
+                                           action="#{pageFlowScope.enableOppositionBean.addAdditionAttach}"/>
+                                <af:spacer width="10" height="10" id="s5"/>
+                                <af:table value="#{bindings.ExcFolderActionsAttachVO.collectionModel}" var="row"
+                                          rows="#{bindings.ExcFolderActionsAttachVO.rangeSize}"
+                                          emptyText="#{bindings.ExcFolderActionsAttachVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.ExcFolderActionsAttachVO.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.ExcFolderActionsAttachVO.collectionModel.makeCurrent}"
+                                          rowSelection="single"
+                                          fetchSize="#{bindings.ExcFolderActionsAttachVO.rangeSize}"
+                                          filterModel="#{bindings.ExcFolderActionsAttachVOQuery.queryDescriptor}"
+                                          filterVisible="true"
+                                          partialTriggers="::t1"
+                                          queryListener="#{bindings.ExcFolderActionsAttachVOQuery.processQuery}"
+                                          varStatus="vs" id="t6" columnStretching="last">
+                                    <af:column sortProperty="#{bindings.ExcFolderActionsAttachVO.hints.Id.name}"
+                                               filterable="true" visible="false"
+                                               headerText="#{bindings.ExcFolderActionsAttachVO.hints.Id.label}" id="c2">
+                                        <af:outputText value="#{row.Id}"
+                                                       shortDesc="#{bindings.ExcFolderActionsAttachVO.hints.Id.tooltip}"
+                                                       id="ot8">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ExcFolderActionsAttachVO.hints.Id.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.name}"
+                                               filterable="true" visible="false"
+                                               headerText="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.label}"
+                                               id="c4">
+                                        <af:outputText value="#{row.FolderActionId}"
+                                                       shortDesc="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.tooltip}"
+                                                       id="ot7">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ExcFolderActionsAttachVO.hints.FolderActionId.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ExcFolderActionsAttachVO.hints.AttachmentType.name}"
+                                               filterable="true" visible="false"
+                                               headerText="#{bindings.ExcFolderActionsAttachVO.hints.AttachmentType.label}"
+                                               id="c5">
+                                        <af:outputText value="#{row.AttachmentType}"
+                                                       shortDesc="#{bindings.ExcFolderActionsAttachVO.hints.AttachmentType.tooltip}"
+                                                       id="ot5">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ExcFolderActionsAttachVO.hints.AttachmentType.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.name}"
+                                               filterable="true" visible="false"
+                                               headerText="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.label}"
+                                               id="c6">
+                                        <af:outputText value="#{row.DocumentId}"
+                                                       shortDesc="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.tooltip}"
+                                                       id="ot6">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ExcFolderActionsAttachVO.hints.DocumentId.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bundle.ATTACHMENT_NAME}" id="c7">
+                                        <af:inputFile label="#{bundle.ATTACHMENT_LABEL}" id="if1" maximumFiles="1"
+                                                      required="true" autoSubmit="true"
+                                                      valueChangeListener="#{pageFlowScope.enableOppositionBean.uploadFile}"
+                                                      binding="#{pageFlowScope.enableOppositionBean.fileUploaded}"/>
+                                    </af:column>
+                                </af:table>
+                                <af:toolbox id="t2">
+                                    <af:toolbar id="t3">
+                                        <af:button text="#{bundle.PRINT}" id="b1" immediate="true" visible="false"
+                                                   actionListener="#{pageFlowScope.enableOppositionBean.printReports}">
+                                            <af:setActionListener from="EnableOpposition"
+                                                                  to="#{pageFlowScope.reportName}"/>
+                                            <af:setActionListener from="executionFolderReports"
+                                                                  to="#{pageFlowScope.reportFolder}"/>
+                                        </af:button>
+                                        <af:button text="#{bundle.ENABLE_OPPOSITION_REQUEST}" id="b3"
+                                                   action="#{pageFlowScope.enableOppositionBean.startUpload}"
+                                                   actionListener="#{pageFlowScope.enableOppositionBean.procedureStatus}">
+                                            <af:setPropertyListener to="#{bindings.DECISION_TYPE.attributeValue}"
+                                                                    from="a" type="action"/>
+                                        </af:button>
+                                        <af:button text="#{bundle.BACK}" id="b4" action="back" immediate="true"
+                                                   actionListener="#{bindings.Rollback.execute}"/>
+                                    </af:toolbar>
+                                </af:toolbox>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:panelBox>
+                    <!--<af:panelGroupLayout id="pgl8" visible="true">
+                        <af:panelBox text="" id="pb5">
+                            <f:facet name="toolbar"/>
+                            <af:panelGridLayout id="pgl9">
+                                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr6">
+                                    <af:gridCell marginStart="5px" width="10%" id="gc44">
+                                        <af:panelLabelAndMessage label="#{bindings.DECISION_TYPE.hints.label}"
+                                                                 id="plam13" showRequired="true"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc45">
+                                        <af:selectOneChoice value="#{bindings.DECISION_TYPE.inputValue}"
+                                                            label="#{bindings.DECISION_TYPE.label}"
+                                                            shortDesc="#{bindings.DECISION_TYPE.hints.tooltip}"
+                                                            id="soc3" simple="true" autoSubmit="true" immediate="false"
+                                                            visible="true" showRequired="true">
+                                                            -->
+                    <!--required="#{pageFlowScope.enableOppositionBean.chefFeilds}"-->
+                    <!--
+                                            <af:selectItem label="#{bundle.INSTALLMENT_APPROVE}" value="#{'a'}"
+                                                           id="si3"/>
+                                            <af:selectItem label="#{bundle.INSTALLMENT_REJECT}" value="#{'r'}"
+                                                           id="si4"/>
+                                            <f:validator binding="#{bindings.DECISION_TYPE.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr9">
+                                    <af:gridCell marginStart="5px" width="10%" id="gc41">
+                                        <af:panelLabelAndMessage label="#{bindings.Remarks.hints.label}" id="plam10"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="30%" id="gc42">
+                                        <af:inputText value="#{bindings.Remarks.inputValue}" simple="true"
+                                                      required="#{bindings.Remarks.hints.mandatory}"
+                                                      columns="#{bindings.Remarks.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Remarks.hints.precision}"
+                                                      shortDesc="#{bindings.Remarks.hints.tooltip}" id="it10"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.Remarks.validator}"/>
+                                        </af:inputText>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="2%" id="gc43"/>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <af:toolbox id="t5">
+                                <af:toolbar id="t4">
+                                    <af:button text="#{bundle.PRINT}" id="b2" immediate="true"
+                                                   actionListener="#{pageFlowScope.enableOppositionBean.printReports}">
+                                            <af:setActionListener from="EnableOpposition"
+                                                                  to="#{pageFlowScope.reportName}"/>
+                                            <af:setActionListener from="executionFolderReports"
+                                                                  to="#{pageFlowScope.reportFolder}"/>
+                                        </af:button>
+                                    <af:button text="#{bundle.save}" id="b5"
+                                               action="#{pageFlowScope.enableOppositionBean.procedureStatus}"/>
+                                    <af:button text="#{bundle.BACK}" id="b6" action="back" immediate="true"
+                                               actionListener="#{bindings.Rollback.execute}"/>
+                                </af:toolbar>
+                            </af:toolbox>
+                        </af:panelBox>
+                    </af:panelGroupLayout>-->
+                </af:panelGroupLayout>
+                <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                    <af:dialog id="d1">
+                        <af:region value="#{bindings.ExcPrtySessJdgTF.regionModel}" id="r1"/>
+                        <f:facet name="buttonBar"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup childCreation="deferred" autoCancel="disabled" id="p2">
+                    <af:dialog id="d2">
+                        <f:facet name="buttonBar"/>
+                        <af:region value="#{bindings.ExecBcSessionsJudgmentsTF.regionModel}" id="r2"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup childCreation="deferred" autoCancel="disabled" id="p3">
+                    <af:dialog id="d3">
+                        <f:facet name="buttonBar"/>
+                        <af:region value="#{bindings.Par_PartiesTF.regionModel}" id="r4"/>
+                    </af:dialog>
+                </af:popup>
+            </af:panelGroupLayout>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+</ui:composition>

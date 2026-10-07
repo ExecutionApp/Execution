@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject xmlns="http://xmlns.oracle.com/bc4j" Name="PreviousProceduresRVO" Version="12.2.1.0.31"
+            InheritPersonalization="merge" BindingStyle="OracleName" CustomQuery="true"
+            ComponentClass="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVOImpl"
+            PageIterMode="Full"
+            RowClass="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVORowImpl"
+    OrderBy='"HEARING_DATE"'>
+    <DesignTime>
+        <Attr Name="_isExpertMode" Value="true"/>
+        <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+        <Attr Name="_isCodegen" Value="true"/>
+    </DesignTime>
+    <Properties>
+        <SchemaBasedProperties>
+            <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO_LABEL"/>
+        </SchemaBasedProperties>
+    </Properties>
+    <Variable Name="businessCaseIdBind" Kind="viewcriteria" Type="java.math.BigDecimal"/>
+    <ViewAccessor Name="FilesTypesVOMoarda" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaMoarda"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaMoarda"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVOEstanaf" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaEstanaf"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaEstanaf"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVOAmr" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaAmrGenay"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaAmrGenay"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVOSadad" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaSadad"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaSadad"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVORequestMoarda" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaRequestMoarda"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaRequestMoarda"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVORequestEstanaf" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaRequestEstanaf"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaRequestEstanaf"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVORequestAmr" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaRequestAmrGenay"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaRequestAmrGenay"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVOEsbat" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaEsbat"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaEsbat"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVOTasdek" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaTasdek"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaTasdek"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVOTanBelNakd" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaTanBelNakd"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaTanBelNakd"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVoCancel" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaCancel"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaCancel"/>
+    </ViewAccessor>
+    <ViewAccessor Name="FilesTypesVOEdit" ViewObjectName="com.egabi.cjexec.model.views.files.FilesTypesVO"
+                  RowLevelBinds="true">
+        <ViewCriteriaUsage Name="FilesTypesVOCriteriaEdit"
+                           FullName="com.egabi.cjexec.model.views.files.FilesTypesVO.FilesTypesVOCriteriaEdit"/>
+    </ViewAccessor>
+    <ViewAccessor
+        Name="BusinessCaseNameROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.BusinessCaseNameROVO"
+        RowLevelBinds="true"/>
+    <ListBinding Name="FilesTypesVOCriteriaMoarda" ListVOName="FilesTypesVOMoarda" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="FilesTypesVOCriteriaEstanaf" ListVOName="FilesTypesVOEstanaf" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="FilesTypesVOCriteriaAmrGenay" ListVOName="FilesTypesVOAmr" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="FilesTypesVOCriteriaSadad" ListVOName="FilesTypesVOSadad" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="FilesTypesVOCriteriaRequestMoarda" ListVOName="FilesTypesVORequestMoarda" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="FilesTypesVOCriteriaRequestEstanaf" ListVOName="FilesTypesVORequestEstanaf" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="FilesTypesVOCriteriaRequestAmrGenay" ListVOName="FilesTypesVORequestAmr" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="FilesTypesVOCriteriaTasdek" ListVOName="FilesTypesVOTasdek" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="FilesTypesVOCriteriaEsbat" ListVOName="FilesTypesVOEsbat" ListRangeSize="-1"
+                 NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="FileTypesTanBelNakd" ListVOName="FilesTypesVOTanBelNakd" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_FileTypeCancel" ListVOName="FilesTypesVoCancel" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding Name="LOV_FileTypeEdit" ListVOName="FilesTypesVOEdit" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FileType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="TypeName"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <SQLQuery><![CDATA[SELECT                 
+    decode(folder.sequence_number, NULL, '',(folder.year                 
+                                             || '/'                 
+                                             || folder.sequence_number                 
+                                             || '/'                 
+                                             || decode(folder.folder_type, 2, 'حبس', 3, 'غرامة',                 
+                                                       5, 'أمن دولة حبس', 6, 'أمن دولة غرامة')                 
+                                             || '/'                 
+                                             || ents.entity_name)) AS inventory_number,                 
+                                             acts.IS_ACTIVE AS F_ACTIONS_ACTIVE , --('O'=Approve) --('X' = Reject) 
+                                             acts.EXPATRIATE_APPROVAL AS F_EXPATRIATE_APPROVAL , --('O'=Approve) --('X' = Reject) 
+                                             acts.EXP_APPROVAL_DATE AS EXPATRIATE_APPROVAL_DATE , 
+                                             acts.EXP_EXPIR_REQUEST AS EXP_EXPIR_REQUEST ,   --('Y' = EXPIR_REQUEST(167)) 
+                                                             
+  ( select                                                           
+  decode(folder.sequence_number, NULL, '',(fol.year                 
+                                             || '/'                 
+                                             || fol.sequence_number                 
+                                             || '/'                 
+                                             || decode(fol.folder_type, 2, 'حبس', 3, 'غرامة',                 
+                                                       5, 'أمن دولة حبس', 6, 'أمن دولة غرامة')                 
+                                             || '/'                 
+                                             || ents.entity_name)) from exc_folder_data fol where fol.id = acts.merged_to ) AS merged_to,                                                             
+                                                             
+  ( select  parr.PARTY_FULL_NAME  from PAR_PARTIES parr where parr.id =                 
+(select ress.PARTY_ID from COURT_BC_HEARING_RES_PARTIES ress where ress.id =                 
+(select fol.RES_PARTY_ID from exc_folder_data fol where fol.id = acts.merged_to) )) as party_name_to,                
+    ( select                                                           
+  decode(folder.sequence_number, NULL, '',(fol.year                 
+                                             || '/'                 
+                                             || fol.sequence_number                 
+                                             || '/'                 
+                                             || decode(fol.folder_type, 2, 'حبس', 3, 'غرامة',                 
+                                                       5, 'أمن دولة حبس', 6, 'أمن دولة غرامة')                 
+                                             || '/'                 
+                                             || ents.entity_name)) from exc_folder_data fol where fol.id = acts.merged_with ) AS merged_with,                    
+                  
+    ( select  parr.PARTY_FULL_NAME  from PAR_PARTIES parr where parr.id =                 
+(select ress.PARTY_ID from COURT_BC_HEARING_RES_PARTIES ress where ress.id =                 
+(select fol.RES_PARTY_ID from exc_folder_data fol where fol.id = acts.merged_with) )) as party_name_with,                
+               
+               
+               
+               
+(select   PAR_POLICE.PAR_YEAR || '/' || PAR_POLICE.POLICE_NUMBER || '/' || CAS_TYPE2.NAME|| '/' || POLICE.ENTITY_NAME AS BUSINESS_CASE_NUMBER               
+               
+               
+from  PAR_POLICE_AUTHORITY_REPORT PAR_POLICE , BUSINESS_CASE_TYPE CAS_TYPE2 ,ENTITY POLICE               
+               
+where PAR_POLICE.ORIGIN_ENTITY = POLICE.ID                 
+AND CAS_TYPE2.ID = PAR_POLICE.BUSINESS_CASE_TYPE                
+               
+ and PAR_POLICE.id =               
+                
+ ( select  parr.PAR_ID  from PAR_PARTIES parr where parr.id =                 
+(select ress.PARTY_ID from COURT_BC_HEARING_RES_PARTIES ress where ress.id =                 
+(select fol.RES_PARTY_ID from exc_folder_data fol where fol.id = acts.merged_with) ))               
+   ) as merged_with_bc ,               
+               
+               
+               
+               
+(select   PAR_POLICE.PAR_YEAR || '/' || PAR_POLICE.POLICE_NUMBER || '/' || CAS_TYPE2.NAME|| '/' || POLICE.ENTITY_NAME AS BUSINESS_CASE_NUMBER               
+               
+               
+from  PAR_POLICE_AUTHORITY_REPORT PAR_POLICE , BUSINESS_CASE_TYPE CAS_TYPE2 ,ENTITY POLICE               
+               
+where PAR_POLICE.ORIGIN_ENTITY = POLICE.ID                 
+AND CAS_TYPE2.ID = PAR_POLICE.BUSINESS_CASE_TYPE                
+               
+ and PAR_POLICE.id =               
+                
+ ( select  parr.PAR_ID  from PAR_PARTIES parr where parr.id =                 
+(select ress.PARTY_ID from COURT_BC_HEARING_RES_PARTIES ress where ress.id =                 
+(select fol.RES_PARTY_ID from exc_folder_data fol where fol.id = acts.merged_to) ))               
+   ) as merged_to_bc ,               
+               
+               
+               
+               
+               
+   (                 
+        SELECT                 
+            to_char(dates.hearing_date, 'yyyy-mm-dd')                 
+        FROM                 
+            court_circles_dates_hearing dates                 
+        WHERE                 
+            dates.id = proc.court_circle_dates_hearing_id                 
+    ) hearing_date,                 
+    (                 
+        SELECT                 
+            dates.id                 
+        FROM                 
+            court_circles_dates_hearing dates                 
+        WHERE                 
+            dates.id = proc.court_circle_dates_hearing_id                 
+    ) hearing_date_id,                 
+    folder.sequence_number,  
+    acts.veto_status,  
+    folder.police_station_entity_id,                 
+    folder.year,                 
+    folder.folder_type,                 
+    decode(folder.repeated_flag, 'N', 'غير                 
+              مكرر', 'Y', 'مكرر') repeated_flag,                 
+    folder.id           AS folder_id,                 
+    res_part.id         res_party_id,                 
+    folder_types.folder_name,                 
+    proc.advance_payment_amount,                 
+    proc.advance_payment_date,                 
+    folder.imprisonment_start_date,                 
+    folder.imprisonment_end_date,                 
+    proc.procedure_date,                 
+    acts.action_type    procedure_type, decode(proc.CAPACITY_TYPE , 1,'بشخصة',2,'توكيل',3,'نيابة عامة'       
+    , 8,'هيئة قضايا الدولة'      
+     , 9,'مدعى بالحق المدنى'      
+    ) as CAPACITY_TYPE,   
+    proc.CAPACITY_TYPE AS CAPACITY_TYPE_ID ,   
+    proc.id,                 
+    (                 
+        SELECT                 
+            to_char(dates.hearing_date, 'yyyy-mm-dd')                 
+        FROM                 
+            court_circles_dates_hearing dates                 
+        WHERE                 
+            dates.id = proc.court_circle_dates_hearing_id                 
+    )                 
+    || ' '                 
+    || ents.entity_name date_ent_reservation,                 
+    action_types.id     acts_type_id,                 
+    action_types.name   acts_types_name,                 
+    action_types.mapping_file_types,                 
+    res_part.party_id,                 
+    res.business_case_id,                 
+    (                 
+        SELECT                 
+            par.party_full_name                 
+        FROM                 
+            par_parties par                 
+        WHERE                 
+            par.id = res_part.party_id                 
+    ) party_full_name,                 
+    res.id              reservation_id   ,                 
+    proc.fees_type_id,   (select COURT_BC_HEARING_RES_ID from court_bc_hearing_res_parties where id = proc.res_party_id ) new_reservation_id ,              
+    proc.res_party_id   new_res_party_id,                 
+    (                 
+        SELECT                 
+            name                 
+        FROM                 
+            exc_lkp_fees_types                 
+        WHERE                 
+            id = proc.fees_type_id                 
+           -- AND acts.action_type = 7                 
+    ) sadad_type,                 
+    ents.id             ent_id,                 
+    proc.created_by,                 
+    (                 
+        SELECT                 
+            nvl(SUM(decisions.penalty_amount), 0)                 
+        FROM                 
+            exc_court_bc_charges_parties    parties,                 
+            exc_court_bc_charge_decisions   decisions                 
+        WHERE                 
+            parties.charge_decision_id = decisions.id                 
+            AND parties.res_party_id = folder.res_party_id                 
+    ) hasr_penalty_amount,                 
+    proc.reason_date    reason_date   ,proc.NUMBER_PAID                
+FROM                 
+    exc_folder_data                folder,                 
+    court_bc_hearing_res_parties   res_part,                 
+    court_bc_hearing_reservation   res,                 
+    exc_lkp_folder_types           folder_types,                 
+    exc_folder_procedures          proc,                 
+    exc_lkp_action_types           action_types,                 
+    exc_folder_actions             acts,                 
+    entity                         ents,                 
+    exc_lkp_action_types           acts_types                 
+WHERE                 
+    folder.folder_type = folder_types.id                 
+    AND folder.id = acts.folder_record_id                 
+    AND acts.procedure_id = proc.id                 
+    AND acts.action_type = action_types.id                 
+    AND res_part.id = folder.res_party_id                 
+    AND res_part.court_bc_hearing_res_id = res.id                 
+    AND ents.id = folder.police_station_entity_id                 
+    AND acts_types.id = acts.action_type                 
+    AND acts.DELETED_FLAG = 'N'               
+                
+ORDER BY                 
+    proc.id asc]]></SQLQuery>
+    <ViewAttribute
+        Name="InventoryNumber"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="408"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="INVENTORY_NUMBER"
+        Expression="INVENTORY_NUMBER"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="408"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FActionsActive"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="1"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="F_ACTIONS_ACTIVE"
+        Expression="F_ACTIONS_ACTIVE"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="1"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FExpatriateApproval"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="1"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="F_EXPATRIATE_APPROVAL"
+        Expression="F_EXPATRIATE_APPROVAL"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="1"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ExpatriateApprovalDate"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Date"
+        ColumnType="DATE"
+        AliasName="EXPATRIATE_APPROVAL_DATE"
+        Expression="EXPATRIATE_APPROVAL_DATE"
+        SQLType="DATE"/>
+    <ViewAttribute
+        Name="ExpExpirRequest"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="1"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="EXP_EXPIR_REQUEST"
+        Expression="EXP_EXPIR_REQUEST"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="1"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="MergedTo"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="408"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="MERGED_TO"
+        Expression="MERGED_TO"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="408"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="PartyNameTo"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="200"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="PARTY_NAME_TO"
+        Expression="PARTY_NAME_TO"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="200"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="MergedWith"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="408"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="MERGED_WITH"
+        Expression="MERGED_WITH"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="408"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="PartyNameWith"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="200"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="PARTY_NAME_WITH"
+        Expression="PARTY_NAME_WITH"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="200"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="MergedWithBc"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="586"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="MERGED_WITH_BC"
+        Expression="MERGED_WITH_BC"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="586"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="MergedToBc"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="586"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="MERGED_TO_BC"
+        Expression="MERGED_TO_BC"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="586"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="HearingDate" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="10"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="HEARING_DATE" Expression="HEARING_DATE"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="10"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.HearingDate_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="HearingDateId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="HEARING_DATE_ID"
+                   Expression="HEARING_DATE_ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="SequenceNumber" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="SEQUENCE_NUMBER"
+                   Expression="SEQUENCE_NUMBER" SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="VetoStatus"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VETO_STATUS"
+        Expression="VETO_STATUS"
+        SQLType="NUMERIC"/>
+    <ViewAttribute Name="PoliceStationEntityId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="POLICE_STATION_ENTITY_ID"
+                   Expression="POLICE_STATION_ENTITY_ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="Year" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="YEAR" Expression="YEAR"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="FolderType" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="FOLDER_TYPE" Expression="FOLDER_TYPE"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="RepeatedFlag" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="8"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="REPEATED_FLAG" Expression="REPEATED_FLAG"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="8"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FolderId"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="FOLDER_ID"
+        Expression="FOLDER_ID"
+        SQLType="NUMERIC"/>
+    <ViewAttribute Name="ResPartyId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="RES_PARTY_ID" Expression="RES_PARTY_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="FolderName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="200"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="FOLDER_NAME" Expression="FOLDER_NAME"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="200"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.FolderName_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="AdvancePaymentAmount" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="ADVANCE_PAYMENT_AMOUNT"
+                   Expression="ADVANCE_PAYMENT_AMOUNT" SQLType="NUMERIC">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.AdvancePaymentAmount_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="AdvancePaymentDate" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.sql.Timestamp" ColumnType="DATE" AliasName="ADVANCE_PAYMENT_DATE"
+                   Expression="ADVANCE_PAYMENT_DATE" SQLType="DATE">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.AdvancePaymentDate_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="ImprisonmentStartDate" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.sql.Timestamp" ColumnType="DATE" AliasName="IMPRISONMENT_START_DATE"
+                   Expression="IMPRISONMENT_START_DATE" SQLType="DATE"/>
+    <ViewAttribute Name="ImprisonmentEndDate" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.sql.Timestamp" ColumnType="DATE" AliasName="IMPRISONMENT_END_DATE"
+                   Expression="IMPRISONMENT_END_DATE" SQLType="DATE"/>
+    <ViewAttribute Name="ProcedureDate" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.sql.Timestamp" ColumnType="DATE" AliasName="PROCEDURE_DATE" Expression="PROCEDURE_DATE"
+                   SQLType="DATE">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.ProcedureDate_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="ProcedureType" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="PROCEDURE_TYPE"
+                   Expression="PROCEDURE_TYPE" SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="CapacityType"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="32"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="CAPACITY_TYPE"
+        Expression="CAPACITY_TYPE"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="32"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="CapacityTypeId"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="CAPACITY_TYPE_ID"
+        Expression="CAPACITY_TYPE_ID"
+        SQLType="NUMERIC"/>
+    <ViewAttribute Name="Id" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Type="java.math.BigDecimal"
+                   ColumnType="NUMBER" AliasName="ID" Expression="ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="DateEntReservation" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Precision="211" Type="java.lang.String" ColumnType="VARCHAR2" AliasName="DATE_ENT_RESERVATION"
+                   Expression="DATE_ENT_RESERVATION" SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="211"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="ActsTypeId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="ACTS_TYPE_ID" Expression="ACTS_TYPE_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="ActsTypesName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="400"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="ACTS_TYPES_NAME"
+                   Expression="ACTS_TYPES_NAME" SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="400"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.ActsTypesName_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="MappingFileTypes" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="MAPPING_FILE_TYPES"
+                   Expression="MAPPING_FILE_TYPES" SQLType="NUMERIC"/>
+    <ViewAttribute Name="PartyId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="PARTY_ID" Expression="PARTY_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="BusinessCaseId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="BUSINESS_CASE_ID"
+                   Expression="BUSINESS_CASE_ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="PartyFullName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="200"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="PARTY_FULL_NAME"
+                   Expression="PARTY_FULL_NAME" SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="200"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.PartyFullName_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="ReservationId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="RESERVATION_ID"
+                   Expression="RESERVATION_ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="FeesTypeId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="FEES_TYPE_ID" Expression="FEES_TYPE_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="NewReservationId"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="NEW_RESERVATION_ID"
+        Expression="NEW_RESERVATION_ID"
+        SQLType="NUMERIC"/>
+    <ViewAttribute Name="NewResPartyId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="NEW_RES_PARTY_ID"
+                   Expression="NEW_RES_PARTY_ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="SadadType" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="100"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="SADAD_TYPE" Expression="SADAD_TYPE"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="EntId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="ENT_ID" Expression="ENT_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="CreatedBy" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="CREATED_BY" Expression="CREATED_BY"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="HasrPenaltyAmount" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="HASR_PENALTY_AMOUNT"
+                   Expression="HASR_PENALTY_AMOUNT" SQLType="NUMERIC"/>
+    <ViewAttribute Name="ReasonDate" IsPersistent="false" PrecisionRule="true" Type="oracle.jbo.domain.Date"
+                   ColumnType="DATE" AliasName="REASON_DATE" Expression="REASON_DATE" SQLType="DATE"/>
+    <ViewAttribute
+        Name="NumberPaid"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="NUMBER_PAID"
+        Expression="NUMBER_PAID"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="255"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="FileType" IsSelected="false" IsPersistent="false" PrecisionRule="true" Precision="255"
+                   Type="java.math.BigDecimal" ColumnType="VARCHAR2" AliasName="VIEW_ATTR" SQLType="NUMERIC"
+                   LOVName="FilesTypesVOCriteriaMoarda" LOVFinder="Switcher">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.FileType_LABEL"/>
+                <CONTROLTYPE Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="Switcher" IsSelected="false" IsPersistent="false" PrecisionRule="true" Type="java.lang.String"
+                   ColumnType="$none$" SQLType="VARCHAR">
+        <TransientExpression trustMode="untrusted" Name="ExpressionScript"><![CDATA[if(ActsTypeId == 2 || ActsTypeId == 8) {return "FilesTypesVOCriteriaMoarda"; } 
+else if(ActsTypeId == 1) { return  "FilesTypesVOCriteriaEstanaf"; } 
+else if(ActsTypeId == 14) { return "FilesTypesVOCriteriaAmrGenay"; } 
+else if(ActsTypeId == 25) { return "FilesTypesVOCriteriaRequestMoarda"; } 
+else if(ActsTypeId == 26) { return "FilesTypesVOCriteriaRequestEstanaf"; } 
+else if(ActsTypeId == 27) { return "FilesTypesVOCriteriaRequestAmrGenay"; } 
+else if(ActsTypeId == 30) { return "FilesTypesVOCriteriaEsbat"; } 
+else if(ActsTypeId == 7) { return "FilesTypesVOCriteriaSadad"; } 
+else if(ActsTypeId == 31) { return "FilesTypesVOCriteriaTasdek"; }
+else if(ActsTypeId == 32) { return "LOV_FileTypeCancel"; } 
+else if(ActsTypeId == 33) { return "LOV_FileTypeEdit"; }
+else if(ActsTypeId == 20) { return "FileTypesTanBelNakd"; }]]></TransientExpression>
+        <RecalcCondition trustMode="untrusted" Name="RecalcExpressionScript">true</RecalcCondition>
+    </ViewAttribute>
+    <ViewAttribute Name="FileUpload" IsSelected="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.lang.Object" ColumnType="STRUCT" AliasName="VIEW_ATTR" SQLType="STRUCT">
+        <Dependencies>
+            <Item Value="FileType"/>
+        </Dependencies>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.FileUpload_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="ProcedureTypeSadadName" IsUpdateable="false" IsSelected="false" IsPersistent="false"
+                   PrecisionRule="true" Precision="255" Type="java.lang.String" ColumnType="VARCHAR2"
+                   AliasName="VIEW_ATTR" SQLType="VARCHAR">
+        <TransientExpression Name="ExpressionScript">if(SadadType != null) return ActsTypesName +' '+ SadadType; else
+                                                     return ActsTypesName;</TransientExpression>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.ProcedureTypeSadadName_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="CurrentGharama" IsUpdateable="false" IsSelected="false" IsPersistent="false"
+                   PrecisionRule="true" Type="java.lang.Double" ColumnType="DOUBLE PRECISION" AliasName="VIEW_ATTR"
+                   SQLType="DOUBLE">
+        <TransientExpression Name="ExpressionScript">SearchInventoryCaseResultR.PenaltyAmount</TransientExpression>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.CurrentGharama_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="TotalPaidAmount" IsUpdateable="false" IsSelected="false" IsPersistent="false"
+                   PrecisionRule="true" Type="java.lang.Double" ColumnType="DOUBLE PRECISION" AliasName="VIEW_ATTR"
+                   SQLType="DOUBLE">
+        <TransientExpression Name="ExpressionScript">object.getRowSet().sum('AdvancePaymentAmount')</TransientExpression>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.TotalPaidAmount_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="RemainPaidAmount" IsSelected="false" IsPersistent="false"
+                   PrecisionRule="true" Type="java.lang.Double" ColumnType="DOUBLE PRECISION" AliasName="VIEW_ATTR"
+                   SQLType="DOUBLE">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.RemainPaidAmount_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="RemainPaid" IsSelected="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.lang.Double" ColumnType="DOUBLE PRECISION" AliasName="VIEW_ATTR" SQLType="DOUBLE">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.RemainPaid_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewCriteria Name="PreviousProceduresRVOCriteria_BusinessCaseId"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO"
+                  Conjunction="AND">
+        <Properties Name="_Props">
+            <CustomProperties>
+                <Property Name="autoExecute" Value="false"/>
+                <Property Name="mode" Value="Basic"/>
+                <Property Name="allowConjunctionOverride" Value="true"/>
+                <Property Name="showInList" Value="true"/>
+                <Property Name="displayOperators" Value="InAdvancedMode"/>
+            </CustomProperties>
+        </Properties>
+        <ViewCriteriaRow Name="PreviousProceduresRVOCriteria_row_0" UpperColumns="1">
+            <ViewCriteriaItem Name="BusinessCaseId" ViewAttribute="BusinessCaseId" Operator="=" Conjunction="AND"
+                              Value=":businessCaseIdBind" IsBindVarValue="true" Required="Optional"/>
+        </ViewCriteriaRow>
+    </ViewCriteria>
+    <ViewCriteria Name="PreviousProceduresRVOCriteria"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO"
+                  Conjunction="AND">
+        <Properties Name="_Props">
+            <CustomProperties>
+                <Property Name="autoExecute" Value="false"/>
+                <Property Name="mode" Value="Basic"/>
+                <Property Name="allowConjunctionOverride" Value="true"/>
+                <Property Name="showInList" Value="true"/>
+                <Property Name="displayOperators" Value="InAdvancedMode"/>
+            </CustomProperties>
+        </Properties>
+        <ViewCriteriaRow Name="PreviousProceduresRVOCriteria_row_0" UpperColumns="1">
+            <ViewCriteriaItem Name="PreviousProceduresRVOCriteria_PreviousProceduresRVOCriteria_row_0_ActsTypeId_PreviousProceduresRVOCriteria_PreviousProceduresRVOCriteria_row_0_ActsTypeId_itemHolder_PreviousProceduresRVOCriteria_PreviousProceduresRVOCriteria_row_0_ActsTypeId_itemHolder_row_10_ActsTypeId"
+                              ViewAttribute="ActsTypeId" Operator="IN" Conjunction="OR" Required="Optional">
+                <CompOper Name="PreviousProceduresRVOCriteria_PreviousProceduresRVOCriteria_row_0_ActsTypeId_PreviousProceduresRVOCriteria_PreviousProceduresRVOCriteria_row_0_ActsTypeId_itemHolder_PreviousProceduresRVOCriteria_PreviousProceduresRVOCriteria_row_0_ActsTypeId_itemHolder_row_10_ActsTypeId_Oper"
+                          ToDo="1"
+                          OperDescStrCode="PreviousProceduresRVOCriteria_PreviousProceduresRVOCriteria_row_0_ActsTypeId_PreviousProceduresRVOCriteria_PreviousProceduresRVOCriteria_row_0_ActsTypeId_itemHolder_PreviousProceduresRVOCriteria_PreviousProceduresRVOCriteria_row_0_ActsTypeId_itemHolder_row_10_ActsTypeId_Oper_CompOper_0"
+                          Oper="IN" MinCardinality="0" MaxCardinality="0">
+                    <TransientExpression trustMode="untrusted" Name="ExpressionScript"><![CDATA["IN(1,20,25,8,2,26,27,30,7,31,14,32,33)"]]></TransientExpression>
+                </CompOper>
+            </ViewCriteriaItem>
+        </ViewCriteriaRow>
+    </ViewCriteria>
+    <ViewCriteria Name="PreviousProceduresRVOGharamaHistory"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO"
+                  Conjunction="AND">
+        <Properties Name="_Props">
+            <CustomProperties>
+                <Property Name="autoExecute" Value="false"/>
+                <Property Name="mode" Value="Basic"/>
+                <Property Name="allowConjunctionOverride" Value="true"/>
+                <Property Name="showInList" Value="true"/>
+                <Property Name="displayOperators" Value="InAdvancedMode"/>
+            </CustomProperties>
+        </Properties>
+        <ViewCriteriaRow Name="PreviousProceduresRVOCriteria1_row_0" UpperColumns="1">
+            <ViewCriteriaItem Name="PreviousProceduresRVOCriteria1_PreviousProceduresRVOCriteria1_row_0_ActsTypeId"
+                              ViewAttribute="ActsTypeId" Operator="=" Conjunction="AND" Value="7" Required="Optional"/>
+            <ViewCriteriaItem Name="FeesTypeId" ViewAttribute="FeesTypeId" Operator="=" Conjunction="AND" Value="3"
+                              Required="Optional"/>
+        </ViewCriteriaRow>
+    </ViewCriteria>
+    <AttrArray Name="KeyAttributes">
+        <Item Value="FolderId"/>
+    </AttrArray>
+    <ViewLinkAccessor Name="PartyFilesR"
+                      ViewLink="com.egabi.cjexec.model.roviews.previousProcedures.PrevProcedureFileVL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="SearchInventoryCaseResultR"
+                      ViewLink="com.egabi.cjexec.model.roviews.previousProcedures.SearchResultPartiesPreviousVL"
+                      Type="oracle.jbo.Row" Reversed="true" IsUpdateable="false"/>
+    <ResourceBundle>
+        <PropertiesBundle PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewObject>

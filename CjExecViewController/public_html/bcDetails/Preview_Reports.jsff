@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:h="http://java.sun.com/jsf/html">
+    <af:button text="رجوع" id="b1"
+               action="#{pageFlowScope.BCDetails.back}"/>
+    <!--<c:set var="cjexecviewcontrollerBundle1" value="#{adfBundle['CjExecViewControllerBundle']}"/>-->
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <!-- Search form -->
+    <af:listView value="#{bindings.CourtBcHearingResPartiesVO1.treeModel}" var="item"
+                 emptyText="#{bindings.CourtBcHearingResPartiesVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                 fetchSize="#{bindings.CourtBcHearingResPartiesVO1.rangeSize}" id="lv2">
+        <af:listItem id="li2">
+            <af:panelGroupLayout layout="horizontal" id="pgl1">
+                <f:facet name="separator">
+                    <af:spacer width="10" id="s1"/>
+                </f:facet>
+                <af:selectOneChoice value="#{item.bindings.FolderType.inputValue}"
+                                    label="#{item.bindings.FolderType.label}"
+                                    required="#{bindings.ExcFolderDataVO1.hints.FolderType.mandatory}"
+                                    shortDesc="#{bindings.ExcFolderDataVO1.hints.FolderType.tooltip}" readOnly="true"
+                                    id="soc1">
+                    <f:selectItems value="#{item.bindings.FolderType.items}" id="si1"/>
+                    <f:validator binding="#{item.bindings.FolderType.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{item.bindings.PoliceStationEntityId.inputValue}"
+                                    label="#{item.bindings.PoliceStationEntityId.label}"
+                                    required="#{bindings.ExcFolderDataVO1.hints.PoliceStationEntityId.mandatory}"
+                                    shortDesc="#{bindings.ExcFolderDataVO1.hints.PoliceStationEntityId.tooltip}"
+                                    readOnly="true" id="soc2">
+                    <f:selectItems value="#{item.bindings.PoliceStationEntityId.items}" id="si2"/>
+                    <f:validator binding="#{item.bindings.PoliceStationEntityId.validator}"/>
+                </af:selectOneChoice>
+                <af:outputLabel value="سنة" id="ol1"/>
+                <af:outputFormatted value="#{item.bindings.Year.inputValue}" id="of1">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ExcFolderDataVO1.hints.Year.format}"/>
+                </af:outputFormatted>
+                <af:outputLabel value="رقم" id="ol2"/>
+                <af:outputFormatted value="#{item.bindings.SequenceNumber.inputValue}" id="of2">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExcFolderDataVO1.hints.SequenceNumber.format}"/>
+                </af:outputFormatted>
+                <af:outputLabel value="مكرر" id="ol3"/>
+                <af:outputFormatted value="#{item.bindings.RepeatedFlag.inputValue eq 'Y' ?'مكرر':'لا'}" id="of3"/>
+                <af:selectOneChoice value="#{item.bindings.CriminalType.inputValue}" label="دفتر"
+                                    required="#{bindings.ExcFolderDataVO1.hints.CriminalType.mandatory}"
+                                    shortDesc="#{bindings.ExcFolderDataVO1.hints.CriminalType.tooltip}" readOnly="true"
+                                    id="soc3">
+                    <f:selectItems value="#{item.bindings.CriminalType.items}" id="si3"/>
+                    <f:validator binding="#{item.bindings.CriminalType.validator}"/>
+                </af:selectOneChoice>
+                <af:button text="عرض التقرير" id="b2" action="#{pageFlowScope.TestBean.printReport25}"/>
+            </af:panelGroupLayout>
+        </af:listItem>
+        <f:facet name="groupHeaderStamp">
+            <af:listItem id="li3">
+                <af:panelGroupLayout layout="horizontal" id="pgl3">
+                    <f:facet name="separator">
+                        <af:spacer width="10" id="s3"/>
+                    </f:facet>
+                    <af:outputFormatted value="#{item.bindings.PartyFullName.inputValue}" id="of5"/>
+                </af:panelGroupLayout>
+            </af:listItem>
+        </f:facet>
+    </af:listView>
+</ui:composition>

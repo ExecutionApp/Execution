@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PreviousProceduresPageDef"
+                Package="pages.com.egabi.cjexec.PreviousProcedures">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.PreviousProceduresRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="PreviousProceduresRVO1Iterator"/>
+    <searchRegion Binds="PreviousProceduresRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PreviousProceduresRVO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PreviousProceduresRVO1Iterator" id="PreviousProceduresRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO"
+                      Name="PreviousProceduresRVO10">
+        <AttrNames>
+          <Item Value="InventoryNumber"/>
+          <Item Value="HearingDate"/>
+          <Item Value="FolderName"/>
+          <Item Value="ProcedureDate"/>
+          <Item Value="ActsTypesName"/>
+          <Item Value="PartyFullName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

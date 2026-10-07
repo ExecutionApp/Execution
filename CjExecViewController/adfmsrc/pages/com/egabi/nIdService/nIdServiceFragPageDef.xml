@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="nIdServiceFragPageDef"
+                Package="pages.com.egabi.nIdService">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="CjConfigRoVOIterator" Binds="CjConfigRoVO" DataControl="SimplifiedModeAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction id="insertNIdServiceCallLog" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="insertNIdServiceCallLog" IsViewObjectMethod="false"
+                  DataControl="SimplifiedModeAMDataControl"
+                  InstanceName="data.SimplifiedModeAMDataControl.dataProvider">
+      <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="entityId" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="nId" NDType="java.lang.String"/>
+      <NamedData NDName="callType" NDType="java.lang.String"/>
+      <NamedData NDName="request" NDType="java.lang.String"/>
+      <NamedData NDName="response" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getNidMapId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getNidMapId"
+                  IsViewObjectMethod="false" DataControl="SimplifiedModeAMDataControl"
+                  InstanceName="data.SimplifiedModeAMDataControl.dataProvider"
+                  ReturnName="data.SimplifiedModeAMDataControl.methodResults.getNidMapId_SimplifiedModeAMDataControl_dataProvider_getNidMapId_result">
+      <NamedData NDName="flag" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="code" NDType="java.math.BigDecimal"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

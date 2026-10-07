@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelFormLayout id="pfl1">
+    <af:inputText value="#{bindings.Id.inputValue}" 
+    label="#{bindings.Id.hints.label}"
+                  required="#{bindings.Id.hints.mandatory}" columns="#{bindings.Id.hints.displayWidth}"
+                  maximumLength="#{bindings.Id.hints.precision}" shortDesc="#{bindings.Id.hints.tooltip}" id="it1">
+      <f:validator binding="#{bindings.Id.validator}"/>
+      <af:convertNumber groupingUsed="false" pattern="#{bindings.Id.format}"/>
+    </af:inputText>
+    <af:inputText value="#{bindings.Name.inputValue}"
+    label="#{bundle.SAVEDONE}"
+                  required="#{bindings.Name.hints.mandatory}" columns="#{bindings.Name.hints.displayWidth}"
+                  maximumLength="#{bindings.Name.hints.precision}" shortDesc="#{bindings.Name.hints.tooltip}" id="it2">
+      <f:validator binding="#{bindings.Name.validator}"/>
+    </af:inputText>
+    <af:inputText value="#{bindings.CreatedBy.inputValue}" label="#{bindings.CreatedBy.hints.label}"
+                  required="#{bindings.CreatedBy.hints.mandatory}" columns="#{bindings.CreatedBy.hints.displayWidth}"
+                  maximumLength="#{bindings.CreatedBy.hints.precision}" shortDesc="#{bindings.CreatedBy.hints.tooltip}"
+                  id="it3">
+      <f:validator binding="#{bindings.CreatedBy.validator}"/>
+    </af:inputText>
+    <af:inputDate value="#{bindings.CreatedDate.inputValue}" label="#{bindings.CreatedDate.hints.label}"
+                  required="#{bindings.CreatedDate.hints.mandatory}"
+                  columns="#{bindings.CreatedDate.hints.displayWidth}" shortDesc="#{bindings.CreatedDate.hints.tooltip}"
+                  id="id1">
+      <f:validator binding="#{bindings.CreatedDate.validator}"/>
+      <af:convertDateTime pattern="#{bindings.CreatedDate.format}"/>
+    </af:inputDate>
+    <af:inputText value="#{bindings.UpdatedBy.inputValue}" label="#{bindings.UpdatedBy.hints.label}"
+                  required="#{bindings.UpdatedBy.hints.mandatory}" columns="#{bindings.UpdatedBy.hints.displayWidth}"
+                  maximumLength="#{bindings.UpdatedBy.hints.precision}" shortDesc="#{bindings.UpdatedBy.hints.tooltip}"
+                  id="it4">
+      <f:validator binding="#{bindings.UpdatedBy.validator}"/>
+    </af:inputText>
+    <af:inputDate value="#{bindings.UpdatedDate.inputValue}" label="#{bindings.UpdatedDate.hints.label}"
+                  required="#{bindings.UpdatedDate.hints.mandatory}"
+                  columns="#{bindings.UpdatedDate.hints.displayWidth}" shortDesc="#{bindings.UpdatedDate.hints.tooltip}"
+                  id="id2">
+      <f:validator binding="#{bindings.UpdatedDate.validator}"/>
+      <af:convertDateTime pattern="#{bindings.UpdatedDate.format}"/>
+    </af:inputDate>
+    <af:inputText value="#{bindings.CaseSchemaId.inputValue}" label="#{bindings.CaseSchemaId.hints.label}"
+                  required="#{bindings.CaseSchemaId.hints.mandatory}"
+                  columns="#{bindings.CaseSchemaId.hints.displayWidth}"
+                  maximumLength="#{bindings.CaseSchemaId.hints.precision}"
+                  shortDesc="#{bindings.CaseSchemaId.hints.tooltip}" id="it5">
+      <f:validator binding="#{bindings.CaseSchemaId.validator}"/>
+      <af:convertNumber groupingUsed="false" pattern="#{bindings.CaseSchemaId.format}"/>
+    </af:inputText>
+  </af:panelFormLayout>
+  <af:listView value="#{bindings.ActionTypeView1.collectionModel}" var="item"
+               emptyText="#{bindings.ActionTypeView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+               fetchSize="#{bindings.ActionTypeView1.rangeSize}" id="lv1">
+    <af:listItem id="li1">
+      <af:panelGridLayout id="pgl1">
+        <af:gridRow marginTop="5px" height="auto" id="gr1">
+          <af:gridCell marginStart="5px" width="50%" id="gc1">
+            <af:outputFormatted value="#{item.bindings.Id.inputValue}" id="of1">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.ActionTypeView1.hints.Id.format}"/>
+            </af:outputFormatted>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2">
+            <af:outputFormatted value="#{item.bindings.Name.inputValue}" id="of2"/>
+          </af:gridCell>
+        </af:gridRow>
+        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+          <af:gridCell marginStart="5px" width="50%" id="gc3">
+            <af:outputFormatted value="#{item.bindings.CreatedBy.inputValue}" id="of3"/>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc4">
+            <af:outputFormatted value="#{item.bindings.CreatedDate.inputValue}" id="of4">
+              <af:convertDateTime pattern="#{bindings.ActionTypeView1.hints.CreatedDate.format}"/>
+            </af:outputFormatted>
+          </af:gridCell>
+        </af:gridRow>
+      </af:panelGridLayout>
+    </af:listItem>
+  </af:listView>
+</ui:composition>

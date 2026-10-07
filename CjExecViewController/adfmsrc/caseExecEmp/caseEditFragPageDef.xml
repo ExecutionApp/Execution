@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="caseEditFragPageDef"
+                Package="caseExecEmp">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="CaseEditMasterROV" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="CaseEditMasterROVIterator"/>
+        <iterator Binds="CaseConvictedPartiesROV" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="CaseConvictedPartiesROVIterator"/>
+        <iterator Binds="CasePartiesConvictionsROV2" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="CasePartiesConvictionsROVIterator" Refresh="default"/>
+        <iterator Binds="ExcCourtBcDecisionEOView" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcCourtBcDecisionEOViewIterator"/>
+        <iterator Binds="ExcCourtBcChargeDecisionsView" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcCourtBcChargeDecisionsViewIterator"/>
+        <iterator Binds="ExcCourtBcChargeDecisionsView1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcCourtBcCharePartiesDecisionsViewIterator"/>
+        <iterator Binds="ExcCourtBcChrgDecDepOrdView" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcCourtBcChrgDecDepOrdViewIterator"/>
+        <iterator Binds="PartiesExcCourtBcChrgDecDepOrdView" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="PartiesExcCourtBcChrgDecDepOrdViewIterator"/>
+        <iterator Binds="PartiesExcCourtBcChrgDecPenPartView" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="PartiesExcCourtBcChrgDecPenPartViewIterator"/>
+        <iterator Binds="ExcCourtBcChrgDecPenPartView" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcCourtBcChrgDecPenPartViewIterator"/>
+        <iterator Binds="FolderDataROV" RangeSize="10" DataControl="CjExecAMDataControl" id="FolderDataROVIterator"/>
+        <iterator Binds="ValidateChargeDecisionsErrROV" RangeSize="100" DataControl="CjExecAMDataControl"
+                  id="ValidateChargeDecisionsErrROVIterator"/>
+        <iterator Binds="PartyDebtROV" RangeSize="25" DataControl="CjExecAMDataControl" id="PartyDebtROVIterator"/>
+        <iterator Binds="ExcCourtBcDecisionFeesView" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcCourtBcDecisionFeesViewIterator"/>
+        <taskFlow id="caseattachmentstf1"
+                  taskFlowId="/WEB-INF/taskflows/caseExecEmp/case-attachments-tf.xml#case-attachments-tf"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters>
+                <parameter id="sessionJudgmentId" value="#{bindings.SessionJudgmentId.inputValue}"/>
+            </parameters>
+        </taskFlow>
+        <taskFlow id="ExcPrtySessJdgTF1"
+                  taskFlowId="/WEB-INF/taskflows/execpartysessionjudgments/ExcPrtySessJdgTF.xml#ExcPrtySessJdgTF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding" Refresh="ifNeeded">
+            <parameters>
+                <parameter id="partyId" value="#{pageFlowScope.caseEditBean.partyID}"/>
+            </parameters>
+        </taskFlow>
+        <taskFlow id="Par_PartiesTF1" taskFlowId="/WEB-INF/taskflows/ParParties/Par_Parties-TF.xml#Par_Parties-TF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding" Refresh="ifNeeded">
+            <parameters>
+                <parameter id="partyId" value="#{pageFlowScope.caseEditBean.partyID}"/>
+            </parameters>
+        </taskFlow>
+        <taskFlow id="WebCamTF1" taskFlowId="/WEB-INF/taskflows/webcam/WebCamTF.xml#WebCamTF" activation="deferred"
+                  xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters>
+                <parameter id="Party_ID" value="#{pageFlowScope.caseEditBean.partyID}"/>
+            </parameters>
+        </taskFlow>
+    </executables>
+    <bindings>
+        <action id="Rollback" DataControl="CjExecAMDataControl" RequiresUpdateModel="false"
+                Action="rollbackTransaction"/>
+        <attributeValues IterBinding="CaseEditMasterROVIterator" id="CaseNumber">
+            <AttrNames>
+                <Item Value="CaseNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseEditMasterROVIterator" id="HearingDate">
+            <AttrNames>
+                <Item Value="HearingDate"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="CaseConvictedPartiesROVIterator" id="CaseConvictedPartiesROV">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.caseexecemp.CaseConvictedPartiesROV"
+                            Name="CaseConvictedPartiesROV0">
+                <AttrNames>
+                    <Item Value="IdNumber"/>
+                    <Item Value="FullName"/>
+                    <Item Value="Age"/>
+                    <Item Value="Gender"/>
+                    <Item Value="Address"/>
+                    <Item Value="JobTitle"/>
+                    <Item Value="JudgmentClassification"/>
+                    <Item Value="Id"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="CourtCircleDateId"/>
+                    <Item Value="JudgementResolutionC"/>
+                    <Item Value="FolderActionId"/>
+                    <Item Value="PartyOrder"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="CaseEditMasterROVIterator" id="JudgementResolution">
+            <AttrNames>
+                <Item Value="JudgementResolution"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseEditMasterROVIterator" id="JudgmentType">
+            <AttrNames>
+                <Item Value="JudgmentType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseEditMasterROVIterator" id="HearingResId">
+            <AttrNames>
+                <Item Value="HearingResId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseEditMasterROVIterator" id="HearingDateId">
+            <AttrNames>
+                <Item Value="HearingDateId"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="CasePartiesConvictionsROVIterator" id="CasePartiesConvictionsROV">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.caseexecemp.CasePartiesConvictionsROV"
+                            Name="CasePartiesConvictionsROV0">
+                <AttrNames>
+                    <Item Value="PartyId"/>
+                    <Item Value="Crime"/>
+                    <Item Value="CriminalType"/>
+                    <Item Value="DecriptionId"/>
+                    <Item Value="CourtCircleDateId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="ExcCourtBcDecisionEOViewIterator" id="JudgementType">
+            <AttrNames>
+                <Item Value="JudgementType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseEditMasterROVIterator" id="SessionJudgmentId">
+            <AttrNames>
+                <Item Value="SessionJudgmentId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcDecisionEOViewIterator" id="DecesionId">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="callEXC_COURT_BC_PKG___CREATE_CHARGE_EACH_CONVICTION" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="callEXC_COURT_BC_PKG___CREATE_CHARGE_EACH_CONVICTION"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="decesionId" NDValue="#{bindings.Id2.inputValue}" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sessionJudId" NDValue="#{bindings.SessionJudgmentId.inputValue}"
+                       NDType="java.math.BigDecimal"/>
+            <NamedData NDName="username" NDValue="#{pageFlowScope.userId}" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction id="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ALL" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ALL" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl" InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="decesionId" NDValue="#{bindings.Id2.inputValue}" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sessionJudId" NDValue="#{bindings.SessionJudgmentId.inputValue}"
+                       NDType="java.math.BigDecimal"/>
+            <NamedData NDName="username" NDValue="#{pageFlowScope.userId}" NDType="java.lang.String"/>
+        </methodAction>
+        <attributeValues IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="ImprisonmentDays">
+            <AttrNames>
+                <Item Value="ImprisonmentDays"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="ImprisonmentDaysPar">
+            <AttrNames>
+                <Item Value="ImprisonmentDays"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="ImprisonmentMonths">
+            <AttrNames>
+                <Item Value="ImprisonmentMonths"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="ImprisonmentMonthsPar">
+            <AttrNames>
+                <Item Value="ImprisonmentMonths"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="ImprisonmentYears">
+            <AttrNames>
+                <Item Value="ImprisonmentYears"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="ImprisonmentYearsPar">
+            <AttrNames>
+                <Item Value="ImprisonmentYears"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ExcCourtBcChargeDecisionsViewIterator" StaticList="false" Uses="LOV_ActionTypeId"
+              id="ActionTypeId" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" StaticList="false" Uses="LOV_ActionTypeId"
+              id="ActionTypeIdPar" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <button IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="StopExecutionFlag" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="StopExecutionFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="StopExecutionFlagPar"
+                DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="StopExecutionFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="GuaranteeFlag" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="GuaranteeFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="GuaranteeFlagPar" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="GuaranteeFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="GuranteeAmount">
+            <AttrNames>
+                <Item Value="GuranteeAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="GuranteeAmountPar">
+            <AttrNames>
+                <Item Value="GuranteeAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="PenaltyAmount">
+            <AttrNames>
+                <Item Value="PenaltyAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="PenaltyAmountPar">
+            <AttrNames>
+                <Item Value="PenaltyAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <button IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="PenaltyAmountFixedFlag" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="PenaltyAmountFixedFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="PenaltyAmountFixedFlagPar"
+                DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="PenaltyAmountFixedFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="WorkAmountFlag" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="WorkAmountFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="WorkAmountFlagPar" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="WorkAmountFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="WorkAmount">
+            <AttrNames>
+                <Item Value="WorkAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="WorkAmountPar">
+            <AttrNames>
+                <Item Value="WorkAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <button IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="WorkAmountMultiplierFlag" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="WorkAmountMultiplierFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="WorkAmountMultiplierFlagPar"
+                DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="WorkAmountMultiplierFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="WorkAmountMultiplier">
+            <AttrNames>
+                <Item Value="WorkAmountMultiplier"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="WorkAmountMultiplierPar">
+            <AttrNames>
+                <Item Value="WorkAmountMultiplier"/>
+            </AttrNames>
+        </attributeValues>
+        <button IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="WorkAmountPercentFlag" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="WorkAmountPercentFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="WorkAmountPercentFlagPar"
+                DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="WorkAmountPercentFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="WorkAmountPercent">
+            <AttrNames>
+                <Item Value="WorkAmountPercent"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="WorkAmountPercentPar">
+            <AttrNames>
+                <Item Value="WorkAmountPercent"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="ChargeAnnouncmentDate">
+            <AttrNames>
+                <Item Value="ChargeAnnouncmentDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="ChargeAnnouncmentDatePar">
+            <AttrNames>
+                <Item Value="ChargeAnnouncmentDate"/>
+            </AttrNames>
+        </attributeValues>
+        <button IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="PenaltySharedFlag" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="PenaltySharedFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="PenaltySharedFlagPar"
+                DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="PenaltySharedFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcChargeDecisionsViewIterator" id="DependentOrderFlag" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="DependentOrderFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="ExcCourtBcCharePartiesDecisionsViewIterator" id="DependentOrderFlagPar"
+                DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="DependentOrderFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <tree IterBinding="ExcCourtBcChrgDecDepOrdViewIterator" id="ExcCourtBcChrgDecDepOrdView">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecDepOrdView"
+                            Name="ExcCourtBcChrgDecDepOrdView0">
+                <AttrNames>
+                    <Item Value="DependentOrderType"/>
+                    <Item Value="ChargeDecisionId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="PartiesExcCourtBcChrgDecDepOrdViewIterator" id="PartiesExcCourtBcChrgDecDepOrdView">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecDepOrdView"
+                            Name="PartiesExcCourtBcChrgDecDepOrdView0">
+                <AttrNames>
+                    <Item Value="DependentOrderType"/>
+                    <Item Value="ChargeDecisionId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="ExcCourtBcChrgDecDepOrdViewIterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="PartiesExcCourtBcChrgDecDepOrdViewIterator" id="CreateInsert1" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="PartiesExcCourtBcChrgDecDepOrdViewIterator" id="Delete" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <action IterBinding="ExcCourtBcChrgDecDepOrdViewIterator" id="Delete1" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <attributeValues IterBinding="CaseConvictedPartiesROVIterator" id="IdNumber">
+            <AttrNames>
+                <Item Value="IdNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseConvictedPartiesROVIterator" id="FullName">
+            <AttrNames>
+                <Item Value="FullName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseConvictedPartiesROVIterator" id="Age">
+            <AttrNames>
+                <Item Value="Age"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseConvictedPartiesROVIterator" id="Gender">
+            <AttrNames>
+                <Item Value="Gender"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseConvictedPartiesROVIterator" id="Address">
+            <AttrNames>
+                <Item Value="Address"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CaseConvictedPartiesROVIterator" id="JobTitle">
+            <AttrNames>
+                <Item Value="JobTitle"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="PartiesExcCourtBcChrgDecPenPartViewIterator" id="PartiesExcCourtBcChrgDecPenPartView">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecPenPartView"
+                            Name="PartiesExcCourtBcChrgDecPenPartView0">
+                <AttrNames>
+                    <Item Value="PartyId"/>
+                    <Item Value="HearingResId"/>
+                    <Item Value="ChargeDecisionId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="ExcCourtBcChrgDecPenPartViewIterator" id="ExcCourtBcChrgDecPenPartView">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcChrgDecPenPartView"
+                            Name="ExcCourtBcChrgDecPenPartView0">
+                <AttrNames>
+                    <Item Value="PartyId"/>
+                    <Item Value="HearingResId"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="ExcCourtBcChrgDecPenPartViewIterator" id="CreateInsert2" RequiresUpdateModel="true"
+                Action="createWithParams" InstanceName="CjExecAMDataControl.ExcCourtBcChrgDecPenPartView"
+                DataControl="CjExecAMDataControl">
+            <NamedData NDName="HearingResId" NDType="java.lang.String" NDValue="#{pageFlowScope.HearingResId}"/>
+            <NamedData NDName="PartyId" NDType="java.math.BigDecimal" NDValue="#{-1}"/>
+        </action>
+        <action IterBinding="ExcCourtBcChrgDecPenPartViewIterator" id="Delete2" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <action IterBinding="PartiesExcCourtBcChrgDecPenPartViewIterator" id="CreateInsert3" RequiresUpdateModel="true"
+                Action="createWithParams" InstanceName="CjExecAMDataControl.PartiesExcCourtBcChrgDecPenPartView"
+                DataControl="CjExecAMDataControl">
+            <NamedData NDName="HearingResId" NDType="java.lang.String" NDValue="#{pageFlowScope.HearingResId}"/>
+            <NamedData NDName="PartyId" NDType="java.math.BigDecimal" NDValue="#{-1}"/>
+        </action>
+        <action IterBinding="PartiesExcCourtBcChrgDecPenPartViewIterator" id="Delete3" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <methodAction id="callCREATE_COUNTING_FOLDER" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="callCREATE_COUNTING_FOLDER" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl" InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="decesionId" NDValue="#{bindings.Id2.inputValue}" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <action IterBinding="FolderDataROVIterator" id="ExecuteFolderData" InstanceName="CjExecAMDataControl.FolderDataROV"
+                DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+        <tree IterBinding="FolderDataROVIterator" id="FolderDataROV">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.caseexecemp.FolderDataROV" Name="FolderDataROV0">
+                <AttrNames>
+                    <Item Value="SequenceNumber"/>
+                    <Item Value="Year"/>
+                    <Item Value="CountNumber"/>
+                    <Item Value="FullName"/>
+                    <Item Value="IdNumber"/>
+                    <Item Value="JudgementResolutionC"/>
+                    <Item Value="FolderName"/>
+                    <Item Value="JudgmentText"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="CaseConvictedPartiesROVIterator" id="JudgementResolutionC">
+            <AttrNames>
+                <Item Value="JudgementResolutionC"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcDecisionEOViewIterator" id="ClassifiedFlag">
+            <AttrNames>
+                <Item Value="ClassifiedFlag"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Commit" DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+        <methodAction id="callEXC_COURT_BC_PKG___VALIDATE_CHARGE_DECISIONS" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="callEXC_COURT_BC_PKG___VALIDATE_CHARGE_DECISIONS"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="decesionId" NDType="java.math.BigDecimal" NDValue="#{bindings.CourtDecesionId.inputValue}"/>
+        </methodAction>
+        <action IterBinding="ValidateChargeDecisionsErrROVIterator" id="ExecuteValidationErrors"
+                InstanceName="CjExecAMDataControl.ValidateChargeDecisionsErrROV" DataControl="CjExecAMDataControl"
+                RequiresUpdateModel="true" Action="iteratorExecute"/>
+        <tree IterBinding="ValidateChargeDecisionsErrROVIterator" id="ValidateChargeDecisionsErrROV">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.caseexecemp.ValidateChargeDecisionsErrROV"
+                            Name="ValidateChargeDecisionsErrROV0">
+                <AttrNames>
+                    <Item Value="ErrMsg"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="PartyDebtROVIterator" id="PartyDebtROV">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.caseexecemp.PartyDebtROV" Name="PartyDebtROV0">
+                <AttrNames>
+                    <Item Value="FeesTypeName"/>
+                    <Item Value="Amount"/>
+                    <Item Value="PaidAmount"/>
+                    <Item Value="PartyFullName"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="PartyDebtROVIterator" id="ExecutePartyDebt" InstanceName="CjExecAMDataControl.PartyDebtROV"
+                DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+        <tree IterBinding="ExcCourtBcDecisionFeesViewIterator" id="ExcCourtBcDecisionFeesView">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcDecisionFeesView"
+                            Name="ExcCourtBcDecisionFeesView0">
+                <AttrNames>
+                    <Item Value="FeesTypeId"/>
+                    <Item Value="FeesAmount"/>
+                    <Item Value="RangeId"/>
+                    <Item Value="FeesSettingId"/>
+                    <Item Value="CalculationType"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="ExcCourtBcDecisionFeesViewIterator" id="CreateInsert4" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="ExcCourtBcDecisionFeesViewIterator" id="Delete4" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <attributeValues IterBinding="CaseConvictedPartiesROVIterator" id="PartyId">
+            <AttrNames>
+                <Item Value="PartyId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderDataROVIterator" id="Id">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderDataROVIterator" id="SequenceNumber">
+            <AttrNames>
+                <Item Value="SequenceNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderDataROVIterator" id="Year">
+            <AttrNames>
+                <Item Value="Year"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderDataROVIterator" id="CountNumber">
+            <AttrNames>
+                <Item Value="CountNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderDataROVIterator" id="FullName1">
+            <AttrNames>
+                <Item Value="FullName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderDataROVIterator" id="IdNumber1">
+            <AttrNames>
+                <Item Value="IdNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderDataROVIterator" id="JudgementResolutionC1">
+            <AttrNames>
+                <Item Value="JudgementResolutionC"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderDataROVIterator" id="FolderName">
+            <AttrNames>
+                <Item Value="FolderName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="FolderDataROVIterator" id="PoliceStationEntityId">
+            <AttrNames>
+                <Item Value="PoliceStationEntityId"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="callEXC_COURT_BC_PKG___CHANGE_SEQUENCE_NUMBER" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="callEXC_COURT_BC_PKG___CHANGE_SEQUENCE_NUMBER"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider"
+                      ReturnName="data.CjExecAMDataControl.methodResults.callEXC_COURT_BC_PKG___CHANGE_SEQUENCE_NUMBER_CjExecAMDataControl_dataProvider_callEXC_COURT_BC_PKG___CHANGE_SEQUENCE_NUMBER_result">
+            <NamedData NDName="folderId" NDValue="#{bindings.Id.inputValue}" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="newSequenceNumber" NDValue="#{bindings.SequenceNumber.inputValue}"
+                       NDType="java.math.BigDecimal"/>
+            <NamedData NDName="year" NDValue="#{bindings.Year.inputValue}" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ONE" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="callEXC_COURT_BC_PKG___CREATE_CHARGE_FOR_ONE" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl" InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="decesionId" NDValue="#{bindings.Id2.inputValue}" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sessionJudId" NDValue="#{bindings.SessionJudgmentId.inputValue}"
+                       NDType="java.math.BigDecimal"/>
+            <NamedData NDName="username" NDValue="#{pageFlowScope.userId}" NDType="java.lang.String"/>
+            <NamedData NDName="PartyId" NDValue="#{pageFlowScope.caseEditBean.partyID}" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="callEXC_COURT_BC_PKG___CREATE_CHARG_FOR_ONE" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="callEXC_COURT_BC_PKG___CREATE_CHARG_FOR_ONE" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl" InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="decesionId" NDValue="#{bindings.Id2.inputValue}" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="sessionJudId" NDValue="#{bindings.SessionJudgmentId.inputValue}"
+                       NDType="java.math.BigDecimal"/>
+            <NamedData NDName="username" NDValue="#{pageFlowScope.userId}" NDType="java.lang.String"/>
+            <NamedData NDName="PartyId" NDValue="#{pageFlowScope.caseEditBean.partyID}" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <attributeValues IterBinding="CasePartiesConvictionsROVIterator" id="CopyFlg">
+            <AttrNames>
+                <Item Value="CopyFlg"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcChrgDecDepOrdViewIterator" id="ChargeDecisionId">
+            <AttrNames>
+                <Item Value="ChargeDecisionId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ExcCourtBcDecisionEOViewIterator" id="Id2">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="updateParPartiesLog" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateParPartiesLog" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider"
+                      ReturnName="data.CjExecAMDataControl.methodResults.updateParPartiesLog_CjExecAMDataControl_dataProvider_updateParPartiesLog_result">
+            <NamedData NDName="parPartyId" NDType="long"/>
+        </methodAction>
+        <methodAction id="updateSessionFlag" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateSessionFlag" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="Id" NDValue="#{bindings.SessionJudgmentId1.inputValue}" NDType="java.lang.Number"/>
+        </methodAction>
+        <attributeValues IterBinding="CaseEditMasterROVIterator" id="SessionJudgmentId1">
+            <AttrNames>
+                <Item Value="SessionJudgmentId"/>
+            </AttrNames>
+        </attributeValues>
+    </bindings>
+</pageDefinition>

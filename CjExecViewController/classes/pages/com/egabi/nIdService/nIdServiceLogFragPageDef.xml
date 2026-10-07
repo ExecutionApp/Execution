@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="nIdServiceLogFragPageDef"
+                Package="pages.com.egabi.nIdService">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"></variableIterator>
+        <iterator Binds="ValidatePoliceReportROVO1" DataControl="SimplifiedModeAMDataControl" RangeSize="-1"
+                  id="ValidatePoliceReportROVO1Iterator"/>
+        <iterator id="ClaimProcedureLogSearchFormRVO1Iterator" Binds="ClaimProcedureLogSearchFormRVO1"
+                  DataControl="SimplifiedModeAMDataControl" RangeSize="25"/>
+        <iterator Binds="NIdServiceLogVO1" RangeSize="25" DataControl="SimplifiedModeAMDataControl"
+                  id="NIdServiceLogVO1Iterator"/>
+    </executables>
+    <bindings>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" Uses="LOV_NeyabGozayaa"
+              id="NeyabGozayaa" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="ClaimProcedureLogSearchFormRVO1Iterator" id="FromDate">
+            <AttrNames>
+                <Item Value="FromDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureLogSearchFormRVO1Iterator" id="ToDate">
+            <AttrNames>
+                <Item Value="ToDate"/>
+            </AttrNames>
+        </attributeValues>
+        <button IterBinding="ClaimProcedureLogSearchFormRVO1Iterator" id="Today" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="Today"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <tree IterBinding="NIdServiceLogVO1Iterator" id="NIdServiceLogVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.nIdService.NIdServiceLogVO" Name="NIdServiceLogVO10">
+                <AttrNames>
+                    <Item Value="CallDate"/>
+                    <Item Value="EntityId"/>
+                    <Item Value="Id"/>
+                    <Item Value="NationalId"/>
+                    <Item Value="UserId"/>
+                    <Item Value="CallType"/>
+                    <Item Value="RequestJson"/>
+                    <Item Value="ResponseJson"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <list IterBinding="ClaimProcedureLogSearchFormRVO1Iterator" StaticList="false" Uses="LOV_CallType"
+              id="CallType" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    </bindings>
+</pageDefinition>

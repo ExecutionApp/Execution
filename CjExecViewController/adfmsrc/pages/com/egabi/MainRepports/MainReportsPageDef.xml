@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="MainReportsPageDef"
+                Package="pages.com.egabi.MainRepports">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="MainReports1" taskFlowId="/WEB-INF/taskflows/MainReports/MainReports.xml#MainReports"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

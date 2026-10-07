@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+    xmlns="http://xmlns.oracle.com/bc4j"
+    Name="PartyProceduresVL"
+    Version="12.2.1.0.31"
+    InheritPersonalization="merge">
+    <ViewLinkDefEnd
+        Name="SearchByPartyResultR"
+        Cardinality="1"
+        Source="true"
+        Owner="com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyResultRVO">
+        <DesignTime>
+            <Attr Name="_isUpdateable" Value="true"/>
+            <Attr Name="_finderName" Value="SearchByPartyResultR"/>
+        </DesignTime>
+        <AttrArray Name="Attributes">
+            <Item Value="com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyResultRVO.PartyId"/>
+        </AttrArray>
+    </ViewLinkDefEnd>
+    <ViewLinkDefEnd
+        Name="PartyProceduresR"
+        Cardinality="-1"
+        Owner="com.egabi.cjexec.model.roviews.claimProcedureROV.PartyProceduresRVO">
+        <DesignTime>
+            <Attr Name="_isUpdateable" Value="true"/>
+            <Attr Name="_accessor" Value="false"/>
+            <Attr Name="_finderName" Value="PartyProceduresR"/>
+        </DesignTime>
+        <AttrArray Name="Attributes">
+            <Item Value="com.egabi.cjexec.model.roviews.claimProcedureROV.PartyProceduresRVO.PartyId"/>
+        </AttrArray>
+    </ViewLinkDefEnd>
+    <ResourceBundle>
+        <PropertiesBundle
+            PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewLink>

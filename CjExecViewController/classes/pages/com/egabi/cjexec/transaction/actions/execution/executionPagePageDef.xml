@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="executionPagePageDef"
+                Package="pages.com.egabi.cjexec.transaction.actions.execution">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Name="v_execution_date" Type="java.sql.Date" />
+      <variable Name="execution_number" Type="java.math.BigDecimal"/>
+      <variable Name="imprisoned_flag" Type="java.math.BigDecimal"/>
+      <variable Name="imprisoned_place" Type="java.lang.String"/>
+    </variableIterator>
+    <iterator Binds="executionROV1" RangeSize="25" DataControl="CjExecAMDataControl" id="executionROV1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="variables" id="v_execution_date1">
+      <AttrNames>
+        <Item Value="v_execution_date" />
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="execution_number1">
+      <AttrNames>
+        <Item Value="execution_number"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="imprisoned_flag1">
+      <AttrNames>
+        <Item Value="imprisoned_flag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="imprisoned_place1">
+      <AttrNames>
+        <Item Value="imprisoned_place"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="executePrison" RequiresUpdateModel="true" Action="invokeMethod" MethodName="executePrison"
+                  IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider">
+      <NamedData NDName="folder_id" NDValue="#{pageFlowScope.folder_id}" NDType="int"/>
+      <NamedData NDName="execution_date" NDValue="#{bindings.v_execution_date1.inputValue}" NDType="java.sql.Date"/>
+      <NamedData NDName="session_id" NDValue="#{sessionScope.userInfo.userId}" NDType="int"/>
+      <NamedData NDName="execution_number" NDValue="#{bindings.execution_number1.inputValue}" NDType="int"/>
+      <NamedData NDName="imprisoned_flag" NDValue="#{bindings.imprisoned_flag1.inputValue}" NDType="int"/>
+      <NamedData NDName="imprisoned_place" NDValue="#{bindings.imprisoned_place1.inputValue}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="executionROV1Iterator" id="JudicialEntityId">
+      <AttrNames>
+        <Item Value="JudicialEntityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="executionROV1Iterator" id="IncidentDate">
+      <AttrNames>
+        <Item Value="IncidentDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="executionROV1Iterator" id="JudgmentText">
+      <AttrNames>
+        <Item Value="JudgmentText"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="executionROV1Iterator" id="ImprisonmentEndDate">
+      <AttrNames>
+        <Item Value="ImprisonmentEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="executionROV1Iterator" id="ImprisonmentStartDate">
+      <AttrNames>
+        <Item Value="ImprisonmentStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="executionROV1Iterator" id="Subjects">
+      <AttrNames>
+        <Item Value="Subjects"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="executionROV1Iterator" id="ExecuteWithParams" InstanceName="CjExecAMDataControl.executionROV1"
+            DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="P_FOLDER_ID" NDValue="#{pageFlowScope.execFolderId}" NDType="java.math.BigDecimal"/>
+    </action>
+    <attributeValues IterBinding="executionROV1Iterator" id="ExecutionProcedurId">
+      <AttrNames>
+        <Item Value="ExecutionProcedurId"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="executionROV1Iterator" id="Execute" InstanceName="CjExecAMDataControl.executionROV1"
+            DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <list IterBinding="executionROV1Iterator" StaticList="false" Uses="LOV_JudicialEntityId" id="JudicialEntityId1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

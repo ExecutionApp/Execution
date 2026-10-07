@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">displayAuditFrag</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">220.68945</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>displayAuditFrag&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">306.39648</property>
+      <property
+         name="page">/pages/com/egabi/auditUpdate/displayAuditFrag.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">displayAuditDetailsFrag</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">534.0293</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>displayAuditDetailsFrag&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">311.79883</property>
+      <property
+         name="page">/pages/com/egabi/auditUpdate/displayAuditDetailsFrag.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="View3">
+      <property
+         name="fromOutcome">detail</property>
+      <property
+         name="sdm:polyPoints">R50,261.68945,306.0459,493.0293,311.44824,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View3"
+      to="View2">
+      <property
+         name="fromOutcome">back</property>
+      <property
+         name="sdm:polyPoints">L54,492.94757,314.94824,261.68945,309.5459,R54</property>
+   </ControlFlowCase>
+</SDM>

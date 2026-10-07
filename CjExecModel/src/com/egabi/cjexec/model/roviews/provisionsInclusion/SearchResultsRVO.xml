@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+    xmlns="http://xmlns.oracle.com/bc4j"
+    Name="SearchResultsRVO"
+    Version="12.2.1.0.31"
+    InheritPersonalization="merge"
+    BindingStyle="OracleName"
+    CustomQuery="true"
+    PageIterMode="Full"
+    ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+    <DesignTime>
+        <Attr Name="_isExpertMode" Value="true"/>
+    </DesignTime>
+    <Properties>
+        <SchemaBasedProperties>
+            <LABEL
+                ResId="com.egabi.cjexec.model.roviews.provisionsInclusion.SearchResultsRVO_LABEL"/>
+        </SchemaBasedProperties>
+    </Properties>
+    <Variable
+        Name="businessCaseTypeParam"
+        Kind="where"
+        Type="oracle.jbo.domain.Number"/>
+    <Variable
+        Name="originEntityParam"
+        Kind="where"
+        Type="oracle.jbo.domain.Number"/>
+    <Variable
+        Name="businessCaseDegreeParam"
+        Kind="where"
+        Type="oracle.jbo.domain.Number"/>
+    <Variable
+        Name="policeNumberParam"
+        Kind="where"
+        Type="java.lang.String"/>
+    <Variable
+        Name="idNumberParam"
+        Kind="where"
+        Type="java.lang.String"/>
+    <Variable
+        Name="fullNameParam"
+        Kind="where"
+        Type="java.lang.String"/>
+    <Variable
+        Name="circleIdParam"
+        Kind="where"
+        Type="oracle.jbo.domain.Number"/>
+    <Variable
+        Name="hearingIdParam"
+        Kind="where"
+        Type="oracle.jbo.domain.Number"/>
+    <Variable
+        Name="classifiedFlagParam"
+        Kind="where"
+        Type="oracle.jbo.domain.Number"/>
+    <Variable
+        Name="parYearParam"
+        Kind="where"
+        Type="java.lang.String"/>
+    <SQLQuery><![CDATA[SELECT res.id               
+           AS res_id,     
+           res.business_case_id,     
+           res.circle_hearing_date_id,     
+       cd.ENTITY_ID,               
+       par.police_number || ' / ' || par.par_year || ' / ' || bct.name               
+           AS business_case_number,               
+       bc.business_case_name,               
+       bcd.name               
+           AS business_case_degree,             
+           to_date(cd.hearing_date,'dd/mm/rrrr') as hearing_date,         
+       cbs.CLASSIFIED_FLAG as CLASSIFIED_FLAG         
+  FROM court_bc_hearing_reservation  res,               
+       court_circles_dates_hearing   cd,               
+       par_police_authority_report   par,               
+       business_case_type            bct,               
+       business_case                 bc,               
+       business_case_degrees         bcd            
+       ,EXC_COURT_BC_SESSION_JUDGMENT cbs         
+ WHERE     res.circle_hearing_date_id = cd.id               
+       AND par.business_case_id = res.business_case_id               
+       AND bct.id = par.business_case_type               
+       AND bc.id = res.business_case_id               
+       AND bcd.id = cd.bc_degree_id               
+       AND res.is_active = 'Y'               
+       and cbs.COURT_BC_HEARING_RES_ID(+)=res.id         
+and par.business_case_type= :businessCaseTypeParam 
+and (par.par_year = :parYearParam or :parYearParam is null)  
+and (cd.id= :hearingIdParam or :hearingIdParam is null)                    
+and (par.origin_entity= :originEntityParam or :originEntityParam is null)               
+and cd.bc_degree_id= :businessCaseDegreeParam              
+and (par.police_number= :policeNumberParam or :policeNumberParam is null)              
+and (cd.entity_id= :circleIdParam or :circleIdParam is null)          
+and (nvl(CLASSIFIED_FLAG, -1)= :classifiedFlagParam or :classifiedFlagParam is null)          
+and res.id in                        
+(select z.COURT_BC_HEARING_RES_ID                         
+from court_bc_hearing_res_parties z, par_parties lll                        
+where z.party_id=lll.id                        
+and (LLL.id_number like '%' || :idNumberParam || '%' or :idNumberParam is null)                       
+and (LLL.party_full_name like '%' || :fullNameParam || '%' or :fullNameParam is null))]]></SQLQuery>
+    <ViewAttribute
+        Name="ResId"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Number"
+        ColumnType="NUMBER"
+        AliasName="RES_ID"
+        Expression="RES_ID"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="BusinessCaseId"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Number"
+        ColumnType="NUMBER"
+        AliasName="BUSINESS_CASE_ID"
+        Expression="BUSINESS_CASE_ID"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="CircleHearingDateId"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Number"
+        ColumnType="NUMBER"
+        AliasName="CIRCLE_HEARING_DATE_ID"
+        Expression="CIRCLE_HEARING_DATE_ID"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="EntityId"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Number"
+        ColumnType="NUMBER"
+        AliasName="ENTITY_ID"
+        Expression="ENTITY_ID"
+        SQLType="NUMERIC"/>
+    <!--
+    <ViewAccessor
+        Name="JudgmentTypesRVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.JudgmentTypesRVO"
+        RowLevelBinds="true"/>-->
+        
+        <ViewAttribute
+        Name="BusinessCaseNumber"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="292"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="BUSINESS_CASE_NUMBER"
+        Expression="BUSINESS_CASE_NUMBER"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="292"/>
+        </DesignTime>
+    </ViewAttribute>
+        
+    <ViewAttribute
+        Name="BusinessCaseName"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="100"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="BUSINESS_CASE_NAME"
+        Expression="BUSINESS_CASE_NAME"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+    </ViewAttribute>
+    
+    <ViewAttribute
+        Name="BusinessCaseDegree"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="100"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="BUSINESS_CASE_DEGREE"
+        Expression="BUSINESS_CASE_DEGREE"
+        SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="HearingDate"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Date"
+        ColumnType="DATE"
+        AliasName="HEARING_DATE"
+        Expression="HEARING_DATE"
+        SQLType="DATE"/>
+    <ViewAttribute
+        Name="ClassifiedFlag"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="CLASSIFIED_FLAG"
+        Expression="CLASSIFIED_FLAG"
+        SQLType="NUMERIC"/>
+    <!--<ViewAccessor
+        Name="JudgmentSubTypesRVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.JudgmentSubTypesRVO"
+        RowLevelBinds="true">
+        <ParameterMap>
+            <PIMap Variable="judgmentMainTypeParam">
+                <TransientExpression
+                    trustMode="untrusted"
+                    Name="ExpressionScript"><![CDATA[JudgmentType]]></TransientExpression>
+            </PIMap>
+        </ParameterMap>
+    </ViewAccessor>
+    <ListBinding
+        Name="LOV_JudgmentType"
+        ListVOName="JudgmentTypesRVO1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="JudgmentType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_JudgmentSubType"
+        ListVOName="JudgmentSubTypesRVO1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="JudgmentSubType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>-->
+    <AttrArray Name="KeyAttributes">
+        <Item Value="ResId"/>
+    </AttrArray>
+    <!--<SQLQuery><![CDATA[select a.id, a.police_number || ' ' ||  (select c.name from business_case_type c where c.id = a.business_case_type) || ' ' || a.par_year as judicial_number, 
+d.HEARING_DATE, (select e.name from BUSINESS_CASE_DEGREES e where e.id = d.bc_degree_id) as degree 
+from PAR_POLICE_AUTHORITY_REPORT a, court_bc_hearing_reservation b, COURT_CIRCLES_DATES_HEARING d 
+where a.BUSINESS_CASE_ID = b.BUSINESS_CASE_ID 
+and b.is_active = 'Y' 
+and d.entity_id= (SELECT ENTITY_ID FROM SEC_USERs WHERE ID=:sessionUser)]]></SQLQuery>-->
+    <!--<ViewAttribute
+      Name="OperativeJudgment"
+      IsSelected="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR"/>
+    <ViewAttribute
+      Name="JudgmentType"
+      IsSelected="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="NUMERIC"
+      LOVName="LOV_JudgmentType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                  Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+      Name="JudgmentSubType"
+      IsSelected="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="NUMERIC"
+      LOVName="LOV_JudgmentSubType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                  Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>-->
+    <ResourceBundle>
+        <PropertiesBundle
+            PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewObject>

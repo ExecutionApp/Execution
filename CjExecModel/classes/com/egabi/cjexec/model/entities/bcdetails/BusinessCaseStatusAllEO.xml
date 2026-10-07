@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BusinessCaseStatusAllEO"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="BUSINESS_CASE_STATUS_ALL"
+  AliasName="BusinessCaseStatusAllEO"
+  BindingStyle="OracleName"
+  RowClass="com.egabi.cjexec.model.baseclasses.EntityEOImpl">
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="BUSINESS_CASE_STATUS_ALL"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="Parties"
+    Precision="4000"
+    ColumnName="PARTIES"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="BUSINESS_CASE_STATUS_ALL">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastAction"
+    Precision="200"
+    ColumnName="LAST_ACTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="BUSINESS_CASE_STATUS_ALL">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CaseStatus"
+    Precision="4000"
+    ColumnName="CASE_STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="BUSINESS_CASE_STATUS_ALL"
+    DefaultValue="منتهي">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LogId"
+    IsNotNull="true"
+    ColumnName="LOG_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="BUSINESS_CASE_STATUS_ALL"/>
+  <Attribute
+    Name="CreatedDate"
+    ColumnName="CREATED_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="BUSINESS_CASE_STATUS_ALL"
+    IsUpdateable="while_insert"
+    HistoryColumn="DateHistory"/>
+  <Attribute
+    Name="Charges"
+    ColumnName="CHARGES"
+    Type="java.lang.String"
+    ColumnType="LONG"
+    TableName="BUSINESS_CASE_STATUS_ALL"/>
+  <Attribute
+    Name="ChildCase"
+    Precision="200"
+    ColumnName="CHILD_CASE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="BUSINESS_CASE_STATUS_ALL">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParentCase"
+    Precision="200"
+    ColumnName="PARENT_CASE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="BUSINESS_CASE_STATUS_ALL">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="BusinessCaseLog"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association18Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association18Assoc.BusinessCaseLog"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association18Assoc.BusinessCaseStatusAll"
+    Type="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseLogEOImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="BusinessCaseStatusAllPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="BUSINESS_CASE_STATUS_ALL_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseStatusAllEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_BusinessCaseStatusAllEO">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="BUSINESS_CASE_LOG_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_BUSINESS_CASE_STATUS_ALL_EO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseStatusAllEO.LogId"/>
+    </AttrArray>
+  </Key>
+</Entity>

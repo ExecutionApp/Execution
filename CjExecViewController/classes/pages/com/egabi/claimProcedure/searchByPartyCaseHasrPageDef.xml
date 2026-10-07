@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="searchByPartyCaseHasrPageDef"
+                Package="pages.com.egabi.claimProcedure">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <taskFlow id="searchByPartyTF1"
+                  taskFlowId="/WEB-INF/taskflows/claimProcedure/searchByPartyTF.xml#searchByPartyTF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    </executables>
+    <bindings/>
+</pageDefinition>

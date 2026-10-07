@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="Oppositions_TF_Oppositions_TF_CreateInsertPageDef" Package="taskflows.oppositions"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="OppositionAM1.ExcFolderProceduresView1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ExcFolderProceduresView1Iterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ExcFolderProceduresView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

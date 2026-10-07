@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+    xmlns="http://xmlns.oracle.com/bc4j"
+    Name="ClaimProcedureSearchFormRVO"
+    Version="12.2.1.0.31"
+    InheritPersonalization="merge"
+    BindingStyle="OracleName"
+    CustomQuery="true"
+    ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+    PageIterMode="Full">
+    <DesignTime>
+        <Attr Name="_isExpertMode" Value="true"/>
+    </DesignTime>
+    <Properties>
+        <SchemaBasedProperties>
+            <LABEL
+                ResId="com.egabi.cjexec.model.roviews.claimProcedureROV.ClaimProcedureSearchFormRVO_LABEL"/>
+        </SchemaBasedProperties>
+    </Properties>
+    <ViewAccessor
+        Name="BusinessCaseTypeROV1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV"
+        RowLevelBinds="true">
+        <ViewCriteriaUsage
+            Name="BusinessCaseTypeROVCriteria_SM1"
+            FullName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV.BusinessCaseTypeROVCriteria_SM1"/>
+    </ViewAccessor>
+    <ViewAccessor
+        Name="ClaimYearsRVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.claimProcedureROV.ClaimYearsRVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="ClaimFolderTypeLKP"
+        ViewObjectName="com.egabi.cjexec.model.roviews.claimFolder.ClaimFolderTypeLKP"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="RepeatedROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.RepeatedROVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="ClaimLKTypeROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.claimProcedureROV.ClaimLKTypeROVO"
+        RowLevelBinds="true"/>
+    <ListBinding
+        Name="LOV_ClaimTypeId"
+        ListVOName="BusinessCaseTypeROV1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ClaimTypeId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_ClaimYear"
+        ListVOName="ClaimYearsRVO1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ClaimYear"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="ClaimYear"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_FolderClaimId"
+        ListVOName="ClaimLKTypeROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="FolderClaimId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_RepeatedFlag"
+        ListVOName="RepeatedROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="RepeatedFlag"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Label"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <SQLQuery><![CDATA[select null as ID from dual]]></SQLQuery>
+    <ViewAttribute
+        Name="Id"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.math.BigDecimal"
+        ColumnType="VARCHAR2"
+        AliasName="ID"
+        Expression="ID"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="ClaimNumber"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.String"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="ClaimYear"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.math.BigDecimal"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_ClaimYear">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="RepeatedFlag"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"
+        LOVName="LOV_RepeatedFlag">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ClaimTypeId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_ClaimTypeId">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="FolderClaimId"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_FolderClaimId">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="com.egabi.cjexec.model.roviews.claimProcedureROV.ClaimProcedureSearchFormRVO.FolderClaimId_LABEL"/>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="KplayaFlag"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"
+        DefaultValue="T"/>
+    <AttrArray Name="KeyAttributes">
+        <Item Value="Id"/>
+    </AttrArray>
+    <ResourceBundle>
+        <PropertiesBundle
+            PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewObject>

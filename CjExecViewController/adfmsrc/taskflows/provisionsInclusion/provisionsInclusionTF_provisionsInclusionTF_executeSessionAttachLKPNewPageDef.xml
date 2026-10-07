@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKPNewPageDef"
+                Package="taskflows.provisionsInclusion" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="executeSessionAttachLKPNew" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeSessionAttachLKPNew" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider"/>
+  </bindings>
+</pageDefinition>

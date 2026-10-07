@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="verifyIdNumPageDef"
+                Package="pages.com.egabi.claimProcedure">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="updateParParties" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateParParties"
+                  IsViewObjectMethod="false" DataControl="SimplifiedModeAMDataControl"
+                  InstanceName="data.SimplifiedModeAMDataControl.dataProvider">
+      <NamedData NDName="firstName" NDType="java.lang.String"/>
+      <NamedData NDName="secondName" NDType="java.lang.String"/>
+      <NamedData NDName="thirdName" NDType="java.lang.String"/>
+      <NamedData NDName="fourthName" NDType="java.lang.String"/>
+      <NamedData NDName="address" NDType="java.lang.String"/>
+      <NamedData NDName="placeOfBirth" NDType="java.lang.String"/>
+      <NamedData NDName="dateOfBirth" NDType="java.lang.String"/>
+      <NamedData NDName="idNumber" NDType="java.lang.String"/>
+      <NamedData NDName="updatedBy" NDType="java.lang.String"/>
+      <NamedData NDName="jobTitle" NDType="java.lang.String"/>
+      <NamedData NDName="fullName" NDType="java.lang.String"/>
+      <NamedData NDName="partyIds" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

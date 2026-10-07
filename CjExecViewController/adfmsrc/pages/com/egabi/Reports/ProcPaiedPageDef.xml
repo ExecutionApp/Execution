@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="ProcPaiedPageDef"
+                Package="pages.com.egabi.Reports">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="SearchInventoryRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ValidatePoliceReportROVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.ProcedurePaiedROVO1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="ProcedurePaiedROVO1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateFrom">
+      <AttrNames>
+        <Item Value="DateFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateTo">
+      <AttrNames>
+        <Item Value="DateTo"/>
+      </AttrNames>
+    </attributeValues>
+ <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_CalimYear" id="CalimYear"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_PoliceStationEntity"
+          id="PoliceStationEntity" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa"
+          id="NeyabGozayaa1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_CriminalType" id="CriminalType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+            <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_ClaimFolderId" id="ClaimFolderType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="ProcedurePaiedROVO1Iterator" id="ProcedurePaiedROVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.bcdetails.ProcedurePaiedROVO" Name="ProcedurePaiedROVO10">
+        <AttrNames>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="InventoryNumber"/>
+          <Item Value="PartyName"/>
+          <Item Value="JudgmentText"/>
+          <Item Value="ProcedureDate"/>
+          <Item Value="NumberPaid"/>
+          <Item Value="PenaltyAmount"/>
+          <Item Value="AdvancePaymentAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CaseEditMasterROV"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="bindHearingResId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT CBHR.ID  
+           HEARING_RES_ID,  
+          POLICE_NUMBER  
+       || '  '  
+       || (SELECT NAME  
+             FROM BUSINESS_CASE_TYPE  
+            WHERE ID = BC.BUSINESS_CASE_TYPE)  
+       || '  '  
+       || PAR_YEAR  
+           AS CASE_NUMBER,  
+       BC.BUSINESS_CASE_NAME,  
+       HEARING_DATE,  
+       (SELECT NAME  
+          FROM BUSINESS_CASE_DEGREES  
+         WHERE ID = CCDH.BC_DEGREE_ID)  
+           CASE_DEGREE,  
+       POLICE_NUMBER,  
+       BC.BUSINESS_CASE_TYPE,  
+       PAR_YEAR,  
+       CCDH.ID  
+           HEARING_DATE_ID,  
+       CSJ.JUDGEMENT_RESOLUTION,  
+       (SELECT NAME  
+          FROM EXC_LKP_JUDGMENT_TYPES  
+         WHERE ID = CSJ.JUDGMENT_TYPE)  
+           JUDGMENT_TYPE,  
+       CSJ.ID  
+           SESSION_JUDGMENT_ID  
+  FROM PAR_POLICE_AUTHORITY_REPORT    AR,  
+       BUSINESS_CASE                  BC,  
+       COURT_CIRCLES_DATES_HEARING    CCDH,  
+       COURT_BC_HEARING_RESERVATION   CBHR,  
+       EXC_COURT_BC_SESSION_JUDGMENT  CSJ  
+ WHERE     AR.BUSINESS_CASE_ID = BC.ID  
+       AND CBHR.BUSINESS_CASE_ID = AR.BUSINESS_CASE_ID  
+       AND CBHR.CIRCLE_HEARING_DATE_ID = CCDH.ID  
+       AND CSJ.COURT_BC_HEARING_RES_ID = CBHR.ID  
+       AND CBHR.ID = :bindHearingResId]]></SQLQuery>
+  <ViewAttribute
+    Name="HearingResId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HEARING_RES_ID"
+    Expression="HEARING_RES_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CaseNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="294"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_NUMBER"
+    Expression="CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="294"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="CASE_NUMBER"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NAME"
+    Expression="BUSINESS_CASE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDate"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CaseEditMasterROV.HearingDate_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseDegree"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_DEGREE"
+    Expression="CASE_DEGREE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PoliceNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="POLICE_NUMBER"
+    Expression="POLICE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseType"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_TYPE"
+    Expression="BUSINESS_CASE_TYPE"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParYear"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PAR_YEAR"
+    Expression="PAR_YEAR"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDateId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HEARING_DATE_ID"
+    Expression="HEARING_DATE_ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JudgementResolution"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="LONG"
+    AliasName="JUDGEMENT_RESOLUTION"
+    Expression="JUDGEMENT_RESOLUTION"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CaseEditMasterROV.JudgementResolution_LABEL"/>
+        <DISPLAYWIDTH
+          Value="100"/>
+        <DISPLAYHEIGHT
+          Value="2"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JudgmentType"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JUDGMENT_TYPE"
+    Expression="JUDGMENT_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CaseEditMasterROV.JudgmentType_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SessionJudgmentId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SESSION_JUDGMENT_ID"
+    Expression="SESSION_JUDGMENT_ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="HearingResId"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="CaseConvictedPartiesROV"
+    ViewLink="com.egabi.cjexec.model.roviews.caseexecemp.links.CaseToCaseConvictedPartiesROV"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ExcCourtBcDecisionEOView"
+    ViewLink="com.egabi.cjexec.model.roviews.caseexecemp.links.CaseEditMasterToExcCourtBCDecesionVL"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

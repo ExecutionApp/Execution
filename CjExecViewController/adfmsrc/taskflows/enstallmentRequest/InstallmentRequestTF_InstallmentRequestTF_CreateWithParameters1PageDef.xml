@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="InstallmentRequestTF_InstallmentRequestTF_CreateWithParameters1PageDef"
+                Package="taskflows.enstallmentRequest" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ExcFolderActionsVO" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExcFolderActionsVOIterator"/>
+    <iterator id="ExcFolderProceduresVOIterator" Binds="ExcFolderProceduresVO" DataControl="CjExecAMDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ExcFolderActionsVOIterator" id="CreateWithParams" RequiresUpdateModel="true"
+            Action="createWithParams">
+      <NamedData NDName="FolderRecordId" NDType="Integer" NDValue="#{pageFlowScope.folderId}" />
+      <NamedData NDName="ActionType" NDType="Integer" NDValue="4"/>
+      <NamedData NDName="ProcedureId" NDType="Integer" NDValue="#{bindings.Id.inputValue}"/>
+    </action>
+    <attributeValues IterBinding="ExcFolderProceduresVOIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

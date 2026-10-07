@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="provisionsInclusionPagePageDef"
+                Package="provisionsInclusion">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <taskFlow id="provisionsInclusionTF1"
+                  taskFlowId="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF"
+                  activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    </executables>
+    <bindings>
+        <action id="Rollback" DataControl="CjExecAMDataControl" RequiresUpdateModel="false"
+                Action="rollbackTransaction"/>
+    </bindings>
+</pageDefinition>

@@ -1,0 +1,19 @@
+//Groovy Scripts for com.egabi.cjexec.model.entities.enableopposition.ExcFolderProceduresEO
+
+package com.egabi.cjexec.model.entities.enableopposition
+
+import oracle.jbo.script.annotation.ValidatorExpression;
+
+@ValidatorExpression(name="ProcedureDateRule0", attributeName="ProcedureDate")
+def ProcedureDate_ProcedureDateRule0_ValidationRuleScript_ValidationRule()
+{
+adf.currentDate
+}
+
+
+@ValidatorExpression(name="FirstInstallmentDateRule0", attributeName="FirstInstallmentDate")
+def FirstInstallmentDate_FirstInstallmentDateRule0_ValidationRuleScript_ValidationRule()
+{
+adf.currentDate
+}
+

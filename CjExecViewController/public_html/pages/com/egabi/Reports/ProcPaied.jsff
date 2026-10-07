@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+<c:set var="bundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle_ar']}"/>
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+
+    <af:panelGroupLayout id="pgl1">
+        <af:panelHeader text="دفتر إجرات السداد"
+                        id="ph1"/>
+        <h:panelGroup id="pg12" styleClass="row " layout="block">
+            <af:panelGroupLayout id="pg46" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{cjexecviewcontrollerBundle.PROSECUTION_KOLYA}" id="ol2"/>
+                <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" label="#{bindings.NeyabKolyaa.label}"
+                                    required="#{bindings.NeyabKolyaa.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc1" simple="true"
+                                    disabled="#{(sessionScope.userInfo.entityDegree eq '39' and !sessionScope.userInfo.userPrevMap[5051]) or sessionScope.userInfo.entityDegree eq '3'}"
+                                    autoSubmit="true" rendered="false">
+                    <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si1"/>
+                    <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.NeyabKolyaa1.inputValue}"  autoSubmit="true" 
+                                    required="#{bindings.NeyabKolyaa1.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabKolyaa1.hints.tooltip}" id="soc6"
+                                    disabled="#{sessionScope.userInfo.entityDegree eq '39' or sessionScope.userInfo.entityDegree eq '3' }">
+                    <f:selectItems value="#{bindings.NeyabKolyaa1.items}" id="si6"/>
+                    <f:validator binding="#{bindings.NeyabKolyaa1.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg45" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{cjexecviewcontrollerBundle.PROSECUTION_PARTIAL}"
+                              
+                                 id="ol3" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}" label="#{bindings.NeyabGozayaa.label}"
+                                    required="true"
+                                    shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc2" simple="true"
+                                    
+                                    autoSubmit="true" partialTriggers="soc1"
+                                    disabled="#{sessionScope.userInfo.entityDegree eq '3'}" rendered="false">
+                    <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si2"/>
+                    <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.NeyabGozayaa1.inputValue}"  autoSubmit="true" 
+                                    required="#{bindings.NeyabGozayaa1.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabGozayaa1.hints.tooltip}" id="soc8"
+                                    partialTriggers="soc6" disabled="#{sessionScope.userInfo.entityDegree eq '3' }">
+                    <f:selectItems value="#{bindings.NeyabGozayaa1.items}" id="si8"/>
+                    <f:validator binding="#{bindings.NeyabGozayaa1.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl8" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="قسم الشرطة" id="ol7" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.PoliceStationEntity.inputValue}"
+                                      autoSubmit="true"
+                                    required="#{bindings.PoliceStationEntity.hints.mandatory}"
+                                    shortDesc="#{bindings.PoliceStationEntity.hints.tooltip}" id="soc5"
+                                    partialTriggers="si2" rendered="false">
+                    <f:selectItems value="#{bindings.PoliceStationEntity.items}" id="si5"/>
+                    <f:validator binding="#{bindings.PoliceStationEntity.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}"  autoSubmit="true" 
+                                    required="#{bindings.OrigEntity.hints.mandatory}"
+                                    shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc7" partialTriggers="soc8">
+                    <f:selectItems value="#{bindings.OrigEntity.items}" id="si7"/>
+                    <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:spacer width="10" height="10" id="s6"/>
+            <af:panelGroupLayout id="pgl9" styleClass="col-md-1 col-sm-12">
+                <af:outputLabel value="النوع" id="ol8" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.CriminalType.inputValue}"
+                                    shortDesc="#{bindings.CriminalType.hints.tooltip}" id="soc9" required="true">
+                    <f:selectItems value="#{bindings.CriminalType.items}" id="si9"/>
+                    <f:validator binding="#{bindings.CriminalType.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl2" styleClass="col-md-2 col-sm-12" rendered="false">
+                <af:outputLabel value="#{bindings.CalimYear.label}" id="ol1" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.CalimYear.inputValue}" 
+                label="#{bindings.CalimYear.label}" autoSubmit="true"
+                                    required="true" simple="true"
+                                    shortDesc="#{bindings.CalimYear.hints.tooltip}" id="soc3">
+                    <f:selectItems value="#{bindings.CalimYear.items}" id="si3"/>
+                    <f:validator binding="#{bindings.CalimYear.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl7" styleClass="col-md-4 col-sm-12">
+                <af:outputLabel value="الدفتر" id="ol6" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.ClaimFolderType.inputValue}"
+                                    label=" "
+                                    shortDesc="#{bindings.ClaimFolderType.hints.tooltip}" id="soc4" required="true">
+                    <f:selectItems value="#{bindings.ClaimFolderType.items}" id="si4"/>
+                    <f:validator binding="#{bindings.ClaimFolderType.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl3" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="من تاريخ إجراء" id="ol4" showRequired="true"/>
+                <af:inputDate value="#{bindings.DateFrom.inputValue}"
+                              required="#{sessionScope.userInfo.userName ne 'hn'}"
+                              simple="true"
+                              shortDesc="#{bindings.DateFrom.hints.tooltip}" id="id2" autoSubmit="true"
+                              showRequired="false">
+                    <f:validator binding="#{bindings.DateFrom.validator}"/>
+                    <af:convertDateTime pattern="dd/MM/yyyy"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl4" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="الي تاريخ إجراء" id="ol5" showRequired="true"/>
+                <af:inputDate value="#{bindings.DateTo.inputValue}" required="#{sessionScope.userInfo.userName ne 'hn'}"
+                              simple="true"
+                              shortDesc="#{bindings.DateTo.hints.tooltip}" id="id1" autoSubmit="true"
+                              showRequired="false">
+                    <f:validator binding="#{bindings.DateTo.validator}"/>
+                    <af:convertDateTime pattern="dd/MM/yyyy"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl5" styleClass="col-md-1 col-sm-12">
+                <!--<af:button styleClass="btn-search" icon="/resources/images/magnifier.png" actionListener="#{bindings.executeProcedureView.execute}" 
+                           disabled="#{!bindings.executeProcedureView.enabled}" id="b1"/>-->
+             
+                <af:button styleClass="btn-search" icon="/resources/images/magnifier.png"
+                 actionListener="#{printDafatertBean.searchDafaterMotalba2}"
+                             id="b1"/>
+            </af:panelGroupLayout>
+            <af:spacer width="50" height="10" id="s2"/>
+        </h:panelGroup>
+        <af:spacer width="10" height="20" id="s1"/>
+        <af:panelGroupLayout id="pgl11" layout="horizontal">
+            <af:panelGroupLayout id="pgl6" styleClass="btn-holder">
+                <af:button text="#{cjexecviewcontrollerBundle.PRINT_REPORT}" id="b2" partialTriggers="b1"
+                           action="#{printDafatertBean.printDaftarMotalbatReport}"/>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl10" styleClass="btn-holder">
+                <af:button text="تصدير إلى إكسل" id="b29">
+                    <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="ProcPaied.xls"
+                                                       charset="UTF-8" title="ProcPaied" filterName="ProcPaied.csv"
+                                                       rowLimit="-1"/>
+                </af:button>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+        <af:spacer width="50" height="10" id="s4"/>
+        <af:table value="#{bindings.ProcedurePaiedROVO1.collectionModel}" var="row"
+                  rows="#{bindings.ProcedurePaiedROVO1.rangeSize}"
+                  emptyText="#{bindings.ProcedurePaiedROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.ProcedurePaiedROVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.ProcedurePaiedROVO1.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.ProcedurePaiedROVO1.rangeSize}" id="t1" scrollPolicy="page"
+                  contentDelivery="lazy">
+            <af:column headerText="رقم القضية" id="c4" width="190">
+                <af:outputText value="#{row.BusinessCaseNumber}"
+                               shortDesc="#{bindings.ProcedurePaiedROVO1.hints.BusinessCaseNumber.tooltip}" id="ot4"/>
+            </af:column>
+            <af:column headerText="رقم الحصر" id="c3" width="220">
+                <af:outputText value="#{row.InventoryNumber}"
+                               shortDesc="#{bindings.ProcedurePaiedROVO1.hints.InventoryNumber.tooltip}" id="ot3"/>
+            </af:column>
+            <af:column headerText="المتهم" id="c5" width="200">
+                <af:outputText value="#{row.PartyName}"
+                               shortDesc="#{bindings.ProcedurePaiedROVO1.hints.PartyName.tooltip}" id="ot5"/>
+            </af:column>
+            <af:column headerText="نص الحكم" id="c2" width="220">
+                <af:outputText value="#{row.JudgmentText}"
+                               shortDesc="#{bindings.ProcedurePaiedROVO1.hints.JudgmentText.tooltip}" id="ot2"/>
+            </af:column>
+            <af:column headerText="تاريخ الاجراء" id="c8">
+                <af:outputText value="#{row.ProcedureDate}"
+                               shortDesc="#{bindings.ProcedurePaiedROVO1.hints.ProcedureDate.tooltip}" id="ot8">
+                    <af:convertDateTime pattern="#{bindings.ProcedurePaiedROVO1.hints.ProcedureDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="رقم السداد" id="c9">
+                <af:outputText value="#{row.NumberPaid}"
+                               shortDesc="#{bindings.ProcedurePaiedROVO1.hints.NumberPaid.tooltip}" id="ot9"/>
+            </af:column>
+            <af:column headerText="المبلغ" id="c6">
+                <af:outputText value="#{row.PenaltyAmount}"
+                               shortDesc="#{bindings.ProcedurePaiedROVO1.hints.PenaltyAmount.tooltip}" id="ot6">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ProcedurePaiedROVO1.hints.PenaltyAmount.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="قيمة الدفع" id="c7">
+                <af:outputText value="#{row.AdvancePaymentAmount}"
+                               shortDesc="#{bindings.ProcedurePaiedROVO1.hints.AdvancePaymentAmount.tooltip}" id="ot7">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ProcedurePaiedROVO1.hints.AdvancePaymentAmount.format}"/>
+                </af:outputText>
+            </af:column>
+        </af:table>
+    </af:panelGroupLayout></ui:composition>

@@ -1,0 +1,29 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.lov.SecuriedEntities
+
+package com.egabi.cjexec.model.roviews.lov
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+
+
+
+@VariableExpression(path="sessionUser")
+def sessionUser_VariableScript_Variable()
+{
+adf.context.current.sessionScope.userInfo.userId
+}
+
+
+@VariableExpression(path="enitityIdBind")
+def enitityIdBind_VariableScript_Variable()
+{
+adf.context.current.sessionScope.userInfo.entityId
+}
+
+
+@VariableExpression(path="parentEntityBind")
+def parentEntityBind_VariableScript_Variable()
+{
+adf.context.current.sessionScope.userInfo.parentEntityId
+}
+

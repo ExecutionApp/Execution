@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FeesProcedureROVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.roviews.claimFolder.FeesProcedureROVOImpl"
+  PageIterMode="Full"
+  ComponentInterface="com.egabi.cjexec.model.roviews.claimFolder.common.FeesProcedureROVO"
+  ClientProxyName="com.egabi.cjexec.model.roviews.claimFolder.client.FeesProcedureROVOClient">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.claimFolder.FeesProcedureROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bindOriginEntity"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"><![CDATA[adf.context.current.sessionScope.pOrigin]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="bindtype"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"><![CDATA[adf.context.current.sessionScope.pBindType]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="DATE_FROM"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"
+      CodeSourceName="FeesProcedureROVO"/>
+  </Variable>
+  <Variable
+    Name="DATE_TO"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"><![CDATA[adf.context.current.sessionScope.dateTo]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="folderCriminalType"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="FeesProcedureROVO"
+      trustMode="trusted"/>
+  </Variable>
+  <Variable
+    Name="attend"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"><![CDATA[adf.context.current.sessionScope.attend]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="deg"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"><![CDATA[adf.context.current.sessionScope.pDeg]]></TransientExpression>
+  </Variable>
+  <SQLQuery><![CDATA[select * from (select distinct PARTIES.PARTY_FIXED_FULL_NAME,PARTIES.ID_NUMBER , CAS.ID BUS_CASE_ID ,  PARTIES.id part_id,   CAS_TYPE.id CAS_TYPE, POLICE.id POLICE_ID,                                                 
+                                
+ DECISIONS.id DECISIONS_IDS,    CH_PARTIES.DECISION_ID DECISION_ID,   DATES.BC_DEGREE_ID  ,                                                           
+      PAR_POLICE.PAR_YEAR|| '/'|| CAS.CASE_NUMBER|| '/'|| CAS_TYPE.NAME   || '/' || POLICE.ENTITY_NAME AS BUSINESS_CASE_NUMBER_FULL,                                                                                 
+      FOLDER.YEAR                                                                                   
+      || '/'                                                                                   
+      || FOLDER.SEQUENCE_NUMBER                                                                                   
+      || '/'                                                                                   
+      || DECODE (FOLDER.FOLDER_TYPE, 2, 'حبس', 3, 'غرامة')                                                                                   
+      || '/'                                                                                   
+      || DECODE (FOLDER.REPEATED_FLAG, 'Y', 'مكرر', 'N', 'غير مكرر')                                                                                   
+      || '/'                                                                                   
+      || POLICE.ENTITY_NAME AS SEQ_NUMBER_FULL                                                        
+      ,          RES_PART.attendance ,                                                    
+       DECISIONS.PENALTY_AMOUNT   ,   DECISIONS.GURANTEE_AMOUNT    ,                         
+       DECISIONS.Work_AMOUNT,  FOLDER.id  folder_id,  FOLDER.police_station_entity_id ,                            
+       DECISIONS.PENALTY_DUE_DATE                                      
+      , (select   nvl (max(FEES_AMOUNT),0) from  EXC_COURT_BC_DECISION_FEES FEES where  FEES.DECISION_ID  =   CH_PARTIES.DECISION_ID and FEES.FEES_TYPE_ID =2 and COURT_FEES_FLAG Is null)   COURT_FEES                                 
+      , (select   nvl(max(FEES_AMOUNT),0) from  EXC_COURT_BC_DECISION_FEES FEES where  FEES.DECISION_ID  =   CH_PARTIES.DECISION_ID and FEES.FEES_TYPE_ID =1 and LAWYER_FEES_FLAG Is null)   LAWYER_FEES                                  
+        ,                    
+                      
+  (select nvl( sum (advance_payment_amount),0)                   
+FROM     EXC_FOLDER_ACTIONS folder_actions                    
+                     
+inner join exc_folder_procedures procedures on                     
+procedures.id = folder_actions.procedure_id                   
+                   
+where                           
+folder_actions.FOLDER_RECORD_ID   = FOLDER.id                   
+and    FOLDER_ACTIONS.ACTION_TYPE    =7                    
+and fees_type_id = :bindtype   -- gurantee                   
+and number_paid is not null                                                                        
+  )   paied_gurantee , (select CLAIM_NUMBER    from EXC_CLAIMS inner join EXC_LKP_FEES_TYPES on            
+ EXC_LKP_FEES_TYPES.CLAIM_FOLDERS_ID = EXC_CLAIMS.CLAIM_FOLDER_ID           
+  inner join EXC_FOLDER_DATA on            
+ EXC_FOLDER_DATA.id =   EXC_CLAIMS.EXC_FOLDER_ID             
+   where EXC_CLAIMS.EXC_FOLDER_ID  =FOLDER.id           
+   and folder_type != 35           
+   and EXC_LKP_FEES_TYPES.id = :bindtype )     CLAIM_NUMBER                           
+                   
+ FROM    EXC_FOLDER_DATA FOLDER            
+-- left outer join EXC_CLAIMS on     FOLDER.id =   EXC_CLAIMS.EXC_FOLDER_ID                                                                                     
+   ,   COURT_BC_HEARING_RES_PARTIES RES_PART,                                                                                   
+      COURT_BC_HEARING_RESERVATION RES,                                                                                   
+      PAR_PARTIES PARTIES,                                                                                   
+      BUSINESS_CASE CAS,                                                                                   
+      PAR_POLICE_AUTHORITY_REPORT PAR_POLICE,                                                                                   
+      ENTITY POLICE,                                                                                   
+      COURT_CIRCLES_DATES_HEARING DATES,                                                                                   
+      BUSINESS_CASE_DEGREES DEGREES,                                                                                   
+      BUSINESS_CASE_TYPE CAS_TYPE,                                                                                   
+      EXC_LKP_FOLDER_TYPES FOLDER_TYPE,                                                                                   
+      EXC_COURT_BC_CHARGES_PARTIES CH_PARTIES,                                                                                   
+      EXC_COURT_BC_CHARGE_DECISIONS DECISIONS                                                                                
+    WHERE FOLDER.RES_PARTY_ID            = RES_PART.ID                            
+      and FOLDER.folder_type != 35                                                                 
+    AND RES_PART.COURT_BC_HEARING_RES_ID = RES.ID                                                                                   
+    AND RES_PART.PARTY_ID                = PARTIES.ID                                                                                   
+    AND RES.BUSINESS_CASE_ID             = CAS.ID                                                                                   
+    AND CAS.ID                           = PAR_POLICE.BUSINESS_CASE_ID                                                                                   
+    AND PAR_POLICE.ORIGIN_ENTITY         = POLICE.ID                                                                                   
+    AND DATES.ID                         = RES.CIRCLE_HEARING_DATE_ID                                                                                   
+    AND DATES.BC_DEGREE_ID               = DEGREES.ID                                                                                   
+    AND CAS.CASE_TYPE                    = CAS_TYPE.ID                                                                                   
+    AND FOLDER_TYPE.ID                   = FOLDER.FOLDER_TYPE                                                         
+     AND CH_PARTIES.CHARGE_DECISION_ID           = DECISIONS.ID                                                                                   
+    AND CH_PARTIES.RES_PARTY_ID                 = FOLDER.RES_PARTY_ID                                                               
+                          
+ -- and DECISIONS.Stop_Execution_Flag  ='N'                                                    
+  AND FOLDER.CLAIM_ISSUE_FLAG    = 0                                                          
+  AND FOLDER.JUDGEMENT_STATUS    = 2                                                         
+   and folder.criminal_type =  :folderCriminalType                   
+   AND FOLDER.is_active    = 'Y'                                                                      
+       AND (   FOLDER.POLICE_STATION_ENTITY_ID = :bindOriginEntity                                                               
+            OR :bindOriginEntity IS NULL)                                                               
+                     
+          AND (    :attend  = 0  OR RES_PART.attendance = :attend                                                               
+          )           
+               AND (  :deg   = 0 OR  DATES.BC_DEGREE_ID  = :deg                                                               
+           )           
+                                 
+  AND DATES.HEARING_DATE BETWEEN TO_DATE(:DATE_FROM, 'yyyy-mm-dd')                                                             
+       AND TO_DATE(:DATE_TO , 'yyyy-mm-dd')+1)                 
+    where  ( COURT_FEES > 0 AND :bindtype= 2) or (LAWYER_FEES > 0 AND :bindtype = 1) or           
+      (GURANTEE_AMOUNT > 0 AND :bindtype =4)]]></SQLQuery>
+  <ViewAttribute
+    Name="PartyFixedFullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_FIXED_FULL_NAME"
+    Expression="PARTY_FIXED_FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_NUMBER"
+    Expression="ID_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusCaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUS_CASE_ID"
+    Expression="BUS_CASE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PART_ID"
+    Expression="PART_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CasType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CAS_TYPE"
+    Expression="CAS_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoliceId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="POLICE_ID"
+    Expression="POLICE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DecisionsIds"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DECISIONS_IDS"
+    Expression="DECISIONS_IDS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DecisionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DECISION_ID"
+    Expression="DECISION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BcDegreeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BC_DEGREE_ID"
+    Expression="BC_DEGREE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BusinessCaseNumberFull"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="486"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NUMBER_FULL"
+    Expression="BUSINESS_CASE_NUMBER_FULL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="486"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeqNumberFull"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="472"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEQ_NUMBER_FULL"
+    Expression="SEQ_NUMBER_FULL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="472"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Attendance"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ATTENDANCE"
+    Expression="ATTENDANCE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PenaltyAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PENALTY_AMOUNT"
+    Expression="PENALTY_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="GuranteeAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="GURANTEE_AMOUNT"
+    Expression="GURANTEE_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="WorkAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="WORK_AMOUNT"
+    Expression="WORK_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FolderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FOLDER_ID"
+    Expression="FOLDER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoliceStationEntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="POLICE_STATION_ENTITY_ID"
+    Expression="POLICE_STATION_ENTITY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PenaltyDueDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="PENALTY_DUE_DATE"
+    Expression="PENALTY_DUE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CourtFees"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="COURT_FEES"
+    Expression="COURT_FEES"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LawyerFees"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LAWYER_FEES"
+    Expression="LAWYER_FEES"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PaiedGurantee"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PAIED_GURANTEE"
+    Expression="PAIED_GURANTEE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ClaimNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLAIM_NUMBER"
+    Expression="CLAIM_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="FolderId"/>
+  </AttrArray>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="filterFeesProcedureRO"
+      MethodName="filterFeesProcedureRO">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="dateFrom"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="dateTo"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="originEntity"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="folderCriminalType"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="type"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="deg"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="attend"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

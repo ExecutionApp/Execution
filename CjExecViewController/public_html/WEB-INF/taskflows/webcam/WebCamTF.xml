@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="WebCamTF">
+    <default-activity>methodCall1</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__2">
+      <name>Party_ID</name>
+      <value>#{pageFlowScope.WebCamUtil.partyID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <return-value-definition id="__4">
+      <name>PicName</name>
+      <value>#{pageFlowScope.DName}</value>
+      <class>java.lang.String</class>
+    </return-value-definition>
+    <return-value-definition id="__8">
+      <name>PicId</name>
+      <value>#{pageFlowScope.DID}</value>
+      <class>java.lang.String</class>
+    </return-value-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>WebCamUtil</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.utils.WebCamUtil</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="WebCamFrag">
+      <page>/pages/com/egabi/cjexec/webCam/WebCamFrag.jsf</page>
+    </view>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="methodCall1">
+      <method>#{pageFlowScope.WebCamUtil.getPartyPicture}</method>
+      <outcome>
+        <fixed-outcome>go</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="back">
+      <outcome>
+        <name>back</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__6">
+      <from-activity-id>methodCall1</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>go</from-outcome>
+        <to-activity-id>WebCamFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>WebCamFrag</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>back</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <visibility/>
+  </task-flow-definition>
+</adfc-config>

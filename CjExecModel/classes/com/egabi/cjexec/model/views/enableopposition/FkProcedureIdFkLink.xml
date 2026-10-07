@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkProcedureIdFkLink"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  EntityAssociation="com.egabi.cjexec.model.entities.enableopposition.FkProcedureIdFkAssoc">
+  <ViewLinkDefEnd
+    Name="ExcFolderProceduresVO"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.views.enableopposition.ExcFolderProceduresVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+      <Attr Name="_finderName" Value="ExcFolderProceduresVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.enableopposition.ExcFolderProceduresVO.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ExcFolderProcedureStepsVO"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.views.enableopposition.ExcFolderProcedureStepsVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="ExcFolderProcedureStepsVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.enableopposition.ExcFolderProcedureStepsVO.ProcedureId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

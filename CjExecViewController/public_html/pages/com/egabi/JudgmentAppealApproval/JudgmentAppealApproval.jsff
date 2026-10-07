@@ -1,0 +1,715 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" 
+xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:h="http://java.sun.com/jsf/html">
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <c:set var="bundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle_ar']}"/>
+  <af:panelHeader text="إعتماد  إجراءات الطعن على الاحكام" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+        <af:panelGroupLayout id="pgl1">
+            <h:panelGroup id="pg12" styleClass="row " layout="block">
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:panelGroupLayout id="pgl81" styleClass="ml-3">
+                    <af:outputLabel showRequired="true" value="#{bindings.CaseNumber.label}" id="ol7"/>
+                    <af:inputText value="#{bindings.CaseNumber.inputValue}" simple="true" autoSubmit="true"
+                                  maximumLength="15" shortDesc="#{bindings.CaseNumber.hints.tooltip}" id="it5"
+                                  contentStyle="width: 60px;"
+                                  valueChangeListener="#{pageFlowScope.inventoryBean.seqVCL}">
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:inputText>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl58">
+                    <h:panelGroup id="pg8" styleClass="ml-3">
+                        <af:outputLabel showRequired="true" value="#{bindings.Year.label}" id="ol8"/>
+                        <af:inputText value="#{bindings.Year.inputValue}" simple="true" maximumLength="4"
+                                      contentStyle="width: 60px;" shortDesc="#{bindings.Year.hints.tooltip}" id="it4"
+                                      autoSubmit="true" validator="#{cjValidator.yearValidator}"
+                                      valueChangeListener="#{pageFlowScope.inventoryBean.yearVCL}">
+                            <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}"
+                                                    type="valueChange"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl5" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel showRequired="true" value="#{bindings.BusinessCaseTypeId.label}" id="ol9"/>
+                    <af:selectOneChoice value="#{bindings.BusinessCaseTypeId.inputValue}" autoSubmit="true"
+                                        label="#{bindings.BusinessCaseTypeId.label}"
+                                        shortDesc="#{bindings.BusinessCaseTypeId.hints.tooltip}" id="soc9" simple="true"
+                                        valueChangeListener="#{pageFlowScope.inventoryBean.businessCaseTypeListener}">
+                        <f:selectItems value="#{bindings.BusinessCaseTypeId.items}" id="si12"/>
+                        <f:validator binding="#{bindings.BusinessCaseTypeId.validator}"/>
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:selectOneChoice>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pg46" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel showRequired="true" value="نيابة كلية" id="ol46"/>
+                    <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" label="#{bindings.NeyabKolyaa.label}"
+                                        required="#{bindings.NeyabKolyaa.hints.mandatory}"
+                                        shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc28"
+                                        disabled="#{sessionScope.userInfo.entityDegree eq '39' or sessionScope.userInfo.entityDegree eq '3' }"
+                                        autoSubmit="true"
+                                        simple="true">
+                        <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si13"/>
+                        <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:selectOneChoice>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pg45" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel showRequired="true" value="نيابة جزئية " id="ol45" partialTriggers="soc29"/>
+                    <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}"
+                                        label="#{bindings.NeyabGozayaa.label}"
+                                        required="#{bindings.NeyabGozayaa.hints.mandatory}"
+                                        shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc29"
+                                        disabled="#{pageFlowScope.inventoryBean.nyabaaGozaiaDisabled and sessionScope.userInfo.errandEntUser eq '0'}"
+                                          autoSubmit="true"
+                                        simple="true">
+                        <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si11"/>
+                        <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:selectOneChoice>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pg44" styleClass="col-md-2 col-sm-12">
+                    <af:outputLabel showRequired="true" value="قسم شرطة" id="ol41"/>
+                    <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}" label="#{bindings.OrigEntity.label}"
+                                        required="#{bindings.OrigEntity.hints.mandatory}"
+                                        shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc30"
+                                        simple="true"
+                                        disabled="#{pageFlowScope.inventoryBean.origEntityDisabled or bindings.NeyabGozayaa.inputValue eq null or bindings.NeyabGozayaa.inputValue eq '0' or bindings.NeyabKolyaa.inputValue eq null or bindings.BusinessCaseTypeId.inputValue eq null}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.inventoryBean.policeVCL}"
+                                        partialTriggers="soc29">
+                        <f:selectItems value="#{bindings.OrigEntity.items}" id="si10"/>
+                        <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                        <af:setPropertyListener from="{null}" to="#{pageFlowScope.disableSearch}" type="valueChange"/>
+                    </af:selectOneChoice>
+                </af:panelGroupLayout>
+                <af:spacer width="10" height="10" id="s6"/>
+                <af:panelGroupLayout id="pgl3" styleClass="btn-holder-search col-md-1 col-sm-12"
+                                      layout="horizontal">
+                    <af:link styleClass="btn-search" icon="/resources/images/magnifier.png" id="b1"
+                            action="#{bindings.ValidatePoliceReportGenericJAA.execute}"
+                             
+                             inlineStyle="width:84px !important;">
+                        <af:setPropertyListener from="1" to="#{pageFlowScope.disableSearch}" type="action"/>
+                    </af:link>
+                </af:panelGroupLayout>
+            </h:panelGroup>
+        </af:panelGroupLayout>
+        
+        
+        
+        <af:panelTabbed position="above" visible="#{bindings.JudgmentAppealApprovalRVO1.estimatedRowCount > 0}" id="pt3"
+                        partialTriggers="::b1">
+                <af:showDetailItem id="tab5" text="المتهمين" disclosed="true" partialTriggers="::b1">
+                    <af:panelGroupLayout id="pgl8" partialTriggers="::b1">
+                    <af:table value="#{bindings.JudgmentAppealApprovalRVO1.collectionModel}" var="row"
+                              rows="#{bindings.JudgmentAppealApprovalRVO1.rangeSize}"
+                              emptyText="#{bindings.JudgmentAppealApprovalRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.JudgmentAppealApprovalRVO1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.JudgmentAppealApprovalRVO1.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.JudgmentAppealApprovalRVO1.rangeSize}"
+                              id="t1" partialTriggers="::b1" contentDelivery="lazy" scrollPolicy="page">
+                        <af:column headerText="رقم القضية" id="c5" width="160">
+                            <af:outputText value="#{row.BusinessCaseNumber}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.BusinessCaseNumber.tooltip}"
+                                           id="ot5" visible="false"/>
+                            <af:link text="#{row.BusinessCaseNumber}" id="l501"
+                                     destination="http://10.20.35.46/criminal_justice/BusinessCaseFindByPrimaryKeyResults.do?id=#{row.bindings.BusinessCaseId.inputValue}&amp;businessCaseId=#{row.bindings.BusinessCaseId.inputValue}&amp;crudMethod=update"
+                                     targetFrame="_blank"/>
+                        </af:column>
+                        <af:column headerText="اسم الطرف" id="c3" width="160">
+                            <af:outputText value="#{row.PartyName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.PartyName.tooltip}"
+                                           id="ot3"/>
+                        </af:column>
+                        <af:column headerText="الرقم القومى" id="c4" width="120">
+                            <af:outputText value="#{row.IdNumber}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.IdNumber.tooltip}"
+                                           id="ot4"/>
+                        </af:column>
+                        <af:column headerText="رقم الحصر"
+                                   id="c2" width="230">
+                            <af:outputText value="#{row.InventoryNumber}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.InventoryNumber.tooltip}"
+                                           id="ot2"/>
+                        </af:column>
+                        <af:column headerText="تاريخ الجلسه" id="c6" width="80">
+                            <af:outputText value="#{row.HearingDate}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.HearingDate.tooltip}"
+                                           id="ot6"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderId.label}" id="c7"
+                                   visible="false">
+                            <af:outputText value="#{row.FolderId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderId.tooltip}"
+                                           id="ot7">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="درجه الحكم" id="c15" width="80" align="center">
+                            <af:outputText value="#{row.DegreeName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.DegreeName.tooltip}"
+                                           id="ot14"/>
+                        </af:column>
+                        <af:column headerText="نوع الحضور" id="c16" width="70" align="center">
+                            <af:outputText value="#{row.AttendanceName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.AttendanceName.tooltip}"
+                                           id="ot16"/>
+                        </af:column>
+                        <af:column headerText="موقف الاجراء" id="c70" width="75" align="center">
+                            <af:outputText value="#{row.FActionsActive eq 'O' ? 'تم إعتماد' : '--' or row.FActionsActive eq 'X' ? 'تم الرفض' : '--'}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.FActionsActive.tooltip}"
+                                           id="ot69"/>
+                        </af:column>
+                        <af:column headerText="الاجراء" id="c73" width="150">
+                            <af:selectOneChoice value="#{row.bindings.ActionType.inputValue}"
+                                                label="#{row.bindings.ActionType.label}"
+                                                required="#{bindings.JudgmentAppealApprovalRVO1.hints.ActionType.mandatory}"
+                                                shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ActionType.tooltip}"
+                                                readOnly="true" id="soc1">
+                                <f:selectItems value="#{row.bindings.ActionType.items}" id="si1"/>
+                                <f:validator binding="#{row.bindings.ActionType.validator}"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ProcedureId.label}" id="c71"
+                                   rendered="false">
+                            <af:outputText value="#{row.ProcedureId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ProcedureId.tooltip}"
+                                           id="ot70">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.ProcedureId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="موقف الاجراء" id="c69" width="80" rendered="false">
+                            <af:outputText value="#{row.IsActive eq 'O' ? 'تم إعتماد' : '--' or row.IsActive eq 'X' ? 'تم الرفض' : '--'}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.IsActive.tooltip}"
+                                           id="ot68"/>
+                        </af:column>
+                        <af:column id="c1" width="125">
+                            <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                <af:link text="إعتماد" id="l1" inlineStyle="color:Green; font-size:large;" visible="#{row.FActionsActive eq 'N'}"
+                                         actionListener="#{pageFlowScope.inventoryBean.judgmentAppealApprove}"
+                                         partialTriggers="c70 ot69 ::t1"/>
+                                <af:link text="رفض" id="l2" inlineStyle="color:Red; font-size:large;" visible="#{row.FActionsActive eq 'N'}"
+                                         actionListener="#{pageFlowScope.inventoryBean.judgmentAppealReject}"
+                                         partialTriggers="c70 ot69 ::t1"/>
+                                <f:facet name="separator">
+                                    <af:spacer width="20" height="10" id="s3"/>
+                                </f:facet>
+                                <af:spacer width="20" height="10" id="s2"/>
+                            </af:panelGroupLayout>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ProcedureText.label}"
+                                   id="c72" rendered="false">
+                            <af:outputText value="#{row.ProcedureText}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ProcedureText.tooltip}"
+                                           id="ot72"/>
+                        </af:column>
+                        <!--<f:facet name="detailStamp">
+                            <h:panelGroup layout="block" styleClass="row notes-panel" id="pg260">
+                                <h:panelGroup id="pg3000" layout="block" styleClass="col-md-12 col-sm-12">
+                                    <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                        <af:outputLabel value=" قرار النيابة المتخذ :  " id="ol20000"/>
+                                    </af:panelGroupLayout>
+                                    <af:outputText value="#{row.ProcedureText}"
+                                                   shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ProcedureText.tooltip}"
+                                                   id="ot71" rendered="false"/>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </f:facet>-->
+                        <f:facet name="detailStamp">
+                            <!--<af:listView value="#{bindings.JudgmentAppealApprovalRVO1.collectionModel}" var="item"
+                                         emptyText="#{bindings.JudgmentAppealApprovalRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                         fetchSize="#{bindings.JudgmentAppealApprovalRVO1.rangeSize}" id="lv1">
+                                <af:listItem id="li1">
+                                    <af:panelGridLayout id="pgl6">
+                                        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+                                            <af:gridCell marginStart="5px" width="34%" id="gc1">
+                                                <af:outputLabel value=" قرار النيابة المتخذ :  " id="ol2"/>
+                                            </af:gridCell>
+                                            <af:gridCell marginStart="5px" width="33%" id="gc2"/>
+                                            <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+                                        </af:gridRow>
+                                    </af:panelGridLayout>
+                                </af:listItem>
+                            </af:listView>-->
+                            <h:panelGroup layout="block" styleClass="row notes-panel" id="pg26">
+                                <h:panelGroup id="pg300" layout="block" styleClass="col-md-12 col-sm-12">
+                                    <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                        <af:outputLabel value=" قرار النيابة المتخذ :  " id="ol2000"/>
+                                        <af:outputFormatted value="#{row.bindings.DescDecision.inputValue}" id="of1"/>
+                                    </af:panelGroupLayout>
+                                    <af:inputText value="#{row.bindings.ProcedureText.inputValue}" id="of5" rows="3"
+                                                  disabled="true" rendered="false"/>
+                                    <af:selectOneChoice value="#{row.bindings.DecisionId.inputValue}"
+                                                        label=" قرار النيابة المتخذ :-"
+                                                        required="#{bindings.JudgmentAppealApprovalRVO1.hints.DecisionId.mandatory}"
+                                                        shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.DecisionId.tooltip}"
+                                                        id="soc2" simple="true" rendered="false">
+                                        <f:selectItems value="#{row.bindings.DecisionId.items}" id="si2"/>
+                                        <f:validator binding="#{row.bindings.DecisionId.validator}"/>
+                                    </af:selectOneChoice>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </f:facet>
+                    </af:table>
+                    <af:table value="#{bindings.JudgmentAppealApprovalRVO1.collectionModel}" var="row"
+                              rows="#{bindings.JudgmentAppealApprovalRVO1.rangeSize}"
+                              emptyText="#{bindings.JudgmentAppealApprovalRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0" fetchSize="#{bindings.JudgmentAppealApprovalRVO1.rangeSize}"
+                              id="t2"
+                              selectedRowKeys="#{bindings.JudgmentAppealApprovalRVO1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.JudgmentAppealApprovalRVO1.collectionModel.makeCurrent}"
+                              rowSelection="single" visible="false">
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.OrderRaws.label}" id="c8">
+                            <af:outputText value="#{row.OrderRaws}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.OrderRaws.tooltip}"
+                                           id="ot63">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.OrderRaws.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.FlgType.label}" id="c9">
+                            <af:outputText value="#{row.FlgType}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.FlgType.tooltip}"
+                                           id="ot67">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.FlgType.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.InventoryNumber.label}"
+                                   id="c10">
+                            <af:outputText value="#{row.InventoryNumber}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.InventoryNumber.tooltip}"
+                                           id="ot54"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.PartyName.label}" id="c11">
+                            <af:outputText value="#{row.PartyName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.PartyName.tooltip}"
+                                           id="ot60"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.IdNumber.label}" id="c12">
+                            <af:outputText value="#{row.IdNumber}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.IdNumber.tooltip}"
+                                           id="ot57"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.UpdateType.label}" id="c13">
+                            <af:outputText value="#{row.UpdateType}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.UpdateType.tooltip}"
+                                           id="ot41"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.UnknownId.label}" id="c14">
+                            <af:outputText value="#{row.UnknownId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.UnknownId.tooltip}"
+                                           id="ot22"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.BusinessCaseNumber.label}"
+                                   id="c17">
+                            <af:outputText value="#{row.BusinessCaseNumber}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.BusinessCaseNumber.tooltip}"
+                                           id="ot32"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.EntityName.label}" id="c18">
+                            <af:outputText value="#{row.EntityName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.EntityName.tooltip}"
+                                           id="ot25"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.HearingDate.label}" id="c19">
+                            <af:outputText value="#{row.HearingDate}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.HearingDate.tooltip}"
+                                           id="ot13"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.SequenceNumber.label}"
+                                   id="c20">
+                            <af:outputText value="#{row.SequenceNumber}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.SequenceNumber.tooltip}"
+                                           id="ot1">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.SequenceNumber.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderName.label}" id="c21">
+                            <af:outputText value="#{row.FolderName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderName.tooltip}"
+                                           id="ot38"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.PoliceStationEntityId.label}"
+                                   id="c22">
+                            <af:outputText value="#{row.PoliceStationEntityId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.PoliceStationEntityId.tooltip}"
+                                           id="ot62">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.PoliceStationEntityId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.Year.label}" id="c23">
+                            <af:outputText value="#{row.Year}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.Year.tooltip}"
+                                           id="ot23">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.Year.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderType.label}" id="c24">
+                            <af:outputText value="#{row.FolderType}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderType.tooltip}"
+                                           id="ot46">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderType.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.RepeatedFlag.label}"
+                                   id="c25">
+                            <af:outputText value="#{row.RepeatedFlag}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.RepeatedFlag.tooltip}"
+                                           id="ot11"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderId.label}" id="c26">
+                            <af:outputText value="#{row.FolderId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderId.tooltip}"
+                                           id="ot61">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.FolderId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.PartyId.label}" id="c27">
+                            <af:outputText value="#{row.PartyId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.PartyId.tooltip}"
+                                           id="ot39">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.PartyId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ResPartyId.label}" id="c28">
+                            <af:outputText value="#{row.ResPartyId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ResPartyId.tooltip}"
+                                           id="ot15">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.ResPartyId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.CaseNumber.label}" id="c29">
+                            <af:outputText value="#{row.CaseNumber}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.CaseNumber.tooltip}"
+                                           id="ot35"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.CaseYear.label}" id="c30">
+                            <af:outputText value="#{row.CaseYear}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.CaseYear.tooltip}"
+                                           id="ot18">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.CaseYear.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.DegreeName.label}" id="c31">
+                            <af:outputText value="#{row.DegreeName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.DegreeName.tooltip}"
+                                           id="ot59"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.DegreeId.label}" id="c32">
+                            <af:outputText value="#{row.DegreeId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.DegreeId.tooltip}"
+                                           id="ot55">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.DegreeId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.CasTypeId.label}" id="c33">
+                            <af:outputText value="#{row.CasTypeId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.CasTypeId.tooltip}"
+                                           id="ot31">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.CasTypeId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.EntDeg.label}" id="c34">
+                            <af:outputText value="#{row.EntDeg}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.EntDeg.tooltip}"
+                                           id="ot28"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.CasTypeName.label}" id="c35">
+                            <af:outputText value="#{row.CasTypeName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.CasTypeName.tooltip}"
+                                           id="ot52"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ParentEntityId.label}"
+                                   id="c36">
+                            <af:outputText value="#{row.ParentEntityId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ParentEntityId.tooltip}"
+                                           id="ot8">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.ParentEntityId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.BusinessCaseId.label}"
+                                   id="c37">
+                            <af:outputText value="#{row.BusinessCaseId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.BusinessCaseId.tooltip}"
+                                           id="ot21">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.BusinessCaseId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.Nickname.label}" id="c38">
+                            <af:outputText value="#{row.Nickname}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.Nickname.tooltip}"
+                                           id="ot20"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.Attendance.label}" id="c39">
+                            <af:outputText value="#{row.Attendance}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.Attendance.tooltip}"
+                                           id="ot45">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.Attendance.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.SessionId.label}" id="c40">
+                            <af:outputText value="#{row.SessionId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.SessionId.tooltip}"
+                                           id="ot36">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.SessionId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.AttendanceName.label}"
+                                   id="c41">
+                            <af:outputText value="#{row.AttendanceName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.AttendanceName.tooltip}"
+                                           id="ot33"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.OriginEntity.label}"
+                                   id="c42">
+                            <af:outputText value="#{row.OriginEntity}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.OriginEntity.tooltip}"
+                                           id="ot17">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.OriginEntity.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.Notes.label}" id="c43">
+                            <af:outputText value="#{row.Notes}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.Notes.tooltip}"
+                                           id="ot24"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.JudgmentText.label}"
+                                   id="c44">
+                            <af:outputText value="#{row.JudgmentText}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.JudgmentText.tooltip}"
+                                           id="ot50"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.JudgementTypeName.label}"
+                                   id="c45">
+                            <af:outputText value="#{row.JudgementTypeName}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.JudgementTypeName.tooltip}"
+                                           id="ot26"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.JudgmentType.label}"
+                                   id="c46">
+                            <af:outputText value="#{row.JudgmentType}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.JudgmentType.tooltip}"
+                                           id="ot65">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.JudgmentType.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.IsActive.label}" id="c47">
+                            <af:outputText value="#{row.IsActive}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.IsActive.tooltip}"
+                                           id="ot44"/>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.HearingDateId.label}"
+                                   id="c48">
+                            <af:outputText value="#{row.HearingDateId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.HearingDateId.tooltip}"
+                                           id="ot30">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.HearingDateId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.IdType.label}" id="c49">
+                            <af:outputText value="#{row.IdType}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.IdType.tooltip}"
+                                           id="ot34">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.IdType.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ReservationId.label}"
+                                   id="c50">
+                            <af:outputText value="#{row.ReservationId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ReservationId.tooltip}"
+                                           id="ot43">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.ReservationId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ProsecutionJudegementFlag.label}"
+                                   id="c51">
+                            <af:outputText value="#{row.ProsecutionJudegementFlag}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ProsecutionJudegementFlag.tooltip}"
+                                           id="ot40">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.ProsecutionJudegementFlag.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ExecutionFlag.label}"
+                                   id="c52">
+                            <af:outputText value="#{row.ExecutionFlag}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ExecutionFlag.tooltip}"
+                                           id="ot56">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.ExecutionFlag.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ClaimIssueFlag.label}"
+                                   id="c53">
+                            <af:outputText value="#{row.ClaimIssueFlag}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ClaimIssueFlag.tooltip}"
+                                           id="ot10">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.ClaimIssueFlag.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.JournalistFlag.label}"
+                                   id="c54">
+                            <af:outputText value="#{row.JournalistFlag}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.JournalistFlag.tooltip}"
+                                           id="ot48">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.JournalistFlag.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.CriminalType.label}"
+                                   id="c55">
+                            <af:outputText value="#{row.CriminalType}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.CriminalType.tooltip}"
+                                           id="ot27">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.CriminalType.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.PoliceId.label}" id="c56">
+                            <af:outputText value="#{row.PoliceId}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.PoliceId.tooltip}"
+                                           id="ot49">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.PoliceId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.Amount.label}" id="c57">
+                            <af:outputText value="#{row.Amount}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.Amount.tooltip}"
+                                           id="ot47">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.Amount.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.Guarantee.label}" id="c58">
+                            <af:outputText value="#{row.Guarantee}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.Guarantee.tooltip}"
+                                           id="ot19">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.Guarantee.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.GuaranteeDate.label}"
+                                   id="c59">
+                            <af:outputText value="#{row.GuaranteeDate}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.GuaranteeDate.tooltip}"
+                                           id="ot53">
+                                <af:convertDateTime pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.GuaranteeDate.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.GuaranteeNumber.label}"
+                                   id="c60">
+                            <af:outputText value="#{row.GuaranteeNumber}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.GuaranteeNumber.tooltip}"
+                                           id="ot37">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.GuaranteeNumber.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.GuranteeAmount.label}"
+                                   id="c61">
+                            <af:outputText value="#{row.GuranteeAmount}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.GuranteeAmount.tooltip}"
+                                           id="ot12">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.GuranteeAmount.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.InPrisonDays.label}"
+                                   id="c62">
+                            <af:outputText value="#{row.InPrisonDays}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.InPrisonDays.tooltip}"
+                                           id="ot42">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.InPrisonDays.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.InPrisonMonths.label}"
+                                   id="c63">
+                            <af:outputText value="#{row.InPrisonMonths}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.InPrisonMonths.tooltip}"
+                                           id="ot64">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.InPrisonMonths.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.InPrisonYears.label}"
+                                   id="c64">
+                            <af:outputText value="#{row.InPrisonYears}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.InPrisonYears.tooltip}"
+                                           id="ot9">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.InPrisonYears.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.DailyPayments.label}"
+                                   id="c65">
+                            <af:outputText value="#{row.DailyPayments}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.DailyPayments.tooltip}"
+                                           id="ot58">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.DailyPayments.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ProsecutionObjection.label}"
+                                   id="c66">
+                            <af:outputText value="#{row.ProsecutionObjection}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ProsecutionObjection.tooltip}"
+                                           id="ot29">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.ProsecutionObjection.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.ObjectionType.label}"
+                                   id="c67">
+                            <af:outputText value="#{row.ObjectionType}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.ObjectionType.tooltip}"
+                                           id="ot66">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.JudgmentAppealApprovalRVO1.hints.ObjectionType.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.JudgmentAppealApprovalRVO1.hints.GuiltlessnessFlag.label}"
+                                   id="c68">
+                            <af:outputText value="#{row.GuiltlessnessFlag}"
+                                           shortDesc="#{bindings.JudgmentAppealApprovalRVO1.hints.GuiltlessnessFlag.tooltip}"
+                                           id="ot51"/>
+                        </af:column>
+                    </af:table>
+                </af:panelGroupLayout>
+                </af:showDetailItem>
+            </af:panelTabbed>
+        
+        
+        
+        
+    </af:panelHeader>
+</ui:composition>

@@ -1,0 +1,12 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.inventory.SearchInventoryResultRVO
+
+package com.egabi.cjexec.model.roviews.inventory
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="bcidp")
+def bcidp_VariableScript_Variable()
+{
+adf.context.current.sessionScope.bcidp
+}
+

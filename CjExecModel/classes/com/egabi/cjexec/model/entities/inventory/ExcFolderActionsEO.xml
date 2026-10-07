@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcFolderActionsEO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="EXC_FOLDER_ACTIONS"
+  AliasName="ExcFolderActionsEO"
+  BindingStyle="OracleName"
+  RowClass="com.egabi.cjexec.model.baseclasses.EntityEOImpl">
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="FolderRecordId"
+    IsNotNull="true"
+    ColumnName="FOLDER_RECORD_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Attribute
+    Name="ActionType"
+    IsNotNull="true"
+    ColumnName="ACTION_TYPE"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Attribute
+    Name="ProcedureId"
+    IsUnique="true"
+    ColumnName="PROCEDURE_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Attribute
+    Name="NextAssignedUser"
+    ColumnName="NEXT_ASSIGNED_USER"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Attribute
+    Name="ClosedFlag"
+    ColumnName="CLOSED_FLAG"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Attribute
+    Name="MergedTo"
+    ColumnName="MERGED_TO"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Attribute
+    Name="MergedWith"
+    ColumnName="MERGED_WITH"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Attribute
+    Name="VetoNo"
+    ColumnName="VETO_NO"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Attribute
+    Name="VetoYear"
+    ColumnName="VETO_YEAR"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Attribute
+    Name="VetoStatus"
+    ColumnName="VETO_STATUS"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_FOLDER_ACTIONS"/>
+  <Key
+    Name="ChkClosedFlag">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value="CLOSED_FLAG IN (0,1)"/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="CHK_CLOSED_FLAG"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="PkExcFolderProcedures"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PK_EXC_FOLDER_PROCEDURES"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.inventory.ExcFolderActionsEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="UniqueProcedureId">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="UNIQUE_PROCEDURE_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.inventory.ExcFolderActionsEO.ProcedureId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkAssignedUser">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="SEC_USERS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_ASSIGNED_USER"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.inventory.ExcFolderActionsEO.NextAssignedUser"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkFolderRecordIdProc">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_FOLDERS"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_FOLDER_RECORD_ID_PROC"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.inventory.ExcFolderActionsEO.FolderRecordId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkProcedureId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_COURT_OBJECTION"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_PROCEDURE_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.inventory.ExcFolderActionsEO.ProcedureId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkProcedureType">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_LKP_PROCEDURE_TYPES"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_PROCEDURE_TYPE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.inventory.ExcFolderActionsEO.ActionType"/>
+    </AttrArray>
+  </Key>
+</Entity>

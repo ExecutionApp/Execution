@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="JudgmentAppealApprovalVL"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.inventory.JudgmentAppealApprovalVL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="JudgmentAppealApprovalR"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.roviews.inventory.JudgmentAppealApprovalRVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="JudgmentAppealApprovalR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.roviews.inventory.JudgmentAppealApprovalRVO.BusinessCaseId"/>
+      <Item Value="com.egabi.cjexec.model.roviews.inventory.JudgmentAppealApprovalRVO.PartyId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="PreviousProceduresR1"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="PreviousProceduresR1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.BusinessCaseId"/>
+      <Item Value="com.egabi.cjexec.model.roviews.previousProcedures.PreviousProceduresRVO.PartyId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

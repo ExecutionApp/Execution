@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SecuriedEntities"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.lov.SecuriedEntities_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="enitityIdBind"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="SecuriedEntities"/>
+  </Variable>
+  <Variable
+    Name="sessionUser"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="SecuriedEntities"/>
+  </Variable>
+  <Variable
+    Name="parentEntityBind"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="SecuriedEntities"
+      trustMode="trusted"/>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT               
+    E.ID ID,               
+    E.ENTITY_NAME ENTITY_NAME,               
+    E.ENTITY_TYPE_ID ENTITY_TYPE_ID,               
+    E.PARENT_ENTITY_ID PARENT_ENTITY_ID ,    
+    E.ENTITY_DEGREE ,  
+    (SELECT ENT.ENTITY_NAME FROM ENTITY ENT WHERE ENT.ID = E.PARENT_ENTITY_ID) AS PARENT_NAME  
+FROM               
+    ENTITY  E        
+    WHERE      
+     ID IN        
+(SELECT ENTITY_ID FROM SEC_USERS WHERE ID = :sessionUser)]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_NAME"
+    Expression="ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityTypeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENTITY_TYPE_ID"
+    Expression="ENTITY_TYPE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ParentEntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARENT_ENTITY_ID"
+    Expression="PARENT_ENTITY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityDegree"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_DEGREE"
+    Expression="ENTITY_DEGREE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParentName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENT_NAME"
+    Expression="PARENT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="SecuriedEntitiesCriteria_Koleyaa"
+    ViewObjectName="com.egabi.cjexec.model.roviews.lov.SecuriedEntities"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="SecuriedEntitiesCriteria_row_0"
+      UpperColumns="1"
+      Conjunction="AND">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":enitityIdBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="SecuriedEntitiesCriteria_SecuriedEntitiesCriteria_row_0_EntityDegree"
+        ViewAttribute="EntityDegree"
+        Operator="="
+        Conjunction="AND"
+        Value="39"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="SecuriedEntitiesCriteria_Partial"
+    ViewObjectName="com.egabi.cjexec.model.roviews.lov.SecuriedEntities"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="SecuriedEntitiesCriteria_row_0"
+      UpperColumns="1"
+      Conjunction="AND">
+      <ViewCriteriaItem
+        Name="ParentEntityId"
+        ViewAttribute="ParentEntityId"
+        Operator="="
+        Conjunction="AND"
+        Value=":parentEntityBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="SecuriedEntitiesCriteria_Partial_SecuriedEntitiesCriteria_row_0_EntityDegree"
+        ViewAttribute="EntityDegree"
+        Operator="="
+        Conjunction="AND"
+        Value="3"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

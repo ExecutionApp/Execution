@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AppealHearingDateROVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.lov.AppealHearingDateROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="entityId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealHearingDateROVO"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="prevDate"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="AppealHearingDateROVO"/>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[/* Formatted on 25/11/2020 06:44:24 ص (QP5 v5.287) */      
+/* this query return date of estanaf or tajeel estenaf or moarda estanafia or tageel moarda estanafia or moarda estanafia be el tamkeen or tageel moarda estanafia be el tamkeen  */      
+      
+  SELECT COU.ID,      
+         TO_CHAR (COU.HEARING_DATE, 'yyyy-mm-dd') || ' ' || ENTS.ENTITY_NAME      
+            HEARING_DATE      
+    FROM COURT_CIRCLES_DATES_HEARING COU, ENTITY ENTS      
+   WHERE     COU.CAPACITY > 0      
+         AND COU.ENTITY_ID = ENTS.ID      
+         AND COU.ENTITY_ID IN      
+                (SELECT CIR.DESTINATION_ENTITY_ID      
+                   FROM ENTITY_CIRCLES CIR      
+                  WHERE     CIR.SOURCE_ENTITY_ID = :entityId      
+                        AND CIR.JOIN_TYPE = '1')      
+         AND COU.BC_DEGREE_ID =     3 
+                      
+         AND COU.HEARING_DATE > TO_DATE ( :prevDate, 'yyyy-mm-dd')      
+        -- AND COU.SOURCE IS NULL      
+ORDER BY COU.HEARING_DATE, COU.ENTITY_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="307"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+</ViewObject>

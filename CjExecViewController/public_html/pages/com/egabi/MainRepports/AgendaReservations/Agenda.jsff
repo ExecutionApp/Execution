@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+  <af:panelHeader text="أجندة الجلسات" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelGroupLayout id="pgl1" layout="vertical">
+      <h:panelGroup id="pg7" layout="block" styleClass="row search-case-panel">
+        <h:panelGroup id="pg98" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel showRequired="true" value="النيابة الكلية" id="ol70"/>
+          <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" required="true"
+                              shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc28" simple="true"
+                              disabled="#{sessionScope.userInfo.entityDegree eq '39' or sessionScope.userInfo.entityDegree eq '3' }"
+                              autoSubmit="true" showRequired="true">
+            <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si28"/>
+            <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg97" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel showRequired="false" value="النيابة الجزئية" id="ol54"/>
+          <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}" required="false"
+                              shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc17" partialTriggers="soc28"
+                              simple="true"
+                              disabled="#{(sessionScope.userInfo.entityDegree eq '3'  or pageFlowScope.disabledValidate)and sessionScope.userInfo.errandEntUser eq '0'}"
+                              autoSubmit="true" showRequired="false" valueChangeListener="#{Agenda.gozVCL}">
+            <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si17"/>
+            <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <!-- Search toggle -->
+        <!-- end Search toggle -->
+        <h:panelGroup id="pg1" layout="block" styleClass="col-md-2 col-sm-12"
+                      rendered="#{bindings.NeyabGozayaa.inputValue eq null}">
+          <af:outputLabel showRequired="true" value="الجلسات الكلية" id="ol1"/>
+          <af:inputListOfValues id="kolId" popupTitle="Search and Select: #{bindings.Kol.hints.label}"
+                                value="#{bindings.Kol.inputValue}" label=" " model="#{bindings.Kol.listOfValuesModel}"
+                                required="true" columns="25"
+                                shortDesc="#{bindings.Kol.hints.tooltip}" autoSubmit="true"
+                                valueChangeListener="#{Agenda.dateVCL}" showRequired="false">
+            <af:autoSuggestBehavior suggestedItems="#{bindings.Kol.suggestedItems}" maxSuggestedItems="6"/>
+            <!--   <f:validator binding="#{bindings.Kol.validator}"/>-->
+          </af:inputListOfValues>
+        </h:panelGroup>
+        <h:panelGroup id="pg2" layout="block" styleClass="col-md-2 col-sm-12"
+                      rendered="#{bindings.NeyabGozayaa.inputValue ne null}">
+          <af:outputLabel value="الجلسات الجزئية" id="ol3" showRequired="true"/>
+          <af:inputListOfValues id="gozId" popupTitle="Search and Select: #{bindings.Goz.hints.label}"
+                                value="#{bindings.Goz.inputValue}" label=" " model="#{bindings.Goz.listOfValuesModel}"
+                                required="true" columns="25"
+                                shortDesc="#{bindings.Goz.hints.tooltip}" autoSubmit="true"
+                                valueChangeListener="#{Agenda.dateVCL}">
+            <af:autoSuggestBehavior suggestedItems="#{bindings.Goz.suggestedItems}" maxSuggestedItems="6"/>
+            <!--  <f:validator binding="#{bindings.Goz.validator}"/> -->
+          </af:inputListOfValues>
+        </h:panelGroup>
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:spacer width="10" height="10" id="s3"/>
+        <af:spacer width="10" height="10" id="s2"/>
+        <h:panelGroup id="pg4" layout="block" styleClass="col-md-1 col-sm-12">
+          <af:outputLabel value="الحكم" id="ol2" showRequired="true"/>
+          <af:selectOneChoice label=" " id="soc1" autoSubmit="true" valueChangeListener="#{Agenda.judgeVCL}"
+                              required="true">
+            <af:selectItem label="الكل" value="0" id="si1"/>
+            <af:selectItem label="بدون أحكام - قرارات" value="1" id="si2"/>
+            <af:selectItem label="أحكام - قرارات" value="2" id="si3"/>
+            <af:selectItem label="تأجيل" value="3" id="si4"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <af:spacer width="10" height="10" id="s4"/>
+        <af:spacer width="10" height="10" id="s5"/>
+        <h:panelGroup id="pg5" layout="block" styleClass="col-md-3 col-sm-12">
+          <af:outputLabel value="دفاتر احكام - قرارات" id="ol4"/>
+          <af:selectOneChoice value="#{bindings.fold.inputValue}" label=" "
+                              required="#{bindings.fold.hints.mandatory}" shortDesc="#{bindings.fold.hints.tooltip}"
+                              id="soc3" autoSubmit="true" valueChangeListener="#{Agenda.foldVCL}">
+            <f:selectItems value="#{bindings.fold.items}" id="si9"/>
+            <f:validator binding="#{bindings.fold.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg6" layout="block" styleClass="col-md-1 col-sm-12">
+          <af:outputLabel value="الدرجة" id="ol5"/>
+          <af:selectOneChoice value="#{bindings.BusinessCaseDegree.inputValue}"
+                              label=" "
+                              
+                              shortDesc="#{bindings.BusinessCaseDegree.hints.tooltip}" id="soc2" autoSubmit="true">
+            <f:selectItems value="#{bindings.BusinessCaseDegree.items}" id="si5"/>
+            <f:validator binding="#{bindings.BusinessCaseDegree.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:panelGroupLayout id="pgl2" layout="horizontal">
+            <af:button text="بحث" id="b1" actionListener="#{Agenda.search}"/>
+            <af:button text="تصدير إلى إكسل" id="b2">
+              <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="AGENDA.xls" charset="UTF-8"
+                                                 title="AGENDA" filterName="Agenda.csv" rowLimit="-1"/>
+            </af:button>
+          </af:panelGroupLayout>
+        </h:panelGroup>
+      </h:panelGroup>
+      <af:table value="#{bindings.AgendaReservations1.collectionModel}" var="row"
+                rows="#{bindings.AgendaReservations1.rangeSize}"
+                emptyText="#{bindings.AgendaReservations1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" selectedRowKeys="#{bindings.AgendaReservations1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.AgendaReservations1.collectionModel.makeCurrent}" rowSelection="single"
+                fetchSize="#{bindings.AgendaReservations1.rangeSize}" id="t1" scrollPolicy="page">
+        <af:column headerText="#{bindings.AgendaReservations1.hints.BusinessCaseId.label}" id="c1" visible="false">
+          <af:outputText value="#{row.BusinessCaseId}"
+                         shortDesc="#{bindings.AgendaReservations1.hints.BusinessCaseId.tooltip}" id="ot1">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.AgendaReservations1.hints.BusinessCaseId.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{bindings.AgendaReservations1.hints.Id.label}" id="c2" visible="false">
+          <af:outputText value="#{row.Id}" shortDesc="#{bindings.AgendaReservations1.hints.Id.tooltip}" id="ot2">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.AgendaReservations1.hints.Id.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="رقم القضية" id="c3" width="200">
+          <af:link text="#{row.BusinessCaseNumber}" id="l1"
+                   destination="http://10.21.35.46/criminal_justice/BusinessCaseFindByPrimaryKeyResults.do?id=#{row.bindings.BusinessCaseId.inputValue}&amp;businessCaseId=#{row.bindings.BusinessCaseId.inputValue}&amp;crudMethod=update"
+                   targetFrame="_blank"/>
+          <af:outputText value="#{row.BusinessCaseNumber}"
+                         shortDesc="#{bindings.AgendaReservations1.hints.BusinessCaseNumber.tooltip}" id="ot3"
+                         visible="false"/>
+        </af:column>
+        <af:column headerText="تاريخ الاجراء" id="c11">
+          <af:outputText value="#{row.LastAction}" shortDesc="#{bindings.AgendaReservations1.hints.LastAction.tooltip}"
+                         id="ot11"/>
+        </af:column>
+        <af:column headerText="درجة التقاضى" id="c13" width="125">
+          <af:outputText value="#{row.DegreeName}" shortDesc="#{bindings.AgendaReservations1.hints.DegreeName.tooltip}"
+                         id="ot14"/>
+        </af:column>
+        <af:column headerText="#{bindings.AgendaReservations1.hints.CircleHearingDateId.label}" id="c4" visible="false">
+          <af:outputText value="#{row.CircleHearingDateId}"
+                         shortDesc="#{bindings.AgendaReservations1.hints.CircleHearingDateId.tooltip}" id="ot4">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.AgendaReservations1.hints.CircleHearingDateId.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="تاريخ الجلسة" id="c5">
+          <af:outputText value="#{row.HearingDate}"
+                         shortDesc="#{bindings.AgendaReservations1.hints.HearingDate.tooltip}" id="ot5">
+            <af:convertDateTime pattern="#{bindings.AgendaReservations1.hints.HearingDate.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{bindings.AgendaReservations1.hints.PartyId.label}" id="c6" visible="false">
+          <af:outputText value="#{row.PartyId}" shortDesc="#{bindings.AgendaReservations1.hints.PartyId.tooltip}"
+                         id="ot6">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.AgendaReservations1.hints.PartyId.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="المتهم" id="c7" width="250">
+          <af:outputText value="#{row.PartyFullName}"
+                         shortDesc="#{bindings.AgendaReservations1.hints.PartyFullName.tooltip}" id="ot7"/>
+        </af:column>
+        <af:column headerText="#{bindings.AgendaReservations1.hints.Postponed.label}" id="c8" visible="false">
+          <af:outputText value="#{row.Postponed}" shortDesc="#{bindings.AgendaReservations1.hints.Postponed.tooltip}"
+                         id="ot8">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.AgendaReservations1.hints.Postponed.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="الحضور" id="c9" visible="false">
+          <af:outputText value="#{row.Attendance}" shortDesc="#{bindings.AgendaReservations1.hints.Attendance.tooltip}"
+                         id="ot9">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.AgendaReservations1.hints.Attendance.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="نص الحكم - القرار" id="c10" width="250">
+          <af:outputText value="#{row.JudgmentText}"
+                         shortDesc="#{bindings.AgendaReservations1.hints.JudgmentText.tooltip}" id="ot10"/>
+          <af:outputText value="#{row.Postponed eq '1'? 'تأجيل':''}"
+                         shortDesc="#{bindings.AgendaReservations1.hints.JudgmentText.tooltip}" id="ot12"/>
+        </af:column>
+        <af:column headerText="تاريخ الانشاء" id="c12">
+          <af:outputText value="#{row.CreatedDate}"
+                         shortDesc="#{bindings.AgendaReservations1.hints.CreatedDate.tooltip}" id="ot13">
+            <af:convertDateTime pattern="#{bindings.AgendaReservations1.hints.CreatedDate.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="تاريخ الجلسة التالية" id="c14">
+          <af:outputText value="#{row.NextReservationDate}"
+                         shortDesc="#{bindings.AgendaReservations1.hints.NextReservationDate.tooltip}" id="ot15">
+            <af:convertDateTime pattern="#{bindings.AgendaReservations1.hints.NextReservationDate.format}"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+    </af:panelGroupLayout>
+  </af:panelHeader>
+</ui:composition>

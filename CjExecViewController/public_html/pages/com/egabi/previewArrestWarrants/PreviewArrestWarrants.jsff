@@ -1,0 +1,463 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+           xmlns:h="http://java.sun.com/jsf/html"      xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="متابعه مذكرة الضبط" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    
+    
+    <h:panelGroup id="pg7" layout="block" styleClass="row search-case-panel">
+            <h:panelGroup id="pg1" layout="block" styleClass="ml-3" rendered="false">
+                <af:outputLabel showRequired="#{bindings.PoliceNo.hints.mandatory}" value="#{bindings.PoliceNo.hints.label}" id="ol1"/>
+                <af:inputText value="#{bindings.PoliceNo.inputValue}" label="#{bindings.PoliceNo.hints.label}" required="#{bindings.PoliceNo.hints.mandatory}" disabled="#{pageFlowScope.disabledValidate}" maximumLength="6" shortDesc="#{bindings.PoliceNo.hints.tooltip}" id="it57" simple="true" contentStyle="    width: 60px;   " autoSubmit="true">
+                    <f:validator binding="#{bindings.PoliceNo.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.PoliceNo.format}"/>
+                </af:inputText>
+            </h:panelGroup>
+            <h:panelGroup id="pg2" layout="block" styleClass="ml-3" rendered="false">
+                <af:outputLabel showRequired="#{bindings.ParYear1.hints.mandatory}" value="سنة" id="ol2"/>
+                <af:inputText value="#{bindings.ParYear1.inputValue}" required="#{bindings.ParYear1.hints.mandatory}" maximumLength="4" shortDesc="#{bindings.ParYear1.hints.tooltip}" id="it58" simple="true" disabled="#{pageFlowScope.disabledValidate}" contentStyle="    width: 60px;     min-width: 60px !important;" autoSubmit="true" validator="#{cjValidator.yearValidator}">
+                    <f:validator binding="#{bindings.ParYear1.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ParYear1.format}"/>
+                </af:inputText>
+            </h:panelGroup>
+            <h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12" rendered="false">
+                <af:outputLabel showRequired="#{bindings.BusinessCaseType1.hints.mandatory}" value="الجدول" id="ol3"/>
+                <af:selectOneChoice value="#{bindings.BusinessCaseType1.inputValue}" label="#{bindings.BusinessCaseType1.label}" required="true" disabled="#{pageFlowScope.disabledValidate}" shortDesc="#{bindings.BusinessCaseType1.hints.tooltip}" id="soc9" simple="true">
+                    <f:selectItems value="#{bindings.BusinessCaseType1.items}" id="si9"/>
+                    <f:validator binding="#{bindings.BusinessCaseType1.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup id="pg98" layout="block" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="true" value="النيابة الكلية" id="ol70"/>
+                <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" required="true" shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc28" simple="true" disabled="#{sessionScope.userInfo.entityDegree eq '39' or sessionScope.userInfo.entityDegree eq '3' }" autoSubmit="true">
+                    <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si28"/>
+                    <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup id="pg97" layout="block" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="true" value="النيابة الجزئية" id="ol54"/>
+                <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}" required="true" shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc17" partialTriggers="soc28" simple="true" disabled="#{sessionScope.userInfo.entityDegree eq '3'  or pageFlowScope.disabledValidate}" autoSubmit="true" showRequired="true">
+                    <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si17"/>
+                    <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup id="pg4" layout="block" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="true" value="#{bindings.OrigEntity.label}" id="ol4"/>
+                <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}" label="#{bindings.OrigEntity.label}" disabled="#{pageFlowScope.disabledValidate}" shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc10" simple="true" partialTriggers="soc17"
+                                    required="false" autoSubmit="true">
+                    <f:selectItems value="#{bindings.OrigEntity.items}" id="si10"/>
+                    <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <!-- Search toggle -->
+            <af:link text="#{bindings.JudgmentType.inputValue}" id="l30" visible="false"/>
+            <h:panelGroup id="pg28" layout="block" styleClass="col-md-3 col-sm-12" rendered="#{bindings.OrigEntity.inputValue ne null}">
+                <af:link styleClass="btn-search" id="l8" icon="/resources/images/magnifier.png"
+                         action="#{pageFlowScope.PreviewArrestWarrants.search}" disabled="#{pageFlowScope.disabledValidate}">
+                    <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                    <!--<af:image  source="/resources/images/accept.png" id="i10"/>-->
+                    <af:setPropertyListener from="false" to="#{pageFlowScope.judge}" type="action"/>
+                    <af:setPropertyListener from="false" to="#{pageFlowScope.search}" type="action"/>
+                    <af:setPropertyListener from="false" to="#{pageFlowScope.dimmed}" type="action"/>
+                </af:link>
+                <af:button text="التهم   " id="l28" inlineStyle="color:Black; font-size:large;" styleClass="buttonv"
+                           visible="false" clientComponent="true" immediate="true">
+                    <af:target events="@all" execute="@this" render="@all"/>
+                </af:button>
+                <af:link actionListener="#{bindings.newProsectionJudgment.execute}" text="newProsectionJudgment"
+                         disabled="#{!bindings.newProsectionJudgment.enabled}" id="l27"
+                         action="#{pageFlowScope.BCDetails.prosecution}" rendered="false"/>
+                <af:button id="b6" action="#{pageFlowScope.BCDetails.ValidateBC}" styleClass="btn-search" icon="/resources/images/magnifier.png" rendered="false" partialSubmit="true"/>
+            </h:panelGroup>
+            <!-- end Search toggle -->
+        </h:panelGroup>
+        <af:table value="#{bindings.PreviewArrestWarrantsROVO1.collectionModel}" var="row"
+                  rows="#{bindings.PreviewArrestWarrantsROVO1.rangeSize}"
+                  emptyText="#{bindings.PreviewArrestWarrantsROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.PreviewArrestWarrantsROVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.PreviewArrestWarrantsROVO1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.PreviewArrestWarrantsROVO1.rangeSize}" id="t1"
+                  scrollPolicy="page" visible="#{bindings.PreviewArrestWarrantsROVO1.estimatedRowCount != '0'}">
+            <af:column headerText="الرقم القضائى" id="c1" width="300">
+                <af:panelGroupLayout id="pgl1" layout="horizontal">
+                    <af:outputText value="#{row.bindings.CaseNumber.inputValue} - "
+                                   shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseNumber.tooltip}"
+                                   id="it14" truncateAt="0">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseNumber.format}"/>
+                    </af:outputText>
+                    <af:outputText value="#{row.bindings.CaseYear.inputValue}"
+                                   shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseYear.tooltip}" id="it15">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseYear.format}"/>
+                    </af:outputText>
+                    <af:selectOneChoice value="#{row.bindings.CaseType.inputValue}"
+                                        label="#{row.bindings.CaseType.label}"
+                                        required="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseType.mandatory}"
+                                        shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseType.tooltip}"
+                                        id="soc4">
+                        <f:selectItems value="#{row.bindings.CaseType.items}" id="si4"/>
+                        <f:validator binding="#{row.bindings.CaseType.validator}"/>
+                    </af:selectOneChoice>
+                    <af:selectOneChoice value="#{row.bindings.OriginEntityId.inputValue}"
+                                        label="#{row.bindings.OriginEntityId.label}"
+                                        required="#{bindings.PreviewArrestWarrantsROVO1.hints.OriginEntityId.mandatory}"
+                                        shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.OriginEntityId.tooltip}"
+                                        id="soc5">
+                        <f:selectItems value="#{row.bindings.OriginEntityId.items}" id="si5"/>
+                        <f:validator binding="#{row.bindings.OriginEntityId.validator}"/>
+                    </af:selectOneChoice>
+                    <f:facet name="separator">
+                        <af:separator id="s1"/>
+                    </f:facet>
+                </af:panelGroupLayout>
+            </af:column>
+            <af:column headerText="رقم الحصر" id="c2" width="400">
+                <af:panelGroupLayout id="pgl2" layout="horizontal">
+                    <af:outputText value="#{row.bindings.SequenceNumber.inputValue} - "
+                                   shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.SequenceNumber.tooltip}"
+                                   id="it1">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.SequenceNumber.format}"/>
+                    </af:outputText>
+                    <af:outputText value="#{row.bindings.Year.inputValue}"
+                                   shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.Year.tooltip}" id="it2">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.Year.format}"/>
+                    </af:outputText>
+                    <af:selectOneChoice value="#{row.bindings.FolderType.inputValue}"
+                                        label="#{row.bindings.FolderType.label}"
+                                        required="#{bindings.PreviewArrestWarrantsROVO1.hints.FolderType.mandatory}"
+                                        shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.FolderType.tooltip}"
+                                        id="soc1">
+                        <f:selectItems value="#{row.bindings.FolderType.items}" id="si1"/>
+                        <f:validator binding="#{row.bindings.FolderType.validator}"/>
+                    </af:selectOneChoice>
+                    <af:outputText value="#{row.bindings.RepeatedFlag.inputValue eq 'Y'?'مكرر':''} - "
+                                   shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.RepeatedFlag.tooltip}"
+                                   id="it3"/>
+                    <af:selectOneChoice value="#{row.bindings.PoliceStationEntityId.inputValue}"
+                                        label="#{row.bindings.PoliceStationEntityId.label}"
+                                        required="#{bindings.PreviewArrestWarrantsROVO1.hints.PoliceStationEntityId.mandatory}"
+                                        shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.PoliceStationEntityId.tooltip}"
+                                        id="soc2">
+                        <f:selectItems value="#{row.bindings.PoliceStationEntityId.items}" id="si2"/>
+                        <f:validator binding="#{row.bindings.PoliceStationEntityId.validator}"/>
+                    </af:selectOneChoice>
+                    <af:outputText value="(#{row.bindings.CriminalType.inputValue eq '1' ? 'جنح':'جنايات'})"
+                                   shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.CriminalType.tooltip}"
+                                   id="it4">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.CriminalType.format}"/>
+                    </af:outputText>
+                </af:panelGroupLayout>
+            </af:column>
+            <af:column headerText="المتهم" id="c11" width="300">
+                <af:outputText value="#{row.bindings.PartyFullName.inputValue}"
+                               shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.PartyFullName.tooltip}" id="it9"/>
+            </af:column>
+            <af:column headerText="تاريخ الورود" id="c34">
+                <af:inputDate value="#{row.bindings.CreatedDate.inputValue}"
+                              label="#{bindings.PreviewArrestWarrantsROVO1.hints.CreatedDate.label}"
+                              required="#{bindings.PreviewArrestWarrantsROVO1.hints.CreatedDate.mandatory}"
+                              columns="#{bindings.PreviewArrestWarrantsROVO1.hints.CreatedDate.displayWidth}"
+                              shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.CreatedDate.tooltip}" id="id3"
+                              readOnly="true">
+                    <f:validator binding="#{row.bindings.CreatedDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.CreatedDate.format}"/>
+                </af:inputDate>
+            </af:column>
+            <af:column headerText="الحالة" id="c10">
+                <af:outputText value="#{row.bindings.MatchingStatus.inputValue == null ? '': row.bindings.MatchingStatus.inputValue == 'Y' ? 'متتطابق':'غير متتطابق'}"
+                               shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.MatchingStatus.tooltip}"
+                               id="it8"/>
+            </af:column>
+            <f:facet name="detailStamp">
+            
+            
+            
+            
+            <af:panelGroupLayout id="pgl33">
+                                                            <af:panelGroupLayout id="pgl27" styleClass="row">
+                                                                <af:panelGroupLayout id="pgl43"
+                                                                                     styleClass="col-md-2 col-sm-12"
+                                                                                     rendered="false">
+                                                                    <af:outputLabel value="رقم الحصر"
+                                                                                    id="ol36"/>
+                                                                    <af:inputText value="#{row.bindings.SequenceNumber.inputValue}"
+                                                                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.SequenceNumber.mandatory}"
+                                                                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.SequenceNumber.displayWidth}"
+                                                                                  maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.SequenceNumber.precision}"
+                                                                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.SequenceNumber.tooltip}"
+                                                                                  id="it18" disabled="true">
+                                                                        <f:validator binding="#{row.bindings.SequenceNumber.validator}"/>
+                                                                        <af:convertNumber groupingUsed="false"
+                                                                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.SequenceNumber.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelGroupLayout>
+                                                                <af:panelGroupLayout id="pgl47"
+                                                                                     styleClass="col-md-2 col-sm-12"
+                                                                                     rendered="false">
+                                                                    <af:outputLabel value="سنة الحصر"
+                                                                                    id="ol37"/>
+                                                                    <af:inputText value="#{row.bindings.Year.inputValue}"
+                                                                                  label="#{bindings.PreviewArrestWarrantsROVO1.hints.Year.label}"
+                                                                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.Year.mandatory}"
+                                                                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.Year.displayWidth}"
+                                                                                  maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.Year.precision}"
+                                                                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.Year.tooltip}"
+                                                                                  id="it21" disabled="true">
+                                                                        <f:validator binding="#{row.bindings.Year.validator}"/>
+                                                                        <af:convertNumber groupingUsed="false"
+                                                                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.Year.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelGroupLayout>
+                                                                <af:panelGroupLayout id="pgl52"
+                                                                                     styleClass="col-md-2 col-sm-12"
+                                                                                     rendered="false">
+                                                                    <af:outputLabel value="نوع الدفتر "
+                                                                                    id="ol38"/>
+                                                                    <af:selectOneChoice value="#{row.bindings.FolderType.inputValue}"
+                                                                                        label="#{row.bindings.FolderType.label}"
+                                                                                        required="#{bindings.PreviewArrestWarrantsROVO1.hints.FolderType.mandatory}"
+                                                                                        shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.FolderType.tooltip}"
+                                                                                        id="soc14" disabled="true">
+                                                                        <f:selectItems value="#{row.bindings.FolderType.items}"
+                                                                                       id="si27"/>
+                                                                        <f:validator binding="#{row.bindings.FolderType.validator}"/>
+                                                                    </af:selectOneChoice>
+                                                                </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl34" styleClass="col-md-2 col-sm-12">
+                            <af:outputLabel value="مسلسل" id="ol32"/>
+                            <af:inputText value="#{row.bindings.CaseNumber.inputValue}"
+                                          shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseNumber.tooltip}"
+                                          id="it16" label="Label 4" simple="true" disabled="true">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseNumber.format}"/>
+                            </af:inputText>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl40" styleClass="col-md-2 col-sm-12">
+                            <af:outputLabel value="سنه" id="ol33"/>
+                            <af:inputText value="#{row.bindings.CaseYear.inputValue}"
+                                          label="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseYear.label}"
+                                          required="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseYear.mandatory}"
+                                          columns="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseYear.displayWidth}"
+                                          maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseYear.precision}"
+                                          shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseYear.tooltip}"
+                                          id="it17" disabled="true">
+                                <f:validator binding="#{row.bindings.CaseYear.validator}"/>
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseYear.format}"/>
+                            </af:inputText>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl41"
+                                                                                     styleClass="col-md-2 col-sm-12">
+                                                                    <af:outputLabel value="جدول"
+                                                                                    id="ol34"/>
+                                                                    <af:selectOneChoice value="#{row.bindings.CaseType.inputValue}"
+                                                                                        label="#{row.bindings.CaseType.label}"
+                                                                                        required="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseType.mandatory}"
+                                                                                        shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.CaseType.tooltip}"
+                                                                                        id="soc12" disabled="true">
+                                                                        <f:selectItems value="#{row.bindings.CaseType.items}"
+                                                                                       id="si25"/>
+                                                                        <f:validator binding="#{row.bindings.CaseType.validator}"/>
+                                                                    </af:selectOneChoice>
+                                                                </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl42" styleClass="col-md-2 col-sm-12">
+                            <af:outputLabel value="قسم شرطة" id="ol35"/>
+                            <af:selectOneChoice value="#{row.bindings.OriginEntityId.inputValue}"
+                                                label="#{row.bindings.OriginEntityId.label}"
+                                                required="#{bindings.PreviewArrestWarrantsROVO1.hints.OriginEntityId.mandatory}"
+                                                shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.OriginEntityId.tooltip}"
+                                                id="soc13" disabled="true">
+                                <f:selectItems value="#{row.bindings.OriginEntityId.items}" id="si26"/>
+                                <f:validator binding="#{row.bindings.OriginEntityId.validator}"/>
+                            </af:selectOneChoice>
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl24" styleClass="row">
+                                                                <af:panelGroupLayout id="pgl55"
+                                                                                     styleClass="col-md-2 col-sm-12">
+                                                                    <af:outputLabel value="تاريخ الضبط"
+                                                                                    id="ol40"/>
+                                                                    <af:inputText value="#{row.bindings.ArrestDate.inputValue}"
+                                                                                  label="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestDate.label}"
+                                                                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestDate.mandatory}"
+                                                                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestDate.displayWidth}"
+                                                                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestDate.tooltip}"
+                                                                                  id="id10" disabled="true">
+                                                                        <f:validator binding="#{row.bindings.ArrestDate.validator}"/>
+                                                                        <af:convertDateTime pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestDate.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelGroupLayout>
+                                                                <af:panelGroupLayout id="pgl56"
+                                                                                     styleClass="col-md-2 col-sm-12">
+                                                                    <af:outputLabel value="ساعه الضبط"
+                                                                                    id="ol43"/>
+                                                                    <af:inputText value="#{row.bindings.ArrestHoure.inputValue}"
+                                                                                  label="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.label}"
+                                                                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.mandatory}"
+                                                                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.displayWidth}"
+                                                                                  maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.precision}"
+                                                                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.tooltip}"
+                                                                                  id="it24" disabled="true">
+                                                                        <f:validator binding="#{row.bindings.ArrestHoure.validator}"/>
+                                                                        <af:convertNumber groupingUsed="false"
+                                                                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl57" styleClass="col-md-2 col-sm-12">
+                            <af:outputLabel value="مكان الضبط" id="ol44"/>
+                            <af:inputText value="#{row.bindings.ArrestAddress.inputValue}"
+                                          label="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestAddress.label}"
+                                          required="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestAddress.mandatory}"
+                                          columns="50"
+                                          maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestAddress.precision}"
+                                          shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestAddress.tooltip}"
+                                          id="it25" disabled="true">
+                                <f:validator binding="#{row.bindings.ArrestAddress.validator}"/>
+                            </af:inputText>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl67" styleClass="col-md-2 col-sm-12" rendered="false">
+                            <af:outputLabel value="#{row.bindings.PassportNo.label}" id="ol52"/>
+                            <af:inputText value="#{row.bindings.PassportNo.inputValue}"
+                                          label="#{bindings.PreviewArrestWarrantsROVO1.hints.PassportNo.label}"
+                                          required="#{bindings.PreviewArrestWarrantsROVO1.hints.PassportNo.mandatory}"
+                                          columns="#{bindings.PreviewArrestWarrantsROVO1.hints.PassportNo.displayWidth}"
+                                          maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.PassportNo.precision}"
+                                          shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.PassportNo.tooltip}"
+                                          id="it105" disabled="true">
+                                <f:validator binding="#{row.bindings.PassportNo.validator}"/>
+                            </af:inputText>
+                        </af:panelGroupLayout>
+                                                                <af:panelGroupLayout id="pgl59"
+                                                                                     styleClass="col-md-2 col-sm-12"
+                                                                                     rendered="false">
+                                                                    <af:outputLabel value="#{row.bindings.PenaltyValue.label}"
+                                                                                    id="ol47"/>
+                                                                    <af:inputText value="#{row.bindings.PenaltyValue.inputValue}"
+                                                                                  label="#{bindings.PreviewArrestWarrantsROVO1.hints.PenaltyValue.label}"
+                                                                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.PenaltyValue.mandatory}"
+                                                                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.PenaltyValue.displayWidth}"
+                                                                                  maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.PenaltyValue.precision}"
+                                                                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.PenaltyValue.tooltip}"
+                                                                                  id="it22" disabled="true">
+                                                                        <f:validator binding="#{row.bindings.PenaltyValue.validator}"/>
+                                                                        <af:convertNumber groupingUsed="false"
+                                                                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.PenaltyValue.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelGroupLayout>
+                                                                <af:panelGroupLayout id="pgl60"
+                                                                                     styleClass="col-md-2 col-sm-12"
+                                                                                     rendered="false">
+                                                                    <af:outputLabel value="#{row.bindings.BirthGovId.label}"
+                                                                                    id="ol48"/>
+                                                                    <af:selectOneChoice value="#{row.bindings.BirthGovId.inputValue}"
+                                                                                        label="#{row.bindings.BirthGovId.label}"
+                                                                                        required="#{bindings.PreviewArrestWarrantsROVO1.hints.BirthGovId.mandatory}"
+                                                                                        shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.BirthGovId.tooltip}"
+                                                                                        id="soc107" disabled="true">
+                                                                        <f:selectItems value="#{row.bindings.BirthGovId.items}"
+                                                                                       id="si30"/>
+                                                                        <f:validator binding="#{row.bindings.BirthGovId.validator}"/>
+                                                                    </af:selectOneChoice>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout id="pgl32" styleClass="row">
+                                                                <af:panelGroupLayout id="pgl63"
+                                                                                     styleClass="col-md-2 col-sm-12">
+                                                                    <af:outputLabel value="تاريخ الميلاد"
+                                                                                    id="ol50"/>
+                                                                    <af:inputText value="#{row.bindings.DateOfBirth.inputValue}"
+                                                                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.DateOfBirth.tooltip}"
+                                                                                  id="id7" label="Label 2" simple="true"
+                                                                                  disabled="true">
+                                                                        <af:convertDateTime pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.DateOfBirth.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelGroupLayout>
+                                                                <af:panelGroupLayout id="pgl64"
+                                                                                     styleClass="col-md-2 col-sm-12">
+                                                                    <af:outputLabel value="العنوان"
+                                                                                    id="ol51"/>
+                                                                    <af:inputText value="#{row.bindings.Address.inputValue}"
+                                                                                  disabled="true"
+                                                                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.Address.tooltip}"
+                                                                                  id="it13" label="Label 3"/>
+                                                                </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+            
+            
+            
+            
+            
+                <af:panelFormLayout id="pfl1" rows="9" maxColumns="1" rendered="false">
+                    <f:facet name="footer"/>
+                    <af:inputText value="#{row.bindings.JudgmentText.inputValue}" label="نص الحكم"
+                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.Address.mandatory}"
+                                  columns="100"
+                                  maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.Address.precision}"
+                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.Address.tooltip}" id="it6"
+                                  rows="2">
+                        <f:validator binding="#{row.bindings.Address.validator}"/>
+                    </af:inputText>
+                    <af:inputDate value="#{row.bindings.DateOfBirth.inputValue}"
+                                  label="تاريخ الميلاد"
+                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.DateOfBirth.mandatory}"
+                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.DateOfBirth.displayWidth}"
+                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.DateOfBirth.tooltip}" id="id1">
+                        <f:validator binding="#{row.bindings.DateOfBirth.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.DateOfBirth.format}"/>
+                    </af:inputDate>
+                    <af:inputText value="#{row.bindings.Address.inputValue}"
+                                  label="العنوان"
+                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.Address.mandatory}"
+                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.Address.displayWidth}"
+                                  maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.Address.precision}"
+                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.Address.tooltip}" id="it11">
+                        <f:validator binding="#{row.bindings.Address.validator}"/>
+                    </af:inputText>
+                    <af:inputDate value="#{row.bindings.ArrestDate.inputValue}"
+                                  label="تاريخ الضبط"
+                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestDate.mandatory}"
+                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestDate.displayWidth}"
+                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestDate.tooltip}" id="id2">
+                        <f:validator binding="#{row.bindings.ArrestDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestDate.format}"/>
+                    </af:inputDate>
+                    <af:inputText value="#{row.bindings.ArrestHoure.inputValue}"
+                                  label="ساعه الضبط"
+                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.mandatory}"
+                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.displayWidth}"
+                                  maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.precision}"
+                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.tooltip}"
+                                  id="it23">
+                        <f:validator binding="#{row.bindings.ArrestHoure.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestHoure.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{row.bindings.ArrestAddress.inputValue}"
+                                  label="محل الضبط"
+                                  required="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestAddress.mandatory}"
+                                  columns="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestAddress.displayWidth}"
+                                  maximumLength="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestAddress.precision}"
+                                  shortDesc="#{bindings.PreviewArrestWarrantsROVO1.hints.ArrestAddress.tooltip}"
+                                  id="it204">
+                        <f:validator binding="#{row.bindings.ArrestAddress.validator}"/>
+                    </af:inputText>
+                    <af:link text=" مذكرة الضبط" id="l9" disabled="#{row.Did eq null}"
+                             windowEmbedStyle="inlineDocument">
+                        <af:fileDownloadActionListener filename="#{row.FileName}"
+                                                       method="#{pageFlowScope.PreviewArrestWarrants.downloadArrestWarrantsFile}"/>
+                    </af:link>
+                </af:panelFormLayout>
+            </f:facet>
+        </af:table>
+    </af:panelHeader>
+</ui:composition>

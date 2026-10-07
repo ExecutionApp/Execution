@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="suppAmountTF">
+    <default-activity>FolderDataExecuteWithParams</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__2">
+      <name>folderID</name>
+      <value>#{pageFlowScope.folderID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__5">
+      <managed-bean-name>SuppAmountBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.suppamount.SuppAmountBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="suppAmountFrag">
+      <page>/pages/com/egabi/cjexec/suppamount/suppAmountFrag.jsff</page>
+    </view>
+    <method-call id="FolderDataExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="commit">
+      <outcome>
+        <name>commit</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="setVisiblity">
+      <method>#{backingBeanScope.SuppAmountBean.setVisiblity}</method>
+      <outcome>
+        <fixed-outcome>main</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__6">
+      <from-activity-id>suppAmountFrag</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>save</from-outcome>
+        <to-activity-id>commit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>FolderDataExecuteWithParams</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>setVisiblity</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__1">
+      <from-activity-id>setVisiblity</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>main</from-outcome>
+        <to-activity-id>suppAmountFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FormCaseDescriptionDesPartEO"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="FORM_CASE_DESCRIPTION_DES_PART"
+  AliasName="FormCaseDescriptionDesPartEO"
+  BindingStyle="OracleName"
+  RowClass="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEOImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"
+    PrimaryKey="true"
+    IsNotNull="true"/>
+  <Attribute
+    Name="CreatedBy"
+    Precision="200"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <TransientExpression
+      Name="ExpressionScript"><![CDATA[adf.context.current.sessionScope.userInfo.userName]]></TransientExpression>
+    <RecalcCondition
+      Name="RecalcExpressionScript"><![CDATA[true]]></RecalcCondition>
+  </Attribute>
+  <Attribute
+    Name="CreatedDate"
+    ColumnName="CREATED_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"
+    IsUpdateable="while_insert"
+    HistoryColumn="DateHistory"/>
+  <Attribute
+    Name="UpdateBy"
+    Precision="200"
+    ColumnName="UPDATE_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"
+    HistoryColumn="UserHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UpdateDate"
+    ColumnName="UPDATE_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"
+    HistoryColumn="DateHistory"/>
+  <Attribute
+    Name="FormCaseDesId"
+    IsNotNull="true"
+    ColumnName="FORM_CASE_DES_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"/>
+  <Attribute
+    Name="FormCasePartyId"
+    ColumnName="FORM_CASE_PARTY_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"/>
+  <Attribute
+    Name="JudgmentClassification"
+    ColumnName="JUDGMENT_CLASSIFICATION"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"
+    DefaultValue="2"/>
+  <Attribute
+    Name="JudgementClassDetail"
+    ColumnName="JUDGEMENT_CLASS_DETAIL"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"
+    DefaultValue="1"/>
+  <Attribute
+    Name="DeletedFlag"
+    Precision="1"
+    ColumnName="DELETED_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="FORM_CASE_DESCRIPTION_DES_PART"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="FormCaseDescriptionDes"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.FkFormCaseDesIdAssoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FkFormCaseDesIdAssoc.FormCaseDescriptionDes"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FkFormCaseDesIdAssoc.FormCaseDescriptionDesPart"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="FormCaseDescriptionParties"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.FormCaseDescriptionDesR02Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FormCaseDescriptionDesR02Assoc.FormCaseDescriptionParties"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FormCaseDescriptionDesR02Assoc.FormCaseDescriptionDesPart"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="ExcCourtBcChargesParties"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk1Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk1Assoc.ExcCourtBcChargesParties"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk1Assoc.FormCaseDescriptionDesPart"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="FormCaseDescriptionParties1"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association6Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association6Assoc.FormCaseDescriptionParties1"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association6Assoc.FormCaseDescriptionDesPart1"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="FormCaseDescriptionDes1"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association7Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association7Assoc.FormCaseDescriptionDes1"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association7Assoc.FormCaseDescriptionDesPart1"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="ExcCourtBcChargesParties1"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association8Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association8Assoc.ExcCourtBcChargesParties1"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association8Assoc.FormCaseDescriptionDesPart1"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="FormCaseDescriptionDESC"
+    Association="com.egabi.cjexec.model.entities.bcdetails.FkFormCaseDesIdAssoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.FkFormCaseDesIdAssoc.FormCaseDescriptionDESC"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.FkFormCaseDesIdAssoc.FormCaseDescriptionDesPart"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="FormCaseDescriptionDESC1"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association11Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association11Assoc.FormCaseDescriptionDESC1"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association11Assoc.FormCaseDescriptionDesPart1"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="FormCaseDescriptionDes2"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association21Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association21Assoc.FormCaseDescriptionDes2"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association21Assoc.FormCaseDescriptionDesPart2"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="AltKey"
+    AltKey="true">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FORM_CASE_DESCRIPTION_DES_PART"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCaseDesId"/>
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCasePartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FormCaseDescriptionDesPartIdCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_checkCondition" Value='"ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FORM_CASE_DESCRIPTION_DES_PART"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="PkFormCaseDescrDesPart"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PK_FORM_CASE_DESCR_DES_PART"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="UniqueFormCaseDesParty">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="UNIQUE_FORM_CASE_DES_PARTY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCaseDesId"/>
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCasePartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="uk_FormCaseDescriptionDesPartEO">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="UK_FORM_CASE_DESCRIPTION_DES_P"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCaseDesId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkExcLkpJudgmentClass">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_LKP_JUDGMENT_CLASS"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_LKP_JUDGMENT_CLASS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.JudgmentClassification"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkFormCaseDesId">
+    <DesignTime>
+      <Attr Name="_isDeferrableConstraint" Value="true"/>
+      <Attr Name="_isDisabledConstraint" Value="true"/>
+      <Attr Name="_isInitiallyDeferredConstraint" Value="true"/>
+      <Attr Name="_referencedKey" Value="FORM_CASE_DESCRIPTION_DES_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_FORM_CASE_DES_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCaseDesId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkJudgementClassDetail">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_LKP_JUDG_CLASS_DETAIL"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_JUDGEMENT_CLASS_DETAIL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.JudgementClassDetail"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FormCaseDescriptionDesR02">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="FORM_CASE_DESCRIPTION_PART_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FORM_CASE_DESCRIPTION_DES__R02"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCasePartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_FormCaseDescriptionDesPartEO">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="FORM_CASE_DESCRIPTION_PART_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_FORM_CASE_DESCRIPTION_DES_P"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCasePartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_FormCaseDescriptionDesPartEO1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="FORM_CASE_DESCRIPTION_DES_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_FORM_CASE_DESCRIPTION_DES_P"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.FormCaseDescriptionDesPartEO.FormCaseDesId"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</Entity>

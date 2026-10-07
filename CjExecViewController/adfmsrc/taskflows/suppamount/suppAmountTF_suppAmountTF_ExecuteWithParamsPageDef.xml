@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="suppAmountTF_suppAmountTF_ExecuteWithParamsPageDef" Package="taskflows.suppamount"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ExcFolderData" RangeSize="25" DataControl="CjExecAMDataControl" id="ExcFolderDataIterator"
+              Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ExcFolderDataIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="P_FOLDER_ID" NDValue="#{pageFlowScope.folderID}" NDType="java.math.BigDecimal"/>
+    </action>
+    <attributeValues IterBinding="ExcFolderDataIterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

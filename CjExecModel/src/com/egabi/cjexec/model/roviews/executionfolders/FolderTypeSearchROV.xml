@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FolderTypeSearchROV"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.executionfolders.FolderTypeSearchROV_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P_FOLDER_TYPE_ID"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="P_TABLE_TYPE"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="P_BC_DEGREE_ID"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="p_entity_id"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="P_HEARING_DATE"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="SEQUENCE_NUMBER"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="P_id_number"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="p_party_full_name"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_PRIMARY_PROSECUTION"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="P_SECONDARY_PROSECUTION"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <SQLQuery><![CDATA[/* Formatted on 20/Nov/19 12:11:20 PM (QP5 v5.240.12305.39446) */        
+SELECT  
+FD.PRIMARY_PROSECUTION PRIMARY_PROSECUTION, 
+FD.SECONDARY_PROSECUTION SECONDARY_PROSECUTION, 
+HEAR.ENTITY_ID Circule_ID,        
+       (SELECT E.ENTITY_NAME        
+          FROM entity e        
+         WHERE E.id = HEAR.ENTITY_id)        
+          Circule_name,        
+       HEAR.BC_DEGREE_ID,        
+       fd.folder_type folder_type,        
+       HEAR.ID hearing_date_id,        
+       HEAR.hearing_date hearing_date,        
+       fd.sequence_number sequence_number,        
+       pp.id_number id_number,        
+       pp.party_full_name party_full_name,        
+       ar.police_number || ' ' || bc.NAME || ' ' || ar.par_year police_number,        
+       PP.ADDRESS,        
+       PP.AGE,        
+       DECODE (PP.GENDER,  'F', 'انثى',  'M', 'ذكر') GENDER,        
+       PP.NICKNAME,        
+       RP.JUDGEMENT_RESOLUTION_C JUDGEMENT_RESOLUTION,        
+       JS.NAME JUDGEMENT_STATUS,        
+       FD.JUDGEMENT_STATUS JUDGEMENT_ID,        
+       -- DECODE (rp.attendance, 1, 'حضور') attendance,        
+       AT.NAME attendance,        
+       RP.ID RES_PARTY_ID,        
+       PP.job_title JOB_TITLE,        
+       bcd.name DEGREE_NAME,        
+       fd.ID FOLDER_ID,        
+       RES.BUSINESS_CASE_ID BUSINESS_CASE_ID,        
+       RP.PARTY_ID PARTY_ID,        
+       rp.ID RESERVATION_ID,        
+       AR.BUSINESS_CASE_TYPE TABLE_TYPE        
+  FROM EXC_FOLDER_DATA fd,        
+       COURT_BC_HEARING_RES_PARTIES rp,        
+       COURT_BC_HEARING_RESERVATION res,        
+       COURT_CIRCLES_DATES_HEARING hear,        
+       PAR_POLICE_AUTHORITY_REPORT ar,        
+       EXC_LKP_FOLDER_TYPES ft,        
+       PAR_PARTIES pp,        
+       business_case_type bc,        
+       business_CASE_DEGrees bcd,        
+       EXC_LKP_JUDGMENT_STATUS js,        
+       court_announcement_types at        
+ WHERE                                  -----------join-----------------------        
+      FD   .RES_PARTY_ID = RP.ID        
+       AND RP.COURT_BC_HEARING_RES_ID = RES.ID        
+       AND RES.CIRCLE_HEARING_DATE_ID = HEAR.ID        
+       AND AR.BUSINESS_CASE_ID = RES.BUSINESS_CASE_ID        
+       AND FD.FOLDER_TYPE = FT.ID        
+       AND PP.ID = RP.PARTY_ID        
+       AND ar.BUSINESS_CASE_TYPE = bc.ID        
+       AND hear.BC_DEGREE_ID = bcd.id        
+       AND FD.JUDGEMENT_STATUS = js.id        
+       AND RP.ATTENDANCE = at.id        
+       ------------------ MANDATORY-------------------        
+       AND FT.FOLDER_CATEGORY = 1        
+       AND FD.JUDGEMENT_STATUS <> 1        
+       AND (FD.FOLDER_TYPE = :P_FOLDER_TYPE_ID)        
+       AND AR.BUSINESS_CASE_TYPE =:P_TABLE_TYPE        
+       And  HEAR.BC_DEGREE_ID =:P_BC_DEGREE_ID    
+       AND FD.PRIMARY_PROSECUTION =:P_PRIMARY_PROSECUTION 
+       AND FD.SECONDARY_PROSECUTION =:P_SECONDARY_PROSECUTION     
+       --     ------------------ Optional-------------------        
+       AND (hear.entity_id = :p_entity_id OR :p_entity_id IS NULL)        
+       AND (HEAR.ID = :P_HEARING_DATE OR :P_HEARING_DATE IS NULL)        
+       AND (FD.SEQUENCE_NUMBER = :SEQUENCE_NUMBER OR :SEQUENCE_NUMBER IS NULL)        
+       AND (PP.ID_NUMBER LIKE :P_id_number OR :P_id_number IS NULL)        
+       AND (   PP.PARTY_FULL_NAME LIKE '%' || :p_party_full_name || '%'        
+            OR :p_party_full_name IS NULL)]]></SQLQuery>
+  <ViewAttribute
+    Name="PrimaryProsecution"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PRIMARY_PROSECUTION"
+    Expression="PRIMARY_PROSECUTION"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SecondaryProsecution"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SECONDARY_PROSECUTION"
+    Expression="SECONDARY_PROSECUTION"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CirculeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CIRCULE_ID"
+    Expression="CIRCULE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CirculeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CIRCULE_NAME"
+    Expression="CIRCULE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BcDegreeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BC_DEGREE_ID"
+    Expression="BC_DEGREE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FolderType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FOLDER_TYPE"
+    Expression="FOLDER_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HearingDateId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HEARING_DATE_ID"
+    Expression="HEARING_DATE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="SequenceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SEQUENCE_NUMBER"
+    Expression="SEQUENCE_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="IdNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_NUMBER"
+    Expression="ID_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyFullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_FULL_NAME"
+    Expression="PARTY_FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PoliceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="292"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="POLICE_NUMBER"
+    Expression="POLICE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="292"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Address"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ADDRESS"
+    Expression="ADDRESS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Age"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="AGE"
+    Expression="AGE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Gender"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GENDER"
+    Expression="GENDER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Nickname"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NICKNAME"
+    Expression="NICKNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JudgementResolution"
+    IsUpdateable="false"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.ClobDomain"
+    ColumnType="CLOB"
+    AliasName="JUDGEMENT_RESOLUTION"
+    Expression="JUDGEMENT_RESOLUTION"
+    SQLType="CLOB"/>
+  <ViewAttribute
+    Name="JudgementStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JUDGEMENT_STATUS"
+    Expression="JUDGEMENT_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JudgementId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="JUDGEMENT_ID"
+    Expression="JUDGEMENT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Attendance"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATTENDANCE"
+    Expression="ATTENDANCE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ResPartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RES_PARTY_ID"
+    Expression="RES_PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JobTitle"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JOB_TITLE"
+    Expression="JOB_TITLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DegreeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEGREE_NAME"
+    Expression="DEGREE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FOLDER_ID"
+    Expression="FOLDER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_ID"
+    Expression="BUSINESS_CASE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARTY_ID"
+    Expression="PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ReservationId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RESERVATION_ID"
+    Expression="RESERVATION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TableType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TABLE_TYPE"
+    Expression="TABLE_TYPE"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

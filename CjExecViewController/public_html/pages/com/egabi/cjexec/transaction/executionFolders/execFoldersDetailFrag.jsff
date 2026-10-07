@@ -1,0 +1,406 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <af:panelHeader text="#{bundle.VIEW_JUDGMENTS}" id="ph0">
+        <?audit suppress oracle.adf.faces.invalidTypeForHeaderComponent?>
+        <f:facet name="info"/>
+        <!--<af:button text="#{bundle.VIEW_CASE_INFO}" id="b9">
+                <af:showPopupBehavior popupId="p1"/>
+            </af:button>-->
+        <af:panelTabbed position="above" id="ph3">
+            <af:showDetailItem text="#{bundle.JUDG_INFO}" id="sdi1">
+                <h:panelGroup id="pg7" layout="block" styleClass="row">
+                    <h:panelGroup id="pg1" layout="block" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel showRequired="#{bindings.SequenceNumber.hints.mandatory}"
+                                        value="#{bindings.SequenceNumber.hints.label}" id="ol2"/>
+                        <af:inputText value="#{bindings.Seq.inputValue}"
+                                      label="#{bindings.ExecPartySessionJudgmentsROV1.hints.SequenceNumber.label}"
+                                      required="#{bindings.SequenceNumber.hints.mandatory}" readOnly="false"
+                                      maximumLength="#{bindings.SequenceNumber.hints.precision}"
+                                      shortDesc="#{bindings.SequenceNumber.hints.tooltip}" id="it1" simple="true">
+                            <f:validator binding="#{bindings.SequenceNumber.validator}"/>
+                            <!--<af:convertNumber groupingUsed="false" pattern="#{bindings.SequenceNumber.format}"/>-->
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg2" layout="block" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel showRequired="#{bindings.PoliceNumber.hints.mandatory}"
+                                        value="#{bindings.PoliceNumber.hints.label}" id="ol3"/>
+                        <af:inputText value="#{bindings.PoliceNumber.inputValue}"
+                                      label="#{bindings.PoliceNumber.hints.label}"
+                                      required="#{bindings.PoliceNumber.hints.mandatory}" readOnly="false"
+                                      maximumLength="#{bindings.PoliceNumber.hints.precision}"
+                                      shortDesc="#{bindings.PoliceNumber.hints.tooltip}" id="it2" simple="true">
+                            <f:validator binding="#{bindings.PoliceNumber.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel showRequired="#{bindings.HearingDate.hints.mandatory}"
+                                        value="#{bindings.HearingDate.hints.label}" id="ol4"/>
+                        <af:inputDate value="#{bindings.HearingDate.inputValue}" readOnly="false"
+                                      label="#{bindings.HearingDate.hints.label}"
+                                      required="#{bindings.HearingDate.hints.mandatory}"
+                                      shortDesc="#{bindings.HearingDate.hints.tooltip}" id="id1" simple="true">
+                            <f:validator binding="#{bindings.HearingDate.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.HearingDate.format}"/>
+                        </af:inputDate>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg4" layout="block" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel showRequired="#{bindings.DegreeName.hints.mandatory}"
+                                        value="#{bindings.DegreeName.hints.label}" id="ol6"/>
+                        <af:inputText value="#{bindings.DegreeName.inputValue}"
+                                      label="#{bindings.DegreeName.hints.label}"
+                                      required="#{bindings.DegreeName.hints.mandatory}"
+                                      maximumLength="#{bindings.DegreeName.hints.precision}"
+                                      shortDesc="#{bindings.DegreeName.hints.tooltip}" id="it13" simple="true"
+                                      readOnly="false">
+                            <f:validator binding="#{bindings.DegreeName.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg5" layout="block" styleClass="col-md-2 col-sm-12">
+                        <af:outputLabel showRequired="#{bindings.JudgementStatus.hints.mandatory}"
+                                        value="#{bindings.JudgementStatus.hints.label}" id="ol5"/>
+                        <af:inputText value="#{bindings.JudgementStatus.inputValue}"
+                                      label="#{bindings.JudgementStatus.hints.label}"
+                                      required="#{bindings.JudgementStatus.hints.mandatory}" readOnly="false"
+                                      maximumLength="#{bindings.JudgementStatus.hints.precision}"
+                                      shortDesc="#{bindings.JudgementStatus.hints.tooltip}" id="it10" simple="true">
+                            <f:validator binding="#{bindings.JudgementStatus.validator}"/>
+                            <!--<af:convertNumber groupingUsed="false" pattern="#{bindings.JudgementStatus.format}"/>-->
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg6" layout="block" styleClass="col-md-12 col-sm-12">
+                        <af:outputLabel showRequired="#{bindings.JudgementResolution.hints.mandatory}"
+                                        value="#{bindings.JudgementResolution.hints.label}" id="ol1"/>
+                        <af:inputText value="#{bindings.JudgementResolution.inputValue}" rows="3"
+                                      required="#{bindings.JudgementResolution.hints.mandatory}" readOnly="false"
+                                      maximumLength="#{bindings.JudgementResolution.hints.precision}"
+                                      shortDesc="#{bindings.JudgementResolution.hints.tooltip}" id="it9" simple="true">
+                            <f:validator binding="#{bindings.JudgementResolution.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </af:showDetailItem>
+            <af:showDetailItem text="#{bundle.CRIMINAL_INFO}" id="sdi2">
+                <h:panelGroup styleClass="row" layout="block" id="pg16">
+                    <h:panelGroup id="pg8" styleClass="col-md-2 col-sm-12" layout="block">
+                        <af:outputLabel showRequired="#{bindings.PartyFullName.hints.mandatory}"
+                                        value="#{bindings.PartyFullName.hints.label}" id="ol7"/>
+                        <af:inputText value="#{bindings.PartyFullName.inputValue}"
+                                      label="#{bindings.PartyFullName.hints.label}"
+                                      required="#{bindings.PartyFullName.hints.mandatory}" readOnly="true"
+                                      maximumLength="#{bindings.PartyFullName.hints.precision}"
+                                      shortDesc="#{bindings.PartyFullName.hints.tooltip}" id="it3" simple="true">
+                            <f:validator binding="#{bindings.PartyFullName.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg9" styleClass="col-md-2 col-sm-12" layout="block">
+                        <af:outputLabel showRequired="#{bindings.IdNumber.hints.mandatory}"
+                                        value="#{bindings.IdNumber.hints.label}" id="ol8"/>
+                        <af:inputText value="#{bindings.IdNumber.inputValue}" label="#{bindings.IdNumber.hints.label}"
+                                      required="#{bindings.IdNumber.hints.mandatory}" readOnly="true"
+                                      maximumLength="#{bindings.IdNumber.hints.precision}"
+                                      shortDesc="#{bindings.IdNumber.hints.tooltip}" id="it5" simple="true">
+                            <f:validator binding="#{bindings.IdNumber.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg10" styleClass="col-md-2 col-sm-12" layout="block">
+                        <af:outputLabel showRequired="#{bindings.Age.hints.mandatory}"
+                                        value="#{bindings.Age.hints.label}" id="ol9"/>
+                        <af:inputText value="#{bindings.Age.inputValue}" label="#{bindings.Age.hints.label}"
+                                      required="#{bindings.Age.hints.mandatory}" readOnly="true"
+                                      maximumLength="#{bindings.Age.hints.precision}"
+                                      shortDesc="#{bindings.Age.hints.tooltip}" id="it6" simple="true">
+                            <f:validator binding="#{bindings.Age.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg11" styleClass="col-md-2 col-sm-12" layout="block">
+                        <af:outputLabel showRequired="#{bindings.Gender.hints.mandatory}"
+                                        value="#{bindings.Gender.hints.label}" id="ol10"/>
+                        <af:inputText value="#{bindings.Gender.inputValue}" label="#{bindings.Gender.hints.label}"
+                                      required="#{bindings.Gender.hints.mandatory}" readOnly="true"
+                                      maximumLength="#{bindings.Gender.hints.precision}"
+                                      shortDesc="#{bindings.Gender.hints.tooltip}" id="it8" simple="true">
+                            <f:validator binding="#{bindings.Gender.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg12" styleClass="col-md-2 col-sm-12" layout="block">
+                        <af:outputLabel showRequired="#{bindings.Nickname.hints.mandatory}"
+                                        value="#{bindings.Nickname.hints.label}" id="ol11"/>
+                        <af:inputText value="#{bindings.Nickname.inputValue}" label="#{bindings.Nickname.hints.label}"
+                                      required="#{bindings.Nickname.hints.mandatory}" readOnly="true"
+                                      maximumLength="#{bindings.Nickname.hints.precision}"
+                                      shortDesc="#{bindings.Nickname.hints.tooltip}" id="it4" simple="true">
+                            <f:validator binding="#{bindings.Nickname.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg13" styleClass="col-md-2 col-sm-12" layout="block">
+                        <af:outputLabel showRequired="#{bindings.JobTitle.hints.mandatory}"
+                                        value="#{bindings.JobTitle.hints.label}" id="ol12"/>
+                        <af:inputText value="#{bindings.JobTitle.inputValue}" label="#{bindings.JobTitle.hints.label}"
+                                      required="#{bindings.JobTitle.hints.mandatory}"
+                                      maximumLength="#{bindings.JobTitle.hints.precision}"
+                                      shortDesc="#{bindings.JobTitle.hints.tooltip}" id="it12" simple="true">
+                            <f:validator binding="#{bindings.JobTitle.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg14" styleClass="col-md-2 col-sm-12" layout="block">
+                        <af:outputLabel showRequired="#{bindings.Address.hints.mandatory}"
+                                        value="#{bindings.Address.hints.label}" id="ol13"/>
+                        <af:inputText value="#{bindings.Address.inputValue}" label="#{bindings.Address.hints.label}"
+                                      required="#{bindings.Address.hints.mandatory}" readOnly="true"
+                                      maximumLength="#{bindings.Address.hints.precision}"
+                                      shortDesc="#{bindings.Address.hints.tooltip}" id="it7" simple="true">
+                            <f:validator binding="#{bindings.Address.validator}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup id="pg15" styleClass="col-md-2 col-sm-12" layout="block">
+                        <af:outputLabel showRequired="#{bindings.Attendance.hints.mandatory}"
+                                        value="#{bindings.Attendance.hints.label}" id="ol14"/>
+                        <af:inputText value="#{bindings.Attendance.inputValue}"
+                                      label="#{bindings.Attendance.hints.label}"
+                                      required="#{bindings.Attendance.hints.mandatory}" readOnly="true"
+                                      maximumLength="#{bindings.Attendance.hints.precision}"
+                                      shortDesc="#{bindings.Attendance.hints.tooltip}" id="it11" simple="true">
+                            <f:validator binding="#{bindings.Attendance.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Attendance.format}"/>
+                        </af:inputText>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <af:panelGroupLayout rendered="false" id="pgl3" layout="horizontal">
+                    <af:panelFormLayout id="pfl1" rows="4">
+                        <f:facet name="footer"/>
+                        <!--<af:panelLabelAndMessage label="#{bindings.PartyFullName.hints.label}" id="plam4"
+                                                 inlineStyle="min-width:50pt;">
+                                </af:panelLabelAndMessage>-->
+                        <!--<af:panelLabelAndMessage label="#{bindings.IdNumber.hints.label}" id="plam6">
+                               </af:panelLabelAndMessage>-->
+                        <!--<af:panelLabelAndMessage label="#{bindings.Age.hints.label}" id="plam7">
+                                </af:panelLabelAndMessage>-->
+                        <!--<af:panelLabelAndMessage label="#{bindings.Gender.hints.label}" id="plam9">
+                                </af:panelLabelAndMessage>-->
+                        <!--<af:panelLabelAndMessage label="#{bindings.Nickname.hints.label}" id="plam5">
+                                </af:panelLabelAndMessage>-->
+                        <!--<af:panelLabelAndMessage label="#{bindings.JobTitle.hints.label}" id="plam11">
+                                </af:panelLabelAndMessage>-->
+                        <!--<af:panelLabelAndMessage label="#{bindings.Address.hints.label}" id="plam8">
+                               </af:panelLabelAndMessage>-->
+                        <!--<af:panelLabelAndMessage label="#{bindings.Attendance.hints.label}" id="plam10">
+                                </af:panelLabelAndMessage>-->
+                    </af:panelFormLayout>
+                </af:panelGroupLayout>
+                <!--<h:panelGroup styleClass="btn-holder" id="pg18">
+                    <af:button text="#{bundle.VIEW_ACTION_INFO}" id="b10">
+                        <af:showPopupBehavior popupId="p2"/>
+                    </af:button>
+                </h:panelGroup>-->
+            </af:showDetailItem>
+            <af:showDetailItem text="#{bundle.CRIMES}" id="sdi3">
+                <af:table value="#{bindings.ResPartyCrimesROV11.collectionModel}" var="row" 
+                          rows="#{bindings.ResPartyCrimesROV11.rangeSize}" emptyText="#{bundle.NO_DATA}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.ResPartyCrimesROV11.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.ResPartyCrimesROV11.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.ResPartyCrimesROV11.rangeSize}" id="t1"
+                          columnStretching="multiple">
+                    <af:column headerText="#{bindings.ResPartyCrimesROV11.hints.CrimeName.label}" id="c1" noWrap="false"
+                               width="100%">
+                        <af:outputText value="#{row.CrimeName}"
+                                       shortDesc="#{bindings.ResPartyCrimesROV11.hints.CrimeName.tooltip}" id="ot1"/>
+                    </af:column>
+                </af:table>
+            </af:showDetailItem>
+            <af:showDetailItem text="#{bundle.EXECUTION_INFO}" id="sdi4">
+                <!--<af:button actionListener="#{bindings.ExecuteWithParams1.execute}" text="ExecuteWithParams1"
+                           disabled="#{!bindings.ExecuteWithParams1.enabled}" id="b9"/>-->
+                <af:table value="#{bindings.ExecPartySessionJudgmentsROV1.collectionModel}" var="row"
+                          rows="#{bindings.ExecPartySessionJudgmentsROV1.rangeSize}"
+                          emptyText="#{bindings.ExecPartySessionJudgmentsROV1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.ExecPartySessionJudgmentsROV1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.ExecPartySessionJudgmentsROV1.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.ExecPartySessionJudgmentsROV1.rangeSize}" id="t2"
+                          contentDelivery="immediate" columnStretching="multiple">
+                    <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.HearingDate.name}"
+                               sortable="true"
+                               headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.HearingDate.label}" id="c6"
+                               width="100%">
+                        <af:outputText value="#{row.HearingDate}"
+                                       shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.HearingDate.tooltip}"
+                                       id="ot6">
+                            <af:convertDateTime pattern="#{bindings.ExecPartySessionJudgmentsROV1.hints.HearingDate.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.AttendanceName.name}"
+                               sortable="true"
+                               headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.AttendanceName.label}"
+                               id="c2" width="100%">
+                        <af:outputText value="#{row.AttendanceName}"
+                                       shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.AttendanceName.tooltip}"
+                                       id="ot2"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.PartyJudgementResolution.name}"
+                               sortable="true"
+                               headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.PartyJudgementResolution.label}"
+                               id="c3" width="100%">
+                        <af:outputText value="#{row.PartyJudgementResolution}"
+                                       shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.PartyJudgementResolution.tooltip}"
+                                       id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.SequenceNumber.name}"
+                               sortable="true"
+                               headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.SequenceNumber.label}"
+                               id="c4" width="100%">
+                        <af:outputText value="#{row.SequenceNumber} #{'/'} #{row.Year}"
+                                       shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.SequenceNumber.tooltip}"
+                                       id="ot4">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.ExecPartySessionJudgmentsROV1.hints.SequenceNumber.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.ExecPartySessionJudgmentsROV1.hints.Name.name}" sortable="true"
+                               headerText="#{bindings.ExecPartySessionJudgmentsROV1.hints.Name.label}" id="c5"
+                               width="100%">
+                        <af:outputText value="#{row.Name}"
+                                       shortDesc="#{bindings.ExecPartySessionJudgmentsROV1.hints.Name.tooltip}"
+                                       id="ot5"/>
+                    </af:column>
+                </af:table>
+            </af:showDetailItem>
+        </af:panelTabbed>
+    </af:panelHeader>
+    <!--<af:spacer width="10" height="5" id="s4"/>
+    <af:panelHeader text="#{bundle.CRIMINAL_INFO}" id="ph4">
+       
+    </af:panelHeader>
+    <af:spacer width="10" height="5" id="s1"/>
+    <af:panelHeader text="#{bundle.CRIMES}" id="ph2">
+        
+    </af:panelHeader>-->
+    <af:panelTabbed position="above" id="pt1">
+        <af:showDetailItem id="tab1" text="#{bundle.ACTIONS}">
+            <af:panelGroupLayout styleClass="btn-holder" id="pgl2" layout="vertical">
+            <af:button text="#{bundle.OPPOSITION}" id="b1"
+                       action="#{pageFlowScope.ExecutionFoldersBean.validationMethod}">
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{sessionScope.folderID}"/>
+                <af:setActionListener from="#{bindings.ResPartyId.inputValue}" to="#{sessionScope.resPartyId}"/>
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{pageFlowScope.FolderID}"/>
+                <af:setActionListener from="oppositions" to="#{pageFlowScope.action}"/>
+                <af:setActionListener from="1" to="#{pageFlowScope.validationType}"/>
+                <af:setActionListener from="1" to="#{sessionScope.oppositionType}"/>
+            </af:button>
+            <af:button text="#{bundle.DO_OPPOSITION}" id="b2"
+                       action="#{pageFlowScope.ExecutionFoldersBean.validationMethod}">
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{sessionScope.folderID}"/>
+                <af:setActionListener from="#{bindings.ResPartyId.inputValue}" to="#{sessionScope.resPartyId}"/>
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{pageFlowScope.FolderID}"/>
+                <af:setActionListener from="oppositions" to="#{pageFlowScope.action}"/>
+                <af:setActionListener from="2" to="#{pageFlowScope.validationType}"/>
+                <af:setActionListener from="2" to="#{sessionScope.oppositionType}"/>
+            </af:button>
+            <!--<af:button text="#{bundle.ENABLE_OPPOSITION}" id="b2"
+                       action="#{pageFlowScope.ExecutionFoldersBean.validationMethod}">
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{pageFlowScope.FolderID}"/>
+                <af:setActionListener from="enable_opposition" to="#{pageFlowScope.action}"/>
+                <af:setActionListener from="2" to="#{pageFlowScope.validationType}"/>
+            </af:button>-->
+                <af:button text="#{bundle.RESUMPTION}" visible="false" id="b3"/>
+            <af:button text="#{bundle.PAYMENT_AMOUNT}" id="b4"
+                       action="#{pageFlowScope.ExecutionFoldersBean.validationMethod}">
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{pageFlowScope.FolderID}"/>
+                <!--<af:setPropertyListener from="#{bindings.FolderId.inputValue}"  to="#{pageFlowScope.folderID}"
+                                            type="action"/>-->
+                <af:setActionListener from="paymentAmount" to="#{pageFlowScope.action}"/>
+                <af:setActionListener from="3" to="#{pageFlowScope.validationType}"/>
+            </af:button>
+            <af:button text="#{bundle.DUE_PAYMENT}" id="b5"
+                       action="#{pageFlowScope.ExecutionFoldersBean.validationMethod}">
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{pageFlowScope.FolderID}"/>
+                <af:setActionListener from="suppRepayment" to="#{pageFlowScope.action}"/>
+                <af:setActionListener from="4" to="#{pageFlowScope.validationType}"/>
+            </af:button>
+            <af:button text="#{bundle.IMPLEMENT_PRISON}" action="#{pageFlowScope.ExecutionFoldersBean.validationMethod}"
+                       id="b6">
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{pageFlowScope.FolderID}"/>
+                <af:setActionListener from="#{bindings.JudgementId.inputValue}" to="#{pageFlowScope.execution_Flag}"/>
+                <af:setActionListener from="execute_prison" to="#{pageFlowScope.action}"/>
+                <af:setActionListener from="5" to="#{pageFlowScope.validationType}"/>
+            </af:button>
+            <af:button text="#{bundle.INSTALLMENT_FINE}" action="#{pageFlowScope.ExecutionFoldersBean.validationMethod}"
+                       id="b7">
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{pageFlowScope.FolderID}"/>
+                <af:setActionListener from="installment_request" to="#{pageFlowScope.action}"/>
+                <af:setActionListener from="6" to="#{pageFlowScope.validationType}"/>
+            </af:button>
+             <af:button text="#{bundle.INSTALLMENT_FINE_CANCEL}" action="#{pageFlowScope.ExecutionFoldersBean.validationMethod}"
+                       id="b9">
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{pageFlowScope.FolderID}"/>
+                <!--<af:setActionListener from="installment_request_cancel" to="#{pageFlowScope.action}"/>-->
+                <af:setActionListener from="7" to="#{pageFlowScope.validationType}"/>
+            </af:button>
+            
+             <af:button text="#{bundle.CANCEL_IMPLEMENT_PRISON}" action="#{pageFlowScope.ExecutionFoldersBean.validationMethod}"
+                       id="b13">
+                <af:setActionListener from="#{bindings.FolderId.inputValue}" to="#{pageFlowScope.FolderID}"/>
+                <af:setActionListener from="8" to="#{pageFlowScope.validationType}"/>
+                <af:setActionListener from="cancel" to="#{pageFlowScope.action}"/>
+            </af:button>
+        </af:panelGroupLayout>
+        </af:showDetailItem>
+        <af:showDetailItem id="tab2" text="#{bundle.REPORTS}">
+            <af:panelGroupLayout id="pgl1" styleClass="btn-holder" layout="vertical">
+                <af:button text="نموذج معارضة" id="b11" actionListener="#{pageFlowScope.ReportsBean.printReports}">
+                    <af:setActionListener from="Person" to="#{pageFlowScope.reportName}"/>
+                    <af:setActionListener from="2" to="#{pageFlowScope.actionType}"/>
+                    <af:setActionListener from="executionFolderReports" to="#{pageFlowScope.reportFolder}"/>
+                </af:button>
+                <!--<af:spacer width="10" height="10" id="s2"/>-->
+                <af:button text="#{bundle.ENABLE_OPPOSITION_REPORT}" id="b12" rendered="false"
+                           actionListener="#{pageFlowScope.ReportsBean.printReports}">
+                    <af:setActionListener from="3" to="#{pageFlowScope.actionType}"/>
+                    <af:setActionListener from="EnableOpposition" to="#{pageFlowScope.reportName}"/>
+                    <af:setActionListener from="executionFolderReports" to="#{pageFlowScope.reportFolder}"/>
+                </af:button>
+                <af:spacer width="10" height="10" id="s5"/>
+                <!--<af:button text="نموذج استئناف" id="b13" actionListener="#{pageFlowScope.ReportsBean.printReports}">
+                    <af:setActionListener from="executePrison" to="#{pageFlowScope.reportName}"/>
+                </af:button>-->
+                <!--<af:spacer width="10" height="10" id="s6"/>-->
+                <af:button text="#{bundle.PRISON_REPORT}" id="b14" actionListener="#{pageFlowScope.ReportsBean.printReports}">
+                    <af:setActionListener from="5" to="#{pageFlowScope.actionType}"/>
+                    <af:setActionListener from="Prison" to="#{pageFlowScope.reportName}"/>
+                    <af:setActionListener from="executionFolderReports" to="#{pageFlowScope.reportFolder}"/>
+                </af:button>
+                <af:spacer width="10" height="10" id="s7"/>
+                <af:button text="#{bundle.EXECUTION_REPORT}" id="b15" actionListener="#{pageFlowScope.ReportsBean.printReports}">
+                    <af:setActionListener from="5" to="#{pageFlowScope.actionType}"/>
+                    <af:setActionListener from="Implement" to="#{pageFlowScope.reportName}"/>
+                    <af:setActionListener from="executionFolderReports" to="#{pageFlowScope.reportFolder}"/>
+                </af:button>
+                 <af:spacer width="10" height="10" id="s77"/>
+                <af:button text="#{bundle.INSTALLMENT_FINE_REPORT}" id="b155" actionListener="#{pageFlowScope.ReportsBean.printReports}">
+                    <af:setActionListener from="4" to="#{pageFlowScope.actionType}"/>
+                    <af:setActionListener from="InstallmentFine" to="#{pageFlowScope.reportName}"/>
+                    <af:setActionListener from="executionFolderReports" to="#{pageFlowScope.reportFolder}"/>
+                </af:button>
+
+            </af:panelGroupLayout>
+        </af:showDetailItem>
+    </af:panelTabbed>
+    <h:panelGroup id="pg17" layout="block" styleClass="btn-holder">
+        <af:button text="#{bundle.BACK}" id="b8" action="back"/>
+    </h:panelGroup>
+        <af:popup childCreation="deferred" id="p1" autoCancel="disabled">
+            <af:dialog id="d1" type="ok">
+                <af:region value="#{bindings.ExecBcSessionsJudgmentsTF1.regionModel}" id="r1"/>
+                <f:facet name="buttonBar"/>
+            </af:dialog>
+        </af:popup>
+        <af:popup childCreation="deferred" id="p2" autoCancel="disabled">
+            <af:dialog id="d2" type="ok">
+                <af:region value="#{bindings.ExcPrtySessJdgTF1.regionModel}" id="r2"/>
+                <f:facet name="buttonBar"/>
+            </af:dialog>
+        </af:popup>
+   
+</ui:composition>

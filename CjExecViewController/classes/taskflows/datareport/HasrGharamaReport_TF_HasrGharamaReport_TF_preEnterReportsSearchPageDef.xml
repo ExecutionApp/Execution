@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="HasrGharamaReport_TF_HasrGharamaReport_TF_preEnterReportsSearchPageDef"
+                Package="taskflows.datareport" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="preEnterReportsSearch" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="preEnterReportsSearch" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"/>
+  </bindings>
+</pageDefinition>

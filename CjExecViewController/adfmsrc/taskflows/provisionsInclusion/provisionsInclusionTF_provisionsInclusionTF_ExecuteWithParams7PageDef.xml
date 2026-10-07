@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams7PageDef"
+                Package="taskflows.provisionsInclusion" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="FormCaseDescriptionView1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="FormCaseDescriptionView1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="FormCaseDescriptionView1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="hearingDateIdParam" NDValue="#{pageFlowScope.provisionsInclusionBean.hearingDateId}"
+                 NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="businessCaseIdParam" NDValue="#{pageFlowScope.provisionsInclusionBean.businessCaseId}"
+                 NDType="oracle.jbo.domain.Number"/>
+    </action>
+  </bindings>
+</pageDefinition>

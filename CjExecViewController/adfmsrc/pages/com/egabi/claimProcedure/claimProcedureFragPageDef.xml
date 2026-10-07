@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="claimProcedureFragPageDef"
+                Package="pages.com.egabi.claimProcedure">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="SimplifiedModeAM1.ClaimProcedureSearchFormRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ClaimProcedureSearchFormRVO1Iterator"/>
+        <iterator Binds="SimplifiedModeAM1.ExcClaimsVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcClaimsVO1Iterator"/>
+        <iterator id="ExcProcedureClaimVO3Iterator" Binds="SimplifiedModeAM1.ExcProcedureClaimVO3"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator Binds="SimplifiedModeAM1.ClaimProcedureInputFormRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ClaimProcedureInputFormRVO1Iterator"/>
+        <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="ValidatePoliceReportROVO1Iterator"/>
+        <iterator id="CjConfigRoVOIterator" Binds="SimplifiedModeAM1.CjConfigRoVO" DataControl="CjExecAMDataControl"
+                  RangeSize="25"/>
+        <iterator id="ExcProcedureClaimVO1Iterator" Binds="SimplifiedModeAM1.ExcProcedureClaimVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator Binds="SimplifiedModeAM1.ExcLkpGharamaInstallments1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="ExcLkpGharamaInstallments1Iterator"/>
+        <iterator id="PosMasterVO1Iterator" Binds="SimplifiedModeAM1.PosMasterVO1" DataControl="CjExecAMDataControl"
+                  RangeSize="25"/>
+        <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ValidatePoliceReportROVO1Iterator1"/>
+        <iterator id="ExcProcedureClaimFolderVO1Iterator" Binds="SimplifiedModeAM1.ExcProcedureClaimFolderVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+        <iterator id="ClaimProcedureSearchFormRVO1Iterator1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  Binds="SimplifiedModeAM1.ClaimProcedureSearchFormRVO1"/>
+        <iterator id="ExcSettlementPenaltyVO1Iterator" Binds="SimplifiedModeAM1.ExcSettlementPenaltyVO1"
+                  DataControl="CjExecAMDataControl" RangeSize="25"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="ClaimProcedureSearchFormRVO1Iterator" id="ClaimNumber">
+            <AttrNames>
+                <Item Value="ClaimNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ClaimProcedureSearchFormRVO1Iterator" StaticList="false" Uses="LOV_ClaimYear" id="ClaimYear"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ClaimProcedureSearchFormRVO1Iterator" StaticList="false" Uses="LOV_ClaimTypeId"
+              id="ClaimTypeId" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa"
+              id="NeyabGozayaa" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ClaimProcedureSearchFormRVO1Iterator" id="RepeatedFlag" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="RepeatedFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </list>
+        <tree IterBinding="ExcClaimsVO1Iterator" id="ExcClaimsVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.claimProcedureViews.ExcClaimsVO" Name="ExcClaimsVO10">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="ClaimNumber"/>
+                    <Item Value="ClaimYear"/>
+                    <Item Value="RepeatedClaimFlag"/>
+                    <Item Value="DecisionId"/>
+                    <Item Value="FixedPenaltyAmount"/>
+                    <Item Value="FixedPenaltyFees"/>
+                    <Item Value="ClaimTotal"/>
+                    <Item Value="DailyPenaltyRemaining"/>
+                    <Item Value="DailyPenaltyFlag"/>
+                    <Item Value="DailyPenaltyAmount"/>
+                    <Item Value="ClaimDecisionDate"/>
+                    <Item Value="ClaimRemarks"/>
+                    <Item Value="ActiveFlag"/>
+                    <Item Value="PartyName"/>
+                    <Item Value="IdNumber"/>
+                    <Item Value="ClaimSequenceNumber"/>
+                    <Item Value="ClaimTypeId"/>
+                    <Item Value="ClaimColyaId"/>
+                    <Item Value="ClaimPartialId"/>
+                    <Item Value="ClaimPoliceStationId"/>
+                    <Item Value="PenaltyDueDate"/>
+                    <Item Value="BusinessCaseId"/>
+                    <Item Value="ClaimFolderId"/>
+                    <Item Value="ClaimResPartyId"/>
+                    <Item Value="ClaimYearName"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreatedDate"/>
+                    <Item Value="DeletedBy"/>
+                    <Item Value="DeletedDate"/>
+                    <Item Value="OriginalPenaltyDueDate"/>
+                    <Item Value="PartyId"/>
+                    <Item Value="UpdatedBy"/>
+                    <Item Value="UpdatedDate"/>
+                    <Item Value="BusinessCaseNumberFull"/>
+                    <Item Value="ClaimTotalOriginal"/>
+                    <Item Value="BusinessCaseNumber"/>
+                    <Item Value="DailyPenaltyFees"/>
+                    <Item Value="CourtFees"/>
+                    <Item Value="LawyerFees"/>
+                    <Item Value="LastDailyPenaltyDate"/>
+                    <Item Value="WorkPenaltyFlag"/>
+                    <Item Value="ExcFolderActive"/>
+                    <Item Value="PreviousPaied"/>
+                    <Item Value="CancelAmount"/>
+                    <Item Value="ExcFolderCriminalType"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="ExcProcedureClaimVO3Iterator" id="ExcProcedureClaimVO3">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.claimProcedureViews.ExcProcedureClaimVO"
+                            Name="ExcProcedureClaimVO20">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="AmountText"/>
+                    <Item Value="ClaimId"/>
+                    <Item Value="ProcedureAmount"/>
+                    <Item Value="ProcedureDate"/>
+                    <Item Value="ProcedureNotes"/>
+                    <Item Value="ProcedureNumber"/>
+                    <Item Value="ProcedureRemaining"/>
+                    <Item Value="ProcedureTypeId"/>
+                    <Item Value="CollectionType"/>
+                    <Item Value="PaymentNumber"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreatedDate"/>
+                    <Item Value="DeletedBy"/>
+                    <Item Value="DeletedDate"/>
+                    <Item Value="UpdatedBy"/>
+                    <Item Value="UpdatedDate"/>
+                    <Item Value="ClaimTotalOriginal"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <methodAction id="numberToText" RequiresUpdateModel="true" Action="invokeMethod" MethodName="numberToText"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.numberToText_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_numberToText_result">
+            <NamedData NDName="amount" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="Id">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="ProcedureNumber">
+            <AttrNames>
+                <Item Value="ProcedureNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ClaimProcedureInputFormRVO1Iterator" StaticList="false" Uses="LOV_ProcedureType"
+              id="ProcedureType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="ProcedureDate">
+            <AttrNames>
+                <Item Value="ProcedureDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="ProcedureAmount">
+            <AttrNames>
+                <Item Value="ProcedureAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="ProcedureRemaining">
+            <AttrNames>
+                <Item Value="ProcedureRemaining"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="ProcedureNotes">
+            <AttrNames>
+                <Item Value="ProcedureNotes"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ClaimProcedureInputFormRVO1Iterator" StaticList="false" Uses="LOV_CollectionType"
+              id="CollectionType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="PaymentNumber">
+            <AttrNames>
+                <Item Value="PaymentNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="AmountText">
+            <AttrNames>
+                <Item Value="AmountText"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="CjExecAMDataControl"/>
+        <methodAction id="insertClaimProcedureLog" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="insertClaimProcedureLog" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+            <NamedData NDName="claimId" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="claimNumber" NDType="java.lang.String"/>
+            <NamedData NDName="claimYear" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimRepeatedFlag" NDType="java.lang.String"/>
+            <NamedData NDName="claimTypeId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimEntityColya" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimEntityPartial" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimEntityPolice" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="procedureId" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="procedureNumber" NDType="java.lang.String"/>
+            <NamedData NDName="procedureTypeId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="procedureDate" NDType="java.sql.Timestamp"/>
+            <NamedData NDName="loggedInEntityId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="PenaltyDueDate">
+            <AttrNames>
+                <Item Value="PenaltyDueDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="NumberOfDays">
+            <AttrNames>
+                <Item Value="NumberOfDays"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="FixedPenaltyAmount">
+            <AttrNames>
+                <Item Value="FixedPenaltyAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="FixedPenaltyFees">
+            <AttrNames>
+                <Item Value="FixedPenaltyFees"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="FixedPenaltyTotal">
+            <AttrNames>
+                <Item Value="FixedPenaltyTotal"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="DailyPenaltyAmount">
+            <AttrNames>
+                <Item Value="DailyPenaltyAmount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="DailyPenaltyFees">
+            <AttrNames>
+                <Item Value="DailyPenaltyFees"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="DailyPenaltyTotal">
+            <AttrNames>
+                <Item Value="DailyPenaltyTotal"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="ClaimTotal">
+            <AttrNames>
+                <Item Value="ClaimTotal"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="insertClaimProcedureRow" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="insertClaimProcedureRow" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.insertClaimProcedureRow_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_insertClaimProcedureRow_result">
+            <NamedData NDName="claimId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimNumber" NDType="java.lang.String"/>
+            <NamedData NDName="claimYear" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimRepeatedFlag" NDType="java.lang.String"/>
+            <NamedData NDName="claimTypeId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimEntityColya" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimEntityPartial" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimEntityPolice" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="resPartyId" NDType="java.lang.String"/>
+            <NamedData NDName="claimFolderId" NDType="java.lang.String"/>
+            <NamedData NDName="procedureNumber" NDType="java.lang.String"/>
+            <NamedData NDName="procedureTypeId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="cancellationType" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="procedureDate" NDType="java.sql.Timestamp"/>
+            <NamedData NDName="procedureAmount" NDType="java.lang.Double"/>
+            <NamedData NDName="procedureRemaining" NDType="java.lang.Double"/>
+            <NamedData NDName="procedureNotes" NDType="java.lang.String"/>
+            <NamedData NDName="collectionType" NDType="java.lang.String"/>
+            <NamedData NDName="paymentNumber" NDType="java.lang.String"/>
+            <NamedData NDName="businessCaseId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="partyId" NDType="java.lang.String"/>
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="entityId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="procedureRemainingZZ" NDType="java.lang.Double"/>
+        </methodAction>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="DailyPenaltyRemaining">
+            <AttrNames>
+                <Item Value="DailyPenaltyRemaining"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="insertNIdServiceCallLog" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="insertNIdServiceCallLog" IsViewObjectMethod="false"
+                      DataControl="SimplifiedModeAMDataControl"
+                      InstanceName="data.SimplifiedModeAMDataControl.dataProvider">
+            <NamedData NDName="userId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="entityId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="nId" NDType="java.lang.String"/>
+        </methodAction>
+        <list IterBinding="ClaimProcedureInputFormRVO1Iterator" StaticList="false" Uses="LOV_CancellationType"
+              id="CancellationType" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <methodAction id="insertIntoCriminalJusticeFilesDetailsVO" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="insertIntoCriminalJusticeFilesDetailsVO" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+            <NamedData NDName="businessCaseDetailId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="businessCaseId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="createdBy" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="did" NDType="java.lang.String"/>
+            <NamedData NDName="Ddocname" NDType="java.lang.String"/>
+            <NamedData NDName="entityId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="partyId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="fileName" NDType="java.lang.String"/>
+            <NamedData NDName="typeId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="Parid" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="caseSchemaId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="procedureId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="resId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="getBusinessCaseDetailId" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getBusinessCaseDetailId" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getBusinessCaseDetailId_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getBusinessCaseDetailId_result">
+            <NamedData NDName="businessCaseId" NDType="long"/>
+        </methodAction>
+        <methodAction id="insertIntoCJFileDetailsClaimProc" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="insertIntoCJFileDetailsClaimProc" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+            <NamedData NDName="businessCaseDetailId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="businessCaseId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="createdBy" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="did" NDType="java.lang.String"/>
+            <NamedData NDName="Ddocname" NDType="java.lang.String"/>
+            <NamedData NDName="entityId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="partyId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="fileName" NDType="java.lang.String"/>
+            <NamedData NDName="typeId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="Parid" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="caseSchemaId" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="procedureId" NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="ProcedureEndDate">
+            <AttrNames>
+                <Item Value="ProcedureEndDate"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="ExcProcedureClaimVO1Iterator" id="ExcProcedureClaimVO1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.views.claimProcedureViews.ExcProcedureClaimVO"
+                            Name="ExcProcedureClaimVO10">
+                <AttrNames>
+                    <Item Value="Id"/>
+                    <Item Value="ProcedureNumber"/>
+                    <Item Value="ClaimId"/>
+                    <Item Value="ProcedureTypeId"/>
+                    <Item Value="ProcedureDate"/>
+                    <Item Value="ProcedureAmount"/>
+                    <Item Value="ClaimTotalOriginal"/>
+                    <Item Value="ProcedureRemaining"/>
+                    <Item Value="CollectionType"/>
+                    <Item Value="PaymentNumber"/>
+                    <Item Value="ProcedureNotes"/>
+                    <Item Value="NoOffInstallments"/>
+                    <Item Value="ValueOffInstallment"/>
+                    <Item Value="ProcedureEndDate"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="ClaimProcedureInputFormRVO1Iterator" id="NumDaysInput">
+            <AttrNames>
+                <Item Value="NumDaysInput"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ClaimProcedureSearchFormRVO1Iterator" StaticList="false" Uses="LOV_FolderClaimId"
+              id="FolderClaimId" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <methodAction id="getClaimsSearch" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getClaimsSearch"
+                      IsViewObjectMethod="true" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.ExcClaimsVO1">
+            <NamedData NDName="claimTypeIdParam" NDValue="#{bindings.ClaimTypeId.inputValue}"
+                       NDType="java.math.BigDecimal"/>
+            <NamedData NDName="claimFolderParam" NDValue="#{bindings.FolderClaimId.inputValue}"
+                       NDType="java.lang.String"/>
+            <NamedData NDName="caseNumber" NDValue="#{bindings.ClaimNumber.inputValue}" NDType="java.lang.String"/>
+            <NamedData NDName="claimYearParam" NDValue="#{bindings.ClaimYear.inputValue}" NDType="java.lang.String"/>
+            <NamedData NDName="policeIdParam" NDValue="#{bindings.OrigEntity.inputValue}" NDType="java.lang.String"/>
+            <NamedData NDName="repeatedFlagParam" NDValue="#{bindings.RepeatedFlag1.inputValue}"
+                       NDType="java.lang.String"/>
+             <NamedData NDName="BCDegreeParam" NDValue="#{bindings.BusinessCaseDegree.inputValue}"
+                       NDType="java.math.BigDecimal"/>
+             <NamedData NDName="criminalTypeParam" NDValue="#{bindings.CrimType.inputValue}"
+                       NDType="java.math.BigDecimal"/>
+        </methodAction>
+        <methodAction id="getClaimProcedureSeqNumber" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getClaimProcedureSeqNumber" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.getClaimProcedureSeqNumber_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_getClaimProcedureSeqNumber_result"/>
+        <list IterBinding="ExcLkpGharamaInstallments1Iterator" ListOperMode="navigation"
+              ListIter="ExcLkpGharamaInstallments1Iterator" id="ExcLkpGharamaInstallments1" DTSupportsMRU="true"
+              SelectItemValueMode="ListObject">
+            <AttrNames>
+                <Item Value="Id"/>
+            </AttrNames>
+        </list>
+        <methodAction id="setPosPaymentClaims" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="setPosPaymentClaims" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+            <NamedData NDName="BillNumber" NDType="java.lang.String"/>
+            <NamedData NDName="transactionId" NDType="java.lang.String"/>
+            <NamedData NDName="terminal" NDType="java.lang.String"/>
+            <NamedData NDName="amount" NDType="double"/>
+        </methodAction>
+        <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator1" id="PoliceNo">
+            <AttrNames>
+                <Item Value="PoliceNo"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator1" StaticList="false" Uses="LOV_BusinessCaseType"
+              id="BusinessCaseType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="ValidatePoliceReportROVO1Iterator1" id="ParYear">
+            <AttrNames>
+                <Item Value="ParYear"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator1" StaticList="false" Uses="LOV_NeyabKolyaa"
+              id="NeyabKolyaa1" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator1" StaticList="false" Uses="LOV_NeyabGozayaa"
+              id="NeyabGozayaa1" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator1" StaticList="false" Uses="LOV_OrigEntity"
+              id="OrigEntity1" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <methodAction id="ValidatePoliceGurantee" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="ValidatePoliceGurantee" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.ValidatePoliceGurantee_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_ValidatePoliceGurantee_result">
+            <NamedData NDName="PoliceNo" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="BusinessCaseType" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="ParYear" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="OrigEntity" NDType="java.math.BigDecimal"/>
+            <NamedData NDName="idNumber" NDType="java.lang.String"/>
+        </methodAction>
+        <attributeValues IterBinding="ClaimProcedureSearchFormRVO1Iterator1" id="ClaimNumber1">
+            <AttrNames>
+                <Item Value="ClaimNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues Uses="LOV_ClaimYear" StaticList="false" IterBinding="ClaimProcedureSearchFormRVO1Iterator1"
+                      id="ClaimYear1"/>
+        <listOfValues Uses="LOV_FolderClaimId" StaticList="false" IterBinding="ClaimProcedureSearchFormRVO1Iterator1"
+                      id="FolderClaimId1"/>
+        <methodAction id="ValidateSettlementPenalty" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="ValidateSettlementPenalty" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.ValidateSettlementPenalty_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_ValidateSettlementPenalty_result">
+            <NamedData NDName="number" NDType="java.lang.String"/>
+            <NamedData NDName="folderType" NDType="java.lang.String"/>
+            <NamedData NDName="Year" NDType="java.lang.String"/>
+            <NamedData NDName="entity" NDType="java.lang.String"/>
+            <NamedData NDName="nationalID" NDType="java.lang.String"/>
+        </methodAction>
+        <list IterBinding="ClaimProcedureInputFormRVO1Iterator" StaticList="false" Uses="LOV_ExternalEntity"
+              id="ExternalEntity" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <methodAction id="paidCombaied" RequiresUpdateModel="true" Action="invokeMethod" MethodName="paidCombaied"
+                      IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+            <NamedData NDName="claimId" NDType="java.lang.String"/>
+            <NamedData NDName="claimNumber" NDType="java.lang.String"/>
+            <NamedData NDName="claimYear" NDType="java.lang.String"/>
+            <NamedData NDName="claimRepeated" NDType="java.lang.String"/>
+            <NamedData NDName="claimfolder" NDType="java.lang.String"/>
+            <NamedData NDName="claimPolice" NDType="java.lang.String"/>
+            <NamedData NDName="amount" NDType="double"/>
+        </methodAction>
+        <methodAction id="modefiyFolderExecutionFlag" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="modefiyFolderExecutionFlag" IsViewObjectMethod="false"
+                      DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                      ReturnName="data.CjExecAMDataControl.methodResults.modefiyFolderExecutionFlag_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_modefiyFolderExecutionFlag_result">
+            <NamedData NDName="folderId" NDType="int"/>
+        </methodAction>
+        <list IterBinding="ClaimProcedureSearchFormRVO1Iterator" StaticList="false" Uses="LOV_RepeatedFlag"
+              id="RepeatedFlag1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="ClaimProcedureSearchFormRVO1Iterator" id="KplayaFlag">
+            <AttrNames>
+                <Item Value="KplayaFlag"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseDegree"
+              id="BusinessCaseDegree" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_CrimType" id="CrimType"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    </bindings>
+</pageDefinition>

@@ -1,0 +1,12 @@
+//Groovy Scripts for com.egabi.cjexec.model.views.bcdetails.BusinessCaseLedgerSeqVO
+
+package com.egabi.cjexec.model.views.bcdetails
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="pEntityKolyaa")
+def pEntityKolyaa_VariableScript_Variable()
+{
+adf.context.current.sessionScope.userInfo.parentEntityId
+}
+

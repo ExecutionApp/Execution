@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <MethodCall
+      id="MethodCall2">
+      <property
+         name="activityId">preEnterReportsSearch</property>
+      <property
+         name="x">159.03223</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>preEnterReportsSearch&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="y">127.94238</property>
+      <property
+         name="exceptionHandler">false</property>
+   </MethodCall>
+   <View
+      id="View7">
+      <property
+         name="activityId">GonahMostanafa</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">394.03125</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>GonahMostanafa&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">118.09766</property>
+      <property
+         name="page">/pages/com/egabi/Reports/GonahMostanafa.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase8"
+      from="MethodCall2"
+      to="View7">
+      <property
+         name="fromOutcome">preEnterReportsSearch</property>
+      <property
+         name="sdm:polyPoints">R50,200.03223,127.5918,353.03125,117.74707,L50</property>
+   </ControlFlowCase>
+</SDM>

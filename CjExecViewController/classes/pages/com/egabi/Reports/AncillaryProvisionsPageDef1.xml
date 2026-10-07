@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="AncillaryProvisionsPageDef1"
+                Package="pages.com.egabi.Reports">
+   <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.AncillaryProvisionsDataReportView1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ProceduresDataReportView1Iterator"/>
+    <searchRegion Binds="ProceduresDataReportView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="AncillaryProvisionsDataReportView1Query"/>
+  </executables>
+  <bindings>
+   <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_DependentOrderType" id="DependentOrderType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+ <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="Year">
+      <AttrNames>
+        <Item Value="Year"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateTo">
+      <AttrNames>
+        <Item Value="DateTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateFrom">
+      <AttrNames>
+        <Item Value="DateFrom"/>
+      </AttrNames>
+    </attributeValues>
+     <list IterBinding="SearchInventoryRVO1Iterator" id="CriminalTypeFlag" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject" StaticList="true">
+      <AttrNames>
+        <Item Value="CriminalTypeFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="2"/>
+      </ValueList>
+    </list>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <button IterBinding="SearchInventoryRVO1Iterator" id="EstanafGozayaFlag" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="EstanafGozayaFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="ProceduresDataReportView1Iterator" id="ProceduresDataReportView1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView"
+                      Name="ProceduresDataReportView10">
+        <AttrNames>
+          <Item Value="ProcNumber"/>
+          <Item Value="ActsTypesName"/>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="DateEntReservation"/>
+          <Item Value="DependentOrderType"/>
+          <Item Value="EntId"/>
+          <Item Value="ExcLkpDependentOrdersName"/>
+          <Item Value="HearingDate"/>
+          <Item Value="InventoryNumber"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="ParYear"/>
+          <Item Value="PoliceStationEntityId"/>
+          <Item Value="ProcedureDate"/>
+          <Item Value="ProcedureType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="executeProcedureView1" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeProcedureView" IsViewObjectMethod="true" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.AncillaryProvisionsDataReportView1">
+      <!--<NamedData NDName="procedureType"
+                 NDValue="#{sessionScope.NavigationName eq 'Moarda'? 2: sessionScope.NavigationName eq 'Estanaf'?1: sessionScope.NavigationName eq 'MoardaEstanafia'?9:sessionScope.NavigationName eq 'EatradAmrGenaya'?14:sessionScope.NavigationName eq 'TaanReportPage' ? 20:0}"
+                 NDType="java.math.BigDecimal"/>-->
+                 <NamedData NDName="procedureType"
+                 
+                 NDValue="#{bindings.DependentOrderType.attributeValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="casYear" NDValue="#{bindings.Year.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="nyabaaGozaya"
+                 NDValue="#{bindings.NeyabKolyaa.inputValue eq null ? 0 : bindings.NeyabKolyaa.inputValue}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="dateFrom" NDValue="#{bindings.DateFrom.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="dateTo" NDValue="#{bindings.DateTo.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="policeId" NDValue="#{bindings.OrigEntity.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="criminalType" NDValue="#{bindings.CriminalTypeFlag.attributeValue}" NDType="java.math.BigDecimal"/>
+    </methodAction>
+    
+    <!--<methodAction id="executeProcedureViewAncillaryProvisions1" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeProcedureViewAncillaryProvisions" IsViewObjectMethod="true" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.ProceduresDataReportView1">
+      --><!--<NamedData NDName="procedureType"
+                 NDValue="#{sessionScope.NavigationName eq 'Moarda'? 2: sessionScope.NavigationName eq 'Estanaf'?1: sessionScope.NavigationName eq 'MoardaEstanafia'?9:sessionScope.NavigationName eq 'EatradAmrGenaya'?14:sessionScope.NavigationName eq 'TaanReportPage' ? 20:0}"
+                 NDType="java.math.BigDecimal"/>--><!--
+      <NamedData NDName="casYear" NDValue="#{bindings.Year.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="nyabaaGozaya"
+                 NDValue="#{bindings.NeyabGozayaa.inputValue eq null ? 0 : bindings.NeyabGozayaa.inputValue}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="dateFrom" NDValue="#{bindings.DateFrom.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="dateTo" NDValue="#{bindings.DateTo.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="dependentOrderType" NDValue="#{bindings.DependentOrderType.inputValue}" NDType="java.math.BigDecimal"/>
+    </methodAction>-->
+  </bindings>
+</pageDefinition>

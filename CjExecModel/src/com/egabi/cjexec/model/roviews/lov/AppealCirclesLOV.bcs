@@ -1,0 +1,334 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.lov.AppealCirclesLOV
+
+package com.egabi.cjexec.model.roviews.lov
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="prevDate")
+def prevDate_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('hearingDateId')
+}
+
+
+@VariableExpression(path="entityId")
+def entityId_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('policeId')
+}
+
+
+@VariableExpression(path="entId")
+def entId_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId')
+}
+
+
+@VariableExpression(path="entId1")
+def entId1_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId1')
+}
+
+
+@VariableExpression(path="entId2")
+def entId2_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId2')
+}
+
+
+@VariableExpression(path="pnum")
+def pnum_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleNum')
+}
+
+
+@VariableExpression(path="ruleId")
+def ruleId_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId')
+}
+
+
+@VariableExpression(path="ruleId1")
+def ruleId1_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId1')
+}
+
+
+@VariableExpression(path="ruleId2")
+def ruleId2_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId2')
+}
+
+
+@VariableExpression(path="postponedBindd")
+def postponedBindd_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('postponeddd')
+}
+
+
+@VariableExpression(path="RDF")
+def RDF_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('RDF')
+}
+
+
+@VariableExpression(path="entId3")
+def entId3_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId3')
+}
+
+
+@VariableExpression(path="entId4")
+def entId4_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId4')
+}
+
+
+@VariableExpression(path="entId5")
+def entId5_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId5')
+}
+
+
+@VariableExpression(path="entId6")
+def entId6_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId6')
+}
+
+
+@VariableExpression(path="entId7")
+def entId7_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId7')
+}
+
+
+@VariableExpression(path="entId8")
+def entId8_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId8')
+}
+
+
+@VariableExpression(path="entId9")
+def entId9_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId9')
+}
+
+
+@VariableExpression(path="ruleId3")
+def ruleId3_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId3')
+}
+
+
+@VariableExpression(path="ruleId4")
+def ruleId4_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId4')
+}
+
+
+@VariableExpression(path="ruleId5")
+def ruleId5_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId5')
+}
+
+
+@VariableExpression(path="ruleId6")
+def ruleId6_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId6')
+}
+
+
+@VariableExpression(path="ruleId7")
+def ruleId7_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId7')
+}
+
+
+@VariableExpression(path="ruleId8")
+def ruleId8_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId8')
+}
+
+
+@VariableExpression(path="ruleId9")
+def ruleId9_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId9')
+}
+
+
+@VariableExpression(path="delay")
+def delay_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('delay')
+}
+
+
+@VariableExpression(path="entId11")
+def entId11_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId11')
+}
+
+
+@VariableExpression(path="entId12")
+def entId12_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId12')
+}
+
+
+@VariableExpression(path="entId13")
+def entId13_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId13')
+}
+
+
+@VariableExpression(path="entId14")
+def entId14_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId14')
+}
+
+
+@VariableExpression(path="entId15")
+def entId15_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId15')
+}
+
+
+@VariableExpression(path="entId16")
+def entId16_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId16')
+}
+
+
+@VariableExpression(path="entId17")
+def entId17_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId17')
+}
+
+
+@VariableExpression(path="entId18")
+def entId18_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId18')
+}
+
+
+@VariableExpression(path="entId19")
+def entId19_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId19')
+}
+
+
+@VariableExpression(path="ruleId11")
+def ruleId11_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId11')
+}
+
+
+@VariableExpression(path="ruleId12")
+def ruleId12_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId12')
+}
+
+
+@VariableExpression(path="ruleId13")
+def ruleId13_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId13')
+}
+
+
+@VariableExpression(path="ruleId14")
+def ruleId14_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId14')
+}
+
+
+@VariableExpression(path="ruleId15")
+def ruleId15_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId15')
+}
+
+
+@VariableExpression(path="ruleId16")
+def ruleId16_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId16')
+}
+
+
+@VariableExpression(path="ruleId17")
+def ruleId17_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId17')
+}
+
+
+@VariableExpression(path="ruleId18")
+def ruleId18_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId18')
+}
+
+
+@VariableExpression(path="ruleId19")
+def ruleId19_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId19')
+}
+
+
+@VariableExpression(path="ruleId10")
+def ruleId10_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleId10')
+}
+
+
+@VariableExpression(path="entId10")
+def entId10_VariableScript_Variable()
+{
+adf.context.current.sessionScope.get('ruleEntId10')
+}
+
+
+@VariableExpression(path="bcidp")
+def bcidp_VariableScript_Variable()
+{
+adf.context.current.sessionScope.bcidp
+}
+

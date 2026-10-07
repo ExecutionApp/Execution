@@ -1,0 +1,1088 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <af:panelHeader text="#{bundle.CLAIMS_SEARCH}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:activeOutputText value="لا توجد نتائج تطابق محددات البحث" id="aot1" visible="false"
+                             styleClass="alert alert-warning alert-custom" partialTriggers="t1"/>
+        <af:panelGroupLayout id="pgl1" layout="default" styleClass="row justify-content-between">
+            <!-- actionListener="#{pageFlowScope.claimProcedureBean.insertNIDLog}" -->
+            <af:button text="button2" id="b5" action="nId" useWindow="true" windowHeight="500" windowWidth="900"
+                       rendered="false" returnListener="#{pageFlowScope.claimProcedureBean.getNIDValues}">
+                <af:setPropertyListener to="#{pageFlowScope.nIdParam}" from="28007280102512" type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.fcnParam}" from="#{null}" type="action"/>
+                <!--<af:setPropertyListener to="#{pageFlowScope.userIdParam}" from="agile.test" type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.channelIdParam}" from="10" type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.tokenIdParam}" from="541f4a29c53a03a0e1cca968acebec64" type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.callPermissionParam}" from="Y" type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.userNameParam}" from="Prosec_User" type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.passwordParam}" from="+@{e4wRPeb." type="action"/>-->
+                <af:setPropertyListener to="#{pageFlowScope.userIdParam}" from="#{sessionScope.userInfo.nidUserId}"
+                                        type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.channelIdParam}"
+                                        from="#{sessionScope.userInfo.nidChannelId}" type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.tokenIdParam}" from="#{sessionScope.userInfo.nidTokenId}"
+                                        type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.callPermissionParam}"
+                                        from="#{sessionScope.userInfo.nidCallPermission}" type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.userNameParam}" from="#{sessionScope.userInfo.nidUserName}"
+                                        type="action"/>
+                <af:setPropertyListener to="#{pageFlowScope.passwordParam}" from="#{sessionScope.userInfo.nidPassword}"
+                                        type="action"/>
+                <af:setPropertyListener to="#{sessionScope.clickedButton}" from="#{null}" type="action"/>
+                <af:target events="@all" render="@all" execute="@this"/>
+            </af:button>
+            <af:panelGroupLayout styleClass="pr-3" id="pgl33">
+                <af:outputLabel value="#{bundle.CLAIM_NUMBER}" id="ol4" showRequired="true"/>
+                <af:inputText value="#{bindings.ClaimNumber.inputValue}" label="#{bundle.CLAIM_NUMBER}" required="true"
+                              simple="true" maximumLength="#{bindings.ClaimNumber.hints.precision}"
+                              shortDesc="#{bindings.ClaimNumber.hints.tooltip}" id="it1" contentStyle="width:150px;">
+                    <f:validator binding="#{bindings.ClaimNumber.validator}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl3">
+                <af:outputLabel value="#{bundle.CLAIM_YEAR}" id="ol1" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.ClaimYear.inputValue}" label="#{bundle.CLAIM_YEAR}"
+                                    required="true" simple="true" shortDesc="#{bindings.ClaimYear.hints.tooltip}"
+                                    id="soc8" contentStyle="width:150px;">
+                    <f:selectItems value="#{bindings.ClaimYear.items}" id="si8"/>
+                    <f:validator binding="#{bindings.ClaimYear.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl20" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.FolderClaimId.label}" id="ol2fff"/>
+                <af:selectOneChoice value="#{bindings.FolderClaimId.inputValue}" label="#{bindings.FolderClaimId.label}"
+                                    required="#{bindings.FolderClaimId.hints.mandatory}" simple="true"
+                                    shortDesc="#{bindings.FolderClaimId.hints.tooltip}" id="soc9">
+                    <f:selectItems value="#{bindings.FolderClaimId.items}" id="si9"/>
+                    <f:validator binding="#{bindings.FolderClaimId.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl4">
+                <af:outputLabel value="#{bundle.CLAIM_TYPE}" id="ol2" showRequired="false"/>
+                <af:selectOneChoice value="#{bindings.ClaimTypeId.inputValue}" label="#{bundle.CLAIM_TYPE}"
+                                    simple="true" shortDesc="#{bindings.ClaimTypeId.hints.tooltip}" id="soc4">
+                    <f:selectItems value="#{bindings.ClaimTypeId.items}" id="si4"/>
+                    <f:validator binding="#{bindings.ClaimTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg98" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="#{bindings.OrigEntity.hints.mandatory}" value="النيابة الكلية" id="ol70"/>
+                <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}"
+                                    required="#{bindings.NeyabKolyaa.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc28" simple="true"
+                                    disabled="#{sessionScope.userInfo.entityDegree eq '3' or (sessionScope.userInfo.entityDegree eq '39' and !sessionScope.userInfo.userPrevMap[5041])}"
+                                    autoSubmit="true" immediate="true">
+                    <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si28"/>
+                    <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg97" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="#{bindings.OrigEntity.hints.mandatory}" value="النيابة الجزئية"
+                                id="ol54"/>
+                <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}"
+                                    required="#{bindings.NeyabGozayaa.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc17"
+                                    partialTriggers="soc28" simple="true"
+                                    disabled="#{(sessionScope.userInfo.entityDegree eq '3'  or pageFlowScope.disabledValidate)and sessionScope.userInfo.errandEntUser eq '0'}"
+                                    autoSubmit="true" immediate="true">
+                    <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si17"/>
+                    <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg43" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{bindings.OrigEntity.label}" id="ol43"/>
+                <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}" label="#{bindings.OrigEntity.label}"
+                                    shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc10" simple="true"
+                                    partialTriggers="soc17" autoSubmit="true" immediate="true"
+                                    required="#{bindings.NeyabGozayaa.inputValue != null and bindings.NeyabKolyaa.inputValue != null}">
+                    <f:selectItems value="#{bindings.OrigEntity.items}" id="si10"/>
+                    <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl48" rendered="true">
+                <af:outputLabel value="النوع" id="ol37"/>
+                <af:selectOneChoice value="#{bindings.CrimType.inputValue}" label=" "
+                                    required="#{bindings.CrimType.hints.mandatory}"
+                                    shortDesc="#{bindings.CrimType.hints.tooltip}" id="soc29">
+                    <f:selectItems value="#{bindings.CrimType.items}" id="si29"/>
+                    <f:validator binding="#{bindings.CrimType.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl46" rendered="true">
+                <af:outputLabel value="الدرجة" id="ol35"/>
+                <af:selectOneChoice   label="#{bindings.OrigEntity.label}"
+                                    shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc25" simple="true"
+                                    partialTriggers="soc17" autoSubmit="true" immediate="true"
+                                     rendered="false">
+                    <f:selectItem itemLabel="جنح" itemValue="1" id="si26"/>
+                     <f:selectItem itemLabel="جنايات" itemValue="2" id="si207"/>
+                    <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.BusinessCaseDegree.inputValue}"
+                                    label=" "
+                                    required="#{bindings.BusinessCaseDegree.hints.mandatory}"
+                                    shortDesc="#{bindings.BusinessCaseDegree.hints.tooltip}" id="soc27">
+                    <f:selectItems value="#{bindings.BusinessCaseDegree.items}" id="si27"/>
+                    <f:validator binding="#{bindings.BusinessCaseDegree.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl47" rendered="false">
+                <af:outputLabel value="#{bindings.OrigEntity.label}" id="ol36"/>
+                <af:selectOneChoice  label="#{bindings.OrigEntity.label}"
+                                    shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc26" simple="true"
+                                    partialTriggers="soc17" autoSubmit="true" immediate="true"
+                                    >
+                    <f:selectItem itemLabel="جزئية" itemValue="1" id="si2006"/>
+                     <f:selectItem itemLabel="كلية" itemValue="2" id="si2007"/>
+                    <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg4" styleClass="pl-3">
+                <af:outputLabel value="#{bundle.IS_REPEATED}" id="ol3" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.RepeatedFlag1.inputValue}" label="#{bindings.RepeatedFlag1.label}"
+                                  
+                                    shortDesc="#{bindings.RepeatedFlag1.hints.tooltip}" id="soc22"
+                                    simple="true" autoSubmit="true" required="true">
+                    <f:selectItems value="#{bindings.RepeatedFlag1.items}" id="si23"/>
+                    <f:validator binding="#{bindings.RepeatedFlag1.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneRadio value="#{bindings.RepeatedFlag.inputValue}" label="#{bindings.RepeatedFlag.label}"
+                                   shortDesc="#{bindings.RepeatedFlag.hints.tooltip}" id="sor3" layout="horizontal" 
+                                   simple="true" autoSubmit="true" required="true" rendered="false">
+                    <af:selectItem label="#{bundle.YES_LABEL}"   id="si2" value="Y" />
+                    <af:selectItem label="#{bundle.NO_LABEL}" id="si16" value="N"/>
+                </af:selectOneRadio>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl8" styleClass="btn-holder">
+            <af:panelLabelAndMessage label="#{bindings.KplayaFlag.inputValue eq 'T'?'جزئى':'كلى'}" id="plam5"
+                                     rendered="#{sessionScope.userInfo.entityDegree eq '39'}">
+                <af:link disabled="#{pageFlowScope.provisionsInclusionBean.mode == 'view'}" id="l6"
+                         rendered="#{bindings.KplayaFlag.inputValue ne 'T'}" styleClass="tglOn">
+                    <af:setPropertyListener from="#{'T'}" to="#{bindings.KplayaFlag.inputValue}" type="action"/>
+                    <af:setPropertyListener from="#{'T'}" to="#{sessionScope.ClaimKplayaFlag}" type="action"/>
+                </af:link>
+                <af:link disabled="#{pageFlowScope.provisionsInclusionBean.mode == 'view'}" id="l7"
+                         rendered="#{bindings.KplayaFlag.inputValue eq 'T'}" styleClass="tglOff">
+                    <af:setPropertyListener from="#{'F'}" to="#{bindings.KplayaFlag.inputValue}" type="action"/>
+                    <af:setPropertyListener from="#{'F'}" to="#{sessionScope.ClaimKplayaFlag}" type="action"/>
+                </af:link>
+            </af:panelLabelAndMessage>
+            <af:button text="#{bundle.SEARCH}" id="b1" rendered="false"
+                       action="#{pageFlowScope.claimProcedureBean.searchClaimProcedure}"/>
+                         <af:button text="#{bundle.SEARCH}" id="b1fara"
+                       action="#{bindings.getClaimsSearch.execute}"/>
+            <af:button text="#{bundle.RESET_SEARCH}" id="b2"
+                       action="#{pageFlowScope.claimProcedureBean.resetSearchClaimProcedure}">
+                <!--<af:target events="@all" execute="@this" render="@all"/>-->
+            </af:button>
+        </af:panelGroupLayout>
+    </af:panelHeader>
+    <af:panelHeader text="#{bundle.CLAIMS_SEARCH_RESULTS}" id="ph2">
+        <f:facet name="context"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:table value="#{bindings.ExcClaimsVO1.collectionModel}" var="row" rows="#{bindings.ExcClaimsVO1.rangeSize}"
+                  emptyText="#{bindings.ExcClaimsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.ExcClaimsVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.ExcClaimsVO1.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.ExcClaimsVO1.rangeSize}" id="t1" width="100%"
+                  rowDisclosureListener="#{pageFlowScope.claimProcedureBean.rowDisclosureListenerClaimTable}"
+                  columnStretching="last" scrollPolicy="page" autoHeightRows="5">
+            <!--styleClass="table-inside-table"-->
+            <f:facet name="detailStamp">
+                <af:panelGroupLayout id="pgl2">
+                    <af:outputLabel value="#{bindings.ProcedureType.inputValue} uuuu" id="ol18" showRequired="true"/>
+                    <af:inputText label="posResultId" id="it303"
+                                  binding="#{pageFlowScope.claimProcedureBean.testTxtBind}" autoSubmit="true"
+                                  partialTriggers="b202"
+                                  valueChangeListener="#{pageFlowScope.claimProcedureBean.posResultValueChangeListener}"
+                                  visible="false"/>
+                    <af:panelTabbed position="above" id="pt1" styleClass="inner-tabs-table">
+                        <af:showDetailItem id="tab1" text="#{bundle.PROCEDURE_ADD}" immediate="true">
+                                        <af:panelGroupLayout id="pgl31" rendered="#{row.ActiveFlag eq '2' }" halign="center" valign="middle" layout="horizontal">
+                                                <af:outputLabel value=" لا يمكنكم اتخاذ اي اجراء على هذا الحصر حيث انه مغلق" inlineStyle="color: Black !important; font-size: 20pt;" id="ol21"/>
+                                            </af:panelGroupLayout>
+                            <af:panelGroupLayout id="pgl25" layout="scroll" rendered="#{row.ActiveFlag eq '1'  }">
+                                <af:panelGroupLayout id="pgl266" styleClass="row" layout="default">
+                                    <af:panelGroupLayout id="pgl1645" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="#{bundle.FIXED_PENALTY_AMOUNT}" id="ol1643"/>
+                                        <af:inputText value="#{row.ClaimTotalOriginal}"
+                                                      label="#{bundle.FIXED_PENALTY_AMOUNT}" simple="true"
+                                                      required="#{bindings.FixedPenaltyAmount.hints.mandatory}"
+                                                      shortDesc="#{bindings.FixedPenaltyAmount.hints.tooltip}" id="it14"
+                                                      disabled="true">
+                                            <f:validator binding="#{bindings.FixedPenaltyAmount.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl165" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="#{bundle.PROCEDURE_REMAINING}" id="ol143"/>
+                                        <af:inputText value="#{row.FixedPenaltyAmount}"
+                                                      label="#{bundle.PROCEDURE_REMAINING}" simple="true"
+                                                      required="#{bindings.ClaimTotal.hints.mandatory}"
+                                                      shortDesc="#{bindings.ClaimTotal.hints.tooltip}" id="it8"
+                                                      disabled="true">
+                                            <f:validator binding="#{row.ClaimTotal}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl145" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="المدفوع" id="ol163"/>
+                                        <af:inputText value="#{row.ClaimTotal}" label="#{bundle.FIXED_PENALTY_TOTAL}"
+                                                      simple="true"
+                                                      shortDesc="#{bindings.FixedPenaltyTotal.hints.tooltip}" id="it184"
+                                                      disabled="true">
+                                            <f:validator binding="#{bindings.FixedPenaltyTotal.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl44" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="مبلغ الالغاء" id="ol34"/>
+                                        <af:inputText value="#{row.CancelAmount}" label="#{bundle.FIXED_PENALTY_TOTAL}"
+                                                      simple="true"
+                                                      shortDesc="#{bindings.FixedPenaltyTotal.hints.tooltip}" id="it23"
+                                                      disabled="true">
+                                            <f:validator binding="#{bindings.FixedPenaltyTotal.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl42" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="سداد سابق" id="ol32"/>
+                                        <af:inputText value="#{row.PreviousPaied}" label="#{bundle.FIXED_PENALTY_TOTAL}"
+                                                      simple="true"
+                                                      shortDesc="#{bindings.FixedPenaltyTotal.hints.tooltip}" id="it22"
+                                                      disabled="true">
+                                            <f:validator binding="#{bindings.FixedPenaltyTotal.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl145far" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="تاريخ المطالبة" id="ol163fara"/>
+                                        <af:inputText value="#{row.OriginalPenaltyDueDate}"
+                                                      label="#{bundle.FIXED_PENALTY_TOTAL}" simple="true"
+                                                      shortDesc="#{bindings.FixedPenaltyTotal.hints.tooltip}"
+                                                      id="it184fara" disabled="true">
+                                            <f:validator binding="#{bindings.FixedPenaltyTotal.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl22" styleClass="col-md-2 col-sm-12" rendered="false">
+                                        <af:outputLabel value="مصاريف المحكمة" id="ol16"/>
+                                        <af:inputText value="#{row.CourtFees}" id="it5" disabled="true"/>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl23" styleClass="col-md-2 col-sm-12" rendered="false">
+                                        <af:outputLabel value="اتعاب المحاماة" id="ol17"/>
+                                        <af:inputText value="#{row.LawyerFees}" id="it10" disabled="true"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl26" styleClass="row" layout="default"
+                                                     rendered="#{row.DailyPenaltyFlag eq 'Y' or row.DailyPenaltyFlag eq 'X'}">
+                                    <af:panelGroupLayout id="pgl1605" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="#{bundle.DAILY_AMOUNT}" id="ol1693"/>
+                                        <af:inputText value="#{row.DailyPenaltyAmount}" label="#{bundle.DAILY_AMOUNT}"
+                                                      simple="true"
+                                                      required="#{bindings.DailyPenaltyAmount.hints.mandatory}"
+                                                      shortDesc="#{bindings.DailyPenaltyAmount.hints.tooltip}"
+                                                      id="it144" disabled="true">
+                                            <f:validator binding="#{bindings.DailyPenaltyAmount.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl1609" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="#{bundle.DAILY_REMAINING}" id="ol1699"/>
+                                        <af:inputText value="#{row.DailyPenaltyRemaining}"
+                                                      label="#{bundle.DAILY_REMAINING}" simple="true"
+                                                      required="#{bindings.DailyPenaltyRemaining.hints.mandatory}"
+                                                      shortDesc="#{bindings.DailyPenaltyRemaining.hints.tooltip}"
+                                                      id="it149" disabled="true">
+                                            <f:validator binding="#{bindings.DailyPenaltyRemaining.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl5farah" styleClass="col-md-2 col-sm-12" rendered="true">
+                                        <af:outputLabel value="الغرامة اليومية المدفوعة" id="ol12fara"/>
+                                        <af:inputText value="#{row.DailyPenaltyFees}" label="#{bundle.CLAIM_EXPENSES}"
+                                                      simple="true"
+                                                      required="#{bindings.DailyPenaltyFees.hints.mandatory}"
+                                                      shortDesc="#{bindings.DailyPenaltyFees.hints.tooltip}" id="it3"
+                                                      disabled="true">
+                                            <f:validator binding="#{bindings.DailyPenaltyFees.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl5" styleClass="col-md-2 col-sm-12" rendered="false">
+                                        <af:outputLabel value="#{bundle.CLAIM_EXPENSES}" id="ol12"/>
+                                        <af:inputText value="#{bindings.DailyPenaltyFees}"
+                                                      label="#{bundle.CLAIM_EXPENSES}" simple="true"
+                                                      required="#{bindings.DailyPenaltyFees.hints.mandatory}"
+                                                      shortDesc="#{bindings.DailyPenaltyFees.hints.tooltip}"
+                                                      id="it3fara" disabled="true">
+                                            <f:validator binding="#{bindings.DailyPenaltyFees.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl1675" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="#{bundle.PREVIOUS_PROCEDURE_DATE}" id="ol1673"/>
+                                        <af:inputDate value="#{row.PenaltyDueDate}" label="#{bundle.PENALTY_DUE_DATE}"
+                                                      simple="true"
+                                                      required="#{bindings.PenaltyDueDate.hints.mandatory}"
+                                                      shortDesc="#{bindings.PenaltyDueDate.hints.tooltip}" id="id1"
+                                                      disabled="true">
+                                            <f:validator binding="#{bindings.PenaltyDueDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.PenaltyDueDate.format}"/>
+                                        </af:inputDate>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl167" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="#{bundle.NUMBER_OF_DAYS}" id="ol1650"/>
+                                        <af:inputText value="#{bindings.NumberOfDays.inputValue}"
+                                                      label="#{bundle.NUMBER_OF_DAYS}" simple="true"
+                                                      maximumLength="#{bindings.NumberOfDays.hints.precision}"
+                                                      shortDesc="#{bindings.NumberOfDays.hints.tooltip}" id="it24"
+                                                      disabled="true">
+                                            <f:validator binding="#{bindings.NumberOfDays.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <!--<af:panelGroupLayout id="pgl1666" styleClass="col-md-2 col-sm-12">
+                                    <af:outputLabel value="#{bundle.CLAIM_DAILY_TOTAL}" id="ol1660"/>
+                                    <af:inputText value="#{bindings.DailyPenaltyTotal.inputValue}"
+                                                  label="#{bundle.CLAIM_DAILY_TOTAL}" simple="true"
+                                                  maximumLength="#{bindings.DailyPenaltyTotal.hints.precision}"
+                                                  shortDesc="#{bindings.DailyPenaltyTotal.hints.tooltip}" id="it64"
+                                                  disabled="true">
+                                        <f:validator binding="#{bindings.DailyPenaltyTotal.validator}"/>
+                                    </af:inputText>
+                                </af:panelGroupLayout>-->
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl166" styleClass="col-md-2 col-sm-12"
+                                                     rendered="#{row.DailyPenaltyFlag eq 'Y' or row.DailyPenaltyFlag eq 'X'}">
+                                    <af:outputLabel value="اجمالى الغرامة اليومية" id="ol14"/>
+                                    <af:inputText value="#{bindings.ClaimTotal.inputValue}" label="#{bundle.ClaimTotal}"
+                                                  simple="true" shortDesc="#{bindings.ClaimTotal.hints.tooltip}"
+                                                  id="it21" disabled="true">
+                                        <f:validator binding="#{bindings.ClaimTotal.validator}"/>
+                                    </af:inputText>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl6" styleClass="row" layout="default">
+                                    <af:spacer width="20" height="10" id="s2"/>
+                                    <af:panelGroupLayout id="pgl17" styleClass="col-md-2 col-sm-12" visible="false">
+                                        <af:outputLabel value="#{bundle.PROCEDURE_NUMBER}" id="ol150" rendered="false"/>
+                                        <af:inputText value="#{bindings.ProcedureNumber.inputValue}"
+                                                      label="#{bundle.PROCEDURE_NUMBER}" simple="true" rendered="false"
+                                                      maximumLength="#{bindings.ProcedureNumber.hints.precision}"
+                                                      shortDesc="#{bindings.ProcedureNumber.hints.tooltip}" id="it4"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.ProcedureNumber.validator}"/>
+                                            <af:clientListener type="keyUp" method="addSpace"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl16">
+                                        <af:outputLabel value="#{bundle.PROCEDURE_TYPE}" id="ol10" showRequired="true"/>
+                                        <af:selectOneChoice value="#{bindings.ProcedureType.inputValue}"
+                                                            label="#{bundle.PROCEDURE_TYPE}" simple="true"
+                                                            shortDesc="#{bindings.ProcedureType.hints.tooltip}"
+                                                            id="soc1" autoSubmit="true"
+                                                            valueChangeListener="#{pageFlowScope.claimProcedureBean.procedureTypeVCL}"
+                                                            contentStyle="width:240px">
+                                            <!--<f:selectItems value="#{bindings.ProcedureType.items}" id="si1"/>
+                                        disabled="#{row.FixedPenaltyAmount ne null and item.value eq 5}"-->
+                                            <af:forEach items="#{bindings.ProcedureType.items}" var="item">
+                                                <af:selectItem value="#{item.value}" label="#{item.label}" id="si34"
+                                                               rendered="#{item.value le 34 }"
+                                                               disabled="#{(row.WorkPenaltyFlag eq  'N' and (item.value eq 8  or item.value eq 12 or item.value eq 5)  ) or(!(row.DailyPenaltyFlag eq 'Y' or row.DailyPenaltyFlag eq 'X') and (item.value eq 5 or item.value eq 8)) or ((row.LawyerFees eq null or row.LawyerFees eq 0) and item.value eq 10)or ((row.CourtFees eq null or row.CourtFees eq 0) and item.value eq 11)}"/>
+                                            </af:forEach>
+                                            <f:validator binding="#{bindings.ProcedureType.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl157" styleClass="col-md-2 col-sm-12" visible="false">
+                                        <af:outputLabel value="#{bundle.CANCELLATION_TYPE}" id="ol19"/>
+                                        <af:selectOneChoice value="#{bindings.CancellationType.inputValue}"
+                                                            label="#{bindings.CancellationType.label}"
+                                                            required="#{bindings.CancellationType.hints.mandatory}"
+                                                            shortDesc="#{bindings.CancellationType.hints.tooltip}"
+                                                            id="soc7">
+                                            <f:selectItems value="#{bindings.CancellationType.items}" id="si1"/>
+                                            <f:validator binding="#{bindings.CancellationType.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl155" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel id="ol63" value="#{bundle.ATTACHMENTSXX}"/>
+                                        <af:inputFile label="" id="if1" autoSubmit="true"
+                                                      valueChangeListener="#{pageFlowScope.claimProcedureBean.uploadFile}"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="70" height="10" id="s1"/>
+                                    <af:panelGroupLayout id="pgl15" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="#{bundle.PROCEDURE_DATE}" id="ol13" showRequired="true"/>
+                                        <af:inputDate value="#{bindings.ProcedureDate.inputValue}"
+                                                      label="#{bundle.PROCEDURE_DATE}" simple="true"
+                                                      shortDesc="#{bindings.ProcedureDate.hints.tooltip}" id="id2"
+                                                      autoSubmit="true"
+                                                      maxValue="#{pageFlowScope.claimProcedureBean.maxDateVal}"
+                                                      valueChangeListener="#{pageFlowScope.claimProcedureBean.procedureDateVCLFolder}"
+                                                      required="true">
+                                            <f:validator binding="#{bindings.ProcedureDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.ProcedureDate.format}"/>
+                                        </af:inputDate>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl21" styleClass="col-md-1 col-sm-12"
+                                                         partialTriggers="soc1"
+                                                         visible="#{bindings.ProcedureType.attributeValue eq '9'}">
+                                        <af:outputLabel value="عدد الاقساط" id="ol1570fara"/>
+                                        <af:selectOneChoice value="#{bindings.ExcLkpGharamaInstallments1.inputValue}"
+                                                            label="#{bindings.ExcLkpGharamaInstallments1.label}"
+                                                            autoSubmit="true" immediate="true"
+                                                            required="#{bindings.ExcLkpGharamaInstallments1.hints.mandatory}"
+                                                            shortDesc="#{bindings.ExcLkpGharamaInstallments1.hints.tooltip}"
+                                                            id="soc13"
+                                                            valueChangeListener="#{pageFlowScope.claimProcedureBean.calculateGramanInstaalmentValue}">
+                                            <f:selectItems value="#{bindings.ExcLkpGharamaInstallments1.items}"
+                                                           id="si13"/>
+                                            <f:validator binding="#{bindings.ExcLkpGharamaInstallments1.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl177" styleClass="col-md-2 col-sm-12" visible="false">
+                                        <af:outputLabel value="#{bindings.ProcedureType.attributeValue eq '9'?'قيمة القسط الواحد':bundle.NUM_DAYS_EKRAH}"
+                                                        id="ol1570"/>
+                                        <af:inputText value="#{bindings.NumDaysInput.inputValue}" simple="true"
+                                                      maximumLength="#{bindings.NumDaysInput.hints.precision}"
+                                                      shortDesc="#{bindings.NumDaysInput.hints.tooltip}" id="it74"
+                                                      autoSubmit="true" partialTriggers="id2 soc13 it2"
+                                                      valueChangeListener="#{pageFlowScope.claimProcedureBean.numDaysVCL}">
+                                            <f:validator binding="#{bindings.NumDaysInput.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl7" styleClass="col-md-2 col-sm-12" visible="false"
+                                                         partialTriggers="soc1">
+                                        <af:outputLabel value="#{bindings.ProcedureType.attributeValue eq '9'?'تاريخ اول قسط':'تاريخ انتهاء  '}"
+                                                        id="ol15"/>
+                                        <af:inputDate value="#{bindings.ProcedureEndDate.inputValue}"
+                                                      rendered="#{row.LastDailyPenaltyDate eq null}"
+                                                      label="#{bundle.PROCEDURE_END_DATE}" simple="true"
+                                                      autoSubmit="true"
+                                                      shortDesc="#{bindings.ProcedureEndDate.hints.tooltip}" id="id3"
+                                                      valueChangeListener="#{pageFlowScope.claimProcedureBean.procedureDateVCLFolderLastDate}"
+                                                      disabled="#{bindings.ProcedureType.attributeValue eq '1' }">
+                                            <f:validator binding="#{bindings.ProcedureEndDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.ProcedureDate.format}"/>
+                                        </af:inputDate>
+                                        <af:inputText value="#{row.LastDailyPenaltyDate}" simple="true"
+                                                      rendered="#{row.LastDailyPenaltyDate ne null}"
+                                                      shortDesc="#{bindings.FixedPenaltyTotal.hints.tooltip}"
+                                                      id="it184far" disabled="true"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl14" styleClass="row" layout="default" rendered="true"
+                                                     partialTriggers="soc1">
+                                    <af:panelGroupLayout id="pgl18" styleClass="col-md-2 col-sm-12" visible="false"
+                                                         partialTriggers="soc1">
+                                        <af:outputLabel value="#{bundle.COLLECTION_TYPE}" id="ol6"/>
+                                        <af:selectOneChoice value="#{bindings.CollectionType.inputValue}"
+                                                            label="#{bundle.COLLECTION_TYPE}" simple="true"
+                                                            shortDesc="#{bindings.CollectionType.hints.tooltip}"
+                                                            id="soc3" autoSubmit="true">
+                                            <f:selectItems value="#{bindings.CollectionType.items}" id="si3"/>
+                                            <f:validator binding="#{bindings.CollectionType.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl13" styleClass="col-md-2 col-sm-12" visible="false"
+                                                         partialTriggers="soc1">
+                                        <af:outputLabel value="#{bundle.PAYMENT_NUMBER}" id="ol11"/>
+                                        <af:inputText value="#{bindings.PaymentNumber.inputValue}"
+                                                      label="#{bundle.PAYMENT_NUMBER}" simple="true"
+                                                      partialTriggers="soc1"
+                                                      maximumLength="#{bindings.PaymentNumber.hints.precision}"
+                                                      shortDesc="#{bindings.PaymentNumber.hints.tooltip}" id="it86"
+                                                      autoSubmit="true">
+                                            <!--<af:clientListener type="keyUp" method="addSpace"/>-->
+                                            <f:validator binding="#{bindings.PaymentNumber.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl43" styleClass="col-md-2 col-sm-12" visible="false"
+                                                         partialTriggers="soc1">
+                                        <af:outputLabel value="الجهة" id="ol33"/>
+                                        <af:selectOneChoice value="#{bindings.ExternalEntity.inputValue}"
+                                                            required="#{bindings.ExternalEntity.hints.mandatory}"
+                                                            shortDesc="#{bindings.ExternalEntity.hints.tooltip}"
+                                                            id="soc23">
+                                            <f:selectItems value="#{bindings.ExternalEntity.items}" id="si24"/>
+                                            <f:validator binding="#{bindings.ExternalEntity.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl12" styleClass="col-md-2 col-sm-12" visible="false"
+                                                         partialTriggers="soc1">
+                                        <af:outputLabel value="#{bundle.PROCEDURE_AMOUNT}" id="ol5"
+                                                        showRequired="true"/>
+                                        <af:inputText value="#{bindings.ProcedureAmount.inputValue}"
+                                                      partialTriggers="it74 id2" label="#{bundle.PROCEDURE_AMOUNT}"
+                                                      simple="true"
+                                                      valueChangeListener="#{pageFlowScope.claimProcedureBean.amountChanged}"
+                                                      maximumLength="#{bindings.ProcedureAmount.hints.precision}"
+                                                      shortDesc="#{bindings.ProcedureAmount.hints.tooltip}" id="it2"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.ProcedureAmount.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ProcedureAmount.format}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl11" styleClass="col-md-2 col-sm-12" visible="false"
+                                                         partialTriggers="soc1">
+                                        <af:outputLabel value="#{bundle.PROCEDURE_REMAINING}" id="ol9"/>
+                                        <af:inputText value="#{bindings.ProcedureRemaining.inputValue}"
+                                                      label="#{bundle.PROCEDURE_REMAINING}" readOnly="true"
+                                                      simple="true"
+                                                      required="#{bindings.ProcedureRemaining.hints.mandatory}"
+                                                      maximumLength="#{bindings.ProcedureRemaining.hints.precision}"
+                                                      shortDesc="#{bindings.ProcedureRemaining.hints.tooltip}" id="it6"
+                                                      autoSubmit="true" partialTriggers="it2">
+                                            <f:validator binding="#{bindings.ProcedureRemaining.validator}"/>
+                                            <af:clientListener type="keyUp" method="addSpace"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ProcedureRemaining.format}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl10" visible="false" partialTriggers="soc1">
+                                        <af:outputLabel value="#{bundle.AMOUNT_TEXT}" id="ol8"/>
+                                        <af:inputText value="#{bindings.AmountText.inputValue} #{bundle.TAFKEET}"
+                                                      label="#{bundle.AMOUNT_TEXT}" partialTriggers="it2"
+                                                      required="#{bindings.AmountText.hints.mandatory}" simple="true"
+                                                      readOnly="true"
+                                                      maximumLength="#{bindings.AmountText.hints.precision}"
+                                                      shortDesc="#{bindings.AmountText.hints.tooltip}" id="it9"
+                                                      autoSubmit="true" contentStyle="width:250px;">
+                                            <f:validator binding="#{bindings.AmountText.validator}"/>
+                                            <af:clientListener type="keyUp" method="addSpace"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl37" styleClass="row" layout="default" visible="false">
+                                    <af:panelGroupLayout id="pgl38" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="رقم المطالبة" id="ol28"/>
+                                        <af:inputText   simple="true"
+                                                      required="#{bindings.ClaimNumber.hints.mandatory}"
+                                                      columns="#{bindings.ClaimNumber.hints.displayWidth}"
+                                                      maximumLength="#{bindings.ClaimNumber.hints.precision}"
+                                                      shortDesc="#{bindings.ClaimNumber.hints.tooltip}" id="it17">
+                                            <f:validator binding="#{bindings.ClaimNumber.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl39">
+                                        <af:outputLabel value="سنة المطالبة" id="ol29" showRequired="true"/>
+                                        <af:selectOneChoice  
+                                                            label="#{bindings.ClaimYear1.label}"
+                                                            required="#{bindings.ClaimYear1.hints.mandatory}"
+                                                            shortDesc="#{bindings.ClaimYear1.hints.tooltip}" id="soc24"
+                                                            autoSubmit="true">
+                                            <f:selectItems value="#{bindings.ClaimYear.items}" id="si25"/>
+                                            <f:validator binding="#{bindings.ClaimYear1.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl40" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="دفتر المطالبة" id="ol30"/>
+                                        <af:selectOneChoice  
+                                                            label="#{bindings.FolderClaimId1.label}"
+                                                            required="#{bindings.FolderClaimId1.hints.mandatory}"
+                                                            shortDesc="#{bindings.FolderClaimId1.hints.tooltip}"
+                                                            id="soc21" autoSubmit="true">
+                                            <f:selectItems value="#{bindings.FolderClaimId.items}" id="si22"/>
+                                            <f:validator binding="#{bindings.FolderClaimId1.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl41" layout="horizontal">
+                                        <af:button text="تحقق" id="b4"
+                                                   action="#{pageFlowScope.claimProcedureBean.validatePenalty}"/>
+                                        <af:outputLabel value="مبلغ التسوية" id="ol31"/>
+                                        <af:inputText label="Label 1" id="it18" disabled="true"/>
+                                        <af:inputText label="Label 1" id="it19" disabled="true"/>
+                                        <af:inputText label="Label 1" id="it20" disabled="true"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl27" styleClass="row" layout="default"
+                                                     partialTriggers="soc1" visible="false">
+                                    <af:panelGroupLayout id="pgl28" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="رقم القضية" id="ol20"/>
+                                        <af:inputText value="#{bindings.PoliceNo.inputValue}"
+                                                      label="#{bindings.PoliceNo.hints.label}"
+                                                       
+                                                      columns="#{bindings.PoliceNo.hints.displayWidth}"
+                                                      maximumLength="#{bindings.PoliceNo.hints.precision}"
+                                                      shortDesc="#{bindings.PoliceNo.hints.tooltip}" id="it11"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.PoliceNo.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.PoliceNo.format}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl29" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="سنة" id="ol22"/>
+                                        <af:inputText value="#{bindings.ParYear.inputValue}"
+                                                      label="#{bindings.ParYear.hints.label}"
+                                                       
+                                                      columns="#{bindings.ParYear.hints.displayWidth}"
+                                                      maximumLength="#{bindings.ParYear.hints.precision}"
+                                                      shortDesc="#{bindings.ParYear.hints.tooltip}" id="it12"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.ParYear.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ParYear.format}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl30" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="جدول" id="ol23" showRequired="true"/>
+                                        <af:selectOneChoice value="#{bindings.BusinessCaseType.inputValue}"
+                                                            label="#{bindings.BusinessCaseType.label}"
+                                                            
+                                                            shortDesc="#{bindings.BusinessCaseType.hints.tooltip}"
+                                                            id="soc16" autoSubmit="true">
+                                            <f:selectItems value="#{bindings.BusinessCaseType.items}" id="si18"/>
+                                            <f:validator binding="#{bindings.BusinessCaseType.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl32" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="نيابة كلية" id="ol24"/>
+                                        <af:selectOneChoice value="#{bindings.NeyabKolyaa1.inputValue}"
+                                                            label="#{bindings.NeyabKolyaa1.label}"
+                                                            required="#{bindings.NeyabKolyaa1.hints.mandatory}"
+                                                            shortDesc="#{bindings.NeyabKolyaa1.hints.tooltip}"
+                                                            id="soc18" autoSubmit="true">
+                                            <f:selectItems value="#{bindings.NeyabKolyaa1.items}" id="si19"/>
+                                            <f:validator binding="#{bindings.NeyabKolyaa1.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl35" styleClass="col-md-2 col-sm-12">
+                                        <af:outputLabel value="نيابة جزئية" id="ol26"/>
+                                        <af:selectOneChoice value="#{bindings.NeyabGozayaa1.inputValue}"
+                                                            label="#{bindings.NeyabGozayaa1.label}"
+                                                            required="#{bindings.NeyabGozayaa1.hints.mandatory}"
+                                                            shortDesc="#{bindings.NeyabGozayaa1.hints.tooltip}"
+                                                            id="soc19" autoSubmit="true" partialTriggers="soc18">
+                                            <f:selectItems value="#{bindings.NeyabGozayaa1.items}" id="si20"/>
+                                            <f:validator binding="#{bindings.NeyabGozayaa1.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl34">
+                                        <af:outputLabel value="قسم الشرطة" id="ol25"/>
+                                        <af:selectOneChoice value="#{bindings.OrigEntity1.inputValue}"
+                                                            label="#{bindings.OrigEntity1.label}"
+                                                            required="#{bindings.OrigEntity1.hints.mandatory}"
+                                                            shortDesc="#{bindings.OrigEntity1.hints.tooltip}" id="soc20"
+                                                            autoSubmit="true" partialTriggers="soc19">
+                                            <f:selectItems value="#{bindings.OrigEntity1.items}" id="si21"/>
+                                            <f:validator binding="#{bindings.OrigEntity1.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl36" layout="horizontal">
+                                        <af:button text="تحقق" id="b3"
+                                                   action="#{pageFlowScope.claimProcedureBean.vlaidateGurantee}"/>
+                                        <af:outputLabel value="مبلغ الكفالة" id="ol27"/>
+                                        <af:inputText id="it13" disabled="true"/>
+                                        <af:inputText id="it15" disabled="true"/>
+                                        <af:inputText id="it16" disabled="true"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl19" styleClass="row" layout="default">
+                                    <af:panelGroupLayout id="pgl9" styleClass="col-md-1 col-sm-12">
+                                        <af:outputLabel value="#{bundle.NOTES}" id="ol7"/>
+                                        <af:inputText value="#{bindings.ProcedureNotes.inputValue}"
+                                                      label="#{bundle.NOTES}"
+                                                      required="#{bindings.ProcedureNotes.hints.mandatory}"
+                                                      simple="true"
+                                                      maximumLength="#{bindings.ProcedureNotes.hints.precision}"
+                                                      shortDesc="#{bindings.ProcedureNotes.hints.tooltip}" id="it7"
+                                                      rows="3" autoSubmit="true" columns="100">
+                                            <f:validator binding="#{bindings.ProcedureNotes.validator}"/>
+                                            <af:clientListener type="keyUp" method="addSpace"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl24" layout="horizontal">
+                                    <af:button text="#{bundle.SAVE}" id="b4fara"
+                                               action="#{pageFlowScope.claimProcedureBean.saveClaimProcedureFolder}"/>
+                                    <af:button  text="الدفع الإلكتروني " id="b202"
+                                               action="#{pageFlowScope.claimProcedureBean.callPOS}"
+                                               styleClass="print-btn" partialSubmit="true" />
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                            <!--<af:button action="#{pageFlowScope.claimProcedureBean.saveClaimProcedure}"
+                                       text="#{bundle.SAVE}" id="b3"/>-->
+                                       
+                        </af:showDetailItem>
+                        <af:showDetailItem id="tab2" text="#{bundle.PROCEDURE_HISTORY}" immediate="true"
+                                           disclosureListener="#{pageFlowScope.claimProcedureBean.claimProctabDisclosureListener}">
+                            <af:table value="#{bindings.ExcProcedureClaimVO1.collectionModel}" var="row"
+                                      rows="#{bindings.ExcProcedureClaimVO1.rangeSize}"
+                                      emptyText="#{bindings.ExcProcedureClaimVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.ExcProcedureClaimVO1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.ExcProcedureClaimVO1.collectionModel.makeCurrent}"
+                                      rowSelection="single" fetchSize="#{bindings.ExcProcedureClaimVO1.rangeSize}"
+                                      id="t2" partialTriggers=":b2" columnStretching="column:c21" width="95%"
+                                      styleClass="table-inside-table" scrollPolicy="page" autoHeightRows="3">
+                                <af:column headerText="#{bindings.ExcProcedureClaimVO1.hints.Id.label}" id="c18"
+                                           visible="false">
+                                    <af:outputText value="#{row.Id}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.Id.tooltip}"
+                                                   id="ot18">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcProcedureClaimVO1.hints.Id.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bundle.PAYMENT_NUMBER}" id="c19" visible="false">
+                                    <af:outputText value="#{row.ProcedureNumber}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ProcedureNumber.tooltip}"
+                                                   id="ot19"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.ExcProcedureClaimVO1.hints.ClaimId.label}" id="c20"
+                                           visible="false">
+                                    <af:outputText value="#{row.ClaimId}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ClaimId.tooltip}"
+                                                   id="ot20">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcProcedureClaimVO1.hints.ClaimId.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bundle.PROCEDURE_TYPE}" id="c21" width="300px">
+                                    <af:selectOneChoice value="#{row.bindings.ProcedureTypeId.inputValue}"
+                                                        label="#{row.bindings.ProcedureTypeId.label}"
+                                                        required="#{bindings.ExcProcedureClaimVO1.hints.ProcedureTypeId.mandatory}"
+                                                        shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ProcedureTypeId.tooltip}"
+                                                        readOnly="true" id="soc2">
+                                        <f:selectItems value="#{row.bindings.ProcedureTypeId.items}" id="si12"/>
+                                        <f:validator binding="#{row.bindings.ProcedureTypeId.validator}"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                                <af:column headerText="#{bundle.PROCEDURE_DATE}" id="c22" width="150px">
+                                    <af:outputText value="#{row.ProcedureDate}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ProcedureDate.tooltip}"
+                                                   id="ot21">
+                                        <af:convertDateTime pattern="#{bindings.ExcProcedureClaimVO1.hints.ProcedureDate.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bundle.PROCEDURE_AMOUNT}" id="c23" visible="true">
+                                    <af:outputText value="#{row.ProcedureAmount}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ProcedureAmount.tooltip}"
+                                                   id="ot22">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcProcedureClaimVO1.hints.ProcedureAmount.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bundle.CLAIM_TOTAL_AMOUNT}" id="c263" visible="true">
+                                    <af:outputText value="#{row.ClaimTotalOriginal}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ClaimTotalOriginal.tooltip}"
+                                                   id="ot262">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcProcedureClaimVO1.hints.ClaimTotalOriginal.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bundle.PROCEDURE_REMAINING}" id="c24" visible="true">
+                                    <af:outputText value="#{row.ProcedureRemaining}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ProcedureRemaining.tooltip}"
+                                                   id="ot23">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcProcedureClaimVO1.hints.ProcedureRemaining.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bundle.COLLECTION_TYPE}" id="c25" width="150px"
+                                           visible="false">
+                                    <af:outputText value="#{row.CollectionType}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.CollectionType.tooltip}"
+                                                   id="ot24">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcProcedureClaimVO1.hints.CollectionType.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bundle.PAYMENT_NUMBER}" id="c26" visible="false">
+                                    <af:outputText value="#{row.PaymentNumber}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.PaymentNumber.tooltip}"
+                                                   id="ot25">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcProcedureClaimVO1.hints.PaymentNumber.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bundle.NOTES}" id="c27" visible="false">
+                                    <af:outputText value="#{row.ProcedureNotes}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ProcedureNotes.tooltip}"
+                                                   id="ot26"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.ExcProcedureClaimVO1.hints.NoOffInstallments.label}"
+                                           id="c33">
+                                    <af:outputText value="#{row.NoOffInstallments}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.NoOffInstallments.tooltip}"
+                                                   id="ot3">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcProcedureClaimVO1.hints.NoOffInstallments.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.ExcProcedureClaimVO1.hints.ValueOffInstallment.label}"
+                                           id="c34">
+                                    <af:outputText value="#{row.ValueOffInstallment}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ValueOffInstallment.tooltip}"
+                                                   id="ot27">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcProcedureClaimVO1.hints.ValueOffInstallment.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.ExcProcedureClaimVO1.hints.ProcedureEndDate.label}"
+                                           id="c35">
+                                    <af:outputText value="#{row.ProcedureEndDate}"
+                                                   shortDesc="#{bindings.ExcProcedureClaimVO1.hints.ProcedureEndDate.tooltip}"
+                                                   id="ot28">
+                                        <af:convertDateTime pattern="#{bindings.ExcProcedureClaimVO1.hints.ProcedureEndDate.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <f:facet name="detailStamp">
+                                    <af:button text="تأكيد العملية" id="b6"
+                                               action="#{pageFlowScope.claimProcedureBean.callPOS2}"
+                                               styleClass="print-btn" partialSubmit="true"
+                                               rendered="#{row.PaymentNumber == null}"/>
+                                </f:facet>
+                            </af:table>
+                        </af:showDetailItem>
+                    </af:panelTabbed>
+                </af:panelGroupLayout>
+            </f:facet>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.Id.label}" id="c1" visible="false">
+                <af:outputText value="#{row.Id}" shortDesc="#{bindings.ExcClaimsVO1.hints.Id.tooltip}" id="ot1">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ExcClaimsVO1.hints.Id.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_NUMBER}" id="c2" visible="false" width="100">
+                <af:outputText value="#{row.ClaimNumber}" shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimNumber.tooltip}"
+                               id="ot2"/>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_YEAR}" id="c3" visible="false">
+                <af:selectOneChoice value="#{row.bindings.ClaimYear.inputValue}" label="#{row.bindings.ClaimYear.label}"
+                                    required="#{bindings.ExcClaimsVO1.hints.ClaimYear.mandatory}"
+                                    shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimYear.tooltip}" id="soc5"
+                                    disabled="true">
+                    <f:selectItems value="#{row.bindings.ClaimYear.items}" id="si5"/>
+                    <f:validator binding="#{row.bindings.ClaimYear.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.IS_REPEATED}" id="c4" visible="false" width="100">
+                <af:outputText value="#{row.RepeatedClaimFlag eq 'Y' ? 'مكرر' : 'غير مكرر'}"
+                               shortDesc="#{bindings.ExcClaimsVO1.hints.RepeatedClaimFlag.tooltip}" id="ot4">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExcClaimsVO1.hints.RepeatedClaimFlag.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_TYPE}" id="c28" width="100" visible="false">
+                <af:selectOneChoice value="#{row.bindings.ClaimTypeId.inputValue}"
+                                    label="#{row.bindings.ClaimTypeId.label}"
+                                    required="#{bindings.ExcClaimsVO1.hints.ClaimTypeId.mandatory}"
+                                    shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimTypeId.tooltip}" id="soc15"
+                                    disabled="true">
+                    <f:selectItems value="#{row.bindings.ClaimTypeId.items}" id="si7"/>
+                    <f:validator binding="#{row.bindings.ClaimTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_COLYA}" id="c30" width="120" visible="false">
+                <af:selectOneChoice value="#{row.bindings.ClaimColyaId.inputValue}"
+                                    label="#{row.bindings.ClaimColyaId.label}"
+                                    required="#{bindings.ExcClaimsVO1.hints.ClaimColyaId.mandatory}"
+                                    shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimColyaId.tooltip}" id="soc14"
+                                    disabled="true">
+                    <f:selectItems value="#{row.bindings.ClaimColyaId.items}" id="si15"/>
+                    <f:validator binding="#{row.bindings.ClaimColyaId.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_PARTIAL}" id="c31" width="120" visible="false">
+                <af:selectOneChoice value="#{row.bindings.ClaimPartialId.inputValue}"
+                                    label="#{row.bindings.ClaimPartialId.label}"
+                                    required="#{bindings.ExcClaimsVO1.hints.ClaimPartialId.mandatory}"
+                                    shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimPartialId.tooltip}" id="soc11"
+                                    disabled="true">
+                    <f:selectItems value="#{row.bindings.ClaimPartialId.items}" id="si14"/>
+                    <f:validator binding="#{row.bindings.ClaimPartialId.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bundle.CLAIM_POLICE}" id="c29" width="120" visible="false">
+                <af:selectOneChoice value="#{row.bindings.ClaimPoliceStationId.inputValue}"
+                                    label="#{row.bindings.ClaimPoliceStationId.label}"
+                                    required="#{bindings.ExcClaimsVO1.hints.ClaimPoliceStationId.mandatory}"
+                                    shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimPoliceStationId.tooltip}" id="soc6"
+                                    disabled="true">
+                    <f:selectItems value="#{row.bindings.ClaimPoliceStationId.items}" id="si6"/>
+                    <f:validator binding="#{row.bindings.ClaimPoliceStationId.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.DecisionId.label}" id="c5" visible="false">
+                <af:outputText value="#{row.DecisionId}" shortDesc="#{bindings.ExcClaimsVO1.hints.DecisionId.tooltip}"
+                               id="ot5">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ExcClaimsVO1.hints.DecisionId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.ClaimDecisionDate.label}" id="c12" visible="false">
+                <af:outputText value="#{row.ClaimDecisionDate}"
+                               shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimDecisionDate.tooltip}" id="ot12">
+                    <af:convertDateTime pattern="#{bindings.ExcClaimsVO1.hints.ClaimDecisionDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.ClaimRemarks.label}" id="c13" visible="false">
+                <af:outputText value="#{row.ClaimRemarks}"
+                               shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimRemarks.tooltip}" id="ot13"/>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.ActiveFlag.label}" id="c14" visible="false">
+                <af:outputText value="#{row.ActiveFlag}" shortDesc="#{bindings.ExcClaimsVO1.hints.ActiveFlag.tooltip}"
+                               id="ot14">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ExcClaimsVO1.hints.ActiveFlag.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.party_full_name}" id="c17" width="280">
+                <af:outputText value="#{row.PartyName}" shortDesc="#{bindings.ExcClaimsVO1.hints.PartyName.tooltip}"
+                               id="ot17"/>
+            </af:column>
+            <af:column headerText="#{bundle.id_number}" id="c16" width="120">
+                <af:outputText value="#{row.IdNumber}" shortDesc="#{bindings.ExcClaimsVO1.hints.IdNumber.tooltip}"
+                               id="ot16"/>
+            </af:column>
+            <af:column headerText="#{bundle.sequence_number}" id="c15" width="220">
+                <af:outputText value="#{row.ClaimSequenceNumber}"
+                               shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimSequenceNumber.tooltip}" id="ot15"/>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.ClaimAmount.label}" id="c6" visible="true"
+                       rendered="false">
+                <af:outputText value="#{row.FixedPenaltyAmount}"
+                               shortDesc="#{bindings.ExcClaimsVO1.hints.FixedPenaltyAmount.tooltip}" id="ot6">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExcClaimsVO1.hints.FixedPenaltyAmount.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.FixedPenaltyFees.label}" id="c7" visible="true"
+                       rendered="false">
+                <af:outputText value="#{row.FixedPenaltyFees}"
+                               shortDesc="#{bindings.ExcClaimsVO1.hints.FixedPenaltyFees.tooltip}" id="ot7">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExcClaimsVO1.hints.FixedPenaltyFees.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.DailyPenaltyFlag.label}" id="c10" visible="true"
+                       rendered="false">
+                <af:outputText value="#{row.DailyPenaltyFlag eq 'Y' ? 'نعم' : 'لا'}"
+                               shortDesc="#{bindings.ExcClaimsVO1.hints.DailyPenaltyFlag.tooltip}" id="ot10">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExcClaimsVO1.hints.DailyPenaltyFlag.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bundle.PENALTY_DUE_DATE}" id="c9" visible="true" rendered="false">
+                <af:outputText value="#{row.PenaltyDueDate}"
+                               shortDesc="#{bindings.ExcClaimsVO1.hints.PenaltyDueDate.tooltip}" id="ot9">
+                    <af:convertDateTime pattern="#{bindings.ExcClaimsVO1.hints.PenaltyDueDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.DailyPenaltyAmount.label}" id="c11" visible="true"
+                       rendered="false">
+                <af:outputText value="#{row.DailyPenaltyAmount}"
+                               shortDesc="#{bindings.ExcClaimsVO1.hints.DailyPenaltyAmount.tooltip}" id="ot11">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExcClaimsVO1.hints.DailyPenaltyAmount.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.BusinessCaseNumberFull.label}" id="c8" width="200">
+                <af:outputText value="#{row.BusinessCaseNumberFull}" shortDesc="#{bindings.ExcClaimsVO1.hints.BusinessCaseNumberFull.tooltip}"
+                               id="ot8">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ExcClaimsVO1.hints.BusinessCaseNumberFull.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ExcClaimsVO1.hints.ClaimFolderId.label}" id="c32">
+                <af:panelGroupLayout id="pgl45" layout="horizontal">
+                    <af:selectOneChoice value="#{row.bindings.ClaimFolderId.inputValue}"
+                                        label="#{row.bindings.ClaimFolderId.label}" readOnly="true"
+                                        required="#{bindings.ExcClaimsVO1.hints.ClaimFolderId.mandatory}"
+                                        shortDesc="#{bindings.ExcClaimsVO1.hints.ClaimFolderId.tooltip}" id="soc12">
+                        <f:selectItems value="#{row.bindings.ClaimFolderId.items}" id="si11"/>
+                        <f:validator binding="#{row.bindings.ClaimFolderId.validator}"/>
+                    </af:selectOneChoice>
+                    <af:activeOutputText value="#{row.bindings.ExcFolderCriminalType.inputValue eq '1'?'جنح':'جنايات'}"
+                                         id="aot2"/>
+                </af:panelGroupLayout>
+            </af:column>
+            <!--<af:column id="c41" rendered="true" headerText="#{bundle.PENALTY_TYPE}">
+                --><!--<af:outputText value="#{row.FixedPenaltyAmount ne null ? 'غرامة ثابتة' : 'غرامة يومية'}" id="ot266"/>--><!--
+                <af:outputText rendered="#{row.DailyPenaltyFlag eq 'N'}" value="#{'غرامة ثابتة'}" id="ot266"/>
+                <af:outputText rendered="#{row.DailyPenaltyFlag eq 'Y'}" value="#{'غرامة يومية'}" id="ot267"/>
+                <af:outputText rendered="#{row.DailyPenaltyFlag eq 'X'}" value="#{'غرامة ثابتة و يومية'}" id="ot268"/>
+            </af:column>-->
+        </af:table>
+    </af:panelHeader>
+    <af:resource type="javascript">
+      function addSpace() {
+        var code = event.keyCode ;
+        if (code == 32) 
+          {
+        
+              event.target.value = event.target.value + ' ';
+          }
+      }
+    </af:resource>
+    <af:resource type="javascript">
+       var port, textEncoder, writableStreamClosed, writer,id;
+          async function connectSerial(id) {
+       
+            try {
+            // Prompt user to select any serial port.
+            port = await navigator.serial.requestPort();
+           
+            await port.open({ baudRate: '115200' });
+             
+            listenToPort(id);
+              
+            textEncoder = new TextEncoderStream();
+            writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
+            writer = textEncoder.writable.getWriter();
+             
+            } catch {
+                alert("Serial Connection Failed");
+            }
+          }
+		
+         
+          async function sendSerialLine(dataToSend,id) {
+            try 
+            {
+                await writer.write(dataToSend);
+                //alert(dataToSend);
+                //alert(escape('[huoUQRQ^]\AYPYM^^^^IHUIiiiiQb'));
+            }
+            catch
+            {
+           // connectSerial(id);
+             await connectSerial(id);
+           sendSerialLine(dataToSend,id);
+            }
+          }
+        
+       async function listenToPort(id) {
+     
+        const textDecoder = new TextDecoderStream();
+        const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+        const reader = textDecoder.readable.getReader();
+        var Data="";
+        // Listen to data coming from the serial device.
+        while (true) {
+            const { value, done } = await reader.read();
+            Data=Data+value;
+            //alert(Data);
+            //alert(done);
+            if (done) {
+                // Allow the serial port to be closed later.
+                //reader.releaseLock();
+                break;
+            }
+            // value is a string.
+            if(Data.length>8)
+            {
+              var textData = AdfPage.PAGE.findComponentByAbsoluteId(id);
+              //alert(textData);
+              textData.setValue(Data);
+              //alert(Data);
+              Data="";
+            }
+           
+            //return Data;
+          }
+        }
+     document.getElementById("baud").value = (localStorage.baud == undefined ? 9600 : localStorage.baud);
+    document.getElementById("addLine").checked = (localStorage.addLine == "false" ? false : true);
+    document.getElementById("echoOn").checked = (localStorage.echoOn == "false" ? false : true);
+    </af:resource>
+    
+    <!--oracle-jdev-comment:preferred-managed-bean-name:testRequestBean-->
+</ui:composition>

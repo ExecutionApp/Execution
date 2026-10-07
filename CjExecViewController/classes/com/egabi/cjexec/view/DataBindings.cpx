@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.0.31" id="DataBindings"
+             SeparateXMLFiles="false" Package="com.egabi.cjexec.view" ClientType="Generic"
+            
+             ErrorHandlerClass="com.egabi.cjexec.view.utils.MyCustomErrorHandler">
+    <definitionFactories>
+        <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+                 className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+        <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+    </definitionFactories>
+    <pageMap>
+        <page path="/pages/com/egabi/MainRepports/hasr/HasrIdNumbReport.jsff"
+              usageId="com_egabi_cjexec_view_HasrIdNumbReportPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/motalabat/TotalMotalabatReport.jsff"
+              usageId="com_egabi_cjexec_view_TotalMotalabatReportPageDef"/>
+        <page path="/WEB-INF/taskflows/MainReports/MainReports.xml#MainReports@resetReports"
+              usageId="com_egabi_cjexec_view_MainReports_MainReports_resetReportsPageDef"/>
+        <page path="/pages/com/egabi/auditUpdate/auditMainFrag.jsff"
+              usageId="com_egabi_cjexec_view_auditMainFragPageDef"/>
+        <page path="/WEB-INF/taskflows/auditUpdate/auditMainTaskFlow.xml#auditMainTaskFlow@ValidatePoliceReportCustom"
+              usageId="com_egabi_cjexec_view_auditMainTaskFlow_auditMainTaskFlow_ValidatePoliceReportCustomPageDef"/>
+        <page path="/bcDetails/AddBCDetails.jsff" usageId="com_egabi_cjexec_view_AddBCDetailsPageDef"/>
+        <page path="/pages/com/egabi/inventory/Inventory.jsf" usageId="com_egabi_cjexec_view_InventoryPageDef"/>
+        <page path="/pages/com/egabi/inventory/home.jsff" usageId="com_egabi_cjexec_view_homePageDef"/>
+        <page path="/WEB-INF/taskflows/ParParties/Search_Par_Parties-TF.xml#Search_Par_Parties-TF@methodCall1"
+              usageId="com_egabi_cjexec_view_Search_Par_Parties_TF_Search_Par_Parties_TF_methodCall1PageDef"/>
+        <page path="/pages/com/egabi/party/SearchParPartiesFrag.jsff"
+              usageId="com_egabi_cjexec_view_SearchParPartiesFragPageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionEditTF.xml#provisionsInclusionEditTF@ExecuteWithParams2"
+              usageId="com_egabi_cjexec_view_provisionsInclusionEditTF_provisionsInclusionEditTF_ExecuteWithParams2PageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@ExecuteWithParams1"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams1PageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@ExecuteWithParams2"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams2PageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@CreateWithParameters"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_CreateWithParametersPageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@ExecuteWithParams3"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams3PageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@ExecuteWithParams4"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams4PageDef"/>
+        <page path="/WEB-INF/taskflows/suppamount/suppAmountTF.xml#suppAmountTF@setVisiblity"
+              usageId="com_egabi_cjexec_view_suppAmountTF_suppAmountTF_setVisiblityPageDef"/>
+        <page path="/WEB-INF/taskflows/supprepayment/suppRepaymentTF.xml#suppRepaymentTF@excuteInstallment"
+              usageId="com_egabi_cjexec_view_suppRepaymentTF_suppRepaymentTF_excuteInstallmentPageDef"/>
+        <page path="/WEB-INF/taskflows/requests/Requests-TF.xml#Requests-TF@methodCall1"
+              usageId="com_egabi_cjexec_view_Requests_TF_Requests_TF_methodCall1PageDef"/>
+        <page path="/pages/com/egabi/party/UpdateParty.jsff" usageId="com_egabi_cjexec_view_UpdatePartyPageDef1"/>
+        <page path="/pages/com/egabi/security/loginOutside/Welcome.jsf" usageId="com_egabi_cjexec_view_WelcomePageDef"/>
+        <page path="/pages/com/egabi/cjexec/webCam/TestWebCam.jsf" usageId="com_egabi_cjexec_view_TestWebCamPageDef"/>
+        <page path="/caseExecEmp/caseAttachFrag.jsff" usageId="com_egabi_cjexec_view_caseAttachFragPageDef"/>
+        <page path="/caseExecEmp/TestCaseAttach.jsf" usageId="com_egabi_cjexec_view_TestCaseAttachPageDef"/>
+        <page path="/pages/com/egabi/cjexec/suppRepayment/SuppRepaymentFrag.jsff"
+              usageId="com_egabi_cjexec_view_SuppRepaymentFragPageDef"/>
+        <page path="/pages/com/egabi/cjexec/enableOpposition/enableOpposition.jsff"
+              usageId="com_egabi_cjexec_view_enableOppositionPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@ExecuteWithParams1"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef"/>
+        <page path="/pages/com/egabi/cjexec/installmentRequest/InstallmentRequest.jsff"
+              usageId="com_egabi_cjexec_view_InstallmentRequestPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@ExecuteWithParams1"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams1PageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@CreateInsert1"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateInsert1PageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@CreateWithParameters"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateWithParametersPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@Commit"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CommitPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@ExecuteWithParams3"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams3PageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@CreateWithParameters1"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateWithParameters1PageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@CreateWithParameters"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateWithParametersPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@CreateInsert"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateInsertPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@ExecuteWithParams3"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams3PageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@CreateWithParameters1"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateWithParameters1PageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@Commit"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CommitPageDef"/>
+        <page path="/pages/com/egabi/cjexec/transaction/executionFolders/execFoldersPage.jsf"
+              usageId="com_egabi_cjexec_view_execFoldersPagePageDef"/>
+        <page path="/pages/com/egabi/cjexec/transaction/executionFolders/execFoldersDetailFrag.jsff"
+              usageId="com_egabi_cjexec_view_execFoldersDetailFragPageDef"/>
+        <page path="/WEB-INF/taskflows/transaction/executionFolders/executionFoldersTF.xml#executionFoldersTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_executionFoldersTF_executionFoldersTF_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionEditTF.xml#provisionsInclusionEditTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_provisionsInclusionEditTF_provisionsInclusionEditTF_ExecuteWithParamsPageDef"/>
+        <page path="/pages/com/egabi/cjexec/lookup/untitled1.jsf" usageId="com_egabi_cjexec_view_untitled1PageDef"/>
+        <page path="/pages/com/egabi/cjexec/lookup/untitled1.jsff" usageId="com_egabi_cjexec_view_untitled1PageDef1"/>
+        <page path="/provisionsInclusion/provisionsInclusionFrag.jsff"
+              usageId="com_egabi_cjexec_view_provisionsInclusionFragPageDef"/>
+        <page path="/provisionsInclusion/provisionsInclusionPage.jsf"
+              usageId="com_egabi_cjexec_view_provisionsInclusionPageDef"/>
+        <page path="/caseExecEmp/casesSearchFrag.jsff" usageId="com_egabi_cjexec_view_casesSearchFragPageDef"/>
+        <page path="/caseExecEmp/caseExecEmpPage.jsf" usageId="com_egabi_cjexec_view_caseExecEmpPagePageDef"/>
+        <page path="/provisionsInclusion/provisionInclusionEditFrag.jsff"
+              usageId="com_egabi_cjexec_view_provisionInclusionEditFragPageDef"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/case-edit-tf.xml#case-edit-tf@ExecuteSharedPenaltyAll"
+              usageId="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef1"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/case-edit-tf.xml#case-edit-tf@ExecuteSharedPenaltyParties"
+              usageId="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef11"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/case-edit-tf.xml#case-edit-tf@ExecuteFolderData"
+              usageId="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef111"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/casese-search-tf.xml#casese-search-tf@ExecuteSearchForm"
+              usageId="com_egabi_cjexec_view_casese_search_tf_casese_search_tf_ExecuteWithParamsPageDef"/>
+        <page path="/caseExecEmp/caseEditFrag.jsff" usageId="com_egabi_cjexec_view_caseEditFragPageDef"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/case-edit-tf.xml#case-edit-tf@callEXC_COURT_BC_PKG___CREATE_BC_DECISION"
+              usageId="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_callEXC_COURT_BC_PKG___CREATE_BC_DECISIONPageDef"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/casese-search-tf.xml#casese-search-tf@ExecuteSearchForm"
+              usageId="com_egabi_cjexec_view_casese_search_tf_casese_search_tf_ExecuteWithParamsPageDef"/>
+        <page path="/caseExecEmp/caseEditFrag.jsff" usageId="com_egabi_cjexec_view_caseEditFragPageDef"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/case-edit-tf.xml#case-edit-tf@callEXC_COURT_BC_PKG___CREATE_BC_DECISION"
+              usageId="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_callEXC_COURT_BC_PKG___CREATE_BC_DECISIONPageDef"/>
+        <page path="/pages/com/egabi/oppositions/OppositionsHomeFrag.jsff"
+              usageId="com_egabi_cjexec_view_OppositionsHomeFragPageDef"/>
+        <page path="/pages/com/egabi/oppositions/OppositionPage.jsf"
+              usageId="com_egabi_cjexec_view_OppositionPagePageDef"/>
+        <page path="/WEB-INF/taskflows/oppositions/Oppositions-TF.xml#Oppositions-TF@CreateInsert"
+              usageId="com_egabi_cjexec_view_Oppositions_TF_Oppositions_TF_CreateInsertPageDef"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/case-edit-tf.xml#case-edit-tf@ExecutePartyDebt"
+              usageId="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef1111"/>
+        <page path="/pages/com/egabi/cjexec/requests/SearchFrag.jsff"
+              usageId="com_egabi_cjexec_view_SearchFragPageDef"/>
+        <page path="/pages/com/egabi/cjexec/requests/Requests.jsf" usageId="com_egabi_cjexec_view_RequestsPageDef"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/case-edit-tf.xml#case-edit-tf@ExecuteCaseEditMaster"
+              usageId="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef"/>
+        <page path="/pages/com/egabi/cjexec/transaction/executionFolders/execFoldersSearchFrag.jsff"
+              usageId="com_egabi_cjexec_view_execFoldersSearchFragPageDef"/>
+        <page path="/pages/com/egabi/cjexec/transaction/actions/execution/executionPage.jsff"
+              usageId="com_egabi_cjexec_view_executionPagePageDef"/>
+        <page path="/WEB-INF/taskflows/transaction/executionFolders/executionFoldersTF.xml#executionFoldersTF@Execute"
+              usageId="com_egabi_cjexec_view_executionFoldersTF_executionFoldersTF_ExecutePageDef"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/casese-search-tf.xml#casese-search-tf@ExecuteSearchResult"
+              usageId="com_egabi_cjexec_view_casese_search_tf_casese_search_tf_ExecutePageDef"/>
+        <page path="/WEB-INF/taskflows/suppamount/suppAmountTF.xml#suppAmountTF@FolderDataExecuteWithParams"
+              usageId="com_egabi_cjexec_view_suppAmountTF_suppAmountTF_ExecuteWithParamsPageDef"/>
+        <page path="/pages/com/egabi/cjexec/suppamount/suppAmountFrag.jsff"
+              usageId="com_egabi_cjexec_view_suppAmountFragPageDef"/>
+        <page path="/WEB-INF/taskflows/supprepayment/suppRepaymentTF.xml#suppRepaymentTF@FolderIDExecuteWithParams"
+              usageId="com_egabi_cjexec_view_suppRepaymentTF_suppRepaymentTF_ExecuteWithParamsPageDef"/>
+        <page path="/pages/com/egabi/cjexec/common/ExcBcSessJdgFrag.jsff"
+              usageId="com_egabi_cjexec_view_ExcBcSessJdgFragPageDef"/>
+        <page path="/pages/com/egabi/cjexec/common/ExcPrtySessJdgFrag.jsff"
+              usageId="com_egabi_cjexec_view_ExcPrtySessJdgFragPageDef"/>
+        <page path="/WEB-INF/taskflows/execbcsessionsjudgments/ExcBcSessJdgTF.xml#ExecBcSessionsJudgmentsTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_ExcBcSessJdgTF_ExecBcSessionsJudgmentsTF_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/execpartysessionjudgments/ExcPrtySessJdgTF.xml#ExcPrtySessJdgTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_ExcPrtySessJdgTF_ExcPrtySessJdgTF_ExecuteWithParams1PageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionEditTF.xml#provisionsInclusionEditTF@ExecuteWithParams1"
+              usageId="com_egabi_cjexec_view_provisionsInclusionEditTF_provisionsInclusionEditTF_ExecuteWithParams1PageDef"/>
+        <page path="/WEB-INF/taskflows/transaction/actions/ationsTF.xml#ationsTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_ationsTF_ationsTF_ExecuteWithParamsPageDef"/>
+        <page path="/pages/com/egabi/cjexec/transaction/executionFolders/execFolderSearchAllFrag.jsff"
+              usageId="com_egabi_cjexec_view_execFolderSearchAllFragPageDef"/>
+        <page path="/WEB-INF/taskflows/transaction/executionFolders/searchAllFoldersTF.xml#searchAllFoldersTF@Execute"
+              usageId="com_egabi_cjexec_view_searchAllFoldersTF_searchAllFoldersTF_ExecutePageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@Rollback"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_RollbackPageDef"/>
+        <page path="/pages/com/egabi/cjexec/installmentRequest/plentyInstallment/PlentyInstallmentFrag.jsff"
+              usageId="com_egabi_cjexec_view_PlentyInstallmentFragPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/plentyInstallments/plentyInstallmentTF.xml#plentyInstallmentTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_plentyInstallmentTF_plentyInstallmentTF_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@CaseInfo"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@UserData"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@CaseInfo"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@UserData"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams1PageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/plentyInstallments/plentyInstallmentTF.xml#plentyInstallmentTF@insertPlentyInstallment"
+              usageId="com_egabi_cjexec_view_plentyInstallmentTF_plentyInstallmentTF_insertPlentyInstallmentPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@CreateWithParameters"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateWithParametersPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@CreateWithParameters1"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateWithParameters1PageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@CreateWithParameters2"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateWithParameters2PageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@CreateWithParameters"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateWithParametersPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@CreateWithParameters1"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateWithParameters1PageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@CreateWithParameters2"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateWithParameters2PageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParamsPageDef1"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParamsPageDef1"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@ExecuteWithParams1"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef1"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@ExecuteWithParams1"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams1PageDef1"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@LawyerList"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams2PageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@LawyerList"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams2PageDef"/>
+        <page path="/pages/com/egabi/party/ParParties.jsf" usageId="com_egabi_cjexec_view_ParPartiesPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@LawyerList"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams2PageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@LawyerList"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams2PageDef"/>
+        <page path="/WEB-INF/taskflows/webcam/WebCamTF.xml#WebCamTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_WebCamTF_WebCamTF_ExecuteWithParams1PageDef"/>
+        <page path="/pages/com/egabi/cjexec/enableOpposition/lawyerInfo.jsff"
+              usageId="com_egabi_cjexec_view_lawyerInfoPageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@CriminalInfo"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef1"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml#enableOppositionTF@ExecuteWithParams1"
+              usageId="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef"/>
+        <page path="/WEB-INF/taskflows/enableOpposition/lawyerInfoTF.xml#lawyerInfoTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_lawyerInfoTF_lawyerInfoTF_ExecuteWithParamsPageDef"/>
+        <page path="/bcDetails/BCDetails.jsf" usageId="com_egabi_cjexec_view_BCDetailsPageDef"/>
+        <page path="/WEB-INF/taskflows/transaction/executionFolders/executionFoldersTF.xml#executionFoldersTF@ExecuteWithParams1"
+              usageId="com_egabi_cjexec_view_executionFoldersTF_executionFoldersTF_ExecuteWithParams1PageDef"/>
+        <page path="/WEB-INF/taskflows/transaction/executionFolders/executionFoldersTF.xml#executionFoldersTF@ExecuteWithParams1"
+              usageId="com_egabi_cjexec_view_executionFoldersTF_executionFoldersTF_ExecuteWithParams1PageDef"/>
+        <page path="/pages/com/egabi/inventory/SearchByCase.jsff" usageId="com_egabi_cjexec_view_SearchByCasePageDef"/>
+        <page path="/WEB-INF/taskflows/inventory/Inventory-TF.xml#Inventory-TF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_Inventory_TF_Inventory_TF_ExecuteWithParamsPageDef"/>
+        <page path="/pages/com/egabi/inventory/SearchResult.jsff" usageId="com_egabi_cjexec_view_SearchResultPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@ParParties"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams2PageDef1"/>
+        <page path="/pages/com/egabi/cjexec/parlawyer/ParLawyerFrag.jsff"
+              usageId="com_egabi_cjexec_view_ParLawyerFragPageDef"/>
+        <page path="/WEB-INF/taskflows/parlawyer/parLawyerTF.xml#parLawyerTF@CreateParLawyersParties"
+              usageId="com_egabi_cjexec_view_parLawyerTF_parLawyerTF_Create1PageDef"/>
+        <page path="/pages/com/egabi/inventory/CaseInventorySesrch.jsf"
+              usageId="com_egabi_cjexec_view_CaseInventorySesrchPageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@ExecuteWithParams5"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams5PageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@ExecuteWithParams6"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams6PageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@ExecuteWithParams7"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams7PageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@executeSessionAttachLKP"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKPPageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@executeSessionAttachLKP1"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKP1PageDef"/>
+        <page path="/WEB-INF/taskflows/parlawyer/parLawyerTF.xml#parLawyerTF@Rollback"
+              usageId="com_egabi_cjexec_view_parLawyerTF_parLawyerTF_RollbackPageDef"/>
+        <page path="/WEB-INF/taskflows/transaction/executionFolders/searchAllFoldersTF.xml#searchAllFoldersTF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_searchAllFoldersTF_searchAllFoldersTF_ExecuteWithParamsPageDef"/>
+        <page path="/pages/com/egabi/cjexec/parlawyer/parlawyer.jsf" usageId="com_egabi_cjexec_view_parlawyerPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@parLawyerTF"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_parLawyerTF1PageDef"/>
+        <page path="/WEB-INF/taskflows/ParParties/Par_Parties-TF.xml#Par_Parties-TF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_Par_Parties_TF_Par_Parties_TF_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/provisionsInclusion/provisionsInclusionTF.xml#provisionsInclusionTF@executeSessionAttachLKPNew"
+              usageId="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKPNewPageDef"/>
+        <page path="/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml#InstallmentRequestTF@Rollback"
+              usageId="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_RollbackPageDef"/>
+        <page path="/pages/com/egabi/claimProcedure/Claim.jsff" usageId="com_egabi_cjexec_view_ClaimPageDef"/>
+        <page path="/pages/com/egabi/claimProcedure/Claim.jsf" usageId="com_egabi_cjexec_view_ClaimPageDef1"/>
+        <page path="/pages/com/egabi/claimProcedure/claimProcedureFrag.jsff"
+              usageId="com_egabi_cjexec_view_claimProcedurePageDef"/>
+        <page path="/pages/com/egabi/claimProcedure/claimProcedure.jsf"
+              usageId="com_egabi_cjexec_view_claimProcedurePageDef1"/>
+        <page path="/pages/com/egabi/claimProcedure/claimProcedureLog.jsf"
+              usageId="com_egabi_cjexec_view_claimProcedureLogPageDef"/>
+        <page path="/pages/com/egabi/claimProcedure/claimProcedureLogFrag.jsff"
+              usageId="com_egabi_cjexec_view_claimProcedureLogFragPageDef"/>
+        <page path="/WEB-INF/taskflows/claimProcedure/claimProcedureLogTF.xml#claimProcedureLogTF@emptyClaimProcedureLog"
+              usageId="com_egabi_cjexec_view_claimProcedureLogTF_claimProcedureLogTF_emptyClaimProcedureLogPageDef"/>
+        <page path="/WEB-INF/taskflows/claimProcedure/claimProcedureTF.xml#claimProcedureTF@emptyClaims"
+              usageId="com_egabi_cjexec_view_claimProcedureTF_claimProcedureTF_emptyClaimsPageDef"/>
+        <page path="/pages/com/egabi/claimProcedure/searchByPartyCaseHasr.jsf"
+              usageId="com_egabi_cjexec_view_searchByPartyCaseHasrPageDef"/>
+        <page path="/pages/com/egabi/audit/auditSimpleFrag.jsff"
+              usageId="com_egabi_cjexec_view_auditSimpleFragPageDef"/>
+        <page path="/pages/com/egabi/audit/audit.jsf" usageId="com_egabi_cjexec_view_auditPageDef"/>
+        <page path="/WEB-INF/taskflows/inventory/CaseInventorySearch-TF.xml#CaseInventorySearch-TF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_CaseInventorySearch_TF_CaseInventorySearch_TF_ExecuteWithParamsPageDef"/>
+        <page path="/pages/com/egabi/claimProcedure/searchByPartyFrag.jsff"
+              usageId="com_egabi_cjexec_view_searchByPartyFragPageDef"/>
+        <page path="/pages/com/egabi/audit/auditFrag.jsff" usageId="com_egabi_cjexec_view_auditFragPageDef"/>
+        <page path="/pages/com/egabi/claimProcedure/searchByHasrFrag.jsff"
+              usageId="com_egabi_cjexec_view_searchByHasrFragPageDef"/>
+        <page path="/pages/com/egabi/claimProcedure/searchByCaseFrag.jsff"
+              usageId="com_egabi_cjexec_view_searchByCaseFragPageDef"/>
+        <page path="/WEB-INF/taskflows/claimProcedure/searchByCaseTF.xml#searchByCase@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_searchByCaseTF_searchByCase_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/claimProcedure/searchByHasrTF.xml#searchByHasr@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_searchByHasrTF_searchByHasr_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/caseExecEmp/case-attachments-tf.xml#case-attachments-tf@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_case_attachments_tf_case_attachments_tf_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/taskflows/procedures/PreviousProcedures-TF.xml#PreviousProcedures-TF@ExecuteWithParams"
+              usageId="com_egabi_cjexec_view_PreviousProcedures_TF_PreviousProcedures_TF_ExecuteWithParamsPageDef"/>
+        <page path="/pages/com/egabi/cjexec/PreviousProcedures/PreviousProcedures.jsff"
+              usageId="com_egabi_cjexec_view_PreviousProceduresPageDef"/>
+        <page path="/WEB-INF/taskflows/claimProcedure/ClaimTF.xml#ClaimTF@emptyClaimSearchResult"
+              usageId="com_egabi_cjexec_view_ClaimTF_ClaimTF_emptyClaimSearchResultPageDef"/>
+        <page path="/pages/com/egabi/claimProcedure/verifyIdNum.jsff"
+              usageId="com_egabi_cjexec_view_verifyIdNumPageDef"/>
+        <page path="/pages/com/egabi/auditUpdate/auditMainPage.jsf"
+              usageId="com_egabi_cjexec_view_auditMainPagePageDef"/>
+        <page path="/pages/com/egabi/auditUpdate/displayAuditFrag.jsff"
+              usageId="com_egabi_cjexec_view_displayAuditFragPageDef"/>
+        <page path="/pages/com/egabi/auditUpdate/displayAuditPage.jsf"
+              usageId="com_egabi_cjexec_view_displayAuditPagePageDef"/>
+        <page path="/pages/com/egabi/auditUpdate/displayAuditDetailsFrag.jsff"
+              usageId="com_egabi_cjexec_view_displayAuditDetailsFragPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/MainReports.jsf" usageId="com_egabi_cjexec_view_MainReportsPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/procedures/TotalProceduresReport.jsff"
+              usageId="com_egabi_cjexec_view_TotalProceduresReportPageDef"/>
+        <page path="/pages/com/egabi/nIdService/nIdServiceFrag.jsf"
+              usageId="com_egabi_cjexec_view_nIdServiceFragPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/hasr/TotalHasrReport.jsff"
+              usageId="com_egabi_cjexec_view_TotalHasrReportPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/hasr/HasrDetailsReport.jsff"
+              usageId="com_egabi_cjexec_view_HasrDetailsReportPageDef"/>
+        <page path="/pages/com/egabi/nIdService/nIdServiceLog.jsf"
+              usageId="com_egabi_cjexec_view_nIdServiceLogPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/procedures/TotalProceudresReport.jsf"
+              usageId="com_egabi_cjexec_view_TotalProceudresReportPageDef"/>
+        <page path="/WEB-INF/taskflows/MainReports/procedures/TotalProceduresReport-TF.xml#TotalProceduresReport-TF@resetReports"
+              usageId="com_egabi_cjexec_view_TotalProceduresReport_TF_TotalProceduresReport_TF_resetReportsPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/hasr/HasrReport.jsf"
+              usageId="com_egabi_cjexec_view_HasrReportPageDef"/>
+        <page path="/WEB-INF/taskflows/MainReports/hasr/TotalHasrReport-TF.xml#TotalHasrReport-TF@resetReports"
+              usageId="com_egabi_cjexec_view_TotalHasrReport_TF_TotalHasrReport_TF_resetReportsPageDef"/>
+        <page path="/WEB-INF/taskflows/MainReports/hasr/HasrDetailsReport-TF.xml#HasrDetailsReport-TF@resetReports"
+              usageId="com_egabi_cjexec_view_HasrDetailsReport_TF_HasrDetailsReport_TF_resetReportsPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/hasr/HasrDetailsReport.jsf"
+              usageId="com_egabi_cjexec_view_HasrDetailsReportPageDef1"/>
+        <page path="/WEB-INF/taskflows/MainReports/hasr/HasrIdNumbReport-TF.xml#HasrIdNumbReport-TF@resetReports"
+              usageId="com_egabi_cjexec_view_HasrIdNumbReport_TF_HasrIdNumbReport_TF_resetReportsPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/hasr/HasrIdNumbReport.jsf"
+              usageId="com_egabi_cjexec_view_HasrIdNumbReportPageDef1"/>
+        <page path="/WEB-INF/taskflows/MainReports/motalabat/TotalMotalabatReport-TF.xml#TotalMotalabatReport-TF@resetReports"
+              usageId="com_egabi_cjexec_view_TotalMotalabatReport_TF_TotalMotalabatReport_TF_resetReportsPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/motalabat/TotalMotalabatReport.jsf"
+              usageId="com_egabi_cjexec_view_TotalMotalabatReportPageDef1"/>
+               <page path="/pages/com/egabi/nIdService/nIdServiceLogFrag.jsff"
+              usageId="com_egabi_cjexec_view_nIdServiceLogFragPageDef"/>
+        <page path="/WEB-INF/taskflows/nIdService/nIdServiceLogTF.xml#nIdServiceLogTF@emptyNIdServiceLog"
+              usageId="com_egabi_cjexec_view_nIdServiceLogTF_nIdServiceLogTF_emptyNIdServiceLogPageDef"/>
+        <page path="/pages/com/egabi/cjexec/webCam/WebCamFrag.jsf" usageId="com_egabi_cjexec_view_WebCamFragPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/hasr/HasrNotInDB.jsf"
+              usageId="com_egabi_cjexec_view_HasrNotInDBPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/hasr/HasrNotInDB.jsff"
+              usageId="com_egabi_cjexec_view_HasrNotInDBPageDef1"/>
+        <page path="/bcDetails/Preview_Reports.jsff" usageId="com_egabi_cjexec_view_Preview_ReportsPageDef"/>
+       <page path="/WEB-INF/taskflows/MainReports/hasr/HasrNotInDB_TF.xml#HasrNotInDB_TF@resetReports"
+              usageId="com_egabi_cjexec_view_HasrNotInDB_TF_HasrNotInDB_TF_resetReportsPageDef"/>
+        <page path="/pages/com/egabi/Reports/HasrGharamaReport.jsf"
+              usageId="com_egabi_cjexec_view_HasrGharamaReportPageDef"/>
+        <page path="/pages/com/egabi/Reports/HasrGharamaReport.jsff"
+              usageId="com_egabi_cjexec_view_HasrGharamaReportPageDef1"/>
+        <page path="/WEB-INF/taskflows/datareport/HasrGharamaReport-TF.xml#HasrGharamaReport-TF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_HasrGharamaReport_TF_HasrGharamaReport_TF_preEnterReportsSearchPageDef"/>
+        <page path="/pages/com/egabi/Reports/MoardaReportPage.jsf"
+              usageId="com_egabi_cjexec_view_ProceduresPagesPageDef"/>
+        <page path="/pages/com/egabi/Reports/ProceduresScreen.jsff"
+              usageId="com_egabi_cjexec_view_ProceduresScreenPageDef"/>
+        <page path="/pages/com/egabi/Reports/EstanafReportPage.jsf"
+              usageId="com_egabi_cjexec_view_EstanafReportPagePageDef"/>
+        <page path="/pages/com/egabi/Reports/MoaradastanafiaReportPage.jsf"
+              usageId="com_egabi_cjexec_view_MoaradastanafiaReportPagePageDef"/>
+        <page path="/pages/com/egabi/Reports/EatradAmrGenaya.jsf"
+              usageId="com_egabi_cjexec_view_EatradAmrGenayaPageDef"/>
+        <page path="/pages/com/egabi/Reports/TaanReportPage.jsf" usageId="com_egabi_cjexec_view_TaanReportPagePageDef"/>
+        <page path="/WEB-INF/taskflows/datareport/Procedures-TF.xml#Procedures-TF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_Procedures_TF_Procedures_TF_preEnterReportsSearchPageDef"/>
+        <page path="/pages/com/egabi/Reports/MotalbatReportPage.jsf"
+              usageId="com_egabi_cjexec_view_MotalbatReportPagePageDef"/>
+        <page path="/pages/com/egabi/Reports/Motalbat.jsff" usageId="com_egabi_cjexec_view_MotalbatPageDef"/>
+        <page path="/WEB-INF/taskflows/datareport/Motalbat-TF.xml#Motalbat-TF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_Motalbat_TF_Motalbat_TF_preEnterReportsSearchPageDef"/>
+        <page path="/pages/com/egabi/Reports/HasrPage.jsf" usageId="com_egabi_cjexec_view_HasrPagePageDef1"/>
+     <page path="/provisionInclusionSM/ProvisionsInclusionSM.jsf"
+              usageId="com_egabi_cjexec_view_ProvisionsInclusionPageDef"/>
+        <page path="/provisionInclusionSM/ProvisionInclusion.jsff"
+              usageId="com_egabi_cjexec_view_ProvisionInclusionPageDef"/>
+        <page path="/WEB-INF/taskflows/nIdService/nIdServiceTF.xml#nIdServiceTF@methodCall1"
+              usageId="com_egabi_cjexec_view_nIdServiceTF_nIdServiceTF_methodCall1PageDef"/>
+        <page path="/AppealDigitsSM/AppealDigitsSM.jsf" usageId="com_egabi_cjexec_view_AppealDigitsSMPageDef"/>
+        <page path="/AppealDigitsSM/AppealDigits.jsff" usageId="com_egabi_cjexec_view_AppealDigitsPageDef"/>
+        <page path="/pages/com/egabi/Reports/AbroadRequestReport.jsff"
+              usageId="com_egabi_cjexec_view_AbroadRequestReportPageDef"/>
+        <page path="/pages/com/egabi/Reports/AbroadRequestReport.jsf"
+              usageId="com_egabi_cjexec_view_AbroadRequestReportPageDef1"/>
+        <page path="/WEB-INF/taskflows/datareport/AbroadRequestReportTF.xml#AbroadRequestReportTF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_AbroadRequestReportTF_AbroadRequestReportTF_preEnterReportsSearchPageDef"/>
+        <page path="/pages/com/egabi/previewArrestWarrants/ArrestWarrants.jsf"
+              usageId="com_egabi_cjexec_view_ArrestWarrantsPageDef"/>
+        <page path="/pages/com/egabi/previewArrestWarrants/PreviewArrestWarrants.jsff"
+              usageId="com_egabi_cjexec_view_PreviewArrestWarrantsPageDef1"/>
+        <page path="/WEB-INF/taskflows/datareport/GonahMostanafa-TF.xml#GonahMostanafa-TF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_GonahMostanafa_TF_GonahMostanafa_TF_preEnterReportsSearchPageDef"/>
+        <page path="/pages/com/egabi/Reports/GonahMostanafa.jsff"
+              usageId="com_egabi_cjexec_view_GonahMostanafaPageDef"/>
+        <page path="/pages/com/egabi/Reports/GonahMostanafa.jsf"
+              usageId="com_egabi_cjexec_view_GonahMostanafaPageDef1"/>
+        <page path="/WEB-INF/taskflows/inventory/CaseInventorySearch-TF.xml#CaseInventorySearch-TF@presEnterInventorySearch"
+              usageId="com_egabi_cjexec_view_CaseInventorySearch_TF_CaseInventorySearch_TF_presEnterInventorySearchPageDef"/>
+        <page path="/WEB-INF/taskflows/datareport/MainReportTF.xml#MainReportTF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_MainReportTF_MainReportTF_preEnterReportsSearchPageDef"/>
+        <page path="/pages/com/egabi/Reports/MainReport.jsf" usageId="com_egabi_cjexec_view_MainReportPageDef"/>
+        <page path="/pages/com/egabi/Reports/MainReportScreen.jsff"
+              usageId="com_egabi_cjexec_view_MainReportScreenPageDef"/>
+        <page path="/pages/com/egabi/Reports/AncillaryProvisions.jsf"
+              usageId="com_egabi_cjexec_view_AncillaryProvisionsPageDef"/>
+        <page path="/pages/com/egabi/Reports/AncillaryProvisions.jsff"
+              usageId="com_egabi_cjexec_view_AncillaryProvisionsPageDef1"/>
+        <page path="/WEB-INF/taskflows/datareport/AncillaryProvisions-TF.xml#AncillaryProvisions-TF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_AncillaryProvisions_TF_AncillaryProvisions_TF_preEnterReportsSearchPageDef"/>
+        <page path="/WEB-INF/taskflows/datareport/FirstDegreeTF.xml#FirstDegreeTF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_FirstDegreeTF_FirstDegreeTF_preEnterReportsSearchPageDef"/>
+        <page path="/pages/com/egabi/Reports/FirstDegreeReport.jsff"
+              usageId="com_egabi_cjexec_view_FirstDegreeReportPageDef"/>
+        <page path="/pages/com/egabi/Reports/FirstDegree.jsf" usageId="com_egabi_cjexec_view_FirstDegreePageDef"/>
+        <page path="/WEB-INF/taskflows/datareport/FeesReport-TF.xml#FeesReport-TF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_FeesReport_TF_FeesReport_TF_preEnterReportsSearchPageDef"/>
+        <page path="/pages/com/egabi/Reports/FeesReport.jsff" usageId="com_egabi_cjexec_view_FeesReportPageDef"/>
+        <page path="/pages/com/egabi/Reports/PaiedFees.jsf" usageId="com_egabi_cjexec_view_PaiedFeesPageDef"/>
+        <page path="/pages/com/egabi/Reports/EstanafGnayaatReport.jsf"
+              usageId="com_egabi_cjexec_view_EstanafGnayaatReportPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/AgendaReservations/AgendaReservation.jsf"
+              usageId="com_egabi_cjexec_view_AgendaReservationPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/AgendaReservations/Agenda.jsff"
+              usageId="com_egabi_cjexec_view_AgendaPageDef"/>
+        <page path="/pages/com/egabi/Reports/ProcPaied.jsff" usageId="com_egabi_cjexec_view_ProcPaiedPageDef"/>
+        <page path="/pages/com/egabi/Reports/ProcPaied.jsf" usageId="com_egabi_cjexec_view_ProcPaiedPageDef1"/>
+        <page path="/WEB-INF/taskflows/datareport/ProcPaied-TF.xml#ProcPaied-TF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_ProcPaied_TF_ProcPaied_TF_preEnterReportsSearchPageDef"/>
+        <page path="/pages/com/egabi/prosecutorApprove/ProsecutorApproveProc.jsff"
+              usageId="com_egabi_cjexec_view_ProsecutorApproveProcPageDef"/>
+        <page path="/pages/com/egabi/prosecutorApprove/ProsecutorApproveProc.jsf"
+              usageId="com_egabi_cjexec_view_ProsecutorApproveProcPageDef1"/>
+        <page path="/pages/com/egabi/MainRepports/executionDaily/ExecutionDaily.jsf"
+              usageId="com_egabi_cjexec_view_ExecutionDailyPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/executionDaily/ExecDaily.jsff"
+              usageId="com_egabi_cjexec_view_ExecDailyPageDef"/>
+        <page path="/pages/com/egabi/Reports/MotalbatProc.jsff" usageId="com_egabi_cjexec_view_MotalbatProcPageDef"/>
+        <page path="/pages/com/egabi/Reports/MotalbatProcReportPage.jsf"
+              usageId="com_egabi_cjexec_view_MotalbatProcReportPagePageDef"/>
+        <page path="/WEB-INF/taskflows/MainReports/motalabat/MotalbatProc-TF.xml#MotalbatProc-TF@preEnterReportsSearch"
+              usageId="com_egabi_cjexec_view_MotalbatProc_TF_MotalbatProc_TF_preEnterReportsSearchPageDef"/>
+        <page path="/bcClaims/NewClaims.jsf" usageId="com_egabi_cjexec_view_NewClaimsPageDef"/>
+        <page path="/bcClaims/Hasr_Claim.jsff" usageId="com_egabi_cjexec_view_Hasr_ClaimPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/ActivateAgenda/ActivateAgenda.jsff"
+              usageId="com_egabi_cjexec_view_ActivateAgendaPageDef"/>
+        <page path="/pages/com/egabi/MainRepports/ActivateAgenda/ActivateAgenda.jsf"
+              usageId="com_egabi_cjexec_view_ActivateAgendaPageDef1"/>
+        <page path="/pages/com/egabi/JudgmentAppealApproval/JudgmentAppealApproval.jsf"
+              usageId="com_egabi_cjexec_view_JudgmentAppealApprovalPageDef"/>
+        <page path="/pages/com/egabi/JudgmentAppealApproval/JudgmentAppealApproval.jsff"
+              usageId="com_egabi_cjexec_view_JudgmentAppealApprovalPageDef1"/>
+        <page path="/WEB-INF/taskflows/JudgmentAppealApproval/JudgmentAppealApproval-TF.xml#JudgmentAppealApproval-TF@judgmentAppealApprovalSearch"
+              usageId="com_egabi_cjexec_view_JudgmentAppealApproval_TF_JudgmentAppealApproval_TF_judgmentAppealApprovalSearchPageDef"/>
+        <page path="/pages/com/egabi/expatriateProcAppealApproval/ExpatriateProcAppealApproval.jsf"
+              usageId="com_egabi_cjexec_view_ExpatriateProcAppealApprovalPageDef"/>
+        <page path="/pages/com/egabi/expatriateProcedures/ExpatriateProcedures.jsf"
+              usageId="com_egabi_cjexec_view_ExpatriateProceduresPageDef"/>
+        <page path="/WEB-INF/taskflows/expatriateProcedures/expatriate-TF.xml#expatriate-TF@presEnterInventorySearch"
+              usageId="com_egabi_cjexec_view_expatriate_TF_expatriate_TF_presEnterInventorySearchPageDef"/>
+        <page path="/pages/com/egabi/expatriateProcedures/expatriateProc.jsff"
+              usageId="com_egabi_cjexec_view_expatriateProcPageDef"/>
+        <page path="/WEB-INF/taskflows/expatriateProcAppealApproval/expatriateProcAppealApproval-TF.xml#expatriateProcAppealApproval-TF@expatriateAppealApprovalSearch"
+              usageId="com_egabi_cjexec_view_expatriateProcAppealApproval_TF_expatriateAppealApprovalSearchPageDef"/>
+        <page path="/pages/com/egabi/expatriateProcAppealApproval/expatriateAppealApproval.jsff"
+              usageId="com_egabi_cjexec_view_expatriateAppealApprovalPageDef"/>
+        <page path="/pages/com/egabi/expatriateProcSecondApproval/ExpatriateProcSecondApproval.jsf"
+              usageId="com_egabi_cjexec_view_ExpatriateProcSecondApprovalPageDef"/>
+        <page path="/WEB-INF/taskflows/expatriateProcSecondApproval/expatriateProcSecondApproval-TF.xml#expatriateProcSecondApproval-TF@expatriateAppealSecondApprovalSearch"
+              usageId="com_egabi_cjexec_view_expatriateProcSecondApproval_TF_expatriateAppealSecondApprovalSearchPageDef"/>
+        <page path="/pages/com/egabi/expatriateProcSecondApproval/expatriateProcSecondApproval.jsff"
+              usageId="com_egabi_cjexec_view_ExpatriateProcSecondApprovalPageDef"/>
+        <page path="/pages/com/egabi/expatriateProcSecondApproval/expatriateProcSecondApprovalll.jsff"
+              usageId="com_egabi_cjexec_view_expatriateProcSecondApprovalllPageDef"/>
+    </pageMap>
+    <pageDefinitionUsages>
+        <page id="com_egabi_cjexec_view_auditMainFragPageDef" path="pages.com.egabi.auditUpdate.auditMainFragPageDef"/>
+        <page id="com_egabi_cjexec_view_auditMainTaskFlow_auditMainTaskFlow_ValidatePoliceReportCustomPageDef"
+              path="taskflows.auditUpdate.auditMainTaskFlow_auditMainTaskFlow_ValidatePoliceReportCustomPageDef"/>
+        <page id="com_egabi_cjexec_view_AddBCDetailsPageDef" path="bcDetails.AddBCDetailsPageDef"/>
+        <page id="com_egabi_cjexec_view_InventoryPageDef" path="pages.com.egabi.inventory.InventoryPageDef"/>
+        <page id="com_egabi_cjexec_view_homePageDef" path="pages.com.egabi.inventory.homePageDef"/>
+        <page id="com_egabi_cjexec_view_Search_Par_Parties_TF_Search_Par_Parties_TF_methodCall1PageDef"
+              path="taskflows.ParParties.Search_Par_Parties_TF_Search_Par_Parties_TF_methodCall1PageDef"/>
+        <page id="com_egabi_cjexec_view_SearchParPartiesFragPageDef"
+              path="pages.com.egabi.party.SearchParPartiesFragPageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_RollbackPageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_RollbackPageDef"/>
+        <page id="com_egabi_cjexec_view_PlentyInstallmentFragPageDef"
+              path="pages.com.egabi.cjexec.installmentRequest.plentyInstallment.PlentyInstallmentFragPageDef"/>
+        <page id="com_egabi_cjexec_view_plentyInstallmentTF_plentyInstallmentTF_ExecuteWithParamsPageDef"
+              path="taskflows.enstallmentRequest.plentyInstallments.plentyInstallmentTF_plentyInstallmentTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateInsertPageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_CreateInsertPageDef"/>
+        <page id="com_egabi_cjexec_view_plentyInstallmentTF_plentyInstallmentTF_insertPlentyInstallmentPageDef"
+              path="taskflows.enstallmentRequest.plentyInstallments.plentyInstallmentTF_plentyInstallmentTF_insertPlentyInstallmentPageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateWithParametersPageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_CreateWithParametersPageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateWithParameters1PageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_CreateWithParameters1PageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CreateWithParameters2PageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_CreateWithParameters2PageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateWithParametersPageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_CreateWithParametersPageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateWithParameters1PageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_CreateWithParameters1PageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateWithParameters2PageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_CreateWithParameters2PageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParamsPageDef1"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_ExecuteWithParamsPageDef1"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParamsPageDef1"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParamsPageDef1"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef1"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef1"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams1PageDef1"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams1PageDef1"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionEditTF_provisionsInclusionEditTF_ExecuteWithParams2PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionEditTF_provisionsInclusionEditTF_ExecuteWithParams2PageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParamsPageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams1PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams1PageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams2PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams2PageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_CreateWithParametersPageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_CreateWithParametersPageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams3PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams3PageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams4PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams4PageDef"/>
+        <page id="com_egabi_cjexec_view_suppAmountTF_suppAmountTF_setVisiblityPageDef"
+              path="taskflows.suppamount.suppAmountTF_suppAmountTF_setVisiblityPageDef"/>
+        <page id="com_egabi_cjexec_view_suppRepaymentTF_suppRepaymentTF_excuteInstallmentPageDef"
+              path="taskflows.supprepayment.suppRepaymentTF_suppRepaymentTF_excuteInstallmentPageDef"/>
+        <page id="com_egabi_cjexec_view_Requests_TF_Requests_TF_methodCall1PageDef"
+              path="taskflows.requests.Requests_TF_Requests_TF_methodCall1PageDef"/>
+        <page id="com_egabi_cjexec_view_UpdatePartyPageDef1" path="pages.com.egabi.party.UpdatePartyPageDef1"/>
+        <page id="com_egabi_cjexec_view_WelcomePageDef" path="pages.com.egabi.security.loginOutside.WelcomePageDef"/>
+        <page id="com_egabi_cjexec_view_TestWebCamPageDef" path="pages.com.egabi.cjexec.webCam.TestWebCamPageDef"/>
+        <page id="com_egabi_cjexec_view_WebCamFragPageDef" path="pages.com.egabi.cjexec.webCam.WebCamFragPageDef"/>
+        <page id="com_egabi_cjexec_view_caseAttachFragPageDef" path="caseExecEmp.caseAttachFragPageDef"/>
+        <page id="com_egabi_cjexec_view_TestCaseAttachPageDef" path="caseExecEmp.TestCaseAttachPageDef"/>
+        <page id="com_egabi_cjexec_view_SuppRepaymentFragPageDef"
+              path="pages.com.egabi.cjexec.suppRepayment.SuppRepaymentFragPageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionPageDef"
+              path="pages.com.egabi.cjexec.enableOpposition.enableOppositionPageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParamsPageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestPageDef"
+              path="pages.com.egabi.cjexec.installmentRequest.InstallmentRequestPageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParamsPageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams1PageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams1PageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CreateInsert1PageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_CreateInsert1PageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_CommitPageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_CommitPageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams3PageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams3PageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams3PageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_ExecuteWithParams3PageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_CommitPageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_CommitPageDef"/>
+        <page id="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef"
+              path="taskflows.caseExecEmp.case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_execFoldersSearchFragPageDef"
+              path="pages.com.egabi.cjexec.transaction.executionFolders.execFoldersSearchFragPageDef"/>
+        <page id="com_egabi_cjexec_view_execFoldersPagePageDef"
+              path="pages.com.egabi.cjexec.transaction.executionFolders.execFoldersPagePageDef"/>
+        <page id="com_egabi_cjexec_view_execFoldersDetailFragPageDef"
+              path="pages.com.egabi.cjexec.transaction.executionFolders.execFoldersDetailFragPageDef"/>
+        <page id="com_egabi_cjexec_view_executionFoldersTF_executionFoldersTF_ExecuteWithParamsPageDef"
+              path="taskflows.transaction.executionFolders.executionFoldersTF_executionFoldersTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionEditTF_provisionsInclusionEditTF_ExecuteWithParamsPageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionEditTF_provisionsInclusionEditTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_untitled1PageDef" path="pages.com.egabi.cjexec.lookup.untitled1PageDef"/>
+        <page id="com_egabi_cjexec_view_untitled1PageDef1" path="pages.com.egabi.cjexec.lookup.untitled1PageDef1"/>
+        <page id="com_egabi_cjexec_view_casesSearchFragPageDef" path="caseExecEmp.casesSearchFragPageDef"/>
+        <page id="com_egabi_cjexec_view_caseExecEmpPagePageDef" path="caseExecEmp.caseExecEmpPagePageDef"/>
+        <page id="com_egabi_cjexec_view_provisionInclusionEditFragPageDef"
+              path="provisionsInclusion.provisionInclusionEditFragPageDef"/>
+        <page id="com_egabi_cjexec_view_caseEditFragPageDef" path="caseExecEmp.caseEditFragPageDef"/>
+        <page id="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_callEXC_COURT_BC_PKG___CREATE_BC_DECISIONPageDef"
+              path="taskflows.caseExecEmp.case_edit_tf_case_edit_tf_callEXC_COURT_BC_PKG___CREATE_BC_DECISIONPageDef"/>
+        <page id="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef1"
+              path="taskflows.caseExecEmp.case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef1"/>
+        <page id="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef11"
+              path="taskflows.caseExecEmp.case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef11"/>
+        <page id="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef111"
+              path="taskflows.caseExecEmp.case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef111"/>
+        <page id="com_egabi_cjexec_view_casese_search_tf_casese_search_tf_ExecuteWithParamsPageDef"
+              path="taskflows.caseExecEmp.casese_search_tf_casese_search_tf_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_OppositionsHomeFragPageDef"
+              path="pages.com.egabi.oppositions.OppositionsHomeFragPageDef"/>
+        <page id="com_egabi_cjexec_view_OppositionPagePageDef"
+              path="pages.com.egabi.oppositions.OppositionPagePageDef"/>
+        <page id="com_egabi_cjexec_view_Oppositions_TF_Oppositions_TF_CreateInsertPageDef"
+              path="taskflows.oppositions.Oppositions_TF_Oppositions_TF_CreateInsertPageDef"/>
+        <page id="com_egabi_cjexec_view_case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef1111"
+              path="taskflows.caseExecEmp.case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef1111"/>
+        <page id="com_egabi_cjexec_view_SearchFragPageDef" path="pages.com.egabi.cjexec.requests.SearchFragPageDef"/>
+        <page id="com_egabi_cjexec_view_RequestsPageDef" path="pages.com.egabi.cjexec.requests.RequestsPageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionFragPageDef"
+              path="provisionsInclusion.provisionsInclusionFragPageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionPageDef"
+              path="provisionsInclusion.provisionsInclusionPagePageDef"/>
+        <page id="com_egabi_cjexec_view_executionPagePageDef"
+              path="pages.com.egabi.cjexec.transaction.actions.execution.executionPagePageDef"/>
+        <page id="com_egabi_cjexec_view_executionFoldersTF_executionFoldersTF_ExecutePageDef"
+              path="taskflows.transaction.executionFolders.executionFoldersTF_executionFoldersTF_ExecutePageDef"/>
+        <page id="com_egabi_cjexec_view_casese_search_tf_casese_search_tf_ExecutePageDef"
+              path="taskflows.caseExecEmp.casese_search_tf_casese_search_tf_ExecutePageDef"/>
+        <page id="com_egabi_cjexec_view_suppAmountTF_suppAmountTF_ExecuteWithParamsPageDef"
+              path="taskflows.suppamount.suppAmountTF_suppAmountTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_suppAmountFragPageDef"
+              path="pages.com.egabi.cjexec.suppamount.suppAmountFragPageDef"/>
+        <page id="com_egabi_cjexec_view_suppRepaymentTF_suppRepaymentTF_ExecuteWithParamsPageDef"
+              path="taskflows.supprepayment.suppRepaymentTF_suppRepaymentTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_ExcBcSessJdgFragPageDef"
+              path="pages.com.egabi.cjexec.common.ExcBcSessJdgFragPageDef"/>
+        <page id="com_egabi_cjexec_view_ExcPrtySessJdgFragPageDef"
+              path="pages.com.egabi.cjexec.common.ExcPrtySessJdgFragPageDef"/>
+        <page id="com_egabi_cjexec_view_ExcBcSessJdgTF_ExecBcSessionsJudgmentsTF_ExecuteWithParamsPageDef"
+              path="taskflows.execbcsessionsjudgments.ExcBcSessJdgTF_ExecBcSessionsJudgmentsTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_ExcPrtySessJdgTF_ExcPrtySessJdgTF_ExecuteWithParams1PageDef"
+              path="taskflows.execpartysessionjudgments.ExcPrtySessJdgTF_ExcPrtySessJdgTF_ExecuteWithParams1PageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionEditTF_provisionsInclusionEditTF_ExecuteWithParams1PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionEditTF_provisionsInclusionEditTF_ExecuteWithParams1PageDef"/>
+        <page id="com_egabi_cjexec_view_ationsTF_ationsTF_ExecuteWithParamsPageDef"
+              path="taskflows.transaction.actions.ationsTF_ationsTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_execFolderSearchAllFragPageDef"
+              path="pages.com.egabi.cjexec.transaction.executionFolders.execFolderSearchAllFragPageDef"/>
+        <page id="com_egabi_cjexec_view_searchAllFoldersTF_searchAllFoldersTF_ExecutePageDef"
+              path="taskflows.transaction.executionFolders.searchAllFoldersTF_searchAllFoldersTF_ExecutePageDef"/>
+        <page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams2PageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_ExecuteWithParams2PageDef"/>
+        <page id="com_egabi_cjexec_view_ParPartiesPageDef" path="pages.com.egabi.ParParties.ParPartiesPageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams2PageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams2PageDef"/>
+        <page id="com_egabi_cjexec_view_WebCamTF_WebCamTF_ExecuteWithParams1PageDef"
+              path="taskflows.webcam.WebCamTF_WebCamTF_ExecuteWithParams1PageDef"/>
+        <page id="com_egabi_cjexec_view_lawyerInfoPageDef"
+              path="pages.com.egabi.cjexec.enableOpposition.lawyerInfoPageDef"/>
+        <!--<page id="com_egabi_cjexec_view_enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef"
+              path="taskflows.enableOpposition.enableOppositionTF_enableOppositionTF_ExecuteWithParams1PageDef"/>-->
+        <page id="com_egabi_cjexec_view_lawyerInfoTF_lawyerInfoTF_ExecuteWithParamsPageDef"
+              path="taskflows.enableOpposition.lawyerInfoTF_lawyerInfoTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_BCDetailsPageDef" path="bcDetails.BCDetailsPageDef"/>
+        <page id="com_egabi_cjexec_view_executionFoldersTF_executionFoldersTF_ExecuteWithParams1PageDef"
+              path="taskflows.transaction.executionFolders.executionFoldersTF_executionFoldersTF_ExecuteWithParams1PageDef"/>
+        <page id="com_egabi_cjexec_view_SearchByCasePageDef" path="pages.com.egabi.inventory.SearchByCasePageDef"/>
+        <page id="com_egabi_cjexec_view_Inventory_TF_Inventory_TF_ExecuteWithParamsPageDef"
+              path="taskflows.inventory.Inventory_TF_Inventory_TF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_SearchResultPageDef" path="pages.com.egabi.inventory.SearchResultPageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams2PageDef1"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams2PageDef1"/>
+        <page id="com_egabi_cjexec_view_ParLawyerFragPageDef"
+              path="pages.com.egabi.cjexec.parlawyer.ParLawyerFragPageDef"/>
+        <page id="com_egabi_cjexec_view_parLawyerTF_parLawyerTF_Create1PageDef"
+              path="taskflows.parlawyer.parLawyerTF_parLawyerTF_Create1PageDef"/>
+        <page id="com_egabi_cjexec_view_CaseInventorySesrchPageDef"
+              path="pages.com.egabi.inventory.CaseInventorySesrchPageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams5PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams5PageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams6PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams6PageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams7PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_ExecuteWithParams7PageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKPPageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKPPageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKP1PageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKP1PageDef"/>
+        <page id="com_egabi_cjexec_view_parLawyerTF_parLawyerTF_RollbackPageDef"
+              path="taskflows.parlawyer.parLawyerTF_parLawyerTF_RollbackPageDef"/>
+        <page id="com_egabi_cjexec_view_searchAllFoldersTF_searchAllFoldersTF_ExecuteWithParamsPageDef"
+              path="taskflows.transaction.executionFolders.searchAllFoldersTF_searchAllFoldersTF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_parlawyerPageDef" path="pages.com.egabi.cjexec.parlawyer.parlawyerPageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_parLawyerTF1PageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_parLawyerTF1PageDef"/>
+        <page id="com_egabi_cjexec_view_Par_Parties_TF_Par_Parties_TF_ExecuteWithParamsPageDef"
+              path="taskflows.ParParties.Par_Parties_TF_Par_Parties_TF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKPNewPageDef"
+              path="taskflows.provisionsInclusion.provisionsInclusionTF_provisionsInclusionTF_executeSessionAttachLKPNewPageDef"/>
+        <page id="com_egabi_cjexec_view_InstallmentRequestTF_InstallmentRequestTF_RollbackPageDef"
+              path="taskflows.enstallmentRequest.InstallmentRequestTF_InstallmentRequestTF_RollbackPageDef"/>
+        <page id="com_egabi_cjexec_view_ClaimPageDef" path="pages.com.egabi.claimProcedure.ClaimPageDef"/>
+        <page id="com_egabi_cjexec_view_ClaimPageDef1" path="pages.com.egabi.claimProcedure.ClaimPageDef1"/>
+        <page id="com_egabi_cjexec_view_claimProcedurePageDef"
+              path="pages.com.egabi.claimProcedure.claimProcedureFragPageDef"/>
+        <page id="com_egabi_cjexec_view_claimProcedurePageDef1"
+              path="pages.com.egabi.claimProcedure.claimProcedurePageDef"/>
+        <page id="com_egabi_cjexec_view_claimProcedureLogPageDef"
+              path="pages.com.egabi.claimProcedure.claimProcedureLogPageDef"/>
+        <page id="com_egabi_cjexec_view_claimProcedureLogFragPageDef"
+              path="pages.com.egabi.claimProcedure.claimProcedureLogFragPageDef"/>
+        <page id="com_egabi_cjexec_view_claimProcedureLogTF_claimProcedureLogTF_emptyClaimProcedureLogPageDef"
+              path="taskflows.claimProcedure.claimProcedureLogTF_claimProcedureLogTF_emptyClaimProcedureLogPageDef"/>
+        <page id="com_egabi_cjexec_view_claimProcedureTF_claimProcedureTF_emptyClaimsPageDef"
+              path="taskflows.claimProcedure.claimProcedureTF_claimProcedureTF_emptyClaimsPageDef"/>
+        <page id="com_egabi_cjexec_view_searchByPartyCaseHasrPageDef"
+              path="pages.com.egabi.claimProcedure.searchByPartyCaseHasrPageDef"/>
+        <page id="com_egabi_cjexec_view_auditSimpleFragPageDef" path="pages.com.egabi.audit.auditSimpleFragPageDef"/>
+        <page id="com_egabi_cjexec_view_CaseInventorySearch_TF_CaseInventorySearch_TF_ExecuteWithParamsPageDef"
+              path="taskflows.inventory.CaseInventorySearch_TF_CaseInventorySearch_TF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_auditPageDef" path="pages.com.egabi.audit.auditPageDef"/>
+        <page id="com_egabi_cjexec_view_auditFragPageDef" path="pages.com.egabi.audit.auditFragPageDef"/>
+        <page id="com_egabi_cjexec_view_searchByPartyFragPageDef"
+              path="pages.com.egabi.claimProcedure.searchByPartyFragPageDef"/>
+        <page id="com_egabi_cjexec_view_searchByHasrFragPageDef"
+              path="pages.com.egabi.claimProcedure.searchByHasrFragPageDef"/>
+        <page id="com_egabi_cjexec_view_searchByCaseFragPageDef"
+              path="pages.com.egabi.claimProcedure.searchByCaseFragPageDef"/>
+        <page id="com_egabi_cjexec_view_searchByCaseTF_searchByCase_ExecuteWithParamsPageDef"
+              path="taskflows.claimProcedure.searchByCaseTF_searchByCase_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_searchByHasrTF_searchByHasr_ExecuteWithParamsPageDef"
+              path="taskflows.claimProcedure.searchByHasrTF_searchByHasr_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_case_attachments_tf_case_attachments_tf_ExecuteWithParamsPageDef"
+              path="taskflows.caseExecEmp.case_attachments_tf_case_attachments_tf_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_PreviousProcedures_TF_PreviousProcedures_TF_ExecuteWithParamsPageDef"
+              path="taskflows.procedures.PreviousProcedures_TF_PreviousProcedures_TF_ExecuteWithParamsPageDef"/>
+        <page id="com_egabi_cjexec_view_PreviousProceduresPageDef"
+              path="pages.com.egabi.cjexec.PreviousProcedures.PreviousProceduresPageDef"/>
+        <page id="com_egabi_cjexec_view_ClaimTF_ClaimTF_emptyClaimSearchResultPageDef"
+              path="taskflows.claimProcedure.ClaimTF_ClaimTF_emptyClaimSearchResultPageDef"/>
+        <page id="com_egabi_cjexec_view_verifyIdNumPageDef" path="pages.com.egabi.claimProcedure.verifyIdNumPageDef"/>
+        <page id="com_egabi_cjexec_view_auditMainPagePageDef" path="pages.com.egabi.auditUpdate.auditMainPagePageDef"/>
+        <page id="com_egabi_cjexec_view_displayAuditFragPageDef"
+              path="pages.com.egabi.auditUpdate.displayAuditFragPageDef"/>
+        <page id="com_egabi_cjexec_view_displayAuditPagePageDef"
+              path="pages.com.egabi.auditUpdate.displayAuditPagePageDef"/>
+        <page id="com_egabi_cjexec_view_displayAuditDetailsFragPageDef"
+              path="pages.com.egabi.auditUpdate.displayAuditDetailsFragPageDef"/>
+        <page id="com_egabi_cjexec_view_MainReportsPageDef" path="pages.com.egabi.MainRepports.MainReportsPageDef"/>
+        <page id="com_egabi_cjexec_view_TotalProceduresReportPageDef"
+              path="pages.com.egabi.MainRepports.TotalProceduresReportPageDef"/>
+        <page id="com_egabi_cjexec_view_nIdServiceFragPageDef" path="pages.com.egabi.nIdService.nIdServiceFragPageDef"/>
+        <page id="com_egabi_cjexec_view_TotalHasrReportPageDef"
+              path="pages.com.egabi.MainRepports.TotalHasrReportPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrDetailsReportPageDef"
+              path="pages.com.egabi.MainRepports.HasrDetailsReportPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrIdNumbReportPageDef"
+              path="pages.com.egabi.MainRepports.HasrIdNumbReportPageDef"/>
+        <page id="com_egabi_cjexec_view_TotalMotalabatReportPageDef"
+              path="pages.com.egabi.MainRepports.TotalMotalabatReportPageDef"/>
+        <page id="com_egabi_cjexec_view_MainReports_MainReports_resetReportsPageDef"
+              path="taskflows.MainReports.MainReports_MainReports_resetReportsPageDef"/>
+        <page id="com_egabi_cjexec_view_nIdServiceLogPageDef" path="pages.com.egabi.nIdService.nIdServiceLogPageDef"/>
+        <page id="com_egabi_cjexec_view_TotalProceudresReportPageDef"
+              path="pages.com.egabi.MainRepports.procedures.TotalProceudresReportPageDef"/>
+        <page id="com_egabi_cjexec_view_TotalProceduresReport_TF_TotalProceduresReport_TF_resetReportsPageDef"
+              path="taskflows.MainReports.procedures.TotalProceduresReport_TF_TotalProceduresReport_TF_resetReportsPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrReportPageDef" path="pages.com.egabi.MainRepports.hasr.HasrReportPageDef"/>
+        <page id="com_egabi_cjexec_view_TotalHasrReport_TF_TotalHasrReport_TF_resetReportsPageDef"
+              path="taskflows.MainReports.hasr.TotalHasrReport_TF_TotalHasrReport_TF_resetReportsPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrDetailsReport_TF_HasrDetailsReport_TF_resetReportsPageDef"
+              path="taskflows.MainReports.hasr.HasrDetailsReport_TF_HasrDetailsReport_TF_resetReportsPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrDetailsReportPageDef1"
+              path="pages.com.egabi.MainRepports.hasr.HasrDetailsReportPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrIdNumbReport_TF_HasrIdNumbReport_TF_resetReportsPageDef"
+              path="taskflows.MainReports.hasr.HasrIdNumbReport_TF_HasrIdNumbReport_TF_resetReportsPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrIdNumbReportPageDef1"
+              path="pages.com.egabi.MainRepports.hasr.HasrIdNumbReportPageDef"/>
+        <page id="com_egabi_cjexec_view_TotalMotalabatReport_TF_TotalMotalabatReport_TF_resetReportsPageDef"
+              path="taskflows.MainReports.motalabat.TotalMotalabatReport_TF_TotalMotalabatReport_TF_resetReportsPageDef"/>
+        <page id="com_egabi_cjexec_view_TotalMotalabatReportPageDef1"
+              path="pages.com.egabi.MainRepports.motalabat.TotalMotalabatReportPageDef"/>
+               <page id="com_egabi_cjexec_view_nIdServiceLogFragPageDef"
+              path="pages.com.egabi.nIdService.nIdServiceLogFragPageDef"/>
+        <page id="com_egabi_cjexec_view_nIdServiceLogTF_nIdServiceLogTF_emptyNIdServiceLogPageDef"
+              path="taskflows.nIdService.nIdServiceLogTF_nIdServiceLogTF_emptyNIdServiceLogPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrNotInDBPageDef"
+              path="pages.com.egabi.MainRepports.hasr.HasrNotInDBPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrNotInDBPageDef1"
+              path="pages.com.egabi.MainRepports.hasr.HasrNotInDBPageDef1"/>
+        <page id="com_egabi_cjexec_view_Preview_ReportsPageDef" path="bcDetails.Preview_ReportsPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrNotInDB_TF_HasrNotInDB_TF_resetReportsPageDef"
+              path="taskflows.MainReports.hasr.HasrNotInDB_TF_HasrNotInDB_TF_resetReportsPageDef"/>
+        <page id="com_egabi_cjexec_view_ReportPageDef" path="pages.com.egabi.Reports.ReportPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrPagePageDef" path="pages.com.egabi.Reports.HasrPagePageDef"/>
+        <page id="com_egabi_cjexec_view_HasrGharamaReportPageDef"
+              path="pages.com.egabi.Reports.HasrGharamaReporPageDefScreen"/>
+        <page id="com_egabi_cjexec_view_HasrGharamaReportPageDef1"
+              path="pages.com.egabi.Reports.HasrGharamaReportPageDef1"/>
+        <page id="com_egabi_cjexec_view_HasrDataReport_TF_HasrDataReport__preEnterReportsSearchPageDef"
+              path="taskflows.datareport.HasrDataReport_TF_HasrDataReport__preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrGharamaReport_TF_HasrGharamaReport_TF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.HasrGharamaReport_TF_HasrGharamaReport_TF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_ProceduresPagesPageDef" path="pages.com.egabi.Reports.ProceduresPagesPageDef"/>
+        <page id="com_egabi_cjexec_view_ProceduresScreenPageDef"
+              path="pages.com.egabi.Reports.ProceduresScreenPageDef"/>
+        <page id="com_egabi_cjexec_view_EstanafReportPagePageDef"
+              path="pages.com.egabi.Reports.EstanafReportPagePageDef"/>
+        <page id="com_egabi_cjexec_view_MoaradastanafiaReportPagePageDef"
+              path="pages.com.egabi.Reports.MoaradastanafiaReportPagePageDef"/>
+        <page id="com_egabi_cjexec_view_EatradAmrGenayaPageDef" path="pages.com.egabi.Reports.EatradAmrGenayaPageDef"/>
+        <page id="com_egabi_cjexec_view_TaanReportPagePageDef" path="pages.com.egabi.Reports.TaanReportPagePageDef"/>
+        <page id="com_egabi_cjexec_view_Procedures_TF_Procedures_TF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.Procedures_TF_Procedures_TF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_MotalbatReportPagePageDef"
+              path="pages.com.egabi.Reports.MotalbatReportPagePageDef"/>
+        <page id="com_egabi_cjexec_view_MotalbatPageDef" path="pages.com.egabi.Reports.MotalbatPageDef"/>
+        <page id="com_egabi_cjexec_view_Motalbat_TF_Motalbat_TF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.Motalbat_TF_Motalbat_TF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_HasrPagePageDef1" path="pages.com.egabi.Reports.HasrPagePageDef1"/>
+     <page id="com_egabi_cjexec_view_ProvisionsInclusionPageDef"
+              path="provisionInclusionSM.ProvisionsInclusionPageDef"/>
+        <page id="com_egabi_cjexec_view_ProvisionInclusionPageDef"
+              path="provisionInclusionSM.ProvisionInclusionPageDef"/>
+        <page id="com_egabi_cjexec_view_nIdServiceTF_nIdServiceTF_methodCall1PageDef"
+              path="taskflows.nIdService.nIdServiceTF_nIdServiceTF_methodCall1PageDef"/>
+        <page id="com_egabi_cjexec_view_AppealDigitsSMPageDef" path="AppealDigitsSM.AppealDigitsSMPageDef"/>
+        <page id="com_egabi_cjexec_view_AppealDigitsPageDef" path="AppealDigitsSM.AppealDigitsPageDef"/>
+        <page id="com_egabi_cjexec_view_AbroadRequestReportPageDef"
+              path="pages.com.egabi.Reports.AbroadRequestReportPageDef"/>
+        <page id="com_egabi_cjexec_view_AbroadRequestReportPageDef1"
+              path="pages.com.egabi.Reports.AbroadRequestReportPageDef1"/>
+        <page id="com_egabi_cjexec_view_AbroadRequestReportTF_AbroadRequestReportTF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.AbroadRequestReportTF_AbroadRequestReportTF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_PreviewArrestWarrantsPageDef"
+              path="pages.com.egabi.previewArrestWarrants.PreviewArrestWarrantsPageDef"/>
+        <page id="com_egabi_cjexec_view_ArrestWarrantsPageDef"
+              path="pages.com.egabi.previewArrestWarrants.ArrestWarrantsPageDef"/>
+        <page id="com_egabi_cjexec_view_PreviewArrestWarrantsPageDef1"
+              path="pages.com.egabi.previewArrestWarrants.PreviewArrestWarrantsPageDef1"/>
+        <page id="com_egabi_cjexec_view_GonahMostanafa_TF_GonahMostanafa_TF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.GonahMostanafa_TF_GonahMostanafa_TF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_GonahMostanafaPageDef" path="pages.com.egabi.Reports.GonahMostanafaPageDef"/>
+        <page id="com_egabi_cjexec_view_GonahMostanafaPageDef1" path="pages.com.egabi.Reports.GonahMostanafaPageDef1"/>
+        <page id="com_egabi_cjexec_view_CaseInventorySearch_TF_CaseInventorySearch_TF_presEnterInventorySearchPageDef"
+              path="taskflows.inventory.CaseInventorySearch_TF_CaseInventorySearch_TF_presEnterInventorySearchPageDef"/>
+        <page id="com_egabi_cjexec_view_MainReportTF_MainReportTF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.MainReportTF_MainReportTF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_MainReportPageDef" path="pages.com.egabi.Reports.MainReportPageDef"/>
+        <page id="com_egabi_cjexec_view_MainReportScreenPageDef"
+              path="pages.com.egabi.Reports.MainReportScreenPageDef"/>
+        <page id="com_egabi_cjexec_view_AncillaryProvisionsPageDef"
+              path="pages.com.egabi.Reports.AncillaryProvisionsPageDef"/>
+        <page id="com_egabi_cjexec_view_AncillaryProvisionsPageDef1"
+              path="pages.com.egabi.Reports.AncillaryProvisionsPageDef1"/>
+        <page id="com_egabi_cjexec_view_AncillaryProvisions_TF_AncillaryProvisions_TF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.AncillaryProvisions_TF_AncillaryProvisions_TF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_FirstDegreeTF_FirstDegreeTF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.FirstDegreeTF_FirstDegreeTF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_FirstDegreeReportPageDef"
+              path="pages.com.egabi.Reports.FirstDegreeReportPageDef"/>
+        <page id="com_egabi_cjexec_view_FirstDegreePageDef" path="pages.com.egabi.Reports.FirstDegreePageDef"/>
+        <page id="com_egabi_cjexec_view_FeesReport_TF_FeesReport_TF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.FeesReport_TF_FeesReport_TF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_FeesReportPageDef" path="pages.com.egabi.Reports.FeesReportPageDef"/>
+        <page id="com_egabi_cjexec_view_PaiedFeesPageDef" path="pages.com.egabi.Reports.PaiedFeesPageDef"/>
+        <page id="com_egabi_cjexec_view_EstanafGnayaatReportPageDef"
+              path="pages.com.egabi.Reports.EstanafGnayaatReportPageDef"/>
+        <page id="com_egabi_cjexec_view_AgendaReservationPageDef"
+              path="pages.com.egabi.MainRepports.AgendaReservations.AgendaReservationPageDef"/>
+        <page id="com_egabi_cjexec_view_AgendaPageDef"
+              path="pages.com.egabi.MainRepports.AgendaReservations.AgendaPageDef"/>
+        <page id="com_egabi_cjexec_view_ProcPaiedPageDef" path="pages.com.egabi.Reports.ProcPaiedPageDef"/>
+        <page id="com_egabi_cjexec_view_ProcPaiedPageDef1" path="pages.com.egabi.Reports.ProcPaiedPageDef1"/>
+        <page id="com_egabi_cjexec_view_ProcPaied_TF_ProcPaied_TF_preEnterReportsSearchPageDef"
+              path="taskflows.datareport.ProcPaied_TF_ProcPaied_TF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_ProsecutorApproveProcPageDef"
+              path="pages.com.egabi.prosecutorApprove.ProsecutorApproveProcPageDef"/>
+        <page id="com_egabi_cjexec_view_ProsecutorApproveProcPageDef1"
+              path="pages.com.egabi.prosecutorApprove.ProsecutorApproveProcPageDef1"/>
+        <page id="com_egabi_cjexec_view_ExecutionDailyPageDef"
+              path="pages.com.egabi.MainRepports.executionDaily.ExecutionDailyPageDef"/>
+        <page id="com_egabi_cjexec_view_ExecDailyPageDef"
+              path="pages.com.egabi.MainRepports.executionDaily.ExecDailyPageDef"/>
+        <page id="com_egabi_cjexec_view_MotalbatProcPageDef" path="pages.com.egabi.Reports.MotalbatProcPageDef"/>
+        <page id="com_egabi_cjexec_view_MotalbatProcReportPagePageDef"
+              path="pages.com.egabi.Reports.MotalbatProcReportPagePageDef"/>
+        <page id="com_egabi_cjexec_view_MotalbatProc_TF_MotalbatProc_TF_preEnterReportsSearchPageDef"
+              path="taskflows.MainReports.motalabat.MotalbatProc_TF_MotalbatProc_TF_preEnterReportsSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_NewClaimsPageDef" path="bcClaims.NewClaimsPageDef"/>
+        <page id="com_egabi_cjexec_view_Hasr_ClaimPageDef" path="bcClaims.Hasr_ClaimPageDef"/>
+        <page id="com_egabi_cjexec_view_ActivateAgendaPageDef"
+              path="pages.com.egabi.MainRepports.ActivateAgenda.ActivateAgendaPageDef"/>
+        <page id="com_egabi_cjexec_view_ActivateAgendaPageDef1"
+              path="pages.com.egabi.MainRepports.ActivateAgenda.ActivateAgendaPageDef1"/>
+        <page id="com_egabi_cjexec_view_JudgmentAppealApprovalPageDef"
+              path="pages.com.egabi.JudgmentAppealApproval.JudgmentAppealApprovalPageDef"/>
+        <page id="com_egabi_cjexec_view_JudgmentAppealApprovalPageDef1"
+              path="pages.com.egabi.JudgmentAppealApproval.JudgmentAppealApprovalPageDef1"/>
+        <page id="com_egabi_cjexec_view_JudgmentAppealApproval_TF_JudgmentAppealApproval_TF_judgmentAppealApprovalSearchPageDef"
+              path="taskflows.JudgmentAppealApproval.JudgmentAppealApproval_TF_JudgmentAppealApproval_TF_judgmentAppealApprovalSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_ExpatriateProcAppealApprovalPageDef"
+              path="pages.com.egabi.expatriateProcAppealApproval.ExpatriateProcAppealApprovalPageDef"/>
+        <page id="com_egabi_cjexec_view_ExpatriateProceduresPageDef"
+              path="pages.com.egabi.expatriateProcedures.ExpatriateProceduresPageDef"/>
+        <page id="com_egabi_cjexec_view_expatriate_TF_expatriate_TF_presEnterInventorySearchPageDef"
+              path="taskflows.expatriateProcedures.expatriate_TF_expatriate_TF_presEnterInventorySearchPageDef"/>
+        <page id="com_egabi_cjexec_view_expatriateProcPageDef"
+              path="pages.com.egabi.expatriateProcedures.expatriateProcPageDef"/>
+        <page id="com_egabi_cjexec_view_expatriateProcAppealApproval_TF_expatriateAppealApprovalSearchPageDef"
+              path="taskflows.expatriateProcAppealApproval.expatriateProcAppealApproval_TF_expatriateAppealApprovalSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_expatriateAppealApprovalPageDef"
+              path="pages.com.egabi.expatriateProcAppealApproval.expatriateAppealApprovalPageDef"/>
+        <page id="com_egabi_cjexec_view_ExpatriateProcSecondApprovalPageDef"
+              path="pages.com.egabi.expatriateProcSecondApproval.ExpatriateProcSecondApprovalPageDef"/>
+        <page id="com_egabi_cjexec_view_expatriateProcSecondApproval_TF_expatriateAppealSecondApprovalSearchPageDef"
+              path="taskflows.expatriateProcSecondApproval.expatriateProcSecondApproval_TF_expatriateAppealSecondApprovalSearchPageDef"/>
+        <page id="com_egabi_cjexec_view_expatriateProcSecondApprovalllPageDef"
+              path="pages.com.egabi.expatriateProcSecondApproval.expatriateProcSecondApprovalllPageDef"/>
+    </pageDefinitionUsages>
+    <dataControlUsages>
+        <BC4JDataControl id="CjExecAMDataControl" Package="com.egabi.cjexec.model.appmodules"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="CjExecAMLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="BCDetailsAMDataControl" Package="com.egabi.cjexec.model.appmodules"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="BCDetailsAMLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="UtilsAppAMDataControl" Package="com.egabi.cjexec.model.appmodules"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="UtilsAppAMLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="UtilsAppModuleAMDataControl" Package="com.egabi.cjexec.model.appmodules"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="UtilsAppModuleAMLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="SimplifiedModeAMDataControl" Package="com.egabi.cjexec.model.appmodules"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="SimplifiedModeAMLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    </dataControlUsages>
+</Application>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="FirstDegreeReportPageDef"
+                Package="pages.com.egabi.Reports">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+                  id="SearchInventoryRVO1Iterator"/>
+        <iterator Binds="SimplifiedModeAM1.HasrDataReportView1" DataControl="CjExecAMDataControl" RangeSize="500"
+                  id="HasrDataReportView1Iterator"/>
+        <searchRegion Binds="HasrDataReportView1Iterator" Criteria=""
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="HasrDataReportView1Query"/>
+    </executables>
+    <bindings>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="Year">
+            <AttrNames>
+                <Item Value="Year"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateTo">
+            <AttrNames>
+                <Item Value="DateTo"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateFrom">
+            <AttrNames>
+                <Item Value="DateFrom"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="HasrDataReportView1Iterator" id="HasrDataReportView1">
+            <nodeDefinition DefName="com.egabi.cjexec.model.roviews.reports.HasrDataReportView"
+                            Name="HasrDataReportView10">
+                <AttrNames>
+                    <Item Value="InventoryNumber"/>
+                    <Item Value="BusinessCaseNumber"/>
+                    <Item Value="PartyName"/>
+                    <Item Value="IdNumber"/>
+                    <Item Value="Address"/>
+                    <Item Value="JobTitle"/>
+                    <Item Value="JudgmentText"/>
+                    <Item Value="Name"/>
+                    <Item Value="HearingDate"/>
+                    <Item Value="CreatedBy"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <list IterBinding="SearchInventoryRVO1Iterator" id="CriminalTypeFlag" DTSupportsMRU="true"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="CriminalTypeFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="1"/>
+                <Item Value="2"/>
+            </ValueList>
+        </list>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_FirstDegree"
+              id="GenayWithoutGharama" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <button IterBinding="SearchInventoryRVO1Iterator" id="EstanafGozayaFlag" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="EstanafGozayaFlag"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+    </bindings>
+</pageDefinition>

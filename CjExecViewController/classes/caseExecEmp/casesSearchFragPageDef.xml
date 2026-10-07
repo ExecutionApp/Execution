@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="casesSearchFragPageDef"
+                Package="caseExecEmp">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CasesSearchReasultROV" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="CasesSearchReasultROVIterator"/>
+    <iterator Binds="CasesSearchFormROV" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="CasesSearchFormROVIterator"/>
+    <iterator Binds="EntityCircleRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="EntityCircleRVO1Iterator"/>
+    <!--<iterator Binds="ProvisionedCasesInSession1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ProvisionedCasesInSession1Iterator"/>
+    <iterator Binds="AllCasesInSessionRVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="AllCasesInSessionRVO1Iterator"/>-->
+    <iterator id="CourtCirclesHearingDatesRVO2Iterator" Binds="CourtCirclesHearingDatesRVO2"
+              DataControl="CjExecAMDataControl" RangeSize="25"/>
+    <iterator id="CourtCirclesHearingDatesRVO1Iterator" Binds="CourtCirclesHearingDatesRVO1"
+              DataControl="CjExecAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CasesSearchReasultROVIterator" id="CasesSearchReasultROV">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.caseexecemp.CasesSearchReasultROV"
+                      Name="CasesSearchReasultROV0">
+        <AttrNames>
+          <Item Value="CaseNumber"/>
+          <Item Value="BusinessCaseName"/>
+          <Item Value="HearingDate"/>
+          <Item Value="CaseDegree"/>
+          <Item Value="BusinessCaseType"/>
+          <Item Value="HearingDateId"/>
+          <Item Value="HearingResId"/>
+          <Item Value="ParYear"/>
+          <Item Value="PoliceNumber"/>
+          <Item Value="CountAll"/>
+          <Item Value="Created"/>
+          <Item Value="Done"/>
+          <Item Value="BcDegreeId"/>
+          <Item Value="ClassifiedFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="CasesSearchFormROVIterator" id="CourtName">
+      <AttrNames>
+        <Item Value="CourtName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CasesSearchFormROVIterator" id="DirName">
+      <AttrNames>
+        <Item Value="DirName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="CasesSearchFormROVIterator" StaticList="false" Uses="LOV_CaseType" id="CaseType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="CasesSearchFormROVIterator" StaticList="false" Uses="LOV_HearingDate" id="HearingDate"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="CasesSearchFormROVIterator" StaticList="false" Uses="LOV_CourtCircleHearingDate"
+                  id="CourtCircleHearingDate"/>
+    <list IterBinding="CasesSearchFormROVIterator" StaticList="false" Uses="LOV_BusinessCaseDegree"
+          id="BusinessCaseDegree" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="CasesSearchFormROVIterator" StaticList="false" Uses="LOV_OriginEntity" id="OriginEntity"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+
+    <attributeValues IterBinding="CasesSearchFormROVIterator" id="PoliceNumber">
+      <AttrNames>
+        <Item Value="PoliceNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CasesSearchFormROVIterator" id="PartyFullName">
+      <AttrNames>
+        <Item Value="PartyFullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CasesSearchFormROVIterator" id="PartyIdNumber">
+      <AttrNames>
+        <Item Value="PartyIdNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CasesSearchFormROVIterator" id="CaseTypeId">
+      <AttrNames>
+        <Item Value="CaseType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CasesSearchFormROVIterator" id="HearingDateId">
+      <AttrNames>
+        <Item Value="HearingDate"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="CasesSearchReasultROVIterator" id="ExecuteCaseResult"
+            InstanceName="CjExecAMDataControl.CasesSearchReasultROV" DataControl="CjExecAMDataControl"
+            RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="bindCaseType" NDValue="#{bindings.CaseTypeId.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="bindCircleId" NDValue="#{bindings.DirId.attributeValue}" NDType="java.lang.String"/>
+      <NamedData NDName="bindHearingDateId" NDValue="#{bindings.CourtCircleHearingDateId.inputValue}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="bindPoliceNumber" NDType="java.lang.String" NDValue="#{bindings.PoliceNumber.inputValue}"/>
+      <NamedData NDName="bindIdNumber" NDValue="#{bindings.PartyIdNumber.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="bindPartyName" NDValue="#{bindings.PartyFullName.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="bindDegree" NDType="java.lang.String" NDValue="#{bindings.BusinessCaseDegree.attributeValue}"/>
+      <NamedData NDName="bindOriginEntityId" NDType="java.lang.String"
+                 NDValue="#{bindings.OriginEntity.attributeValue}"/>
+    </action>
+    <!--<attributeValues IterBinding="CasesSearchFormROVIterator" id="DirId">
+      <AttrNames>
+        <Item Value="DirId"/>
+      </AttrNames>
+    </attributeValues>-->
+    <attributeValues IterBinding="CasesSearchReasultROVIterator" id="CountAll">
+      <AttrNames>
+        <Item Value="CountAll"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CasesSearchReasultROVIterator" id="Done">
+      <AttrNames>
+        <Item Value="Done"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CasesSearchFormROVIterator" id="CourtCircleHearingDateId">
+      <AttrNames>
+        <Item Value="CourtCircleHearingDateId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="CasesSearchFormROVIterator" StaticList="false" Uses="LOV_DirId" id="DirId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="CourtCirclesHearingDatesRVO2Iterator" id="HearingDate1">
+      <AttrNames>
+        <Item Value="HearingDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues Uses="LOV_HearingDate" StaticList="false" IterBinding="CourtCirclesHearingDatesRVO2Iterator"
+                  id="HearingDate2"/>
+  </bindings>
+</pageDefinition>

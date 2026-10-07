@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="parLawyerTF">
+    <default-activity>parlawyer</default-activity>
+    <transaction>
+      <new-transaction/>
+    </transaction>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <!--<input-parameter-definition id="__14">
+      <name>DecisionPath</name>
+      <value>#{sessionScope.DesicionPath}</value>
+    </input-parameter-definition>-->
+    <input-parameter-definition id="__6">
+      <name>parId</name>
+      <value>#{pageFlowScope.parId}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name>partyId</name>
+      <value>#{pageFlowScope.partyId}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__2">
+      <name>createdBy</name>
+      <value>#{pageFlowScope.createdBy}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__3">
+      <name>businessCaseId</name>
+      <value>#{pageFlowScope.businessCaseId}</value>
+      <required/>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>parLawyerBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.parlawyer.ParLawyerBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <view id="parlawyer">
+      <page>/pages/com/egabi/cjexec/parlawyer/parlawyer.jsf</page>
+    </view>
+    <control-flow-rule id="__4">
+      <from-activity-id>parlawyer</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="Par_Parties_TF_Par_Parties_TF_ExecuteWithParamsPageDef" Package="taskflows.ParParties"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ParPartiesView1" RangeSize="25" DataControl="UtilsAppModuleAMDataControl"
+              id="ParPartiesView1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ParPartiesView1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="partyId" NDValue="#{pageFlowScope.partyId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="case_edit_tf_case_edit_tf_ExecuteWithParamsPageDef" Package="taskflows.caseExecEmp"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="CaseEditMasterROV" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="CaseEditMasterROVIterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="CaseEditMasterROVIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="bindHearingResId" NDValue="#{pageFlowScope.HearingResId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

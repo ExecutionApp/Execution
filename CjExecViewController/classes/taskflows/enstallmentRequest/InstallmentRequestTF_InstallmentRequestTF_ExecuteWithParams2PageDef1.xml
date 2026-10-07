@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams2PageDef1"
+                Package="taskflows.enstallmentRequest" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ParPartiesView1" RangeSize="25" DataControl="CjExecAMDataControl" id="ParPartiesView1Iterator"
+              Refresh="never"/>
+    <iterator id="CaseInfoROVIterator" Binds="CaseInfoROV" DataControl="CjExecAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ParPartiesView1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="partyId" NDValue="#{bindings.PartyId.inputValue}" NDType="java.lang.String"/>
+    </action>
+    <attributeValues IterBinding="CaseInfoROVIterator" id="PartyId">
+      <AttrNames>
+        <Item Value="PartyId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

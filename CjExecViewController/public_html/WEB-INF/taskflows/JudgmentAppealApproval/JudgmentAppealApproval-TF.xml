@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="JudgmentAppealApproval-TF">
+    <default-activity>judgmentAppealApprovalSearch</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>inventoryBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.inventory.InventoryBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="JudgmentAppealApproval">
+      <page>/pages/com/egabi/JudgmentAppealApproval/JudgmentAppealApproval.jsff</page>
+    </view>
+    <method-call id="judgmentAppealApprovalSearch">
+      <method>#{pageFlowScope.inventoryBean.judgmentAppealSearch}</method>
+      <outcome>
+        <fixed-outcome>gojudgmentAppealSearch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>judgmentAppealApprovalSearch</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>gojudgmentAppealSearch</from-outcome>
+        <to-activity-id>JudgmentAppealApproval</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

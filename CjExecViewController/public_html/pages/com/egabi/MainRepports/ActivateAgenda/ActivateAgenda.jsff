@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<af:panelHeader text="تفعيل الجلسات" id="ph1">
+    <f:facet name="context"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelGroupLayout id="pgl1" layout="vertical">
+      <h:panelGroup id="pg7" layout="block" styleClass="row search-case-panel">
+        <h:panelGroup id="pg98" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel showRequired="true" value="النيابة الكلية" id="ol70"/>
+          <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" required="true"
+                              shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc28" simple="true"
+                              disabled="#{sessionScope.userInfo.entityDegree eq '39' or sessionScope.userInfo.entityDegree eq '3' }"
+                              autoSubmit="true" showRequired="true">
+            <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si28"/>
+            <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg97" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel showRequired="false" value="النيابة الجزئية" id="ol54"/>
+          <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}" required="false"
+                              shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc17" partialTriggers="soc28"
+                              simple="true"
+                              disabled="#{(sessionScope.userInfo.entityDegree eq '3'  or pageFlowScope.disabledValidate)and sessionScope.userInfo.errandEntUser eq '0'}"
+                              autoSubmit="true" showRequired="false" valueChangeListener="#{Agenda.gozVCL}">
+            <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si17"/>
+            <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <!-- Search toggle -->
+        <!-- end Search toggle -->
+        <h:panelGroup id="pg1" layout="block" styleClass="col-md-2 col-sm-12"
+                      rendered="#{bindings.NeyabGozayaa.inputValue eq null}">
+          <af:outputLabel showRequired="true" value="الجلسات الكلية" id="ol1"/>
+          <af:inputListOfValues id="kolId" popupTitle="Search and Select: #{bindings.Kol.hints.label}"
+                                value="#{bindings.Kol.inputValue}" label=" " model="#{bindings.Kol.listOfValuesModel}"
+                                required="true" columns="25"
+                                shortDesc="#{bindings.Kol.hints.tooltip}" autoSubmit="true"
+                                valueChangeListener="#{Agenda.dateVCL}" showRequired="false">
+            <af:autoSuggestBehavior suggestedItems="#{bindings.Kol.suggestedItems}" maxSuggestedItems="6"/>
+            <!--   <f:validator binding="#{bindings.Kol.validator}"/>-->
+          </af:inputListOfValues>
+        </h:panelGroup>
+        <h:panelGroup id="pg2" layout="block" styleClass="col-md-2 col-sm-12"
+                      rendered="#{bindings.NeyabGozayaa.inputValue ne null}">
+          <af:outputLabel value="الجلسات الجزئية" id="ol3" showRequired="true"/>
+          <af:inputListOfValues id="gozId" popupTitle="Search and Select: #{bindings.Goz.hints.label}"
+                                value="#{bindings.Goz.inputValue}" label=" " model="#{bindings.Goz.listOfValuesModel}"
+                                required="true" columns="25"
+                                shortDesc="#{bindings.Goz.hints.tooltip}" autoSubmit="true"
+                                valueChangeListener="#{Agenda.dateVCL}">
+            <af:autoSuggestBehavior suggestedItems="#{bindings.Goz.suggestedItems}" maxSuggestedItems="6"/>
+            <!--  <f:validator binding="#{bindings.Goz.validator}"/> -->
+          </af:inputListOfValues>
+        </h:panelGroup>
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:spacer width="10" height="10" id="s3"/>
+        <af:spacer width="10" height="10" id="s2"/>
+        <h:panelGroup id="pg4" layout="block" styleClass="col-md-1 col-sm-12" rendered="false">
+          <af:outputLabel value="الحكم" id="ol2" showRequired="true"/>
+          <af:selectOneChoice label=" " id="soc1" autoSubmit="true" valueChangeListener="#{Agenda.judgeVCL}"
+                              required="true">
+            <af:selectItem label="الكل" value="0" id="si1"/>
+            <af:selectItem label="بدون أحكام - قرارات" value="1" id="si2"/>
+            <af:selectItem label="أحكام - قرارات" value="2" id="si3"/>
+            <af:selectItem label="تأجيل" value="3" id="si4"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <af:spacer width="10" height="10" id="s4"/>
+        <af:spacer width="10" height="10" id="s5"/>
+        <h:panelGroup id="pg5" layout="block" styleClass="col-md-3 col-sm-12" rendered="false">
+          <af:outputLabel value="دفاتر احكام - قرارات" id="ol4"/>
+          <af:selectOneChoice value="#{bindings.fold.inputValue}" label=" "
+                              required="#{bindings.fold.hints.mandatory}" shortDesc="#{bindings.fold.hints.tooltip}"
+                              id="soc3" autoSubmit="true" valueChangeListener="#{Agenda.foldVCL}">
+            <f:selectItems value="#{bindings.fold.items}" id="si9"/>
+            <f:validator binding="#{bindings.fold.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg6" layout="block" styleClass="col-md-1 col-sm-12">
+          <af:outputLabel value="الدرجة" id="ol5"/>
+          <af:selectOneChoice value="#{bindings.BusinessCaseDegree.inputValue}"
+                              label=" "
+                              required="#{bindings.BusinessCaseDegree.hints.mandatory}"
+                              shortDesc="#{bindings.BusinessCaseDegree.hints.tooltip}" id="soc2" autoSubmit="true">
+            <f:selectItems value="#{bindings.BusinessCaseDegree.items}" id="si5"/>
+            <f:validator binding="#{bindings.BusinessCaseDegree.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value=" " id="ol6"/>
+          <af:panelGroupLayout id="pgl2" layout="horizontal">
+            <af:button text="بحث" id="b1" actionListener="#{Agenda.searchActivation}"/>
+            <af:button text="تفعيل الجلسات" id="b2" actionListener="#{Agenda.ActivateReservations}"/>
+            <af:button actionListener="#{bindings.closeReservations.execute}" text="غلق الجلسات"
+                         id="b3"
+                       rendered="#{sessionScope.userInfo.userName eq 'hn'|| sessionScope.userInfo.userPrevMap[10203]}" immediate="true"/>
+            <f:facet name="separator">
+              <af:spacer id="s6" width="10"/>
+            </f:facet>
+          </af:panelGroupLayout>
+        </h:panelGroup>
+      </h:panelGroup>
+      <af:table value="#{bindings.ActivateAgendaROVO1.collectionModel}" var="row"
+                rows="#{bindings.ActivateAgendaROVO1.rangeSize}"
+                emptyText="#{bindings.ActivateAgendaROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" selectedRowKeys="#{bindings.ActivateAgendaROVO1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.ActivateAgendaROVO1.collectionModel.makeCurrent}" rowSelection="single"
+                fetchSize="#{bindings.ActivateAgendaROVO1.rangeSize}" id="t1">
+        <af:column headerText="#{bindings.ActivateAgendaROVO1.hints.BusinessCaseId.label}" id="c1" visible="false">
+          <af:outputText value="#{row.BusinessCaseId}"
+                         shortDesc="#{bindings.ActivateAgendaROVO1.hints.BusinessCaseId.tooltip}" id="ot1">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.ActivateAgendaROVO1.hints.BusinessCaseId.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{bindings.ActivateAgendaROVO1.hints.Id.label}" id="c2" visible="false">
+          <af:outputText value="#{row.Id}" shortDesc="#{bindings.ActivateAgendaROVO1.hints.Id.tooltip}" id="ot2">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.ActivateAgendaROVO1.hints.Id.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="القضية" id="c3" width="400">
+         
+         <af:link text="#{row.BusinessCaseNumber}" id="l1"
+                   destination="http://10.21.35.46/criminal_justice/BusinessCaseFindByPrimaryKeyResults.do?id=#{row.bindings.BusinessCaseId.inputValue}&amp;businessCaseId=#{row.bindings.BusinessCaseId.inputValue}&amp;crudMethod=update"
+                   targetFrame="_blank"/>
+        </af:column>
+        <af:column headerText="الاطراف" id="c5" width="400">
+          <af:outputText value="#{row.PartyFullName}"
+                         shortDesc="#{bindings.ActivateAgendaROVO1.hints.PartyFullName.tooltip}" id="ot5"/>
+        </af:column>
+        <af:column headerText="تاريخ الجلسة" id="c4" width="200">
+          <af:outputText value="#{row.HearingDate}"
+                         shortDesc="#{bindings.ActivateAgendaROVO1.hints.HearingDate.tooltip}" id="ot4">
+            <af:convertDateTime pattern="#{bindings.ActivateAgendaROVO1.hints.HearingDate.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="الدرجة" id="c6" width="150">
+          <af:outputText value="#{row.DegreeName}" shortDesc="#{bindings.ActivateAgendaROVO1.hints.DegreeName.tooltip}"
+                         id="ot6"/>
+        </af:column>
+      </af:table>
+    </af:panelGroupLayout>
+  </af:panelHeader>
+
+
+
+</ui:composition>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Requests-TF">
+    <default-activity>methodCall1</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>requestSearchBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.requests.RequestSearchBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="methodCall1">
+      <method>#{pageFlowScope.requestSearchBean.resetSearch}</method>
+      <outcome>
+        <fixed-outcome>go</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="search">
+      <page>/pages/com/egabi/cjexec/requests/SearchFrag.jsff</page>
+    </view>
+    <task-flow-call id="enableOppositionTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml</document>
+        <id>enableOppositionTF</id>
+      </task-flow-reference>
+      <input-parameter id="__4">
+        <name>folderId</name>
+        <value>#{pageFlowScope.folderId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="InstallmentRequestTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml</document>
+        <id>InstallmentRequestTF</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>folderId</name>
+        <value>#{pageFlowScope.folderId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>methodCall1</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>go</from-outcome>
+        <to-activity-id>search</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>search</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>enableOpposition</from-outcome>
+        <to-activity-id>enableOppositionTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>installmentRequest</from-outcome>
+        <to-activity-id>InstallmentRequestTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

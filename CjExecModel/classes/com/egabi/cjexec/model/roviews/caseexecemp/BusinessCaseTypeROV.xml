@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BusinessCaseTypeROV"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT            
+    BUSINESS_CASE_TYPE.ID ID,            
+    BUSINESS_CASE_TYPE.NAME NAME,            
+    BUSINESS_CASE_TYPE.DESCRIPTION DESCRIPTION,          
+    BUSINESS_CASE_TYPE.SM_TYPE           
+FROM            
+    BUSINESS_CASE_TYPE        
+UNION        
+SELECT     ADM_CASE_SCHEMA.ID ID,            
+    ADM_CASE_SCHEMA.NAME NAME,        
+    NULL DESCRIPTION,        
+    999 SM_TYPE        
+FROM ADM_CASE_SCHEMA        
+WHERE ID IN(3646, 3647, 3648, 3643)]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Name"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Description"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESCRIPTION"
+    Expression="DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SmType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SM_TYPE"
+    Expression="SM_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewCriteria
+    Name="BusinessCaseTypeROVCriteria"
+    ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="BusinessCaseTypeROVCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value="3"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="BusinessCaseTypeROVCriteria_SM1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="BusinessCaseTypeROVCriteria1_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="SmType"
+        ViewAttribute="SmType"
+        Operator="="
+        Conjunction="AND"
+        Value="1"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="BusinessCaseTypeROVKoly"
+    ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="BusinessCaseTypeROVCriteria1_row_0"
+      UpperColumns="1"
+      Conjunction="OR">
+      <ViewCriteriaItemCompound
+        Name="SmType"
+        ViewAttribute="SmType">
+        <ViewCriteria
+          Name="BusinessCaseTypeROVKoly_BusinessCaseTypeROVCriteria1_row_0_SmType_itemHolder"
+          ViewObjectName="com.egabi.cjexec.model.roviews.caseexecemp.BusinessCaseTypeROV"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="BusinessCaseTypeROVKoly_BusinessCaseTypeROVCriteria1_row_0_SmType_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="SmType"
+              ViewAttribute="SmType"
+              Operator="="
+              Conjunction="AND"
+              Value="999"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="BusinessCaseTypeROVKoly_BusinessCaseTypeROVCriteria1_row_0_SmType_itemHolder_row_1"
+            Conjunction="OR">
+            <ViewCriteriaItem
+              Name="BusinessCaseTypeROVKoly_BusinessCaseTypeROVCriteria1_row_0_SmType_BusinessCaseTypeROVKoly_BusinessCaseTypeROVCriteria1_row_0_SmType_itemHolder_BusinessCaseTypeROVKoly_BusinessCaseTypeROVCriteria1_row_0_SmType_itemHolder_row_1_SmType"
+              ViewAttribute="SmType"
+              Operator="="
+              Conjunction="OR"
+              Value="1"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+</ViewObject>

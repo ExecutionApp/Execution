@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CasePartiesConvictionsROV"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT FCDP.PARTY_ID,                   
+       (SELECT NAME                   
+          FROM PAR_CRIMINAL_TYPES                   
+         WHERE ID = FCDD.DESCRIPTION_ID)                   
+           CRIME,                   
+       FCDD.DESCRIPTION_ID                   
+           CRIMINAL_TYPE,                   
+       FCDD.ID                   
+           DECRIPTION_ID,                   
+       COURT_CIRCLE_DATE_ID,                   
+       FCDDP.FORM_CASE_PARTY_ID,                   
+       FCDDP.ID                   
+           PARTY_CRIME_ID,                   
+       (SELECT CHARGE_DECISION_ID                   
+          FROM EXC_COURT_BC_CHARGES_PARTIES                   
+         WHERE PARTY_CRIME_ID = FCDDP.ID)                   
+           CHARGE_DECISION_ID          
+                           
+  FROM FORM_CASE_DESCRIPTION_DES_PART  FCDDP,                   
+       FORM_CASE_DESCRIPTION_DES       FCDD,                   
+       FORM_CASE_DESCRIPTION_PARTIES   FCDP,                   
+       FORM_CASE_DESCRIPTION           FCD                   
+ WHERE     FCDDP.FORM_CASE_DES_ID = FCDD.ID                   
+       AND FCDP.FORM_CASE_DESCRIPTION_ID = FCD.ID                   
+       AND FCDD.FORM_CASE_DESCRIPTION_ID = FCD.ID                   
+       AND FCDDP.FORM_CASE_PARTY_ID = FCDP.ID                 
+       AND FCDDP.JUDGMENT_CLASSIFICATION = 2]]></SQLQuery>
+  <ViewAttribute
+    Name="PartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARTY_ID"
+    Expression="PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Crime"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CRIME"
+    Expression="CRIME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.caseexecemp.CasePartiesConvictionsROV.Crime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CriminalType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CRIMINAL_TYPE"
+    Expression="CRIMINAL_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DecriptionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DECRIPTION_ID"
+    Expression="DECRIPTION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CourtCircleDateId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="COURT_CIRCLE_DATE_ID"
+    Expression="COURT_CIRCLE_DATE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FormCasePartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FORM_CASE_PARTY_ID"
+    Expression="FORM_CASE_PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PartyCrimeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARTY_CRIME_ID"
+    Expression="PARTY_CRIME_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ChargeDecisionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CHARGE_DECISION_ID"
+    Expression="CHARGE_DECISION_ID"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="PartyId"/>
+    <Item Value="CriminalType"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="ExcCourtBcChargeDecisionsView"
+    ViewLink="com.egabi.cjexec.model.roviews.caseexecemp.links.CasePartiesConvictionsToCourtBcChargeDecesionsVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

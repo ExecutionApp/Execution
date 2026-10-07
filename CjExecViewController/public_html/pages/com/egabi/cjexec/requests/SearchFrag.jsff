@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+  <af:panelGroupLayout id="pgl1">
+    <af:panelHeader text="#{pageFlowScope.requestSearchBean.requestsTitle}" id="ph1">
+      <af:panelGridLayout id="pgl2">
+        <af:gridRow marginTop="5px" height="auto" id="gr1">
+          <af:gridCell marginStart="5px" width="auto" id="gc1">
+            <af:outputLabel value="#{bindings.RequestType.label}" id="ol1"/>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc2">
+            <af:selectOneChoice value="#{bindings.RequestType.inputValue}" label="#{bindings.RequestType.label}"
+                                required="#{bindings.RequestType.hints.mandatory}"
+                                shortDesc="#{bindings.RequestType.hints.tooltip}" id="soc1" simple="true">
+              <f:selectItems value="#{bindings.RequestType.items}" id="si1"/>
+              <f:validator binding="#{bindings.RequestType.validator}"/>
+            </af:selectOneChoice>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc3">
+            <af:outputLabel value="#{bindings.RequestNumber.label}" id="ol2"/>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc4">
+            <af:inputText value="#{bindings.RequestNumber.inputValue}" simple="true" 
+                          required="#{bindings.RequestNumber.hints.mandatory}" columns="30"
+                          maximumLength="#{bindings.RequestNumber.hints.precision}"
+                          shortDesc="#{bindings.RequestNumber.hints.tooltip}" id="it1">
+              <f:validator binding="#{bindings.RequestNumber.validator}"/>
+            </af:inputText>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc5">
+            <af:outputLabel value="#{bindings.BCNumber.label}" id="ol3"/>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc6">
+            <af:inputText value="#{bindings.BCNumber.inputValue}" simple="true"
+                          required="#{bindings.BCNumber.hints.mandatory}" columns="30"
+                          maximumLength="#{bindings.BCNumber.hints.precision}"
+                          shortDesc="#{bindings.BCNumber.hints.tooltip}" id="it2">
+              <f:validator binding="#{bindings.BCNumber.validator}"/>
+            </af:inputText>
+          </af:gridCell>
+        </af:gridRow>
+        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+          <af:gridCell marginStart="5px" width="auto" id="gc7">
+            <af:outputLabel value="#{bindings.IdNmumber.label}" id="ol4"/>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc8">
+            <af:inputText value="#{bindings.IdNmumber.inputValue}" simple="true"
+                          required="#{bindings.IdNmumber.hints.mandatory}" columns="30"
+                          maximumLength="#{bindings.IdNmumber.hints.precision}"
+                          shortDesc="#{bindings.IdNmumber.hints.tooltip}" id="it3">
+              <f:validator binding="#{bindings.IdNmumber.validator}"/>
+            </af:inputText>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc9">
+            <af:outputLabel value="#{bindings.FromDate.label}" id="ol5"/>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc10">
+            <af:inputDate value="#{bindings.FromDate.inputValue}" required="#{bindings.FromDate.hints.mandatory}"
+                          columns="25" shortDesc="#{bindings.FromDate.hints.tooltip}" id="id1" simple="true"
+                          autoSubmit="true">
+              <f:validator binding="#{bindings.FromDate.validator}"/>
+              <af:convertDateTime pattern="yyyy-MM-dd"/>
+            </af:inputDate>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc11">
+            <af:outputLabel value="#{bindings.ToDate.label}" id="ol6"/>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc12">
+            <af:inputDate value="#{bindings.ToDate.inputValue}" required="#{bindings.ToDate.hints.mandatory}"
+                          columns="25" shortDesc="#{bindings.ToDate.hints.tooltip}"
+                          disabled="#{bindings.FromDate.inputValue eq null}" id="id2" simple="true"
+                          partialTriggers="id1">
+              <f:validator binding="#{bindings.ToDate.validator}"/>
+              <af:convertDateTime pattern="yyyy-MM-dd"/>
+            </af:inputDate>
+          </af:gridCell>
+        </af:gridRow>
+      </af:panelGridLayout>
+    </af:panelHeader>
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelGroupLayout id="pgl3">
+      <af:button text="بحث" id="b1" action="#{pageFlowScope.requestSearchBean.searchRequests}"/>
+      <af:spacer width="10" height="10" id="s2"/>
+      <af:button text="إلغاء" id="b2"/>
+    </af:panelGroupLayout>
+    <af:spacer width="10" height="10" id="s3"/>
+    <af:table value="#{bindings.RequestsSearchResultRVO1.collectionModel}" var="row"
+              rows="#{bindings.RequestsSearchResultRVO1.rangeSize}"
+              emptyText="#{bindings.RequestsSearchResultRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.RequestsSearchResultRVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.RequestsSearchResultRVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.RequestsSearchResultRVO1.rangeSize}" width="100%" columnStretching="multiple"
+              filterModel="#{bindings.RequestsSearchResultRVO1Query.queryDescriptor}" filterVisible="true"
+              queryListener="#{bindings.RequestsSearchResultRVO1Query.processQuery}" varStatus="vs" id="t1">
+      <af:column sortProperty="#{bindings.RequestsSearchResultRVO1.hints.ProcedureSerial.name}" filterable="true" width="10%"
+                 sortable="true" headerText="#{bindings.RequestsSearchResultRVO1.hints.ProcedureSerial.label}" id="c1">
+        <af:outputText value="#{row.ProcedureSerial}"
+                       shortDesc="#{bindings.RequestsSearchResultRVO1.hints.ProcedureSerial.tooltip}" id="ot1"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RequestsSearchResultRVO1.hints.BcNumber.name}" filterable="true" width="25%"
+                 sortable="true" headerText="#{bindings.RequestsSearchResultRVO1.hints.BcNumber.label}" id="c2">
+        <af:outputText value="#{row.BcNumber}" shortDesc="#{bindings.RequestsSearchResultRVO1.hints.BcNumber.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RequestsSearchResultRVO1.hints.ActsName.name}" filterable="true" width="25%"
+                 sortable="true" headerText="#{bindings.RequestsSearchResultRVO1.hints.ActsName.label}" id="c3">
+        <af:outputText value="#{row.ActsName}" shortDesc="#{bindings.RequestsSearchResultRVO1.hints.ActsName.tooltip}"
+                       id="ot3"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RequestsSearchResultRVO1.hints.ProcName.name}" filterable="true" width="20%"
+                 sortable="true" headerText="#{bindings.RequestsSearchResultRVO1.hints.ProcName.label}" id="c4">
+        <af:outputText value="#{row.ProcName}" shortDesc="#{bindings.RequestsSearchResultRVO1.hints.ProcName.tooltip}"
+                       id="ot4"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RequestsSearchResultRVO1.hints.CapName.name}" filterable="true" width="10%"
+                 sortable="true" headerText="#{bindings.RequestsSearchResultRVO1.hints.CapName.label}" id="c5">
+        <af:outputText value="#{row.CapName}" shortDesc="#{bindings.RequestsSearchResultRVO1.hints.CapName.tooltip}"
+                       id="ot5"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RequestsSearchResultRVO1.hints.ProcedureDate.name}" filterable="true" width="10%"
+                 sortable="true" headerText="#{bindings.RequestsSearchResultRVO1.hints.ProcedureDate.label}" id="c6">
+        <af:outputText value="#{row.ProcedureDate}"
+                       shortDesc="#{bindings.RequestsSearchResultRVO1.hints.ProcedureDate.tooltip}" id="ot6">
+          <af:convertDateTime pattern="yyyy-MM-dd" type="date"/>
+        </af:outputText>
+      </af:column>
+      <af:column id="c7">
+        <af:button text="#{bundle.REQUEST_DETAILS}" id="b3"
+                   action="#{pageFlowScope.requestSearchBean.goToRequestDetails}">
+          <af:setPropertyListener from="#{row.FolderRecordId}" to="#{pageFlowScope.folderId}" type="action"/>
+        </af:button>
+      </af:column>
+    </af:table>
+  </af:panelGroupLayout>
+</ui:composition>

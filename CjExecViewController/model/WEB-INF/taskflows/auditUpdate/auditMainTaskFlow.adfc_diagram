@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">auditMainFrag</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">481.35254</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>auditMainFrag&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">562.6953</property>
+      <property
+         name="page">/pages/com/egabi/auditUpdate/auditMainFrag.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <MethodCall
+      id="MethodCall7">
+      <property
+         name="activityId">ValidatePoliceReportCustom</property>
+      <property
+         name="x">365.70508</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>ValidatePoliceReportCustom&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="y">401.44824</property>
+      <property
+         name="exceptionHandler">false</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase8"
+      from="MethodCall7"
+      to="View2">
+      <property
+         name="fromOutcome">ValidatePoliceReportCustom</property>
+      <property
+         name="sdm:polyPoints">B50,365.70508,455.09766,481.35254,508.34473,T50</property>
+   </ControlFlowCase>
+</SDM>

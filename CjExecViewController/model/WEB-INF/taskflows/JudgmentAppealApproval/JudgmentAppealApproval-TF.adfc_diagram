@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">JudgmentAppealApproval</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">618.7129</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>JudgmentAppealApproval&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">285.34473</property>
+      <property
+         name="page">/pages/com/egabi/JudgmentAppealApproval/JudgmentAppealApproval.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">judgmentAppealApprovalSearch</property>
+      <property
+         name="x">201.0</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>judgmentAppealApprovalSearch&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="y">318.59766</property>
+      <property
+         name="exceptionHandler">false</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View2">
+      <property
+         name="fromOutcome">gojudgmentAppealSearch</property>
+      <property
+         name="sdm:polyPoints">R50,242.0,318.24707,577.7129,284.99414,L50</property>
+   </ControlFlowCase>
+</SDM>

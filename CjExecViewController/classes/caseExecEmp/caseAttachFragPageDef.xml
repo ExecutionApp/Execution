@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="caseAttachFragPageDef"
+                Package="caseExecEmp">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.CriminalJusticeFilesDetailsVO2" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="CriminalJusticeFilesDetailsVO2Iterator"/>
+    <searchRegion Binds="CriminalJusticeFilesDetailsVO2Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="CriminalJusticeFilesDetailsVO2Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CriminalJusticeFilesDetailsVO2Iterator" id="CriminalJusticeFilesDetailsVO2">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.files.CriminalJusticeFilesDetailsVO"
+                      Name="CriminalJusticeFilesDetailsVO20">
+        <AttrNames>
+          <Item Value="TypeName"/>
+          <Item Value="Filename"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="Did"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

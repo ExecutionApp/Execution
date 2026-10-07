@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ClaimTF">
+    <default-activity>emptyClaimSearchResult</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>claimBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.claimprocedure.Claim</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="Claim">
+      <page>/pages/com/egabi/claimProcedure/Claim.jsff</page>
+    </view>
+    <method-call id="emptyClaimSearchResult">
+      <method>#{bindings.emptyClaimSearchResult.execute}</method>
+      <outcome>
+        <fixed-outcome>emptyClaimSearchResult</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>emptyClaimSearchResult</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>emptyClaimSearchResult</from-outcome>
+        <to-activity-id>Claim</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

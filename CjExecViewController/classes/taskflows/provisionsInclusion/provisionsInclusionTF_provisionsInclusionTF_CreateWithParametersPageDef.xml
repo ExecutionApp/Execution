@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="provisionsInclusionTF_provisionsInclusionTF_CreateWithParametersPageDef"
+                Package="taskflows.provisionsInclusion" SkipValidation="true">
+    <parameters/>
+    <executables>
+        <iterator Binds="ExcCourtBcSessionJudgmentVO1" RangeSize="25" DataControl="CjExecAMDataControl"
+                  id="ExcCourtBcSessionJudgmentVO1Iterator"/>
+    </executables>
+    <bindings>
+        <action IterBinding="ExcCourtBcSessionJudgmentVO1Iterator" id="CreateWithParams" RequiresUpdateModel="true"
+                Action="createWithParams">
+            <NamedData NDName="CourtBcHearingResId" NDValue="#{pageFlowScope.provisionsInclusionBean.resId}"
+                       NDType="java.math.BigDecimal"/>
+            <NamedData NDName="DegreeId" NDValue="#{pageFlowScope.provisionsInclusionBean.degreeId}"
+                       NDType="java.math.BigDecimal"/>
+        </action>
+    </bindings>
+</pageDefinition>

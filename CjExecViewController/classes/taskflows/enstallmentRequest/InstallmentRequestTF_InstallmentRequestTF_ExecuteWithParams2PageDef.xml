@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="InstallmentRequestTF_InstallmentRequestTF_ExecuteWithParams2PageDef"
+                Package="taskflows.enstallmentRequest" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="CriminalLawyersROV" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="CriminalLawyersROVIterator" Refresh="never"/>
+    <iterator id="CaseInfoROVIterator" Binds="CaseInfoROV" DataControl="CjExecAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action IterBinding="CriminalLawyersROVIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="BindPartyID" NDType="Integer" NDValue="#{bindings.PartyId.inputValue}"/>
+    </action>
+    <attributeValues IterBinding="CaseInfoROVIterator" id="PartyId">
+      <AttrNames>
+        <Item Value="PartyId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

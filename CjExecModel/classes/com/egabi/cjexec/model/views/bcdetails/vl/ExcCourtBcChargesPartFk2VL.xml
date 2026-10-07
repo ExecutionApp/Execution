@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcCourtBcChargesPartFk2VL"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  EntityAssociation="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk2Assoc">
+  <ViewLinkDefEnd
+    Name="ExcCourtBcDecision"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.views.bcdetails.ExcCourtBcDecisionVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+      <Attr Name="_finderName" Value="ExcCourtBcDecision"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.ExcCourtBcDecisionVO.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ExcCourtBcChargesParties"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.views.bcdetails.ExcCourtBcChargesPartiesVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="ExcCourtBcChargesParties"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.bcdetails.ExcCourtBcChargesPartiesVO.DecisionId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

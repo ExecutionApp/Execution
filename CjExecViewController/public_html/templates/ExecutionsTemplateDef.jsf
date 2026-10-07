@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<af:pageTemplateDef xmlns:af="http://xmlns.oracle.com/adf/faces/rich" var="attrs" definition="private"
+                    xmlns:afc="http://xmlns.oracle.com/adf/faces/rich/component"
+                    xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core">
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+  <af:xmlContent>
+    <afc:component>
+      <afc:description/>
+      <afc:display-name>templateDef1</afc:display-name>
+      <afc:facet>
+        <afc:facet-name>header</afc:facet-name>
+      </afc:facet>
+      <afc:facet>
+        <afc:facet-name>status</afc:facet-name>
+      </afc:facet>
+      <afc:facet>
+        <afc:facet-name>appNav</afc:facet-name>
+      </afc:facet>
+      <afc:facet>
+        <afc:facet-name>globalLinks</afc:facet-name>
+      </afc:facet>
+      <afc:facet>
+        <afc:facet-name>footer</afc:facet-name>
+      </afc:facet>
+      <afc:facet>
+        <afc:facet-name>center</afc:facet-name>
+      </afc:facet>
+      <afc:facet>
+        <afc:facet-name>start</afc:facet-name>
+      </afc:facet>
+      <afc:facet>
+        <afc:facet-name>end</afc:facet-name>
+      </afc:facet>
+      <afc:attribute>
+        <afc:attribute-name>logoImagePath</afc:attribute-name>
+        <afc:attribute-class>java.lang.String</afc:attribute-class>
+      </afc:attribute>
+      <afc:attribute>
+        <afc:attribute-name>logoSmallImagePath</afc:attribute-name>
+        <afc:attribute-class>java.lang.String</afc:attribute-class>
+      </afc:attribute>
+      <afc:attribute>
+        <afc:attribute-name>logoStyleClass</afc:attribute-name>
+        <afc:attribute-class>java.lang.String</afc:attribute-class>
+      </afc:attribute>
+      <afc:attribute>
+        <afc:attribute-name>logoShortDesc</afc:attribute-name>
+        <afc:attribute-class>java.lang.String</afc:attribute-class>
+      </afc:attribute>
+      <afc:attribute>
+        <afc:attribute-name>showAppNavbar</afc:attribute-name>
+        <afc:attribute-class>boolean</afc:attribute-class>
+        <afc:default-value>true</afc:default-value>
+      </afc:attribute>
+      <afc:attribute>
+        <afc:attribute-name>brandingMaxWidth</afc:attribute-name>
+        <afc:attribute-class>java.lang.String</afc:attribute-class>
+        <afc:default-value>1024px</afc:default-value>
+      </afc:attribute>
+      <afc:attribute>
+        <afc:attribute-name>minWidth</afc:attribute-name>
+        <afc:attribute-class>java.lang.String</afc:attribute-class>
+      </afc:attribute>
+      <afc:attribute>
+        <afc:attribute-name>startWidth</afc:attribute-name>
+        <afc:attribute-class>java.lang.String</afc:attribute-class>
+        <afc:default-value>170</afc:default-value>
+      </afc:attribute>
+      <afc:attribute>
+        <afc:attribute-name>endWidth</afc:attribute-name>
+        <afc:attribute-class>java.lang.String</afc:attribute-class>
+        <afc:default-value>170</afc:default-value>
+      </afc:attribute>
+      <afc:attribute>
+        <afc:attribute-name>showFooter</afc:attribute-name>
+        <afc:attribute-class>boolean</afc:attribute-class>
+      </afc:attribute>
+    </afc:component>
+  </af:xmlContent>
+  <af:group id="grp1">
+    <af:resource type="css" source="/resources/css/fonts.css"/>
+    <af:resource type="css" source="/resources/css/font-awesome.min.css"/>
+    <af:resource type="javascript" source="/resources/js/pdfobject.min.js"/>
+    <af:resource type="css" source="/styles/brandingBar.css"/>
+    <af:resource type="css" source="/styles/tabletFirstTemplate.css"/>
+    <af:resource type="javascript" source="/jsLibs/brandingBar.js"/>
+    <af:resource type="javascript">function changeTab(actionEvent) { var inputTextComponen = actionEvent.getSource();
+                                   AdfCustomEvent.queue(inputTextComponen, "changeTabServer", { one : 't' }, false);
+                                   actionEvent.cancel(); }</af:resource>
+    <af:resource type="javascript">function viewPdf() { var options = { pdfOpenParams : { toolbar : '0', view : 'FitH' }
+                                   }; console.log(document.querySelector('[id$="if1"]').src);
+                                   PDFObject.embed(document.querySelector('[id$="if1"]').src, "#pdf", options); }
+                                   function printPdf() { var iframe = document.querySelector('[id$="pdfPrint"]');
+                                   console.log(iframe); iframe.focus(); iframe.contentWindow.print(); } function
+                                   doPrint(url) { console.log('do print'); window.open(url); }</af:resource>
+    <!--<af:serverListener type="onloadEvent"
+                       method=""/>
+            <af:clientListener method="onLoadClient" type="beforeunload"/>
+            <af:resource type="javascript">
+                function onLoadClient(event) {
+                  alert('sdfdsfdsfdsfsdfdsf');
+                }
+            </af:resource>-->
+              <af:resource type="css">
+    .af_inputDate_launch-icon-style {
+      top: 30px !important;
+      left: -192px !important;
+    }
+    <af:panelGroupLayout id="mainArea" styleClass="tablet-first-main-area" layout="vertical">
+      <af:panelGroupLayout layout="vertical" id="_afrBrandingContainer" halign="center"
+                           styleClass="AFBrandingBar #{attrs.showAppNavbar ? 'AFBrandingBarTall' : 'AFBrandingBarCompact'}"
+                           clientComponent="true">
+        <af:panelGridLayout id="branding"
+                            styleClass="#{attrs.brandingMaxWidth == '1440px' ? 'BrandingMaxWidth-1440' :                                         (attrs.brandingMaxWidth == '1280px') ? 'BrandingMaxWidth-1280' :                                            (attrs.brandingMaxWidth == '1024px') ? 'BrandingMaxWidth-1024' : 'BrandingMaxWidth'}"
+                            dimensionsFrom="auto" clientComponent="true">
+          <af:gridRow marginTop="0px" height="34px" id="pt_gr2">
+            <af:gridCell marginStart="20px" marginEnd="0px" width="auto" id="pt_gc4" halign="start" rowSpan="2">
+              <af:panelGroupLayout id="logo" layout="horizontal" styleClass="AFBrandingLogoTitleContainer">
+                <af:link id="logoLink" icon="#{attrs.logoImagePath }" action="index" shortDesc="#{attrs.logoShortDesc}"
+                         styleClass="#{attrs.logoStyleClass? attrs.logoStyleClass: '' } AFBrandingLogo"
+                         rendered="#{attrs.logoImagePath != null}"/>
+                <af:link id="logoLinkAlt" action="index" shortDesc="#{attrs.logoShortDesc}"
+                         styleClass="AFBrandingBarLogoLarge AFBrandingLogo" rendered="#{attrs.logoImagePath == null}"/>
+                <af:link id="logoLinkSm" icon="#{attrs.logoSmallImagePath}" action="index"
+                         shortDesc="#{attrs.logoShortDesc}" visible="false"
+                         styleClass="#{attrs.logoStyleClass? attrs.logoStyleClass: '' } AFBrandingLogo"
+                         rendered="#{attrs.logoSmallImagePath != null}"/>
+                <af:link id="logoLinkAltSm" action="index" shortDesc="#{attrs.logoShortDesc}" visible="false"
+                         styleClass="AFBrandingBarLogo AFBrandingLogo" rendered="#{attrs.logoSmallImagePath == null}"/>
+                <af:panelGroupLayout id="title" layout="vertical" styleClass="AFBrandingBarTitle">
+                  <af:facetRef facetName="header"/>
+                  <af:outputText value="النيـــابة العامــــة" id="pt_ot1"/>
+                  <af:outputText value="نظام التنفيذ والمطالبة" id="pt_ot2"/>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+            </af:gridCell>
+            <af:gridCell marginStart="0px" width="50%" marginEnd="20px" id="pt_gc5" halign="end">
+              <af:panelGroupLayout valign="middle" layout="horizontal" styleClass="AFBrandingBarItem" id="gllink">
+                <af:facetRef facetName="globalLinks"/>
+                <!--  <af:button id="pt_b5" styleClass="searchScreenLink" action="docSearch"
+                                           rendered="#{securityBean.userFunctions['SRCH'] or securityBean.isSystemAdmin}"/>-->
+                <af:panelGroupLayout id="pt_pgl1" layout="vertical" styleClass="flex-container">
+                  <!--  <af:button id="pt_b1" styleClass="profileLogo" action="changePassword"/>-->
+                  <af:outputText value="مرحبا بك " id="pt_ot4" styleClass="welcome-txt"/>
+                  <af:outputText value="#{sessionScope.userInfo.fullName}" id="pt_ot5" styleClass="user-txt"/>
+                  <af:button id="b1" immediate="true" text="#{bundle.LOGOUT}" action="#{ExcTemplateBean.logout}"
+                             styleClass="logout-btn"/>
+                </af:panelGroupLayout>
+                <af:facetRef facetName="status"/>
+                <af:statusIndicator rendered="#{attrs.showStatusIndicator}" styleClass="" id="status"/>
+              </af:panelGroupLayout>
+            </af:gridCell>
+          </af:gridRow>
+          <af:gridRow marginTop="0px" height="auto" marginBottom="0px" id="pt_gr3" rendered="#{attrs.showAppNavbar}">
+            <af:gridCell marginStart="0px" width="50%" marginEnd="20px" id="pt_gc7" halign="end">
+              <af:panelGroupLayout layout="horizontal" id="navig" styleClass="AFAppNavbarContainer" rendered="false">
+                <af:button text="button 1" id="pt_b3" type="radio" styleClass="AFAppNavbarButton "
+                           icon="/resources/images/naviBarFaces/navi_dashboard_24_ena.png"
+                           depressedIcon="/resources/images/naviBarFaces/navi_dashboard_24_act.png"/>
+                <af:button text="button 2" id="b2" type="radio" styleClass="AFAppNavbarButton "
+                           icon="/resources/images/naviBarFaces/navi_person_24_ena.png"
+                           depressedIcon="/resources/images/naviBarFaces/navi_person_24_act.png"/>
+                <af:button text="button 4" id="b4" icon="/resources/images/naviBarFaces/navi_person_24_ena.png"
+                           type="radio" styleClass="AFAppNavbarButton "
+                           depressedIcon="/resources/images/naviBarFaces/navi_person_24_act.png"/>
+                <af:button text="button 5" id="b5" icon="/resources/images/naviBarFaces/navi_people_24_ena.png"
+                           type="radio" styleClass="AFAppNavbarButton "
+                           depressedIcon="/resources/images/naviBarFaces/navi_people_24_act.png"/>
+              </af:panelGroupLayout>
+            </af:gridCell>
+          </af:gridRow>
+        </af:panelGridLayout>
+      </af:panelGroupLayout>
+      <af:panelGroupLayout id="pt_pgl3" layout="vertical" styleClass="general-Background">
+        <af:panelGroupLayout id="pt_pgl2" layout="vertical" styleClass="menu">
+          <af:menuBar id="pt_mb1">
+            <af:menu text="#{bundle.CASES}" id="pt_m1">
+              <af:commandMenuItem text="#{bundle.ADD_JUDGMENT}" action="addJudg" id="pt_cmi1" immediate="true"
+                                  styleClass="hover-Effect"/>
+              <af:commandMenuItem text="#{bundle.JUDG_CLASS}" action="judgClass" id="pt_cmi2" immediate="true"
+                                  styleClass="hover-Effect"/>
+            </af:menu>
+            <af:menu text="#{bundle.JUDGMENTS}" id="pt_m2">
+              <af:commandMenuItem text="#{bundle.FOLDERS}" action="folders" id="pt_cmi3" immediate="true"
+                                  styleClass="hover-Effect">
+                                  <af:setPropertyListener from="search" to="#{sessionScope.screen_name}" type="action"/>
+                                   </af:commandMenuItem>
+              <af:commandMenuItem text="المعارضة من اى نيابة" action="Allfolders" id="pt_cmi4" immediate="true"
+                                  styleClass="hover-Effect">
+                                  <af:setPropertyListener from="searchall" to="#{sessionScope.screen_name}" type="action"/>
+                                  </af:commandMenuItem>
+            </af:menu>
+            <af:menu text="#{bundle.REQUESTS}" id="pt_m3" rendered="true">
+              <af:commandMenuItem text="طلباتي" action="myRequests" id="mReqs" immediate="true"
+                                  rendered="true" styleClass="hover-Effect">
+                <af:setPropertyListener from="myRequests" to="#{sessionScope.requestType}" type="action"/>
+              </af:commandMenuItem>
+              <af:commandMenuItem text="الطلبات المفتوحة" action="openedRequests" id="pt_cmi5" immediate="true"
+                                  styleClass="hover-Effect">
+                <af:setPropertyListener from="openedRequests" to="#{sessionScope.requestType}" type="action"/>
+              </af:commandMenuItem>
+              <af:commandMenuItem text="كل الطلبات" action="allRequests" id="pt_cmi6" immediate="true"
+                                  styleClass="hover-Effect" >
+                <af:setPropertyListener from="allRequests" to="#{sessionScope.requestType}" type="action"/>
+              </af:commandMenuItem>
+            </af:menu>
+            <af:menu text="#{cjexecviewcontrollerBundle.SIMPLIFIED_MODE}" id="pt_m4">
+              <af:commandMenuItem text="#{cjexecviewcontrollerBundle.HASR_SIMPLIFIED_MODE}" action="SimplifiedModeBC" id="pt_cmi7" immediate="true"
+                                  styleClass="hover-Effect"/>
+              <af:commandMenuItem text="#{bundle.JUDG_CLASS}" action="judgClass" id="pt_cmi8" immediate="true"
+                                  styleClass="hover-Effect" rendered="false"/>
+            </af:menu>
+          </af:menuBar>
+        </af:panelGroupLayout>
+        <af:panelSplitter id="mainCont" orientation="horizontal" splitterPosition="#{attrs.startWidth}"
+                          styleClass="tablet-first-content-container #{(attrs.brandingMaxWidth == '1440px') ? 'BrandingMaxWidth-1440' :                                         (attrs.brandingMaxWidth == '1280px') ? 'BrandingMaxWidth-1280' :                                            (attrs.brandingMaxWidth == '1024px') ? 'BrandingMaxWidth-1024' : 'BrandingMaxWidth'}"
+                          dimensionsFrom="children" inlineStyle="min-width: #{attrs.minWidth}" disabled="true">
+          <af:matchMediaBehavior propertyName="orientation" matchedPropertyValue="vertical"
+                                 mediaQuery="screen and (max-width: 768px)"/>
+          <af:matchMediaBehavior propertyName="splitterPosition" matchedPropertyValue="150"
+                                 mediaQuery="screen and (max-width: 768px)"/>
+          <af:matchMediaBehavior propertyName="styleClass"
+                                 matchedPropertyValue="BrandingMaxWidth-1024 tablet-first-content-container-flowing"
+                                 mediaQuery="screen and (max-width: 768px)"/>
+          <f:facet name="second">
+            <af:panelSplitter id="contentAndEnd" orientation="horizontal" dimensionsFrom="children"
+                              splitterPosition="#{attrs.endWidth}" positionedFromEnd="true" disabled="true">
+              <af:matchMediaBehavior propertyName="orientation" matchedPropertyValue="vertical"
+                                     mediaQuery="screen and (max-width: 768px)"/>
+              <af:matchMediaBehavior propertyName="splitterPosition" matchedPropertyValue="200"
+                                     mediaQuery="screen and (max-width: 768px)"/>
+              <f:facet name="first">
+                <af:facetRef facetName="center"/>
+              </f:facet>
+            </af:panelSplitter>
+          </f:facet>
+        </af:panelSplitter>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+    <af:panelGroupLayout id="footerArea" styleClass="tablet-first-footer-area" layout="vertical">
+      <af:group id="grp2">
+        <af:panelGroupLayout layout="vertical" valign="middle" id="footPgl"
+                             styleClass="AFFooterBar #{attrs.showAppNavbar ? 'AFBrandingBarTall' : ''}" halign="center"
+                             clientComponent="true" rendered="#{attrs.showFooter}">
+          <af:panelGridLayout id="pt_pgl4"
+                              styleClass="#{attrs.brandingMaxWidth == '1440px' ? 'BrandingMaxWidth-1440' :(attrs.brandingMaxWidth == '1280px') ? 'BrandingMaxWidth-1280' :(attrs.brandingMaxWidth == '1024px') ? 'BrandingMaxWidth-1024' : 'BrandingMaxWidth'}">
+            <af:gridRow marginTop="5px" height="auto" id="pt_gr5">
+              <af:gridCell marginStart="20px" width="100%" marginEnd="20px" id="pt_gc6" halign="start">
+                <af:facetRef facetName="footer"/>
+              </af:gridCell>
+            </af:gridRow>
+          </af:panelGridLayout>
+        </af:panelGroupLayout>
+        <af:outputText value="جميع الحقوق محفوظة للنيابة العامه 2018" id="pt_ot3"/>
+      </af:group>
+    </af:panelGroupLayout>
+  </af:group>
+</af:pageTemplateDef>

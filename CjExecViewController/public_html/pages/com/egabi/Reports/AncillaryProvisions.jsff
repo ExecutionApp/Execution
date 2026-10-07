@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                 xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+<c:set var="bundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle_ar']}"/>
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+
+    <af:panelGroupLayout id="pgl1">
+        <af:panelHeader text="دفتر الاحكام التبعية"
+                        id="ph1"/>
+                             <h:panelGroup id="pg12" styleClass="row " layout="block">
+                                 <!--<af:outputText value="dd:#{sessionScope.NavigationName}" id="ot0"/>-->
+                             <af:panelGroupLayout id="pgl9_99" styleClass="col-md-1 col-sm-12"
+                             rendered="#{sessionScope.userInfo.entityDegree ne '3'  or sessionScope.userInfo.errandFlag eq 'Y'}">
+        <af:panelFormLayout id="pfl2" labelAlignment="top">
+          <f:facet name="footer">
+                 <af:selectBooleanCheckbox value="#{bindings.EstanafGozayaFlag.inputValue}" 
+                                                  text="#{cjexecviewcontrollerBundle.GOZEYA}" label=""  id="sbc2"
+                                               autoSubmit="true"   shortDesc="#{bindings.EstanafGozayaFlag.hints.tooltip}"  
+                                                  
+                                                  valueChangeListener="#{printDafatertBean.gozayOrKolyCheckBox}"/>
+          </f:facet>
+        </af:panelFormLayout>
+      </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg46" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="#{cjexecviewcontrollerBundle.PROSECUTION_KOLYA}" id="ol2"/>
+                <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" label="#{bindings.NeyabKolyaa.label}"
+                                    required="#{bindings.NeyabKolyaa.hints.mandatory}"
+                                    shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc1" simple="true"
+                                    disabled="#{(sessionScope.userInfo.entityDegree eq '39' and !sessionScope.userInfo.userPrevMap[5051]) or sessionScope.userInfo.entityDegree eq '3'}"
+                                    autoSubmit="true" immediate="true">
+                    <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si1"/>
+                    <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg45" styleClass="col-md-2 col-sm-12" partialTriggers="sbc2"
+            visible="#{printDafatertBean.gozaySearch}"
+                                 binding="#{printDafatertBean.niyabaGozayaa}">
+                <af:outputLabel value="#{cjexecviewcontrollerBundle.PROSECUTION_PARTIAL}"
+                              
+                                 id="ol3" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}" label="#{bindings.NeyabGozayaa.label}"
+                                    shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc2" simple="true"
+                                     visible="#{printDafatertBean.gozaySearch}"
+                                 
+                                    autoSubmit="true" partialTriggers="soc1"
+                                    disabled="#{sessionScope.userInfo.entityDegree eq '3'}">
+                    <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si2"/>
+                    <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+               <!--<af:outputText value="ww:#{bindings.NeyabGozayaa.inputValue eq null}" partialTriggers="soc2" id="ot0"/>
+                  <af:outputText value="cc:#{bindings.NeyabGozayaa.attributeValue}" partialTriggers="soc2" id="ot02312312"/>-->
+              <af:panelGroupLayout id="pgl7" styleClass="col-md-2 col-sm-12" partialTriggers="sbc2"
+                visible="#{printDafatertBean.gozaySearch}" binding="#{printDafatertBean.originEntity}">
+               
+                  <!-- required="#{bindings.NeyabGozayaa.inputValue ne null}"-->
+                <af:outputLabel value="#{bindings.OrigEntity.label}" id="ol6"
+                                showRequired="#{(printDafatertBean.userGozaya or bindings.NeyabGozayaa.inputValue ne null)?true:false}"/>
+                <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}" partialTriggers="soc2"
+                                    label="#{bindings.OrigEntity.label}"  autoSubmit="true" simple="true"
+                                    
+                                    shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc3"
+                                    valueChangeListener="#{cjValidator.origEntityVCL}">
+                    <f:selectItems value="#{bindings.OrigEntity.items}" id="si3"/>
+                    <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:spacer width="10" height="10" id="s6"/>
+            <af:panelGroupLayout id="pgl2" styleClass="col-md-2 col-sm-12" rendered="true">
+                <af:outputLabel value="سنة  الدفتر " id="ol1" showRequired="true"/>
+                <af:inputText value="#{bindings.Year.inputValue}" simple="true"
+                              required="true" columns="4"
+                              maximumLength="4"
+                              shortDesc="#{bindings.Year.hints.tooltip}" id="it1" autoSubmit="true"
+                              valueChangeListener="#{cjValidator.yearVCL}">
+                    <f:validator binding="#{bindings.Year.validator}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl8" styleClass="col-md-2 col-sm-12">
+        <af:outputLabel value="النوع" id="ol7_99" showRequired="true"/>
+           <af:selectOneChoice value="#{bindings.CriminalTypeFlag.inputValue}"
+                                    simple="true" autoSubmit="true"
+                                    label="#{bindings.CriminalTypeFlag.label}"
+                                    required="#{!printDafatertBean.userGozaya and sessionScope.NavigationName eq 'MainReport' }"
+                                    shortDesc="#{bindings.CriminalTypeFlag.hints.tooltip}"
+                                    id="soc4"
+                                    valueChangeListener="#{printDafatertBean.criminalTypeFlagListener}">
+                    <f:selectItem itemValue="1" itemLabel="جنح" id="si4_99"/>
+                    <f:selectItem itemValue="2" itemLabel="جنايات" id="si5_99"/>
+                </af:selectOneChoice>
+      </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl3" styleClass="col-md-2 col-sm-12" rendered="false">
+                <af:outputLabel value="من تاريخ الاجراء" id="ol4" showRequired="true"/>
+                <af:inputDate value="#{bindings.DateFrom.inputValue}" required="true"
+                               simple="true"
+                              shortDesc="#{bindings.DateFrom.hints.tooltip}" id="id2" autoSubmit="true"
+                              showRequired="false">
+                    <f:validator binding="#{bindings.DateFrom.validator}"/>
+                    <af:convertDateTime pattern="dd/MM/yyyy"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl4" styleClass="col-md-2 col-sm-12" rendered="false">
+                <af:outputLabel value="الي تاريخ الاجراء" id="ol5" showRequired="true"/>
+                <af:inputDate value="#{bindings.DateTo.inputValue}" required="true"
+                             
+                              simple="true"
+                              shortDesc="#{bindings.DateTo.hints.tooltip}" id="id1" autoSubmit="true"
+                              showRequired="false">
+                    <f:validator binding="#{bindings.DateTo.validator}"/>
+                    <af:convertDateTime pattern="dd/MM/yyyy"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg46_2" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="نوع الدفتر" id="ol2_2"/>
+                <af:selectOneChoice value="#{bindings.DependentOrderType.inputValue}"
+                                    label="#{bindings.DependentOrderType.label}"
+                                    required="#{bindings.DependentOrderType.hints.mandatory}"
+                                    shortDesc="#{bindings.DependentOrderType.hints.tooltip}" id="soc1_2" simple="true"
+                                    autoSubmit="true" immediate="true">
+                    <f:selectItems value="#{bindings.DependentOrderType.items}" id="si1_2"/>
+                    <f:validator binding="#{bindings.DependentOrderType.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl5" styleClass="col-md-1 col-sm-12">
+                <af:button  styleClass="btn-search" icon="/resources/images/magnifier.png" 
+                           disabled="#{!bindings.executeProcedureView1.enabled}" id="b2"
+                           action="#{printDafatertBean.validateBeforeSearchAncillaryProvisions}"/>
+            </af:panelGroupLayout>
+            <af:spacer width="50" height="10" id="s2"/>
+        </h:panelGroup>
+        <af:link text=" " id="l1" actionListener="#{bindings.executeProcedureView1.execute}" visible="false"/>
+        <af:spacer width="10" height="20" id="s3"/>
+        <af:panelGroupLayout id="pgl6" styleClass="btn-holder">
+            <af:button text="#{cjexecviewcontrollerBundle.PRINT_REPORT}" id="b1" visible="false"
+                       disabled="#{bindings.ProceduresDataReportView1Iterator.estimatedRowCount eq '0'}"
+                       partialTriggers="b2 t1" action="#{printDafatertBean.printDaftarProceduresReport}"/>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="20" id="s1"/>
+        <af:table value="#{bindings.ProceduresDataReportView1.collectionModel}" var="row"
+                  rows="#{bindings.ProceduresDataReportView1.rangeSize}"
+                  emptyText="#{bindings.ProceduresDataReportView1.viewable ?  bundle['NO_DATA']  : 'Access Denied.'}"
+                  rowBandingInterval="1" partialTriggers="::b2"
+                  selectedRowKeys="#{bindings.ProceduresDataReportView1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.ProceduresDataReportView1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.ProceduresDataReportView1.rangeSize}"
+                  filterModel="#{bindings.AncillaryProvisionsDataReportView1Query.queryDescriptor}"
+                  queryListener="#{bindings.AncillaryProvisionsDataReportView1Query.processQuery}" varStatus="vs" id="t1"
+                  styleClass="AFStretchWidth" scrollPolicy="page" autoHeightRows="13"
+                  columnStretching="column:c2">
+            <?audit suppress oracle.adf.faces.compreqsummary?><?audit suppress oracle.adf.faces.tableneedsrowheader?>
+            <af:column id="c11" headerText="#" width="50" minimumWidth="12">
+                <af:outputText value="#{vs.index+1}" id="ot11"/>
+            </af:column>
+            <!--<af:column sortProperty="#{bindings.ProceduresDataReportView1.hints.DateEntReservation.name}"
+                       filterable="true" sortable="true"
+                       headerText="#{bindings.ProceduresDataReportView1.hints.DateEntReservation.label}" id="c5"
+                       width="200" rendered="false" minimumWidth="12">
+                <af:outputText value="#{row.ActsTypesName}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.DateEntReservation.tooltip}"
+                               id="ot5"/>
+            </af:column>-->
+            <af:column sortProperty="ProcNumber" filterable="true"
+                      visible="false" sortable="true" headerText="#{bindings.ProceduresDataReportView1.hints.ProcNumber.label}"
+                       id="c1" width="100">
+                <af:outputText value="#{row.ProcNumber}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.ProcNumber.tooltip}" id="ot1">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ProceduresDataReportView1.hints.ProcNumber.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="InventoryNumber" filterable="true"
+                       sortable="true" headerText="#{bindings.ProceduresDataReportView1.hints.InventoryNumber.label}"
+                       id="c2" width="300">
+                <af:outputText value="#{row.InventoryNumber}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.InventoryNumber.tooltip}"
+                               id="ot2"/>
+            </af:column>
+            <af:column sortProperty="BusinessCaseNumber"
+                       filterable="true" sortable="true"
+                       headerText="#{bindings.ProceduresDataReportView1.hints.BusinessCaseNumber.label}" id="c3"
+                       width="250">
+                <af:outputText value="#{row.BusinessCaseNumber}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.BusinessCaseNumber.tooltip}"
+                               id="ot3"/>
+            </af:column>
+            <af:column sortProperty="PartyFullName" filterable="true"
+                       sortable="true" headerText="#{bindings.ProceduresDataReportView1.hints.PartyFullName.label}"
+                       id="c4" width="200">
+                <af:outputText value="#{row.PartyFullName}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.PartyFullName.tooltip}" id="ot4"/>
+            </af:column>
+            <af:column sortProperty="ProcedureDate" filterable="true"
+                    visible="false"   sortable="true" headerText="#{bindings.ProceduresDataReportView1.hints.ProcedureDate.label}"
+                       id="c6" width="90">
+                <!--<f:facet name="filter">
+                    <af:inputDate value="#{bindings.AncillaryProvisionsDataReportView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ProcedureDate.value}"
+                                  id="id3">
+                        <?audit suppress oracle.adf.faces.compnotlabelled?>
+                        <af:convertDateTime pattern="#{bindings.ProceduresDataReportView1.hints.ProcedureDate.format}"/>
+                    </af:inputDate>
+                </f:facet>-->
+                <af:outputText value="#{row.ProcedureDate}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.ProcedureDate.tooltip}" id="ot6">
+                    <af:convertDateTime pattern="#{bindings.ProceduresDataReportView1.hints.ProcedureDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="DateEntReservation" filterable="true" sortable="true"
+                    visible="false"   headerText="#{bindings.ProceduresDataReportView1.hints.DateEntReservation.label}" id="c5"
+                       width="150" rendered="false" minimumWidth="12">
+                <af:outputText value="#{row.DateEntReservation}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.DateEntReservation.tooltip}"
+                               id="ot5"/>
+            </af:column>
+            <af:column sortProperty="DateEntReservation"
+                    visible="false"   filterable="true" sortable="true"
+                       headerText="تاريخ الجلسه" id="c7"
+                       width="90" minimumWidth="12">
+                <af:outputText value="#{row.HearingDate}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.DateEntReservation.tooltip}"
+                               id="ot7"/>
+            </af:column>
+            <af:column sortProperty="CreatedBy" filterable="true" sortable="true"
+                       headerText="#{bindings.ProceduresDataReportView1.hints.CreatedBy.label}" id="c8"
+                       width="140" minimumWidth="12">
+                <af:outputText value="#{row.CreatedBy}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.CreatedBy.tooltip}"
+                               id="ot8"/>
+            </af:column>
+            <af:column sortProperty="ExcLkpDependentOrdersName" filterable="true" sortable="true"
+                      headerText="#{bindings.ProceduresDataReportView1.hints.ExcLkpDependentOrdersName.label}" id="c8_98"
+                       width="140" minimumWidth="12">
+                <af:outputText value="#{row.ExcLkpDependentOrdersName}"
+                               shortDesc="#{bindings.ProceduresDataReportView1.hints.ExcLkpDependentOrdersName.tooltip}"
+                               id="ot8_98"/>
+            </af:column>
+        </af:table>
+    
+      </af:panelGroupLayout>
+</ui:composition>

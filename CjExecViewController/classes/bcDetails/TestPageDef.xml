@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.1.10" id="TestPageDef" Package="bcDetails">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="FormCaseDescriptionDESCVO1" RangeSize="25" DataControl="SimplifiedModeAMDataControl"
+              id="FormCaseDescriptionDESCVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="FormCaseDescriptionDESCVO1Iterator" id="FormCaseDescriptionDESCVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.bcdetails.FormCaseDescriptionDESCVO"
+                      Name="FormCaseDescriptionDESCVO10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="FormCaseDescriptionId"/>
+          <Item Value="DescriptionId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="UpdatedBy"/>
+          <Item Value="UpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="FormCaseDescriptionDESCVO1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

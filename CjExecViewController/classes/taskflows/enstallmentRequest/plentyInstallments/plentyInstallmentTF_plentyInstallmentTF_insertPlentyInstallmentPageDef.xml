@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="plentyInstallmentTF_plentyInstallmentTF_insertPlentyInstallmentPageDef"
+                Package="taskflows.enstallmentRequest.plentyInstallments" SkipValidation="true">
+    <parameters/>
+    <executables/>
+    <bindings>
+        <methodAction id="insertPlentyInstallment" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="insertPlentyInstallment" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                      InstanceName="data.CjExecAMDataControl.dataProvider">
+            <NamedData NDName="p_FIRST_INSTALLMENT_DATE" NDValue="#{pageFlowScope.FirstInstallmentDate}"
+                       NDType="java.sql.Date"/>
+            <NamedData NDName="p_MONTH_NUMBER" NDValue="#{pageFlowScope.MonthNumber}" NDType="int"/>
+            <NamedData NDName="p_CREATION_PROC_ID" NDValue="#{pageFlowScope.CreationProcedureId}" NDType="int"/>
+            <NamedData NDName="p_FOLDER_RECORD" NDValue="#{pageFlowScope.FolderRecord}" NDType="int"/>
+            <NamedData NDName="p_FEES_AMOUNT" NDValue="#{pageFlowScope.FeesAmount}" NDType="int"/>
+           
+        </methodAction>
+    </bindings>
+</pageDefinition>

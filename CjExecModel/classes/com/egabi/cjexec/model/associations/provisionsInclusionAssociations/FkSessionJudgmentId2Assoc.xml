@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkSessionJudgmentId2Assoc"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="ExcCourtBcSessionJudgmentEO"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.provisionsInclusionEntities.ExcCourtBcSessionJudgmentEO"
+    LockLevel="NONE"
+    CascadeUpdate="true">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcCourtBcSessionJudgmentEO"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.provisionsInclusionEntities.ExcCourtBcSessionJudgmentEO.PkExcCourtBcSessionJudg"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.provisionsInclusionEntities.ExcCourtBcSessionJudgmentEO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ExcCourtBcSessionAttach"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.provisionsInclusionEntities.ExcCourtBcSessionAttach"
+     >
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcCourtBcSessionAttach"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.provisionsInclusionEntities.ExcCourtBcSessionAttach.fk_ExcCourtBcSessionAttach"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.egabi.cjexec.model.entities.provisionsInclusionEntities.ExcCourtBcSessionAttach.SessionJudgmentId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

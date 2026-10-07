@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="PreviousProcedures_TF_PreviousProcedures_TF_ExecuteWithParamsPageDef"
+                Package="taskflows.procedures" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="SimplifiedModeAM1.PreviousProceduresRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="PreviousProceduresRVO1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="PreviousProceduresRVO1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="businessCaseIdBind" NDValue="#{pageFlowScope.businessCaseId}" NDType="java.math.BigDecimal"/>
+    </action>
+  </bindings>
+</pageDefinition>

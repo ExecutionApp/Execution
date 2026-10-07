@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="enableOppositionTF_enableOppositionTF_ExecuteWithParams2PageDef"
+                Package="taskflows.enableOpposition" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="CriminalLawyersROV" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="CriminalLawyersROVIterator" Refresh="never"/>
+    <iterator id="CaseInfoROVIterator" Binds="CaseInfoROV" DataControl="CjExecAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="CaseInfoROVIterator" id="PartyId">
+      <AttrNames>
+        <Item Value="PartyId"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="CriminalLawyersROVIterator" id="ExecuteWithParams"
+            InstanceName="CjExecAMDataControl.CriminalLawyersROV" DataControl="CjExecAMDataControl"
+            RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="BindPartyID" NDValue="#{'1127438'}" NDType="java.math.BigDecimal"/>
+    </action>
+  </bindings>
+</pageDefinition>

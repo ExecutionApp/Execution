@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                 xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+<c:set var="bundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle_ar']}"/>
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+
+  
+    <af:panelGroupLayout id="pgl1">
+        <af:panelHeader text="دفتر #{sessionScope.label}"
+                        id="ph1"/>
+        <h:panelGroup id="pg12" styleClass="row " layout="block">
+            <af:panelGroupLayout id="pgl10" styleClass="col-md-2 col-sm-12"
+            visible="#{sessionScope.userInfo.entityDegree eq '38' or sessionScope.userInfo.entityDegree eq '46'}">
+                <af:outputLabel id="ol9" showRequired="true" value="مأموريات"/>
+                <af:selectBooleanCheckbox id="sbc1"
+                                          valueChangeListener="#{pageFlowScope.gonahMostanafaBean.mamoreyaCheckBox}"
+                                          autoSubmit="true"/>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg46" styleClass="col-md-2 col-sm-12" visible="#{sessionScope.userInfo.errandFlag eq 'N'}"
+                                 partialTriggers="sbc1" >
+                <af:outputLabel value="#{cjexecviewcontrollerBundle.PROSECUTION_KOLYA}" id="ol2" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" label="#{bindings.NeyabKolyaa.label}"
+                                   required="#{bindings.NeyabKolyaa.hints.mandatory}"
+                                  shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc1" simple="true"
+                                    disabled="#{(sessionScope.userInfo.entityDegree eq '39' and !sessionScope.userInfo.userPrevMap[5051]) or sessionScope.userInfo.entityDegree eq '3'}"
+                                    autoSubmit="true" immediate="true" partialTriggers="sbc1"
+                                    >
+                    <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si1"/>
+                    <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pg45" styleClass="col-md-2 col-sm-12" visible="false" rendered="false">
+                <af:outputLabel value="#{cjexecviewcontrollerBundle.PROSECUTION_PARTIAL}"
+                              
+                                 id="ol3" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}" label="#{bindings.NeyabGozayaa.label}"
+                                    shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc2" simple="true"
+                                    
+                                    autoSubmit="true" partialTriggers="soc1"
+                                    disabled="#{sessionScope.userInfo.entityDegree eq '3'}">
+                    <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si2"/>
+                    <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl9" styleClass="col-md-2 col-sm-12" visible="#{sessionScope.userInfo.errandFlag eq 'Y'}"
+                                 partialTriggers="sbc1">
+                <af:outputLabel id="ol8" showRequired="true" value="المأمورية"/>
+                <af:selectOneChoice value="#{bindings.NeyabaMamoreya.inputValue}"
+                                    required="#{bindings.NeyabaMamoreya.hints.mandatory}"
+                               autoSubmit="true"     shortDesc="#{bindings.NeyabaMamoreya.hints.tooltip}" id="soc4"
+                                    valueChangeListener="#{pageFlowScope.gonahMostanafaBean.mamoreyaVCL}">
+                    <f:selectItems value="#{bindings.NeyabaMamoreya.items}" id="si4"/>
+                    <f:validator binding="#{bindings.NeyabaMamoreya.validator}"/>
+                </af:selectOneChoice>
+                <!--<af:outputText value="vv:#{(bindings.NeyabKolyaa.inputValue ne '') ? bindings.NeyabKolyaa.inputValue : (bindings.NeyabaMamoreya.inputValue ne '' ? bindings.NeyabaMamoreya.inputValue : 0)} " partialTriggers="soc4" id="ot5"/>
+                <af:outputText value="gg:#{(bindings.NeyabKolyaa.inputValue ne '')} " partialTriggers="soc4" id="ot5-2"/>-->
+            </af:panelGroupLayout>
+            <af:spacer width="10" height="10" id="s6"/>
+            <af:panelGroupLayout id="pgl2" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="سنة  الدفتر " id="ol1" showRequired="true"/>
+                <af:inputText value="#{bindings.Year.inputValue}" simple="true"
+                              required="true" columns="4"
+                              maximumLength="4"
+                              shortDesc="#{bindings.Year.hints.tooltip}" id="it1" autoSubmit="true"
+                              valueChangeListener="#{cjValidator.yearVCL}">
+                    <f:validator binding="#{bindings.Year.validator}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl8" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel value="رقم مستأنف كلي" id="ol7"/>
+                <af:inputText value="#{bindings.Seq.inputValue}" simple="true"
+                              columns="#{bindings.Seq.hints.displayWidth}"
+                              maximumLength="#{bindings.Seq.hints.precision}" shortDesc="#{bindings.Seq.hints.tooltip}"
+                              id="it2">
+                    <f:validator binding="#{bindings.Seq.validator}"/>
+                </af:inputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl3" styleClass="col-md-2 col-sm-12" rendered="false">
+                <af:outputLabel value="من تاريخ الجلسة" id="ol4" showRequired="true"/>
+                <af:inputDate value="#{bindings.DateFrom.inputValue}" required="true"
+                               simple="true"
+                              shortDesc="#{bindings.DateFrom.hints.tooltip}" id="id2" autoSubmit="true"
+                              showRequired="false">
+                    <f:validator binding="#{bindings.DateFrom.validator}"/>
+                    <af:convertDateTime pattern="dd/MM/yyyy"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl4" styleClass="col-md-2 col-sm-12" rendered="false">
+                <af:outputLabel value="الي تاريخ الجلسة" id="ol5" showRequired="true"/>
+                <af:inputDate value="#{bindings.DateTo.inputValue}" required="true"
+                             
+                              simple="true"
+                              shortDesc="#{bindings.DateTo.hints.tooltip}" id="id1" autoSubmit="true"
+                              showRequired="false">
+                    <f:validator binding="#{bindings.DateTo.validator}"/>
+                    <af:convertDateTime pattern="dd/MM/yyyy"/>
+                </af:inputDate>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl7" styleClass="col-md-2 col-sm-12" visible="false" >
+                <af:outputLabel value="نوع الدفتر" id="ol6" showRequired="true"/>
+                <af:selectOneChoice value="#{bindings.FolderTypeId.inputValue}" label="#{bindings.FolderTypeId.label}"
+                                    required="#{bindings.FolderTypeId.hints.mandatory}"
+                                    shortDesc="#{bindings.FolderTypeId.hints.tooltip}" id="soc3" simple="true">
+                    <f:selectItems value="#{bindings.FolderTypeId.items}" id="si3"/>
+                    <f:validator binding="#{bindings.FolderTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl5" styleClass="col-md-1 col-sm-12">
+                <af:button  styleClass="btn-search" icon="/resources/images/magnifier.png" actionListener="#{bindings.executeProcedureView1.execute}" 
+                           disabled="#{!bindings.executeProcedureView1.enabled}" id="b2"/>
+            </af:panelGroupLayout>
+            <af:spacer width="50" height="10" id="s2"/>
+        </h:panelGroup>
+        <af:spacer width="10" height="20" id="s3"/>
+        <af:panelGroupLayout id="pgl6" styleClass="btn-holder">
+            <af:button text="#{cjexecviewcontrollerBundle.PRINT_REPORT}" id="b1"
+                       disabled="#{bindings.GonahMostanafa1Iterator.estimatedRowCount eq '0'}"
+                       partialTriggers="b2 t1" action="#{printDafatertBean.printDaftarProceduresReport}"/>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="20" id="s1"/>
+        <af:table value="#{bindings.GonahMostanafa1.collectionModel}" var="row"
+                  rows="#{bindings.GonahMostanafa1.rangeSize}"
+                  emptyText="#{bindings.GonahMostanafa1.viewable ?  bundle['NO_DATA']  : 'Access Denied.'}"
+                  rowBandingInterval="1" partialTriggers="::b2"
+                  selectedRowKeys="#{bindings.GonahMostanafa1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.GonahMostanafa1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.GonahMostanafa1.rangeSize}"
+                  filterModel="#{bindings.GonahMostanafa1Query.queryDescriptor}"
+                  queryListener="#{bindings.GonahMostanafa1Query.processQuery}" varStatus="vs" id="t1"
+                  styleClass="AFStretchWidth" scrollPolicy="page" autoHeightRows="13"
+                  columnStretching="column:c3">
+            <?audit suppress oracle.adf.faces.compreqsummary?><?audit suppress oracle.adf.faces.tableneedsrowheader?>
+            <af:column id="c11" headerText="#" width="40" minimumWidth="12">
+                <af:outputText value="#{vs.index+1}" id="ot11"/>
+            </af:column>
+            <af:column sortProperty="BusinessCaseNumber" filterable="true" sortable="true"
+                       headerText="رقم القضية" id="c3" width="250">
+                <af:outputText value="#{row.BusinessCaseNumber}"
+                               shortDesc="#{bindings.GonahMostanafa1.hints.BusinessCaseNumber.tooltip}" id="ot3"/>
+            </af:column>
+            <!--<af:column sortProperty="#{bindings.GonahMostanafa1.hints.DateEntReservation.name}"
+                       filterable="true" sortable="true"
+                       headerText="#{bindings.GonahMostanafa1.hints.DateEntReservation.label}" id="c5"
+                       width="200" rendered="false" minimumWidth="12">
+                <af:outputText value="#{row.ActsTypesName}"
+                               shortDesc="#{bindings.GonahMostanafa1.hints.DateEntReservation.tooltip}"
+                               id="ot5"/>
+            </af:column>-->
+   
+            <af:column sortProperty="InventoryNumber" filterable="true"
+                       sortable="true" headerText="#{bindings.GonahMostanafa1.hints.InventoryNumber.label}"
+                       id="c2" width="200" visible="false">
+                <af:outputText value="#{row.InventoryNumber}"
+                               shortDesc="#{bindings.GonahMostanafa1.hints.InventoryNumber.tooltip}"
+                               id="ot2"/>
+            </af:column>
+                     <af:column sortProperty="ProcNumber" filterable="true"
+                       sortable="true" headerText="رقم مستأنف كلي"
+                       id="c1" width="600">
+                <af:outputText value="#{row.AppealNumber}"
+                               shortDesc="#{bindings.GonahMostanafa1.hints.AppealNumber.tooltip}" id="ot1">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.GonahMostanafa1.hints.AppealNumber.format}"/>
+                </af:outputText>
+            </af:column>
+            
+            <!--<af:column sortProperty="#{bindings.HasrDataReportView1.hints.Address.name}"
+                       filterable="true" sortable="true"
+                       headerText="#{bindings.HasrDataReportView1.hints.Address.label}"
+                       id="c7" width="150">
+                <af:outputText value="#{row.Address}"
+                               shortDesc="#{bindings.HasrDataReportView1.hints.Address.tooltip}"
+                               id="ot7"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.HasrDataReportView1.hints.JobTitle.name}"
+                       filterable="true" sortable="true"
+                       headerText="#{bindings.HasrDataReportView1.hints.JobTitle.label}"
+                       id="c8" width="150">
+                <af:outputText value="#{row.JobTitle}"
+                               shortDesc="#{bindings.HasrDataReportView1.hints.JobTitle.tooltip}"
+                               id="ot8"/>
+            </af:column>
+            <af:column headerText="#{bindings.HasrDataReportView1.hints.JudgmentText.label}"
+                       id="c12" width="150">
+                <af:outputText value="#{row.JudgmentText}"
+                               shortDesc="#{bindings.HasrDataReportView1.hints.JudgmentText.tooltip}"
+                               id="ot12"/>
+            </af:column>-->
+            
+            
+            <af:column sortProperty="PartyFullName" filterable="true"
+                       sortable="true" headerText="المتهم"
+                       id="c4" width="150" >
+                <af:outputText value="#{row.PartyFullName}"
+                               shortDesc="#{bindings.GonahMostanafa1.hints.PartyFullName.tooltip}" id="ot4"/>
+            </af:column>
+            <af:column sortProperty="DateEntReservation"
+                       filterable="true" sortable="true"
+                       headerText="تاريخ الجلسه" id="c7"
+                       width="90" minimumWidth="12">
+                <af:outputText value="#{row.HearingDate}"
+                               shortDesc="#{bindings.GonahMostanafa1.hints.DateEntReservation.tooltip}"
+                               id="ot7"/>
+            </af:column>
+            <af:column sortProperty="CreatedBy" filterable="true" sortable="true"
+                       headerText="#{bindings.GonahMostanafa1.hints.CreatedBy.label}" id="c8"
+                       width="140" minimumWidth="12" >
+                <af:outputText value="#{row.CreatedBy}"
+                               shortDesc="#{bindings.GonahMostanafa1.hints.CreatedBy.tooltip}"
+                               id="ot8"/>
+            </af:column>
+        </af:table>
+    </af:panelGroupLayout>
+</ui:composition>

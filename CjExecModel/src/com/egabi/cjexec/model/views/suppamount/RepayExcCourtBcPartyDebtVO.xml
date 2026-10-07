@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RepayExcCourtBcPartyDebtVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  FetchMode="FETCH_AS_NEEDED"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.views.suppamount.RepayExcCourtBcPartyDebtVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="FeesTypesROV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.suppamount.FeesTypesROV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="SettlmentAuthsROV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.suppamount.SettlmentAuthsROV"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_FeesTypeId"
+    ListVOName="FeesTypesROV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FeesTypeId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SettlementAuthId"
+    ListVOName="SettlmentAuthsROV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SettlementAuthId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT ExcRepayCourtBcPartyDepOrdEO.AMOUNT,  
+       ExcRepayCourtBcPartyDepOrdEO.CREATED_BY,  
+       ExcRepayCourtBcPartyDepOrdEO.CREATED_DATE,  
+       ExcRepayCourtBcPartyDepOrdEO.FEES_TYPE_ID,  
+       ExcRepayCourtBcPartyDepOrdEO.GROUP_NUMBER,  
+       ExcRepayCourtBcPartyDepOrdEO.ID,  
+       ExcRepayCourtBcPartyDepOrdEO.PAID_AMOUNT,  
+       ExcRepayCourtBcPartyDepOrdEO.RECEIPT_NUMBER,  
+       ExcRepayCourtBcPartyDepOrdEO.RES_PARTY_ID,  
+       ExcRepayCourtBcPartyDepOrdEO.SETT_REQ_PROC_ID,  
+       ExcRepayCourtBcPartyDepOrdEO.SETTLEMENT_AUTH_ID,  
+       ExcRepayCourtBcPartyDepOrdEO.SETTLEMENT_DATE,  
+       ExcRepayCourtBcPartyDepOrdEO.SETTLEMENT_PROC_ID,  
+       (SELECT PP.PARTY_FULL_NAME 
+  FROM PAR_PARTIES pp, 
+       EXC_COURT_BC_PARTY_DEBT ecd, 
+       COURT_BC_HEARING_RES_PARTIES cbr 
+ WHERE     ECD.SETTLEMENT_RES_PARTY_ID = CBR.ID 
+       AND PP.ID = CBR.PARTY_ID 
+       AND ECD.SETTLEMENT_RES_PARTY_ID = 
+              ExcRepayCourtBcPartyDepOrdEO.SETTLEMENT_RES_PARTY_ID 
+       AND ECD.RES_PARTY_ID = ExcRepayCourtBcPartyDepOrdEO.RES_PARTY_ID) AS VIEW_ATTR,  
+       ExcRepayCourtBcPartyDepOrdEO.SETTLEMENT_RES_PARTY_ID 
+FROM  EXC_COURT_BC_PARTY_DEBT ExcRepayCourtBcPartyDepOrdEO 
+WHERE ( (ExcRepayCourtBcPartyDepOrdEO.SETT_REQ_PROC_ID IS NOT NULL ) )]]></SQLQuery>
+  <EntityUsage
+    Name="ExcRepayCourtBcPartyDepOrdEO"
+    Entity="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO"/>
+  <ViewAttribute
+    Name="Amount"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Amount"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="AMOUNT"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="CREATED_DATE"/>
+  <ViewAttribute
+    Name="FeesTypeId"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FeesTypeId"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="FEES_TYPE_ID"
+    LOVName="LOV_FeesTypeId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GroupNumber"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="GroupNumber"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="GROUP_NUMBER"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="PaidAmount"
+    PrecisionRule="true"
+    EntityAttrName="PaidAmount"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="PAID_AMOUNT"/>
+  <ViewAttribute
+    Name="ReceiptNumber"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ReceiptNumber"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="RECEIPT_NUMBER"/>
+  <ViewAttribute
+    Name="ResPartyId"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ResPartyId"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="RES_PARTY_ID"/>
+  <ViewAttribute
+    Name="SettReqProcId"
+    PrecisionRule="true"
+    EntityAttrName="SettReqProcId"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="SETT_REQ_PROC_ID"/>
+  <ViewAttribute
+    Name="SettlementAuthId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="SettlementAuthId"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="SETTLEMENT_AUTH_ID"
+    LOVName="LOV_SettlementAuthId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SettlementDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="SettlementDate"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="SETTLEMENT_DATE">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="ExpressionScript"><![CDATA[adf.currentDate]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="PAYMENT_DATE"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SettlementProcId"
+    PrecisionRule="true"
+    EntityAttrName="SettlementProcId"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="SETTLEMENT_PROC_ID"/>
+  <ViewAttribute
+    Name="isPaid"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Boolean"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="BIT">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="ExpressionScript"><![CDATA[SettlementProcId!=null]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="IS_PAID"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PayerName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    Expression="SELECT PP.PARTY_FULL_NAME
+  FROM PAR_PARTIES pp,
+       EXC_COURT_BC_PARTY_DEBT ecd,
+       COURT_BC_HEARING_RES_PARTIES cbr
+ WHERE     ECD.SETTLEMENT_RES_PARTY_ID = CBR.ID
+       AND PP.ID = CBR.PARTY_ID
+       AND ECD.SETTLEMENT_RES_PARTY_ID =
+              ExcRepayCourtBcPartyDepOrdEO.SETTLEMENT_RES_PARTY_ID
+       AND ECD.RES_PARTY_ID = ExcRepayCourtBcPartyDepOrdEO.RES_PARTY_ID"
+    IsQueriable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="PAIED_BY"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SettlementResPartyId"
+    PrecisionRule="true"
+    EntityAttrName="SettlementResPartyId"
+    EntityUsage="ExcRepayCourtBcPartyDepOrdEO"
+    AliasName="SETTLEMENT_RES_PARTY_ID"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

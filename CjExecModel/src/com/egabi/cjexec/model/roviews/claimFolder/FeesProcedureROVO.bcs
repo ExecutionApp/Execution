@@ -1,0 +1,57 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.claimFolder.FeesProcedureROVO
+
+package com.egabi.cjexec.model.roviews.claimFolder
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+
+
+
+@VariableExpression(path="DATE_FROM")
+def DATE_FROM_VariableScript_Variable()
+{
+adf.context.current.sessionScope.dateFrom
+}
+
+
+@VariableExpression(path="DATE_TO")
+def DATE_TO_VariableScript_Variable()
+{
+adf.context.current.sessionScope.dateTo
+}
+
+
+@VariableExpression(path="attend")
+def attend_VariableScript_Variable()
+{
+adf.context.current.sessionScope.attend
+}
+
+
+@VariableExpression(path="bindOriginEntity")
+def bindOriginEntity_VariableScript_Variable()
+{
+adf.context.current.sessionScope.pOrigin
+}
+
+
+@VariableExpression(path="bindtype")
+def bindtype_VariableScript_Variable()
+{
+adf.context.current.sessionScope.pBindType
+}
+
+
+@VariableExpression(path="deg")
+def deg_VariableScript_Variable()
+{
+adf.context.current.sessionScope.pDeg
+}
+
+
+@VariableExpression(path="folderCriminalType")
+def folderCriminalType_VariableScript_Variable()
+{
+adf.context.current.sessionScope.pcriminalType
+}
+

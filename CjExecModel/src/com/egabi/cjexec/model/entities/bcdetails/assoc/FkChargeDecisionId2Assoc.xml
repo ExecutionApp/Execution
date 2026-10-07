@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkChargeDecisionId2Assoc"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="ExcCourtBcChargeDecisions"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO"
+    LockLevel="NONE"
+    DeleteContainee="true"
+    CascadeUpdate="true">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcCourtBcChargeDecisions"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.ExcCourtBcChrgDeciPk"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargeDecisionsEO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ExcCourtBcChargesParties"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO"
+     
+    UpdateHistoryColumn="true">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ExcCourtBcChargesParties"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.FkChargeDecisionId2"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.ChargeDecisionId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

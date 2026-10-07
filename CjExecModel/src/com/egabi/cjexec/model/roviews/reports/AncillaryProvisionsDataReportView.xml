@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AncillaryProvisionsDataReportView"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportViewImpl"
+  PageIterMode="Full"
+  ComponentInterface="com.egabi.cjexec.model.roviews.reports.common.AncillaryProvisionsDataReportView"
+  ClientProxyName="com.egabi.cjexec.model.roviews.reports.client.AncillaryProvisionsDataReportViewClient">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+   <Variable
+    Name="YEAR"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="DATE_FROM"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="DATE_TO"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="PROCEDURE_TYPE"
+    Kind="where"
+    Type="java.lang.String"/> 
+    <Variable
+    Name="P_policeId"
+    Kind="where"
+    Type="java.lang.String"/>
+    <Variable
+    Name="P_CRIMINAL_TYPE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="Nyabaa"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[
+   SELECT  distinct
+        null PROC_NUMBER,
+         DECODE (             
+            FOLDER.SEQUENCE_NUMBER,             
+            NULL, '',             
+            (  FOLDER.YEAR             
+             || '/'             
+             || FOLDER.SEQUENCE_NUMBER             
+             || '/'             
+             || FOLDER_TYPES.FOLDER_NAME             
+             || '/'             
+             || ENTS.ENTITY_NAME))             
+            AS INVENTORY_NUMBER,             
+            PAR_POLICE.PAR_YEAR             
+         || '/'             
+         || PAR_POLICE.POLICE_NUMBER             
+         || '/'             
+         || CAS_TYPE.NAME             
+         || '/'             
+         || ENTS.ENTITY_NAME             
+            AS BUSINESS_CASE_NUMBER,           
+            null PROCEDURE_DATE,             
+          null PROCEDURE_TYPE,             
+         null HEARING_DATE,
+         PARTIES.PARTY_FULL_NAME PARTY_FULL_NAME,             
+         --ACTION_TYPES.NAME ACTS_TYPES_NAME,             
+         null ACTS_TYPES_NAME,
+         PAR_POLICE.PAR_YEAR,             
+         FOLDER.POLICE_STATION_ENTITY_ID,             
+         ENTS.PARENT_ENTITY_ID ENT_ID,            
+            null DATE_ENT_RESERVATION,   
+            FOLDER.CREATED_BY  , 
+             DEP_ORD.DEPENDENT_ORDER_TYPE, 
+            (select NAME from EXC_LKP_DEPENDENT_ORDERS_TYPES where id=DEP_ORD.DEPENDENT_ORDER_TYPE) EXC_LKP_DEPENDENT_ORDERS_name
+            ,FOLDER.CRIMINAL_TYPE 
+    FROM EXC_FOLDER_DATA FOLDER,              
+         COURT_BC_HEARING_RES_PARTIES RES_PART,              
+         COURT_BC_HEARING_RESERVATION RES,              
+         EXC_LKP_FOLDER_TYPES FOLDER_TYPES,              
+              
+         ENTITY ENTS,              
+                 
+         EXC_LKP_FEES_TYPES FEES_TYPES,              
+         PAR_PARTIES PARTIES,              
+         BUSINESS_CASE CAS,              
+         PAR_POLICE_AUTHORITY_REPORT PAR_POLICE,              
+        
+         BUSINESS_CASE_TYPE CAS_TYPE  , 
+          EXC_COURT_BC_CHRG_DEC_DEP_ORD DEP_ORD 
+   WHERE     FOLDER.FOLDER_TYPE = FOLDER_TYPES.ID              
+             
+         AND RES_PART.ID = FOLDER.RES_PARTY_ID              
+         AND RES_PART.COURT_BC_HEARING_RES_ID = RES.ID              
+         AND PARTIES.ID = RES_PART.PARTY_ID              
+         AND RES.BUSINESS_CASE_ID = CAS.ID              
+         AND CAS.ID = PAR_POLICE.BUSINESS_CASE_ID              
+         AND PAR_POLICE.ORIGIN_ENTITY = ents.ID                        
+         AND CAS_TYPE.ID = CAS.CASE_TYPE    
+          and FOLDER.id=DEP_ORD.FOLDER_ID 
+        AND DEP_ORD.YEAR = :YEAR         
+      /* AND (:P_policeId is null or  DEP_ORD.ENTITY_ID=:P_policeId) */
+        AND (:P_CRIMINAL_TYPE is null or FOLDER.CRIMINAL_TYPE=:P_CRIMINAL_TYPE)
+       and (:PROCEDURE_TYPE is null or DEP_ORD.DEPENDENT_ORDER_TYPE=:PROCEDURE_TYPE) 
+        /*and (:Nyabaa is null or  DEP_ORD.ENTITY_ID=:Nyabaa) */
+       and  DEP_ORD.ENTITY_ID=(case when :P_policeId is not  null then :P_policeId else :Nyabaa end)
+       and (1=1 or :DATE_FROM =:DATE_TO)
+   
+]]></SQLQuery>
+  <ViewAttribute
+    Name="ProcNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PROC_NUMBER"
+    Expression="PROC_NUMBER"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.ProcNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InventoryNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="576"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INVENTORY_NUMBER"
+    Expression="INVENTORY_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="576"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.InventoryNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="586"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NUMBER"
+    Expression="BUSINESS_CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="586"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.BusinessCaseNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProcedureDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="PROCEDURE_DATE"
+    Expression="PROCEDURE_DATE"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.ProcedureDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProcedureType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PROCEDURE_TYPE"
+    Expression="PROCEDURE_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="75"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="75"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyFullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_FULL_NAME"
+    Expression="PARTY_FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.PartyFullName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ActsTypesName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACTS_TYPES_NAME"
+    Expression="ACTS_TYPES_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.ActsTypesName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParYear"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PAR_YEAR"
+    Expression="PAR_YEAR"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.ParYear_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PoliceStationEntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="POLICE_STATION_ENTITY_ID"
+    Expression="POLICE_STATION_ENTITY_ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.PoliceStationEntityId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENT_ID"
+    Expression="ENT_ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.EntId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DateEntReservation"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="307"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DATE_ENT_RESERVATION"
+    Expression="DATE_ENT_RESERVATION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="307"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.DateEntReservation_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.CreatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DependentOrderType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DEPENDENT_ORDER_TYPE"
+    Expression="DEPENDENT_ORDER_TYPE"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.DependentOrderType_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExcLkpDependentOrdersName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EXC_LKP_DEPENDENT_ORDERS_NAME"
+    Expression="EXC_LKP_DEPENDENT_ORDERS_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.reports.AncillaryProvisionsDataReportView.ExcLkpDependentOrdersName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CriminalType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CRIMINAL_TYPE"
+    Expression="CRIMINAL_TYPE"
+    SQLType="NUMERIC"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="executeProcedureView"
+      MethodName="executeProcedureView">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="procedureType"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="casYear"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="nyabaaGozaya"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="dateFrom"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="dateTo"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="policeId"
+        Type="java.math.BigDecimal"/>
+      <Parameter
+        Name="criminalType"
+        Type="java.math.BigDecimal"/>
+    </Method>
+  </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

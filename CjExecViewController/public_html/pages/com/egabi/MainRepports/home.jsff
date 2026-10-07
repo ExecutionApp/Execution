@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+  <af:panelGroupLayout id="pgl1">
+    <af:button text="#{cjexecviewcontrollerBundle.TOTAL_PROCEDURES_REPORT}" id="b1" action="goProcedureReport"/>
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:button text="#{cjexecviewcontrollerBundle.HASR_REPORT}" id="b2" action="goTotalHasrReport"/>
+    <af:spacer width="10" height="10" id="s2"/>
+    <af:button text="#{cjexecviewcontrollerBundle.DETAILS_HASR_REPORT}" id="b3" action="goHasrDetailsReport"/>
+    <af:spacer width="10" height="10" id="s3"/>
+    <af:button text="#{cjexecviewcontrollerBundle.HASR_ID_NUMB_REPORT}" id="b4" action="goHasrIdNumbReport"/>
+    <af:spacer width="10" height="10" id="s4"/>
+    <af:button text="#{cjexecviewcontrollerBundle.TOTAL_MOTALABAT_REPORT}" id="b5" action="goTotalMotalabatReport"/>
+  </af:panelGroupLayout>
+</ui:composition>

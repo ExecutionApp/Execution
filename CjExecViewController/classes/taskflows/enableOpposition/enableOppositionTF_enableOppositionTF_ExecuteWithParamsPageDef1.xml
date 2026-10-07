@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="enableOppositionTF_enableOppositionTF_ExecuteWithParamsPageDef1"
+                Package="taskflows.enableOpposition" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="ExcFolderProceduresVO" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExcFolderProceduresVOIterator" Refresh="never"/>
+    <iterator id="CaseInfoROVIterator" Binds="CaseInfoROV" DataControl="CjExecAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ExcFolderProceduresVOIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="BResPartyId" NDType="Integer" NDValue="#{bindings.Id.inputValue}"/>
+      <NamedData NDName="BFolderId" NDType="Integer" NDValue="#{pageFlowScope.folderId}"/>
+      
+      <NamedData NDName="BActionType" NDType="Integer" NDValue="3"/>
+    </action>
+    <attributeValues IterBinding="CaseInfoROVIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

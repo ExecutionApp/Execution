@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelBox id="pb1">
+        <f:facet name="toolbar"/>
+        <af:panelGridLayout id="pgl6">
+            <af:gridRow marginTop="5px" height="auto" id="gr7">
+                <af:gridCell marginStart="5px" width="10%" id="gc31">
+                    <af:panelLabelAndMessage label="#{bindings.Name.hints.label}" id="plam7"/>
+                </af:gridCell>
+                <af:gridCell marginStart="5px" width="30%" id="gc32">
+                    <af:inputText value="#{bindings.Name.inputValue}" simple="true"
+                                  required="#{bindings.Name.hints.mandatory}"
+                                  columns="#{bindings.Name.hints.displayWidth}"
+                                  maximumLength="#{bindings.Name.hints.precision}"
+                                  shortDesc="#{bindings.Name.hints.tooltip}" id="it7" autoSubmit="true">
+                        <f:validator binding="#{bindings.Name.validator}"/>
+                    </af:inputText>
+                </af:gridCell>
+                <af:gridCell marginStart="5px" width="2%" id="gc33"/>
+                <af:gridCell marginStart="5px" width="10%" id="gc34">
+                    <af:panelLabelAndMessage label="#{bindings.RetainerNumber.hints.label}" id="plam8"/>
+                </af:gridCell>
+                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc35">
+                    <af:inputText value="#{bindings.RetainerNumber.inputValue}" simple="true"
+                                  required="#{bindings.RetainerNumber.hints.mandatory}"
+                                  columns="#{bindings.RetainerNumber.hints.displayWidth}"
+                                  maximumLength="#{bindings.RetainerNumber.hints.precision}"
+                                  shortDesc="#{bindings.RetainerNumber.hints.tooltip}" id="it8" autoSubmit="true">
+                        <f:validator binding="#{bindings.RetainerNumber.validator}"/>
+                    </af:inputText>
+                </af:gridCell>
+            </af:gridRow>
+            <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr8">
+                <af:gridCell marginStart="5px" width="10%" id="gc36"/>
+                <af:gridCell marginStart="5px" width="30%" id="gc37"/>
+                <af:gridCell marginStart="5px" width="2%" id="gc38"/>
+                <af:gridCell marginStart="5px" width="10%" id="gc39">
+                    <af:panelLabelAndMessage label="#{bindings.ReleasedFrom.hints.label}" id="plam9"/>
+                </af:gridCell>
+                <af:gridCell marginStart="5px" width="30%" marginEnd="5px" id="gc40">
+                    <af:inputText value="#{bindings.ReleasedFrom.inputValue}" simple="true"
+                                  required="#{bindings.ReleasedFrom.hints.mandatory}"
+                                  columns="#{bindings.ReleasedFrom.hints.displayWidth}"
+                                  maximumLength="#{bindings.ReleasedFrom.hints.precision}"
+                                  shortDesc="#{bindings.ReleasedFrom.hints.tooltip}" id="it9" autoSubmit="true">
+                        <f:validator binding="#{bindings.ReleasedFrom.validator}"/>
+                    </af:inputText>
+                </af:gridCell>
+            </af:gridRow>
+        </af:panelGridLayout>
+    </af:panelBox>
+</ui:composition>

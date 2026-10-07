@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="FeesReportPageDef"
+                Package="pages.com.egabi.Reports">
+   <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="SearchInventoryRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ValidatePoliceReportROVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.FeesProcedureROVO1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="FeesProcedureROVO1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateFrom">
+      <AttrNames>
+        <Item Value="DateFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateTo">
+      <AttrNames>
+        <Item Value="DateTo"/>
+      </AttrNames>
+    </attributeValues>
+ <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="executeMotalbatView" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeMotalbatView" IsViewObjectMethod="true" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.MotalbatDataReport1">
+      <NamedData NDName="claimFolderType" NDValue="#{bindings.ClaimFolderType.inputValue}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="casYear" NDValue="#{bindings.CalimYear.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="nyabaaGozaya"
+                 NDValue="#{bindings.OrigEntity.inputValue}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="dateFrom" NDValue="#{bindings.DateFrom.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="dateTo" NDValue="#{bindings.DateTo.inputValue}" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_PoliceStationEntity"
+          id="PoliceStationEntity" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa"
+          id="NeyabGozayaa1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_FeesFolderType" id="FeesFolderType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="filterFeesProcedureRO" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterFeesProcedureRO" IsViewObjectMethod="true" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.FeesProcedureROVO1">
+      <NamedData NDName="dateFrom" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="dateTo" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="originEntity" NDType="java.lang.String"/>
+      <NamedData NDName="folderCriminalType" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="type" NDType="java.lang.String"/>
+      <NamedData NDName="attend" NDType="java.lang.String"/>
+      <NamedData NDName="deg" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="FeesProcedureROVO1Iterator" id="FeesProcedureROVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.claimFolder.FeesProcedureROVO" Name="FeesProcedureROVO10">
+        <AttrNames>
+          <Item Value="PartyFixedFullName"/>
+          <Item Value="IdNumber"/>
+          <Item Value="GuranteeAmount"/>
+          <Item Value="CourtFees"/>
+          <Item Value="LawyerFees"/>
+          <Item Value="PaiedGurantee"/>
+          <Item Value="BusinessCaseNumberFull"/>
+          <Item Value="SeqNumberFull"/>
+          <Item Value="ClaimNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_CriminalType" id="CriminalType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_Attendance" id="Attendance"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_DegreeId" id="DegreeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ParLawyerPartiesFk1Assoc"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="ParLawyers"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.parlawyer.ParLawyersEO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ParLawyers"/>
+      <Attr Name="_foreignKey" Value="com.egabi.cjexec.model.entities.parlawyer.ParLawyersEO.ParLawyersPk"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.parlawyer.ParLawyersEO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ParLawyerParties"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.parlawyer.ParLawyerPartiesEO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ParLawyerParties"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.parlawyer.ParLawyerPartiesEO.ParLawyerPartiesFk1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.parlawyer.ParLawyerPartiesEO.LawyerId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

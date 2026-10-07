@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject xmlns="http://xmlns.oracle.com/bc4j" Name="CourtBcHearingResPartiesVO"
+    Version="12.2.1.0.31"
+            InheritPersonalization="merge" BindingStyle="OracleName" CustomQuery="false"
+            ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl" PageIterMode="Full"
+    SelectListFlags="1"
+    FromListFlags="1"
+    WhereFlags="1"
+    SelectAllAttributes="false"
+    RowClass="com.egabi.cjexec.model.views.bcdetails.CourtBcHearingResPartiesVORowImpl">
+    <DesignTime>
+        <Attr Name="_codeGenFlag2" Value="Access"/>
+        <Attr Name="_isCodegen" Value="true"/>
+    </DesignTime>
+    <Variable
+        Name="pType"
+        Kind="where"
+        Type="java.math.BigDecimal"/>
+    <ViewAccessor
+        Name="AttendanceROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AttendanceROVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="ParPartiesVO1"
+        ViewObjectName="com.egabi.cjexec.model.views.bcdetails.ParPartiesVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="FormCaseDescriptionPartiesVO1"
+        ViewObjectName="com.egabi.cjexec.model.views.bcdetails.FormCaseDescriptionPartiesVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="FormDescriptionPartiesVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FormDescriptionPartiesVO"
+        RowLevelBinds="true">
+        <ViewCriteriaUsage
+            Name="FormDescriptionPartiesVOCriteria"
+            FullName="com.egabi.cjexec.model.roviews.bcdetails.FormDescriptionPartiesVO.FormDescriptionPartiesVOCriteria"/>
+    </ViewAccessor>
+    <ViewAccessor
+        Name="FolderTypeROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.FolderTypeROVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="BCDegreeROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.BCDegreeROVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="CourtBCDateHearingCustomROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.CourtBCDateHearingCustomROVO"
+        RowLevelBinds="true">
+        <ViewCriteriaUsage
+            Name="CourtBCDateHearingCustomROVOCriteria"
+            FullName="com.egabi.cjexec.model.roviews.bcdetails.CourtBCDateHearingCustomROVO.CourtBCDateHearingCustomROVOCriteria"/>
+        <ParameterMap>
+            <PIMap Variable="bindId">
+                <TransientExpression
+                    trustMode="untrusted"
+                    Name="ExpressionScript">CircleHearingDateId</TransientExpression>
+            </PIMap>
+        </ParameterMap>
+    </ViewAccessor>
+    <ViewAccessor
+        Name="AttendaceVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AttendaceVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="specalizedLKP1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.specalizedLKP"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="AllAttendanceTypesROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AllAttendanceTypesROVO"
+        RowLevelBinds="true"/>
+    <ListBinding
+        Name="LOV_Attendance"
+        ListVOName="AttendanceROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="Attendance"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="Attend"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_CircleHearingDateId"
+        ListVOName="CourtBCDateHearingCustomROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="CircleHearingDateId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="HearingDate"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_BcDegreeSpecId"
+        ListVOName="BCDegreeROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="BcDegreeSpecId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_Attend"
+        ListVOName="AttendaceVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="Attend"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="Announced"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_UnspecializedFlag"
+        ListVOName="specalizedLKP1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="UnspecializedFlag"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_AttendanceAll"
+        ListVOName="AllAttendanceTypesROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="AttendanceAll"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="DerivedAttrNames">
+            <Item Value="Attendance"/>
+        </AttrArray>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <EntityUsage
+        Name="CourtBcHearingResPartiesEO"
+        Entity="com.egabi.cjexec.model.entities.bcdetails.CourtBcHearingResPartiesEO"/>
+    <EntityUsage
+        Name="CourtBcHearingReservationEO"
+        Entity="com.egabi.cjexec.model.entities.bcdetails.CourtBcHearingReservationEO"
+        Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association2Assoc"
+        AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association2Assoc.CourtBcHearingReservation"
+        SourceUsage="com.egabi.cjexec.model.views.bcdetails.CourtBcHearingResPartiesVO.CourtBcHearingResPartiesEO"
+        ReadOnly="true"
+        Reference="true"
+        DeleteParticipant="false"
+        JoinType="LEFT OUTER JOIN">
+        <DesignTime>
+            <AttrArray Name="_dstAttributes">
+                <Item Value="com.egabi.cjexec.model.entities.bcdetails.CourtBcHearingReservationEO.Id"/>
+            </AttrArray>
+            <AttrArray Name="_srcAttributes">
+                <Item Value="com.egabi.cjexec.model.entities.bcdetails.CourtBcHearingResPartiesEO.CourtBcHearingResId"/>
+            </AttrArray>
+        </DesignTime>
+    </EntityUsage>
+    <EntityUsage
+        Name="ParPartiesEO"
+        Entity="com.egabi.cjexec.model.entities.bcdetails.ParPartiesEO"
+        Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association4Assoc"
+        AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association4Assoc.ParParties"
+        SourceUsage="com.egabi.cjexec.model.views.bcdetails.CourtBcHearingResPartiesVO.CourtBcHearingResPartiesEO"
+        ReadOnly="true"
+        Reference="true"
+        DeleteParticipant="false"
+        JoinType="LEFT OUTER JOIN">
+        <DesignTime>
+            <AttrArray Name="_dstAttributes">
+                <Item Value="com.egabi.cjexec.model.entities.bcdetails.ParPartiesEO.Id"/>
+            </AttrArray>
+            <AttrArray Name="_srcAttributes">
+                <Item Value="com.egabi.cjexec.model.entities.bcdetails.CourtBcHearingResPartiesEO.PartyId"/>
+            </AttrArray>
+        </DesignTime>
+    </EntityUsage>
+    <ViewAttribute Name="CircleHearingDateId" PrecisionRule="true" EntityAttrName="CircleHearingDateId"
+                   EntityUsage="CourtBcHearingReservationEO" AliasName="CIRCLE_HEARING_DATE_ID"
+                   LOVName="LOV_CircleHearingDateId">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="Id" IsNotNull="true" PrecisionRule="true" EntityAttrName="Id"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="ID"/>
+    <ViewAttribute Name="CourtBcHearingResId" PrecisionRule="true" EntityAttrName="CourtBcHearingResId"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="COURT_BC_HEARING_RES_ID"/>
+    <ViewAttribute Name="PartyId" PrecisionRule="true" EntityAttrName="PartyId" EntityUsage="CourtBcHearingResPartiesEO"
+                   AliasName="PARTY_ID"/>
+    <ViewAttribute Name="CreatedBy" PrecisionRule="true" EntityAttrName="CreatedBy"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="CREATED_BY" IsUpdateable="false"/>
+    <ViewAttribute Name="CreatedDate" PrecisionRule="true" EntityAttrName="CreatedDate"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="CREATED_DATE" IsUpdateable="false"/>
+    <ViewAttribute Name="UpdateBy" PrecisionRule="true" EntityAttrName="UpdateBy"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="UPDATE_BY" />
+    <ViewAttribute Name="UpdatedDate" PrecisionRule="true" EntityAttrName="UpdatedDate"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="UPDATED_DATE" IsUpdateable="false"/>
+    <ViewAttribute Name="Announced" PrecisionRule="true" EntityAttrName="Announced"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="ANNOUNCED"/>
+    <ViewAttribute Name="JudgementResolution" PrecisionRule="true" EntityAttrName="JudgementResolution"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="JUDGEMENT_RESOLUTION"/>
+    <ViewAttribute Name="Description" PrecisionRule="true" EntityAttrName="Description"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="DESCRIPTION"/>
+    <ViewAttribute Name="Status" PrecisionRule="true" EntityAttrName="Status" EntityUsage="CourtBcHearingResPartiesEO"
+                   AliasName="STATUS"/>
+    <ViewAttribute Name="Attachment1" PrecisionRule="true" EntityAttrName="Attachment1"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="ATTACHMENT1"/>
+    <ViewAttribute Name="Attachment2" PrecisionRule="true" EntityAttrName="Attachment2"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="ATTACHMENT2"/>
+    <ViewAttribute Name="ActionTypeId" PrecisionRule="true" EntityAttrName="ActionTypeId"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="ACTION_TYPE_ID"/>
+    <ViewAttribute Name="Amount" PrecisionRule="true" EntityAttrName="Amount" EntityUsage="CourtBcHearingResPartiesEO"
+                   AliasName="AMOUNT"/>
+    <ViewAttribute Name="DailyPayments" PrecisionRule="true" EntityAttrName="DailyPayments"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="DAILY_PAYMENTS"/>
+    <ViewAttribute Name="ExecutionStartDate" PrecisionRule="true" EntityAttrName="ExecutionStartDate"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="EXECUTION_START_DATE"/>
+    <ViewAttribute Name="ExecutionCancellation" PrecisionRule="true" EntityAttrName="ExecutionCancellation"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="EXECUTION_CANCELLATION"/>
+    <ViewAttribute Name="InPrisonDays" PrecisionRule="true" EntityAttrName="InPrisonDays"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="IN_PRISON_DAYS"/>
+    <ViewAttribute Name="InPrisonMonths" PrecisionRule="true" EntityAttrName="InPrisonMonths"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="IN_PRISON_MONTHS"/>
+    <ViewAttribute Name="InPrisonYears" PrecisionRule="true" EntityAttrName="InPrisonYears"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="IN_PRISON_YEARS"/>
+    <ViewAttribute Name="ExecutionCancellationCause" PrecisionRule="true" EntityAttrName="ExecutionCancellationCause"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="EXECUTION_CANCELLATION_CAUSE"/>
+    <ViewAttribute Name="Attendance" PrecisionRule="true" EntityAttrName="Attendance"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="ATTENDANCE" LOVName="LOV_Attendance"
+        DefaultValue="3">
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL ResId="attendance"/>
+                <CONTROLTYPE Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="BcDegreeSpecId" PrecisionRule="true" EntityAttrName="BcDegreeSpecId"
+                   EntityUsage="CourtBcHearingResPartiesEO" LOVName="LOV_BcDegreeSpecId" AliasName="BC_DEGREE_SPEC_ID">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="ExecutionNumber" PrecisionRule="true" EntityAttrName="ExecutionNumber"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="EXECUTION_NUMBER"/>
+    <ViewAttribute Name="PaymentsNumber" PrecisionRule="true" EntityAttrName="PaymentsNumber"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="PAYMENTS_NUMBER"/>
+    <ViewAttribute Name="Degree" PrecisionRule="true" EntityAttrName="Degree" EntityUsage="CourtBcHearingResPartiesEO"
+                   AliasName="DEGREE"/>
+    <ViewAttribute Name="ExecutionNumberSchedule" PrecisionRule="true" EntityAttrName="ExecutionNumberSchedule"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="EXECUTION_NUMBER_SCHEDULE"/>
+    <ViewAttribute Name="ScheduleYear" PrecisionRule="true" EntityAttrName="ScheduleYear"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="SCHEDULE_YEAR"/>
+    <ViewAttribute Name="CreatedUserId" PrecisionRule="true" EntityAttrName="CreatedUserId"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="CREATED_USER_ID"/>
+    <ViewAttribute Name="CreatedEntityId" PrecisionRule="true" EntityAttrName="CreatedEntityId"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="CREATED_ENTITY_ID"/>
+    <ViewAttribute Name="Guarantee" PrecisionRule="true" EntityAttrName="Guarantee"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="GUARANTEE"/>
+    <ViewAttribute Name="GuaranteeNumber" PrecisionRule="true" EntityAttrName="GuaranteeNumber"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="GUARANTEE_NUMBER"/>
+    <ViewAttribute Name="GuaranteeDate" PrecisionRule="true" EntityAttrName="GuaranteeDate"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="GUARANTEE_DATE"/>
+    <ViewAttribute Name="Stamp" PrecisionRule="true" EntityAttrName="Stamp" EntityUsage="CourtBcHearingResPartiesEO"
+                   AliasName="STAMP"/>
+    <ViewAttribute Name="Fees" PrecisionRule="true" EntityAttrName="Fees" EntityUsage="CourtBcHearingResPartiesEO"
+                   AliasName="FEES"/>
+    <ViewAttribute Name="LawyerFees" PrecisionRule="true" EntityAttrName="LawyerFees"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="LAWYER_FEES"/>
+    <ViewAttribute Name="BusinessCaseDetailsId" PrecisionRule="true" EntityAttrName="BusinessCaseDetailsId"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="BUSINESS_CASE_DETAILS_ID"/>
+    <ViewAttribute Name="DecisionText" PrecisionRule="true" EntityAttrName="DecisionText"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="DECISION_TEXT"/>
+    <ViewAttribute Name="GuranteeAmount" PrecisionRule="true" EntityAttrName="GuranteeAmount"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="GURANTEE_AMOUNT"/>
+    <ViewAttribute Name="Cancelled" PrecisionRule="true" EntityAttrName="Cancelled"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="CANCELLED"/>
+    <ViewAttribute Name="PartyOrder" PrecisionRule="true" EntityAttrName="PartyOrder"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="PARTY_ORDER"/>
+    <ViewAttribute Name="ExecutionType" PrecisionRule="true" EntityAttrName="ExecutionType"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="EXECUTION_TYPE"
+        DefaultValue="0"/>
+    <ViewAttribute Name="JudgmentActionType" PrecisionRule="true" EntityAttrName="JudgmentActionType"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="JUDGMENT_ACTION_TYPE"/>
+    <ViewAttribute Name="CommitteeType" PrecisionRule="true" EntityAttrName="CommitteeType"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="COMMITTEE_TYPE"/>
+    <ViewAttribute Name="DegreeDate" PrecisionRule="true" EntityAttrName="DegreeDate"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="DEGREE_DATE"/>
+    <ViewAttribute Name="CauseOfResumption" PrecisionRule="true" EntityAttrName="CauseOfResumption"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="CAUSE_OF_RESUMPTION"/>
+    <ViewAttribute Name="X" PrecisionRule="true" EntityAttrName="X" EntityUsage="CourtBcHearingResPartiesEO"
+                   AliasName="X"/>
+    <ViewAttribute Name="JudgmentClassification" PrecisionRule="true" EntityAttrName="JudgmentClassification"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="JUDGMENT_CLASSIFICATION"/>
+    <ViewAttribute Name="JudgementResolutionC" IsQueriable="false" PrecisionRule="true"
+                   EntityAttrName="JudgementResolutionC" EntityUsage="CourtBcHearingResPartiesEO"
+                   AliasName="JUDGEMENT_RESOLUTION_C"/>
+    <ViewAttribute Name="JudgementType" PrecisionRule="true" EntityAttrName="JudgementType"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="JUDGEMENT_TYPE"/>
+    <ViewAttribute Name="JudgementClassDetail" PrecisionRule="true" EntityAttrName="JudgementClassDetail"
+                   EntityUsage="CourtBcHearingResPartiesEO" AliasName="JUDGEMENT_CLASS_DETAIL"/>
+    <ViewAttribute Name="BusinessCaseDegree" PrecisionRule="true" EntityAttrName="BusinessCaseDegree"
+                   EntityUsage="CourtBcHearingReservationEO" IsPersistent="false" IsQueriable="false"
+                   AliasName="POLICE_NO"/>
+    <ViewAttribute Name="IdNumber" PrecisionRule="true" EntityAttrName="IdNumber" EntityUsage="ParPartiesEO"
+                   AliasName="ID_NUMBER"/>
+    <ViewAttribute Name="Id2" IsNotNull="true" PrecisionRule="true" EntityAttrName="Id" EntityUsage="ParPartiesEO"
+                   AliasName="ID2"/>
+    <ViewAttribute Name="Nickname" PrecisionRule="true" EntityAttrName="Nickname" EntityUsage="ParPartiesEO"
+                   AliasName="NICKNAME"/>
+    <ViewAttribute Name="PartyFullName" PrecisionRule="true" EntityAttrName="PartyFullName" EntityUsage="ParPartiesEO"
+                   AliasName="PARTY_FULL_NAME"/>
+    <ViewAttribute
+    Name="OrderName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Id1"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="CourtBcHearingReservationEO"
+    AliasName="ID1"/>
+    <ViewAttribute
+        Name="Postponed"
+        PrecisionRule="true"
+        EntityAttrName="Postponed"
+        EntityUsage="CourtBcHearingResPartiesEO"
+        AliasName="POSTPONED"/>
+    <ViewAttribute
+        Name="Attend"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_Attend"
+        IsNotNull="true"
+        DefaultValue="3">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="TransFolderId"
+        PrecisionRule="true"
+        EntityAttrName="TransFolderId"
+        EntityUsage="CourtBcHearingResPartiesEO"
+        AliasName="TRANS_FOLDER_ID"
+        IsQueriable="false"
+        IsPersistent="false"/>
+    <ViewAttribute
+        Name="FullName"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR">
+        <TransientExpression
+            Name="ExpressionScript"><![CDATA[ParParties.PartyFullName]]></TransientExpression>
+        <RecalcCondition
+            Name="RecalcExpressionScript"><![CDATA[true]]></RecalcCondition>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="UnspecializedFlag"
+        PrecisionRule="true"
+        EntityAttrName="UnspecializedFlag"
+        EntityUsage="CourtBcHearingResPartiesEO"
+        AliasName="UNSPECIALIZED_FLAG"
+        LOVName="LOV_UnspecializedFlag"
+        DefaultValue="0">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="PrisonYear"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        Expression="SELECT nvl ( IN_PRISON_YEARS , 0 )  FROM COURT_BC_HEARING_RES_PARTIES WHERE id = CourtBcHearingResPartiesEO.ID"/>
+    <ViewAttribute
+        Name="PrisonMonths"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        Expression="SELECT nvl ( IN_PRISON_MONTHS , 0 )  FROM COURT_BC_HEARING_RES_PARTIES WHERE id = CourtBcHearingResPartiesEO.ID"/>
+    <ViewAttribute
+        Name="PrisonDays"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        Expression="SELECT nvl ( IN_PRISON_DAYS , 0 )  FROM COURT_BC_HEARING_RES_PARTIES WHERE id = CourtBcHearingResPartiesEO.ID"
+        IsQueriable="false"/>
+    <ViewAttribute
+        Name="GuaranteeGuarantee"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        Expression="SELECT nvl ( GUARANTEE , 0 )  FROM COURT_BC_HEARING_RES_PARTIES WHERE id = CourtBcHearingResPartiesEO.ID"/>
+    <ViewAttribute
+        Name="DailyPaymentsDailyPayments"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        Expression="SELECT nvl ( Daily_Payments , 0 )  FROM COURT_BC_HEARING_RES_PARTIES WHERE id = CourtBcHearingResPartiesEO.ID"/>
+    <ViewAttribute
+        Name="AmountAmount"
+        IsUpdateable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        Expression="SELECT nvl ( Amount , 0 )  FROM COURT_BC_HEARING_RES_PARTIES WHERE id = CourtBcHearingResPartiesEO.ID"/>
+    <ViewAttribute
+        Name="AttendanceAll"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_AttendanceAll"
+        DefaultValue="3">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="DeletedFlag"
+        PrecisionRule="true"
+        EntityAttrName="DeletedFlag"
+        EntityUsage="CourtBcHearingResPartiesEO"
+        AliasName="DELETED_FLAG"
+        DefaultValue="N"/>
+    <ViewAttribute
+        Name="FolderType"
+        IsQueriable="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        EntityAttrName="FolderType"
+        EntityUsage="CourtBcHearingResPartiesEO"
+        AliasName="FOLDER_TYPE"/>
+    <ViewCriteria
+        Name="CourtBcHearingResPartiesVOCriteria"
+        ViewObjectName="com.egabi.cjexec.model.views.bcdetails.CourtBcHearingResPartiesVO"
+        Conjunction="AND">
+        <Properties Name="_Props">
+            <CustomProperties>
+                <Property
+                    Name="autoExecute"
+                    Value="false"/>
+                <Property
+                    Name="mode"
+                    Value="Basic"/>
+                <Property
+                    Name="allowConjunctionOverride"
+                    Value="true"/>
+                <Property
+                    Name="showInList"
+                    Value="true"/>
+                <Property
+                    Name="displayOperators"
+                    Value="InAdvancedMode"/>
+            </CustomProperties>
+        </Properties>
+        <ViewCriteriaRow
+            Name="CourtBcHearingResPartiesVOCriteria_row_0"
+            UpperColumns="1">
+            <ViewCriteriaItem
+                Name="DeletedFlag"
+                ViewAttribute="DeletedFlag"
+                Operator="="
+                Conjunction="AND"
+                Value="'N'"
+                Required="Optional"/>
+        </ViewCriteriaRow>
+    </ViewCriteria>
+    <AttrArray Name="KeyAttributes">
+        <Item Value="Id"/>
+    </AttrArray>
+    <ViewLinkAccessor Name="ParParties" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink4VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="CourtBcHearingReservation" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink2VL"
+                      Type="oracle.jbo.Row" Reversed="true" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="ExcCourtBcChargesParties" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink24VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="ExcFolderDataTest1" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink3VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor Name="TestExcFolderData" ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink28VL"
+                      Type="oracle.jbo.RowIterator" IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="ExcCourtBcSessionJudgment"
+        ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink37VL"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="ExcFolderActions"
+        ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink39VL"
+        Type="oracle.jbo.Row"
+        Reversed="true"
+        IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="ExcFolderDataAudit"
+        ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink40VL"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="FolderDataSpecial"
+        ViewLink="com.egabi.cjexec.model.viewLinks.suppamount.CourtBCSpecilFolderDataViewLinkVL"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
+    <ViewLinkAccessor
+        Name="FormCaseDescriptionParties"
+        ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink43VL"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
+    <ResourceBundle>
+        <PropertiesBundle PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+    <DeclarativeWhereClause
+        Name="DeclarativeWhereClause">
+        <ViewCriteria
+            Name="CourtBcHearingResPartiesVOWhereCriteria"
+            ViewObjectName="com.egabi.cjexec.model.views.bcdetails.CourtBcHearingResPartiesVO"
+            Conjunction="AND"
+            Mode="3">
+            <ViewCriteriaRow
+                Name="CourtBcHearingResPartiesVOWhereCriteria_row_0"
+                UpperColumns="1">
+                <ViewCriteriaItem
+                    Name="UnspecializedFlag"
+                    ViewAttribute="UnspecializedFlag"
+                    Operator="&lt;"
+                    Conjunction="AND"
+                    Value=":pType"
+                    Required="Optional"
+                    IsBindVarValue="true"
+                    GenerateIsNullClauseForBindVars="false"/>
+                <ViewCriteriaItem
+                    Name="DeletedFlag"
+                    ViewAttribute="DeletedFlag"
+                    Operator="="
+                    Conjunction="AND"
+                    Value="'N'"
+                    Required="Optional"/>
+            </ViewCriteriaRow>
+        </ViewCriteria>
+    </DeclarativeWhereClause>
+    <SortCriteria>
+        <Sort
+            Attribute="PartyOrder"/>
+    </SortCriteria>
+    <SortCriteria>
+        <Sort
+            Attribute="PartyOrder"/>
+    </SortCriteria>
+    <SortCriteria>
+        <Sort
+            Attribute="PartyOrder"/>
+    </SortCriteria>
+</ViewObject>

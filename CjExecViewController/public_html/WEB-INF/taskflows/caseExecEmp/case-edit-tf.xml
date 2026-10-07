@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="case-edit-tf">
+    <default-activity>ExecuteCaseEditMaster</default-activity>
+    <transaction>
+      <new-transaction/>
+    </transaction>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>HearingResId</name>
+      <value>#{pageFlowScope.HearingResId}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__4">
+      <name>userName</name>
+      <value>#{pageFlowScope.userName}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__10">
+      <name>userId</name>
+      <value>#{pageFlowScope.userId}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__20">
+      <name>viewOnlyMode</name>
+      <value>#{pageFlowScope.viewOnlyMode}</value>
+      <class>java.lang.Boolean</class>
+    </input-parameter-definition>
+    <managed-bean id="__11">
+      <managed-bean-name>caseEditBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.caseexecemp.CaseEditBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="ExecuteCaseEditMaster">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="caseEditFrag">
+      <page>/caseExecEmp/caseEditFrag.jsff</page>
+    </view>
+    <task-flow-return id="cancel">
+      <outcome>
+        <name>back</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="save">
+      <outcome>
+        <name>back</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="callEXC_COURT_BC_PKG___CREATE_BC_DECISION">
+      <method>#{bindings.callEXC_COURT_BC_PKG___CREATE_BC_DECISION.execute}</method>
+      <outcome>
+        <fixed-outcome>callEXC_COURT_BC_PKG___CREATE_BC_DECISION</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteSharedPenaltyAll">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteSharedPenaltyParties">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteFolderData">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecutePartyDebt">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__5">
+      <from-activity-id>ExecuteCaseEditMaster</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>callEXC_COURT_BC_PKG___CREATE_BC_DECISION</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>caseEditFrag</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>cancel</from-outcome>
+        <to-activity-id>cancel</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>save</from-outcome>
+        <to-activity-id>save</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2">
+      <from-activity-id>callEXC_COURT_BC_PKG___CREATE_BC_DECISION</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>callEXC_COURT_BC_PKG___CREATE_BC_DECISION</from-outcome>
+        <to-activity-id>ExecuteSharedPenaltyAll</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id>ExecuteSharedPenaltyAll</from-activity-id>
+      <control-flow-case id="__13">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>ExecuteSharedPenaltyParties</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>ExecuteSharedPenaltyParties</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>ExecuteFolderData</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id>ExecuteFolderData</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>ExecutePartyDebt</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id>ExecutePartyDebt</from-activity-id>
+      <control-flow-case id="__19">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>caseEditFrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

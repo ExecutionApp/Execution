@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="ExcBcSessJdgFragPageDef"
+                Package="pages.com.egabi.cjexec.common">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ExecBcSeeeionsJudgmentsROV1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExecBcSeeeionsJudgmentsROV1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ExecBcSeeeionsJudgmentsROV1Iterator" id="ExecBcSeeeionsJudgmentsROV1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.common.ExecBcSessionsJudgmentsROV"
+                      Name="ExecBcSeeeionsJudgmentsROV10">
+        <AttrNames>
+          <Item Value="HearingDate"/>
+          <Item Value="JudgementResolution"/>
+          <Item Value="Name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

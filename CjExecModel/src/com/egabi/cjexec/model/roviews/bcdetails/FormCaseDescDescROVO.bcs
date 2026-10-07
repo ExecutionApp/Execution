@@ -1,0 +1,12 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.bcdetails.FormCaseDescDescROVO
+
+package com.egabi.cjexec.model.roviews.bcdetails
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="pBC_ID")
+def pBC_ID_VariableScript_Variable()
+{
+adf.context.current.sessionScope.bcidp
+}
+

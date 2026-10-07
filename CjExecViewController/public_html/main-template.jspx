@@ -1,0 +1,666 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+            
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <af:pageTemplateDef var="attrs" definition="private">
+        <af:xmlContent>
+            <!--StyleSheets-->
+            <af:resource type="css" source="/resources/css/fonts.css"/>
+            <!--<af:resource type="css" source="https://fonts.googleapis.com/css?family=Cairo"/>-->
+            <af:resource type="css" source="/resources/css/font-awesome.min.css"/>
+            <af:resource type="css" source="/resources/css/bootstrap.css"/>
+            <af:resource type="css" source="/resources/css/bootstrap-rtl.css"/>
+            <!--<af:resource type="javascript" source="https://code.jquery.com/jquery-3.4.1.min.js"/>
+            <af:resource source="/js/jquery.growl.js" type="javascript"/>
+            <af:resource source="/style/jquery.growl.css" type="css"/>-->
+            <af:resource type="javascript">
+              /*Loader for the website*/
+              $(document).ready(function () {
+                  setTimeout(function () {
+                      $('.overlay').fadeOut('slow');
+                  },
+                  3000);
+              });
+            </af:resource>
+            <af:resource type="css">
+                .af_inputDate_launch-icon-style {
+                    top: -5px !important;
+                    left: -75px !important;
+                }
+
+                .af_inputDate_content {
+                    min-width: 0% !important;
+                }
+            </af:resource>
+            <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+            <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+                <description/>
+                <display-name>main-template</display-name>
+                <facet>
+                    <facet-name>header</facet-name>
+                </facet>
+                <facet>
+                    <facet-name>status</facet-name>
+                </facet>
+                <facet>
+                    <facet-name>footer</facet-name>
+                </facet>
+                <facet>
+                    <facet-name>center</facet-name>
+                </facet>
+                <attribute>
+                    <attribute-name>header</attribute-name>
+                    <attribute-class>java.lang.String</attribute-class>
+                </attribute>
+                <attribute>
+                    <attribute-name>footer</attribute-name>
+                    <attribute-class>java.lang.String</attribute-class>
+                </attribute>
+            </component>
+        </af:xmlContent>
+        <h:panelGroup id="pt_pg9" styleClass="overlay" layout="block" rendered="false">
+            <h:panelGroup id="pt_pg10" styleClass="loadingWrapper" layout="block">
+                <h:panelGroup id="pt_pg11" styleClass="lds-css" layout="block">
+                    <h:panelGroup id="pt_pg12" styleClass="lds-dual-ring" layout="block">
+                        <af:image source="/resources/img/logo2.png" id="pt_i3"/>
+                        <h:panelGroup layout="block" id="pt_pg13"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup id="pt_pg14" styleClass="h-100" layout="block">
+            <h:panelGroup layout="block" styleClass="header  container-fluid" id="pt_pg1">
+                <af:facetRef facetName="status"/>
+                <af:statusIndicator rendered="#{attrs.showStatusIndicator}" styleClass="" id="status"/>
+                <af:facetRef facetName="header"/>
+                <h:panelGroup layout="block" styleClass="d-flex header-logo" id="pt_pg6">
+                    <af:image styleClass="logo" source="/resources/img/logo.png" id="pt_i1"/>
+                    <h:panelGroup layout="block" styleClass="d-flex flex-column logo-txt" id="pt_pg5">
+                        <!--Need to be dynamic bundle value-->
+                        <af:outputText styleClass="slogan01" value="النيابة العامة" id="pt_ot3"/>
+                        <af:outputLabel styleClass="slogan02" value="نظام التنفيذ والمطالبة" id="pt_ol1"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="welcome-login d-flex align-items-center" id="pt_pg4">
+                    <h:panelGroup layout="block" styleClass="userholder" id="pt_pg7">
+                        <af:image source="/resources/img/user.png" id="pt_i2" styleClass="userimg"/>
+                    </h:panelGroup>
+                    <!--Need to be dynamic bundle value-->
+                    <!--<af:outputText value="مرحبا بك" id="pt_ot1"/>-->
+                    <af:spacer width="10" height="10" id="pt_s1"/>
+                    <af:outputText value="#{sessionScope.userInfo.firstName}" id="pt_ot2"/>
+                    <br/>
+                    <af:outputText value=" #{sessionScope.userInfo.entityName == null? '':' نيابة ' } #{sessionScope.userInfo.entityName}"
+                                   id="pt_ot5"/>
+                    <af:button immediate="true" text="#{bundle.LOGOUT}" action="#{ExcTemplateBean.logout}" id="b1"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup styleClass="menu-holder" id="pt_pg15">
+                <h:panelGroup id="pt_pg8" layout="block" styleClass="d-flex">
+                    <!-- Simplified Mode action="#{ExcTemplateBean.getNavPage}"-->
+                    <af:menuBar id="pt_mb1" inlineStyle="color:white;" styleClass="hover-Effect">
+                        <af:menu text="التنفيذ" id="pt_m5">
+                            <af:commandMenuItem text="حصر احكام" id="pt_cmi71"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'SimplifiedModeBC'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إدراج احكام القضايا الغير مدرجة" id="pt_cmi29"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'NewClaims'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="تحديد الجلسات و المؤجلات" id="pt_cmi6"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'SimplifidModeProvisionInclusion'}"
+                                                        to="#{ExcTemplateBean.source}" type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إجراءات تنفيذ الاحكام" id="pt_cmi72" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}"
+                                                inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}">
+                                <af:setPropertyListener from="#{'goActions'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="متابعه مذكرة الضبط" id="pt_cmi17"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'PreviewArrest'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="جنح مستائنف كلى" id="pt_cmi15" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}"
+                                                inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}">
+                                <af:setPropertyListener from="#{'AppealDigitsSM'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="الاجراءت المتخذة من خارج النيابة" id="pt_cmi76" immediate="true"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'goInventory'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إعتماد قرارات النيابة" id="pt_cmi25" immediate="true"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}" visible="true">
+                                <af:setPropertyListener from="#{'ProsecutorApproveProc'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إعتماد  إجراءات الطعن على الاحكام" id="pt_cmi31" immediate="true"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}" visible="true">
+                                <af:setPropertyListener from="#{'goJudgmentAppealApproval'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إجراءات تنفيذ الوافدين" id="pt_cmi32" immediate="true"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}" visible="true">
+                                <af:setPropertyListener from="#{'goExpatriateProcedures'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إعتماد إجراءات الوافدين لنيابة الضبط" id="pt_cmi33" immediate="true"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}" visible="true">
+                                <af:setPropertyListener from="#{'goExpatriateProcAppealApproval'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إعتماد إجراءات الوافدين لنيابة الحكم" id="pt_cmi34" immediate="true"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}" visible="true">
+                                <af:setPropertyListener from="#{'goExpatriateProcSecondApproval'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                        </af:menu>
+                        <af:menu text="المطالبات" id="pt_m2">
+                            <af:commandMenuItem text="المطالبه" id="pt_cmi78" immediate="true"
+                                                styleClass="hover-Effect" inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'Claim'}" to="#{ExcTemplateBean.source}" type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إجرات المطالبه" id="pt_cmi73" styleClass="hover-Effect"
+                                                immediate="true" action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'claimProcedure'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إجرات المطالبه من خارج النيابه" id="pt_cmi75" immediate="true"
+                                                styleClass="hover-Effect" inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                rendered="#{sessionScope.mode eq '2'}" visible="false">
+                                <af:setPropertyListener from="#{'claimProcedureLog'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                        </af:menu>
+                        <af:menu text="#{bundle.SEARCH}" id="pt_m33">
+                            <af:commandMenuItem text="#{bundle.GENERAL_SEARCH}" id="pt_cmi100"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'searchByPartyCaseHasr'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{cjexecviewcontrollerBundle.NATIONAL_ID_LOG}" id="pt_cmi5"
+                                                inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'nIdServiceLog'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                        </af:menu>
+                        <af:menu text="#{bundle.MAIN_REPORTS}" id="pt_m3">
+                            <af:commandMenuItem text="تفعيل الجلسات" id="pt_cmi23"
+                                                inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}"
+                                               >
+                                <af:setPropertyListener from="#{'ActivateAgenda'}"
+                                                        to="#{ExcTemplateBean.source}" type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="متابعة أعمال التنفيذ" id="pt_cmi30" inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'AgendaReservation'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="يومية التنفيذ" id="pt_cmi26" inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'ExectionDaily'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{bundle.HASR_NOT_IN_DB}" id="pt_cmi4w" inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'hasrNoInDB'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{bundle.TOTAL_PROCEDURES_REPORT}" id="pt_l1"
+                                                inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'goTotalProceduresReport'}"
+                                                        to="#{ExcTemplateBean.source}" type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{bundle.HASR_REPORT}" id="pt_cmi1" inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'goHasrReport'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{bundle.DETAILS_HASR_REPORT}" id="pt_cmi2"
+                                                inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'goHasrDetailsReport'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{bundle.HASR_ID_NUMB_REPORT}" id="pt_cmi3"
+                                                inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'goHasrIdNumbReport'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{bundle.TOTAL_MOTALABAT_REPORT}" id="pt_cmi4"
+                                                inlineStyle="color:white;"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}" immediate="true"
+                                                styleClass="hover-Effect" rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'goTotalMotalabatReport'}"
+                                                        to="#{ExcTemplateBean.source}" type="action"/>
+                            </af:commandMenuItem>
+                        </af:menu>
+                        <af:menu text="#{bundle.AUDIT}" id="pt_m1">
+                            <af:commandMenuItem text="#{cjexecviewcontrollerBundle.AUDIT_UPDATE}" id="pt_71far"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'auditUpdate'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{cjexecviewcontrollerBundle.DISPLAT_AUDIT}" id="pt_71fara"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'displayAuditUpdate'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                        </af:menu>
+                        <!-- Full Mode -->
+                        <af:commandMenuItem text="#{bundle.ADD_JUDGMENT}"
+                                            action="#{ExcTemplateBean.checkDirtyDataAction}" inlineStyle="color:white;"
+                                            styleClass="hover-Effect" immediate="true" id="pt_gmi44"
+                                            rendered="#{sessionScope.mode eq '1'}">
+                            <af:setPropertyListener from="addJudg" to="#{sessionScope.screen_name}" type="action"/>
+                            <af:setPropertyListener from="#{'addJudg'}" to="#{ExcTemplateBean.source}" type="action"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem text="#{bundle.UPDATE_CLASS}"
+                                            action="#{ExcTemplateBean.checkDirtyDataAction}" inlineStyle="color:white;"
+                                            styleClass="hover-Effect" immediate="true" id="pt_gmi555"
+                                            rendered="#{sessionScope.mode eq '1'}">
+                            <af:setPropertyListener from="updateJudg" to="#{sessionScope.screen_name}" type="action"/>
+                            <af:setPropertyListener from="#{'updateJudg'}" to="#{ExcTemplateBean.source}"
+                                                    type="action"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem text="#{bundle.JUDG_CLASS}" action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                            inlineStyle="color:white;" styleClass="hover-Effect" immediate="true"
+                                            id="pt_gmi25" rendered="#{sessionScope.mode eq '1'}">
+                            <af:setPropertyListener from="#{'judgClass'}" to="#{ExcTemplateBean.source}" type="action"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem text="#{bundle.FOLDERS}" action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                            inlineStyle="color:white;" styleClass="hover-Effect" immediate="true"
+                                            id="pt_gmi77" rendered="#{sessionScope.mode eq '1'}">
+                            <af:setPropertyListener from="search" to="#{sessionScope.screen_name}" type="action"/>
+                            <af:setPropertyListener from="#{'folders'}" to="#{ExcTemplateBean.source}" type="action"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem text="المعارضة من اى نيابة" action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                            inlineStyle="color:white;" id="pt_cmi44" immediate="true"
+                                            styleClass="hover-Effect" rendered="#{sessionScope.mode eq '1'}">
+                            <af:setPropertyListener from="searchall" to="#{sessionScope.screen_name}" type="action"/>
+                            <af:setPropertyListener from="#{'Allfolders'}" to="#{ExcTemplateBean.source}"
+                                                    type="action"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem text="#{bundle.MY_REQUESTS}"
+                                            action="#{ExcTemplateBean.checkDirtyDataAction}" inlineStyle="color:white;"
+                                            styleClass="hover-Effect" id="mReqs4" immediate="true"
+                                            rendered="#{sessionScope.mode eq '1'}">
+                            <af:setPropertyListener from="#{'myRequests'}" to="#{ExcTemplateBean.source}"
+                                                    type="action"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem text="#{bundle.OPENED_REQUESTS}"
+                                            action="#{ExcTemplateBean.checkDirtyDataAction}" inlineStyle="color:white;"
+                                            styleClass="hover-Effect" rendered="#{sessionScope.mode eq '1'}"
+                                            immediate="true" id="pt_gmi111">
+                            <af:setPropertyListener from="#{'openedRequests'}" to="#{ExcTemplateBean.source}"
+                                                    type="action"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem text="#{bundle.ALL_REQUESTS}"
+                                            action="#{ExcTemplateBean.checkDirtyDataAction}" inlineStyle="color:white;"
+                                            styleClass="hover-Effect" immediate="true"
+                                            rendered="#{sessionScope.mode eq '1'}" id="pt_gmi122">
+                            <af:setPropertyListener from="#{'allRequests'}" to="#{ExcTemplateBean.source}"
+                                                    type="action"/>
+                        </af:commandMenuItem>
+                        <af:menu text="الدفاتر" id="pt_m6">
+                            <af:commandMenuItem text="بحث الدفاتر" id="pt_cmi19"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'MainReport'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر حصر أحكام الحبس" id="pt_cmi14"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'HasrPage'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر اول درجة" id="pt_cmi141"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'FirstDegree'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر حصر أحكام الغرامة" id="pt_cmi7"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'HasrGharamaReport'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر المعارضات  " id="pt_cmi8"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'Moarda'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر الاحكام التبعية" id="pt_cmi8_55"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'AncillaryProvisions'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر الاستئناف  " id="pt_cmi9"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'Estanaf'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر تتابع استئناف جنايات  " id="pt_cmi22"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'EstanafGnayaatReport'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر جنح مستأنفة" id="pt_cmi18"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'GonahMostanafa'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                                <af:setPropertyListener from="#{'جنح مستأنف'}" to="#{sessionScope.label}" type="action"/>
+                                <af:setPropertyListener from="#{3643}" to="#{sessionScope.caseSchemaId}" type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر جنايات مستأنفة" id="pt_cmi21"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'GonahMostanafa'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                                <af:setPropertyListener from="#{'جنايات مستأنف'}" to="#{sessionScope.label}"
+                                                        type="action"/>
+                                <af:setPropertyListener from="#{13}" to="#{sessionScope.caseSchemaId}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر جرائم إقتصادية مستأنفة" id="pt_cmi27"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'GonahMostanafa'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                                <af:setPropertyListener from="#{' جرائم إقتصادية مستأنفة'}" to="#{sessionScope.label}"
+                                                        type="action"/>
+                                <af:setPropertyListener from="#{13}" to="#{sessionScope.caseSchemaId}" type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر المعارضات الاستئنافية  " id="pt_cmi10"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'MoardaEstanafia'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر الاعتراض علي الاوامر الجنائية" id="pt_cmi11"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'EatradAmrGenaya'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر الطعون بالنقض" id="pt_cmi12"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'TaanReportPage'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر حصر المطالبات" id="pt_cmi13"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'MotalbatReportPage'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="إجرات حصر المطالبات" id="pt_cmi28"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'MotalbatProcReportPage'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر  المصاريف والكفالات" id="pt_cmi20"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'paiedFees'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفتر إجرات السداد" id="pt_cmi24"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'ProcPaied'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="دفترتنفيذ الاحكام علي الوافدين" id="pt_cmi16"
+                                                action="#{ExcTemplateBean.checkDirtyDataAction}"
+                                                inlineStyle="color:white;" immediate="true" styleClass="hover-Effect"
+                                                rendered="#{sessionScope.mode eq '2'}">
+                                <af:setPropertyListener from="#{'AbroadRequestReport'}" to="#{ExcTemplateBean.source}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                        </af:menu>
+                            <af:link text="الحبس الأحتياطي"  id="l159"
+                   destination="http://10.21.35.44/cj-remand-app/home"
+                   targetFrame="_blank" inlineStyle="font-size:large; font-weight:bold; color:White;"/>
+                    </af:menuBar>
+                    <!--<af:menuBar id="pt_mb1">
+                        <af:menu text="menu 1" id="pt_m1">
+                            <af:goMenuItem text="AAAA 1" partialSubmit="true" actionListener="#{ExcTemplateBean.checkDirtyDataAction}" id="pt_cmi1"/>
+                            -->
+                    <!--<af:goMenuItem text="goMenuItem 1" id="pt_gmi1"/>-->
+                    <!--
+                        </af:menu>
+                    </af:menuBar>-->
+                    <!--<af:menuBar id="pt_mb1" inlineStyle="color:white;" styleClass="hover-Effect">
+                        -->
+                    <!--<af:commandMenuItem text="الرئيسية" id="pt_cmi1" rendered="#{sessionScope.mode eq '1'}"/>-->
+                    <!--
+                        -->
+                    <!--<af:menu text="#{bundle.SIMPLIFIED_MODE}" id="pt_m5" rendered="false"/>-->
+                    <!--
+                        -->
+                    <!--<af:commandMenuItem text="#{bundle.HASR_SIMPLIFIED_MODE}" action="SimplifiedModeBC" id="pt_cmi7"
+                                            immediate="true" styleClass="hover-Effect"
+                                            rendered="#{sessionScope.mode eq '2'}"></af:commandMenuItem>-->
+                    <!--
+                        -->
+                    <!--<af:commandMenuItem text="#{bundle.PROCEDURES_LINK}" action="goActions" id="pt_cmi2"
+                                            immediate="true" styleClass="hover-Effect"
+                                            rendered="#{sessionScope.mode eq '2'}"/>-->
+                    <!--
+                        -->
+                    <!--<af:commandMenuItem text="#{bundle.CLAIM}" action="Claim" id="pt_cmi8" immediate="true"
+                                            styleClass="hover-Effect"
+                                            rendered="#{sessionScope.mode eq '2' and sessionScope.userInfo.userPrevMap[5100]}"/>-->
+                    <!--
+                        -->
+                    <!--<af:commandMenuItem text="#{bundle.CLAIM_PROCEDURE}" action="claimProcedure" id="pt_cmi3"
+                                            immediate="true" styleClass="hover-Effect"
+                                            actionListener="#{templateBean.checkDirtyDataAction}"
+                                            rendered="#{sessionScope.mode eq '2' and sessionScope.userInfo.userPrevMap[5043]}">
+                            <af:setPropertyListener to="#{templateBean.source}" from="claimProcedure" type="action"/>
+                        </af:commandMenuItem>-->
+                    <!--
+                        -->
+                    <!--<af:commandMenuItem text="#{bundle.AUDIT}" action="audit" id="pt_cmi9" immediate="true"
+                                            styleClass="hover-Effect" rendered="false"/>-->
+                    <!--
+                        -->
+                    <!--<af:commandMenuItem text="#{bundle.CLAIM_PROCEDURE_LOG}" action="claimProcedureLog" id="pt_cmi5"
+                                            immediate="true" styleClass="hover-Effect"
+                                            rendered="#{sessionScope.mode eq '2' and sessionScope.userInfo.userPrevMap[5042]}"/>-->
+                    <!--
+                        -->
+                    <!--<af:commandMenuItem text="#{bundle.SEARCH_BY_PARTY_CASE_HASR}" action="searchByPartyCaseHasr"
+                                            id="pt_cmi10" immediate="true" rendered="#{sessionScope.mode eq '2'}"
+                                            styleClass="hover-Effect"/>-->
+                    <!--
+                        -->
+                    <!--<af:commandMenuItem text="#{bundle.SEARCH_OUTTER_INVENTORY}" action="goInventory" id="pt_cmi6"
+                                            immediate="true" styleClass="hover-Effect"
+                                            rendered="#{sessionScope.mode eq '2'}"/>-->
+                    <!--
+                        <af:menu text="#{bundle.CASES}" id="pt_m2">
+                            <af:commandMenuItem text="#{bundle.ADD_JUDGMENT}" action="addJudg" immediate="true"
+                                                id="pt_gmi4">
+                                <af:setPropertyListener from="addJudg" to="#{sessionScope.screen_name}" type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{bundle.UPDATE_CLASS}" action="updateJudg" immediate="true"
+                                                id="pt_gmi55">
+                                <af:setPropertyListener from="updateJudg" to="#{sessionScope.screen_name}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="#{bundle.JUDG_CLASS}" action="judgClass" immediate="true"
+                                                id="pt_gmi5"/>
+                        </af:menu>
+                        -->
+                    <!--<af:menu text="#{bundle.JUDGMENTS}" id="pt_m3" rendered="#{sessionScope.mode eq '1'}">
+                            <af:commandMenuItem text="#{bundle.FOLDERS}" action="folders" immediate="true" id="pt_gmi7">
+                                <af:setPropertyListener from="search" to="#{sessionScope.screen_name}" type="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="المعارضة من اى نيابة" action="Allfolders" id="pt_cmi4"
+                                                immediate="true" styleClass="hover-Effect">
+                                <af:setPropertyListener from="searchall" to="#{sessionScope.screen_name}"
+                                                        type="action"/>
+                            </af:commandMenuItem>
+                        </af:menu>-->
+                    <!--
+                        -->
+                    <!--<af:menu text="#{bundle.REQUESTS}" id="pt_m4" rendered="#{sessionScope.mode eq '1'}">
+                            <af:commandMenuItem text="#{bundle.MY_REQUESTS}" action="myRequests" id="mReqs"
+                                                immediate="true"
+                                                rendered="#{sessionScope.menusList.contains('mReqs')}"/>
+                            <af:commandMenuItem text="#{bundle.OPENED_REQUESTS}" action="openedRequests"
+                                                immediate="true" id="pt_gmi11"/>
+                            <af:commandMenuItem text="#{bundle.ALL_REQUESTS}" action="allRequests" immediate="true"
+                                                id="pt_gmi12"/>
+                        </af:menu>-->
+                    <!--
+                    </af:menuBar>-->
+                    <af:popup id="pt_p1" contentDelivery="lazyUncached">
+                        <af:dialog id="pt_d1" type="none" closeIconVisible="false" modal="true">
+                            <f:facet name="buttonBar">
+                                <af:panelGroupLayout id="pt_pgl1" halign="center" valign="middle" layout="horizontal"
+                                                     inlineStyle="padding:10px;">
+                                    <af:button text="#{bundle.STAY_ON_PAGE}" id="pt_b1"
+                                               action="#{ExcTemplateBean.stayAction}"/>
+                                    <af:button text="#{bundle.LEAVE_PAGE}" id="pt_b2" immediate="true"
+                                               action="#{ExcTemplateBean.leaveAction}"/>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                            <af:outputText value="#{bundle.UNCOMMITTED_DATA_MESSAGE}" id="pt_ot33"
+                                           inlineStyle="color:red;font-weight:bold;padding:10px;"/>
+                        </af:dialog>
+                    </af:popup>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="main-content" id="pt_pg3">
+                <af:facetRef facetName="center"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="footer mt-auto py-3 text-center" id="pt_pg2">
+                <af:facetRef facetName="footer"/>
+                <af:outputText value="جميع الحقوق محفوظة للنيابة العامة  V6.2  - 2019" id="pt_ot4"/>
+            </h:panelGroup>
+        </h:panelGroup>
+        <af:resource type="javascript" source="/resources/js/pdfobject.min.js"/>
+        <af:resource type="javascript">
+          function changeTab(actionEvent) {
+              var inputTextComponen = actionEvent.getSource();
+              AdfCustomEvent.queue(inputTextComponen, "changeTabServer", 
+              {
+                  one : 't'
+              },
+              false);
+              actionEvent.cancel();
+          }
+        </af:resource>
+        <af:resource type="javascript">
+          function viewPdf() {
+              var options = {
+                  pdfOpenParams :  {
+                      toolbar : '0', view : 'FitH'
+                  }
+              };
+              console.log(document.querySelector('[id$="if1"]').src);
+              PDFObject.embed(document.querySelector('[id$="if1"]').src, "#pdf", options);
+          }
+
+          function printPdf() {
+              var iframe = document.querySelector('[id$="pdfPrint"]');
+              console.log(iframe);
+              iframe.focus();
+              iframe.contentWindow.print();
+          }
+
+          function doPrint(url) {
+              console.log('do print');
+              window.open(url);
+          }
+        </af:resource>
+    </af:pageTemplateDef>
+</jsp:root>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ProcedurePaiedROVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.ProcedurePaiedROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pFLag"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"
+      CodeSourceName="ProcedurePaiedROVO"/>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT proc.id,          
+  FOLDERr.JUDGMENT_TEXT ,          
+  FOLDERr.FOLDER_TYPE,          
+  PAR_POLICE.PAR_YEAR Case_year,          
+  FOLDERr.Id FOLDER_ID,     FOLDERr.criminal_type , FOLDERr.POLICE_STATION_ENTITY_ID ,     
+  FOLDERr.YEAR          
+  || '/'          
+  || FOLDERr.SEQUENCE_NUMBER          
+  || '/'          
+  || FOLDER_TYPE.FOLDER_NAME          
+  || '/'          
+  || POLICE.ENTITY_NAME AS INVENTORY_NUMBER,          
+  PAR_POLICE.PAR_YEAR          
+  || '/'          
+  || PAR_POLICE.POLICE_NUMBER          
+  || '/'          
+  || CAS_TYPE.NAME          
+  || '/'          
+  || POLICE.ENTITY_NAME AS BUSINESS_CASE_NUMBER,          
+  PARTIES.FNAME          
+  || ' '          
+  || PARTIES.SNAME          
+  || ' '          
+  || PARTIES.TNAME          
+  || ' '          
+  || PARTIES.FOURTHNAME AS PARTY_NAME ,          
+  DECISIONS.PENALTY_AMOUNT ,          
+  proc.ADVANCE_PAYMENT_AMOUNT,          
+  proc.CLAIM_FOLDER_ID,          
+  proc.PROCEDURE_DATE ,          
+  proc.NUMBER_PAID          
+FROM   EXC_FOLDER_DATA FOLDERr,        
+EXC_FOLDER_ACTIONS action ,          
+  EXC_FOLDER_PROCEDURES PROC ,          
+         
+  COURT_BC_HEARING_RES_PARTIES RES_PART,          
+  COURT_BC_HEARING_RESERVATION RES,          
+  PAR_PARTIES PARTIES,          
+  BUSINESS_CASE CAS,          
+  PAR_POLICE_AUTHORITY_REPORT PAR_POLICE,          
+  ENTITY POLICE,          
+  BUSINESS_CASE_DEGREES DEGREES,          
+  BUSINESS_CASE_TYPE CAS_TYPE,          
+  EXC_LKP_FOLDER_TYPES FOLDER_TYPE ,          
+  EXC_COURT_BC_CHARGES_PARTIES CH_PARTIES,          
+  EXC_COURT_BC_CHARGE_DECISIONS DECISIONS          
+WHERE    
+action.ACTION_TYPE            IN (7,77)          
+AND proc.FEES_TYPE_ID                = 3          
+AND action.DELETED_FLAG              ='N'          
+AND proc.id                          = action.PROCEDURE_ID          
+AND FOLDERr.id                        = action.FOLDER_RECORD_ID          
+AND FOLDERr.RES_PARTY_ID              = RES_PART.ID          
+AND RES_PART.COURT_BC_HEARING_RES_ID = RES.ID          
+AND RES_PART.PARTY_ID                = PARTIES.ID          
+AND RES.BUSINESS_CASE_ID             = CAS.ID          
+AND CAS.ID                           = PAR_POLICE.BUSINESS_CASE_ID          
+AND PAR_POLICE.ORIGIN_ENTITY         = POLICE.ID          
+AND RES_PART.BC_DEGREE_SPEC_ID       = DEGREES.ID          
+AND CAS.CASE_TYPE                    = CAS_TYPE.ID          
+AND FOLDER_TYPE.ID                   = FOLDERr.FOLDER_TYPE          
+AND CH_PARTIES.RES_PARTY_ID          = FOLDERr.RES_PARTY_ID          
+AND CH_PARTIES.CHARGE_DECISION_ID    = DECISIONS.ID          
+AND DECISIONS.Stop_Execution_Flag    ='N'          
+AND CH_PARTIES.deleted_flag          ='N'          
+AND proc.CLAIM_FOLDER_ID            IS NOT NULL          
+and 1=:pFLag          
+ORDER BY proc.id DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JudgmentText"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JUDGMENT_TEXT"
+    Expression="JUDGMENT_TEXT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FOLDER_TYPE"
+    Expression="FOLDER_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CaseYear"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CASE_YEAR"
+    Expression="CASE_YEAR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="FolderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FOLDER_ID"
+    Expression="FOLDER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CriminalType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CRIMINAL_TYPE"
+    Expression="CRIMINAL_TYPE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoliceStationEntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="POLICE_STATION_ENTITY_ID"
+    Expression="POLICE_STATION_ENTITY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="InventoryNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="576"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INVENTORY_NUMBER"
+    Expression="INVENTORY_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="576"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="586"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NUMBER"
+    Expression="BUSINESS_CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="586"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="496"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME"
+    Expression="PARTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="496"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PenaltyAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PENALTY_AMOUNT"
+    Expression="PENALTY_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="AdvancePaymentAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ADVANCE_PAYMENT_AMOUNT"
+    Expression="ADVANCE_PAYMENT_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ClaimFolderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CLAIM_FOLDER_ID"
+    Expression="CLAIM_FOLDER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ProcedureDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="PROCEDURE_DATE"
+    Expression="PROCEDURE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="NumberPaid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NUMBER_PAID"
+    Expression="NUMBER_PAID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="255"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

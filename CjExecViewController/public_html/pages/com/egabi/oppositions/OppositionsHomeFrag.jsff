@@ -1,0 +1,393 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+  <af:panelHeader text="#{bundle.CASE_DETAILS}" id="ph3">
+    <f:facet name="context"/>
+    <f:facet name="toolbar">
+      <af:toolbar id="t3">
+        <af:button text="طباعة" id="b1" action="#{pageFlowScope.oppositionsBean.printReport}"
+                   disabled="#{pageFlowScope.enablePrint ne 'yes'}" partialTriggers="b6">
+          <!--<af:setPropertyListener from="#{pageFlowScope.procedureIdSave}" to="#{pageFlowScope.procedureId}" type="action"/>-->
+        </af:button>
+        <af:spacer width="10" height="10" id="s7"/>
+        <af:button text="حفظ" id="b6" action="#{pageFlowScope.oppositionsBean.saveOpposition}"
+                   disabled="#{pageFlowScope.close eq 'close'}"/>
+        <af:spacer width="10" height="10" id="s5"/>
+        <af:button text="رجوع" id="b7" action="#{pageFlowScope.oppositionsBean.cancel}" immediate="true"/>
+      </af:toolbar>
+    </f:facet>
+    <f:facet name="menuBar"/>
+    <f:facet name="legend"/>
+    <h:panelGroup layout="block" styleClass="casedata-panel" id="pg1">
+      <h:panelGroup id="pg22" styleClass="row">
+        <h:panelGroup layout="block" styleClass="col-md-4 col-sm-12" id="pg565">
+          <af:outputLabel value="#{bundle.BUSINESS_CASE_NUMBER}" id="ol11"/>
+          <af:inputText simple="true" id="it29" disabled="true"
+                        value="#{pageFlowScope.businessCaseNumber}"/>
+        </h:panelGroup>
+        <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg2" rendered="true">
+          <af:outputLabel value="#{bundle.BUSINESS_CASE_NAME}" id="ol132"/>
+          <af:inputText simple="true" id="it302" disabled="true"
+                        value="#{pageFlowScope.businessCaseName}"/>
+        </h:panelGroup>
+        <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg3">
+          <af:outputLabel value="#{bundle.HEARING_DATE}" id="ol193"/>
+          <af:inputText simple="true"  id="it31" disabled="true"
+                        value="#{pageFlowScope.hearingDate}"/>
+        </h:panelGroup>
+        <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg4">
+          <af:outputLabel value="#{bundle.BUSINESS_CASE_DEGREE}" id="ol164"/>
+          <af:inputText simple="true"  id="it32" disabled="true"
+                        value="#{pageFlowScope.businessCaseDegree}"/>
+        </h:panelGroup>
+      </h:panelGroup>
+    </h:panelGroup>
+    <f:facet name="info"/>
+  </af:panelHeader>
+  <af:panelGroupLayout id="pgl2">
+    <af:panelHeader text="#{sessionScope.oppositionType ne '2' ? bundle.OPPOSITION_DATA : bundle.OPPOSION_ENABLE_DATA}" id="ph1">
+      <h:panelGroup id="pg14" styleClass="row">
+        <h:panelGroup id="pg5" styleClass="col-md-2 col-sm-12" layout="block">
+          <af:outputLabel value="#{bindings.CapacityType.label}" id="ol1"/>
+          <af:selectOneChoice value="#{bindings.CapacityType.inputValue}" simple="true" required="true"
+                              requiredMessageDetail="يجب اختيار صفة المقر بالطعن" autoSubmit="true"
+                              disabled="#{pageFlowScope.close eq 'close'}"
+                              shortDesc="#{bindings.CapacityType.hints.tooltip}" id="soc1"
+                              valueChangeListener="#{pageFlowScope.oppositionsBean.getFees}">
+            <f:selectItems value="#{bindings.CapacityType.items}" id="si1"/>
+            <f:validator binding="#{bindings.CapacityType.validator}"/>
+          </af:selectOneChoice>
+        </h:panelGroup>
+        <h:panelGroup id="pg6" styleClass="col-md-2 col-sm-12" layout="block">
+          <af:outputLabel value="#{pageFlowScope.hearingDateMsg}" visible="#{pageFlowScope.validateHearingDate eq true}" 
+                         inlineStyle="color: Red;"  id="ol7"/>
+          <af:outputLabel value="#{bindings.HearingDate.hints.label}" id="ol2"/>
+          <af:inputListOfValues id="hearingDateId" popupTitle="#{bundle.SEARCH_IN_COURT_HEARING}"
+                                value="#{pageFlowScope.validateHearingDate eq true ? pageFlowScope.hearingDate : bindings.HearingDate.inputValue}" simple="true"
+                                model="#{bindings.HearingDate.listOfValuesModel}" required="true"
+                                requiredMessageDetail="#{bundle.HEARING_DATE_REQUIRED}"
+                                disabled="#{pageFlowScope.validateHearingDate eq true}"
+                                shortDesc="#{bindings.HearingDate.hints.tooltip}">
+            <af:autoSuggestBehavior suggestItems="#{bindings.HearingDate.suggestItems}"/>
+          </af:inputListOfValues>
+        </h:panelGroup>
+        <h:panelGroup id="pg7" styleClass="col-md-2 col-sm-12" layout="block">
+          <af:outputLabel value="#{bindings.ProcedureDate.label}" id="ol3"/>
+          <af:inputDate value="#{bindings.ProcedureDate.inputValue}" required="true"
+                        requiredMessageDetail="يجب اختيار تاريخ الطعن بالمعارضة"
+                        
+                        disabled="#{pageFlowScope.close eq 'close'}" maxValue="#{pageFlowScope.oppositionsBean.maxDate}"
+                        shortDesc="#{bindings.ProcedureDate.hints.tooltip}" id="id1" simple="true">
+            <f:validator binding="#{bindings.ProcedureDate.validator}"/>
+            <af:convertDateTime pattern="yyyy/MM/dd"/>
+          </af:inputDate>
+        </h:panelGroup>
+        <h:panelGroup id="pg8" styleClass="col-md-2 col-sm-12" layout="block">
+          <af:outputLabel value="رقم طلب التمكين من المعارضة" id="ol8"/>
+          <af:inputText value="#{pageFlowScope.oppositionsBean.procedureSerial}" disabled="true" id="it4"/>
+        </h:panelGroup>
+        <h:panelGroup id="pg9" styleClass="col-md-2 col-sm-12" layout="block">
+          <af:outputLabel value="حالة طلب التمكين" id="ol9"/>
+          <af:inputText value="#{pageFlowScope.oppositionsBean.procedureStatus}" disabled="true" id="it6"/>
+        </h:panelGroup>
+        <h:panelGroup id="pg10" styleClass="col-md-2 col-sm-12" layout="block">
+          <af:outputLabel value="#{bindings.PrimaryLawyerName.hints.label}" id="ol10"/>
+          <af:button text="#{bundle.ADD_LAWYER} #{pageFlowScope.businessCaseId}" action="parLawyerTF1" id="b4" useWindow="true" immediate="true" 
+                    windowHeight="200" windowWidth="500"/>
+          <af:inputListOfValues id="primaryLawyerNameId" popupTitle="#{bundle.SEARCH_IN_PRIMARY_LAWYER}"
+                                value="#{bindings.PrimaryLawyerName.inputValue}"
+                                label="#{bindings.PrimaryLawyerName.hints.label}" autoSubmit="true"
+                                model="#{bindings.PrimaryLawyerName.listOfValuesModel}"
+                                required="#{bindings.PrimaryLawyerName.hints.mandatory}" 
+                                shortDesc="#{bindings.PrimaryLawyerName.hints.tooltip}" simple="true">
+            <af:autoSuggestBehavior suggestItems="#{bindings.PrimaryLawyerName.suggestItems}"/>
+          </af:inputListOfValues>
+        </h:panelGroup>
+        <h:panelGroup id="pg11" styleClass="col-md-2 col-sm-12" layout="block">
+          <af:outputLabel value="#{bindings.PrimaryRetainerNumber.hints.label}" id="ol12"/>
+          <af:inputText value="#{bindings.PrimaryRetainerNumber.inputValue}" simple="true"
+                        required="#{bindings.PrimaryRetainerNumber.hints.mandatory}"
+                        maximumLength="#{bindings.PrimaryRetainerNumber.hints.precision}"
+                        shortDesc="#{bindings.PrimaryRetainerNumber.hints.tooltip}" id="it7" disabled="true"
+                        partialTriggers="primaryLawyerNameId">
+            <f:validator binding="#{bindings.PrimaryRetainerNumber.validator}"/>
+          </af:inputText>
+        </h:panelGroup>
+        <h:panelGroup id="pg12" styleClass="col-md-2 col-sm-12" layout="block">
+          <af:outputLabel value="#{bindings.SecondaryLawyerName.hints.label}" id="ol17"/>
+          <af:inputListOfValues id="secondaryLawyerNameId" popupTitle="بحث في محامي عن محامي"
+                                value="#{bindings.SecondaryLawyerName.inputValue}"
+                                label="#{bindings.SecondaryLawyerName.hints.label}"
+                                disabled="#{bindings.PrimaryLawyerName.inputValue eq null}"
+                                model="#{bindings.SecondaryLawyerName.listOfValuesModel}"
+                                required="#{bindings.SecondaryLawyerName.hints.mandatory}" 
+                                shortDesc="#{bindings.SecondaryLawyerName.hints.tooltip}" simple="true"
+                                partialTriggers="primaryLawyerNameId" autoSubmit="true">
+            <af:autoSuggestBehavior suggestItems="#{bindings.SecondaryLawyerName.suggestItems}"/>
+          </af:inputListOfValues>
+        </h:panelGroup>
+        <h:panelGroup id="pg13" styleClass="col-md-2 col-sm-12" layout="block">
+          <af:outputLabel value="#{bindings.SecondaryRetainerNumber.hints.label}" id="ol13"/>
+          <af:inputText value="#{bindings.SecondaryRetainerNumber.inputValue}" simple="true"
+                        required="#{bindings.SecondaryRetainerNumber.hints.mandatory}" 
+                        maximumLength="#{bindings.SecondaryRetainerNumber.hints.precision}"
+                        shortDesc="#{bindings.SecondaryRetainerNumber.hints.tooltip}" id="it8" disabled="true"
+                        partialTriggers="secondaryLawyerNameId">
+            <f:validator binding="#{bindings.SecondaryRetainerNumber.validator}"/>
+          </af:inputText>
+        </h:panelGroup>
+      </h:panelGroup>
+      <!--<af:panelGridLayout id="pgl4">
+        <af:gridRow marginTop="5px" height="auto" id="gr2">
+          <af:gridCell marginStart="5px" width="auto" id="gc5">
+            <af:outputLabel value="#{bindings.ProcedureText.label}" id="ol7"/>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc6">
+            <af:inputText value="#{bindings.ProcedureText.inputValue}" simple="true"
+                          required="#{bindings.ProcedureText.hints.mandatory}" columns="75"
+                          maximumLength="#{bindings.ProcedureText.hints.precision}"
+                          disabled="#{pageFlowScope.close eq 'close'}"
+                          shortDesc="#{bindings.ProcedureText.hints.tooltip}" id="it1" rows="10">
+              <f:validator binding="#{bindings.ProcedureText.validator}"/>
+            </af:inputText>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="auto" id="gc7"/>
+          <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc8"/>
+          <af:gridCell id="gc15"/>
+          <af:gridCell id="gc16"/>
+        </af:gridRow>
+      </af:panelGridLayout>-->
+    </af:panelHeader>
+    <af:spacer width="10" height="10" id="s1"/>
+    <af:panelHeader text="#{bundle.OPPOSITION_PERSON_DATA}" id="ph2">
+      <h:panelGroup id="pg21" layout="block" styleClass="row">
+        <h:panelGroup id="pg15" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.IdNumber.label}" id="ol4"/>
+          <af:inputText value="#{pageFlowScope.oppositionsBean.idNumber}" id="it5" disabled="true" simple="true"/>
+        </h:panelGroup>
+        <h:panelGroup id="pg16" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.FullName.label}" id="ol5"/>
+          <af:inputText value="#{pageFlowScope.oppositionsBean.fullName}" id="it2" disabled="true" simple="true"/>
+        </h:panelGroup>
+        <h:panelGroup id="pg17" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bindings.Nickname.label}" id="ol6"/>
+          <af:inputText value="#{pageFlowScope.oppositionsBean.nickname}" id="it3" disabled="true" simple="true"/>
+        </h:panelGroup>
+        <h:panelGroup id="pg18" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bundle.AGE}" id="ol14"/>
+          <af:inputText value="#{pageFlowScope.oppositionsBean.age}" id="it9" disabled="true" simple="true"/>
+        </h:panelGroup>
+        <h:panelGroup id="pg19" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bundle.ADDRESS}" id="ol15"/>
+          <af:inputText value="#{pageFlowScope.oppositionsBean.address}" id="it10" disabled="true" simple="true"/>
+        </h:panelGroup>
+        <h:panelGroup id="pg20" styleClass="col-md-2 col-sm-12">
+          <af:outputLabel value="#{bundle.JOB_TITLE}" id="ol16"/>
+          <af:inputText value="#{pageFlowScope.oppositionsBean.jobTitle}" id="it11" disabled="true" simple="true"/>
+        </h:panelGroup>
+      </h:panelGroup>
+      <af:spacer width="10" height="10" id="s11"/>
+      <af:spacer width="10" height="10" id="s9"/>
+      <af:panelGroupLayout id="pgl5" styleClass="btn-holder" layout="vertical">
+        <af:button text="#{bundle.ACCUSED_DATA}" id="b2" immediate="true">
+          <af:showPopupBehavior popupId="p1"/>
+        </af:button>
+        <af:spacer width="10" height="10" id="s4"/>
+        <af:spacer width="10" height="10" id="s3"/>
+        <af:button text="" id="b5" icon="/resources/images/profile.png" immediate="true">
+          <af:showPopupBehavior popupId="p2"/>
+        </af:button>
+      </af:panelGroupLayout>
+      <af:popup childCreation="deferred" autoCancel="disabled" id="p2">
+        <af:dialog id="d1" closeIconVisible="true" inlineStyle="width:500px; height: 500px;">
+          <f:facet name="buttonBar"/>
+          <af:region value="#{bindings.WebCamTF1.regionModel}" id="r2"/>
+        </af:dialog>
+      </af:popup>
+    </af:panelHeader>
+    <af:spacer width="10" height="20" id="s2"/>
+    <af:panelHeader text="#{bundle.COLLECTIBLE_ITEMS}" id="ph4"  partialTriggers="soc1" visible="#{bindings.CapacityType.attributeValue ne '1' and bindings.CapacityType.attributeValue ne null}">
+      <f:facet name="context"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:table value="#{bindings.ExcCourtBcPartyDebtRVO1.collectionModel}" var="row"
+                rows="#{bindings.ExcCourtBcPartyDebtRVO1.rangeSize}"
+                emptyText="#{bindings.ExcCourtBcPartyDebtRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" selectedRowKeys="#{bindings.ExcCourtBcPartyDebtRVO1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.ExcCourtBcPartyDebtRVO1.collectionModel.makeCurrent}"
+                rowSelection="single" fetchSize="#{bindings.ExcCourtBcPartyDebtRVO1.rangeSize}"
+                filterModel="#{bindings.ExcCourtBcPartyDebtRVO1Query.queryDescriptor}" filterVisible="true"
+                queryListener="#{bindings.ExcCourtBcPartyDebtRVO1Query.processQuery}" varStatus="vs" id="t1"
+                partialTriggers="::soc1" columnStretching="column:c1">
+        <af:column sortProperty="#{bindings.ExcCourtBcPartyDebtRVO1.hints.Name.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.ExcCourtBcPartyDebtRVO1.hints.Name.label}" id="c1">
+          <af:outputText value="#{row.Name}" shortDesc="#{bindings.ExcCourtBcPartyDebtRVO1.hints.Name.tooltip}"
+                         id="ot4"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.ExcCourtBcPartyDebtRVO1.hints.Amount.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.ExcCourtBcPartyDebtRVO1.hints.Amount.label}" id="c2">
+          <af:outputText value="#{row.Amount}" shortDesc="#{bindings.ExcCourtBcPartyDebtRVO1.hints.Amount.tooltip}"
+                         id="ot5">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.ExcCourtBcPartyDebtRVO1.hints.Amount.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.ExcCourtBcPartyDebtRVO1.hints.PaidAmount.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.ExcCourtBcPartyDebtRVO1.hints.PaidAmount.label}" id="c3">
+          <af:outputText value="#{row.PaidAmount}"
+                         shortDesc="#{bindings.ExcCourtBcPartyDebtRVO1.hints.PaidAmount.tooltip}" id="ot6">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.ExcCourtBcPartyDebtRVO1.hints.PaidAmount.format}"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+    </af:panelHeader>
+    
+    <af:panelSplitter id="ps1" disabled="true" splitterPosition="700">
+        <f:facet name="first">
+        <af:panelHeader text="#{bundle.REQUIRED_ATTACHMENTS}" id="ph5">
+          <f:facet name="context"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+           <af:table value="#{bindings.OppositionsAttachmentsRVO1.collectionModel}" var="row"
+                    rows="#{bindings.OppositionsAttachmentsRVO1.rangeSize}"
+                    emptyText="#{bindings.OppositionsAttachmentsRVO1.viewable ? 'لاتوجد بيانات.' : 'Access Denied.'}"
+                    rowBandingInterval="0" columnStretching="column:c4"
+                    visible="#{sessionScope.oppositionType ne '2'}"
+                    selectedRowKeys="#{bindings.OppositionsAttachmentsRVO1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.OppositionsAttachmentsRVO1.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.OppositionsAttachmentsRVO1.rangeSize}"
+                    filterModel="#{bindings.OppositionsAttachmentsRVO1Query.queryDescriptor}" filterVisible="true"
+                    queryListener="#{bindings.OppositionsAttachmentsRVO1Query.processQuery}" varStatus="vs" id="t2"
+                    partialTriggers="::t4:if1">
+            <af:column sortProperty="#{bindings.OppositionsAttachmentsRVO1.hints.Name.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.OppositionsAttachmentsRVO1.hints.Name.label}" id="c4">
+              <af:outputText value="#{row.Name}" shortDesc="#{bindings.OppositionsAttachmentsRVO1.hints.Name.tooltip}"
+                             id="ot7"/>
+            </af:column>
+            <af:column headerText="#{bindings.OppositionsAttachmentsRVO1.hints.InsertFlag.label}" id="c6"
+                       visible="true">
+              <af:selectBooleanCheckbox value="#{row.bindings.InsertFlag.inputValue}" autoSubmit="true"
+                                        label="#{row.bindings.InsertFlag.label}" disabled="true"
+                                        shortDesc="#{bindings.OppositionsAttachmentsRVO1.hints.InsertFlag.tooltip}"
+                                        id="sbc1"/>
+            </af:column>
+          </af:table>
+          <af:table value="#{bindings.OppositionsEnableAttachmentsRVO1.collectionModel}" var="row"
+                    rows="#{bindings.OppositionsEnableAttachmentsRVO1.rangeSize}"
+                    emptyText="#{bindings.OppositionsEnableAttachmentsRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"  columnStretching="column:c5"
+                    visible="#{sessionScope.oppositionType eq '2'}"
+                    selectedRowKeys="#{bindings.OppositionsEnableAttachmentsRVO1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.OppositionsEnableAttachmentsRVO1.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.OppositionsEnableAttachmentsRVO1.rangeSize}"
+                    filterModel="#{bindings.OppositionsEnableAttachmentsRVO1Query.queryDescriptor}" filterVisible="true"
+                    queryListener="#{bindings.OppositionsEnableAttachmentsRVO1Query.processQuery}" varStatus="vs"
+                    id="t5">
+            <af:column sortProperty="#{bindings.OppositionsEnableAttachmentsRVO1.hints.Name.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.OppositionsEnableAttachmentsRVO1.hints.Name.label}"
+                       id="c5">
+              <af:outputText value="#{row.Name}"
+                             shortDesc="#{bindings.OppositionsEnableAttachmentsRVO1.hints.Name.tooltip}" id="ot8"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.OppositionsEnableAttachmentsRVO1.hints.InsertFlag1.name}"
+                       filterable="true" sortable="true"
+                       headerText="#{bindings.OppositionsEnableAttachmentsRVO1.hints.InsertFlag1.label}" id="c7">
+              <af:selectBooleanCheckbox value="#{row.bindings.InsertFlag1.inputValue}"
+                                        label="#{row.bindings.InsertFlag1.label}"
+                                        shortDesc="#{bindings.OppositionsEnableAttachmentsRVO1.hints.InsertFlag1.tooltip}"
+                                        id="sbc2"/>
+            </af:column>
+          </af:table>
+     
+     
+        </af:panelHeader>
+      
+      </f:facet>
+      <f:facet name="second">
+        <af:panelHeader text="#{bundle.ATTACHMENTS}" id="ph6">
+          <f:facet name="context"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="menuBar">
+            <af:toolbar id="t10" styleClass="mb-2">
+              <af:button text="إضافة مرفق" action="#{pageFlowScope.oppositionsBean.openAttachsPopup}" id="b3"/>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:table value="#{bindings.ExcFolderActionsAttachView2.collectionModel}" var="row"
+                    rows="#{bindings.ExcFolderActionsAttachView2.rangeSize}"
+                    emptyText="#{bindings.ExcFolderActionsAttachView2.viewable ? 'لا توجد بيانات.' : 'Access Denied.'}"
+                    rowBandingInterval="0"  columnStretching="column:c11"
+                    selectedRowKeys="#{bindings.ExcFolderActionsAttachView2.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.ExcFolderActionsAttachView2.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.ExcFolderActionsAttachView2.rangeSize}"
+                    filterModel="#{bindings.ExcFolderActionsAttachView2Query.queryDescriptor}" filterVisible="true"
+                    queryListener="#{bindings.ExcFolderActionsAttachView2Query.processQuery}" varStatus="vs" id="t4"
+                    partialTriggers="::b3">
+            <af:column sortProperty="#{bindings.ExcFolderActionsAttachView2.hints.Id.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.ExcFolderActionsAttachView2.hints.Id.label}" id="c12"
+                       visible="false">
+              <af:outputText value="#{row.Id}" shortDesc="#{bindings.ExcFolderActionsAttachView2.hints.Id.tooltip}"
+                             id="ot12">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.ExcFolderActionsAttachView2.hints.Id.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.ExcFolderActionsAttachView2.hints.FolderActionId.name}"
+                       filterable="true" sortable="true"
+                       headerText="#{bindings.ExcFolderActionsAttachView2.hints.FolderActionId.label}" id="c13"
+                       visible="false">
+              <af:outputText value="#{row.FolderActionId}"
+                             shortDesc="#{bindings.ExcFolderActionsAttachView2.hints.FolderActionId.tooltip}" id="ot13">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.ExcFolderActionsAttachView2.hints.FolderActionId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.ExcFolderActionsAttachView2.hints.AttachmentType.name}"
+                       filterable="true" sortable="true"
+                       headerText="#{bindings.ExcFolderActionsAttachView2.hints.AttachmentType.label}" id="c14"
+                       visible="false">
+              <af:outputText value="#{row.AttachmentType}"
+                             shortDesc="#{bindings.ExcFolderActionsAttachView2.hints.AttachmentType.tooltip}" id="ot14">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.ExcFolderActionsAttachView2.hints.AttachmentType.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.ExcFolderActionsAttachView2.hints.DocumentId.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.ExcFolderActionsAttachView2.hints.DocumentId.label}"
+                       id="c15" visible="false">
+              <af:outputText value="#{row.DocumentId}"
+                             shortDesc="#{bindings.ExcFolderActionsAttachView2.hints.DocumentId.tooltip}" id="ot15">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.ExcFolderActionsAttachView2.hints.DocumentId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c11" headerText="المرفقات">
+              <af:inputFile label="المرفقات" id="if1" value="#{pageFlowScope.oppositionsBean.file}" maximumFiles="1"
+                            visible="#{pageFlowScope.newFolderActionId eq 'yes'}"
+                            valueChangeListener="#{pageFlowScope.oppositionsBean.upload}" autoSubmit="true"/>
+            </af:column>
+          </af:table>
+        </af:panelHeader>
+ 
+      </f:facet>
+    </af:panelSplitter>
+    <af:panelGroupLayout id="pgl7">
+    <af:outputLabel value="#{pageFlowScope.partyId}" visible="false"/>
+    </af:panelGroupLayout>
+    
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p1"  
+              binding="#{pageFlowScope.oppositionsBean.partyPopup}">
+      <af:dialog id="pw1" closeIconVisible="true" inlineStyle="width:500px; height: 500px;"
+                 type="none">
+        <af:region value="#{bindings.Par_PartiesTF1.regionModel}" id="r1"/>
+      </af:dialog>
+    </af:popup>
+  </af:panelGroupLayout>
+</ui:composition>

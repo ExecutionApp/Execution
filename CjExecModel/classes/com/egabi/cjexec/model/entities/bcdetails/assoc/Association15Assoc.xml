@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Association15Assoc"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="BusinessCaseDetails"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseDetailsEO"
+    LockLevel="NONE"
+    DeleteContainee="true"
+    CascadeUpdate="true">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="BusinessCaseDetails"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseDetailsEO.BusinessCaseDetailsPk"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseDetailsEO.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="BusinessCaseLedgerSeq"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseLedgerSeqEO"
+     
+    UpdateHistoryColumn="true">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="BusinessCaseLedgerSeq"/>
+      <Attr Name="_foreignKey"
+        Value="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseLedgerSeqEO.fk_BusinessCaseLedgerSeqEO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseLedgerSeqEO.BusinessCaseDetailsId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

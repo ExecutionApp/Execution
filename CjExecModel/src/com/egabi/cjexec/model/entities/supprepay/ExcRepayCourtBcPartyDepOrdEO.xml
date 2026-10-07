@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcRepayCourtBcPartyDepOrdEO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="EXC_COURT_BC_PARTY_DEBT"
+  AliasName="ExcRepayCourtBcPartyDepOrdEO"
+  BindingStyle="OracleName"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation"
+  RowClass="com.egabi.cjexec.model.baseclasses.EntityEOImpl">
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_PARTY_DEBT"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="ResPartyId"
+    IsUnique="true"
+    IsNotNull="true"
+    ColumnName="RES_PARTY_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_PARTY_DEBT"/>
+  <Attribute
+    Name="FeesTypeId"
+    IsUnique="true"
+    IsNotNull="true"
+    ColumnName="FEES_TYPE_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_PARTY_DEBT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.oppositions.ExcCourtBcPartyDebtRVO.Name_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Amount"
+    IsNotNull="true"
+    ColumnName="AMOUNT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_PARTY_DEBT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0642_U064A_U0645_U0629__U0627_U0644_U0628_U0646_U062F"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PaidAmount"
+    ColumnName="PAID_AMOUNT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_PARTY_DEBT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="PAID"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="200"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_PARTY_DEBT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedDate"
+    ColumnName="CREATED_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_PARTY_DEBT"/>
+  <Attribute
+    Name="SettlementDate"
+    ColumnName="SETTLEMENT_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_PARTY_DEBT"
+    IsNotNull="true">
+    <validation:CompareValidationBean
+      Name="SettlementDateRule0"
+      OnAttribute="SettlementDate"
+      OperandType="SQL"
+      Inverse="false"
+      CompareType="LESSTHAN"
+      CompareValue="select sysdate from dual"
+      ResId="SETTELMENT_DATE_VALIDATION_MESSAGE"/>
+  </Attribute>
+  <Attribute
+    Name="SettlementProcId"
+    ColumnName="SETTLEMENT_PROC_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_PARTY_DEBT"/>
+  <Attribute
+    Name="SettReqProcId"
+    ColumnName="SETT_REQ_PROC_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_PARTY_DEBT"/>
+  <Attribute
+    Name="GroupNumber"
+    Precision="200"
+    ColumnName="GROUP_NUMBER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_PARTY_DEBT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="GROUP_NUM"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ReceiptNumber"
+    Precision="200"
+    ColumnName="RECEIPT_NUMBER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_PARTY_DEBT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="RECIP_NUM"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="SettlementAuthId"
+    ColumnName="SETTLEMENT_AUTH_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_PARTY_DEBT"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="SETTLL_AUTH_ID"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="SettlementResPartyId"
+    ColumnName="SETTLEMENT_RES_PARTY_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_PARTY_DEBT"/>
+  <Key
+    Name="ExcCourtBcPartyDebtSettlementAuthIdCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_checkCondition" Value='"SETTLEMENT_AUTH_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_PARTY_DEBT_SETTLE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.SettlementAuthId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ExcCourtBcPartyDebtSettlementDateCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_checkCondition" Value='"SETTLEMENT_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_PARTY_DEBT_SETTLE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.SettlementDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="PkExcCourtBcPartyDue"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PK_EXC_COURT_BC_PARTY_DUE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="UniquePartyDebt">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="UNIQUE_PARTY_DEBT"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.ResPartyId"/>
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.FeesTypeId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkFeesTypeId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="EXC_LKP_FEES_TYPES_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_FEES_TYPE_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.FeesTypeId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkResPartyId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COURT_BC_HEARING_RES_PARTI_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_RES_PARTY_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.ResPartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkSettReqProcIdFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_COURT_OBJECTION"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_SETT_REQ_PROC_ID_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.SettReqProcId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkSettlementAuthId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_LKP_SETT_AUTHORITY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_SETTLEMENT_AUTH_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.SettlementAuthId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkSettlementProcId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_EXC_COURT_OBJECTION"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_SETTLEMENT_PROC_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.supprepay.ExcRepayCourtBcPartyDepOrdEO.SettlementProcId"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</Entity>

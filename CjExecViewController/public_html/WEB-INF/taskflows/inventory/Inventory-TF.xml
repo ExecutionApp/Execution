@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Inventory-TF">
+    <default-activity>SearchResult</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__2">
+      <name>yearBind</name>
+      <value>#{pageFlowScope.yearBind}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__5">
+      <name>police</name>
+      <value>#{pageFlowScope.police}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__6">
+      <name>caseNumberBind</name>
+      <value>#{pageFlowScope.caseNumberBind}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name>caseTypeBind</name>
+      <value>#{pageFlowScope.caseTypeBind}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name>degreeIdBind</name>
+      <value>#{pageFlowScope.degreeIdBind}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__9">
+      <name>hearingDateBind</name>
+      <value>#{pageFlowScope.hearingDateBind}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>inventoryBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.inventory.InventoryBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__3">
+      <managed-bean-name>BCDetails</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.bcDetails.BCDetails</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="SearchResult">
+      <page>/pages/com/egabi/inventory/SearchResult.jsff</page>
+    </view>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__10">
+      <from-activity-id>SearchResult</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

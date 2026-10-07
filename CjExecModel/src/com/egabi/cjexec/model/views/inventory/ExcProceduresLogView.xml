@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcProceduresLogView"
+ Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT EXCPROCEDURESLOGEO.ID,                                                  
+       EXCPROCEDURESLOGEO.PROCEDURE_ID,                                                  
+       EXCPROCEDURESLOGEO.ACTION_TYPE_ID,                                                  
+       EXCPROCEDURESLOGEO.CREATED_BY,                                                  
+       trunc(EXCPROCEDURESLOGEO.CREATED_DATE) AS CREATED_DATE ,                                                  
+       EXCPROCEDURESLOGEO.ENTITY_ID,                                                  
+       EXCPROCEDURESLOGEO.BUSINESS_CASE_ID,                                                  
+       EXCPROCEDURESLOGEO.LOGGED_IN_ENTITY_ID,                                                  
+       EXCPROCEDURESLOGEO.SEQUENCE_NUMBER,                                                  
+       EXCPROCEDURESLOGEO.EXC_CLAIM_ID,                                                  
+       EXCPROCEDURESLOGEO.MODE_TYPE ,                                             
+       EXCPROCEDURESLOGEO.DOCUMENT_ID ,                                 
+       EXCPROCEDURESLOGEO.FOLDER_TYPE_ID ,                                
+       DECODE(EXCPROCEDURESLOGEO.FOLDER_TYPE_ID , '2' , 'حبس' , '3' , 'غرامة' , '5' , ' حبس غير منفذ ', '6' , 'حبس منفذ ') FOLDER_TYPE_NAME ,                                               
+       EXCPROCEDURESLOGEO.REPEATED_FLAG ,                                            
+       EXCPROCEDURESLOGEO.SEQUENCE_YEAR ,                                            
+       EXCPROCEDURESLOGEO.DOCUMENT_ID2 ,                
+       EXCPROCEDURESLOGEO.APPEAL_REQUEST ,               
+       EXCPROCEDURESLOGEO.CRIMINAL_REQUEST ,           
+       EXCPROCEDURESLOGEO.OPPOSITION_REQUEST ,         
+       trunc(EXCPROCEDURESLOGEO.PROCEDURE_DATE) AS PROCEDURE_DATE ,                                       
+       LOGGED_ENTITY.ENTITY_NAME AS LOGGED_ENTITY_NAME ,                                                
+       CASE_ENTITY.ENTITY_NAME AS CASE_ENTITY_NAME ,                                                
+       ACTION_TYPES.NAME AS ACTION_TYPE_NAME ,                                                
+       CASE_TYPE.NAME AS CASE_TYPE_NAME ,                                                
+       BUS_CASE.CASE_NUMBER ,                                                
+       CASE_TYPE.ID AS CASE_TYPE_ID  ,                                                
+       REPO.PAR_YEAR AS CASE_YEAR ,                                                
+       SEC.FULL_NAME ,       (select  max (files.filename) from CRIMINAL_JUSTICE_FILES_DETAILS files where files.did  =      document_id  ) file_name ,                        
+       EXCPROCEDURESLOGEO.SEQUENCE_YEAR || '/' || EXCPROCEDURESLOGEO.SEQUENCE_NUMBER || '/' || CASE_POLICE_ENTITY.ENTITY_NAME || '/' || CASE_TYPE.NAME || ' ' || DECODE(EXCPROCEDURESLOGEO.REPEATED_FLAG , 'N' , ' ' , 'Y' , 'مكرر') SEQUENCE_NUMBER_LONG                  
+                                                       
+FROM  EXC_PROCEDURES_LOG EXCPROCEDURESLOGEO , ENTITY LOGGED_ENTITY , ENTITY CASE_ENTITY , ENTITY CASE_POLICE_ENTITY ,EXC_LKP_ACTION_TYPES ACTION_TYPES ,                                                 
+BUSINESS_CASE BUS_CASE , BUSINESS_CASE_TYPE CASE_TYPE , PAR_POLICE_AUTHORITY_REPORT REPO , SEC_USERS SEC                                                  
+WHERE EXCPROCEDURESLOGEO.LOGGED_IN_ENTITY_ID = LOGGED_ENTITY.ID                                                
+AND EXCPROCEDURESLOGEO.ENTITY_ID = CASE_ENTITY.ID                            
+AND REPO.ORIGIN_ENTITY =   CASE_POLICE_ENTITY.ID                                          
+AND EXCPROCEDURESLOGEO.ACTION_TYPE_ID = ACTION_TYPES.ID                                                
+AND EXCPROCEDURESLOGEO.BUSINESS_CASE_ID = BUS_CASE.ID                                                
+AND BUS_CASE.BUSINESS_CASE_TYPE = CASE_TYPE.ID                                                
+AND REPO.BUSINESS_CASE_ID = BUS_CASE.ID                                              
+AND EXCPROCEDURESLOGEO.CREATED_BY = SEC.ID  
+and 1=0
+ORDER BY EXCPROCEDURESLOGEO.ID DESC]]></SQLQuery>
+  <EntityUsage
+    Name="ExcProceduresLogEO"
+    Entity="com.egabi.cjexec.model.entities.inventory.ExcProceduresLogEO"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="ProcedureId"
+    PrecisionRule="true"
+    EntityAttrName="ProcedureId"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="PROCEDURE_ID"/>
+  <ViewAttribute
+    Name="ActionTypeId"
+    PrecisionRule="true"
+    EntityAttrName="ActionTypeId"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="ACTION_TYPE_ID"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="CREATED_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.CreatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedDate"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="CREATED_DATE">
+    <TransientExpression
+      Name="ExpressionScript"><![CDATA[adf.currentDate]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.CreatedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityId"
+    PrecisionRule="true"
+    EntityAttrName="EntityId"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="ENTITY_ID"/>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    PrecisionRule="true"
+    EntityAttrName="BusinessCaseId"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="BUSINESS_CASE_ID"/>
+  <ViewAttribute
+    Name="LoggedInEntityId"
+    PrecisionRule="true"
+    EntityAttrName="LoggedInEntityId"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="LOGGED_IN_ENTITY_ID"/>
+  <ViewAttribute
+    Name="SequenceNumber"
+    PrecisionRule="true"
+    EntityAttrName="SequenceNumber"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="SEQUENCE_NUMBER">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.SequenceNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExcClaimId"
+    PrecisionRule="true"
+    EntityAttrName="ExcClaimId"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="EXC_CLAIM_ID"/>
+  <ViewAttribute
+    Name="ModeType"
+    PrecisionRule="true"
+    EntityAttrName="ModeType"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="MODE_TYPE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.ModeType_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocumentId"
+    PrecisionRule="true"
+    EntityAttrName="DocumentId"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="DOCUMENT_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.DocumentId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderTypeId"
+    PrecisionRule="true"
+    EntityAttrName="FolderTypeId"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="FOLDER_TYPE_ID"/>
+  <ViewAttribute
+    Name="FolderTypeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FOLDER_TYPE_NAME"
+    Expression="FOLDER_TYPE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.FolderTypeName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RepeatedFlag"
+    PrecisionRule="true"
+    EntityAttrName="RepeatedFlag"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="REPEATED_FLAG"/>
+  <ViewAttribute
+    Name="SequenceYear"
+    PrecisionRule="true"
+    EntityAttrName="SequenceYear"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="SEQUENCE_YEAR"/>
+  <ViewAttribute
+    Name="DocumentId2"
+    PrecisionRule="true"
+    EntityAttrName="DocumentId2"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="DOCUMENT_ID2">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.DocumentId2_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AppealRequest"
+    PrecisionRule="true"
+    EntityAttrName="AppealRequest"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="APPEAL_REQUEST">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.AppealRequest_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CriminalRequest"
+    PrecisionRule="true"
+    EntityAttrName="CriminalRequest"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="CRIMINAL_REQUEST">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.CriminalRequest_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OppositionRequest"
+    PrecisionRule="true"
+    EntityAttrName="OppositionRequest"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="OPPOSITION_REQUEST">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.OppositionRequest_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProcedureDate"
+    PrecisionRule="true"
+    EntityAttrName="ProcedureDate"
+    EntityUsage="ExcProceduresLogEO"
+    AliasName="PROCEDURE_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.ProcedureDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LoggedEntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LOGGED_ENTITY_NAME"
+    Expression="LOGGED_ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.LoggedEntityName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseEntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_ENTITY_NAME"
+    Expression="CASE_ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.CaseEntityName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ActionTypeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACTION_TYPE_NAME"
+    Expression="ACTION_TYPE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.ActionTypeName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseTypeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_TYPE_NAME"
+    Expression="CASE_TYPE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.CaseTypeName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_NUMBER"
+    Expression="CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.CaseNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseTypeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CASE_TYPE_ID"
+    Expression="CASE_TYPE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CaseYear"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CASE_YEAR"
+    Expression="CASE_YEAR"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.CaseYear_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FULL_NAME"
+    Expression="FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.FullName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FileName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FILE_NAME"
+    Expression="FILE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SequenceNumberLong"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="453"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEQUENCE_NUMBER_LONG"
+    Expression="SEQUENCE_NUMBER_LONG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="453"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.SequenceNumberLong_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

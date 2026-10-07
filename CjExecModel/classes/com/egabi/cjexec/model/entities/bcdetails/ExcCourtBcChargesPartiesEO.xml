@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcCourtBcChargesPartiesEO"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="EXC_COURT_BC_CHARGES_PARTIES"
+  AliasName="ExcCourtBcChargesPartiesEO"
+  BindingStyle="OracleName"
+  RowClass="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="PartyCrimeId"
+    IsNotNull="true"
+    ColumnName="PARTY_CRIME_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"/>
+  <Attribute
+    Name="CreatedBy"
+    Precision="100"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <TransientExpression
+      Name="ExpressionScript"><![CDATA[adf.context.current.sessionScope.userInfo.userName]]></TransientExpression>
+    <RecalcCondition
+      Name="RecalcExpressionScript"><![CDATA[true]]></RecalcCondition>
+  </Attribute>
+  <Attribute
+    Name="CreatedDate"
+    ColumnName="CREATED_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"
+    IsUpdateable="while_insert"
+    HistoryColumn="DateHistory"/>
+  <Attribute
+    Name="UpdateBy"
+    Precision="100"
+    ColumnName="UPDATE_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"
+    HistoryColumn="UserHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UpdatedDate"
+    ColumnName="UPDATED_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"
+    HistoryColumn="DateHistory"/>
+  <Attribute
+    Name="DecisionId"
+    IsNotNull="true"
+    ColumnName="DECISION_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"/>
+  <Attribute
+    Name="Status"
+    Precision="20"
+    ColumnName="STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ChargeDecisionId"
+    ColumnName="CHARGE_DECISION_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"
+    ChangeIndicator="true"
+    IsNotNull="true"/>
+  <Attribute
+    Name="ResPartyId"
+    ColumnName="RES_PARTY_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"/>
+  <Attribute
+    Name="SanctionCopiedFlag"
+    ColumnName="SANCTION_COPIED_FLAG"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"
+    DefaultValue="1"/>
+  <Attribute
+    Name="DeletedFlag"
+    Precision="1"
+    ColumnName="DELETED_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EXC_COURT_BC_CHARGES_PARTIES"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="FormCaseDescriptionDesPart"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk1Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk1Assoc.FormCaseDescriptionDesPart"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk1Assoc.ExcCourtBcChargesParties"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="ExcCourtBcDecision"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk2Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk2Assoc.ExcCourtBcDecision"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.ExcCourtBcChargesPartFk2Assoc.ExcCourtBcChargesParties"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="ExcCourtBcChargeDecisions"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.FkChargeDecisionId2Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FkChargeDecisionId2Assoc.ExcCourtBcChargeDecisions"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.FkChargeDecisionId2Assoc.ExcCourtBcChargesParties"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="FormCaseDescriptionDesPart1"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association8Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association8Assoc.FormCaseDescriptionDesPart1"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association8Assoc.ExcCourtBcChargesParties1"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="CourtBcHearingResParties"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association19Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association19Assoc.CourtBcHearingResParties"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association19Assoc.ExcCourtBcChargesParties"
+    Type="com.egabi.cjexec.model.entities.bcdetails.CourtBcHearingResPartiesEOImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="ExcCourtBcChargeDecisions1"
+    Association="com.egabi.cjexec.model.entities.bcdetails.assoc.Association9Assoc"
+    AssociationEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association9Assoc.ExcCourtBcChargeDecisions1"
+    AssociationOtherEnd="com.egabi.cjexec.model.entities.bcdetails.assoc.Association9Assoc.ExcCourtBcChargesParties1"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="ExcCourtBcChargesPartPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_CHARGES_PART_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ExcCourtBcChargesPartiesChargeDecisionIdCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_checkCondition" Value='"CHARGE_DECISION_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_CHARGES_PARTIES_C"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.ChargeDecisionId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="UniquePartyReservDecision">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="UNIQUE_PARTY_RESERV_DECISION"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.PartyCrimeId"/>
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.DecisionId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="uk_ExcCourtBcChargesPartiesEO">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="UK_EXC_COURT_BC_CHARGES_PARTIE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.ChargeDecisionId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ChSanctionCopiedFlag">
+    <DesignTime>
+      <Attr Name="_isForeign" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ExcCourtBcChargesPartFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_FORM_CASE_DESCR_DES_PART"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_CHARGES_PART_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.PartyCrimeId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ExcCourtBcChargesPartFk2">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="EXC_COURT_BC_DECISION_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EXC_COURT_BC_CHARGES_PART_FK2"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.DecisionId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkChargeDecisionId2">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="EXC_COURT_BC_CHRG_DECI_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_CHARGE_DECISION_ID2"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.ChargeDecisionId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkCrtBcHearResPartyId">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COURT_BC_HEARING_RES_PARTI_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_CRT_BC_HEAR_RES_PARTY_ID"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.ResPartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargesPartiesEO">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PK_FORM_CASE_DESCR_DES_PART"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGES_PARTIE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.PartyCrimeId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargesPartiesEO1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COURT_BC_HEARING_RES_PARTI_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGES_PARTIE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.ResPartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargesPartiesEO2">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COURT_BC_HEARING_RES_PARTI_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGES_PARTIE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.ResPartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargesPartiesEO3">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COURT_BC_HEARING_RES_PARTI_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGES_PARTIE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.ResPartyId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ExcCourtBcChargesPartiesEO4">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COURT_BC_HEARING_RES_PARTI_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_EXC_COURT_BC_CHARGES_PARTIE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.entities.bcdetails.ExcCourtBcChargesPartiesEO.ResPartyId"/>
+    </AttrArray>
+  </Key>
+</Entity>

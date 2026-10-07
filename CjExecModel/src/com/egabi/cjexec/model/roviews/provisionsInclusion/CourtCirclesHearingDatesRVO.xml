@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject xmlns="http://xmlns.oracle.com/bc4j" Name="CourtCirclesHearingDatesRVO" Version="12.2.1.0.31"
+            InheritPersonalization="merge" BindingStyle="OracleName" CustomQuery="true" PageIterMode="Full"
+            OrderBy='"HEARING_DATE" DESC'
+    ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+    <DesignTime>
+        <Attr Name="_isExpertMode" Value="true"/>
+    </DesignTime>
+    <Properties>
+        <SchemaBasedProperties>
+            <LABEL ResId="com.egabi.cjexec.model.roviews.provisionsInclusion.CourtCirclesHearingDatesRVO_LABEL"/>
+        </SchemaBasedProperties>
+    </Properties>
+    <Variable Name="sessionUser" Kind="where" Type="oracle.jbo.domain.Number">
+        <Properties>
+            <SchemaBasedProperties>
+                <DISPLAYHINT Value="Hide"/>
+            </SchemaBasedProperties>
+        </Properties>
+        <TransientExpression
+            Name="VariableScript"
+            CodeSourceName="CourtCirclesHearingDatesRVO"/>
+    </Variable>
+    <Variable Name="degreeIdParam" Kind="viewcriteria" Type="oracle.jbo.domain.Number"/>
+    <Variable
+        Name="FirstSessionIdParam"
+        Kind="viewcriteria"
+        Type="java.math.BigDecimal"/>
+    <ViewAccessor Name="CourtCirclesHearingDatesRVO1"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.CourtCirclesHearingDatesRVO"
+                  RowLevelBinds="true"/>
+    <ViewAccessor Name="BusinessCaseDegreesRVO1"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.BusinessCaseDegreesRVO"
+                  RowLevelBinds="true"/>
+    <ListBinding Name="LOV_BcDegreeId" ListVOName="BusinessCaseDegreesRVO1" ListRangeSize="-1" NullValueFlag="start"
+                 NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+                 MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="BcDegreeId"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <SQLQuery><![CDATA[select h.id,to_char(h.hearing_date, 'dd/mm/yyyy') as hearing_date,           
+h.bc_degree_id,ENT.ENTITY_NAME, 
+h.hearing_date as hearing_date_xx 
+from court_circles_dates_hearing h,ENTITY ent          
+where H.ENTITY_ID = ENT.ID   
+and entity_id= (SELECT ENTITY_ID FROM SEC_USERs        
+WHERE ID=:sessionUser)]]></SQLQuery>
+    <ViewAttribute Name="Id" IsPersistent="false" PrecisionRule="true" Type="java.math.BigDecimal"
+                   ColumnType="NUMBER" AliasName="ID" Expression="ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="HearingDate" Precision="10" IsPersistent="false" PrecisionRule="true" Type="java.lang.String"
+                   ColumnType="VARCHAR2"
+        AliasName='HEARING_DATE'
+        Expression='"AS HEARING_DATE"' SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="10"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="BcDegreeId" IsPersistent="false" PrecisionRule="true" Type="oracle.jbo.domain.Number"
+                   ColumnType="NUMBER" AliasName="BC_DEGREE_ID" Expression="BC_DEGREE_ID" SQLType="NUMERIC"
+                   LOVName="LOV_BcDegreeId">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute Name="EntityName" IsPersistent="false" PrecisionRule="true" Precision="200"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="ENTITY_NAME" Expression="ENTITY_NAME"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="200"/>
+        </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <DISPLAYWIDTH Value="20"/>
+                <LABEL ResId="Circule_ID"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="HearingDateXx"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.sql.Timestamp"
+        ColumnType="DATE"
+        AliasName="HEARING_DATE_XX"
+        Expression="HEARING_DATE_XX"
+        SQLType="DATE"/>
+    <ViewCriteria Name="CourtCirclesHearingDatesRVOCriteria"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.CourtCirclesHearingDatesRVO"
+                  Conjunction="AND">
+        <Properties Name="_Props">
+            <CustomProperties>
+                <Property Name="autoExecute" Value="false"/>
+                <Property Name="mode" Value="Basic"/>
+                <Property Name="allowConjunctionOverride" Value="false"/>
+                <Property Name="showInList" Value="false"/>
+                <Property Name="displayOperators" Value="Never"/>
+            </CustomProperties>
+        </Properties>
+        <ViewCriteriaRow Name="CourtCirclesHearingDatesRVOCriteria_row_0" UpperColumns="1" Conjunction="AND">
+            <ViewCriteriaItem Name="CourtCirclesHearingDatesRVOCriteria_CourtCirclesHearingDatesRVOCriteria_row_0_BcDegreeId"
+                              ViewAttribute="BcDegreeId" Operator="=" Conjunction="AND" Value=":degreeIdParam"
+                              IsBindVarValue="true" Required="Optional"/>
+        </ViewCriteriaRow>
+    </ViewCriteria>
+    <ViewCriteria
+        Name="CourtCirclesHearingDatesRVOCriteria1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.provisionsInclusion.CourtCirclesHearingDatesRVO"
+        Conjunction="AND">
+        <Properties Name="_Props">
+            <CustomProperties>
+                <Property
+                    Name="autoExecute"
+                    Value="false"/>
+                <Property
+                    Name="mode"
+                    Value="Basic"/>
+                <Property
+                    Name="allowConjunctionOverride"
+                    Value="true"/>
+                <Property
+                    Name="showInList"
+                    Value="true"/>
+                <Property
+                    Name="displayOperators"
+                    Value="InAdvancedMode"/>
+            </CustomProperties>
+        </Properties>
+        <ViewCriteriaRow
+            Name="CourtCirclesHearingDatesRVOCriteria1_row_0"
+            UpperColumns="1">
+            <ViewCriteriaItem
+                Name="Id"
+                ViewAttribute="Id"
+                Operator="&lt;>"
+                Conjunction="AND"
+                Value=":FirstSessionIdParam"
+                IsBindVarValue="true"
+                Required="Optional"/>
+        </ViewCriteriaRow>
+    </ViewCriteria>
+    <AttrArray Name="KeyAttributes">
+        <Item Value="Id"/>
+    </AttrArray>
+    <ResourceBundle>
+        <PropertiesBundle PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewObject>

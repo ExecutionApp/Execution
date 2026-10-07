@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="casese_search_tf_casese_search_tf_ExecutePageDef" Package="taskflows.caseExecEmp"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="CasesSearchReasultROV" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="CasesSearchReasultROVIterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="CasesSearchReasultROVIterator" id="Execute" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

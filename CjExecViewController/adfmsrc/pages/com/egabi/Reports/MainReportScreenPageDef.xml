@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="MainReportScreenPageDef"
+                Package="pages.com.egabi.Reports">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.MainReport1" DataControl="CjExecAMDataControl" RangeSize="500"
+              id="MainReport1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.MainReports1" DataControl="CjExecAMDataControl" RangeSize="500"
+              id="MainReports1Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateFrom">
+      <AttrNames>
+        <Item Value="DateFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateTo">
+      <AttrNames>
+        <Item Value="DateTo"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="MainReport1Iterator" id="MainReport1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.reports.MainReport" Name="MainReport10">
+        <AttrNames>
+          <Item Value="ProcNumber"/>
+          <Item Value="InventoryNumber"/>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="ProcedureDate"/>
+          <Item Value="ProcedureType"/>
+          <Item Value="HearingDate"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="ActsTypesName"/>
+          <Item Value="ParYear"/>
+          <Item Value="PoliceStationEntityId"/>
+          <Item Value="EntId"/>
+          <Item Value="DateEntReservation"/>
+          <Item Value="CreatedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="executeProcedureView1" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeProcedureView" IsViewObjectMethod="true" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.MainReport1">
+      <NamedData NDName="folderType" NDValue="#{bindings.FolderTypesId.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="casYear" NDValue="#{bindings.Year.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="nyabaaGozaya"
+                 NDValue="#{bindings.NeyabGozayaa.inputValue eq null ? 0 : bindings.NeyabGozayaa.inputValue}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="dateFrom" NDValue="#{bindings.DateFrom.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="dateTo" NDValue="#{bindings.DateTo.inputValue}" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="Year">
+      <AttrNames>
+        <Item Value="Year"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_FolderTypesId" id="FolderTypesId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" id="CriminalTypeFlag" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject" StaticList="true">
+      <AttrNames>
+        <Item Value="CriminalTypeFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="2"/>
+      </ValueList>
+    </list>
+    <button IterBinding="SearchInventoryRVO1Iterator" id="EstanafGozayaFlag" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="EstanafGozayaFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="MainReports1Iterator" id="MainReports1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.reports.MainReports" Name="MainReports10">
+        <AttrNames>
+          <Item Value="InventoryNumber"/>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="PartyName"/>
+          <Item Value="Address"/>
+          <Item Value="JobTitle"/>
+          <Item Value="JudgmentText"/>
+          <Item Value="Name"/>
+          <Item Value="HearingDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="IdNumber"/>
+          <Item Value="ExecutionDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="SearchInventoryRVO1Iterator" id="MamoreyaFlag" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="MamoreyaFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabaMamoreya" id="NeyabaMamoreya"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_Attendance" id="Attendance"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_DegreeId" id="DegreeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="TypeToggle">
+      <AttrNames>
+        <Item Value="TypeToggle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="StartNum">
+      <AttrNames>
+        <Item Value="StartNum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="EndNum">
+      <AttrNames>
+        <Item Value="EndNum"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="true" id="Status"
+          NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+          NullValueFlag="start">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value=" "/>
+        <Item Value="1"/>
+        <Item Value="2"/>
+        <Item Value="3"/>
+        <Item Value="4"/>
+      </ValueList>
+    </list>
+  </bindings>
+</pageDefinition>

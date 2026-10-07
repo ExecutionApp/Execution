@@ -1,0 +1,19 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.inventory.SearchInventoryRVO
+
+package com.egabi.cjexec.model.roviews.inventory
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="prosecutionKolyaBind")
+def prosecutionKolyaBind_VariableScript_Variable()
+{
+adf.context.current.sessionScope.userInfo.parentEntityId
+}
+
+
+@VariableExpression(path="pBCType")
+def pBCType_VariableScript_Variable()
+{
+adf.context.current.sessionScope.pBCType
+}
+

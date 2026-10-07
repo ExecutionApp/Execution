@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="TestCaseAttachPageDef"
+                Package="caseExecEmp">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="caseattachmentstf1"
+              taskFlowId="/WEB-INF/taskflows/caseExecEmp/case-attachments-tf.xml#case-attachments-tf"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="sessionJudgmentId" value="63"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

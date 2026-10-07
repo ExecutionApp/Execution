@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TotalHasrReportRVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.mainreports.TotalHasrReportRVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="createdDateBind"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="gozeyaIdBind"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="createdDateToBind"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="entity_degree"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT NVL (COUNT_GONAH, 0) COUNT_GONAH,            
+       NVL (COUNT_GENAYAT, 0) COUNT_GENAYAT,            
+       NVL (TAB1.GOZEYA_ENTITY_NAME, TAB2.GOZEYA_ENTITY_NAME)            
+          GOZEYA_ENTITY_NAME,            
+       NVL (TAB2.PARENT_ENTITY_NAME, TAB1.PARENT_ENTITY_NAME)            
+          PARENT_ENTITY_NAME,            
+       NVL (TAB1.USER_NAME, TAB2.USER_NAME) USER_NAME            
+  FROM (  select  COUNT (FOLD.ID) COUNT_GONAH,            
+                 GOZEYA.ENTITY_NAME GOZEYA_ENTITY_NAME,            
+                 paren.ENTITY_NAME PARENT_ENTITY_NAME,            
+                 USR.USERNAME USER_NAME,            
+                 PAREN.ID            
+            FROM EXC_FOLDER_DATA FOLD,            
+                 ENTITY GOZEYA,            
+                 ENTITY PAREN,            
+                 ENTITY Master,            
+                 SEC_USERS USR   
+   
+  where  
+  (POLICE_STATION_ENTITY_ID in (select id from entity where PARENT_ENTITY_ID =  :gozeyaIdBind and :entity_degree = 3) 
+  or  
+  POLICE_STATION_ENTITY_ID in (select id from entity where ID =  :gozeyaIdBind and :entity_degree = 3 and EXC_ERRAND_FLAG = 'Y') 
+  or  
+(  POLICE_STATION_ENTITY_ID in (select id from entity where PARENT_ENTITY_ID in ((select id from entity where PARENT_ENTITY_ID =  :gozeyaIdBind and :entity_degree = 39)) 
+  or   POLICE_STATION_ENTITY_ID in (select id from entity where PARENT_ENTITY_ID =   :gozeyaIdBind and :entity_degree = 39) 
+   or   POLICE_STATION_ENTITY_ID in (select id from entity where ID =   :gozeyaIdBind and :entity_degree = 39) 
+ )  
+   
+  )) 
+   
+   AND (   FOLD.CREATED_DATE BETWEEN TO_DATE ( :createdDateBind,            
+    
+                                                            'dd/mm/yyyy')            
+                                               AND TO_DATE (            
+                                                      :createdDateToBind,            
+                                                      'dd/mm/yyyy') +1           
+                      OR to_char(FOLD.CREATED_DATE, 'dd/mm/yyyy') =:createdDateBind)   
+ and  FOLD.POLICE_STATION_ENTITY_ID = GOZEYA.ID            
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID            
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID            
+                 AND FOLD.CREATED_BY = USR.USERNAME            
+                 AND FOLD.CRIMINAL_TYPE = 1     
+                  GROUP BY PAREN.ID,            
+                           
+                 GOZEYA.ENTITY_NAME,   
+                 PAREN.ENTITY_NAME,   
+                 USR.USERNAME) TAB1  
+                  
+   FULL OUTER JOIN                  
+ (  select  COUNT (FOLD.ID) COUNT_GENAYAT,            
+                 GOZEYA.ENTITY_NAME GOZEYA_ENTITY_NAME,            
+                 paren.ENTITY_NAME PARENT_ENTITY_NAME,            
+                 USR.USERNAME USER_NAME,            
+                 PAREN.ID            
+            FROM EXC_FOLDER_DATA FOLD,            
+                 ENTITY GOZEYA,            
+                 ENTITY PAREN,            
+                 ENTITY Master,            
+                 SEC_USERS USR   
+   
+  where  
+  (POLICE_STATION_ENTITY_ID in (select id from entity where PARENT_ENTITY_ID =  :gozeyaIdBind and :entity_degree = 3) 
+  or  
+  POLICE_STATION_ENTITY_ID in (select id from entity where ID =  :gozeyaIdBind and :entity_degree = 3 and EXC_ERRAND_FLAG = 'Y') 
+  or  
+(  POLICE_STATION_ENTITY_ID in (select id from entity where PARENT_ENTITY_ID in ((select id from entity where PARENT_ENTITY_ID =  :gozeyaIdBind and :entity_degree = 39)) 
+  or   POLICE_STATION_ENTITY_ID in (select id from entity where PARENT_ENTITY_ID =   :gozeyaIdBind and :entity_degree = 39) 
+   or   POLICE_STATION_ENTITY_ID in (select id from entity where ID =   :gozeyaIdBind and :entity_degree = 39) 
+ )  
+   
+  )) 
+   
+   AND (   FOLD.CREATED_DATE BETWEEN TO_DATE ( :createdDateBind,            
+    
+                                                            'dd/mm/yyyy')            
+                                               AND TO_DATE (            
+                                                      :createdDateToBind,            
+                                                      'dd/mm/yyyy') +1           
+                      OR to_char(FOLD.CREATED_DATE, 'dd/mm/yyyy') =:createdDateBind)   
+ and  FOLD.POLICE_STATION_ENTITY_ID = GOZEYA.ID            
+                 AND GOZEYA.PARENT_ENTITY_ID = PAREN.ID            
+                 AND PAREN.PARENT_ENTITY_ID = Master.ID            
+                 AND FOLD.CREATED_BY = USR.USERNAME            
+                 AND FOLD.CRIMINAL_TYPE = 2    
+                  GROUP BY PAREN.ID,            
+                           
+                 GOZEYA.ENTITY_NAME,   
+                 PAREN.ENTITY_NAME,   
+                 USR.USERNAME) TAB2    
+                   ON TAB1.ID = TAB2.ID]]></SQLQuery>
+  <ViewAttribute
+    Name="CountGonah"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNT_GONAH"
+    Expression="COUNT_GONAH"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.mainreports.TotalHasrReportRVO.CountGonah_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountGenayat"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNT_GENAYAT"
+    Expression="COUNT_GENAYAT"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.mainreports.TotalHasrReportRVO.CountGenayat_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GozeyaEntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GOZEYA_ENTITY_NAME"
+    Expression="GOZEYA_ENTITY_NAME"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.mainreports.TotalHasrReportRVO.GozeyaEntityName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParentEntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENT_ENTITY_NAME"
+    Expression="PARENT_ENTITY_NAME"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.mainreports.TotalHasrReportRVO.ParentEntityName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UserName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="USER_NAME"
+    Expression="USER_NAME"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.mainreports.TotalHasrReportRVO.UserName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

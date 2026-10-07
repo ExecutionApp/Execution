@@ -1,0 +1,19 @@
+//Groovy Scripts for com.egabi.cjexec.model.views.oppositions.CourtBcHearingResPartiesView
+
+package com.egabi.cjexec.model.views.oppositions
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="CreatedDate")
+def CreatedDate_ExpressionScript_Expression()
+{
+adf.currentDateTime
+}
+
+
+@TransientValueExpression(attributeName="UpdatedDate")
+def UpdatedDate_ExpressionScript_Expression()
+{
+adf.currentDateTime
+}
+

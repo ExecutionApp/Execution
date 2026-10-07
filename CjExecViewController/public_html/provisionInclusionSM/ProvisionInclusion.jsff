@@ -1,0 +1,2013 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <!--<c:set var="cjexecviewcontrollerBundle1" value="#{adfBundle['CjExecViewControllerBundle']}"/>-->
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <!-- Search form -->
+    <af:panelGroupLayout id="pgl53">
+      
+    </af:panelGroupLayout>
+    <af:panelHeader text="تحديد الجلسات  و المؤجلات" id="ph5" styleClass="bcddetail-screen"
+                    partialTriggers="b12 b1">
+        <h:panelGroup id="pg7" layout="block" styleClass="row search-case-panel">
+            <h:panelGroup id="pg1" layout="block" styleClass="ml-3">
+                <af:outputLabel showRequired="#{bindings.PoliceNo.hints.mandatory}"
+                                value="#{bindings.PoliceNo.hints.label}" id="ol1"/>
+                <af:inputText id="it109" rendered="#{pageFlowScope.disabledValidate}" disabled="true"
+                              contentStyle="    width: 60px;   "/>
+                <af:inputText value="#{bindings.PoliceNo.inputValue}" label="#{bindings.PoliceNo.hints.label}"
+                              required="#{bindings.PoliceNo.hints.mandatory}"
+                              disabled="#{pageFlowScope.disabledValidate}" maximumLength="6"
+                              shortDesc="#{bindings.PoliceNo.hints.tooltip}" id="it57" simple="true"
+                              contentStyle="    width: 60px;   " autoSubmit="true"
+                              rendered="#{!pageFlowScope.disabledValidate}">
+                    <f:validator binding="#{bindings.PoliceNo.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.PoliceNo.format}"/>
+                </af:inputText>
+            </h:panelGroup>
+            <h:panelGroup id="pg2" layout="block" styleClass="ml-3">
+                <af:outputLabel showRequired="#{bindings.ParYear1.hints.mandatory}" value="سنة" id="ol2"/>
+                <af:inputText id="it110" rendered="#{pageFlowScope.disabledValidate}" disabled="true"
+                              contentStyle="    width: 60px;     min-width: 60px !important;"/>
+                <af:inputText value="#{bindings.ParYear1.inputValue}" required="#{bindings.ParYear1.hints.mandatory}"
+                              maximumLength="4" shortDesc="#{bindings.ParYear1.hints.tooltip}" id="it58" simple="true"
+                              disabled="#{pageFlowScope.disabledValidate}"
+                              contentStyle="    width: 60px;     min-width: 60px !important;" autoSubmit="true"
+                              validator="#{cjValidator.yearValidator}" rendered="#{!pageFlowScope.disabledValidate}">
+                    <f:validator binding="#{bindings.ParYear1.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ParYear1.format}"/>
+                </af:inputText>
+            </h:panelGroup>
+            <h:panelGroup id="pg3" layout="block" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="#{bindings.BusinessCaseType1.hints.mandatory}" value="الجدول" id="ol3"/>
+                <af:selectOneChoice value="#{bindings.BusinessCaseType1.inputValue}"
+                                    label="#{bindings.BusinessCaseType1.label}" required="true"
+                                    disabled="#{pageFlowScope.disabledValidate}"
+                                    shortDesc="#{bindings.BusinessCaseType1.hints.tooltip}" id="soc9" simple="true"
+                                    autoSubmit="true">
+                    <f:selectItems value="#{bindings.BusinessCaseType1.items}" id="si9"/>
+                    <f:validator binding="#{bindings.BusinessCaseType1.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.PoliceType.inputValue}"
+                                    required="#{bindings.PoliceType.hints.mandatory}"
+                                    shortDesc="#{bindings.PoliceType.hints.tooltip}" id="soc56" disabled="true"
+                                    rendered="false">
+                    <f:selectItems value="#{bindings.PoliceType.items}" id="si58"/>
+                    <f:validator binding="#{bindings.PoliceType.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup id="pg98" layout="block" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="true" value="النيابة الكلية" id="ol70"/>
+                <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}" required="true"
+                                    shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}" id="soc28" simple="true"
+                                    disabled="#{sessionScope.userInfo.entityDegree eq '39' or sessionScope.userInfo.entityDegree eq '3' }"
+                                    autoSubmit="true">
+                    <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si28"/>
+                    <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup id="pg97" layout="block" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="true" value="النيابة الجزئية" id="ol54"/>
+                <af:selectOneChoice value="#{bindings.NeyabGozayaa.inputValue}" required="true"
+                                    shortDesc="#{bindings.NeyabGozayaa.hints.tooltip}" id="soc17"
+                                    partialTriggers="soc28" simple="true"
+                                    disabled="#{sessionScope.userInfo.entityDegree eq '3'  or pageFlowScope.disabledValidate}"
+                                    autoSubmit="true" showRequired="true">
+                    <f:selectItems value="#{bindings.NeyabGozayaa.items}" id="si17"/>
+                    <f:validator binding="#{bindings.NeyabGozayaa.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup id="pg4" layout="block" styleClass="col-md-2 col-sm-12">
+                <af:outputLabel showRequired="true" value="#{bindings.OrigEntity.label}" id="ol4"/>
+                <af:selectOneChoice value="#{bindings.OrigEntity.inputValue}" label="#{bindings.OrigEntity.label}"
+                                    disabled="#{pageFlowScope.disabledValidate}"
+                                    shortDesc="#{bindings.OrigEntity.hints.tooltip}" id="soc10" simple="true"
+                                    partialTriggers="soc17" valueChangeListener="#{pageFlowScope.BCDetails.policeVCL}"
+                                    showRequired="true" autoSubmit="true">
+                    <f:selectItems value="#{bindings.OrigEntity.items}" id="si10"/>
+                    <f:validator binding="#{bindings.OrigEntity.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.PoliceOriginId.inputValue}"
+                                    required="#{bindings.PoliceOriginId.hints.mandatory}"
+                                    shortDesc="#{bindings.PoliceOriginId.hints.tooltip}" id="soc55" rendered="false"
+                                    disabled="true">
+                    <f:selectItems value="#{bindings.PoliceOriginId.items}" id="si57"/>
+                    <f:validator binding="#{bindings.PoliceOriginId.validator}"/>
+                </af:selectOneChoice>
+                <af:inputText id="it111" disabled="true" contentStyle="    width: 60px;   " visible="false"/>
+            </h:panelGroup>
+            <!-- Search toggle -->
+            <af:link text="#{bindings.JudgmentType.inputValue}" id="l30" visible="false"/>
+            <h:panelGroup id="pg8" layout="block" styleClass="col-md-2 col-sm-12">
+                <af:link styleClass="btn-search" id="l8" icon="/resources/images/magnifier.png"
+                         action="#{pageFlowScope.BCDetails.validateBC_PI}" disabled="#{pageFlowScope.disabledValidate}"
+                         partialTriggers="l9 b2">
+                    <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                    <!--<af:image  source="/resources/images/accept.png" id="i10"/>-->
+                    <af:setPropertyListener from="false" to="#{pageFlowScope.judge}" type="action"/>
+                    <af:setPropertyListener from="false" to="#{pageFlowScope.search}" type="action"/>
+                    <af:setPropertyListener from="false" to="#{pageFlowScope.dimmed}" type="action"/>
+                </af:link>
+            </h:panelGroup>
+            <h:panelGroup id="pg28" layout="block" styleClass="col-md-3 col-sm-12"
+                          rendered="#{bindings.OrigEntity.inputValue ne null}">
+                <af:button text="التهم   " id="l28" inlineStyle="color:Black; font-size:large;" styleClass="buttonv"
+                           visible="false" clientComponent="true" immediate="true">
+                    <af:target events="@all" execute="@this" render="@all"/>
+                </af:button>
+                <af:link actionListener="#{bindings.newProsectionJudgment.execute}" text="newProsectionJudgment"
+                         disabled="#{!bindings.newProsectionJudgment.enabled}" id="l27"
+                         action="#{pageFlowScope.BCDetails.prosecution}" rendered="false"/>
+                <h:panelGroup layout="block" styleClass="search-mode-panel" id="pg82" rendered="false">
+                    <af:outputLabel value="تغيير النظام" id="ol15"/>
+                    <af:panelLabelAndMessage id="plam2" binding="#{pageFlowScope.BCDetails.btnMode2}">
+                        <af:panelGroupLayout id="pgl38" styleClass="tgl-radio-btn">
+                            <af:selectOneRadio value="#{bindings.ExistFlag.inputValue}"
+                                               required="#{bindings.ExistFlag.hints.mandatory}"
+                                               shortDesc="#{bindings.ExistFlag.hints.tooltip}" id="sor1" visible="false"
+                                               rendered="false">
+                                <f:selectItems value="#{bindings.ExistFlag.items}" id="si29"/>
+                                <f:validator binding="#{bindings.ExistFlag.validator}"/>
+                            </af:selectOneRadio>
+                            <af:button text="قديم" id="b24" type="radio" action="#{pageFlowScope.BCDetails.backLog}"
+                                       rendered="#{pageFlowScope.BCFound}" disabled="#{pageFlowScope.back eq '2'}"
+                                       partialTriggers="b19 b21 b12 b1 l9" immediate="true" partialSubmit="false"
+                                       selected="#{pageFlowScope.back eq '1'}">
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.backLog}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.detail}" type="action"/>
+                            </af:button>
+                            <af:button text="حديث" id="b277" type="radio" action="#{pageFlowScope.BCDetails.forwardLog}"
+                                       rendered="#{pageFlowScope.BCFound and !sessionScope.GnayaatFlag and !sessionScope.ProsecutionCJ}"
+                                       disabled="#{pageFlowScope.back eq '1'}" partialTriggers="b19 b21 b12 b1 l9 l8"
+                                       immediate="true" selected="#{pageFlowScope.back eq '2'}">
+                                <af:setPropertyListener from="false" to="#{pageFlowScope.backLog}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.detail}" type="action"/>
+                            </af:button>
+                            <af:button text="حديث" id="b28" type="radio"
+                                       action="#{pageFlowScope.BCDetails.forwardLogGnayaat}"
+                                       rendered="#{pageFlowScope.BCFound and sessionScope.GnayaatFlag and !sessionScope.ProsecutionCJ}"
+                                       disabled="#{pageFlowScope.back eq '1'}" partialTriggers="b19 b21 b12 b1 l9 l8"
+                                       immediate="true" selected="#{pageFlowScope.back eq '2'}">
+                                <af:setPropertyListener from="false" to="#{pageFlowScope.backLog}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.detail}" type="action"/>
+                            </af:button>
+                            <af:button text="حديث" id="b5" type="radio" action="#{pageFlowScope.BCDetails.prosecution}"
+                                       rendered="false" disabled="#{pageFlowScope.back eq '1'}"
+                                       partialTriggers="b19 b21 b12 b1 l9 l8" immediate="true"
+                                       selected="#{pageFlowScope.back eq '2'}">
+                                <af:setPropertyListener from="false" to="#{pageFlowScope.backLog}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.detail}" type="action"/>
+                            </af:button>
+                        </af:panelGroupLayout>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="" id="plam1" visible="false"
+                                             binding="#{pageFlowScope.BCDetails.btNMode}" partialTriggers="b6 b1 b2">
+                        <af:panelGroupLayout id="pgl7" styleClass="tgl-radio-btn">
+                            <af:button text="#{cjexecviewcontrollerBundle.CHRG_DECISION_ONE_PARTY}" id="b19"
+                                       type="radio" action="#{pageFlowScope.BCDetails.radio_OneParty}"
+                                       selected="#{pageFlowScope.decision eq '1'}"
+                                       disabled="#{pageFlowScope.decision eq '2'}" partialTriggers="b19 b21 l9 b1 b12"
+                                       immediate="true">
+                                <af:setPropertyListener from="false" to="#{bindings.Flag.inputValue}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.backLog}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.detail}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.judge}" type="action"/>
+                            </af:button>
+                            <af:button text="#{cjexecviewcontrollerBundle.CHRG_DECISION_MANY_PARTY}" id="b21"
+                                       type="radio" action="#{pageFlowScope.BCDetails.radio_ManyParty}"
+                                       selected="#{pageFlowScope.decision eq '2'}"
+                                       disabled="#{pageFlowScope.decision eq '1' }" partialTriggers="b19 b21 l9 b1 b12"
+                                       immediate="true">
+                                <af:setPropertyListener from="true" to="#{bindings.Flag.inputValue}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.backLog}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.detail}" type="action"/>
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.judge}" type="action"/>
+                            </af:button>
+                            <af:link text="#{bindings.ReturnFlag.inputValue}" id="l13" rendered="false"/>
+                            <af:link id="l1" styleClass="tglOn" action="#{pageFlowScope.BCDetails.judgType_1}"
+                                     rendered="false"/>
+                            <af:link text="#{bindings.Flag.inputValue}" id="l12" rendered="false"/>
+                            <af:link action="#{pageFlowScope.BCDetails.JudgType_2}" id="l2" styleClass="tglOff"
+                                     rendered="false"/>
+                            <af:selectBooleanCheckbox value="#{bindings.ReturnFlag.inputValue}"
+                                                      label="#{bindings.ReturnFlag.label}"
+                                                      shortDesc="#{bindings.ReturnFlag.hints.tooltip}" id="sbc19"
+                                                      binding="#{pageFlowScope.BCDetails.returnFlag}" visible="false"/>
+                        </af:panelGroupLayout>
+                        <af:selectBooleanCheckbox value="#{bindings.Flag.inputValue}" label="#{bindings.Flag.label}"
+                                                  shortDesc="#{bindings.Flag.hints.tooltip}" id="sbc18"
+                                                  autoSubmit="true" nullValueMeans="mixed" partialTriggers="b19 b21"
+                                                  binding="#{pageFlowScope.BCDetails.checkFlag}" visible="false"/>
+                    </af:panelLabelAndMessage>
+                </h:panelGroup>
+                <af:button id="b6" action="#{pageFlowScope.BCDetails.ValidateBC}" styleClass="btn-search"
+                           icon="/resources/images/magnifier.png" rendered="false" partialSubmit="true"/>
+            </h:panelGroup>
+            <!-- end Search toggle -->
+        </h:panelGroup>
+        <h:panelGroup id="pg6" layout="block" styleClass="btn-holder btn-holder-search mt-0" rendered="false">
+            <af:link actionListener="#{bindings.ValidatePoliceReport.execute}"
+                     action="#{pageFlowScope.BCDetails.ValidateBC}" icon="/resources/images/magnifier.png" id="l18"/>
+            <af:link id="l23" action="#{pageFlowScope.BCDetails.newBusinessCaseLedgerSeq}" rendered="false"
+                     visible="#{bindings.BusinessCaseLedgerSeqVO1Iterator.estimatedRowCount ==0}">
+                <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                <af:image source="/resources/images/taxonomy.png" id="i6"/>
+            </af:link>
+            <af:button rendered="false" id="b9" actionListener="#{bindings.ValidatePoliceReport.execute}"
+                       action="#{pageFlowScope.BCDetails.ValidateBC}" icon="/resources/images/magnifier.png"
+                       partialSubmit="true" visible="false"/>
+        </h:panelGroup>
+        <af:link text="#{bindings.IdFormCaseDecription.inputValue}" id="l21" visible="false"/>
+        <af:link text="#{bindings.IdExcCourtBCDecision.inputValue}" id="l22" visible="false"/>
+        <!-- END Search form -->
+        <!--    <af:panelGroupLayout partialTriggers="b19 b21"  layout="vertical" styleClass="search-empty-panel" id="pg83"
+                         binding="#{pageFlowScope.BCDetails.searchImge}" rendered="false">
+      <af:image styleClass="search-empty" source="/resources/img/searchpaper.png" id="i110"/>
+    </af:panelGroupLayout>  -->
+        <af:table value="#{bindings.BusinessCase1.collectionModel}" var="row" rows="#{bindings.BusinessCase1.rangeSize}"
+                  emptyText="#{bindings.BusinessCase1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.BusinessCase1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.BusinessCase1.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.BusinessCase1.rangeSize}"
+                  filterModel="#{bindings.BusinessCase1Query.queryDescriptor}" filterVisible="true"
+                  queryListener="#{bindings.BusinessCase1Query.processQuery}" varStatus="vs" id="t10" visible="false"
+                  contentDelivery="immediate" scrollPolicy="page">
+            <af:column sortProperty="#{bindings.BusinessCase1.hints.Id.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.BusinessCase1.hints.Id.label}" id="c27">
+                <af:outputText value="#{row.Id}" shortDesc="#{bindings.BusinessCase1.hints.Id.tooltip}" id="ot10">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.BusinessCase1.hints.Id.format}"/>
+                </af:outputText>
+            </af:column>
+        </af:table>
+        <af:inputText value="#{bindings.Id8.inputValue}" required="#{bindings.Id8.hints.mandatory}"
+                      maximumLength="#{bindings.Id8.hints.precision}" shortDesc="#{bindings.Id8.hints.tooltip}"
+                      id="it74" visible="false">
+            <f:validator binding="#{bindings.Id8.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.Id8.format}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.Id9.inputValue}" required="#{bindings.Id9.hints.mandatory}"
+                      maximumLength="#{bindings.Id9.hints.precision}" shortDesc="#{bindings.Id9.hints.tooltip}"
+                      id="it75" visible="false">
+            <f:validator binding="#{bindings.Id9.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.Id9.format}"/>
+        </af:inputText>
+        <af:table value="#{bindings.CourtBcHearingReservationVO1.collectionModel}" var="row"
+                  rows="#{bindings.CourtBcHearingReservationVO1.rangeSize}"
+                  emptyText="#{bindings.CourtBcHearingReservationVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.CourtBcHearingReservationVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.CourtBcHearingReservationVO1.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.CourtBcHearingReservationVO1.rangeSize}"
+                  filterModel="#{bindings.CourtBcHearingReservationVO1Query.queryDescriptor}" filterVisible="true"
+                  queryListener="#{bindings.CourtBcHearingReservationVO1Query.processQuery}" varStatus="vs" id="t11"
+                  visible="false" contentDelivery="immediate" scrollPolicy="page">
+            <af:column sortProperty="#{bindings.CourtBcHearingReservationVO1.hints.Id.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.CourtBcHearingReservationVO1.hints.Id.label}" id="c28">
+                <af:outputText value="#{row.Id}" shortDesc="#{bindings.CourtBcHearingReservationVO1.hints.Id.tooltip}"
+                               id="ot11">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.CourtBcHearingReservationVO1.hints.Id.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.CourtBcHearingReservationVO1.hints.BusinessCaseId.name}"
+                       filterable="true" sortable="true"
+                       headerText="#{bindings.CourtBcHearingReservationVO1.hints.BusinessCaseId.label}" id="c29">
+                <af:outputText value="#{row.BusinessCaseId}"
+                               shortDesc="#{bindings.CourtBcHearingReservationVO1.hints.BusinessCaseId.tooltip}"
+                               id="ot12">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.CourtBcHearingReservationVO1.hints.BusinessCaseId.format}"/>
+                </af:outputText>
+            </af:column>
+        </af:table>
+        <h:panelGroup id="pg107" styleClass="row search-case-panel" rendered="false">
+            <h:panelGroup id="pg118">
+                <h:panelGroup id="pg11" styleClass="stop-action-panel checkbox-custom" style="top: 19px;"
+                              rendered="#{sessionScope.userInfo.entityDegree eq '39'}">
+                    <af:outputLabel styleClass="text-center" value="و المقيدة برقم كلى" id="ol75"
+                                    rendered="#{bindings.BusinessCaseType1.inputValue  ne '11'}"/>
+                    <af:selectBooleanCheckbox value="#{bindings.CheckFlag.inputValue}" label="حصر قضية جديد"
+                                              shortDesc="#{bindings.CheckFlag.hints.tooltip}" id="sbc21"
+                                              autoSubmit="true"
+                                              valueChangeListener="#{pageFlowScope.BCDetails.newHasrBC}" simple="true"
+                                              rendered="#{bindings.BusinessCaseType1.inputValue  ne '11'}"
+                                              disabled="#{bindings.CreatedBy2.inputValue ne null or !sessionScope.userInfo.userPrevMap[5820]}"
+                                              readOnly="#{pageFlowScope.search}">
+                        <af:setPropertyListener from="false" to="#{pageFlowScope.search}" type="valueChange"/>
+                    </af:selectBooleanCheckbox>
+                    <af:spacer width="10" height="10" id="s3"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup id="pg109" styleClass="hasr-case-panel d-flex">
+                <h:panelGroup id="pg46" layout="block" rendered="#{bindings.Id9.inputValue != null}" styleClass="ml-3">
+                    <af:outputLabel showRequired="#{bindings.PoliceNo.hints.mandatory}" value="رقم" id="ol30"/>
+                    <af:inputText value="#{bindings.Seq.inputValue}" required="true"
+                                  maximumLength="#{bindings.Seq.hints.precision}"
+                                  shortDesc="#{bindings.Seq.hints.tooltip}" id="it70" contentStyle="    width: 60px;   "
+                                  simple="true" autoSubmit="true" disabled="#{bindings.UpdatedBy2.inputValue != null}">
+                        <f:validator binding="#{bindings.Seq.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Seq.format}"/>
+                    </af:inputText>
+                </h:panelGroup>
+                <h:panelGroup id="pg99" layout="block" rendered="#{bindings.Id9.inputValue != null}" styleClass="ml-3">
+                    <af:outputLabel showRequired="#{bindings.ParYear1.hints.mandatory}" value="سنة" id="ol71"/>
+                    <af:inputText value="#{bindings.Year1.inputValue}" required="true" maximumLength="4"
+                                  shortDesc="#{bindings.Year1.hints.tooltip}" id="it71"
+                                  contentStyle="    width: 60px;     min-width: 60px !important;" simple="true"
+                                  validator="#{cjValidator.yearValidator}" autoSubmit="true"
+                                  disabled="#{bindings.UpdatedBy2.inputValue != null}">
+                        <f:validator binding="#{bindings.Year1.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Year1.format}"/>
+                    </af:inputText>
+                </h:panelGroup>
+                <h:panelGroup id="pg100" layout="block" rendered="#{bindings.Id9.inputValue != null}" styleClass="ml-3">
+                    <af:outputLabel showRequired="#{bindings.BusinessCaseType1.hints.mandatory}" value="الجدول"
+                                    id="ol72"/>
+                    <af:inputText value="#{bindings.SchemaId.inputValue}"
+                                  required="#{bindings.SchemaId.hints.mandatory}"
+                                  columns="#{bindings.SchemaId.hints.displayWidth}"
+                                  maximumLength="#{bindings.SchemaId.hints.precision}"
+                                  shortDesc="#{bindings.SchemaId.hints.tooltip}" id="it36" partialTriggers="soc4"
+                                  rendered="false">
+                        <f:validator binding="#{bindings.SchemaId.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.SchemaId.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.CaseSchemaId.inputValue}"
+                                  required="#{bindings.CaseSchemaId.hints.mandatory}"
+                                  columns="#{bindings.CaseSchemaId.hints.displayWidth}"
+                                  maximumLength="#{bindings.CaseSchemaId.hints.precision}"
+                                  shortDesc="#{bindings.CaseSchemaId.hints.tooltip}" id="it90" rendered="false">
+                        <f:validator binding="#{bindings.CaseSchemaId.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.CaseSchemaId.format}"/>
+                    </af:inputText>
+                    <af:selectOneChoice value="#{bindings.LedgerId.inputValue}" required="true"
+                                        shortDesc="#{bindings.LedgerId.hints.tooltip}" id="soc4" simple="true"
+                                        partialTriggers="soc27 soc11"
+                                        valueChangeListener="#{pageFlowScope.BCDetails.LedgerVCL}" autoSubmit="true"
+                                        readOnly="#{pageFlowScope.search}"
+                                        disabled="#{bindings.UpdatedBy2.inputValue != null}">
+                        <f:selectItems value="#{bindings.LedgerId.items}" id="si4"/>
+                        <f:validator binding="#{bindings.LedgerId.validator}"/>
+                    </af:selectOneChoice>
+                </h:panelGroup>
+                <h:panelGroup id="pg115" layout="block" rendered="#{bindings.Id9.inputValue != null}"
+                              styleClass="col-sm-4">
+                    <af:outputLabel showRequired="#{bindings.ParYear1.hints.mandatory}" value="تاريخ وفوع الجريمة "
+                                    id="ol83" rendered="#{bindings.SchemaId.inputValue ne '3643'}"
+                                    partialTriggers="soc4"/>
+                    <af:inputDate value="#{bindings.CrimeDate.inputValue}"
+                                  required="#{bindings.CrimeDate.hints.mandatory}" simple="true" showRequired="false"
+                                  shortDesc="#{bindings.CrimeDate.hints.tooltip}" id="id22"
+                                  maxValue="#{pageFlowScope.TestBean.date}"
+                                  rendered="#{bindings.SchemaId.inputValue ne '3643'}" partialTriggers="soc4">
+                        <f:validator binding="#{bindings.CrimeDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.CrimeDate.format}"/>
+                    </af:inputDate>
+                </h:panelGroup>
+                <h:panelGroup id="pg128" layout="block" rendered="#{bindings.Id9.inputValue != null}"
+                              styleClass="col-sm-4">
+                    <af:inputText value="#{bindings.InTimeDescription.inputValue}"
+                                  maximumLength="#{bindings.PartyFullName.hints.precision}" id="it102" autoSubmit="true"
+                                  simple="true" validator="#{cjValidator.arabicCharValidator}" showRequired="true"
+                                  required="true" rendered="false">
+                        <f:validator binding="#{bindings.PartyFullName.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.InTimeDescription.inputValue}" simple="true"
+                                  required="#{bindings.InTimeDescription.hints.mandatory}"
+                                  columns="#{bindings.InTimeDescription.hints.displayWidth}"
+                                  maximumLength="#{bindings.InTimeDescription.hints.precision}"
+                                  shortDesc="#{bindings.InTimeDescription.hints.tooltip}" id="it103" rendered="false">
+                        <f:validator binding="#{bindings.InTimeDescription.validator}"/>
+                    </af:inputText>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+        <af:inputText value="#{bindings.Source.inputValue}" simple="true" required="#{bindings.Source.hints.mandatory}"
+                      maximumLength="#{bindings.Source.hints.precision}" shortDesc="#{bindings.Source.hints.tooltip}"
+                      id="it80" rendered="false">
+            <f:validator binding="#{bindings.Source.validator}"/>
+        </af:inputText>
+        <h:panelGroup layout="block" styleClass="row search-case-panel" id="pg51"
+                      rendered="#{pageFlowScope.disabledValidate}">
+            <h:panelGroup id="pg5" layout="block" styleClass="col-md-1 col-sm-12">
+                <af:outputLabel showRequired="#{!pageFlowScope.CJP}"
+                                value="الدرجة    #{!pageFlowScope.backLog and bindings.BusinessCaseDegree.inputValue eq '1' and bindings.Source.inputValue ne null and !sessionScope.CJ }" id="ol5"/>
+                <!--<af:outputLabel value="#{bindings.IdFormCaseDescriptionParties.inputValue}" id="ol83"/>-->
+                <af:selectOneChoice value="#{bindings.BusinessCaseDegree1.inputValue}"
+                                    label="#{bindings.BusinessCaseDegree1.label}"
+                                    required="#{bindings.BusinessCaseDegree1.hints.mandatory}" simple="true"
+                                    shortDesc="#{bindings.BusinessCaseDegree1.hints.tooltip}" id="soc27"
+                                    rendered="false">
+                    <f:selectItems value="#{bindings.BusinessCaseDegree1.items}" id="si27"/>
+                    <f:validator binding="#{bindings.BusinessCaseDegree1.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.BusinessCaseDegree.inputValue}"
+                                    label="#{bindings.BusinessCaseDegree.label}"
+                                    shortDesc="#{bindings.BusinessCaseDegree.hints.tooltip}" id="soc11" simple="true"
+                                    autoSubmit="true" valueChangeListener="#{pageFlowScope.BCDetails.degreeVCL}"
+                                    showRequired="#{!pageFlowScope.CJP}" clientComponent="true"
+                                    rendered="#{bindings.SchemaId.inputValue ne '3646' and bindings.SchemaId.inputValue ne '3647' and  bindings.SchemaId.inputValue ne '3648' and   bindings.SchemaId.inputValue ne '3643'  and !sessionScope.GnayaatFlag or bindings.BusinessCaseType1.inputValue eq '5'}"
+                                    partialTriggers="soc4 sor2" required="false"
+                                    readOnly="#{pageFlowScope.CJP or sessionScope.prosequtionFlag eq'2'}"
+                                    visible="#{!(!((!pageFlowScope.backLog and (bindings.BusinessCaseDegree.inputValue ne '1' or bindings.Source.inputValue eq null) or sessionScope.CJ) and bindings.BusinessCaseDegree.inputValue ne '8') and bindings.JudgmentType.inputValue  eq '3' ) }"
+                                    disabled="true">
+                    <f:selectItems value="#{bindings.BusinessCaseDegree.items}" id="si11"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.BcDegreeGnayaat.inputValue}" required="false"
+                                    shortDesc="#{bindings.BcDegreeGnayaat.hints.tooltip}" id="soc34"
+                                    rendered="#{(bindings.SchemaId.inputValue eq '3646' or bindings.SchemaId.inputValue eq '3647' or bindings.SchemaId.inputValue eq '3648' or sessionScope.GnayaatFlag) and bindings.BusinessCaseType1.inputValue ne '5'}"
+                                    partialTriggers="soc4" valueChangeListener="#{pageFlowScope.BCDetails.degreeVCL}"
+                                    autoSubmit="true" disabled="#{pageFlowScope.search}"
+                                    visible="#{!(!((!pageFlowScope.backLog and (bindings.BusinessCaseDegree.inputValue ne '1' or bindings.Source.inputValue eq null) or sessionScope.CJ) and bindings.BusinessCaseDegree.inputValue ne '8') and bindings.JudgmentType.inputValue  eq '3' ) }">
+                    <f:selectItems value="#{bindings.BcDegreeGnayaat.items}" id="si36"/>
+                    <f:validator binding="#{bindings.BcDegreeGnayaat.validator}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.BcDegreeGonaha.inputValue}" required="false"
+                                    shortDesc="#{bindings.BcDegreeGonaha.hints.tooltip}" id="soc35"
+                                    rendered="#{bindings.SchemaId.inputValue eq '3643' and !sessionScope.GnayaatFlag}"
+                                    partialTriggers="soc4" valueChangeListener="#{pageFlowScope.BCDetails.degreeVCL}"
+                                    autoSubmit="true" disabled="#{pageFlowScope.search}"
+                                    visible="#{!(!((!pageFlowScope.backLog and (bindings.BusinessCaseDegree.inputValue ne '1' or bindings.Source.inputValue eq null) or sessionScope.CJ) and bindings.BusinessCaseDegree.inputValue ne '8') and bindings.JudgmentType.inputValue  eq '3' ) }">
+                    <f:selectItems value="#{bindings.BcDegreeGonaha.items}" id="si37"/>
+                    <f:validator binding="#{bindings.BcDegreeGonaha.validator}"/>
+                </af:selectOneChoice>
+                <af:outputText value="نيابة عامة" id="ot4"
+                               rendered="#{!((!pageFlowScope.backLog and (bindings.BusinessCaseDegree.inputValue ne '1' or bindings.Source.inputValue eq null) or sessionScope.CJ) and bindings.BusinessCaseDegree.inputValue ne '8') and bindings.JudgmentType.inputValue  eq '3'  }"/>
+            </h:panelGroup>
+            <h:panelGroup id="pg29" layout="block" styleClass="col-md-2 col-sm-12" rendered="true">
+                <af:outputLabel value="#{bindings.CircleHearingDateId.label}" id="ol16"
+                                rendered="#{bindings.JudgmentType.inputValue ne '3'}" partialTriggers="sor2"/>
+                <af:inputDate value="#{bindings.HearingDate.inputValue}" partialTriggers="b24 b277 b28 l8"
+                              shortDesc="#{bindings.HearingDate.hints.tooltip}" id="id21" simple="true"
+                              maxValue="#{pageFlowScope.TestBean.date}"
+                              required="#{bindings.JudgmentType.inputValue ne '3' or sessionScope.ProsecutionCJ}"
+                              showRequired="true" autoSubmit="true">
+                    <f:validator binding="#{bindings.HearingDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.HearingDate.format}"/>
+                </af:inputDate>
+                <af:selectOneChoice value="#{bindings.Hearing.inputValue}" shortDesc="#{bindings.Hearing.hints.tooltip}"
+                                    id="soc18" partialTriggers="soc10 soc27 soc11 b24 b277 b28 soc34 soc35"
+                                    simple="true" autoSubmit="true"
+                                    rendered="#{(!pageFlowScope.backLog  and !sessionScope.ProsecutionCJ or sessionScope.CJ) and bindings.BusinessCaseDegree.inputValue ne '8'  or bindings.BusinessCaseType1.inputValue eq '5'}"
+                                    valueChangeListener="#{pageFlowScope.BCDetails.hearingDateVCL}">
+                    <!--<f:selectItems value="#{bindings.Hearing.items}" id="si18"/>-->
+                    <f:selectItems value="#{pageFlowScope.BCDetails.selectItemList}" id="si18"/>
+                    <f:validator binding="#{bindings.Hearing.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup id="pg106" styleClass="col-md-2 col-sm-12" rendered="false">
+                <af:outputLabel value="#{bindings.CircleHearingDateId.label}" id="ol73" showRequired="true"/>
+                <af:inputDate value="#{bindings.HearingDate.inputValue}" partialTriggers="l8 b24 b277 b28 soc11"
+                              shortDesc="#{bindings.HearingDate.hints.tooltip}" id="id17" simple="true"
+                              maxValue="#{pageFlowScope.TestBean.date}" showRequired="true" required="true"
+                              rendered="#{pageFlowScope.BCFound and !pageFlowScope.backLog and bindings.BusinessCaseDegree.inputValue eq '1' and bindings.Source.inputValue ne null}">
+                    <f:validator binding="#{bindings.HearingDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.HearingDate.format}"/>
+                </af:inputDate>
+            </h:panelGroup>
+            <h:panelGroup id="pg110" styleClass="col-md-2 col-sm-12" rendered="false">
+                <af:outputLabel value="#{bindings.CircleHearingDateId.label}" id="ol77" showRequired="true"/>
+                <af:inputDate value="#{bindings.HearingDate.inputValue}" partialTriggers="b24 b277 b28 l8"
+                              shortDesc="#{bindings.HearingDate.hints.tooltip}" id="id16" simple="true"
+                              rendered="#{pageFlowScope.backLog or !pageFlowScope.BCFound }"
+                              maxValue="#{pageFlowScope.TestBean.date}" required="true" showRequired="true">
+                    <f:validator binding="#{bindings.HearingDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.HearingDate.format}"/>
+                </af:inputDate>
+            </h:panelGroup>
+            <h:panelGroup id="pg48" layout="block"
+                          rendered="#{pageFlowScope.judge and bindings.BusinessCaseType1.inputValue ne '5' }"
+                          styleClass="col-md-2 col-sm-12 judjmentType-panel">
+                <af:selectOneRadio value="#{bindings.JudgmentType.inputValue}"
+                                   shortDesc="#{bindings.JudgmentType.hints.tooltip}" id="sor2" layout="horizontal"
+                                   valueChangeListener="#{pageFlowScope.TestBean.penaltyFlagVCL}" autoSubmit="true"
+                                   rendered="#{!bindings.CheckFlag.inputValue}" partialTriggers="ilov3">
+                    <f:selectItems value="#{bindings.JudgmentType.items}" id="si33"/>
+                    <f:validator binding="#{bindings.JudgmentType.validator}"/>
+                </af:selectOneRadio>
+            </h:panelGroup>
+            <af:button text="جلسة جنح" id="b7" partialTriggers="b24 b28 b277"
+                       action="#{pageFlowScope.BCDetails.newGonahReservationPI}" styleClass="validate-btn" immediate="true"
+                       partialSubmit="false">
+                <af:setPropertyListener from="true" to="#{pageFlowScope.showDate}" type="action"/>
+            </af:button>
+            <h:panelGroup id="pg96" layout="block" styleClass="col-md-1 col-sm-12"
+                          rendered="#{pageFlowScope.BCFound  and !sessionScope.ProsecutionCJ}">
+                <af:button text=" جلسة جنايات" id="b4" partialTriggers="b24 b28 b277"
+                           action="#{pageFlowScope.BCDetails.newReservationGnayatPI}" styleClass="validate-btn"
+                           immediate="true" partialSubmit="false">
+                    <af:setPropertyListener from="true" to="#{pageFlowScope.showDate}" type="action"/>
+                </af:button>
+                <af:link id="l26" partialSubmit="true">
+                    <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                    <af:button text="بحث" id="b23" partialTriggers="b24 b277 b28"
+                               action="#{pageFlowScope.BCDetails.fetchResParties}"
+                               rendered="#{(!pageFlowScope.backLog   or sessionScope.CJ) and bindings.BusinessCaseDegree.inputValue ne '8'  or bindings.BusinessCaseType1.inputValue eq '5'}"
+                               styleClass="validate-btn" immediate="true" partialSubmit="false">
+                        <af:setPropertyListener from="true" to="#{pageFlowScope.search}" type="action"/>
+                        <af:setPropertyListener from="true" to="#{pageFlowScope.dimmed}" type="action"/>
+                        <!--<af:clientListener type="mouseUp" method="pressButton"/>-->
+                    </af:button>
+                </af:link>
+                <af:button text="اضافة جلسة" id="l25" partialTriggers="b24 b28 b277"
+                           rendered="#{!pageFlowScope.backLog and bindings.BusinessCaseDegree.inputValue eq '1' and bindings.Source.inputValue ne null and !sessionScope.CJ }"
+                           action="#{pageFlowScope.BCDetails.newReservationPI}" styleClass="validate-btn"
+                           immediate="true" partialSubmit="false">
+                    <af:setPropertyListener from="true" to="#{pageFlowScope.showDate}" type="action"/>
+                </af:button>
+                <af:button text="حديث" id="b283" action="#{pageFlowScope.BCDetails.forwardLogGnayaat}"
+                           rendered="#{bindings.BusinessCaseDegree.inputValue eq '8' and bindings.CaseSchemaId.inputValue eq '3643' }"
+                           partialTriggers="b19 b21 l9 b1 b12" immediate="true">
+                    <af:setPropertyListener from="false" to="#{pageFlowScope.backLog}" type="action"/>
+                    <af:setPropertyListener from="true" to="#{pageFlowScope.detail}" type="action"/>
+                </af:button>
+            </h:panelGroup>
+            <h:panelGroup id="pg139" layout="block" styleClass="col-md-1 col-sm-12"
+                          rendered="#{sessionScope.NO_RESERV}">
+                <af:panelGroupLayout id="pgl54" halign="center" valign="middle" layout="vertical">
+                    <af:spacer width="10" height="20" id="s8"/>
+                    <af:button text="جلسة جديدة" id="b32" action="#{pageFlowScope.BCDetails.newGnayaat_newCase}"
+                               partialTriggers="b19 b21 l9 b1 b12" immediate="true">
+                        <af:setPropertyListener from="false" to="#{pageFlowScope.backLog}" type="action"/>
+                        <af:setPropertyListener from="true" to="#{pageFlowScope.detail}" type="action"/>
+                    </af:button>
+                </af:panelGroupLayout>
+            </h:panelGroup>
+            <h:panelGroup id="pg111" styleClass="col-md-1 col-sm-12" rendered="true">
+                <af:outputLabel value="الحكم" id="ol6" rendered="true" partialTriggers="sor2"/>
+                <af:selectOneChoice value="#{bindings.JudgmentSubType.inputValue}"
+                                    required="#{bindings.JudgmentSubType.hints.mandatory}"
+                                    shortDesc="#{bindings.JudgmentSubType.hints.tooltip}" id="soc2" autoSubmit="true"
+                                    valueChangeListener="#{pageFlowScope.BCDetails.subJudgmentVCL}">
+                    <f:selectItems value="#{bindings.JudgmentSubType.items}" id="si2"/>
+                    <f:validator binding="#{bindings.JudgmentSubType.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <h:panelGroup id="pg10" styleClass="col-md-3 col-sm-12" rendered="true">
+                <af:outputLabel value=" الأجل الأول" id="ol28" rendered="true" partialTriggers="sor2"/>
+                <af:panelGroupLayout id="pgl5" layout="scroll">
+                    <af:inputDate value="#{bindings.HearingDate.inputValue}" partialTriggers="b24 b277 b28 l8 soc2"
+                                  shortDesc="#{bindings.HearingDate.hints.tooltip}" id="id1" simple="true"
+                                   
+                                 
+                                  showRequired="true" autoSubmit="true" rendered="#{sessionScope.GnayaatFlag}">
+                        <f:validator binding="#{bindings.HearingDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.HearingDate.format}"/>
+                    </af:inputDate>
+                    <af:inputListOfValues id="ilov1"
+                    partialTriggers="soc2"
+                                          popupTitle="Search and Select: #{bindings.FirstSession.hints.label}"
+                                          value="#{bindings.FirstSession.inputValue}"
+                                          model="#{bindings.FirstSession.listOfValuesModel}"
+                                          required="#{bindings.FirstSession.hints.mandatory}"
+                                          columns="#{bindings.FirstSession.hints.displayWidth}"
+                                          shortDesc="#{bindings.FirstSession.hints.tooltip}" simple="true"
+                                          disabled="#{bindings.JudgmentSubType.inputValue eq '12'}"
+                                          rendered="#{!sessionScope.GnayaatFlag}">
+                        <f:validator binding="#{bindings.FirstSession.validator}"/>
+                        <af:autoSuggestBehavior suggestedItems="#{bindings.HearingDate1.suggestedItems}"/>
+                    </af:inputListOfValues>
+                </af:panelGroupLayout>
+            </h:panelGroup>
+            <h:panelGroup id="pg9" styleClass="col-md-3 col-sm-12" rendered="true">
+                <af:outputLabel value=" الأجل الثانى" id="ol27" rendered="true" partialTriggers="sor2"/>
+                <af:inputListOfValues id="secondSessionId"
+                                      popupTitle="Search and Select: #{bindings.SecondSession.hints.label}"
+                                      value="#{bindings.SecondSession.inputValue}"
+                                      model="#{bindings.SecondSession.listOfValuesModel}"
+                                      required="#{!(bindings.JudgmentSubType.inputValue ne '7' &amp;&amp; bindings.JudgmentSubType.inputValue ne '8')}"
+                                      columns="#{bindings.SecondSession.hints.displayWidth}"
+                                      shortDesc="#{bindings.SecondSession.hints.tooltip}" simple="true"
+                                      rendered="#{!sessionScope.GnayaatFlag}"
+                                      disabled="#{bindings.JudgmentSubType.inputValue ne '7' &amp;&amp; bindings.JudgmentSubType.inputValue ne '8'}"
+                                      partialTriggers="soc2">
+                    <f:validator binding="#{bindings.SecondSession.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.HearingDate1.suggestedItems}"/>
+                </af:inputListOfValues>
+            </h:panelGroup>
+            <!--Bayoumi-->
+            <h:panelGroup id="psg9" rendered="true">
+                <af:outputLabel value="قرار المحكمة" id="ols27" rendered="true"/>
+          
+                <af:selectOneChoice value="#{bindings.JudgmentTypeId.inputValue}"
+                                    label="#{bindings.JudgmentTypeId.label}"
+                                    required="#{bindings.JudgmentTypeId.hints.mandatory}"
+                                 autoSubmit="true"   shortDesc="#{bindings.JudgmentTypeId.hints.tooltip}" id="soc6" simple="true"
+                                    contentStyle="    width: 500px;" 
+                                    valueChangeListener="#{pageFlowScope.BCDetails.courtDecisionVCL}"
+                                    disabled="#{bindings.JudgmentSubType.inputValue ne '24'}" partialTriggers="soc2"
+                                    binding="#{pageFlowScope.BCDetails.judgmentTypeIdBind}">
+                    <f:selectItems value="#{bindings.JudgmentTypeId.items}" id="si6"/>
+                    <f:validator binding="#{bindings.JudgmentTypeId.validator}"/>
+                </af:selectOneChoice>
+            </h:panelGroup>
+            <!--Bayoumi-->
+        </h:panelGroup>
+        <af:panelHeader styleClass="bcdetail-panel" text="      " id="ph1"
+                        partialTriggers="l8 b24 b277 b28 b19 b21 b6 b23 l25 b283"
+                        binding="#{pageFlowScope.BCDetails.details}" rendered="false">
+            <f:facet name="context"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info">
+                <af:link text="police: #{bindings.IdPoliceReport.inputValue}" id="l5"
+                         action="#{pageFlowScope.BCDetails.getOrder}" rendered="false"/>
+                <af:link text="Bc Descision : #{bindings.IdExcCourtBCDecision.inputValue}" id="l4" rendered="false"/>
+                <af:link text="Case : #{bindings.IdFormCaseDecription.inputValue}" id="l3" rendered="false"/>
+            </f:facet>
+            <af:inputListOfValues id="hearingDate1Id"
+                                  popupTitle="Search and Select: #{bindings.HearingDate1.hints.label}"
+                                  value="#{bindings.HearingDate1.inputValue}"
+                                  label="#{bindings.HearingDate1.hints.label}"
+                                  model="#{bindings.HearingDate1.listOfValuesModel}"
+                                  required="#{bindings.HearingDate1.hints.mandatory}"
+                                  columns="#{bindings.HearingDate1.hints.displayWidth}"
+                                  shortDesc="#{bindings.HearingDate1.hints.tooltip}" rendered="false">
+                <f:validator binding="#{bindings.HearingDate1.validator}"/>
+            </af:inputListOfValues>
+            <af:panelGroupLayout id="pgl3" styleClass="col-md-3 col-sm-12"/>
+            <af:panelGroupLayout id="pgl4" styleClass="col-md-3 col-sm-12"/>
+            <af:panelSplitter id="ps1" disabled="true" splitterPosition="700">
+                <f:facet name="first">
+                    <af:panelGroupLayout id="pgl1" layout="vertical">
+                        <af:link text="#{pageFlowScope.search} link 7 #{bindings.UpdatedDate2.inputValue ne null} "
+                                 id="l24" rendered="false"/>
+                        <af:inputText value="#{bindings.PartyFullName.inputValue}" id="it78" readOnly="true"
+                                      disabled="true" rendered="false"/>
+                        <af:inputText value="#{bindings.UpdatedDate2.inputValue}"
+                                      label="#{bindings.UpdatedDate2.hints.label}"
+                                      required="#{bindings.UpdatedDate2.hints.mandatory}"
+                                      maximumLength="#{bindings.UpdatedDate2.hints.precision}"
+                                      shortDesc="#{bindings.UpdatedDate2.hints.tooltip}" id="it79" rendered="false">
+                            <f:validator binding="#{bindings.UpdatedDate2.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.UpdatedDate2.format}"/>
+                        </af:inputText>
+                        <af:panelHeader text="#{'بيانات '}#{bindings.OrderName.inputValue}" id="ph4"
+                                        partialTriggers="l25 b15">
+                            <f:facet name="context">
+                                <af:panelGroupLayout id="pg22" layout="vertical" visible="false">
+                                    <h:panelGroup styleClass="row" layout="block" id="pg23">
+                                        <h:panelGroup id="pg24" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel value="#{bindings.PartyId2.hints.label}" id="ol18"/>
+                                            <af:inputText value="#{bindings.PartyId2.inputValue}"
+                                                          label="#{bindings.PartyId2.hints.label}"
+                                                          required="#{bindings.PartyId2.hints.mandatory}"
+                                                          maximumLength="#{bindings.PartyId2.hints.precision}"
+                                                          shortDesc="#{bindings.PartyId2.hints.tooltip}"
+                                                          partialTriggers="fullNameId" id="it49" simple="true">
+                                                <f:validator binding="#{bindings.PartyId2.validator}"/>
+                                            </af:inputText>
+                                        </h:panelGroup>
+                                        <h:panelGroup layout="block" styleClass="col-md-2 col-sm-12" id="pg31">
+                                            <af:inputListOfValues id="fullNameId"
+                                                                  popupTitle="Search and Select: #{bindings.FullName.hints.label}"
+                                                                  value="#{bindings.FullName.inputValue}"
+                                                                  label="#{bindings.FullName.hints.label}"
+                                                                  model="#{bindings.FullName.listOfValuesModel}"
+                                                                  required="#{bindings.FullName.hints.mandatory}"
+                                                                  shortDesc="#{bindings.FullName.hints.tooltip}">
+                                                <f:validator binding="#{bindings.FullName.validator}"/>
+                                                <!--<af:autoSuggestBehavior suggestedItems="#{bindings.PartyFullName2.suggestedItems}"
+                                                maxSuggestedItems="5"/>-->
+                                            </af:inputListOfValues>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pfl4" visible="false">
+                                    <h:panelGroup id="pg32" styleClass="row" layout="block">
+                                        <h:panelGroup id="pg33" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.IdFormCaseDescriptionParties.hints.mandatory}"
+                                                            value="#{bindings.IdFormCaseDescriptionParties.hints.label}"
+                                                            id="ol17"/>
+                                            <af:inputText value="#{bindings.IdFormCaseDescriptionParties.inputValue}"
+                                                          label="#{bindings.IdFormCaseDescriptionParties.hints.label}"
+                                                          required="#{bindings.IdFormCaseDescriptionParties.hints.mandatory}"
+                                                          maximumLength="#{bindings.IdFormCaseDescriptionParties.hints.precision}"
+                                                          shortDesc="#{bindings.IdFormCaseDescriptionParties.hints.tooltip}"
+                                                          id="it48" simple="true">
+                                                <f:validator binding="#{bindings.IdFormCaseDescriptionParties.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.IdFormCaseDescriptionParties.format}"/>
+                                            </af:inputText>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg34" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.PartyId1.hints.mandatory}"
+                                                            value="#{bindings.PartyId1.hints.label}" id="ol19"/>
+                                            <af:inputText value="#{bindings.PartyId1.inputValue}"
+                                                          label="#{bindings.PartyId1.hints.label}"
+                                                          required="#{bindings.PartyId1.hints.mandatory}"
+                                                          maximumLength="#{bindings.PartyId1.hints.precision}"
+                                                          shortDesc="#{bindings.PartyId1.hints.tooltip}" id="it50"
+                                                          simple="true">
+                                                <f:validator binding="#{bindings.PartyId1.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.PartyId1.format}"/>
+                                            </af:inputText>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg35" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.FormCaseDescriptionId.hints.mandatory}"
+                                                            value="#{bindings.FormCaseDescriptionId.hints.label}"
+                                                            id="ol20"/>
+                                            <af:inputText value="#{bindings.FormCaseDescriptionId.inputValue}"
+                                                          label="#{bindings.FormCaseDescriptionId.hints.label}"
+                                                          required="#{bindings.FormCaseDescriptionId.hints.mandatory}"
+                                                          maximumLength="#{bindings.FormCaseDescriptionId.hints.precision}"
+                                                          shortDesc="#{bindings.FormCaseDescriptionId.hints.tooltip}"
+                                                          id="it51" simple="true">
+                                                <f:validator binding="#{bindings.FormCaseDescriptionId.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.FormCaseDescriptionId.format}"/>
+                                            </af:inputText>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg36" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.CreatedBy1.hints.mandatory}"
+                                                            value="#{bindings.CreatedBy1.hints.label}" id="ol21"/>
+                                            <af:inputText value="#{bindings.CreatedBy1.inputValue}"
+                                                          label="#{bindings.CreatedBy1.hints.label}"
+                                                          required="#{bindings.CreatedBy1.hints.mandatory}"
+                                                          maximumLength="#{bindings.CreatedBy1.hints.precision}"
+                                                          shortDesc="#{bindings.CreatedBy1.hints.tooltip}" id="it52"
+                                                          simple="true">
+                                                <f:validator binding="#{bindings.CreatedBy1.validator}"/>
+                                            </af:inputText>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg37" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.CreatedDate1.hints.mandatory}"
+                                                            value="#{bindings.CreatedDate1.hints.label}" id="ol22"/>
+                                            <af:inputDate value="#{bindings.CreatedDate1.inputValue}"
+                                                          label="#{bindings.CreatedDate1.hints.label}"
+                                                          required="#{bindings.CreatedDate1.hints.mandatory}"
+                                                          shortDesc="#{bindings.CreatedDate1.hints.tooltip}" id="id11"
+                                                          simple="true">
+                                                <f:validator binding="#{bindings.CreatedDate1.validator}"/>
+                                                <af:convertDateTime pattern="#{bindings.CreatedDate1.format}"/>
+                                            </af:inputDate>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg38" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.UpdatedBy.hints.mandatory}"
+                                                            value="#{bindings.UpdatedBy.hints.label}" id="ol23"/>
+                                            <af:inputText value="#{bindings.UpdatedBy.inputValue}"
+                                                          label="#{bindings.UpdatedBy.hints.label}"
+                                                          required="#{bindings.UpdatedBy.hints.mandatory}"
+                                                          maximumLength="#{bindings.UpdatedBy.hints.precision}"
+                                                          shortDesc="#{bindings.UpdatedBy.hints.tooltip}" id="it53"
+                                                          simple="true">
+                                                <f:validator binding="#{bindings.UpdatedBy.validator}"/>
+                                            </af:inputText>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg39" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.UpdatedDate1.hints.mandatory}"
+                                                            value="#{bindings.UpdatedDate1.hints.label}" id="ol24"/>
+                                            <af:inputDate value="#{bindings.UpdatedDate1.inputValue}"
+                                                          label="#{bindings.UpdatedDate1.hints.label}"
+                                                          required="#{bindings.UpdatedDate1.hints.mandatory}"
+                                                          shortDesc="#{bindings.UpdatedDate1.hints.tooltip}" id="id12"
+                                                          simple="true">
+                                                <f:validator binding="#{bindings.UpdatedDate1.validator}"/>
+                                                <af:convertDateTime pattern="#{bindings.UpdatedDate1.format}"/>
+                                            </af:inputDate>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg40" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.PartyFullName1.hints.mandatory}"
+                                                            value="#{bindings.PartyFullName1.hints.label}" id="ol25"/>
+                                            <af:inputText value="#{bindings.PartyFullName1.inputValue}"
+                                                          label="#{bindings.PartyFullName1.hints.label}"
+                                                          required="#{bindings.PartyFullName1.hints.mandatory}"
+                                                          maximumLength="#{bindings.PartyFullName1.hints.precision}"
+                                                          shortDesc="#{bindings.PartyFullName1.hints.tooltip}" id="it54"
+                                                          simple="true">
+                                                <f:validator binding="#{bindings.PartyFullName1.validator}"/>
+                                            </af:inputText>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg41" layout="block" styleClass="col-md-2 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.PartyIDNumber.hints.mandatory}"
+                                                            value="#{bindings.PartyIDNumber.hints.label}" id="ol26"/>
+                                            <af:inputText value="#{bindings.PartyIDNumber.inputValue}"
+                                                          label="#{bindings.PartyIDNumber.hints.label}"
+                                                          required="#{bindings.PartyIDNumber.hints.mandatory}"
+                                                          maximumLength="#{bindings.PartyIDNumber.hints.precision}"
+                                                          shortDesc="#{bindings.PartyIDNumber.hints.tooltip}" id="it55"
+                                                          simple="true">
+                                                <f:validator binding="#{bindings.PartyIDNumber.validator}"/>
+                                            </af:inputText>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="toolbar">
+                                <af:panelGroupLayout id="pgl27" layout="vertical"
+                                                     styleClass="bcdDetail-bar-buttons d-flex" rendered="false">
+                                    <af:link id="l11" immediate="true">
+                                        <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                                        <af:image source="/resources/images/profile.png" id="i8"/>
+                                        <af:showPopupBehavior popupId="p4"/>
+                                    </af:link>
+                                    <af:spacer width="10" height="10" id="s7"/>
+                                    <af:link id="l16" immediate="true">
+                                        <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                                        <af:image source="/resources/images/fingerprint.png" id="i9"/>
+                                    </af:link>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl37" layout="horizontal">
+                                    <af:spacer width="60" height="10" id="s2"/>
+                                    <af:link text="أضف متهم" styleClass="add-btn-guilty float-left" id="l15"
+                                             action="#{pageFlowScope.BCDetails.newPartyPI}">
+                                        <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                                        <af:setPropertyListener from="true" to="#{bindings.Flag.inputValue}"
+                                                                type="action"/>
+                                    </af:link>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="menuBar">
+                                <af:toolbar id="t15">
+                                    <af:inputListOfValues id="ilov3"
+                                                          popupTitle="Search and Select: #{bindings.FullName1.hints.label}"
+                                                          value="#{bindings.FullName.inputValue}"
+                                                          model="#{bindings.FullName.listOfValuesModel}"
+                                                          required="#{bindings.FullName.hints.mandatory}"
+                                                          shortDesc="#{bindings.FullName.hints.tooltip}"
+                                                          autoSubmit="true" partialTriggers="b24 b277 b28 l8"
+                                                          rendered="#{pageFlowScope.backLog and pageFlowScope.BCFound and bindings.BusinessCaseType1.inputValue ne '500'}"
+                                                          label="بحث متهم " simple="true">
+                                        <f:validator binding="#{bindings.FullName.validator}"/>
+                                        <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                                        <af:clientListener method="handleEnterEventaddParty" type="keyDown"/>
+                                        <af:serverListener type="EnterEventsAddParty"
+                                                           method="#{pageFlowScope.BCDetails.addPartyPI}"/>
+                                        <af:autoSuggestBehavior suggestedItems="#{bindings.PartyName.suggestedItems}"
+                                                                maxSuggestedItems="5"/>
+                                    </af:inputListOfValues>
+                                </af:toolbar>
+                                <h:panelGroup id="pg113" layout="block" styleClass="col-md-4 col-sm-12 pl-2 pr-2"
+                                              rendered="false">
+                                    <af:outputLabel showRequired="true" value="بحث متهم " id="ol81"/>
+                                    <af:outputText value="#{bindings.PartyFullName.inputValue}"
+                                                   shortDesc="#{bindings.Fname.hints.tooltip}" id="ot14"
+                                                   rendered="false"/>
+                                    <af:panelGroupLayout id="pgl41" layout="horizontal" clientComponent="true"
+                                                         rendered="false">
+                                        <af:inputText value="#{bindings.Fname.inputValue}" simple="true"
+                                                      required="#{bindings.Fname.hints.mandatory}"
+                                                      maximumLength="#{bindings.Fname.hints.precision}"
+                                                      shortDesc="#{bindings.Fname.hints.tooltip}" id="it86"
+                                                      placeholder="الاول" contentStyle="width:100px">
+                                            <f:validator binding="#{bindings.Fname.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Sname.inputValue}" simple="true"
+                                                      required="#{bindings.Sname.hints.mandatory}"
+                                                      maximumLength="#{bindings.Sname.hints.precision}"
+                                                      shortDesc="#{bindings.Sname.hints.tooltip}" id="it87"
+                                                      placeholder="الثانى" contentStyle="width:100px">
+                                            <f:validator binding="#{bindings.Sname.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Tname.inputValue}" simple="true"
+                                                      required="#{bindings.Tname.hints.mandatory}"
+                                                      maximumLength="#{bindings.Tname.hints.precision}"
+                                                      shortDesc="#{bindings.Tname.hints.tooltip}" id="it88"
+                                                      placeholder="الثالث" contentStyle="width:100px">
+                                            <f:validator binding="#{bindings.Tname.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Fourthname.inputValue}" simple="true"
+                                                      required="#{bindings.Fourthname.hints.mandatory}"
+                                                      maximumLength="#{bindings.Fourthname.hints.precision}"
+                                                      shortDesc="#{bindings.Fourthname.hints.tooltip}" id="it89"
+                                                      placeholder="الرابع" contentStyle="width:100px">
+                                            <f:validator binding="#{bindings.Fourthname.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                </h:panelGroup>
+                            </f:facet>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:panelGroupLayout id="pgl39">
+                                <af:resource type="javascript">
+                                  function testload() {
+                                      alert('ddfdfdfdfdf');
+                                  }
+
+                                  function pressButton() {
+                                      var el = document.getElementsByClassName('buttonv');
+
+                                      document.getElementById(el[0].id).click();
+
+                                  }
+
+                                  function handleEnterEventaddParty(evt) {
+
+                                      var _keyCode = evt.getKeyCode();
+                                      //check for Enter Keyi +
+                                      console.log()
+                                      if (_keyCode == AdfKeyStroke.ENTER_KEY) {
+
+                                          var comp = evt.getSource();
+                                          AdfCustomEvent.queue(comp, "EnterEventsAddParty", 
+                                          {
+                                              fvalue : comp.getSubmittedValue()
+                                          },
+                                          false);
+
+                                          evt.cancel();
+                                      }
+                                  }
+                                </af:resource>
+                            </af:panelGroupLayout>
+                            <h:panelGroup id="pg21" styleClass="row" layout="block">
+                                <h:panelGroup id="pg16" layout="block" styleClass="col-md-4 col-sm-12 pl-2 pr-2">
+                                    <af:outputLabel showRequired="#{bindings.Nationality.hints.mandatory}"
+                                                    value="#{bindings.Nationality.label}" id="ol11"/>
+                                    <af:inputListOfValues id="soc26"
+                                                          popupTitle="Search and Select: #{bindings.NationalityName.hints.label}"
+                                                          value="#{bindings.NationalityName.inputValue}"
+                                                          model="#{bindings.NationalityName.listOfValuesModel}"
+                                                          required="#{bindings.NationalityName.hints.mandatory}"
+                                                          shortDesc="#{bindings.NationalityName.hints.tooltip}"
+                                                          simple="true" styleClass="nationality-name-input"
+                                                          disabled="#{bindings.UpdatedBy1.inputValue ne null}"
+                                                          readOnly="#{pageFlowScope.dimmed}">
+                                        <f:validator binding="#{bindings.NationalityName.validator}"/>
+                                        <af:autoSuggestBehavior suggestItems="#{bindings.NationalityName.suggestItems}"/>
+                                    </af:inputListOfValues>
+                                    <af:selectOneChoice value="#{bindings.NationalityId.inputValue}"
+                                                        label="#{bindings.NationalityId.label}"
+                                                        required="#{bindings.NationalityId.hints.mandatory}"
+                                                        shortDesc="#{bindings.NationalityId.hints.tooltip}" id="soc262"
+                                                        autoSubmit="true" simple="true" rendered="false">
+                                        <f:selectItems value="#{bindings.NationalityId.items}" id="si26"/>
+                                        <f:validator binding="#{bindings.NationalityId.validator}"/>
+                                    </af:selectOneChoice>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg27" styleClass="col-md-4 col-sm-12 pl-2 pr-2" layout="block">
+                                    <af:outputLabel value="نوع تحقيق الشخصية" id="ol14"/>
+                                    <af:selectOneChoice value="#{bindings.IdType.inputValue}"
+                                                        required="#{bindings.IdNumber.inputValue ne null}"
+                                                        shortDesc="#{bindings.IdType.hints.tooltip}" id="soc25"
+                                                        autoSubmit="true" simple="true"
+                                                        disabled="#{bindings.UpdatedBy1.inputValue ne null}"
+                                                        showRequired="#{bindings.IdNumber.inputValue ne null}"
+                                                        readOnly="#{pageFlowScope.dimmed}">
+                                        <f:selectItems value="#{bindings.IdType.items}" id="si25"/>
+                                        <f:validator binding="#{bindings.IdType.validator}"/>
+                                    </af:selectOneChoice>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg17" layout="block" styleClass="col-md-4 col-sm-12 pl-2 pr-2">
+                                    <af:outputLabel showRequired="#{bindings.IdNumber.hints.mandatory}"
+                                                    value="رقم تحقيق الشخصية" id="ol12"/>
+                                    <af:link text="link 8   #{pageFlowScope.clickedButton}" id="l10"
+                                             partialTriggers="b51" rendered="false"/>
+                                    <h:panelGroup layout="block" styleClass="d-flex" id="pg103">
+                                        <af:inputText value="#{bindings.IdNumber.inputValue}"
+                                                      label="#{bindings.IdNumber.hints.label}"
+                                                      required="#{bindings.IdNumber.hints.mandatory}" maximumLength="14"
+                                                      shortDesc="#{bindings.IdNumber.hints.tooltip}" id="it14"
+                                                      autoSubmit="true" simple="true"
+                                                      disabled="#{bindings.UpdatedBy1.inputValue ne null}"
+                                                      rendered="#{bindings.IdType.inputValue eq '2' }"
+                                                      readOnly="#{pageFlowScope.dimmed}">
+                                            <f:validator binding="#{bindings.IdNumber.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.IdNumber.inputValue}"
+                                                      label="#{bindings.IdNumber.hints.label}"
+                                                      required="#{bindings.IdNumber.hints.mandatory}"
+                                                      shortDesc="#{bindings.IdNumber.hints.tooltip}" id="it81"
+                                                      autoSubmit="true" simple="true"
+                                                      disabled="#{bindings.UpdatedBy1.inputValue ne null}"
+                                                      rendered="#{bindings.IdType.inputValue ne '2' }" maximumLength="6"
+                                                      readOnly="#{pageFlowScope.dimmed}">
+                                            <f:validator binding="#{bindings.IdNumber.validator}"/>
+                                        </af:inputText>
+                                        <af:button id="b51" action="nId" useWindow="true" windowHeight="500"
+                                                   windowWidth="900"
+                                                   returnListener="#{pageFlowScope.BCDetails.getNIDValues}"
+                                                   rendered="#{bindings.IdType.inputValue eq '2' }" styleClass="id-btn"
+                                                   icon="/resources/images/magnifier.png" immediate="true"
+                                                   disabled="#{pageFlowScope.dimmed}">
+                                            <af:setPropertyListener to="#{pageFlowScope.nIdParam}"
+                                                                    from="#{bindings.IdNumber.inputValue}"
+                                                                    type="action"/>
+                                            <af:setPropertyListener to="#{pageFlowScope.fcnParam}" from="#{null}"
+                                                                    type="action"/>
+                                            <af:setPropertyListener to="#{sessionScope.clickedButton}" from="#{null}"
+                                                                    type="action"/>
+                                            <af:setPropertyListener to="#{pageFlowScope.userIdParam}"
+                                                                    from="#{sessionScope.userInfo.nidUserId}"
+                                                                    type="action"/>
+                                            <af:setPropertyListener to="#{pageFlowScope.channelIdParam}"
+                                                                    from="#{sessionScope.userInfo.nidChannelId}"
+                                                                    type="action"/>
+                                            <af:setPropertyListener to="#{pageFlowScope.tokenIdParam}"
+                                                                    from="#{sessionScope.userInfo.nidTokenId}"
+                                                                    type="action"/>
+                                            <af:setPropertyListener to="#{pageFlowScope.callPermissionParam}"
+                                                                    from="#{sessionScope.userInfo.nidCallPermission}"
+                                                                    type="action"/>
+                                            <af:setPropertyListener to="#{pageFlowScope.userNameParam}"
+                                                                    from="#{sessionScope.userInfo.nidUserName}"
+                                                                    type="action"/>
+                                            <af:setPropertyListener to="#{pageFlowScope.passwordParam}"
+                                                                    from="#{sessionScope.userInfo.nidPassword}"
+                                                                    type="action"/>
+                                            <af:target events="@all" render="@all" execute="@this"/>
+                                        </af:button>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg19" layout="block" styleClass="col-md-4 col-sm-12 pl-2 pr-2">
+                                    <af:outputLabel showRequired="true" value="#{bindings.PartyFullName.hints.label}"
+                                                    id="ol9"/>
+                                    <af:outputText value="#{bindings.PartyFullName.inputValue}"
+                                                   shortDesc="#{bindings.Fname.hints.tooltip}" id="ot13"
+                                                   rendered="false"/>
+                                    <af:inputText value="#{bindings.PartyFullName.inputValue}"
+                                                  label="#{bindings.PartyFullName.hints.label}"
+                                                  maximumLength="#{bindings.PartyFullName.hints.precision}"
+                                                  shortDesc="#{bindings.PartyFullName.hints.tooltip}" id="it16"
+                                                  autoSubmit="true" simple="true"
+                                                  valueChangeListener="#{pageFlowScope.BCDetails.fullNameVCL}"
+                                                  disabled="#{bindings.UpdatedBy1.inputValue ne null}" rendered="true"
+                                                  validator="#{cjValidator.arabicCharValidator}" showRequired="true"
+                                                  required="true" readOnly="#{pageFlowScope.dimmed || bindings.UpdateType.inputValue eq 'Y'}">
+                                        <f:validator binding="#{bindings.PartyFullName.validator}"/>
+                                    </af:inputText>
+                                    <af:panelGroupLayout id="pgl20" layout="horizontal" clientComponent="true"
+                                                         rendered="false">
+                                        <af:inputText value="#{bindings.Fname.inputValue}" simple="true"
+                                                      required="#{bindings.Fname.hints.mandatory}"
+                                                      maximumLength="#{bindings.Fname.hints.precision}"
+                                                      shortDesc="#{bindings.Fname.hints.tooltip}" id="it17"
+                                                      placeholder="الاول" contentStyle="width:100px">
+                                            <f:validator binding="#{bindings.Fname.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Sname.inputValue}" simple="true"
+                                                      required="#{bindings.Sname.hints.mandatory}"
+                                                      maximumLength="#{bindings.Sname.hints.precision}"
+                                                      shortDesc="#{bindings.Sname.hints.tooltip}" id="it27"
+                                                      placeholder="الثانى" contentStyle="width:100px">
+                                            <f:validator binding="#{bindings.Sname.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Tname.inputValue}" simple="true"
+                                                      required="#{bindings.Tname.hints.mandatory}"
+                                                      maximumLength="#{bindings.Tname.hints.precision}"
+                                                      shortDesc="#{bindings.Tname.hints.tooltip}" id="it68"
+                                                      placeholder="الثالث" contentStyle="width:100px">
+                                            <f:validator binding="#{bindings.Tname.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Fourthname.inputValue}" simple="true"
+                                                      required="#{bindings.Fourthname.hints.mandatory}"
+                                                      maximumLength="#{bindings.Fourthname.hints.precision}"
+                                                      shortDesc="#{bindings.Fourthname.hints.tooltip}" id="it69"
+                                                      placeholder="الرابع" contentStyle="width:100px">
+                                            <f:validator binding="#{bindings.Fourthname.validator}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg20" layout="block" styleClass="col-md-3 col-sm-12 pl-2 pr-2">
+                                    <af:outputLabel showRequired="#{bindings.JobTitle.hints.mandatory}"
+                                                    value="#{bindings.Nickname.hints.label}" id="ol13"/>
+                                    <af:inputText value="#{bindings.Nickname.inputValue}"
+                                                  label="#{bindings.Nickname.hints.label}"
+                                                  required="#{bindings.Nickname.hints.mandatory}"
+                                                  maximumLength="#{bindings.Nickname.hints.precision}"
+                                                  shortDesc="#{bindings.Nickname.hints.tooltip}" id="it63"
+                                                  autoSubmit="true" simple="true"
+                                                  disabled="#{bindings.UpdatedBy1.inputValue ne null}"
+                                                  validator="#{cjValidator.arabicCharValidator}"
+                                                  readOnly="#{pageFlowScope.dimmed || bindings.UpdateType.inputValue eq 'Y'}">
+                                        <f:validator binding="#{bindings.Nickname.validator}"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.JobTitle.inputValue}"
+                                                  label="#{bindings.JobTitle.hints.label}"
+                                                  required="#{bindings.JobTitle.hints.mandatory}"
+                                                  maximumLength="#{bindings.JobTitle.hints.precision}"
+                                                  shortDesc="#{bindings.JobTitle.hints.tooltip}" id="it15"
+                                                  autoSubmit="true" simple="true" rendered="false">
+                                        <f:validator binding="#{bindings.JobTitle.validator}"/>
+                                    </af:inputText>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg26" layout="block" styleClass="col-md-2 col-sm-12 pl-2 pr-2">
+                                    <af:outputLabel showRequired="#{bindings.City.hints.mandatory}" value="محافظة"
+                                                    id="ol8"/>
+                                    <af:selectOneChoice value="#{bindings.City.inputValue}"
+                                                        shortDesc="#{bindings.City.hints.tooltip}" id="soc5"
+                                                        autoSubmit="true" simple="true"
+                                                        disabled="#{bindings.UpdatedBy1.inputValue ne null}"
+                                                        showRequired="true" partialTriggers="sbc30"
+                                                        readOnly="#{pageFlowScope.dimmed || bindings.UpdateType.inputValue eq 'Y'}">
+                                        <f:selectItems value="#{bindings.City.items}" id="si5"/>
+                                        <f:validator binding="#{bindings.City.validator}"/>
+                                    </af:selectOneChoice>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg108" styleClass="col-md-2 col-sm-12 pl-2 pr-2">
+                                    <af:outputLabel showRequired="#{bindings.City.hints.mandatory}" value="مركز / قسم"
+                                                    id="ol74"/>
+                                    <af:selectOneChoice value="#{bindings.EntityPolice.inputValue}"
+                                                        shortDesc="#{bindings.EntityPolice.hints.tooltip}" id="soc23"
+                                                        partialTriggers="soc5 sbc30" simple="true"
+                                                        disabled="#{bindings.UpdatedBy1.inputValue ne null}"
+                                                        showRequired="true" readOnly="#{pageFlowScope.dimmed || bindings.UpdateType.inputValue eq 'Y'}">
+                                        <f:selectItems value="#{bindings.EntityPolice.items}" id="si23"/>
+                                        <f:validator binding="#{bindings.EntityPolice.validator}"/>
+                                    </af:selectOneChoice>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg122" styleClass="col-md-2 col-sm-12 pl-2 pr-2">
+                                    <af:outputLabel showRequired="#{bindings.City.hints.mandatory}"
+                                                    value="ليس لديه عنوان" id="ol89"/>
+                                    <af:selectBooleanCheckbox value="#{bindings.UnknownAddressFlag.inputValue}"
+                                                              shortDesc="#{bindings.UnknownAddressFlag.hints.tooltip}"
+                                                              id="sbc30" autoSubmit="true"
+                                                              valueChangeListener="#{pageFlowScope.BCDetails.addressVCL}"
+                                                              disabled="#{bindings.UpdatedBy1.inputValue ne null}"
+                                                              readOnly="#{(pageFlowScope.dimmed || bindings.UpdateType.inputValue eq 'Y') and  bindings.Address.inputValue ne null}"/>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg123" styleClass="col-md-2 col-sm-12 pl-2 pr-2">
+                                    <af:outputLabel showRequired="#{bindings.BusinessCaseType1.inputValue eq '5'}"
+                                                    value="السن  " id="ol91"/>
+                                    <af:inputText value="#{bindings.Age.inputValue}" simple="true"
+                                                  required="#{bindings.BusinessCaseType1.inputValue eq '5'}" columns="3"
+                                                  maximumLength="#{bindings.Age.hints.precision}"
+                                                  shortDesc="#{bindings.Age.hints.tooltip}" id="it65" autoSubmit="true"
+                                                  readOnly="#{pageFlowScope.dimmed || bindings.UpdateType.inputValue eq 'Y'}">
+                                        <f:validator binding="#{bindings.Age.validator}"/>
+                                    </af:inputText>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg12" styleClass="col-md-2 col-sm-12 pl-2 pr-2">
+                                    <af:outputLabel showRequired="true"
+                                                    value="الحكم" id="ol29"/>
+                                    <af:outputText value="ff:#{bindings.JudgmentSubType.attributeValue ne null}" visible="false" id="ot0"/>
+                                    <af:selectOneChoice value="#{bindings.UnspecializedFlag.inputValue}"
+                                                         
+                                                        shortDesc="#{bindings.UnspecializedFlag.hints.tooltip}"
+                                                        disabled="#{bindings.JudgmentSubType.attributeValue ne null}"
+                                                        partialTriggers="soc2"
+                                                        id="soc3" autoSubmit="true"
+                                                        showRequired="false">
+                                        <f:selectItems value="#{bindings.UnspecializedFlag.items}" id="si3"/>
+                                        <f:validator binding="#{bindings.UnspecializedFlag.validator}"/>
+                                    </af:selectOneChoice>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg18" layout="block" styleClass="col-md-12 col-sm-12">
+                                    <af:outputLabel showRequired="true" value="#{bindings.Address.hints.label}"
+                                                    id="ol10"/>
+                                    <h:panelGroup styleClass="d-flex" id="pg102">
+                                        <af:inputText value="#{bindings.Address.inputValue}"
+                                                      label="#{bindings.Address.hints.label}" required="true"
+                                                      maximumLength="#{bindings.Address.hints.precision}"
+                                                      shortDesc="#{bindings.Address.hints.tooltip}" id="it12"
+                                                      autoSubmit="true" simple="true"
+                                                      disabled="#{bindings.UnknownAddressFlag.inputValue or  bindings.Address.inputValue ne null}"
+                                                      showRequired="true"
+                                                      readOnly="#{((bindings.PartyStatus.inputValue eq '1' and bindings.IdType.inputValue eq '2' )|| bindings.UpdateType.inputValue eq 'Y') and  bindings.Address.inputValue ne null}">
+                                            <f:validator binding="#{bindings.Address.validator}"/>
+                                        </af:inputText>
+                                        <af:button text="عناوين اخرى" id="b20" immediate="true">
+                                            <af:showPopupBehavior popupId="p2"/>
+                                        </af:button>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg15" layout="block" styleClass="col-md-3">
+                                    <af:outputLabel showRequired="#{bindings.Attendance.hints.mandatory}"
+                                                    value="#{bindings.Attendance.label}" id="ol7"/>
+                                    <af:selectOneChoice value="#{bindings.Attendance.inputValue}"
+                                                        label="#{bindings.Attendance.label}"
+                                                        required="#{bindings.Attendance.hints.mandatory}"
+                                                        shortDesc="#{bindings.Attendance.hints.tooltip}" id="soc1"
+                                                        autoSubmit="true" simple="true" partialTriggers="sor2">
+                                        <f:selectItems value="#{bindings.Attendance.items}" id="si1"/>
+                                        <f:validator binding="#{bindings.Attendance.validator}"/>
+                                    </af:selectOneChoice>
+                                </h:panelGroup>
+                                <h:panelGroup id="pg116" layout="block" styleClass="col-md-3">
+                                    <af:outputLabel showRequired="#{bindings.Attendance.hints.mandatory}"
+                                                    value="حالة المتهم" id="ol84"/>
+                                    <af:selectOneChoice value="#{bindings.Flex1.inputValue}" required="true"
+                                                        simple="true" shortDesc="#{bindings.Flex1.hints.tooltip}"
+                                                        id="soc36" autoSubmit="true"
+                                                        valueChangeListener="#{pageFlowScope.BCDetails.partyStatusVCL}">
+                                        <f:selectItems value="#{bindings.Flex1.items}" id="si38"/>
+                                        <f:validator binding="#{bindings.Flex1.validator}"/>
+                                    </af:selectOneChoice>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p4"
+                                      contentDelivery="lazyUncached">
+                                <af:dialog id="d4" type="ok"></af:dialog>
+                            </af:popup>
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                                      contentDelivery="lazyUncached">
+                                <af:dialog id="d2" type="ok" title="عنواين اخرى" resize="on" inlineStyle="Width:400px;"
+                                           contentWidth="400">
+                                    <af:button styleClass="mb-3" text="اضف"
+                                               actionListener="#{bindings.CreateInsert6.execute}"
+                                               disabled="#{!bindings.CreateInsert6.enabled}" id="b22"
+                                               icon="/resources/images/plus.png" immediate="true"/>
+                                    <f:facet name="buttonBar"/>
+                                    <af:table value="#{bindings.ParPartyAddressVO1.collectionModel}" var="row"
+                                              rows="#{bindings.ParPartyAddressVO1.rangeSize}"
+                                              emptyText="#{bindings.ParPartyAddressVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.ParPartyAddressVO1.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.ParPartyAddressVO1.collectionModel.makeCurrent}"
+                                              rowSelection="single" fetchSize="#{bindings.ParPartyAddressVO1.rangeSize}"
+                                              id="t6" partialTriggers="::b22 b25" columnStretching="column:c49"
+                                              autoHeightRows="0" contentDelivery="immediate" scrollPolicy="page"
+                                              styleClass="AFStretchWidth">
+                                        <af:column headerText="المحافظة" id="c26">
+                                            <af:selectOneChoice value="#{row.bindings.City.inputValue}"
+                                                                label="#{row.bindings.City.label}"
+                                                                required="#{bindings.ParPartyAddressVO1.hints.City.mandatory}"
+                                                                shortDesc="#{bindings.ParPartyAddressVO1.hints.City.tooltip}"
+                                                                id="soc30" autoSubmit="true">
+                                                <f:selectItems value="#{row.bindings.City.items}" id="si31"/>
+                                                <f:validator binding="#{row.bindings.City.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column headerText="مركز / قسم الشرطة" id="c48">
+                                            <af:selectOneChoice value="#{row.bindings.EntityPolice.inputValue}"
+                                                                label="#{row.bindings.EntityPolice.label}"
+                                                                required="#{bindings.ParPartyAddressVO1.hints.EntityPolice.mandatory}"
+                                                                shortDesc="#{bindings.ParPartyAddressVO1.hints.EntityPolice.tooltip}"
+                                                                id="soc31" partialTriggers="soc30" autoSubmit="true">
+                                                <f:selectItems value="#{row.bindings.EntityPolice.items}" id="si32"/>
+                                                <f:validator binding="#{row.bindings.EntityPolice.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column headerText="العنوان" id="c49">
+                                            <af:inputText value="#{row.bindings.Address.inputValue}"
+                                                          label="#{bindings.ParPartyAddressVO1.hints.Address.label}"
+                                                          required="true"
+                                                          maximumLength="#{bindings.ParPartyAddressVO1.hints.Address.precision}"
+                                                          shortDesc="#{bindings.ParPartyAddressVO1.hints.Address.tooltip}"
+                                                          id="it72" autoSubmit="true" rows="3" simple="true"
+                                                          showRequired="true">
+                                                <f:validator binding="#{row.bindings.Address.validator}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column id="c50" align="center" rendered="false">
+                                            <af:button actionListener="#{bindings.Delete2.execute}"
+                                                       disabled="#{!bindings.Delete2.enabled}" id="b25"
+                                                       icon="/resources/images/no.png" immediate="true"
+                                                       inlineStyle="background-color:Red;"/>
+                                        </af:column>
+                                    </af:table>
+                                </af:dialog>
+                            </af:popup>
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                      contentDelivery="lazyUncached">
+                                <af:dialog id="d1" title="Integeration ">
+                                    <f:facet name="buttonBar"/>
+                                </af:dialog>
+                            </af:popup>
+                        </af:panelHeader>
+                        <af:panelHeader text="التهم  " id="ph7" partialTriggers="sbc18 b19 b21">
+                            <f:facet name="context"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="menuBar"/>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:panelGroupLayout id="pgl14" layout="vertical">
+                                <af:panelGroupLayout id="pgl31">
+                                    <af:resource type="javascript">
+                                      function handleEnterEventMany(evt) {
+
+                                          var _keyCode = evt.getKeyCode();
+                                          //check for Enter Keyi +
+                                          console.log()
+                                          if (_keyCode == AdfKeyStroke.ENTER_KEY) {
+
+                                              var comp = evt.getSource();
+                                              AdfCustomEvent.queue(comp, "EnterEventsMany", 
+                                              {
+                                                  fvalue : comp.getSubmittedValue()
+                                              },
+                                              false);
+
+                                              evt.cancel();
+                                          }
+                                      }
+                                    </af:resource>
+                                    <af:resource type="javascript">
+                                      function handleEnterEventSearch(evt) {
+
+                                          var _keyCode = evt.getKeyCode();
+                                          //check for Enter Keyi +
+                                          console.log()
+                                          if (_keyCode == AdfKeyStroke.ENTER_KEY) {
+
+                                              var comp = evt.getSource();
+                                              AdfCustomEvent.queue(comp, "EnterEvents", 
+                                              {
+                                                  fvalue : comp.getSubmittedValue()
+                                              },
+                                              false);
+
+                                              evt.cancel();
+                                          }
+                                      }
+                                    </af:resource>
+                                    <af:resource type="javascript">
+                                      function handleEnterEventSearch2(evt) {
+
+                                          var _keyCode = evt.getKeyCode();
+                                          //check for Enter Keyi +
+                                          console.log()
+                                          if (_keyCode == AdfKeyStroke.ENTER_KEY) {
+
+                                              var comp = evt.getSource();
+                                              AdfCustomEvent.queue(comp, "EnterEvents2", 
+                                              {
+                                                  fvalue : comp.getSubmittedValue()
+                                              },
+                                              false);
+
+                                              evt.cancel();
+                                          }
+                                      }
+                                    </af:resource>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl2" layout="vertical">
+                                    <h:panelGroup id="pg89" layout="block" styleClass="row">
+                                        <h:panelGroup id="pg88" styleClass="col-md-12 col-sm-12">
+                                            <af:outputLabel value="التهمة" id="ol62" rendered="false"/>
+                                            <af:inputListOfValues id="descionId2"
+                                                                  popupTitle="Search and Select: #{bindings.Descion1.hints.label}"
+                                                                  value="#{bindings.Descion1.inputValue}" label="التهمة"
+                                                                  model="#{bindings.Descion1.listOfValuesModel}"
+                                                                  required="#{bindings.Descion1.hints.mandatory}"
+                                                                  shortDesc="#{bindings.Descion1.hints.tooltip}"
+                                                                  autoSubmit="true" partialTriggers="b10" simple="true"
+                                                                  styleClass="add-toham-input">
+                                                <f:validator binding="#{bindings.Descion1.validator}"/>
+                                                <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                                                <af:clientListener method="handleEnterEventMany" type="keyDown"/>
+                                                <af:serverListener type="EnterEventsMany"
+                                                                   method="#{pageFlowScope.BCDetails.insertCrime}"/>
+                                                <af:autoSuggestBehavior suggestedItems="#{pageFlowScope.BCDetails.onDecisionSuggest}"
+                                                                        maxSuggestedItems="5"/>
+                                            </af:inputListOfValues>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <af:button actionListener="#{bindings.CreateWithParams.execute}"
+                                               disabled="#{!bindings.CreateWithParams.enabled}" id="b10"
+                                               icon="/resources/img/add-plus-button.png" visible="false"/>
+                                </af:panelGroupLayout>
+                                <af:table value="#{bindings.FormCaseDescriptionDesVO1.collectionModel}" var="row"
+                                          rows="#{bindings.FormCaseDescriptionDesVO1.rangeSize}"
+                                          emptyText="#{bindings.FormCaseDescriptionDesVO1.viewable ? 'لا يوجد بيانات'  : 'Access Denied.'}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.FormCaseDescriptionDesVO1.collectionModel.selectedRow}"
+                                          selectionListener="#{pageFlowScope.BCDetails.customListenerdesTable}"
+                                          rowSelection="single"
+                                          fetchSize="#{bindings.FormCaseDescriptionDesVO1.rangeSize}" id="t4"
+                                          partialTriggers="::b10 b13" columnStretching="multiple" scrollPolicy="page"
+                                          editingMode="clickToEdit">
+                                    <af:column headerText="#{bindings.FormCaseDescriptionDesVO1.hints.Id.label}"
+                                               id="c15" rendered="false" width="100%">
+                                        <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                      label="#{bindings.FormCaseDescriptionDesVO1.hints.Id.label}"
+                                                      required="#{bindings.FormCaseDescriptionDesVO1.hints.Id.mandatory}"
+                                                      maximumLength="#{bindings.FormCaseDescriptionDesVO1.hints.Id.precision}"
+                                                      shortDesc="#{bindings.FormCaseDescriptionDesVO1.hints.Id.tooltip}"
+                                                      id="it35">
+                                            <f:validator binding="#{row.bindings.Id.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.FormCaseDescriptionDesVO1.hints.Id.format}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.FormCaseDescriptionDesVO1.hints.FormCaseDescriptionId.label}"
+                                               id="c16" rendered="false" width="100%">
+                                        <af:inputText value="#{row.bindings.FormCaseDescriptionId.inputValue}"
+                                                      label="#{bindings.FormCaseDescriptionDesVO1.hints.FormCaseDescriptionId.label}"
+                                                      required="#{bindings.FormCaseDescriptionDesVO1.hints.FormCaseDescriptionId.mandatory}"
+                                                      maximumLength="#{bindings.FormCaseDescriptionDesVO1.hints.FormCaseDescriptionId.precision}"
+                                                      shortDesc="#{bindings.FormCaseDescriptionDesVO1.hints.FormCaseDescriptionId.tooltip}"
+                                                      id="it45">
+                                            <f:validator binding="#{row.bindings.FormCaseDescriptionId.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.FormCaseDescriptionDesVO1.hints.FormCaseDescriptionId.format}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="التهم" id="c17" width="100%">
+                                        <af:selectOneChoice value="#{row.bindings.DescriptionId.inputValue}"
+                                                            label="#{row.bindings.DescriptionId.label}"
+                                                            required="#{bindings.FormCaseDescriptionDesVO1.hints.DescriptionId.mandatory}"
+                                                            shortDesc="#{bindings.FormCaseDescriptionDesVO1.hints.DescriptionId.tooltip}"
+                                                            id="soc13" disabled="true">
+                                            <f:selectItems value="#{row.bindings.DescriptionId.items}" id="si13"/>
+                                            <f:validator binding="#{row.bindings.DescriptionId.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedBy.label}"
+                                               id="c18" rendered="false" width="100%">
+                                        <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                                      label="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedBy.label}"
+                                                      required="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedBy.mandatory}"
+                                                      maximumLength="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedBy.precision}"
+                                                      shortDesc="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedBy.tooltip}"
+                                                      id="it46">
+                                            <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedDate.label}"
+                                               id="c19" rendered="false" width="100%">
+                                        <af:inputDate value="#{row.bindings.CreatedDate.inputValue}"
+                                                      label="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedDate.label}"
+                                                      required="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedDate.mandatory}"
+                                                      shortDesc="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedDate.tooltip}"
+                                                      id="id9">
+                                            <f:validator binding="#{row.bindings.CreatedDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.FormCaseDescriptionDesVO1.hints.CreatedDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedBy.label}"
+                                               id="c20" rendered="false" width="100%">
+                                        <af:inputText value="#{row.bindings.UpdatedBy.inputValue}"
+                                                      label="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedBy.label}"
+                                                      required="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedBy.mandatory}"
+                                                      maximumLength="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedBy.precision}"
+                                                      shortDesc="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedBy.tooltip}"
+                                                      id="it47">
+                                            <f:validator binding="#{row.bindings.UpdatedBy.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedDate.label}"
+                                               id="c21" rendered="false" width="100%">
+                                        <af:inputDate value="#{row.bindings.UpdatedDate.inputValue}"
+                                                      label="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedDate.label}"
+                                                      required="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedDate.mandatory}"
+                                                      shortDesc="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedDate.tooltip}"
+                                                      id="id10">
+                                            <f:validator binding="#{row.bindings.UpdatedDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.FormCaseDescriptionDesVO1.hints.UpdatedDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column id="c25" width="30%" align="center">
+                                        <af:button actionListener="#{bindings.Delete.execute}"
+                                                   disabled="#{!bindings.Delete.enabled}" id="b13"
+                                                   icon="/resources/images/no.png" immediate="true"
+                                                   styleClass="button-danger"
+                                                   action="#{pageFlowScope.BCDetails.deleteGenericDesc}"/>
+                                    </af:column>
+                                </af:table>
+                                <af:inputText value="#{bindings.Id.inputValue}" label="#{bindings.Id.hints.label}"
+                                              required="#{bindings.Id.hints.mandatory}"
+                                              maximumLength="#{bindings.Id.hints.precision}"
+                                              shortDesc="#{bindings.Id.hints.tooltip}" id="it9" autoSubmit="true"
+                                              visible="false">
+                                    <f:validator binding="#{bindings.Id.validator}"/>
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Id.format}"/>
+                                </af:inputText>
+                            </af:panelGroupLayout>
+                        </af:panelHeader>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="second">
+                    <af:panelTabbed position="above" id="pt1">
+                        <af:showDetailItem text="المتهمين" id="sdi2" disclosed="true" immediate="true">
+                            <af:panelAccordion id="pa1" reorder="enable" styleClass="ahkam-details-panel"
+                                               partialTriggers="b23 fullNameId ilov3 l9" clientComponent="true">
+                                <af:forEach items="#{bindings.CourtBcHearingResPartiesVO1.children}" var="Parties"
+                                            varStatus="vs">
+                                    <af:showDetailItem text="#{Parties.OrderName}  #{' - '}#{Parties.PartyFullName}   #{Parties.Nickname == null ? '':'و شهرته'}  #{Parties.Nickname} #{Parties.IdNumber != null ?'/' :''}#{Parties.IdNumber}"
+                                                       id="sdi1"
+                                                       disclosureListener="#{pageFlowScope.BCDetails.discolsePI}"
+                                                       stretchChildren="first" partialTriggers="l9 it63 it16"
+                                                       disclosed="true" immediate="true">
+                                        <f:attribute name="PartyID" value="#{Parties.PartyId}"/>
+                                        <f:attribute name="CourtBcHearingResPartyId" value="#{Parties.Id}"/>
+                                        <h:panelGroup id="pg42" layout="block" styleClass="row">
+                                            <h:panelGroup id="pg4666" layout="block" styleClass="col-md-12 col-sm-12">
+                                                <h:panelGroup styleClass="d-flex flex-column justify-content-center text-right case-detail"
+                                                              id="pg812120">
+                                                    <af:outputLabel styleClass="text-right" value="الحكم"
+                                                                    id="ol399991"/>
+                                                    <!--<af:outputText value="#{pageFlowScope.judgText ==null?' مثال 2:: ح حبس 4 سنوات وغرامة 500 جنية مع الشغل والنفاذ + المصاريف ': pageFlowScope.judgText}" id="ot9" rendered="#{bindings.Flag.inputValue}"/>-->
+                                                    <af:outputText value="#{bindings.JudgmentText.inputValue==null?' ': bindings.JudgmentText.inputValue}"
+                                                                   id="ot8999" rendered="#{!bindings.Flag.inputValue}"/>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg852" layout="block" styleClass="row"
+                                                      rendered="#{bindings.SequenceNumber.inputValue ne null}">
+                                            <h:panelGroup id="pg432" layout="block" styleClass="col-md-2 col-sm-12">
+                                                <h:panelGroup id="pg542" layout="block"
+                                                              styleClass="d-flex flex-column justify-content-center text-center">
+                                                    <af:outputLabel value="رقم" id="ol282" styleClass="text-center"/>
+                                                    <af:outputText value="#{bindings.SequenceNumber.inputValue}"
+                                                                   shortDesc="#{bindings.SequenceNumber.hints.tooltip}"
+                                                                   id="ot62" styleClass="text-center">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.SequenceNumber.format}"/>
+                                                    </af:outputText>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <h:panelGroup id="pg442" layout="block" styleClass="col-md-2 col-sm-12">
+                                                <h:panelGroup id="pg552" layout="block"
+                                                              styleClass="d-flex flex-column justify-content-center text-center">
+                                                    <af:outputLabel value="سنة" id="ol272" styleClass="text-center"/>
+                                                    <af:outputText value="#{bindings.Year.inputValue}"
+                                                                   shortDesc="#{bindings.Year.hints.tooltip}" id="ot72"
+                                                                   styleClass="text-center">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.Year.format}"/>
+                                                    </af:outputText>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <h:panelGroup id="pg452" layout="block" styleClass="col-md-2 col-sm-12">
+                                                <af:outputLabel showRequired="#{bindings.FolderType.hints.mandatory}"
+                                                                value="#{bindings.FolderType.label}" id="ol292"/>
+                                                <af:selectOneChoice value="#{bindings.FolderType.inputValue}"
+                                                                    required="#{bindings.FolderTypeAll.hints.mandatory}"
+                                                                    shortDesc="#{bindings.FolderTypeAll.hints.tooltip}"
+                                                                    simple="true" id="soc32" readOnly="true"
+                                                                    rendered="false">
+                                                    <f:selectItems value="#{bindings.FolderTypeAll.items}" id="si34"/>
+                                                    <f:validator binding="#{bindings.FolderTypeAll.validator}"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.FolderType.inputValue}"
+                                                                    label="#{bindings.FolderType.label}"
+                                                                    required="#{bindings.FolderType.hints.mandatory}"
+                                                                    shortDesc="#{bindings.FolderType.hints.tooltip}"
+                                                                    readOnly="true" id="soc222" simple="true"
+                                                                    rendered="false">
+                                                    <f:selectItems value="#{bindings.FolderType.items}" id="si222"/>
+                                                    <f:validator binding="#{bindings.FolderType.validator}"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.FolderTypeCrime.inputValue}"
+                                                                    label="#{bindings.FolderTypeCrime.label}"
+                                                                    required="#{bindings.FolderTypeCrime.hints.mandatory}"
+                                                                    shortDesc="#{bindings.FolderTypeCrime.hints.tooltip}"
+                                                                    id="soc29" readOnly="true" simple="true"
+                                                                    rendered="false">
+                                                    <f:selectItems value="#{bindings.FolderTypeCrime.items}" id="si30"/>
+                                                    <f:validator binding="#{bindings.FolderTypeCrime.validator}"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.FolderType.inputValue}"
+                                                                    required="#{bindings.FolderType.hints.mandatory}"
+                                                                    shortDesc="#{bindings.FolderType.hints.tooltip}"
+                                                                    id="soc42" readOnly="true">
+                                                    <f:selectItems value="#{bindings.FolderType.items}" id="si44"/>
+                                                    <f:validator binding="#{bindings.FolderType.validator}"/>
+                                                </af:selectOneChoice>
+                                            </h:panelGroup>
+                                            <h:panelGroup id="pg482" styleClass="col-md-2 col-sm-12">
+                                                <af:outputLabel showRequired="#{bindings.Nickname.hints.mandatory}"
+                                                                value="الجهة" id="ol322"/>
+                                                <af:selectOneChoice value="#{bindings.PoliceStationEntityId.inputValue}"
+                                                                    required="#{bindings.PoliceStationEntityId.hints.mandatory}"
+                                                                    shortDesc="#{bindings.PoliceStationEntityId.hints.tooltip}"
+                                                                    id="soc40" readOnly="true"
+                                                                    rendered="#{bindings.Seq.inputValue == null}">
+                                                    <f:selectItems value="#{bindings.PoliceStationEntityId.items}"
+                                                                   id="si42"/>
+                                                    <f:validator binding="#{bindings.PoliceStationEntityId.validator}"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.NeyabKolyaa.inputValue}"
+                                                                    required="true"
+                                                                    shortDesc="#{bindings.NeyabKolyaa.hints.tooltip}"
+                                                                    id="soc43" simple="true" autoSubmit="true"
+                                                                    rendered="#{bindings.Seq.inputValue != null}"
+                                                                    readOnly="true">
+                                                    <f:selectItems value="#{bindings.NeyabKolyaa.items}" id="si45"/>
+                                                    <f:validator binding="#{bindings.NeyabKolyaa.validator}"/>
+                                                </af:selectOneChoice>
+                                            </h:panelGroup>
+                                            <h:panelGroup id="pg472" layout="block" styleClass="col-md-2 col-sm-12">
+                                                <h:panelGroup styleClass="d-flex flex-column justify-content-center text-center"
+                                                              id="pg802">
+                                                    <af:outputLabel styleClass="text-center" value="مكرر" id="ol312"/>
+                                                    <af:outputText value="#{bindings.RepeatedFlag1.inputValue eq 'Y'? 'نعم':'لا'}"
+                                                                   shortDesc="#{bindings.RepeatedFlag1.hints.tooltip}"
+                                                                   id="ot82"/>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg86" layout="block" styleClass="row">
+                                            <h:panelGroup id="pg49" styleClass="col-md-12 col-sm-12">
+                                                <af:outputLabel showRequired="#{bindings.Address.hints.mandatory}"
+                                                                value="#{bindings.Address.hints.label}" id="ol33"/>
+                                                <af:inputText value="#{bindings.Address.inputValue}"
+                                                              label="#{bindings.Address.hints.label}"
+                                                              required="#{bindings.Address.hints.mandatory}"
+                                                              maximumLength="#{bindings.Address.hints.precision}"
+                                                              shortDesc="#{bindings.Address.hints.tooltip}" id="it66"
+                                                              readOnly="true" simple="true" rows="2">
+                                                    <f:validator binding="#{bindings.Address.validator}"/>
+                                                </af:inputText>
+                                                <af:link text="عنواين اخرى" id="l29" immediate="true"
+                                                         rendered="#{bindings.ParPartyAddressVO1.estimatedRowCount > '0'}">
+                                                    <af:showPopupBehavior popupId="p2"/>
+                                                </af:link>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="pg50" rendered="false" styleClass="col-md-4 col-sm-12">
+                                            <af:outputLabel showRequired="#{bindings.Nationality.hints.mandatory}"
+                                                            value="#{bindings.Nationality.label}" id="ol34"/>
+                                            <af:selectOneChoice value="#{bindings.Nationality.inputValue}"
+                                                                label="#{bindings.Nationality.label}"
+                                                                required="#{bindings.Nationality.hints.mandatory}"
+                                                                shortDesc="#{bindings.Nationality.hints.tooltip}"
+                                                                readOnly="true" id="soc24" simple="true">
+                                                <f:selectItems value="#{bindings.Nationality.items}" id="si24"/>
+                                                <f:validator binding="#{bindings.Nationality.validator}"/>
+                                            </af:selectOneChoice>
+                                        </h:panelGroup>
+                                        <af:listView value="#{bindings.PreviousJudementROVO1.collectionModel}"
+                                                     var="item"
+                                                     emptyText="#{bindings.PreviousJudementROVO1.viewable ? 'لا توجد احكام سابقة' : 'Access Denied.'}"
+                                                     fetchSize="#{bindings.PreviousJudementROVO1.rangeSize}" id="lv1">
+                                            <af:listItem id="li1">
+                                                <af:panelGroupLayout layout="horizontal" id="pgl43">
+                                                    <f:facet name="separator">
+                                                        <af:spacer width="10" id="s4"/>
+                                                    </f:facet>
+                                                    <af:outputFormatted value="#{item.bindings.Degree.inputValue}"
+                                                                        id="of1"/>
+                                                    <af:outputFormatted value=":" id="of3"/>
+                                                    <af:outputFormatted value="#{item.bindings.JudgmentText.inputValue}"
+                                                                        id="of2"/>
+                                                </af:panelGroupLayout>
+                                            </af:listItem>
+                                        </af:listView>
+                                        <af:panelGroupLayout id="pgl30" layout="vertical" styleClass="btn-holder"
+                                                             rendered="false">
+                                            <af:button styleClass="button-danger"
+                                                       actionListener="#{bindings.Delete1.execute}"
+                                                       disabled="#{bindings.CourtBcHearingResPartiesVO1.estimatedRowCount ==1}"
+                                                       id="b15" icon="/resources/img/close.png" text="حذف"
+                                                       immediate="true" partialSubmit="false"/>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="20" id="s1"/>
+                                    </af:showDetailItem>
+                                </af:forEach>
+                            </af:panelAccordion>
+                        </af:showDetailItem>
+                        <af:showDetailItem id="tab1" text="الرسوم" immediate="true">
+                            <af:button actionListener="#{bindings.CreateInsert1.execute}"
+                                       disabled="#{!bindings.CreateInsert1.enabled}" id="b8"
+                                       icon="/resources/images/plus.png"/>
+                            <af:table value="#{bindings.ExcCourtBcDecisionFeesVO1.collectionModel}" var="row"
+                                      rows="#{bindings.ExcCourtBcDecisionFeesVO1.rangeSize}"
+                                      emptyText="#{bindings.ExcCourtBcDecisionFeesVO1.viewable ? 'لا يوجد بيانات'  : 'Access Denied.'}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.ExcCourtBcDecisionFeesVO1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.ExcCourtBcDecisionFeesVO1.collectionModel.makeCurrent}"
+                                      rowSelection="single" fetchSize="#{bindings.ExcCourtBcDecisionFeesVO1.rangeSize}"
+                                      id="t3" partialTriggers="::b8" columnStretching="multiple" scrollPolicy="page">
+                                <af:column headerText="#{bindings.ExcCourtBcDecisionFeesVO1.hints.Id.label}" id="c4"
+                                           width="100%" rendered="false">
+                                    <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                  label="#{bindings.ExcCourtBcDecisionFeesVO1.hints.Id.label}"
+                                                  required="#{bindings.ExcCourtBcDecisionFeesVO1.hints.Id.mandatory}"
+                                                  maximumLength="#{bindings.ExcCourtBcDecisionFeesVO1.hints.Id.precision}"
+                                                  shortDesc="#{bindings.ExcCourtBcDecisionFeesVO1.hints.Id.tooltip}"
+                                                  id="it4">
+                                        <f:validator binding="#{row.bindings.Id.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcCourtBcDecisionFeesVO1.hints.Id.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.ExcCourtBcDecisionFeesVO1.hints.DecisionId.label}"
+                                           id="c5" width="100%" rendered="false">
+                                    <af:inputText value="#{row.bindings.DecisionId.inputValue}"
+                                                  label="#{bindings.ExcCourtBcDecisionFeesVO1.hints.DecisionId.label}"
+                                                  required="#{bindings.ExcCourtBcDecisionFeesVO1.hints.DecisionId.mandatory}"
+                                                  maximumLength="#{bindings.ExcCourtBcDecisionFeesVO1.hints.DecisionId.precision}"
+                                                  shortDesc="#{bindings.ExcCourtBcDecisionFeesVO1.hints.DecisionId.tooltip}"
+                                                  id="it5">
+                                        <f:validator binding="#{row.bindings.DecisionId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcCourtBcDecisionFeesVO1.hints.DecisionId.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="النوع" id="c6" width="100%">
+                                    <af:selectOneChoice value="#{row.bindings.FeesTypeId.inputValue}"
+                                                        label="#{row.bindings.FeesTypeId.label}"
+                                                        required="#{bindings.ExcCourtBcDecisionFeesVO1.hints.FeesTypeId.mandatory}"
+                                                        shortDesc="#{bindings.ExcCourtBcDecisionFeesVO1.hints.FeesTypeId.tooltip}"
+                                                        id="soc12" autoSubmit="true">
+                                        <f:selectItems value="#{row.bindings.FeesTypeId.items}" id="si12"/>
+                                        <f:validator binding="#{row.bindings.FeesTypeId.validator}"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                                <af:column headerText="المبلغ" id="c7" width="100%">
+                                    <af:inputText value="#{row.bindings.FeesAmount.inputValue}"
+                                                  label="#{bindings.ExcCourtBcDecisionFeesVO1.hints.FeesAmount.label}"
+                                                  required="#{bindings.ExcCourtBcDecisionFeesVO1.hints.FeesAmount.mandatory}"
+                                                  maximumLength="#{bindings.ExcCourtBcDecisionFeesVO1.hints.FeesAmount.precision}"
+                                                  shortDesc="#{bindings.ExcCourtBcDecisionFeesVO1.hints.FeesAmount.tooltip}"
+                                                  id="it6" partialTriggers="soc12" autoSubmit="true">
+                                        <f:validator binding="#{row.bindings.FeesAmount.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcCourtBcDecisionFeesVO1.hints.FeesAmount.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                            </af:table>
+                        </af:showDetailItem>
+                        <af:showDetailItem id="tab2" text="المرفقات" immediate="true">
+                            <af:button actionListener="#{bindings.CreateInsert5.execute}"
+                                       disabled="#{!bindings.CreateInsert5.enabled}" id="b16"
+                                       icon="/resources/img/add-plus-button.png" rendered="false"/>
+                            <af:table value="#{bindings.ExcCourtBcSessionAttachVO1.collectionModel}" var="row"
+                                      rows="#{bindings.ExcCourtBcSessionAttachVO1.rangeSize}"
+                                      emptyText="#{bindings.ExcCourtBcSessionAttachVO1.viewable ? 'لا يوجد بيانات'  : 'Access Denied.'}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.ExcCourtBcSessionAttachVO1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.ExcCourtBcSessionAttachVO1.collectionModel.makeCurrent}"
+                                      rowSelection="single" fetchSize="#{bindings.ExcCourtBcSessionAttachVO1.rangeSize}"
+                                      id="t7" partialTriggers="::b16" rendered="false" columnStretching="multiple"
+                                      contentDelivery="immediate" scrollPolicy="page">
+                                <af:column headerText="#{bindings.ExcCourtBcSessionAttachVO1.hints.Id.label}" id="c30"
+                                           rendered="false" width="100%">
+                                    <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                  label="#{bindings.ExcCourtBcSessionAttachVO1.hints.Id.label}"
+                                                  required="#{bindings.ExcCourtBcSessionAttachVO1.hints.Id.mandatory}"
+                                                  maximumLength="#{bindings.ExcCourtBcSessionAttachVO1.hints.Id.precision}"
+                                                  shortDesc="#{bindings.ExcCourtBcSessionAttachVO1.hints.Id.tooltip}"
+                                                  id="it28">
+                                        <f:validator binding="#{row.bindings.Id.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcCourtBcSessionAttachVO1.hints.Id.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.ExcCourtBcSessionAttachVO1.hints.SessionJudgmentId.label}"
+                                           id="c31" rendered="false" width="100%">
+                                    <af:inputText value="#{row.bindings.SessionJudgmentId.inputValue}"
+                                                  label="#{bindings.ExcCourtBcSessionAttachVO1.hints.SessionJudgmentId.label}"
+                                                  required="#{bindings.ExcCourtBcSessionAttachVO1.hints.SessionJudgmentId.mandatory}"
+                                                  maximumLength="#{bindings.ExcCourtBcSessionAttachVO1.hints.SessionJudgmentId.precision}"
+                                                  shortDesc="#{bindings.ExcCourtBcSessionAttachVO1.hints.SessionJudgmentId.tooltip}"
+                                                  id="it29">
+                                        <f:validator binding="#{row.bindings.SessionJudgmentId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcCourtBcSessionAttachVO1.hints.SessionJudgmentId.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.ExcCourtBcSessionAttachVO1.hints.AttachmentType.label}"
+                                           id="c32" width="100%">
+                                    <af:selectOneChoice value="#{row.bindings.AttachmentType.inputValue}"
+                                                        label="#{row.bindings.AttachmentType.label}"
+                                                        required="#{bindings.ExcCourtBcSessionAttachVO1.hints.AttachmentType.mandatory}"
+                                                        shortDesc="#{bindings.ExcCourtBcSessionAttachVO1.hints.AttachmentType.tooltip}"
+                                                        id="soc19">
+                                        <f:selectItems value="#{row.bindings.AttachmentType.items}" id="si19"/>
+                                        <f:validator binding="#{row.bindings.AttachmentType.validator}"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                                <af:column headerText="#{bindings.ExcCourtBcSessionAttachVO1.hints.DocumentId.label}"
+                                           id="c33" partialTriggers="if1" rendered="false" width="100%">
+                                    <af:inputText value="#{row.bindings.DocumentId.inputValue}"
+                                                  label="#{bindings.ExcCourtBcSessionAttachVO1.hints.DocumentId.label}"
+                                                  required="#{bindings.ExcCourtBcSessionAttachVO1.hints.DocumentId.mandatory}"
+                                                  maximumLength="#{bindings.ExcCourtBcSessionAttachVO1.hints.DocumentId.precision}"
+                                                  shortDesc="#{bindings.ExcCourtBcSessionAttachVO1.hints.DocumentId.tooltip}"
+                                                  id="it30">
+                                        <f:validator binding="#{row.bindings.DocumentId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.ExcCourtBcSessionAttachVO1.hints.DocumentId.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column id="c11" headerText="المرفقات" width="100%">
+                                    <af:inputFile label="المرفقات" id="if1" value="#{pageFlowScope.BCDetails.file}"
+                                                  maximumFiles="1"
+                                                  valueChangeListener="#{pageFlowScope.BCDetails.upload}"
+                                                  autoSubmit="true"/>
+                                </af:column>
+                            </af:table>
+                            <af:panelGroupLayout id="pgl28" layout="vertical">
+                                <af:panelGroupLayout id="pgl36" layout="vertical" styleClass="d-flex  attach-row">
+                                    <af:image source="/resources/images/paperclip.png" id="i5"/>
+                                    <af:outputLabel value="محضر شرطة" id="ol61"/>
+                                    <af:inputFile label="محضر شرطة" id="if6"
+                                                  value="#{pageFlowScope.BCDetails.filePolice}" maximumFiles="1"
+                                                  valueChangeListener="#{pageFlowScope.BCDetails.uploadType10ReportPolice}"
+                                                  autoSubmit="true" simple="true"
+                                                  validator="#{cjValidator.fileFormatValidator}"/>
+                                    <f:facet name="separator"/>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl33" layout="vertical" styleClass="d-flex  attach-row">
+                                    <af:image source="/resources/images/paperclip.png" id="i2"/>
+                                    <af:outputLabel value="تحقيقات النيابة" id="ol58"/>
+                                    <af:inputFile label="تحقيقات النيابة" id="if3"
+                                                  value="#{pageFlowScope.BCDetails.fileNeyaba}" maximumFiles="1"
+                                                  valueChangeListener="#{pageFlowScope.BCDetails.uploadType9Neyaba}"
+                                                  autoSubmit="true" simple="true"
+                                                  validator="#{cjValidator.fileFormatValidator}"/>
+                                    <f:facet name="separator"/>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl32" layout="vertical" styleClass="d-flex  attach-row">
+                                    <af:image source="/resources/images/paperclip.png" id="i1"/>
+                                    <af:outputLabel value="حكم القاضي" id="ol57"/>
+                                    <af:inputFile simple="true" label="حكم القاضي" id="if2"
+                                                  value="#{pageFlowScope.BCDetails.fileJudgeDecision}" maximumFiles="1"
+                                                  valueChangeListener="#{pageFlowScope.BCDetails.uploadType5HokmAlqdy}"
+                                                  autoSubmit="true" validator="#{cjValidator.fileFormatValidator}"/>
+                                    <f:facet name="separator"/>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl35" layout="vertical" styleClass="d-flex  attach-row">
+                                    <af:image source="/resources/images/paperclip.png" id="i4"/>
+                                    <af:outputLabel value="محضر الجلسة" id="ol60"/>
+                                    <af:inputFile label="محضر الجلسة" id="if5"
+                                                  value="#{pageFlowScope.BCDetails.fileSessionRepor}" maximumFiles="1"
+                                                  valueChangeListener="#{pageFlowScope.BCDetails.uploadType4Session}"
+                                                  autoSubmit="true" simple="true"
+                                                  validator="#{cjValidator.fileFormatValidator}"/>
+                                    <f:facet name="separator"/>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl34" layout="vertical" styleClass="d-flex  attach-row">
+                                    <af:image source="/resources/images/paperclip.png" id="i3"/>
+                                    <af:outputLabel value="شهادة من واقع الجدول" id="ol59"/>
+                                    <af:inputFile label="شهادة من واقع الدول" id="if4"
+                                                  value="#{pageFlowScope.BCDetails.fileDocument28}" maximumFiles="1"
+                                                  valueChangeListener="#{pageFlowScope.BCDetails.upload28Document}"
+                                                  autoSubmit="true" simple="true"
+                                                  validator="#{cjValidator.fileFormatValidator}"/>
+                                    <f:facet name="separator"/>
+                                </af:panelGroupLayout>
+                                <f:facet name="separator"/>
+                                <af:panelGroupLayout id="pgl42" layout="vertical" styleClass="d-flex  attach-row">
+                                    <af:image source="/resources/images/paperclip.png" id="i7"/>
+                                    <af:outputLabel value="دوسيه التنفيذ" id="ol85"/>
+                                    <af:inputFile label="دوسيه التنفيذ" id="if7"
+                                                  value="#{pageFlowScope.BCDetails.fileDocument29}" maximumFiles="1"
+                                                  valueChangeListener="#{pageFlowScope.BCDetails.upload29Document}"
+                                                  autoSubmit="true" simple="true"
+                                                  validator="#{cjValidator.fileFormatValidator}"/>
+                                    <f:facet name="separator"/>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                            <af:region value="#{bindings.caseattachmentstf1.regionModel}" id="r2" rendered="false"/>
+                            <af:table value="#{bindings.CriminalJusticeFilesDetails2VO1.collectionModel}" var="row"
+                                      rows="#{bindings.CriminalJusticeFilesDetails2VO1.rangeSize}"
+                                      emptyText="#{bindings.CriminalJusticeFilesDetails2VO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.CriminalJusticeFilesDetails2VO1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.CriminalJusticeFilesDetails2VO1.collectionModel.makeCurrent}"
+                                      rowSelection="single"
+                                      fetchSize="#{bindings.CriminalJusticeFilesDetails2VO1.rangeSize}"
+                                      filterModel="#{bindings.CriminalJusticeFilesDetails2VO1Query.queryDescriptor}"
+                                      filterVisible="true"
+                                      queryListener="#{bindings.CriminalJusticeFilesDetails2VO1Query.processQuery}"
+                                      varStatus="vs" id="t14" autoHeightRows="-1" scrollPolicy="page"
+                                      styleClass="AFStretchWidth">
+                                <af:column sortProperty="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Filename.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Filename.label}"
+                                           id="c58">
+                                    <af:outputText value="#{row.Filename}"
+                                                   shortDesc="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Filename.tooltip}"
+                                                   id="ot1"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Ddocname.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Ddocname.label}"
+                                           id="c59">
+                                    <af:outputText value="#{row.Ddocname}"
+                                                   shortDesc="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Ddocname.tooltip}"
+                                                   id="ot2"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.CriminalJusticeFilesDetails2VO1.hints.CreatedDate.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.CriminalJusticeFilesDetails2VO1.hints.CreatedDate.label}"
+                                           id="c60">
+                                    <f:facet name="filter">
+                                        <af:inputDate value="#{bindings.CriminalJusticeFilesDetails2VO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreatedDate.value}"
+                                                      id="id15">
+                                            <af:convertDateTime pattern="#{bindings.CriminalJusticeFilesDetails2VO1.hints.CreatedDate.format}"/>
+                                        </af:inputDate>
+                                    </f:facet>
+                                    <af:outputText value="#{row.CreatedDate}"
+                                                   shortDesc="#{bindings.CriminalJusticeFilesDetails2VO1.hints.CreatedDate.tooltip}"
+                                                   id="ot3">
+                                        <af:convertDateTime pattern="#{bindings.CriminalJusticeFilesDetails2VO1.hints.CreatedDate.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Typeid.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Typeid.label}"
+                                           id="c61">
+                                    <af:selectOneChoice value="#{row.bindings.Typeid.inputValue}"
+                                                        label="#{row.bindings.Typeid.label}"
+                                                        required="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Typeid.mandatory}"
+                                                        shortDesc="#{bindings.CriminalJusticeFilesDetails2VO1.hints.Typeid.tooltip}"
+                                                        readOnly="true" id="soc45">
+                                        <f:selectItems value="#{row.bindings.Typeid.items}" id="si47"/>
+                                        <f:validator binding="#{row.bindings.Typeid.validator}"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                                <af:column id="c62">
+                                    <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l09" disabled="#{row.Did eq null}"
+                                             immediate="true">
+                                        <af:fileDownloadActionListener filename="#{row.Filename}"
+                                                                       method="#{pageFlowScope.BCDetails.downloadAllAttachedFiles}"/>
+                                    </af:link>
+                                </af:column>
+                            </af:table>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="غرامة المتضامنين" id="sdi6" rendered="false" immediate="true">
+                            <af:inputText value="#{bindings.UndefineedPenaltyCom.inputValue}" label="غرامة غير معلومة"
+                                          required="#{bindings.UndefineedPenaltyCom.hints.mandatory}"
+                                          columns="#{bindings.UndefineedPenaltyCom.hints.displayWidth}"
+                                          maximumLength="#{bindings.UndefineedPenaltyCom.hints.precision}"
+                                          shortDesc="#{bindings.UndefineedPenaltyCom.hints.tooltip}" id="it92"
+                                          autoSubmit="true"
+                                          valueChangeListener="#{pageFlowScope.BCDetails.undefinedPenaltyCombVCL}">
+                                <f:validator binding="#{bindings.UndefineedPenaltyCom.validator}"/>
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.UndefineedPenaltyCom.format}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.PenaltyAmountCom.inputValue}" label="غرامة ثابتة"
+                                          required="#{bindings.PenaltyAmountCom.hints.mandatory}"
+                                          columns="#{bindings.PenaltyAmountCom.hints.displayWidth}"
+                                          maximumLength="#{bindings.PenaltyAmountCom.hints.precision}"
+                                          shortDesc="#{bindings.PenaltyAmountCom.hints.tooltip}" id="it93"
+                                          autoSubmit="true">
+                                <f:validator binding="#{bindings.PenaltyAmountCom.validator}"/>
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.PenaltyAmountCom.format}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.WorkAmountCom.inputValue}" label="غرامة يومية"
+                                          required="#{bindings.WorkAmountCom.hints.mandatory}"
+                                          columns="#{bindings.WorkAmountCom.hints.displayWidth}"
+                                          maximumLength="#{bindings.WorkAmountCom.hints.precision}"
+                                          shortDesc="#{bindings.WorkAmountCom.hints.tooltip}" id="it94"
+                                          autoSubmit="true">
+                                <f:validator binding="#{bindings.WorkAmountCom.validator}"/>
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.WorkAmountCom.format}"/>
+                            </af:inputText>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="حكم المكمة" id="sdi5" rendered="true" immediate="true">
+                            <af:richTextEditor id="rte1" value="#{bindings.JudgementResolution.inputValue}" rows="2"
+                                               simple="true" disabled="true"
+                                               rendered="#{bindings.JudgementResolution.inputValue ne null}">
+                                <f:facet name="footer"/>
+                            </af:richTextEditor>
+                            <af:table value="#{bindings.CriminalJusticeFilesDetailsVO4.collectionModel}" var="row"
+                                      rows="#{bindings.CriminalJusticeFilesDetailsVO4.rangeSize}"
+                                      emptyText="#{bindings.CriminalJusticeFilesDetailsVO4.viewable ? 'لا يوجد بيانات'  : 'Access Denied.'}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.CriminalJusticeFilesDetailsVO4.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.CriminalJusticeFilesDetailsVO4.collectionModel.makeCurrent}"
+                                      rowSelection="single"
+                                      fetchSize="#{bindings.CriminalJusticeFilesDetailsVO4.rangeSize}" id="t13"
+                                      autoHeightRows="-1" contentDelivery="immediate" columnStretching="column:c57"
+                                      immediate="true" styleClass="AFStretchWidth">
+                                <af:column headerText="نوع المرفق" id="c57">
+                                    <af:selectOneChoice value="#{row.bindings.Typeid.inputValue}"
+                                                        label="#{row.bindings.Typeid.label}"
+                                                        required="#{bindings.CriminalJusticeFilesDetailsVO4.hints.Typeid.mandatory}"
+                                                        shortDesc="#{bindings.CriminalJusticeFilesDetailsVO4.hints.Typeid.tooltip}"
+                                                        id="soc44" readOnly="true">
+                                        <f:selectItems value="#{row.bindings.Typeid.items}" id="si46"/>
+                                        <f:validator binding="#{row.bindings.Typeid.validator}"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                                <af:column id="c602">
+                                    <af:link text="#{bundle.DOWNLOAD_REPORT}" id="l009" disabled="#{row.Did eq null}"
+                                             immediate="true">
+                                        <af:fileDownloadActionListener filename="#{row.Filename}"
+                                                                       method="#{pageFlowScope.BCDetails.downloadAllAttachedFiles}"/>
+                                    </af:link>
+                                </af:column>
+                            </af:table>
+                        </af:showDetailItem>
+                    </af:panelTabbed>
+                </f:facet>
+            </af:panelSplitter>
+        </af:panelHeader>
+        <h:panelGroup id="pg25" styleClass="btn-holder btn-holder-bcd" layout="block">
+            <af:button text="#{cjexecviewcontrollerBundle.save}" id="b12"
+                       disabled="#{bindings.FormCaseDescriptionDesVO1.estimatedRowCount ==0}"
+                       action="#{pageFlowScope.BCDetails.customSave}" partialTriggers="b19 b21" rendered="false"></af:button>
+            <af:button text="#{cjexecviewcontrollerBundle.save}" id="b1" action="#{pageFlowScope.BCDetails.saveBC_PI}"
+                       binding="#{pageFlowScope.BCDetails.saveBTN}" partialTriggers="b19 b21 b23 l25 t4 t4:b13"
+                       disabled="#{bindings.ParPartyAddressVO1.estimatedRowCount eq '0'}"/>
+            <af:spacer width="10" height="10" id="s11"/>
+            <af:button actionListener="#{bindings.customSaveBeforeCommit.execute}"
+                       text="#{cjexecviewcontrollerBundle.save}" disabled="#{!bindings.customSaveBeforeCommit.enabled}"
+                       id="b3" rendered="false"/>
+            <af:button actionListener="#{bindings.Commit.execute}" text="#{cjexecviewcontrollerBundle.save}"
+                       disabled="#{!bindings.Commit.enabled}" id="b14" rendered="false"/>
+            <af:link styleClass="add-btn-guilty" text="إلغاء" id="l9" actionListener="#{bindings.Rollback.execute}"
+                     action="#{pageFlowScope.BCDetails.cancelPI}" immediate="true" partialSubmit="true">
+                <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                <af:resetActionListener/>
+            </af:link>
+            <af:button actionListener="#{bindings.Rollback.execute}" disabled="#{!bindings.Rollback.enabled}"
+                       immediate="true" id="b2" action="#{pageFlowScope.BCDetails.Cancel}"
+                       text="#{cjexecviewcontrollerBundle.cancel}" rendered="false">
+                <af:resetActionListener/>
+            </af:button>
+        </h:panelGroup>
+        <af:link text=" #{bindings.Id6.inputValue}" id="l7" visible="false"/>
+        <f:facet name="toolbar">
+            <af:activeOutputText value="القضية مدرجة بالنظام" id="aot1"
+                                 binding="#{pageFlowScope.BCDetails.not_Exisit_Label}" visible="false"
+                                 partialTriggers="b6 b2 b1" styleClass="alert alert-success alert-custom"/>
+            <af:activeOutputText value="القضية غير مدرجة بالنظام" id="aot2"
+                                 binding="#{pageFlowScope.BCDetails.exisit_Label}" visible="false"
+                                 partialTriggers="b6 b2 b1" styleClass="alert alert-success alert-custom"/>
+            <af:activeOutputText value="القضية مُعاد قيدها " id="aot3" binding="#{pageFlowScope.BCDetails.error_label}"
+                                 visible="false" partialTriggers="b6 b2 b1"
+                                 styleClass="alert alert-success alert-custom"/>
+        </f:facet>
+    </af:panelHeader>
+</ui:composition>

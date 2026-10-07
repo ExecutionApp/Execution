@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AppealsBCParties"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.bcdetails.AppealsBCParties_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[/* Formatted on 1/30/2021 5:18:00 PM (QP5 v5.269.14213.34769) */     
+SELECT *     
+  FROM (SELECT    
+    
+                  PARTIES.FNAME     
+               || ' '     
+               || PARTIES.SNAME     
+               || ' '     
+               || PARTIES.TNAME     
+               || ' '     
+               || PARTIES.FOURTHNAME     
+                  AS PARTY_NAME,     
+               PARTIES.ID_NUMBER,     
+                  PAR_POLICE.PAR_YEAR     
+               || '/'     
+               || PAR_POLICE.POLICE_NUMBER     
+               || '/'     
+               || CAS_TYPE.NAME     
+               || '/'     
+               || POLICE.ENTITY_NAME     
+                  AS BUSINESS_CASE_NUMBER,     
+               TO_CHAR (DATES.HEARING_DATE, 'yyyy-mm-dd') HEARING_DATE,     
+               RES_PART.PARTY_ID,      
+               CAS.ID AS BUSINESS_CASE_ID,     
+               PARTIES.NICKNAME,      
+               RES.ID RESERVATION_ID ,    
+               (select entity.entity_name   from entity where id = DATES.entity_id) entity_name    
+                   
+               ,     
+                   
+          (          
+SELECT  'رقم الحصر :  '|| sequence_number || ' - '||year     
+            
+          ||' - '||    
+           DECODE   (folder_type,          
+                   '2', 'حبس غير منفذ',          
+                   '3', 'غرامة' ,          
+                   '1', 'حبس منفذ'   ,       
+                    '5', 'امن دوله حبس' ,          
+                   '6', 'امن دولة غرامة'  ,     
+                   '8', 'تدابير' ,     
+                   '7', 'براءة'      
+                   )    
+                       
+                   ||' - '||    
+            
+       
+           
+        (select entity.entity_name   from entity where id =police_station_entity_id ) ||' - '||DECODE   (repeated_flag , 'N','غير مكرر', 'Y','مكرر')    
+            
+            
+         as fold_num     
+           
+         
+         
+  FROM exc_folder_data    
+ WHERE res_party_id IN (SELECT MAX (id)    
+                          FROM court_bc_hearing_res_parties    
+                         WHERE     party_id = RES_PART.PARTY_ID    
+                               --AND BC_DEGREE_SPEC_ID IN (1, 2) 
+                               )) as fold_num     
+       
+          FROM COURT_BC_HEARING_RES_PARTIES RES_PART,     
+               COURT_BC_HEARING_RESERVATION RES,     
+               PAR_PARTIES PARTIES,     
+               BUSINESS_CASE CAS,     
+               PAR_POLICE_AUTHORITY_REPORT PAR_POLICE,     
+               ENTITY POLICE,     
+               COURT_CIRCLES_DATES_HEARING DATES,      
+               BUSINESS_CASE_TYPE CAS_TYPE     
+                   
+                     
+         WHERE     RES_PART.COURT_BC_HEARING_RES_ID = RES.ID     
+               AND RES_PART.PARTY_ID = PARTIES.ID     
+               AND RES.BUSINESS_CASE_ID = CAS.ID     
+               AND CAS.ID = PAR_POLICE.BUSINESS_CASE_ID     
+               AND PAR_POLICE.ORIGIN_ENTITY = POLICE.ID     
+               AND DATES.ID(+) = RES.CIRCLE_HEARING_DATE_ID      
+               AND CAS.CASE_TYPE = CAS_TYPE.ID      
+               and    RES.sent_to_court='C'      
+              -- AND CAS.ID = 25201800     
+               )]]></SQLQuery>
+  <ViewAttribute
+    Name="PartyName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="403"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME"
+    Expression="PARTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="403"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_NUMBER"
+    Expression="ID_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="493"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_NUMBER"
+    Expression="BUSINESS_CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="493"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HEARING_DATE"
+    Expression="HEARING_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PARTY_ID"
+    Expression="PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_ID"
+    Expression="BUSINESS_CASE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Nickname"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NICKNAME"
+    Expression="NICKNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReservationId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RESERVATION_ID"
+    Expression="RESERVATION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_NAME"
+    Expression="ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FoldNum"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="354"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FOLD_NUM"
+    Expression="FOLD_NUM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="354"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="PartyId"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="BusinessCaseDetails"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink35VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

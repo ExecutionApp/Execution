@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+    <task-flow-definition id="searchByPartyTF">
+        <default-activity>searchByPartyFrag</default-activity>
+        <transaction>
+            <new-transaction/>
+        </transaction>
+        <data-control-scope>
+            <shared/>
+        </data-control-scope>
+        <managed-bean id="__1">
+            <managed-bean-name>claimProcedureBean</managed-bean-name>
+            <managed-bean-class>com.egabi.cjexec.view.beans.claimprocedure.ClaimProcedure</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+        <view id="searchByPartyFrag">
+            <page>/pages/com/egabi/claimProcedure/searchByPartyFrag.jsff</page>
+        </view>
+        <task-flow-call id="nIdServiceTF">
+            <task-flow-reference>
+                <document>/WEB-INF/taskflows/nIdService/nIdServiceTF.xml</document>
+                <id>nIdServiceTF</id>
+            </task-flow-reference>
+            <input-parameter id="__6">
+                <name>nIdParam</name>
+                <value>#{pageFlowScope.nIdParam}</value>
+            </input-parameter>
+            <input-parameter id="__7">
+                <name>fcnParam</name>
+                <value>#{pageFlowScope.fcnParam}</value>
+            </input-parameter>
+            <input-parameter id="__4">
+                <name>userIdParam</name>
+                <value>#{pageFlowScope.userIdParam}</value>
+            </input-parameter>
+            <input-parameter id="__5">
+                <name>channelIdParam</name>
+                <value>#{pageFlowScope.channelIdParam}</value>
+            </input-parameter>
+            <input-parameter id="__9">
+                <name>tokenIdParam</name>
+                <value>#{pageFlowScope.tokenIdParam}</value>
+            </input-parameter>
+            <input-parameter id="__10">
+                <name>callPermissionParam</name>
+                <value>#{pageFlowScope.callPermissionParam}</value>
+            </input-parameter>
+            <input-parameter id="__11">
+                <name>userNameParam</name>
+                <value>#{pageFlowScope.userNameParam}</value>
+            </input-parameter>
+            <input-parameter id="__14">
+                <name>passwordParam</name>
+                <value>#{pageFlowScope.passwordParam}</value>
+            </input-parameter>
+            <return-value id="__8">
+                <name>nIdResponseParam</name>
+                <value>#{pageFlowScope.nIdResponseParam}</value>
+            </return-value>
+            <run-as-dialog>
+                <display-type>
+                    <inline-popup/>
+                </display-type>
+            </run-as-dialog>
+        </task-flow-call>
+        <control-flow-rule id="__12">
+            <from-activity-id>searchByPartyFrag</from-activity-id>
+            <control-flow-case id="__13">
+                <from-outcome>nId</from-outcome>
+                <to-activity-id>nIdServiceTF</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <use-page-fragments/>
+    </task-flow-definition>
+</adfc-config>

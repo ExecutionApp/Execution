@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+    <af:panelGroupLayout id="pgl4" layout="horizontal">
+        <af:outputLabel value="#{bundle.ID_NUMBER}" id="ol1"/>
+        <af:inputText value="#{pageFlowScope.claimProcedureBean.idNum}" required="true" simple="true" maximumLength="14"
+                      contentStyle="width:200px;" id="it2" validator="#{cjValidator.nationalIdValidator}"/>
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:button text="#{bundle.VERIFY}" id="b5" action="nId" useWindow="true" windowHeight="500" windowWidth="900"
+                   rendered="true" returnListener="#{pageFlowScope.claimProcedureBean.getNIDValues}">
+            <af:setPropertyListener to="#{pageFlowScope.nIdParam}" from="#{pageFlowScope.claimProcedureBean.idNum}"
+                                    type="action"/>
+            <af:setPropertyListener to="#{pageFlowScope.fcnParam}" from="" type="action"/>
+        </af:button>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:button text="#{bundle.BACK}" id="b6" action="back" rendered="true">
+            <af:target events="@all" render="@all" execute="@this"/>
+        </af:button>
+    </af:panelGroupLayout>
+</ui:composition>

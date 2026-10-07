@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="GonahMostanafa_TF_GonahMostanafa_TF_preEnterReportsSearchPageDef" Package="taskflows.datareport"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="preEnterReportsSearch" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="preEnterReportsSearch" IsViewObjectMethod="false"
+                  DataControl="SimplifiedModeAMDataControl"
+                  InstanceName="data.SimplifiedModeAMDataControl.dataProvider"/>
+  </bindings>
+</pageDefinition>

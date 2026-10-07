@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="ExcPrtySessJdgFragPageDef"
+                Package="pages.com.egabi.cjexec.common">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ExecPartySessionJudgmentsROV1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="ExecPartySessionJudgmentsROV1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="ExecPartySessionJudgmentsROV1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.common.ExecPartySessionJudgmentsROV"
+                      Name="ExecPartySessionJudgmentsROV10">
+        <AttrNames>
+          <Item Value="HearingDate"/>
+          <Item Value="AttendanceName"/>
+          <Item Value="PartyJudgementResolution"/>
+          <Item Value="SequenceNumber"/>
+          <Item Value="Name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="PartyJudgementResolution">
+      <AttrNames>
+        <Item Value="PartyJudgementResolution"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="HearingDate">
+      <AttrNames>
+        <Item Value="HearingDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="SequenceNumber">
+      <AttrNames>
+        <Item Value="SequenceNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExecPartySessionJudgmentsROV1Iterator" id="AttendanceName">
+      <AttrNames>
+        <Item Value="AttendanceName"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

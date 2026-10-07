@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="execFoldersSearchFragPageDef"
+                Package="pages.com.egabi.cjexec.transaction.executionFolders">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variableUsage DataControl="CjExecAMDataControl" Binds="FolderTypeROV1.variablesMap.P_id_number"
+                     Name="ExecuteWithParams_P_id_number" IsQueriable="false"/>
+           <variableUsage DataControl="CjExecAMDataControl" Binds="FolderTypeROV1.variablesMap.SEQUENCE_NUMBER"
+                     Name="ExecuteWithParams_SEQUENCE_NUMBER" IsQueriable="false"/>
+      <variableUsage DataControl="CjExecAMDataControl" Binds="FolderTypeROV1.variablesMap.p_party_full_name"
+                     Name="ExecuteWithParams_p_party_full_name" IsQueriable="false"/>
+    
+    </variableIterator>
+    <iterator Binds="EntityNameROV1" RangeSize="25" DataControl="CjExecAMDataControl" id="EntityNameROV1Iterator"/>
+    <iterator Binds="FolderTypeROV1" RangeSize="25" DataControl="CjExecAMDataControl" id="FolderTypeROV1Iterator"/>
+    <searchRegion Criteria="FolderTypeROVCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="FolderTypeROV1Iterator" id="FolderTypeROVCriteriaQuery"/>
+    <iterator Binds="SearchROV1" RangeSize="25" DataControl="CjExecAMDataControl" id="SearchROV1Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="SearchROV1Iterator" StaticList="false" Uses="LOV_CirculeId" id="CirculeId2"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchROV1Iterator" StaticList="false" Uses="LOV_FolderType" id="FolderType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="variables" id="SEQUENCE_NUMBER">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_SEQUENCE_NUMBER"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="P_id_number">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_P_id_number"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="p_party_full_name">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_p_party_full_name"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="FolderTypeROV1Iterator" id="FolderTypeROV11">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.executionfolders.FolderTypeROV" Name="FolderTypeROV110">
+        <AttrNames>
+          <Item Value="CirculeName"/>
+          <Item Value="HearingDate"/>
+          <Item Value="ReservationId"/>
+          <Item Value="SequenceNumber"/>
+          <Item Value="PoliceNumber"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="Year"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="EntityNameROV1Iterator" id="CourtName">
+      <AttrNames>
+        <Item Value="CourtName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EntityNameROV1Iterator" id="EntityName">
+      <AttrNames>
+        <Item Value="EntityName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SearchROV1Iterator" StaticList="false" Uses="LOV_TableType" id="TableType" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <!--<listOfValues IterBinding="SearchROV1Iterator" StaticList="false" Uses="LOV_HearingDateId" id="HearingDateId1"/>-->
+    <list IterBinding="SearchROV1Iterator" StaticList="false" Uses="LOV_DegreeType" id="DegreeType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <action IterBinding="FolderTypeROV1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="P_id_number" NDValue="#{bindings.ExecuteWithParams_P_id_number}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="p_party_full_name" NDValue="#{bindings.ExecuteWithParams_p_party_full_name}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="p_entity_id" NDValue="#{bindings.CirculeId2.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="P_HEARING_DATE" NDValue="#{bindings.HearingDateId.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="P_FOLDER_TYPE_ID" NDValue="#{bindings.FolderType.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="SEQUENCE_NUMBER" NDValue="#{bindings.ExecuteWithParams_SEQUENCE_NUMBER}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="P_TABLE_TYPE" NDValue="#{bindings.TableType.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="P_BC_DEGREE_ID" NDValue="#{bindings.DegreeType.inputValue}" NDType="java.math.BigDecimal"/>
+    </action>
+    <listOfValues IterBinding="FolderTypeROV1Iterator" StaticList="false" Uses="LOV_HearDate" id="HearDate"/>
+    <listOfValues IterBinding="SearchROV1Iterator" StaticList="false" Uses="LOV_HearDateSTR" id="HearDateSTR1"/>
+    <attributeValues IterBinding="SearchROV1Iterator" id="HearingDateId">
+      <AttrNames>
+        <Item Value="HearingDateId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FolderTypeROV1Iterator" id="PartyId">
+      <AttrNames>
+        <Item Value="PartyId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

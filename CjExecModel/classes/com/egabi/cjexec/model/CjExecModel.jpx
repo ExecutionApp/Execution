@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE JboProject SYSTEM "jbo_03_01.dtd">
+<!---->
+<JboProject
+    xmlns="http://xmlns.oracle.com/bc4j"
+    Name="CjExecModel"
+    Version="12.2.1.0.31"
+    SeparateXMLFiles="true"
+    PackageName="com.egabi.cjexec.model">
+    <DesignTime>
+        <Attr Name="_jbo.TypeMapEntries" Value="OracleApps"/>
+        <Attr Name="_jprName" Value="../../../../../CjExecModel.jpr"/>
+        <Attr Name="_appModuleNames0" Value="com.egabi.cjexec.model.appmodules.SimplifiedModeAM"/>
+        <Attr Name="_appModuleNames1" Value="com.egabi.cjexec.model.appmodules.OppositionAM"/>
+        <Attr Name="_appModuleNames2" Value="com.egabi.cjexec.model.appmodules.CjExecAM"/>
+        <Attr Name="_appModuleNames3" Value="com.egabi.cjexec.model.appmodules.UtilsAppModuleAM"/>
+        <Attr Name="_NamedConnection" Value="PRE_PRODCJ"/>
+    </DesignTime>
+    <Containee
+        Name="appmodules"
+        PackageName="com.egabi.cjexec.model.appmodules"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_AM" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="claimProcedure"
+        PackageName="com.egabi.cjexec.model.associations.claimProcedure"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_AS" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="provisionsInclusionAssociations"
+        PackageName="com.egabi.cjexec.model.associations.provisionsInclusionAssociations"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_AS" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="suppAmount"
+        PackageName="com.egabi.cjexec.model.associations.suppAmount"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_AS" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="audit"
+        PackageName="com.egabi.cjexec.model.entities.audit"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="assoc"
+        PackageName="com.egabi.cjexec.model.entities.bcdetails.assoc"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_AS" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="bcdetails"
+        PackageName="com.egabi.cjexec.model.entities.bcdetails"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+            <Attr Name="_AS" Value="true"/>
+            <Attr Name="_DO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="caseexecemp"
+        PackageName="com.egabi.cjexec.model.entities.caseexecemp"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+            <Attr Name="_AS" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="claimProcedureEntities"
+        PackageName="com.egabi.cjexec.model.entities.claimProcedureEntities"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="enableopposition"
+        PackageName="com.egabi.cjexec.model.entities.enableopposition"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+            <Attr Name="_AS" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="entities"
+        PackageName="com.egabi.cjexec.model.entities"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="files"
+        PackageName="com.egabi.cjexec.model.entities.files"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="installmentrequest"
+        PackageName="com.egabi.cjexec.model.entities.installmentrequest"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+            <Attr Name="_AS" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="inventory"
+        PackageName="com.egabi.cjexec.model.entities.inventory"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="jicservice"
+        PackageName="com.egabi.cjexec.model.entities.jicservice"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="nIdService"
+        PackageName="com.egabi.cjexec.model.entities.nIdService"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="oppositions"
+        PackageName="com.egabi.cjexec.model.entities.oppositions"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="parlawyer"
+        PackageName="com.egabi.cjexec.model.entities.parlawyer"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_AS" Value="true"/>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="log"
+        PackageName="com.egabi.cjexec.model.entities.party.log"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="party"
+        PackageName="com.egabi.cjexec.model.entities.party"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="provisionsInclusionEntities"
+        PackageName="com.egabi.cjexec.model.entities.provisionsInclusionEntities"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="security"
+        PackageName="com.egabi.cjexec.model.entities.security"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="suppAmount"
+        PackageName="com.egabi.cjexec.model.entities.suppAmount"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="supprepay"
+        PackageName="com.egabi.cjexec.model.entities.supprepay"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_EO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="attatchUCMWebCam"
+        PackageName="com.egabi.cjexec.model.roviews.attatchUCMWebCam"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="audit"
+        PackageName="com.egabi.cjexec.model.roviews.audit"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="auditupdate"
+        PackageName="com.egabi.cjexec.model.roviews.auditupdate"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="bcdetails"
+        PackageName="com.egabi.cjexec.model.roviews.bcdetails"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="caseexecemp"
+        PackageName="com.egabi.cjexec.model.roviews.caseexecemp"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="links"
+        PackageName="com.egabi.cjexec.model.roviews.caseexecemp.links"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="claimFolder"
+        PackageName="com.egabi.cjexec.model.roviews.claimFolder"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="claimProcedureROV"
+        PackageName="com.egabi.cjexec.model.roviews.claimProcedureROV"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="common"
+        PackageName="com.egabi.cjexec.model.roviews.common"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="enableopposition"
+        PackageName="com.egabi.cjexec.model.roviews.enableopposition"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="execution"
+        PackageName="com.egabi.cjexec.model.roviews.execution"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="executionfolders"
+        PackageName="com.egabi.cjexec.model.roviews.executionfolders"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="expatriate"
+        PackageName="com.egabi.cjexec.model.roviews.expatriate"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="inventory"
+        PackageName="com.egabi.cjexec.model.roviews.inventory"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="executionfolders"
+        PackageName="com.egabi.cjexec.model.roviews.executionfolders"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="staticV"
+        PackageName="com.egabi.cjexec.model.roviews.inventory.staticV"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="lov"
+        PackageName="com.egabi.cjexec.model.roviews.lov"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="lov"
+        PackageName="com.egabi.cjexec.model.roviews.lov"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="lov"
+        PackageName="com.egabi.cjexec.model.roviews.lov"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="mainreports"
+        PackageName="com.egabi.cjexec.model.roviews.mainreports"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="oppositions"
+        PackageName="com.egabi.cjexec.model.roviews.oppositions"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="oppositions"
+        PackageName="com.egabi.cjexec.model.roviews.oppositions"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="ParParties"
+        PackageName="com.egabi.cjexec.model.roviews.ParParties"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="previousProcedures"
+        PackageName="com.egabi.cjexec.model.roviews.previousProcedures"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="oppositions"
+        PackageName="com.egabi.cjexec.model.roviews.oppositions"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="provisionsInclusion"
+        PackageName="com.egabi.cjexec.model.roviews.provisionsInclusion"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="provisionsInclusion"
+        PackageName="com.egabi.cjexec.model.roviews.provisionsInclusion"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="provisionsInclusion"
+        PackageName="com.egabi.cjexec.model.roviews.provisionsInclusion"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="reports"
+        PackageName="com.egabi.cjexec.model.roviews.reports"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="requests"
+        PackageName="com.egabi.cjexec.model.roviews.requests"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="requests"
+        PackageName="com.egabi.cjexec.model.roviews.requests"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="security"
+        PackageName="com.egabi.cjexec.model.roviews.security"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="servicescatalog"
+        PackageName="com.egabi.cjexec.model.roviews.servicescatalog"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="suppamount"
+        PackageName="com.egabi.cjexec.model.roviews.suppamount"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="arrestwrrantsVLink"
+        PackageName="com.egabi.cjexec.model.viewLinks.arrestwrrantsVLink"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="claimProcedureVL"
+        PackageName="com.egabi.cjexec.model.viewLinks.claimProcedureVL"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="requests"
+        PackageName="com.egabi.cjexec.model.roviews.requests"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="provisionsInclusionViewLinks"
+        PackageName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="provisionsInclusionViewLinks"
+        PackageName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="security"
+        PackageName="com.egabi.cjexec.model.viewLinks.security"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="servicescatalog"
+        PackageName="com.egabi.cjexec.model.viewLinks.servicescatalog"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="suppamount"
+        PackageName="com.egabi.cjexec.model.viewLinks.suppamount"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="audit"
+        PackageName="com.egabi.cjexec.model.views.audit"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="bcdetails"
+        PackageName="com.egabi.cjexec.model.views.bcdetails"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="vl"
+        PackageName="com.egabi.cjexec.model.views.bcdetails.vl"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="caseexecemp"
+        PackageName="com.egabi.cjexec.model.views.caseexecemp"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="links"
+        PackageName="com.egabi.cjexec.model.views.caseexecemp.links"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="claimProcedureViews"
+        PackageName="com.egabi.cjexec.model.views.claimProcedureViews"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="enableopposition"
+        PackageName="com.egabi.cjexec.model.views.enableopposition"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="files"
+        PackageName="com.egabi.cjexec.model.views.files"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="installmentrequest"
+        PackageName="com.egabi.cjexec.model.views.installmentrequest"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="inventory"
+        PackageName="com.egabi.cjexec.model.views.inventory"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="jicservice"
+        PackageName="com.egabi.cjexec.model.views.jicservice"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="nIdService"
+        PackageName="com.egabi.cjexec.model.views.nIdService"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="oppositions"
+        PackageName="com.egabi.cjexec.model.views.oppositions"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="parlawyer"
+        PackageName="com.egabi.cjexec.model.views.parlawyer"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="log"
+        PackageName="com.egabi.cjexec.model.views.party.log"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="party"
+        PackageName="com.egabi.cjexec.model.views.party"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="provisionsInclusionViews"
+        PackageName="com.egabi.cjexec.model.views.provisionsInclusionViews"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="security"
+        PackageName="com.egabi.cjexec.model.views.security"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="service"
+        PackageName="com.egabi.cjexec.model.views.service"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="suppamount"
+        PackageName="com.egabi.cjexec.model.views.suppamount"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="views"
+        PackageName="com.egabi.cjexec.model.views"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VO" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="provisionsInclusionViewLinks"
+        PackageName="com.egabi.cjexec.model.viewLinks.provisionsInclusionViewLinks"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+    <Containee
+        Name="vl"
+        PackageName="com.egabi.cjexec.model.vl"
+        ObjectType="JboPackage">
+        <DesignTime>
+            <Attr Name="_VL" Value="true"/>
+        </DesignTime>
+    </Containee>
+</JboProject>

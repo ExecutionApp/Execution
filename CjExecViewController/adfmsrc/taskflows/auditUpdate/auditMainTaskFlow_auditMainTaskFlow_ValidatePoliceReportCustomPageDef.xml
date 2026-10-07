@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="auditMainTaskFlow_auditMainTaskFlow_ValidatePoliceReportCustomPageDef"
+                Package="taskflows.auditUpdate" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  
+  <bindings>
+    <methodAction id="ValidatePoliceReportCustom" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="ValidatePoliceReportCustom" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1"
+                  ReturnName="data.CjExecAMDataControl.methodResults.ValidatePoliceReportCustom_CjExecAMDataControl_dataProvider_SimplifiedModeAM1_ValidatePoliceReportCustom_result">
+      <NamedData NDName="PoliceNo" NDValue="1" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="BusinessCaseType" NDValue="1" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="ParYear" NDValue="1" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="OrigEntity" NDValue="1" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="BusinessCaseDegree" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="entityGozyaa" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

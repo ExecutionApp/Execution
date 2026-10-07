@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <!--<c:set var="CjExecViewControllerBundle"
+           value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>-->
+    <af:panelHeader text="#{bundle.SEARCH}" id="ph0">
+            <?audit suppress oracle.adf.faces.invalidTypeForHeaderComponent?>
+            <f:facet name="info"/>
+        <af:panelGroupLayout id="pgl1" layout="vertical">
+            <af:panelFormLayout id="pfl1" maxColumns="3" rows="3">
+               <af:panelLabelAndMessage label="نيابة إستئناف" id="plam11" showRequired="true">
+                    <af:selectOneChoice value="#{bindings.Resumption.inputValue}" autoSubmit="true"
+                                        required="#{bindings.Resumption.hints.mandatory}"
+                                        
+                                        shortDesc="#{bindings.Resumption.hints.tooltip}" id="soc7">
+                        <f:selectItems value="#{bindings.Resumption.items}" id="si7"/>
+                        <f:validator binding="#{bindings.Resumption.validator}"/>
+                    </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="النيابة الكلية" id="plam1" showRequired="true">
+                    <af:selectOneChoice value="#{bindings.PrimaryProsecution1.inputValue}" autoSubmit="true"
+                                        required="#{bindings.PrimaryProsecution1.hints.mandatory}"
+                                        partialTriggers="soc7"
+                                      disabled="#{bindings.Resumption.inputValue eq  null}"
+                                        shortDesc="#{bindings.PrimaryProsecution1.hints.tooltip}" id="soc5">
+                        <f:selectItems value="#{bindings.PrimaryProsecution1.items}" id="si5"/>
+                        <f:validator binding="#{bindings.PrimaryProsecution1.validator}"/>
+                    </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bundle.folder_type}" id="plam4" showRequired="true">
+                    <af:selectOneChoice value="#{bindings.FolderType.inputValue}"
+                                        required="#{bindings.FolderType.hints.mandatory}"
+                                        shortDesc="#{bindings.FolderType.hints.tooltip}" id="soc2">
+                        <f:selectItems value="#{bindings.FolderType.items}" id="si2"/>
+                        <f:validator binding="#{bindings.FolderType.validator}"/>
+                    </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.FolderTypeROV11.hints.SequenceNumber.label}" id="plam10">
+                    <af:inputText value="#{bindings.SEQUENCE_NUMBER.inputValue}"
+                                  required="#{bindings.SEQUENCE_NUMBER.hints.mandatory}"
+                                  maximumLength="#{bindings.SEQUENCE_NUMBER.hints.precision}"
+                                  shortDesc="#{bindings.SEQUENCE_NUMBER.hints.tooltip}" id="it1">
+                        <f:validator binding="#{bindings.SEQUENCE_NUMBER.validator}"/>
+                        <!--<af:convertNumber groupingUsed="false" pattern="#{bindings.SEQUENCE_NUMBER.format}"/>-->
+                    </af:inputText>
+                    <!--<af:inputText value="#{bindings.SequenceNumber.inputValue}"
+                                          required="#{bindings.SequenceNumber.hints.mandatory}"
+                                          columns="#{bindings.SequenceNumber.hints.displayWidth}"
+                                          maximumLength="#{bindings.SequenceNumber.hints.precision}"
+                                          shortDesc="#{bindings.SequenceNumber.hints.tooltip}" id="it1">
+                                <f:validator binding="#{bindings.SequenceNumber.validator}"/>
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.SequenceNumber.format}"/>
+                            </af:inputText>-->
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bundle.id_number}" id="plam7">
+                    <!--<af:inputText value="#{bindings.P_id_number.inputValue}"
+                                          required="#{bindings.P_id_number.hints.mandatory}"
+                                          columns="#{bindings.P_id_number.hints.displayWidth}"
+                                          maximumLength="#{bindings.P_id_number.hints.precision}"
+                                          shortDesc="#{bindings.P_id_number.hints.tooltip}" id="it4">
+                                <f:validator binding="#{bindings.P_id_number.validator}"/>
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.P_id_number.format}"/>
+                            </af:inputText>-->
+                    <!--<af:inputText value="#{bindings.P_id_number.inputValue}"
+                                          required="#{bindings.P_id_number.hints.mandatory}"
+                                          columns="#{bindings.P_id_number.hints.displayWidth}"
+                                          maximumLength="#{bindings.P_id_number.hints.precision}"
+                                          shortDesc="#{bindings.P_id_number.hints.tooltip}" id="it4">
+                                <f:validator binding="#{bindings.P_id_number.validator}"/>
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.P_id_number.format}"/>
+                            </af:inputText>-->
+                    <af:inputText value="#{bindings.P_id_number.inputValue}"
+                                  required="#{bindings.P_id_number.hints.mandatory}"
+                                  maximumLength="#{bindings.P_id_number.hints.precision}"
+                                  shortDesc="#{bindings.P_id_number.hints.tooltip}" id="it2">
+                        <f:validator binding="#{bindings.P_id_number.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.P_id_number.format}"/>
+                    </af:inputText>
+                </af:panelLabelAndMessage>
+                <!--<af:spacer width="50" height="10" id="s2"/>-->
+                <af:panelLabelAndMessage label="#{bindings.EntityName.hints.label}" id="plam2" showRequired="true">
+                    <af:selectOneChoice value="#{bindings.SecondaryProsecution.inputValue}" partialTriggers="soc5"
+                                        autoSubmit="true" disabled="#{bindings.PrimaryProsecution1.inputValue eq  null}"
+                                        shortDesc="#{bindings.SecondaryProsecution.hints.tooltip}" id="soc6">
+                        <f:selectItems value="#{bindings.SecondaryProsecution.items}" id="si6"/>
+                        <f:validator binding="#{bindings.SecondaryProsecution.validator}"/>
+                    </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.TableType.label}" id="plam9" showRequired="true">
+                    <af:selectOneChoice value="#{bindings.TableType.inputValue}"
+                                        required="#{bindings.TableType.hints.mandatory}"
+                                        shortDesc="#{bindings.TableType.hints.tooltip}" id="soc4">
+                        <f:selectItems value="#{bindings.TableType.items}" id="si4"/>
+                        <f:validator binding="#{bindings.TableType.validator}"/>
+                    </af:selectOneChoice>
+                    <!--<af:selectOneChoice value="#{bindings.TableType.inputValue}"
+                                                label="#{bindings.TableType.label}"
+                                                required="#{bindings.TableType.hints.mandatory}"
+                                                shortDesc="#{bindings.TableType.hints.tooltip}" id="soc4">
+                                <f:selectItems value="#{bindings.TableType.items}" id="si4"/>
+                                <f:validator binding="#{bindings.TableType.validator}"/>
+                            </af:selectOneChoice>-->
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bundle.hearing_date}" id="plam5"
+                                         disabled="#{bindings.DegreeType.inputValue eq  null}">
+                    <af:inputListOfValues id="hearDateSTR1Id" partialTriggers="soc3"
+                                          disabled="#{bindings.DegreeType.inputValue eq  null}"
+                                          popupTitle="Search and Select: #{bindings.HearDateSTR1.hints.label}"
+                                          value="#{bindings.HearDateSTR1.inputValue}"
+                                          model="#{bindings.HearDateSTR1.listOfValuesModel}"
+                                          required="#{bindings.HearDateSTR1.hints.mandatory}"
+                                          shortDesc="#{bindings.HearDateSTR1.hints.tooltip}">
+                        <f:validator binding="#{bindings.HearDateSTR1.validator}"/>
+                        <af:autoSuggestBehavior suggestedItems="#{bindings.HearDateSTR1.suggestedItems}"/>
+                    </af:inputListOfValues>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bundle.party_full_name}" id="plam8">
+                    <af:inputText value="#{bindings.p_party_full_name.inputValue}"
+                                  required="#{bindings.p_party_full_name.hints.mandatory}"
+                                  maximumLength="#{bindings.p_party_full_name.hints.precision}"
+                                  shortDesc="#{bindings.p_party_full_name.hints.tooltip}" id="it3">
+                        <f:validator binding="#{bindings.p_party_full_name.validator}"/>
+                    </af:inputText>
+                    <!--<af:inputText value="#{bindings.p_party_full_name.inputValue}" simple="true"
+                                          required="#{bindings.p_party_full_name.hints.mandatory}"
+                                          columns="#{bindings.p_party_full_name.hints.displayWidth}"
+                                          maximumLength="#{bindings.p_party_full_name.hints.precision}"
+                                          shortDesc="#{bindings.p_party_full_name.hints.tooltip}" id="it2">
+                                -->
+                    <!--<f:validator binding="#{bindings.p_party_full_name.validator}"/>-->
+                    <!--
+                            </af:inputText>-->
+                </af:panelLabelAndMessage>
+                <!--<af:spacer width="55" height="10" id="s4"/>-->
+                <af:panelLabelAndMessage label="#{bundle.Circule_ID}" id="plam3" showRequired="true">
+                    <af:selectOneChoice value="#{bindings.CirculeId2.inputValue}" partialTriggers="soc6"
+                                        required="#{bindings.CirculeId2.hints.mandatory}"
+                                        shortDesc="#{bindings.CirculeId2.hints.tooltip}" id="soc1">
+                        <f:selectItems value="#{bindings.CirculeId2.items}" id="si1"/>
+                        <f:validator binding="#{bindings.CirculeId2.validator}"/>
+                    </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.DegreeType.label}" id="plam6" showRequired="true">
+                    <af:selectOneChoice value="#{bindings.DegreeType.inputValue}" autoSubmit="true"
+                                        shortDesc="#{bindings.DegreeType.hints.tooltip}" id="soc3"
+                                        required="#{bindings.DegreeType.hints.mandatory}">
+                        <f:selectItems value="#{bindings.DegreeType.items}" id="si3"/>
+                        <f:validator binding="#{bindings.DegreeType.validator}"/>
+                    </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+                <af:panelGroupLayout id="pgl4" layout="vertical">
+                    <af:spacer width="10" height="10" id="s10"/>
+                    <af:button actionListener="#{bindings.ExecuteWithParams.execute}" text="#{bundle.SEARCH}"
+                               disabled="#{!bindings.ExecuteWithParams.enabled}" id="b1"/>
+                    <!--<af:button actionListener="#{bindings.ExecuteWithParams1.execute}" text="#{bundle.SEARCH}"
+                           disabled="#{!bindings.ExecuteWithParams1.enabled}" id="b1"/>-->
+                    <af:spacer width="10" height="10" id="s9"/>
+                </af:panelGroupLayout>
+            </af:panelFormLayout>
+        </af:panelGroupLayout>
+        </af:panelHeader>
+    <af:panelBox text="نتائج البحث" id="pb2" styleClass="AFStretchWidth">
+        <af:table value="#{bindings.FolderTypeROV11.collectionModel}" var="row" styleClass="AFStretchWidth"
+                  rows="#{bindings.FolderTypeROV11.rangeSize}" emptyText="#{bundle.NO_DATA}" rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.FolderTypeROV11.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.FolderTypeROV11.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.FolderTypeROV11.rangeSize}"
+                  filterModel="#{bindings.FolderTypeROVCriteriaQuery.queryDescriptor}"
+                  queryListener="#{bindings.FolderTypeROVCriteriaQuery.processQuery}" varStatus="vs" id="t1"
+                  partialTriggers="::b1" filterVisible="true">
+            <af:column sortProperty="#{bindings.FolderTypeROV11.hints.CirculeName.name}" filterable="false"
+                       sortable="true" headerText="#{bindings.FolderTypeROV11.hints.CirculeName.label}" id="c7"
+                       width="250" noWrap="false">
+                <af:outputText value="#{row.CirculeName}"
+                               shortDesc="#{bindings.FolderTypeROV11.hints.CirculeName.tooltip}" id="ot6"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.FolderTypeROV11.hints.HearingDate.name}" filterable="false"
+                       sortable="true" headerText="#{bindings.FolderTypeROV11.hints.HearingDate.label}" id="c3"
+                       width="128">
+                <af:outputText value="#{row.HearingDate}"
+                               shortDesc="#{bindings.FolderTypeROV11.hints.HearingDate.tooltip}" id="ot3">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.FolderTypeROV11.hints.HearingDate.format}"/>
+                </af:outputText>
+                <f:facet name="filter">
+                    <af:inputDate value="#{bindings.FolderTypeROVCriteriaQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.HearingDate.value}"
+                                  id="id1">
+                        <af:convertDateTime pattern="#{bindings.FolderTypeROV11.hints.HearingDate.format}"/>
+                    </af:inputDate>
+                </f:facet>
+            </af:column>
+            <af:column sortProperty="#{bindings.FolderTypeROV11.hints.ReservationId.name}" filterable="false"
+                       sortable="true" headerText="#{bindings.FolderTypeROV11.hints.ReservationId.label}" id="c6"
+                       width="130" noWrap="false">
+                <af:outputText value="#{row.ReservationId}"
+                               shortDesc="#{bindings.FolderTypeROV11.hints.ReservationId.tooltip}" id="ot5">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.FolderTypeROV11.hints.ReservationId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.FolderTypeROV11.hints.SequenceNumber.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.FolderTypeROV11.hints.SequenceNumber.label}" id="c1">
+                <af:outputText value="#{row.SequenceNumber} #{'/'} #{row.Year} "
+                               shortDesc="#{bindings.FolderTypeROV11.hints.SequenceNumber.tooltip}" id="ot1">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.FolderTypeROV11.hints.SequenceNumber.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.FolderTypeROV11.hints.PoliceNumber.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.FolderTypeROV11.hints.PoliceNumber.label}" id="c2"
+                       width="200" noWrap="false">
+                <af:outputText value="#{row.PoliceNumber}"
+                               shortDesc="#{bindings.FolderTypeROV11.hints.PoliceNumber.tooltip}" id="ot2"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.FolderTypeROV11.hints.PartyFullName.name}" filterable="false"
+                       sortable="true" headerText="#{bindings.FolderTypeROV11.hints.PartyFullName.label}" id="c4"
+                       width="300" noWrap="false">
+                <af:outputText value="#{row.PartyFullName}"
+                               shortDesc="#{bindings.FolderTypeROV11.hints.PartyFullName.tooltip}" id="ot4"/>
+            </af:column>
+            <af:column headerText="#{bundle.DETAILS}" id="c5" filterable="true">
+                <af:button text="#{bundle.DETAILS}" id="b2" action="edit" immediate="true">
+                <af:setActionListener from="#{bindings.PartyId.inputValue}" to="#{pageFlowScope.party_id}"/>
+                </af:button>
+            </af:column>
+        </af:table>
+    </af:panelBox>
+</ui:composition>

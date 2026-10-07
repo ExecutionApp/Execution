@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ationsTF">
+    <default-activity>router1</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__5">
+      <name>execFolderId</name>
+      <value>#{pageFlowScope.execFolderId}</value>
+      <class></class>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__6">
+      <name>buttonAction</name>
+      <value>#{pageFlowScope.buttonAction}</value>
+      <class>java.lang.String</class>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__9">
+      <name>executionFlag</name>
+      <value>#{pageFlowScope.executionFlag}</value>
+      <class>java.lang.Number</class>
+    </input-parameter-definition>
+    <managed-bean id="__7">
+      <managed-bean-name>ExecutionFoldersBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.executionfolders.ExecutionFoldersBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__35">
+      <managed-bean-name>ReportsBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.executionfolders.PrintReportsBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="executionPage">
+      <page>/pages/com/egabi/cjexec/transaction/actions/execution/executionPage.jsff</page>
+      <input-page-parameter id="__8">
+        <from-value>#{pageFlowScope.execFolderId}</from-value>
+        <to-value>#{pageFlowScope.folder_id}</to-value>
+      </input-page-parameter>
+      <input-page-parameter id="__10">
+        <from-value>#{pageFlowScope.executionFlag}</from-value>
+        <to-value>#{pageFlowScope.execution_Flag}</to-value>
+      </input-page-parameter>
+    </view>
+    <router id="router1">
+      <case id="__91">
+        <expression>#{pageFlowScope.buttonAction=='enable_opposition'}</expression>
+        <outcome>enable_opposition</outcome>
+      </case>
+      <case id="__101">
+        <expression>#{pageFlowScope.buttonAction=='execute_prison'}</expression>
+        <outcome>execute_prison</outcome>
+      </case>
+      <case id="__15">
+        <expression>#{pageFlowScope.buttonAction=='installment_request'}</expression>
+        <outcome>installment_request</outcome>
+      </case>
+      <case id="__11">
+        <expression>#{pageFlowScope.buttonAction=='execute_prison'}</expression>
+        <outcome>execute_prison</outcome>
+      </case>
+      <case id="__19">
+        <expression>#{pageFlowScope.buttonAction=='oppositions'}</expression>
+        <outcome>oppositions</outcome>
+      </case>
+      <case id="__23">
+        <expression>#{pageFlowScope.buttonAction=='paymentAmount'}</expression>
+        <outcome>paymentAmount</outcome>
+      </case>
+      <case id="__25">
+        <expression>#{pageFlowScope.buttonAction=='suppRepayment'}</expression>
+        <outcome>suppRepayment</outcome>
+      </case>
+      <case id="__37">
+        <expression>#{pageFlowScope.buttonAction=='cancel'}</expression>
+        <outcome>cancel_execute_prison</outcome>
+      </case>
+      <default-outcome>execute_prison</default-outcome>
+    </router>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-call id="enableOppositionTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/enableOpposition/enableOppositionTF.xml</document>
+        <id>enableOppositionTF</id>
+      </task-flow-reference>
+      <input-parameter id="__71">
+        <name>folderId</name>
+        <value>#{pageFlowScope.execFolderId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="InstallmentRequestTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/enstallmentRequest/InstallmentRequestTF.xml</document>
+        <id>InstallmentRequestTF</id>
+      </task-flow-reference>
+      <input-parameter id="__12">
+        <name>folderId</name>
+        <value>#{pageFlowScope.execFolderId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="suppAmountTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/suppamount/suppAmountTF.xml</document>
+        <id>suppAmountTF</id>
+      </task-flow-reference>
+      <input-parameter id="__27">
+        <name>folderID</name>
+        <value>#{pageFlowScope.execFolderId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="suppRepaymentTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/supprepayment/suppRepaymentTF.xml</document>
+        <id>suppRepaymentTF</id>
+      </task-flow-reference>
+      <input-parameter id="__26">
+        <name>folderID</name>
+        <value>#{pageFlowScope.execFolderId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="Oppositions-TF1">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/oppositions/Oppositions-TF.xml</document>
+        <id>Oppositions-TF</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>router1</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>execute_prison</from-outcome>
+        <to-activity-id>ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__81">
+        <from-outcome>enable_opposition</from-outcome>
+        <to-activity-id>enableOppositionTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__111">
+        <from-outcome>installment_request</from-outcome>
+        <to-activity-id>InstallmentRequestTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__18">
+        <from-outcome>oppositions</from-outcome>
+        <to-activity-id>Oppositions-TF1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__22">
+        <from-outcome>paymentAmount</from-outcome>
+        <to-activity-id>suppAmountTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__24">
+        <from-outcome>suppRepayment</from-outcome>
+        <to-activity-id>suppRepaymentTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__36">
+        <from-outcome>cancel_execute_prison</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__1">
+      <from-activity-id>executionPage</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>enableOppositionTF</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>taskFlowReturn1</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id>InstallmentRequestTF</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>taskFlowReturn1</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__28">
+      <from-activity-id>suppAmountTF</from-activity-id>
+      <control-flow-case id="__29">
+        <from-outcome>commit</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__30">
+      <from-activity-id>suppRepaymentTF</from-activity-id>
+      <control-flow-case id="__31">
+        <from-outcome>commit</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__20">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__34">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>executionPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id>Oppositions-TF1</from-activity-id>
+      <control-flow-case id="__32">
+        <from-outcome>taskFlowReturn1</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

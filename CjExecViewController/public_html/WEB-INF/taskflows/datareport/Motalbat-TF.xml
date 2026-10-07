@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Motalbat-TF">
+    <default-activity>preEnterReportsSearch</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__3">
+      <managed-bean-name>printDafatertBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.reports.PrintDafatertBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <view id="Motalbat">
+      <page>/pages/com/egabi/Reports/Motalbat.jsff</page>
+    </view>
+    <method-call id="preEnterReportsSearch">
+      <method>#{bindings.preEnterReportsSearch.execute}</method>
+      <outcome>
+        <fixed-outcome>preEnterReportsSearch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>preEnterReportsSearch</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>preEnterReportsSearch</from-outcome>
+        <to-activity-id>Motalbat</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>*</from-activity-id>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

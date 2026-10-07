@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" locale="ar">
+    <af:document title="AuthenticationError.jsf" id="d1">
+        <!--<af:resource type="javascript">
+              window.addEventListener('beforeunload',
+                                       function (){performUnloadEvent()},false)     
+            function performUnloadEvent(){
+              //note that af:document must have clientComponent="true" set
+              //for JavaScript to access the component object
+              var eventSource = AdfPage.PAGE.findComponentByAbsoluteId('d1');
+              //var x and y are dummy variables obviously needed to keep the page
+              //alive for as long it takes to send the custom event to the server
+              var x = AdfCustomEvent.queue(eventSource,
+                                           "handleOnUnload",
+                                           {args:'noargs'},false);
+              //replace args:'noargs' with key:value pairs if your event needs to
+              //pass arguments and values to the server side managed bean.
+            
+              var y = 0;
+            
+          }
+        </af:resource>
+        <af:serverListener type="handleOnUnload" method="#{UnloadHandler.onUnloadHandler}"/>-->
+        <af:form id="f1">
+            <af:panelGridLayout id="pgl2">
+                <af:gridRow marginTop="5px" height="100%" marginBottom="5px" id="gr3">
+                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc3" halign="center"
+                                 valign="middle">
+                        <af:panelGridLayout id="pgl1" dimensionsFrom="parent">
+                            <af:gridRow id="gr4">
+                                <af:gridCell id="gc4" valign="middle" halign="center" width="100%">
+                                    <af:image source="/resources/images/faild-256.png" shortDesc="Login Failed"
+                                              id="i1"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow marginTop="20px" id="gr1" rendered="#{!sessionScope.userInfo.isUserSignedIn}">
+                                <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc1" halign="center"
+                                             valign="middle">
+                                    <af:outputText id="ot3" value="#{sessionScope.userInfo.loginErrorMsg == null ? 'Url is wrong' : sessionScope.userInfo.loginErrorMsg}"
+                                                   inlineStyle="font-size:32px;color:#CCC"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+        </af:form>
+    </af:document>
+</f:view>

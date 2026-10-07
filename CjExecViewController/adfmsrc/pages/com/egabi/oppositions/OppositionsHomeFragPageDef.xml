@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="OppositionsHomeFragPageDef"
+                Package="pages.com.egabi.oppositions">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="OppositionAM1.ExcFolderProceduresView1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ExcFolderProceduresView1Iterator"/>
+    <iterator Binds="OppositionAM1.ExcCourtBcPartyDebtRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ExcCourtBcPartyDebtRVO1Iterator"/>
+    <searchRegion Binds="ExcCourtBcPartyDebtRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ExcCourtBcPartyDebtRVO1Query"/>
+    <iterator Binds="OppositionAM1.OppositionsAttachmentsRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="OppositionsAttachmentsRVO1Iterator"/>
+    <searchRegion Binds="OppositionsAttachmentsRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="OppositionsAttachmentsRVO1Query"/>
+    <iterator Binds="OppositionAM1.ExcFolderActionsAttachView2" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ExcFolderActionsAttachView2Iterator"/>
+    <searchRegion Binds="ExcFolderActionsAttachView2Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ExcFolderActionsAttachView2Query"/>
+    <iterator Binds="OppositionAM1.ExcFolderActionsView1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="ExcFolderActionsView1Iterator"/>
+    <taskFlow id="WebCamTF1" taskFlowId="/WEB-INF/taskflows/webcam/WebCamTF.xml#WebCamTF" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="Party_ID" value="#{pageFlowScope.partyId}"/>
+      </parameters>
+    </taskFlow>
+    <iterator Binds="OppositionAM1.OppositionsEnableAttachmentsRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="OppositionsEnableAttachmentsRVO1Iterator"/>
+    <searchRegion Binds="OppositionsEnableAttachmentsRVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="OppositionsEnableAttachmentsRVO1Query"/>
+    <taskFlow id="Par_PartiesTF1" taskFlowId="/WEB-INF/taskflows/ParParties/Par_Parties-TF.xml#Par_Parties-TF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="partyId" value="#{pageFlowScope.partyId}"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings>
+    <list IterBinding="ExcFolderProceduresView1Iterator" StaticList="false" Uses="LOV_CapacityType" id="CapacityType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ExcFolderProceduresView1Iterator" id="ProcedureDate">
+      <AttrNames>
+        <Item Value="ProcedureDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderProceduresView1Iterator" id="ProcedureText">
+      <AttrNames>
+        <Item Value="ProcedureText"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderProceduresView1Iterator" id="IdNumber">
+      <AttrNames>
+        <Item Value="IdNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderProceduresView1Iterator" id="FullName">
+      <AttrNames>
+        <Item Value="FullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderProceduresView1Iterator" id="Nickname">
+      <AttrNames>
+        <Item Value="Nickname"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ExcCourtBcPartyDebtRVO1Iterator" id="ExcCourtBcPartyDebtRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.oppositions.ExcCourtBcPartyDebtRVO"
+                      Name="ExcCourtBcPartyDebtRVO10">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="Amount"/>
+          <Item Value="PaidAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="OppositionsAttachmentsRVO1Iterator" id="OppositionsAttachmentsRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.oppositions.OppositionsAttachmentsRVO"
+                      Name="OppositionsAttachmentsRVO10">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="CapacityType"/>
+          <Item Value="InsertFlag"/>
+          <Item Value="Id"/>
+          <Item Value="AttachmentType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ExcFolderActionsAttachView2Iterator" id="ExcFolderActionsAttachView2">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.oppositions.ExcFolderActionsAttachView"
+                      Name="ExcFolderActionsAttachView20">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="FolderActionId"/>
+          <Item Value="AttachmentType"/>
+          <Item Value="DocumentId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="ExcFolderActionsAttachView2Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="ExcFolderActionsView1Iterator" id="CreateInsert1"
+            InstanceName="CjExecAMDataControl.Root.OppositionAM1.ExcFolderActionsView1"
+            DataControl="CjExecAMDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <listOfValues IterBinding="ExcFolderProceduresView1Iterator" StaticList="false" Uses="LOV_HearingDate"
+                  id="HearingDate"/>
+    <button IterBinding="OppositionsAttachmentsRVO1Iterator" id="InsertFlag" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="InsertFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+    <listOfValues IterBinding="ExcFolderProceduresView1Iterator" StaticList="false" Uses="LOV_PrimaryLawyerName"
+                  id="PrimaryLawyerName"/>
+    <listOfValues IterBinding="ExcFolderProceduresView1Iterator" StaticList="false" Uses="LOV_SecondaryLawyerName"
+                  id="SecondaryLawyerName"/>
+    <attributeValues IterBinding="ExcFolderProceduresView1Iterator" id="PrimaryRetainerNumber">
+      <AttrNames>
+        <Item Value="PrimaryRetainerNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderProceduresView1Iterator" id="SecondaryRetainerNumber">
+      <AttrNames>
+        <Item Value="SecondaryRetainerNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="OppositionsEnableAttachmentsRVO1Iterator" id="OppositionsEnableAttachmentsRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.oppositions.OppositionsEnableAttachmentsRVO"
+                      Name="OppositionsEnableAttachmentsRVO10">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="InsertFlag" Binds="InsertFlag1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="OppositionsEnableAttachmentsRVO1Iterator" id="InsertFlag1" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="InsertFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="0"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>

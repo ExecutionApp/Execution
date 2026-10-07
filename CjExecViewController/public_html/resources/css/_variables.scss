@@ -1,0 +1,54 @@
+//Main Application Colors
+$primaryClr: #1083ac;
+$secondClr: #1083ac;
+$dangerClr: #f31b27;
+$orangeClr: #ef9543;
+
+ 
+//Layout
+$height100Vh: 100;
+$footerVH: 30px;
+$max-height: $height100Vh - $footerVH ;
+
+//Menu
+$menuHeight: 40px;
+$menuFontSize: 17px;
+
+
+//Label
+$labelFontSize: 15px;
+$labelClr: #4F4F4F;
+
+//inputs componants
+$inputTxtFontSize: 18px;
+$inputTxtClr: #666;
+
+//Buttons
+$buttonFontSize: 15px;
+$buttonBorderClr: 13px;
+$buttonPadding: 8;
+$buttonHeight: 5;
+$buttonColor: 5;
+$buttonHvrClr: 5;
+$buttonDisableClr: 5;
+$buttonMinWidth: 75px;
+
+
+//PanelHeader
+$panelHeaderFontSize: 2rem;
+$panelHeaderClr: #2a7fc2;
+$leftPaddingpnlHeader: 5px;
+ 
+
+//Tabs
+$tabTxt: 18px;
+//Table
+$tblHeaderHeight: 35px ;
+$tblHeaderClr: #fff;
+$tableHeaderTxtClr: #777;
+$tableRowTxtClr: #444;
+$tblHeaderBorderClr: #c8c8c8;
+$tblRowHeight: 70px;
+$tblRowHeightInbox: 90px;
+$tblHeaderFontSize: 17px;
+$tblRowFontSize: 16px;

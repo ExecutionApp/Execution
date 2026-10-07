@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="suppAmountTF_suppAmountTF_setVisiblityPageDef" Package="taskflows.suppamount" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ExcCourtBcPartyDebt" RangeSize="10" DataControl="CjExecAMDataControl"
+              id="ExcCourtBcPartyDebtIterator"/>
+    <iterator Binds="ExcFolderData" RangeSize="10" DataControl="CjExecAMDataControl" id="ExcFolderDataIterator"/>
+    <iterator Binds="ExcFolderProcInstall" RangeSize="10" DataControl="CjExecAMDataControl"
+              id="ExcFolderProcInstallIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ExcCourtBcPartyDebtIterator" id="FeesTypeId">
+      <AttrNames>
+        <Item Value="FeesTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ExcFolderDataIterator" id="ResPartyId">
+      <AttrNames>
+        <Item Value="ResPartyId"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="ExcFolderProcInstallIterator" id="Execute"
+            InstanceName="CjExecAMDataControl.ExcFolderProcInstall" DataControl="CjExecAMDataControl"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues IterBinding="ExcFolderProcInstallIterator" id="rowConts">
+      <AttrNames>
+        <Item Value="rowConts"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

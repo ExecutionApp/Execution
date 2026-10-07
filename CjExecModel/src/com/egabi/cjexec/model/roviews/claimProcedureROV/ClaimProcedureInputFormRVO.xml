@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+    xmlns="http://xmlns.oracle.com/bc4j"
+    Name="ClaimProcedureInputFormRVO"
+    Version="12.2.1.0.31"
+    InheritPersonalization="merge"
+    BindingStyle="OracleName"
+    CustomQuery="true"
+    ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+    PageIterMode="Full"
+    xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+    <DesignTime>
+        <Attr Name="_isExpertMode" Value="true"/>
+    </DesignTime>
+    <Properties>
+        <SchemaBasedProperties>
+            <LABEL
+                ResId="com.egabi.cjexec.model.roviews.claimProcedureROV.ClaimProcedureInputFormRVO_LABEL"/>
+        </SchemaBasedProperties>
+    </Properties>
+    <ViewAccessor
+        Name="ExcLkpClaimProcedureTypesVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.claimProcedureROV.ExcLkpClaimProcedureTypesVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="CollectionTypeLOV1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.claimProcedureROV.CollectionTypeLOV"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="ExcLkpClaimProcCancelTypesRVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.claimProcedureROV.ExcLkpClaimProcCancelTypesRVO"
+        RowLevelBinds="true"/>
+    <ViewAccessor
+        Name="ExternalEntityROVO1"
+        ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.ExternalEntityROVO"
+        RowLevelBinds="true"/>
+    <ListBinding
+        Name="LOV_ProcedureType"
+        ListVOName="ExcLkpClaimProcedureTypesVO1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ProcedureType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_CollectionType"
+        ListVOName="CollectionTypeLOV1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="CollectionType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Value"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Description"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_CancellationType"
+        ListVOName="ExcLkpClaimProcCancelTypesRVO1"
+        ListRangeSize="-1"
+        NullValueFlag="start"
+        NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="CancellationType"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="Id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="Name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <ListBinding
+        Name="LOV_ExternalEntity"
+        ListVOName="ExternalEntityROVO1"
+        ListRangeSize="-1"
+        NullValueFlag="none"
+        MRUCount="0">
+        <AttrArray Name="AttrNames">
+            <Item Value="ExternalEntity"/>
+        </AttrArray>
+        <AttrArray Name="AttrExpressions"/>
+        <AttrArray Name="ListAttrNames">
+            <Item Value="id"/>
+        </AttrArray>
+        <AttrArray Name="ListDisplayAttrNames">
+            <Item Value="name"/>
+        </AttrArray>
+        <DisplayCriteria/>
+    </ListBinding>
+    <SQLQuery><![CDATA[SELECT 1 AS ID FROM DUAL]]></SQLQuery>
+    <ViewAttribute
+        Name="Id"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.math.BigDecimal"
+        ColumnType="VARCHAR2"
+        AliasName="ID"
+        Expression="ID"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="ProcedureNumber"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="ProcedureType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.math.BigDecimal"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_ProcedureType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ProcedureDate"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.sql.Timestamp"
+        ColumnType="DATE"
+        AliasName="VIEW_ATTR"
+        SQLType="DATE"/>
+    <ViewAttribute
+        Name="ProcedureAmount"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"
+        DefaultValue="0"/>
+    <ViewAttribute
+        Name="ProcedureRemaining"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"/>
+    <ViewAttribute
+        Name="ProcedureNotes"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="CollectionType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"
+        LOVName="LOV_CollectionType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="PaymentNumber"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="AmountText"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Precision="255"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="FixedPenaltyAmount"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"/>
+    <ViewAttribute
+        Name="FixedPenaltyFees"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"/>
+    <ViewAttribute
+        Name="FixedPenaltyTotal"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"/>
+    <ViewAttribute
+        Name="PenaltyDueDate"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.String"
+        ColumnType="DATE"
+        AliasName="VIEW_ATTR"
+        SQLType="VARCHAR"/>
+    <ViewAttribute
+        Name="NumberOfDays"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="DailyPenaltyAmount"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"/>
+    <ViewAttribute
+        Name="DailyPenaltyTotal"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"/>
+    <ViewAttribute
+        Name="ClaimTotal"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"/>
+    <ViewAttribute
+        Name="DailyPenaltyRemaining"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"/>
+    <ViewAttribute
+        Name="DailyPenaltyFees"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.lang.Double"
+        ColumnType="DOUBLE PRECISION"
+        AliasName="VIEW_ATTR"
+        SQLType="DOUBLE"/>
+    <ViewAttribute
+        Name="CancellationType"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_CancellationType">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <ViewAttribute
+        Name="ProcedureEndDate"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.sql.Timestamp"
+        ColumnType="DATE"
+        AliasName="VIEW_ATTR"
+        SQLType="DATE"/>
+    <ViewAttribute
+        Name="NumDaysInput"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="java.math.BigDecimal"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"/>
+    <ViewAttribute
+        Name="ExternalEntity"
+        IsSelected="false"
+        IsPersistent="false"
+        PrecisionRule="true"
+        Type="oracle.jbo.domain.Number"
+        ColumnType="NUMBER"
+        AliasName="VIEW_ATTR"
+        SQLType="NUMERIC"
+        LOVName="LOV_ExternalEntity"
+        DefaultValue="1">
+        <Properties>
+            <SchemaBasedProperties>
+                <CONTROLTYPE
+                    Value="choice"/>
+            </SchemaBasedProperties>
+        </Properties>
+    </ViewAttribute>
+    <AttrArray Name="KeyAttributes">
+        <Item Value="Id"/>
+    </AttrArray>
+    <ResourceBundle>
+        <PropertiesBundle
+            PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="displayAuditDetailsFragPageDef"
+                Package="pages.com.egabi.auditUpdate">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.AuditSimpleMasterRo" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="AuditSimpleMasterRoIterator"/>
+    <iterator Binds="SimplifiedModeAM1.AuditSimpleUpdateRo" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="AuditSimpleUpdateRoIterator"/>
+    <iterator Binds="SimplifiedModeAM1.AuditSimpleUpdateRoHasr" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="AuditSimpleUpdateRoHasrIterator"/>
+    <iterator Binds="SimplifiedModeAM1.AuditSimpleUpdatePartiesRo" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="AuditSimpleUpdatePartiesRoIterator"/>
+    <iterator Binds="SimplifiedModeAM1.AuditSimpleUpdateRoClaims" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="AuditSimpleUpdateRoClaimsIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="AuditSimpleMasterRoIterator" id="CaseNumber">
+      <AttrNames>
+        <Item Value="CaseNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AuditSimpleMasterRoIterator" id="ParYear">
+      <AttrNames>
+        <Item Value="ParYear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AuditSimpleMasterRoIterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AuditSimpleMasterRoIterator" id="EntityName1">
+      <AttrNames>
+        <Item Value="EntityName1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AuditSimpleMasterRoIterator" id="EntityName">
+      <AttrNames>
+        <Item Value="EntityName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="AuditSimpleUpdateRoIterator" id="AuditSimpleUpdateRo">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleUpdateRo"
+                      Name="AuditSimpleUpdateRo0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Type"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="EditedAttribute"/>
+          <Item Value="OldValue"/>
+          <Item Value="NewValue"/>
+          <Item Value="BusinessCaseId"/>
+          <Item Value="TechnicalName"/>
+          <Item Value="EntityId"/>
+          <Item Value="EntityName"/>
+          <Item Value="UserId"/>
+          <Item Value="TableId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AuditSimpleUpdateRoHasrIterator" id="AuditSimpleUpdateRoHasr">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleUpdateRo"
+                      Name="AuditSimpleUpdateRoHasr0">
+        <AttrNames>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="EditedAttribute"/>
+          <Item Value="OldValue"/>
+          <Item Value="NewValue"/>
+          <Item Value="EntityName"/>
+          <Item Value="SequenceNumber"/>
+          <Item Value="Year"/>
+          <Item Value="RepeatedFlag"/>
+          <Item Value="FolderName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AuditSimpleUpdatePartiesRoIterator" id="AuditSimpleUpdatePartiesRo">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleUpdateRo"
+                      Name="AuditSimpleUpdatePartiesRo0">
+        <AttrNames>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="EditedAttribute"/>
+          <Item Value="OldValue"/>
+          <Item Value="NewValue"/>
+          <Item Value="EntityName"/>
+          <Item Value="PartyFullName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AuditSimpleUpdateRoClaimsIterator" id="AuditSimpleUpdateRoClaims">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleUpdateRo"
+                      Name="AuditSimpleUpdateRoClaims0">
+        <AttrNames>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="EditedAttribute"/>
+          <Item Value="OldValue"/>
+          <Item Value="NewValue"/>
+          <Item Value="EntityName"/>
+          <Item Value="PartyFullName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="UtilsAppModuleAM"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  ComponentClass="com.egabi.cjexec.model.appmodules.UtilsAppModuleAMImpl"
+  DefClass="com.egabi.cjexec.model.appmodules.UtilsAppModuleAMDefImpl"
+  ClearCacheOnRollback="true">
+  <DesignTime>
+    <Attr Name="_isDefCodegen" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.appmodules.UtilsAppModuleAM_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewUsage
+    Name="ParPartiesView1"
+    ViewObjectName="com.egabi.cjexec.model.views.party.ParPartiesView"/>
+  <ViewUsage
+    Name="ParPartiesLogView1"
+    ViewObjectName="com.egabi.cjexec.model.views.party.log.ParPartiesLogView"/>
+  <ViewLinkUsage
+    Name="ParParties_ParPartiesLog_VL1"
+    ViewLinkObjectName="com.egabi.cjexec.model.views.party.log.ParParties_ParPartiesLog_VL"
+    SrcViewUsageName="com.egabi.cjexec.model.appmodules.UtilsAppModuleAM.ParPartiesView1"
+    DstViewUsageName="com.egabi.cjexec.model.appmodules.UtilsAppModuleAM.ParPartiesLogView1"
+    Reversed="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</AppModule>

@@ -1,0 +1,19 @@
+//Groovy Scripts for com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyNameRVO
+
+package com.egabi.cjexec.model.roviews.claimProcedureROV
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="pSearchType")
+def pSearchType_VariableScript_Variable()
+{
+adf.context.current.sessionScope.pSearchTypeVar
+}
+
+
+@VariableExpression(path="pK")
+def pK_VariableScript_Variable()
+{
+adf.context.current.sessionScope.pEntSVar
+}
+

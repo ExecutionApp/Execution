@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject xmlns="http://xmlns.oracle.com/bc4j" Name="SearchByPartyResultRVO" Version="12.2.1.0.31"
+            InheritPersonalization="merge" BindingStyle="OracleName" CustomQuery="true"
+            ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl" PageIterMode="Full">
+    <DesignTime>
+        <Attr Name="_isExpertMode" Value="true"/>
+    </DesignTime>
+    <Variable Name="seqNumParam" Kind="viewcriteria" Type="java.lang.String"/>
+    <Variable Name="yearParam" Kind="viewcriteria" Type="java.lang.String"/>
+    <Variable Name="policeParam" Kind="viewcriteria" Type="java.math.BigDecimal"/>
+    <Variable Name="repeatedParam" Kind="viewcriteria" Type="java.lang.String"/>
+    <Variable Name="folderTypeParam" Kind="viewcriteria" Type="java.math.BigDecimal"/>
+    <Variable
+        Name="pBussinessCaseId"
+        Kind="viewcriteria"
+        Type="java.math.BigDecimal"/>
+    <Variable
+        Name="pPartyId"
+        Kind="viewcriteria"
+        Type="java.math.BigDecimal"/>
+    <Variable
+        Name="pPoliceStationEntityId"
+        Kind="viewcriteria"
+        Type="java.math.BigDecimal"/>
+    <Variable
+        Name="ParPartyIdBind"
+        Kind="where"
+        Type="java.math.BigDecimal"/>
+    <SQLQuery><![CDATA[SELECT                                                       
+ROW_NUMBER () OVER (PARTITION BY RES_PART.PARTY_ID ORDER BY RES_PART.PARTY_ID,HEARING_DATE DESC )ORDER_RAWS ,                                                      
+FOLDER.YEAR || '/' || FOLDER.SEQUENCE_NUMBER  || '/' || decode (FOLDER.FOLDER_TYPE , 2 , 'حبس' ,3 ,'غرامة' ) || '/' || DECODE(FOLDER.REPEATED_FLAG , 'N' , 'غير مكرر' , 'Y' , 'مكرر') AS INVENTORY_NUMBER ,                                                                                                      
+PARTIES.PARTY_FIXED_FULL_NAME AS PARTY_NAME , PARTIES.ID_NUMBER ,                                                                                                     
+PAR_POLICE.PAR_YEAR || '/' || PAR_POLICE.POLICE_NUMBER || '/' || CAS_TYPE.NAME|| '/' || POLICE.ENTITY_NAME AS BUSINESS_CASE_NUMBER                                   
+, POLICE.ENTITY_NAME ,                                                                                                     
+TO_CHAR(DATES.HEARING_DATE , 'yyyy-mm-dd') HEARING_DATE ,                                                                                                     
+FOLDER.SEQUENCE_NUMBER ,                
+FOLDER.CRIMINAL_TYPE,                
+decode (FOLDER.FOLDER_TYPE , 2 , 'حبس' ,3 ,'غرامة' ) Folder_Name                                                    
+,                                                                                                     
+FOLDER.POLICE_STATION_ENTITY_ID ,                                                                                                      
+FOLDER.YEAR ,                                                                                                      
+FOLDER.FOLDER_TYPE ,                                                                                                    
+FOLDER.REPEATED_FLAG ,                        
+FOLDER.EXECUTION_FLAG,                 
+DECODE(FOLDER.EXECUTION_FLAG, 1, 'مطلوب', 2, 'غير مطلوب', 3, 'تم التنفيذ', 4, 'محبوس') EXECUTION_FLAG_NAME,                 
+FOLDER.ID AS FOLDER_ID  ,                                                                                              
+RES_PART.PARTY_ID ,                                                                                            
+FOLDER.RES_PARTY_ID ,                                                                                          
+CAS.CASE_NUMBER ,                                                                                           
+PAR_POLICE.PAR_YEAR CASE_YEAR ,                                                                                           
+DEGREES.NAME DEGREE_NAME ,                                                                                          
+RES_PART.BC_DEGREE_SPEC_ID DEGREE_ID ,                                                                                          
+POLICE.ID POLICE_ID  ,                                                                                               
+CAS_TYPE.ID CAS_TYPE_ID ,                                                                                       
+CAS_TYPE.NAME CAS_TYPE_NAME ,                                                              
+POLICE.PARENT_ENTITY_ID ,                                                         
+CAS.ID AS BUSINESS_CASE_ID ,                                                        
+PARTIES.NICKNAME ,                                                     
+RES_PART.ATTENDANCE  ,                                           
+(SELECT ID FROM EXC_COURT_BC_SESSION_JUDGMENT  where COURT_BC_HEARING_RES_ID = RES.ID ) session_Id ,                                           
+DECODE(RES_PART.ATTENDANCE , '1' , 'ح' , '2' , 'ح أ' , '3' , 'غ') AS ATTENDANCE_NAME  ,                                                 
+FOLDER.NOTES ,                            
+FOLDER.JUDGMENT_TEXT,               
+PARTY_CLAIMS.PARTY_ID as PARTY_ID_XX,              
+PARTY_CLAIMS.CLAIM_TOTAL as REMAINING ,               
+PARTY_CLAIMS.CLAIM_TOTAL_ORIGINAL as TOTAL,              
+CASE WHEN NVL(PARTY_CLAIMS.CLAIM_TOTAL_ORIGINAL, 0) > 0 THEN 'Y' ELSE 'N' END PARTY_CLAIM_FLAG,              
+             
+--(SELECT rtrim( xmlcast( xmlagg( xmlelement(e, CRIMINAL.NAME  || ',') order by PARTIESXX.PARTY_ID) as clob), ',')             
+--(SELECT LISTAGG(CRIMINAL.NAME ,  ' | ')  WITHIN GROUP (order by PARTIESXX.PARTY_ID)               
+--FROM PAR_CRIMINAL_TYPES CRIMINAL , FORM_CASE_DESCRIPTION_DES DES , FORM_CASE_DESCRIPTION_DES_PART DES_PART , FORM_CASE_DESCRIPTION_PARTIES PARTIESXX               
+--WHERE CRIMINAL.ID = DES.DESCRIPTION_ID               
+--AND DES_PART.FORM_CASE_DES_ID = DES.ID               
+--AND DES_PART.FORM_CASE_PARTY_ID = PARTIESXX.ID               
+--AND RES_PART.PARTY_ID  = PARTIESXX.PARTY_ID  )            
+'00' CRIMES               
+                                                                       
+FROM EXC_FOLDER_DATA FOLDER , COURT_BC_HEARING_RES_PARTIES RES_PART , COURT_BC_HEARING_RESERVATION RES , PAR_PARTIES PARTIES , BUSINESS_CASE CAS ,                                                                                                     
+    PAR_POLICE_AUTHORITY_REPORT PAR_POLICE , ENTITY POLICE , COURT_CIRCLES_DATES_HEARING DATES , BUSINESS_CASE_DEGREES DEGREES , BUSINESS_CASE_TYPE CAS_TYPE ,                                                                          
+    EXC_LKP_FOLDER_TYPES FOLDER_TYPE   ,              
+--    (SELECT XX.PARTY_ID_XX, XX.TOTAL, XX.REMAINING FROM (              
+--(SELECT DISTINCT TRIM(REGEXP_SUBSTR(C.PARTY_ID,'[^,]+', 1, level)) PARTY_ID_XX, CLAIM_TOTAL REMAINING, CLAIM_TOTAL_ORIGINAL TOTAL, ID FROM EXC_CLAIMS C              
+--CONNECT BY INSTR(C.PARTY_ID, ',', 1, LEVEL -1) > 0)               
+--) XX )      
+EXC_CLAIMS PARTY_CLAIMS              
+              
+      
+              
+WHERE FOLDER.RES_PARTY_ID = RES_PART.ID                                                                                                     
+AND RES_PART.COURT_BC_HEARING_RES_ID = RES.ID                                                                                                     
+AND RES_PART.PARTY_ID = PARTIES.ID                                                                                                     
+AND RES.BUSINESS_CASE_ID = CAS.ID                                                                                                     
+AND CAS.ID = PAR_POLICE.BUSINESS_CASE_ID                                                                                                     
+AND PAR_POLICE.ORIGIN_ENTITY = POLICE.ID                                                                                                     
+AND DATES.ID = RES.CIRCLE_HEARING_DATE_ID                                                                                         
+AND RES_PART.BC_DEGREE_SPEC_ID = DEGREES.ID                                                                                             
+AND CAS.CASE_TYPE = CAS_TYPE.ID                                                                            
+AND FOLDER_TYPE.ID = FOLDER.FOLDER_TYPE              
+AND FOLDER.id = PARTY_CLAIMS.EXC_FOLDER_ID (+)              
+AND FOLDER.JUDGEMENT_STATUS = 2            
+and RES_PART.PARTY_ID  = :ParPartyIdBind]]></SQLQuery>
+    <ViewAttribute Name="OrderRaws" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="ORDER_RAWS" Expression="ORDER_RAWS"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="InventoryNumber" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="96"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="INVENTORY_NUMBER"
+                   Expression="INVENTORY_NUMBER" SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="96"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="PartyName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="403"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="PARTY_NAME" Expression="PARTY_NAME"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="403"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="IdNumber" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="100"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="ID_NUMBER" Expression="ID_NUMBER"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="BusinessCaseNumber" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Precision="493" Type="java.lang.String" ColumnType="VARCHAR2" AliasName="BUSINESS_CASE_NUMBER"
+                   Expression="BUSINESS_CASE_NUMBER" SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="493"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="EntityName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="200"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="ENTITY_NAME" Expression="ENTITY_NAME"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="200"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="HearingDate" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="10"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="HEARING_DATE" Expression="HEARING_DATE"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="10"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="SequenceNumber" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="SEQUENCE_NUMBER"
+                   Expression="SEQUENCE_NUMBER" SQLType="NUMERIC"/>
+    <ViewAttribute Name="CriminalType" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="CRIMINAL_TYPE" Expression="CRIMINAL_TYPE"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="FolderName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="5"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="FOLDER_NAME" Expression="FOLDER_NAME"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="5"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="PoliceStationEntityId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="POLICE_STATION_ENTITY_ID"
+                   Expression="POLICE_STATION_ENTITY_ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="Year" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="YEAR" Expression="YEAR"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="FolderType" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="FOLDER_TYPE" Expression="FOLDER_TYPE"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="RepeatedFlag" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="1"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="REPEATED_FLAG" Expression="REPEATED_FLAG"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="1"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="ExecutionFlag" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="EXECUTION_FLAG"
+                   Expression="EXECUTION_FLAG" SQLType="NUMERIC"/>
+    <ViewAttribute Name="ExecutionFlagName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Precision="10" Type="java.lang.String" ColumnType="VARCHAR2" AliasName="EXECUTION_FLAG_NAME"
+                   Expression="EXECUTION_FLAG_NAME" SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="10"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="FolderId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="FOLDER_ID" Expression="FOLDER_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="PartyId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="PARTY_ID" Expression="PARTY_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="ResPartyId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="RES_PARTY_ID" Expression="RES_PARTY_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="CaseNumber" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="100"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="CASE_NUMBER" Expression="CASE_NUMBER"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="CaseYear" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="CASE_YEAR" Expression="CASE_YEAR"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="DegreeName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="100"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="DEGREE_NAME" Expression="DEGREE_NAME"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="DegreeId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="DEGREE_ID" Expression="DEGREE_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="PoliceId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="POLICE_ID" Expression="POLICE_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="CasTypeId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="CAS_TYPE_ID" Expression="CAS_TYPE_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="CasTypeName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="50"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="CAS_TYPE_NAME" Expression="CAS_TYPE_NAME"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="50"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="ParentEntityId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="PARENT_ENTITY_ID"
+                   Expression="PARENT_ENTITY_ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="BusinessCaseId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="BUSINESS_CASE_ID"
+                   Expression="BUSINESS_CASE_ID" SQLType="NUMERIC"/>
+    <ViewAttribute Name="Nickname" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="100"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="NICKNAME" Expression="NICKNAME"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="100"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="Attendance" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="ATTENDANCE" Expression="ATTENDANCE"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="SessionId" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="SESSION_ID" Expression="SESSION_ID"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="AttendanceName" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="3"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="ATTENDANCE_NAME"
+                   Expression="ATTENDANCE_NAME" SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="3"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="Notes" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="1000"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="NOTES" Expression="NOTES" SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="1000"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="JudgmentText" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="1000"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="JUDGMENT_TEXT" Expression="JUDGMENT_TEXT"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="1000"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="PartyIdXx" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="200"
+                   Type="java.lang.String" ColumnType="VARCHAR2" AliasName="PARTY_ID_XX" Expression="PARTY_ID_XX"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="200"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="Remaining" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="REMAINING" Expression="REMAINING"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="Total" IsUpdateable="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="TOTAL" Expression="TOTAL"
+                   SQLType="NUMERIC"/>
+    <ViewAttribute Name="PartyClaimFlag" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="1"
+                   Type="java.lang.String" ColumnType="CHAR" AliasName="PARTY_CLAIM_FLAG" Expression="PARTY_CLAIM_FLAG"
+                   SQLType="VARCHAR">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="1"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="Crimes" IsUpdateable="false" IsPersistent="false" PrecisionRule="true" Precision="4000"
+                   Type="oracle.jbo.domain.ClobDomain" ColumnType="VARCHAR2" AliasName="CRIMES" Expression="CRIMES"
+                   SQLType="CLOB">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="4000"/>
+        </DesignTime>
+    </ViewAttribute>
+    <ViewAttribute Name="CheckParty" IsSelected="false" IsPersistent="false" PrecisionRule="true"
+                   Type="java.math.BigDecimal" ColumnType="NUMBER" AliasName="VIEW_ATTR" SQLType="NUMERIC"/>
+    <ViewCriteria Name="SearchByHasrVC"
+                  ViewObjectName="com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyResultRVO"
+                  Conjunction="AND" Mode="2">
+        <Properties Name="_Props">
+            <CustomProperties>
+                <Property Name="autoExecute" Value="false"/>
+                <Property Name="mode" Value="Basic"/>
+                <Property Name="allowConjunctionOverride" Value="true"/>
+                <Property Name="showInList" Value="true"/>
+                <Property Name="displayOperators" Value="InAdvancedMode"/>
+            </CustomProperties>
+        </Properties>
+        <ViewCriteriaRow Name="SearchByPartyResultRVOCriteria_row_0" UpperColumns="1">
+            <ViewCriteriaItem Name="SequenceNumber" ViewAttribute="SequenceNumber" Operator="=" Conjunction="AND"
+                              Value=":seqNumParam" IsBindVarValue="true" Required="Optional"/>
+            <ViewCriteriaItem Name="PoliceStationEntityId" ViewAttribute="PoliceStationEntityId" Operator="="
+                              Conjunction="AND" Value=":policeParam" IsBindVarValue="true" Required="Optional"/>
+            <ViewCriteriaItem Name="Year" ViewAttribute="Year" Operator="=" Conjunction="AND" Value=":yearParam"
+                              IsBindVarValue="true" Required="Optional"/>
+            <ViewCriteriaItem Name="FolderType" ViewAttribute="FolderType" Operator="=" Conjunction="AND"
+                              Value=":folderTypeParam" IsBindVarValue="true" Required="Optional"/>
+            <ViewCriteriaItem Name="RepeatedFlag" ViewAttribute="RepeatedFlag" Operator="=" Conjunction="AND"
+                              Value=":repeatedParam" IsBindVarValue="true" Required="Optional"/>
+        </ViewCriteriaRow>
+    </ViewCriteria>
+    <ViewCriteria
+        Name="FilterByBussinessCaseId"
+        ViewObjectName="com.egabi.cjexec.model.roviews.claimProcedureROV.SearchByPartyResultRVO"
+        Conjunction="AND">
+        <Properties Name="_Props">
+            <CustomProperties>
+                <Property
+                    Name="autoExecute"
+                    Value="true"/>
+                <Property
+                    Name="mode"
+                    Value="Basic"/>
+                <Property
+                    Name="allowConjunctionOverride"
+                    Value="false"/>
+                <Property
+                    Name="showInList"
+                    Value="false"/>
+                <Property
+                    Name="displayOperators"
+                    Value="InAdvancedMode"/>
+            </CustomProperties>
+        </Properties>
+        <ViewCriteriaRow
+            Name="SearchByPartyResultRVOCriteria_row_0"
+            UpperColumns="1">
+            <ViewCriteriaItem
+                Name="PoliceStationEntityId"
+                ViewAttribute="PoliceStationEntityId"
+                Operator="="
+                Conjunction="AND"
+                Value=":pPoliceStationEntityId"
+                IsBindVarValue="true"
+                Required="Optional"/>
+            <ViewCriteriaItem
+                Name="PartyId"
+                ViewAttribute="PartyId"
+                Operator="="
+                Conjunction="AND"
+                Value=":pPartyId"
+                IsBindVarValue="true"
+                Required="Optional"/>
+            <ViewCriteriaItem
+                Name="BusinessCaseId"
+                ViewAttribute="BusinessCaseId"
+                Operator="="
+                Conjunction="AND"
+                Value=":pBussinessCaseId"
+                IsBindVarValue="true"
+                Required="Optional"/>
+        </ViewCriteriaRow>
+    </ViewCriteria>
+    <ResourceBundle>
+        <PropertiesBundle PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+    </ResourceBundle>
+</ViewObject>

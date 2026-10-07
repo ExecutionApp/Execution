@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SearchByCasePageDef"
+                Package="pages.com.egabi.inventory">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.ExcProceduresLogView1" DataControl="CjExecAMDataControl" RangeSize="10"
+              id="ExcProceduresLogView1Iterator"/>
+    <searchRegion Binds="ExcProceduresLogView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ExcProceduresLogView1Query"/>
+  </executables>
+  <bindings>
+    <!--<list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_PoliceStationEntityId"
+          id="PoliceStationEntityId" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>-->
+    
+    
+    <listOfValues IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_PoliceStationEntity"
+                  id="PoliceStationEntity"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="SearchType">
+      <AttrNames>
+        <Item Value="SearchType"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ExcProceduresLogView1Iterator" id="ExcProceduresLogView1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView"
+                      Name="ExcProceduresLogView10">
+        <AttrNames>
+          <Item Value="ProcedureDate"/>
+          <Item Value="LoggedEntityName"/>
+          <Item Value="FullName"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="ActionTypeName"/>
+          <Item Value="SequenceNumberLong"/>
+          <Item Value="CaseEntityName"/>
+          <Item Value="CaseTypeName"/>
+          <Item Value="AppealRequest"/>
+          <Item Value="CriminalRequest"/>
+          <Item Value="OppositionRequest"/>
+          <Item Value="FileName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="ProsecutionKolya1">
+      <AttrNames>
+        <Item Value="ProsecutionKolya"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="ProsecutionPartial">
+      <AttrNames>
+        <Item Value="ProsecutionPartial"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_PoliceStationEntityName"
+                  id="PoliceStationEntityName"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateFrom">
+      <AttrNames>
+        <Item Value="DateFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateTo">
+      <AttrNames>
+        <Item Value="DateTo"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues Uses="LOV_ProsecutionPartial" StaticList="false" IterBinding="SearchInventoryRVO1Iterator"
+                  id="ProsecutionPartial1"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_ProsecutionKolya"
+          id="ProsecutionKolya2" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_ProsecutionPartialName"
+          id="ProsecutionPartialName1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

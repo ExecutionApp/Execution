@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcProcedureClaimFkVL"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  EntityAssociation="com.egabi.cjexec.model.associations.claimProcedure.ExcProcedureClaimFkAssoc">
+  <ViewLinkDefEnd
+    Name="ExcClaims"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.views.claimProcedureViews.ExcClaimsVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="ExcClaims"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.claimProcedureViews.ExcClaimsVO.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ExcProcedureClaim"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.views.claimProcedureViews.ExcProcedureClaimVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="ExcProcedureClaim"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.claimProcedureViews.ExcProcedureClaimVO.ClaimId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="JudgmentAppealApprovalPageDef1"
+                Package="pages.com.egabi.JudgmentAppealApproval">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.JudgmentAppealApprovalRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="JudgmentAppealApprovalRVO1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="Year">
+      <AttrNames>
+        <Item Value="Year"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="CaseNumber">
+      <AttrNames>
+        <Item Value="CaseNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_OrigEntity" id="OrigEntity"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseTypeId"
+          id="BusinessCaseTypeId" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="JudgmentAppealApprovalRVO1Iterator" id="JudgmentAppealApprovalRVO1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.inventory.JudgmentAppealApprovalRVO"
+                      Name="JudgmentAppealApprovalRVO10">
+        <AttrNames>
+          <Item Value="OrderRaws"/>
+          <Item Value="FlgType"/>
+          <Item Value="InventoryNumber"/>
+          <Item Value="PartyName"/>
+          <Item Value="IdNumber"/>
+          <Item Value="UpdateType"/>
+          <Item Value="UnknownId"/>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="EntityName"/>
+          <Item Value="HearingDate"/>
+          <Item Value="SequenceNumber"/>
+          <Item Value="FolderName"/>
+          <Item Value="PoliceStationEntityId"/>
+          <Item Value="Year"/>
+          <Item Value="FolderType"/>
+          <Item Value="RepeatedFlag"/>
+          <Item Value="FolderId"/>
+          <Item Value="PartyId"/>
+          <Item Value="ResPartyId"/>
+          <Item Value="CaseNumber"/>
+          <Item Value="CaseYear"/>
+          <Item Value="DegreeName"/>
+          <Item Value="DegreeId"/>
+          <Item Value="CasTypeId"/>
+          <Item Value="EntDeg"/>
+          <Item Value="CasTypeName"/>
+          <Item Value="ParentEntityId"/>
+          <Item Value="BusinessCaseId"/>
+          <Item Value="Nickname"/>
+          <Item Value="Attendance"/>
+          <Item Value="SessionId"/>
+          <Item Value="AttendanceName"/>
+          <Item Value="OriginEntity"/>
+          <Item Value="Notes"/>
+          <Item Value="JudgmentText"/>
+          <Item Value="JudgementTypeName"/>
+          <Item Value="JudgmentType"/>
+          <Item Value="IsActive"/>
+          <Item Value="HearingDateId"/>
+          <Item Value="IdType"/>
+          <Item Value="ReservationId"/>
+          <Item Value="ProsecutionJudegementFlag"/>
+          <Item Value="ExecutionFlag"/>
+          <Item Value="ClaimIssueFlag"/>
+          <Item Value="JournalistFlag"/>
+          <Item Value="CriminalType"/>
+          <Item Value="PoliceId"/>
+          <Item Value="Amount"/>
+          <Item Value="Guarantee"/>
+          <Item Value="GuaranteeDate"/>
+          <Item Value="GuaranteeNumber"/>
+          <Item Value="GuranteeAmount"/>
+          <Item Value="InPrisonDays"/>
+          <Item Value="InPrisonMonths"/>
+          <Item Value="InPrisonYears"/>
+          <Item Value="DailyPayments"/>
+          <Item Value="ProsecutionObjection"/>
+          <Item Value="ObjectionType"/>
+          <Item Value="GuiltlessnessFlag"/>
+          <Item Value="ProcedureText"/>
+          <Item Value="FActionsActive"/>
+          <Item Value="ProcedureId"/>
+          <Item Value="ActionType"/>
+          <Item Value="DecisionId"/>
+          <Item Value="DescDecision"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="ValidatePoliceReportGeneric" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="ValidatePoliceReportGeneric" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+      <NamedData NDName="PoliceNo" NDValue="#{bindings.CaseNumber.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="BusinessCaseType" NDValue="#{bindings.BusinessCaseTypeId.attributeValue}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="ParYear" NDValue="#{bindings.Year.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="OrigEntity" NDValue="#{bindings.OrigEntity.attributeValue}" NDType="java.math.BigDecimal"/>
+    </methodAction>
+    <methodAction id="ValidatePoliceReportGenericJAA" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="ValidatePoliceReportGenericJAA" IsViewObjectMethod="false"
+                  DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+      <NamedData NDName="PoliceNo" NDValue="#{bindings.CaseNumber.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="BusinessCaseType" NDValue="#{bindings.BusinessCaseTypeId.attributeValue}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="ParYear" NDValue="#{bindings.Year.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="OrigEntity" NDValue="#{bindings.OrigEntity.attributeValue}" NDType="java.math.BigDecimal"/>
+    </methodAction>
+    <attributeValues IterBinding="JudgmentAppealApprovalRVO1Iterator" id="IsActive">
+      <AttrNames>
+        <Item Value="IsActive"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="updateProsecutorFolderData" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateProsecutorFolderData" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+      <NamedData NDName="folderId" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="confirmation" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="JudgmentAppealApprovalRVO1Iterator" id="FolderId">
+      <AttrNames>
+        <Item Value="FolderId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JudgmentAppealApprovalRVO1Iterator" id="ProcedureId">
+      <AttrNames>
+        <Item Value="ProcedureId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="updateExcFolderActions" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateExcFolderActions" IsViewObjectMethod="false" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1">
+      <NamedData NDName="procedureId" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="isActive" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

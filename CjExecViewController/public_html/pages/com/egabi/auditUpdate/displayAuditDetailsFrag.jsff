@@ -1,0 +1,378 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="cjexecviewcontrollerBundle" value="#{adfBundle['com.egabi.cjexec.view.CjExecViewControllerBundle']}"/>
+  <af:panelGroupLayout id="pgl1">
+   
+
+   <af:panelHeader text="#{cjexecviewcontrollerBundle.CASE_DETAILS}" id="pb1">
+   
+  
+	  
+	  
+	  
+	  
+	  <af:panelGroupLayout id="id99" styleClass="row">
+	    <af:panelGroupLayout id="id100" styleClass="col-md-3 col-sm-12">
+			<af:outputLabel value="#{bindings.CaseNumber.hints.label}" id="p01"></af:outputLabel>
+		<af:inputText simple="true"
+                value="#{bindings.CaseNumber.inputValue} / #{bindings.ParYear.inputValue} / #{ bindings.Name.inputValue}/  #{bindings.EntityName1.inputValue}"
+                    label="#{bindings.CaseNumber.hints.label}" required="#{bindings.CaseNumber.hints.mandatory}"
+                   
+                    maximumLength="#{bindings.CaseNumber.hints.precision}"
+                    shortDesc="#{bindings.CaseNumber.hints.tooltip}" id="it1">
+        <f:validator binding="#{bindings.CaseNumber.validator}"/>
+      </af:inputText>
+		</af:panelGroupLayout>
+	    <af:panelGroupLayout id="id101" styleClass="col-md-3 col-sm-12">
+		<af:outputLabel value="#{bindings.EntityName.hints.label}" id="p00"></af:outputLabel>
+		 <af:inputText simple="true" value="#{bindings.EntityName.inputValue}" label="#{bindings.EntityName.hints.label}"
+                    required="#{bindings.EntityName.hints.mandatory}"
+                    
+                    maximumLength="#{bindings.EntityName.hints.precision}"
+                    shortDesc="#{bindings.EntityName.hints.tooltip}" id="it5">
+        <f:validator binding="#{bindings.EntityName.validator}"/>
+      </af:inputText>
+	  
+		
+		</af:panelGroupLayout>
+		 
+	  
+	  </af:panelGroupLayout>
+      
+
+
+     
+	  
+    </af:panelHeader>
+	
+	 <af:panelGroupLayout id="pgl2" styleClass="btn-holder">
+	  <af:button text="رجوع" id="b1" action="back"/>
+	 	</af:panelGroupLayout>
+	 
+	
+	
+    <af:panelTabbed position="above" id="pt1">
+      <af:showDetailItem id="tab1" text="تعديلات بيانات القضية و المحضر">
+        <af:table value="#{bindings.AuditSimpleUpdateRo.collectionModel}" var="row"
+                  rows="#{bindings.AuditSimpleUpdateRo.rangeSize}"
+                  autoHeightRows="8" scrollPolicy="page" 
+                  emptyText="#{bindings.AuditSimpleUpdateRo.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.AuditSimpleUpdateRo.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.AuditSimpleUpdateRo.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.AuditSimpleUpdateRo.rangeSize}" id="t1" styleClass="AFStretchWidth"
+                  columnStretching="column:c3">
+          <af:column headerText="#{bindings.AuditSimpleUpdateRo.hints.CreatedBy.label}" id="c3">
+            <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRo.hints.CreatedBy.label}"
+                          required="#{bindings.AuditSimpleUpdateRo.hints.CreatedBy.mandatory}"
+                         
+                          maximumLength="#{bindings.AuditSimpleUpdateRo.hints.CreatedBy.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRo.hints.CreatedBy.tooltip}" id="it8">
+              <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRo.hints.CreationDate.label}" id="c4" width="100">
+            <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRo.hints.CreationDate.label}"
+                          required="#{bindings.AuditSimpleUpdateRo.hints.CreationDate.mandatory}"
+                          
+                          shortDesc="#{bindings.AuditSimpleUpdateRo.hints.CreationDate.tooltip}" id="id1">
+              <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.AuditSimpleUpdateRo.hints.CreationDate.format}"/>
+            </af:inputDate>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRo.hints.EditedAttribute.label}" id="c5" width="200">
+            <af:inputText value="#{row.bindings.EditedAttribute.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRo.hints.EditedAttribute.label}"
+                          required="#{bindings.AuditSimpleUpdateRo.hints.EditedAttribute.mandatory}"
+                         
+                          maximumLength="#{bindings.AuditSimpleUpdateRo.hints.EditedAttribute.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRo.hints.EditedAttribute.tooltip}" id="it9">
+              <f:validator binding="#{row.bindings.EditedAttribute.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRo.hints.OldValue.label}" id="c6">
+            <af:panelGroupLayout id="pgl3">
+              <af:inputText value="#{row.bindings.OldValue.inputValue}" rendered="#{row.TechnicalName ne 'DID'}"
+                            label="#{bindings.AuditSimpleUpdateRo.hints.OldValue.label}"
+                            required="#{bindings.AuditSimpleUpdateRo.hints.OldValue.mandatory}"
+                            maximumLength="#{bindings.AuditSimpleUpdateRo.hints.OldValue.precision}"
+                            shortDesc="#{bindings.AuditSimpleUpdateRo.hints.OldValue.tooltip}" id="it10">
+                <f:validator binding="#{row.bindings.OldValue.validator}"/>
+              </af:inputText>
+              <af:link text="#{row.OldValue}" id="l9" rendered="#{row.TechnicalName eq 'DID'}"
+                       shortDesc="عند الضغط  علي رقم الملف  يتم تحميل الملف القديم قبل تعديله">
+                <af:fileDownloadActionListener filename="#{row.OldValue}"
+                                               method="#{displayAuditDetails.downloadOldValueMethod}"/>
+              </af:link>
+            </af:panelGroupLayout>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRo.hints.NewValue.label}" id="c7">
+            <af:panelGroupLayout id="pgl4">
+              <af:inputText value="#{row.bindings.NewValue.inputValue}" rendered="#{row.TechnicalName ne 'DID'}"
+                            label="#{bindings.AuditSimpleUpdateRo.hints.NewValue.label}"
+                            required="#{bindings.AuditSimpleUpdateRo.hints.NewValue.mandatory}"
+                            maximumLength="#{bindings.AuditSimpleUpdateRo.hints.NewValue.precision}"
+                            shortDesc="#{bindings.AuditSimpleUpdateRo.hints.NewValue.tooltip}" id="it11">
+                <f:validator binding="#{row.bindings.NewValue.validator}"/>
+              </af:inputText>
+              <af:link text="#{row.NewValue}" id="l1" rendered="#{row.TechnicalName eq 'DID'}"
+                       shortDesc="عند الضغط  علي رقم الملف يتم تحميل الملف الجديد بعد تحميله">
+                <af:fileDownloadActionListener filename="#{row.NewValue}"
+                                               method="#{displayAuditDetails.downloadNewValueMethod}"/>
+              </af:link>
+            </af:panelGroupLayout>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRo.hints.EntityName.label}" id="c11" width="200"
+                     minimumWidth="12">
+            <af:inputText value="#{row.bindings.EntityName.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRo.hints.EntityName.label}"
+                          required="#{bindings.AuditSimpleUpdateRo.hints.EntityName.mandatory}"
+                         
+                          maximumLength="#{bindings.AuditSimpleUpdateRo.hints.EntityName.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRo.hints.EntityName.tooltip}" id="it15">
+              <f:validator binding="#{row.bindings.EntityName.validator}"/>
+            </af:inputText>
+          </af:column>
+        </af:table>
+      </af:showDetailItem>
+      <af:showDetailItem id="tab2" text="تعديلات الحصر و الحكم">
+        <af:table value="#{bindings.AuditSimpleUpdateRoHasr.collectionModel}" var="row"
+                  rows="#{bindings.AuditSimpleUpdateRoHasr.rangeSize}"
+                  emptyText="#{bindings.AuditSimpleUpdateRoHasr.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.AuditSimpleUpdateRoHasr.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.AuditSimpleUpdateRoHasr.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.AuditSimpleUpdateRoHasr.rangeSize}" id="t2"
+                  styleClass="AFStretchWidth" columnStretching="last">
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.CreatedBy.label}" id="c1">
+            <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.CreatedBy.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.CreatedBy.mandatory}"
+                        
+                          maximumLength="#{bindings.AuditSimpleUpdateRoHasr.hints.CreatedBy.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.CreatedBy.tooltip}" id="it6">
+              <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.CreationDate.label}" id="c2">
+            <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.CreationDate.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.CreationDate.mandatory}"
+                         
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.CreationDate.tooltip}" id="id2">
+              <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.AuditSimpleUpdateRoHasr.hints.CreationDate.format}"/>
+            </af:inputDate>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.EditedAttribute.label}" id="c8">
+            <af:inputText value="#{row.bindings.EditedAttribute.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.EditedAttribute.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.EditedAttribute.mandatory}"
+                         
+                          maximumLength="#{bindings.AuditSimpleUpdateRoHasr.hints.EditedAttribute.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.EditedAttribute.tooltip}" id="it7">
+              <f:validator binding="#{row.bindings.EditedAttribute.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.OldValue.label}" id="c9">
+            <af:inputText value="#{row.bindings.OldValue.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.OldValue.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.OldValue.mandatory}"
+                        
+                          maximumLength="#{bindings.AuditSimpleUpdateRoHasr.hints.OldValue.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.OldValue.tooltip}" id="it12">
+              <f:validator binding="#{row.bindings.OldValue.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.NewValue.label}" id="c10">
+            <af:inputText value="#{row.bindings.NewValue.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.NewValue.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.NewValue.mandatory}"
+                          
+                          maximumLength="#{bindings.AuditSimpleUpdateRoHasr.hints.NewValue.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.NewValue.tooltip}" id="it13">
+              <f:validator binding="#{row.bindings.NewValue.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.EntityName.label}" id="c12" width="170"
+                     minimumWidth="12">
+            <af:inputText value="#{row.bindings.EntityName.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.EntityName.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.EntityName.mandatory}"
+                         
+                          maximumLength="#{bindings.AuditSimpleUpdateRoHasr.hints.EntityName.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.EntityName.tooltip}" id="it14">
+              <f:validator binding="#{row.bindings.EntityName.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.SequenceNumber.label}" id="c13">
+            <af:inputText value="#{row.bindings.SequenceNumber.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.SequenceNumber.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.SequenceNumber.mandatory}"
+                         
+                          maximumLength="#{bindings.AuditSimpleUpdateRoHasr.hints.SequenceNumber.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.SequenceNumber.tooltip}" id="it16">
+              <f:validator binding="#{row.bindings.SequenceNumber.validator}"/>
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.AuditSimpleUpdateRoHasr.hints.SequenceNumber.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.Year.label}" id="c14">
+            <af:inputText value="#{row.bindings.Year.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.Year.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.Year.mandatory}"
+                        
+                          maximumLength="#{bindings.AuditSimpleUpdateRoHasr.hints.Year.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.Year.tooltip}" id="it17">
+              <f:validator binding="#{row.bindings.Year.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.AuditSimpleUpdateRoHasr.hints.Year.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.RepeatedFlag.label}" id="c15">
+            <af:inputText value="#{row.bindings.RepeatedFlag.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.RepeatedFlag.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.RepeatedFlag.mandatory}"
+                        
+                          maximumLength="#{bindings.AuditSimpleUpdateRoHasr.hints.RepeatedFlag.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.RepeatedFlag.tooltip}" id="it18">
+              <f:validator binding="#{row.bindings.RepeatedFlag.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoHasr.hints.FolderName.label}" id="c16">
+            <af:inputText value="#{row.bindings.FolderName.inputValue}"
+                          label="#{bindings.AuditSimpleUpdateRoHasr.hints.FolderName.label}"
+                          required="#{bindings.AuditSimpleUpdateRoHasr.hints.FolderName.mandatory}"
+                         
+                          maximumLength="#{bindings.AuditSimpleUpdateRoHasr.hints.FolderName.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdateRoHasr.hints.FolderName.tooltip}" id="it19">
+              <f:validator binding="#{row.bindings.FolderName.validator}"/>
+            </af:inputText>
+          </af:column>
+        </af:table>
+      </af:showDetailItem>
+      <af:showDetailItem id="tab3" text="تعديلات الاطراف">
+        <af:table value="#{bindings.AuditSimpleUpdatePartiesRo.collectionModel}" var="row"
+                  rows="#{bindings.AuditSimpleUpdatePartiesRo.rangeSize}"
+                  emptyText="#{bindings.AuditSimpleUpdatePartiesRo.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.AuditSimpleUpdatePartiesRo.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.AuditSimpleUpdatePartiesRo.collectionModel.makeCurrent}"
+                  rowSelection="single" columnStretching="last" fetchSize="#{bindings.AuditSimpleUpdatePartiesRo.rangeSize}" id="t3">
+          <af:column headerText="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreatedBy.label}" id="c17">
+            <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                          label="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreatedBy.label}"
+                          required="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreatedBy.mandatory}"
+                          
+                          maximumLength="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreatedBy.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreatedBy.tooltip}" id="it20">
+              <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreationDate.label}" id="c18">
+            <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                          label="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreationDate.label}"
+                          required="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreationDate.mandatory}"
+                          
+                          shortDesc="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreationDate.tooltip}" id="id3">
+              <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.AuditSimpleUpdatePartiesRo.hints.CreationDate.format}"/>
+            </af:inputDate>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdatePartiesRo.hints.EditedAttribute.label}" id="c19">
+            <af:inputText value="#{row.bindings.EditedAttribute.inputValue}"
+                          label="#{bindings.AuditSimpleUpdatePartiesRo.hints.EditedAttribute.label}"
+                          required="#{bindings.AuditSimpleUpdatePartiesRo.hints.EditedAttribute.mandatory}"
+                          
+                          maximumLength="#{bindings.AuditSimpleUpdatePartiesRo.hints.EditedAttribute.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdatePartiesRo.hints.EditedAttribute.tooltip}" id="it21">
+              <f:validator binding="#{row.bindings.EditedAttribute.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdatePartiesRo.hints.OldValue.label}" id="c20">
+            <af:inputText value="#{row.bindings.OldValue.inputValue}"
+                          label="#{bindings.AuditSimpleUpdatePartiesRo.hints.OldValue.label}"
+                          required="#{bindings.AuditSimpleUpdatePartiesRo.hints.OldValue.mandatory}"
+                         
+                          maximumLength="#{bindings.AuditSimpleUpdatePartiesRo.hints.OldValue.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdatePartiesRo.hints.OldValue.tooltip}" id="it22">
+              <f:validator binding="#{row.bindings.OldValue.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdatePartiesRo.hints.NewValue.label}" id="c21">
+            <af:inputText value="#{row.bindings.NewValue.inputValue}"
+                          label="#{bindings.AuditSimpleUpdatePartiesRo.hints.NewValue.label}"
+                          required="#{bindings.AuditSimpleUpdatePartiesRo.hints.NewValue.mandatory}"
+                        
+                          maximumLength="#{bindings.AuditSimpleUpdatePartiesRo.hints.NewValue.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdatePartiesRo.hints.NewValue.tooltip}" id="it23">
+              <f:validator binding="#{row.bindings.NewValue.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdatePartiesRo.hints.EntityName.label}" id="c22" width="170"
+                     minimumWidth="12">
+            <af:inputText value="#{row.bindings.EntityName.inputValue}"
+                          label="#{bindings.AuditSimpleUpdatePartiesRo.hints.EntityName.label}"
+                          required="#{bindings.AuditSimpleUpdatePartiesRo.hints.EntityName.mandatory}"
+                          
+                          maximumLength="#{bindings.AuditSimpleUpdatePartiesRo.hints.EntityName.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdatePartiesRo.hints.EntityName.tooltip}" id="it24">
+              <f:validator binding="#{row.bindings.EntityName.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdatePartiesRo.hints.PartyFullName.label}" id="c23">
+            <af:inputText value="#{row.bindings.PartyFullName.inputValue}"
+                          label="#{bindings.AuditSimpleUpdatePartiesRo.hints.PartyFullName.label}"
+                          required="#{bindings.AuditSimpleUpdatePartiesRo.hints.PartyFullName.mandatory}"
+                          
+                          maximumLength="#{bindings.AuditSimpleUpdatePartiesRo.hints.PartyFullName.precision}"
+                          shortDesc="#{bindings.AuditSimpleUpdatePartiesRo.hints.PartyFullName.tooltip}" id="it25">
+              <f:validator binding="#{row.bindings.PartyFullName.validator}"/>
+            </af:inputText>
+          </af:column>
+        </af:table>
+      </af:showDetailItem>
+      <af:showDetailItem text="تعديل المطالبات" id="sdi1">
+        <af:table value="#{bindings.AuditSimpleUpdateRoClaims.collectionModel}" var="row"
+                  rows="#{bindings.AuditSimpleUpdateRoClaims.rangeSize}"
+                  emptyText="#{bindings.AuditSimpleUpdateRoClaims.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.AuditSimpleUpdateRoClaims.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.AuditSimpleUpdateRoClaims.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.AuditSimpleUpdateRoClaims.rangeSize}" id="t4">
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoClaims.hints.CreatedBy.label}" id="c24">
+            <af:outputText value="#{row.CreatedBy}"
+                           shortDesc="#{bindings.AuditSimpleUpdateRoClaims.hints.CreatedBy.tooltip}" id="ot1"/>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoClaims.hints.CreationDate.label}" id="c25">
+            <af:outputText value="#{row.CreationDate}"
+                           shortDesc="#{bindings.AuditSimpleUpdateRoClaims.hints.CreationDate.tooltip}" id="ot2">
+              <af:convertDateTime pattern="#{bindings.AuditSimpleUpdateRoClaims.hints.CreationDate.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoClaims.hints.EditedAttribute.label}" id="c26">
+            <af:outputText value="#{row.EditedAttribute}"
+                           shortDesc="#{bindings.AuditSimpleUpdateRoClaims.hints.EditedAttribute.tooltip}" id="ot3"/>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoClaims.hints.OldValue.label}" id="c27">
+            <af:outputText value="#{row.OldValue}"
+                           shortDesc="#{bindings.AuditSimpleUpdateRoClaims.hints.OldValue.tooltip}" id="ot4"/>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoClaims.hints.NewValue.label}" id="c28">
+            <af:outputText value="#{row.NewValue}"
+                           shortDesc="#{bindings.AuditSimpleUpdateRoClaims.hints.NewValue.tooltip}" id="ot5"/>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoClaims.hints.EntityName.label}" id="c29">
+            <af:outputText value="#{row.EntityName}"
+                           shortDesc="#{bindings.AuditSimpleUpdateRoClaims.hints.EntityName.tooltip}" id="ot6"/>
+          </af:column>
+          <af:column headerText="#{bindings.AuditSimpleUpdateRoClaims.hints.PartyFullName.label}" id="c30">
+            <af:outputText value="#{row.PartyFullName}"
+                           shortDesc="#{bindings.AuditSimpleUpdateRoClaims.hints.PartyFullName.tooltip}" id="ot7"/>
+          </af:column>
+        </af:table>
+      </af:showDetailItem>
+    </af:panelTabbed>
+  </af:panelGroupLayout>
+</ui:composition>

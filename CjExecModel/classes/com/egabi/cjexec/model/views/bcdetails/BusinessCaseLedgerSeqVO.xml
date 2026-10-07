@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BusinessCaseLedgerSeqVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="pEntityKolyaa"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <TransientExpression
+      Name="VariableScript"
+      CodeSourceName="BusinessCaseLedgerSeqVO"/>
+  </Variable>
+  <ViewAccessor
+    Name="EntityLedgerROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityLedgerROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EntityLedgerAppealROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityLedgerAppealROVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_LedgerId"
+    ListVOName="EntityLedgerROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LedgerId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CASE_SCHEMA_ID"/>
+      <Item Value="SchemaId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="CaseSchemaId"/>
+      <Item Value="CaseSchemaId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_LedgerAppeal"
+    ListVOName="EntityLedgerAppealROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LedgerAppeal"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="LedgerId"/>
+      <Item Value="SchemaId"/>
+      <Item Value="CASE_SCHEMA_ID"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Id"/>
+      <Item Value="CaseSchemaId"/>
+      <Item Value="CaseSchemaId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT BusinessCaseLedgerSeqEO.ID,    
+       BusinessCaseLedgerSeqEO.BUSINESS_CASE_DETAILS_ID,    
+       BusinessCaseLedgerSeqEO.LEDGER_ID,    
+       BusinessCaseLedgerSeqEO.SEQ,    
+       BusinessCaseLedgerSeqEO.CREATED_BY,    
+       BusinessCaseLedgerSeqEO.CREATED_DATE,    
+       BusinessCaseLedgerSeqEO.UPDATED_BY,    
+       BusinessCaseLedgerSeqEO.UPDATED_DATE,    
+       BusinessCaseLedgerSeqEO.YEAR,    
+       BusinessCaseLedgerSeqEO.CORRESPONDENCE_ID,    
+       (select nvl (case_schema_id , 0) from business_case_details where id =BusinessCaseLedgerSeqEO.BUSINESS_CASE_DETAILS_ID) AS VIEW_ATTR,    
+       BusinessCaseLedgerSeqEO.CASE_SCHEMA_ID,    
+       BusinessCaseLedgerSeqEO.BUSINESS_CASE_ID ,  
+       (select max (el.id)  from entity_ledger el  , ledger_schema ls                   
+where el.entity_id = :pEntityKolyaa                 
+and   el.id =LS.ENTITY_LEDGER_ID and                   
+LS.CASE_SCHEMA_ID = 3643 ) as ledger_Appeal  
+FROM  BUSINESS_CASE_LEDGER_SEQ BusinessCaseLedgerSeqEO]]></SQLQuery>
+  <EntityUsage
+    Name="BusinessCaseLedgerSeqEO"
+    Entity="com.egabi.cjexec.model.entities.bcdetails.BusinessCaseLedgerSeqEO"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="BusinessCaseDetailsId"
+    PrecisionRule="true"
+    EntityAttrName="BusinessCaseDetailsId"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="BUSINESS_CASE_DETAILS_ID">
+    <TransientExpression
+      Name="ExpressionScript"><![CDATA[BusinessCaseDetails.Ledger]]></TransientExpression>
+    <RecalcCondition
+      Name="RecalcExpressionScript"><![CDATA[true]]></RecalcCondition>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LedgerId"
+    PrecisionRule="true"
+    EntityAttrName="LedgerId"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="LEDGER_ID"
+    LOVName="LOV_LedgerId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Seq"
+    PrecisionRule="true"
+    EntityAttrName="Seq"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="SEQ"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="CREATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="CREATED_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="UpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="UpdatedBy"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="UPDATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="UpdatedDate"
+    PrecisionRule="true"
+    EntityAttrName="UpdatedDate"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="UPDATED_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Year"
+    PrecisionRule="true"
+    EntityAttrName="Year"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="YEAR"/>
+  <ViewAttribute
+    Name="CorrespondenceId"
+    PrecisionRule="true"
+    EntityAttrName="CorrespondenceId"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="CORRESPONDENCE_ID"/>
+  <ViewAttribute
+    Name="CASE_SCHEMA_ID"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    Expression="select nvl (case_schema_id , 0) from business_case_details where id =BusinessCaseLedgerSeqEO.BUSINESS_CASE_DETAILS_ID"/>
+  <ViewAttribute
+    Name="SchemaId"
+    PrecisionRule="true"
+    EntityAttrName="CaseSchemaId"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="CASE_SCHEMA_ID"/>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    PrecisionRule="true"
+    EntityAttrName="BusinessCaseId"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="BUSINESS_CASE_ID"/>
+  <ViewAttribute
+    Name="LedgerAppeal"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LEDGER_APPEAL"
+    Expression="LEDGER_APPEAL"
+    SQLType="NUMERIC"
+    LOVName="LOV_LedgerAppeal">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SchemaId1"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="SchemaId"
+    EntityUsage="BusinessCaseLedgerSeqEO"
+    AliasName="SCHEMA_ID"/>
+  <ViewLinkAccessor
+    Name="BusinessCaseDetails"
+    ViewLink="com.egabi.cjexec.model.views.bcdetails.vl.ViewLink19VL"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+</ViewObject>

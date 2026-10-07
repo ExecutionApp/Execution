@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SearchROV"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="com.egabi.cjexec.model.baseclasses.GenericVOImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.executionfolders.SearchROV_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="sessionUser"
+    Kind="where"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="CirculeNameROV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.CirculeNameROV"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="bindEntityId">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[CourtId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LkpFolderTypes1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.LkpFolderTypes"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="HearingDateROV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.HearingDateROV"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="P_BC_Degree_id">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[DegreeType]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="BusinesscasetypeROV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.BusinesscasetypeROV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="BusinessCaseDegreesROV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.BusinessCaseDegreesROV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PrimaryProsecutionROV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.PrimaryProsecutionROV"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="PARENT_ID">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[Resumption]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="SecondryProsecutionROV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.SecondryProsecutionROV"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="PARENT_ID">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[PrimaryProsecution]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ResumptionROV1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.executionfolders.ResumptionROV"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_CirculeId"
+    ListVOName="CirculeNameROV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    MRUCount="0"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
+    <AttrArray Name="AttrNames">
+      <Item Value="CirculeId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="EntityName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FolderType"
+    ListVOName="LkpFolderTypes1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FolderType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FolderName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TableType"
+    ListVOName="BusinesscasetypeROV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TableType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DegreeType"
+    ListVOName="BusinessCaseDegreesROV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DegreeType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_HearDateSTR"
+    ListVOName="HearingDateROV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="HearDateSTR"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="HearingDateId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="HearingDate"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="HearingDate"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PrimaryProsecution"
+    ListVOName="PrimaryProsecutionROV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PrimaryProsecution"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="EntityName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SecondaryProsecution"
+    ListVOName="SecondryProsecutionROV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SecondaryProsecution"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CourtId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="CourtId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="EntityName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Resumption"
+    ListVOName="ResumptionROV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Resumption"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="EntityName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[select                
+     null Circule_ID,                             
+       null    folder_type,                             
+     null   hearing_date_id,       
+     (SELECT court_id       
+          FROM entity       
+         WHERE id IN (SELECT ENTITY_ID       
+                        FROM SEC_USERs       
+                       WHERE ID = :sessionUser))       
+          court_id ,      
+          null table_type   ,   
+          null degree_type ,  
+          null PRIMARY_PROSECUTION,  
+          null SECONDARY_PROSECUTION , 
+          null Resumption 
+from dual]]></SQLQuery>
+  <ViewAttribute
+    Name="CirculeId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="CIRCULE_ID"
+    Expression="CIRCULE_ID"
+    SQLType="NUMERIC"
+    LOVName="LOV_CirculeId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FolderType"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="FOLDER_TYPE"
+    Expression="FOLDER_TYPE"
+    SQLType="NUMERIC"
+    LOVName="LOV_FolderType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearingDateId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="HEARING_DATE_ID"
+    Expression="HEARING_DATE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CourtId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="COURT_ID"
+    Expression="COURT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TableType"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="TABLE_TYPE"
+    Expression="TABLE_TYPE"
+    SQLType="NUMERIC"
+    LOVName="LOV_TableType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="TABLE"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DegreeType"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="DEGREE_TYPE"
+    Expression="DEGREE_TYPE"
+    SQLType="NUMERIC"
+    LOVName="LOV_DegreeType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="DEGREE"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PrimaryProsecution"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="PRIMARY_PROSECUTION"
+    Expression="PRIMARY_PROSECUTION"
+    SQLType="NUMERIC"
+    LOVName="LOV_PrimaryProsecution">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SecondaryProsecution"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="SECONDARY_PROSECUTION"
+    Expression="SECONDARY_PROSECUTION"
+    SQLType="NUMERIC"
+    LOVName="LOV_SecondaryProsecution">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Resumption"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="RESUMPTION"
+    Expression="RESUMPTION"
+    SQLType="VARCHAR"
+    LOVName="LOV_Resumption">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HearDateSTR"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_HearDateSTR">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="GonahMostanafaPageDef"
+                Package="pages.com.egabi.Reports">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryRVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.GonahMostanafa1" DataControl="CjExecAMDataControl" RangeSize="500"
+              id="ProceduresDataReportView1Iterator"/>
+    <searchRegion Binds="ProceduresDataReportView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ProceduresDataReportView1Query"/>
+    <iterator id="GonahMostanafa1Iterator" Binds="SimplifiedModeAM1.GonahMostanafa1" DataControl="CjExecAMDataControl"
+              RangeSize="500"/>
+    <searchRegion Binds="GonahMostanafa1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="GonahMostanafa1Query"/>
+  </executables>
+  <bindings>
+  
+ <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="Year">
+      <AttrNames>
+        <Item Value="Year"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateTo">
+      <AttrNames>
+        <Item Value="DateTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="DateFrom">
+      <AttrNames>
+        <Item Value="DateFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ProceduresDataReportView1Iterator" id="ProceduresDataReportView1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.reports.ProceduresDataReportView"
+                      Name="ProceduresDataReportView10">
+        <AttrNames>
+          <Item Value="ProcNumber"/>
+          <Item Value="InventoryNumber"/>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="ProcedureDate"/>
+          <Item Value="DateEntReservation"/>
+          <Item Value="HearingDate"/>
+          <Item Value="CreatedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="GonahMostanafa1Iterator" id="GonahMostanafa1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.reports.GonahMostanafa" Name="GonahMostanafa10">
+        <AttrNames>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="InventoryNumber"/>
+          <Item Value="AppealNumber"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="HearingDate"/>
+          <Item Value="CreatedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_FolderTypeId" id="FolderTypeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SearchInventoryRVO1Iterator" id="Seq">
+      <AttrNames>
+        <Item Value="Seq"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="executeProcedureView1" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeProcedureView" IsViewObjectMethod="true" DataControl="CjExecAMDataControl"
+                  InstanceName="data.CjExecAMDataControl.dataProvider.SimplifiedModeAM1.GonahMostanafa1">
+      <NamedData NDName="folderType" NDValue="#{bindings.Seq.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="casYear" NDValue="#{bindings.Year.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="nyabaaGozaya"
+                 NDValue="#{(bindings.NeyabKolyaa.inputValue ne '') ? bindings.NeyabKolyaa.inputValue : (bindings.NeyabaMamoreya.inputValue ne '' ? bindings.NeyabaMamoreya.inputValue : 0)}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="dateFrom" NDValue="#{bindings.DateFrom.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="dateTo" NDValue="#{bindings.DateTo.inputValue}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="caseSchemaId"
+                 NDValue="#{sessionScope.label eq 'جنح مستأنف' ?3643 :(sessionScope.label eq 'جنايات مستأنف'? 13:6206)}"
+                 NDType="java.math.BigDecimal"/>
+    </methodAction>
+    <list IterBinding="SearchInventoryRVO1Iterator" StaticList="false" Uses="LOV_NeyabaMamoreya" id="NeyabaMamoreya"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Oppositions-TF">
+    <default-activity>CreateInsert</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>oppositionsBean</managed-bean-name>
+      <managed-bean-class>com.egabi.cjexec.view.beans.oppositions.OppositionsBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="Home">
+      <page>/pages/com/egabi/oppositions/OppositionsHomeFrag.jsff</page>
+    </view>
+    <method-call id="methodCall1">
+      <method>#{pageFlowScope.oppositionsBean.createOpposition}</method>
+      <outcome>
+        <fixed-outcome>go</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-call id="parLawyerTF1">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflows/parlawyer/parLawyerTF.xml</document>
+        <id>parLawyerTF</id>
+      </task-flow-reference>
+      <input-parameter id="__10">
+        <name>partyId</name>
+        <value>#{pageFlowScope.partyId}</value>
+      </input-parameter>
+      <input-parameter id="__11">
+        <name>parId</name>
+        <value>#{pageFlowScope.parId}</value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>createdBy</name>
+        <value>#{sessionScope.userInfo.userId}</value>
+      </input-parameter>
+      <input-parameter id="__13">
+        <name>businessCaseId</name>
+        <value>#{pageFlowScope.businessCaseId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>methodCall1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>methodCall1</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>go</from-outcome>
+        <to-activity-id>Home</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>Home</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>Home</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>parLawyerTF1</from-outcome>
+        <to-activity-id>parLawyerTF1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ExcCourtBcDecisionFeesFkLink"
+  Version="12.2.1.1.10"
+  InheritPersonalization="merge"
+  EntityAssociation="com.egabi.cjexec.model.entities.caseexecemp.ExcCourtBcDecisionFeesFkAssoc">
+  <ViewLinkDefEnd
+    Name="ExcCourtBcDecisionEOView"
+    Cardinality="1"
+    Source="true"
+    Owner="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcDecisionEOView">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+      <Attr Name="_finderName" Value="ExcCourtBcDecisionEOView"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcDecisionEOView.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ExcCourtBcDecisionFeesView"
+    Cardinality="-1"
+    Owner="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcDecisionFeesView">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="ExcCourtBcDecisionFeesView"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.egabi.cjexec.model.views.caseexecemp.ExcCourtBcDecisionFeesView.DecisionId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

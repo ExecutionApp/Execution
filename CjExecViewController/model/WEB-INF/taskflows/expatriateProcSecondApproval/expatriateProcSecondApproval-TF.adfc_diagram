@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">expatriateAppealSecondApprovalSearch</property>
+      <property
+         name="x">329.0</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>expatriateAppealSecondApprovalSearch&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="y">229.14355</property>
+      <property
+         name="exceptionHandler">false</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View5">
+      <property
+         name="fromOutcome">goExpatriateAppealSecondApprovalSearch</property>
+      <property
+         name="sdm:polyPoints">R50,370.0,228.79297,689.0,342.24707,L50</property>
+   </ControlFlowCase>
+   <View
+      id="View5">
+      <property
+         name="activityId">expatriateProcSecondApprovalll</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">730.0</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>expatriateProcSecondApprovalll&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">342.59766</property>
+      <property
+         name="page">/pages/com/egabi/expatriateProcSecondApproval/expatriateProcSecondApprovalll.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+</SDM>

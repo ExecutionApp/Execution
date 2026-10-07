@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="Inventory_TF_Inventory_TF_ExecuteWithParamsPageDef" Package="taskflows.inventory"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="SimplifiedModeAM1.SearchInventoryResultRVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="SearchInventoryResultRVO1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="SearchInventoryResultRVO1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="yearBind" NDValue="#{pageFlowScope.yearBind}" NDType="java.lang.String"/>
+      <NamedData NDName="police" NDValue="#{pageFlowScope.police}" NDType="java.lang.String"/>
+      <NamedData NDName="caseNumberBind" NDValue="#{pageFlowScope.caseNumberBind}" NDType="java.lang.String"/>
+      <NamedData NDName="caseTypeBind" NDValue="#{pageFlowScope.caseTypeBind}" NDType="java.lang.String"/>
+      <NamedData NDName="degreeIdBind" NDValue="#{pageFlowScope.degreeIdBind}" NDType="java.lang.String"/>
+      <NamedData NDName="hearingDateBind" NDValue="#{pageFlowScope.hearingDateBind}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

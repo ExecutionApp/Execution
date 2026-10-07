@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="caseExecEmpPagePageDef"
+                Package="caseExecEmp">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="casesesearchtf1" taskFlowId="/WEB-INF/taskflows/caseExecEmp/casese-search-tf.xml#casese-search-tf"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="sessionUserId" value="#{sessionScope.userInfo.userId}"/>
+        <parameter id="sessionUserName" value="#{sessionScope.userInfo.userName}"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

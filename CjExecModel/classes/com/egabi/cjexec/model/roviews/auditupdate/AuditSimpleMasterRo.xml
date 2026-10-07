@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AuditSimpleMasterRo"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleMasterRoImpl"
+  PageIterMode="Full"
+  ComponentInterface="com.egabi.cjexec.model.roviews.auditupdate.common.AuditSimpleMasterRo"
+  ClientProxyName="com.egabi.cjexec.model.roviews.auditupdate.client.AuditSimpleMasterRoClient">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleMasterRo_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bindStartDate"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="bindEndDate"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="bindUserID"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindCaseNumber"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindParYear"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindEntityId"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="bindOriginEntity"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="bindBusinessCaseType"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <ViewAccessor
+    Name="EntityROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.EntityROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="AllEntityROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.AllEntityROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="BCTypeROVO1"
+    ViewObjectName="com.egabi.cjexec.model.roviews.bcdetails.BCTypeROVO"
+    RowLevelBinds="true"/>
+  <SQLQuery><![CDATA[SELECT DISTINCT AUDS.BUSINESS_CASE_ID,       
+                BC.CASE_NUMBER,       
+                PPAR.PAR_YEAR,       
+                PPAR.BUSINESS_CASE_TYPE,       
+                BUSCASETYP.NAME,       
+                BC.ENTITY_ID,       
+                EN.ENTITY_NAME,       
+                PPAR.ORIGIN_ENTITY,       
+                EN_ORIGIN.ENTITY_NAME       
+  FROM Audit_simple AUDS,       
+       Business_case BC,       
+       PAR_POLICE_AUTHORITY_REPORT PPAR,       
+       ENTITY EN,       
+       BUSINESS_CASE_TYPE BUSCASETYP,       
+       ENTITY EN_ORIGIN       
+ WHERE     AUDS.BUSINESS_CASE_ID = BC.ID       
+       AND BC.ENTITY_ID = EN.ID       
+       AND PPAR.BUSINESS_CASE_TYPE = BUSCASETYP.ID       
+       AND PPAR.ORIGIN_ENTITY = EN_ORIGIN.ID       
+       AND AUDS.BUSINESS_CASE_ID = PPAR.BUSINESS_CASE_ID       
+       AND (TO_DATE(AUDS.CREATION_DATE, 'DD/MM/YYYY') >= TO_DATE(:bindStartDate, 'DD/MM/YYYY') OR :bindStartDate IS NULL)       
+       AND (TO_DATE(AUDS.CREATION_DATE, 'DD/MM/YYYY') <= TO_DATE(:bindEndDate  , 'DD/MM/YYYY') OR :bindEndDate IS NULL)       
+       AND (AUDS.USER_ID = :bindUserID OR :bindUserID IS NULL)       
+       AND (BC.CASE_NUMBER = :bindCaseNumber OR :bindCaseNumber IS NULL)       
+       AND (PPAR.PAR_YEAR = :bindParYear OR :bindParYear IS NULL)       
+       AND (BC.ENTITY_ID = :bindEntityId OR AUDS.ENTITY_ID = :bindEntityId)       
+       AND (   PPAR.ORIGIN_ENTITY = :bindOriginEntity       
+            OR :bindOriginEntity IS NULL)       
+       AND (   PPAR.BUSINESS_CASE_TYPE = :bindBusinessCaseType       
+            OR :bindBusinessCaseType IS NULL)]]></SQLQuery>
+  <ViewAttribute
+    Name="BusinessCaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUSINESS_CASE_ID"
+    Expression="BUSINESS_CASE_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_NUMBER"
+    Expression="CASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="police_number"/>
+        <DISPLAYWIDTH
+          Value="70"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParYear"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PAR_YEAR"
+    Expression="PAR_YEAR"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.inventory.ExcProceduresLogView.CaseYear_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessCaseType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUSINESS_CASE_TYPE"
+    Expression="BUSINESS_CASE_TYPE"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.audit.AuditParPoliceAuthorityReportVO.BusinessCaseType_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Name"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleMasterRo.Name_LABEL"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENTITY_ID"
+    Expression="ENTITY_ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.views.bcdetails.ParPoliceAuthorityReportVO.NeyabKolyaaTran_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_NAME"
+    Expression="ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleMasterRo.EntityName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OriginEntity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ORIGIN_ENTITY"
+    Expression="ORIGIN_ENTITY"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="_U0642_U0633_U0645__U0627_U0644_U0634_U0631_U0637_U0629"/>
+        <DISPLAYWIDTH
+          Value="70"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityName1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_NAME"
+    Expression="ENTITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.egabi.cjexec.model.roviews.auditupdate.AuditSimpleMasterRo.EntityName1_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="BusinessCaseId"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="AuditSimpleUpdateRo"
+    ViewLink="com.egabi.cjexec.model.viewLinks.suppamount.AuditUpdateMasterVl"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="filterAuditSimple"
+      MethodName="filterAuditSimple">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="startDate"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="endDate"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="userID"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="caseNumber"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="parYear"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="entityId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="originEntity"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="businessCaseType"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.egabi.cjexec.model.CjExecModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

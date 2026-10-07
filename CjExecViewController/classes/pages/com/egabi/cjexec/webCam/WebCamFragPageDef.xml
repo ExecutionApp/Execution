@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.1.10" id="WebCamFragPageDef"
+                Package="pages.com.egabi.cjexec.webCam">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="WebCamAttatchROV1" RangeSize="25" DataControl="CjExecAMDataControl"
+              id="WebCamAttatchROV1Iterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="insertExcFolderActionsAttachs" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="insertExcFolderActionsAttachs" IsViewObjectMethod="false"
+                  DataControl="CjExecAMDataControl" InstanceName="data.CjExecAMDataControl.dataProvider"
+                  ReturnName="data.CjExecAMDataControl.methodResults.insertExcFolderActionsAttachs_CjExecAMDataControl_dataProvider_insertExcFolderActionsAttachs_result">
+      <NamedData NDName="folderActionId" NDType="long"/>
+      <NamedData NDName="documentId" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="WebCamAttatchROV1Iterator" id="DocumentId">
+      <AttrNames>
+        <Item Value="DocumentId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

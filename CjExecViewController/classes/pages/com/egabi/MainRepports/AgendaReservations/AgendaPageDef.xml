@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="AgendaPageDef"
+                Package="pages.com.egabi.MainRepports.AgendaReservations">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SimplifiedModeAM1.ValidatePoliceReportROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="ValidatePoliceReportROVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.AgendaSearchROVO1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="AgendaSearchROVO1Iterator"/>
+    <iterator Binds="SimplifiedModeAM1.AgendaReservations1" DataControl="CjExecAMDataControl" RangeSize="25"
+              id="AgendaReservations1Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabKolyaa" id="NeyabKolyaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_NeyabGozayaa" id="NeyabGozayaa"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="AgendaSearchROVO1Iterator" StaticList="false" Uses="LOV_Kol" id="Kol"/>
+    <listOfValues IterBinding="AgendaSearchROVO1Iterator" StaticList="false" Uses="LOV_Goz" id="Goz"/>
+    <tree IterBinding="AgendaReservations1Iterator" id="AgendaReservations1">
+      <nodeDefinition DefName="com.egabi.cjexec.model.roviews.bcdetails.AgendaReservations" Name="AgendaReservations10">
+        <AttrNames>
+          <Item Value="BusinessCaseId"/>
+          <Item Value="Id"/>
+          <Item Value="BusinessCaseNumber"/>
+          <Item Value="CircleHearingDateId"/>
+          <Item Value="HearingDate"/>
+          <Item Value="PartyId"/>
+          <Item Value="PartyFullName"/>
+          <Item Value="Postponed"/>
+          <Item Value="Attendance"/>
+          <Item Value="JudgmentText"/>
+          <Item Value="LastAction"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="DegreeName"/>
+          <Item Value="NextReservationDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="AgendaSearchROVO1Iterator" id="KolID">
+      <AttrNames>
+        <Item Value="KolID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AgendaSearchROVO1Iterator" id="GozID">
+      <AttrNames>
+        <Item Value="GozID"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AgendaSearchROVO1Iterator" StaticList="false" Uses="LOV_fold" id="fold" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="ValidatePoliceReportROVO1Iterator" StaticList="false" Uses="LOV_BusinessCaseDegree"
+          id="BusinessCaseDegree" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>
